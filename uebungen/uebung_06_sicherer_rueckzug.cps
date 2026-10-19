@@ -24,14 +24,29 @@ properties = {
 function onOpen() {
   writeln("%");
   writeln("O1006 (UEBUNG 06 - SAFE RETRACT)");
+
+  // Sicherheits-Startblock:
+  // G90 = Absolutmaß (Bezug auf Werkstück-Nullpunkt G54)
+  // G21 = Metrisches Maßsystem (Millimeter)
+  // G17 = Arbeitsebene XY
+  // G40 = Werkzeugradiuskorrektur abwählen
+  // G80 = Alle aktiven Zyklen abbrechen
   writeWords("G90", "G21", "G17", "G40", "G80");
 }
 
 function writeRetract() {
   if (getProperty("useG28SafeRetract")) {
+    // G28 = Maschinen-Referenzpunktfahrt
+    // G91 = Relativmaß (Kettenmaß)
+    // Z0.0 = Z-Achse um 0 mm relativ verfahren -> direkt nach oben
     writeWords("G28", "G91", "Z0.0");
+
+    // G90 = Sofort wieder zurück auf Absolutmaß
     writeWords("G90");
   } else {
+    // G53 = Maschinen-Koordinatensystem (nicht verschiebbarer Nullpunkt der Fräsmaschine)
+    // G00 = Eilgang (Höchstgeschwindigkeit ohne Materialkontakt)
+    // Z0.0 = Z-Achse fährt auf maximale Höhe an die Kabinendecke
     writeWords("G53", "G00", "Z0.0");
   }
 }
@@ -39,22 +54,27 @@ function writeRetract() {
 function onClose() {
   writeln("");
   writeln("(--- SICHERES PROGRAMMENDE ---)");
-  writeWords("M09"); // Kühlmittel aus
+
+  // M09 = Kühlschmierstoff (KSS / Emulsion) ausschalten
+  writeWords("M09");
   
-  // 1. ZUERST Spindel ganz nach oben ziehen
+  // 1. ZUERST Spindel ganz nach oben ziehen (Kollisionsschutz gegen Spannmittel)
   writeRetract();
   
-  // 2. Spindelmotor ausschalten
+  // 2. M05 = Frässpindelmotor ausschalten (Spindel-Stopp)
   writeWords("M05");
   
   // 3. Tisch vor zur Tür fahren (Y0 im Maschinenkoordinatensystem G53)
   if (getProperty("useG28SafeRetract")) {
+    // G28 G91 Y0.0 = Y-Achse im Kettenmaß auf Referenz fahren
     writeWords("G28", "G91", "Y0.0");
     writeWords("G90");
   } else {
+    // G53 G00 Y0.0 = Maschinentisch im Eilgang ganz nach vorne zur Schutztür fahren
     writeWords("G53", "G00", "Y0.0");
   }
 
-  writeWords("M30"); // Programmende
+  // M30 = Hauptprogramm-Ende, Reset und Speicher auf Zeile 1 zurücksetzen
+  writeWords("M30");
   writeln("%");
 }

@@ -30,21 +30,32 @@ function onOpen() {
   writeComment("DATUM: " + (new Date()).toLocaleDateString());
   writeComment("==================================================");
 
-  // Späneförderer Einschalten
+  // Späneförderer Einschalten:
+  // M31 = Späneförderer (Kratzband / Schnecke) automatisch starten
   if (properties.enableChipConveyor) {
     writeComment("SPAENEFOERDERER AUTOMATISCH GESTARTET");
     writeBlock("M31");
   }
 
-  // Initialisierungsblock
+  // Initialisierungsblock:
+  // G90 = Absolutmaß (Bezug auf Bauteil-Nullpunkt G54)
+  // G17 = Fräsebene XY
+  // G71 = Metrisches System bei Siemens (Millimeter)
+  // G21 = Metrisches System bei Fanuc/Haas (Millimeter)
+  // G94 = Vorschub F in mm/min
   if (properties.controllerDialect === "SIEMENS") {
-    writeBlock("G90", "G17", "G71", "G94"); // G71 = metrisch bei Siemens
+    writeBlock("G90", "G17", "G71", "G94");
   } else {
-    writeBlock("G90", "G17", "G21", "G94"); // G21 = metrisch bei Fanuc/Haas
+    writeBlock("G90", "G17", "G21", "G94");
   }
 
-  // Sichere Referenzfahrt in Z
+  // Sichere Referenzfahrt in Z:
+  // G28 = Maschinen-Referenzpunktfahrt
+  // G91 = Relativmaß (Kettenmaß)
+  // Z0. = Z-Achse direkt nach oben auf Referenzhöhe fahren
   writeBlock("G28", "G91", "Z0.");
+
+  // G90 = Wieder auf Absolutmaß zurückschalten
   writeBlock("G90");
 }
 
@@ -70,10 +81,23 @@ function onSection() {
   writeComment("Z-MINIMUM DIESER OPERATION: Z" + zMin.toFixed(2) + " mm");
   writeComment("--------------------------------------------------");
 
+  // T.. = Werkzeugnummer
+  // M06 = Physischer Werkzeugwechsel durch Greifer
   writeBlock("T" + tool.number, "M06");
+
+  // G54 = 1. Werkstück-Koordinatensystem
   writeBlock("G54");
+
+  // S.. = Spindeldrehzahl in U/min
+  // M03 = Frässpindel im Uhrzeigersinn (Rechtslauf) starten
   writeBlock("S" + tool.spindleRPM, "M03");
+
+  // G43 = Werkzeuglängenkorrektur aktivieren
+  // H.. = Längenoffset-Register aus der Werkzeugvermessung
+  // Z15.0 = Erste Z-Zustellung auf 15 mm Sicherheitshöhe
   writeBlock("G43", "H" + tool.number, "Z15.0");
+
+  // M08 = Kühlschmierstoff (KSS) einschalten
   writeBlock("M08");
 }
 
@@ -81,16 +105,26 @@ function onClose() {
   writeComment("==================================================");
   writeComment("PROGRAMMENDE: TEIL ERFOLGREICH FERTIGGESTELLT");
   writeComment("==================================================");
-  writeBlock("M09"); // Kühlmittel AUS
-  writeBlock("M05"); // Spindel AUS
+
+  // M09 = Kühlschmierstoff ausschalten
+  writeBlock("M09");
+
+  // M05 = Frässpindel ausschalten (Spindel-Stopp)
+  writeBlock("M05");
   
-  // Späneförderer Ausschalten
+  // Späneförderer Ausschalten:
+  // M33 = Späneförderer stoppen
   if (properties.enableChipConveyor) {
     writeBlock("M33");
   }
 
-  // Sicherer 2-Stufen-Rückzug
-  writeBlock("G28", "G91", "Z0."); // Erst Z ganz nach oben
-  writeBlock("G28", "Y0.");        // Dann Y nach vorne zum Bediener
-  writeBlock("M30");               // Programmende
+  // Sicherer 2-Stufen-Rückzug:
+  // G28 G91 Z0. = ZUERST Z-Achse senkrecht ganz nach oben fahren (Kollisionsschutz)
+  writeBlock("G28", "G91", "Z0.");
+
+  // G28 Y0. = DANACH Y-Achse nach vorne zur Tür fahren (Bedienerkomfort)
+  writeBlock("G28", "Y0.");
+
+  // M30 = Hauptprogramm-Ende, Reset und Speicher zurücksetzen
+  writeBlock("M30");
 }

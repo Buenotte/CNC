@@ -92,7 +92,12 @@ function onOpen() {
     writeComment("==================================================");
   }
 
-  // Sicherheitsstartzeile
+  // Sicherheits-Startblock (Safe Start Block):
+  // G90 = Absolutmaß (Programmierung bezieht sich fest auf den Bauteil-Nullpunkt)
+  // G21 = Metrisches Einheitensystem in Millimeter (mm)
+  // G17 = Arbeitsebene XY (Standard für Fräsen von oben)
+  // G40 = Fräserradiuskorrektur ABWÄHLEN (schaltet Mittenbahnverschiebung aus)
+  // G80 = Bohrzyklen ABBRECHEN (löscht aktive Zyklen wie G81/G83)
   writeWords("G90", "G21", "G17", "G40", "G80");
 }
 
@@ -106,16 +111,32 @@ function onSection() {
   writeComment("WERKZEUG T" + tool.number + " | DIESE OP Z-MIN: " + xyzFormat.format(sectionZ.getMinimum()) + "MM");
   writeComment("--------------------------------------------------");
 
-  writeWords("T" + tool.number, "M06"); // Werkzeug einwechseln
-  writeWords("G54");                    // Nullpunkt G54
-  writeWords("S" + tool.spindleRPM, "M03"); // Drehzahl & Spindelstart
+  // T.. = Werkzeugplatz im Magazinkarussell
+  // M06 = Automatischer Werkzeugwechsel durch Doppelgreifer
+  writeWords("T" + tool.number, "M06");
+
+  // G54 = 1. Werkstück-Koordinatensystem (Nullpunkt an Bauteilecke)
+  writeWords("G54");
+
+  // S.. = Spindeldrehzahl in Umdrehungen pro Minute (U/min)
+  // M03 = Spindelantrieb im Uhrzeigersinn (Rechtslauf) EIN
+  writeWords("S" + tool.spindleRPM, "M03");
 }
 
 // 7. onClose() - PROGRAMMENDE
 function onClose() {
-  writeWords("M09");                 // Kühlwasser AUS
-  writeWords("M05");                 // Spindel AUS
-  writeWords("G53", "G00", "Z0.0"); // Spindel hoch
-  writeWords("M30");                 // Programmende
+  // M09 = Kühlschmierstoff (KSS) AUS
+  writeWords("M09");
+
+  // M05 = Frässpindel AUS (Spindel-Stopp)
+  writeWords("M05");
+
+  // G53 = Maschinen-Koordinatensystem
+  // G00 = Eilgang (Schnellgang ohne Spanabtrag)
+  // Z0.0 = Spindel senkrecht nach oben auf Maschinenreferenz fahren
+  writeWords("G53", "G00", "Z0.0");
+
+  // M30 = Hauptprogramm-Ende, Reset und Rücklauf zum Programmanfang
+  writeWords("M30");
   writeln("%");                      // Übertragungsende
 }

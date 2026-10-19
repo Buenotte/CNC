@@ -85,13 +85,23 @@ function onOpen() {
     writeComment("==================================================");
   }
 
-  // Sicherheits-Startblock: Absolutmaß G90, Metrisch G21, Ebene G17
+  // Sicherheits-Startblock (Safe Start Block):
+  // G90 = Absolutmaß (alle Koordinaten beziehen sich fest auf den Werkstück-Nullpunkt G54)
+  // G21 = Metrisches Einheitensystem (Maßeinheit Millimeter mm)
+  // G17 = Fräsbearbeitung in der XY-Hauptebene (Z-Achse ist die Spindelachse)
+  // G40 = Fräserradiuskorrektur ABWÄHLEN (schaltet alte Fräsermittenbahn-Verschiebungen sicher aus)
+  // G80 = Alle aktiven Bohrzyklen ABBRECHEN und löschen
   writeWords("G90", "G21", "G17", "G40", "G80");
 }
 
 // 6. onClose() - PROGRAMMENDE
 function onClose() {
-  writeWords("G53", "G00", "Z0.0"); // Spindel hoch
-  writeWords("M30");                 // Programmende
-  writeln("%");                      // Endezeichen
+  // G53 = Maschinen-Koordinatensystem (fester Maschinennullpunkt an oberer Kabinendecke)
+  // G00 = Eilgang (Schnellstmöglicher Verfahrweg durch die freie Luft ohne Spanabtrag)
+  // Z0.0 = Spindel senkrecht nach ganz oben fahren (Kollisionsschutz beim Teilewechsel)
+  writeWords("G53", "G00", "Z0.0");
+
+  // M30 = Hauptprogramm-Ende, Spindel-Reset und Rücklauf zum Programmanfang
+  writeWords("M30");
+  writeln("%"); // Endezeichen der Übertragung
 }

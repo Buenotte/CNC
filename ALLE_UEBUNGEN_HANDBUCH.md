@@ -256,17 +256,59 @@ In dieser Datei sehen Sie in der Funktion **`onOpen()`** *(wird immer automatisc
 ```javascript
 function onOpen() {
   // Hier steht Ihre allererste eigene Zeile im CNC-Code:
-  writeComment("========================================");
-  writeComment("HALLO WELT - MEIN ERSTER CNC POSTPROZESSOR");
-  writeComment("ERFOLGREICH ERSTE ZEILE EINGEFUEGT");
-  writeComment("========================================");
+  writeComment("========================================"); // Optische Trennlinie als Kommentar
+  writeComment("HALLO WELT - MEIN ERSTER CNC POSTPROZESSOR"); // Begrüßungstext in runden Klammern (...)
+  writeComment("ERFOLGREICH ERSTE ZEILE EINGEFUEGT");        // Bestätigungskommentar
+  writeComment("========================================"); // Trennlinie
 
   // Grundinitialisierung der Fräsmaschine:
+  // G90 = Absolute Maßangaben in Bezug auf das Werkstück (Nullpunkt G54)
+  // G17 = Fräsbearbeitung in der XY-Hauptebene (Z-Achse ist die Spindelachse)
+  // G21 = Alle Maßeinheiten sind in Millimeter (metrisches System)
+  // G94 = Vorschubgeschwindigkeit F wird in mm/min (Millimeter pro Minute) interpretiert
   writeBlock("G90", "G17", "G21", "G94");
 
   // Sicherheitsfahrt der Z-Achse auf den Referenzpunkt:
+  // G28 = Fahre auf Maschinen-Referenzpunkt (feste Endschalter der Fräsmaschine)
+  // G91 = Relativmaß (Inkrementell / Kettenmaß)
+  // Z0. = Relativ um 0 mm verfahren, also direkt senkrecht nach oben auf Z-Referenzhöhe
   writeBlock("G28", "G91", "Z0.");
+
+  // G90 = Sofort wieder zurückschalten in den Absolutmaß-Modus für alle weiteren Befehle
   writeBlock("G90");
+}
+
+function onSection() {
+  var tool = currentSection.getTool();
+  writeComment("--- WERKZEUGWECHSEL ---");
+  // T.. = Werkzeugplatz im Magazin (Tool Number)
+  // M06 = Automatischer Werkzeugwechsel durch mechanischen Greifer
+  writeBlock("T" + tool.number, "M06");
+
+  // S.. = Spindeldrehzahl in U/min (Spindle Speed)
+  // M03 = Frässpindel im Uhrzeigersinn (Rechtslauf) starten
+  writeBlock("S" + tool.spindleRPM, "M03");
+
+  // G54 = 1. Werkstück-Koordinatensystem (Nullpunkt an Bauteilecke)
+  writeBlock("G54");
+}
+
+function onClose() {
+  writeComment("--- PROGRAMMENDE ---");
+  // M05 = Frässpindel ausschalten (Spindel-Stopp)
+  writeBlock("M05");
+
+  // M09 = Kühlschmierstoff ausschalten (KSS AUS)
+  writeBlock("M09");
+
+  // G28 G91 Z0. = Z-Achse ganz nach oben auf Maschinenreferenz fahren
+  writeBlock("G28", "G91", "Z0.");
+
+  // G28 Y0. = Maschinentisch nach vorne zur Kabinentür fahren
+  writeBlock("G28", "Y0.");
+
+  // M30 = Hauptprogramm-Ende, Reset und Speicher auf Zeile 1 zurücksetzen
+  writeBlock("M30");
 }
 ```
 
@@ -394,6 +436,23 @@ writeComment("BETRIEB    : " + getProperty("companyName"));
 writeComment("DATUM/ZEIT : " + dateString);
 writeComment("EINHEITEN  : " + (unit == MM ? "MILLIMETER (METRISCH G21)" : "INCH / ZOLL (G20)"));
 writeComment("==================================================");
+
+// 3. Sicherheits-Startblock (Safe Start Block):
+// G90 = Absolute Maßangaben (alle Koordinaten beziehen sich auf den Werkstück-Nullpunkt G54)
+// G21 = Metrisches Einheitensystem in Millimeter (mm)
+// G17 = Arbeitsebene XY (Standard für Fräsen von oben)
+// G40 = Werkzeugradiuskorrektur ABWÄHLEN (keine alten Bahnverschiebungen aktiv)
+// G80 = Alle aktiven Bohrzyklen ABBRECHEN und löschen
+writeWords("G90", "G21", "G17", "G40", "G80");
+
+// 4. Sicherer Programmabschluss in onClose():
+// G53 = Maschinen-Koordinatensystem
+// G00 = Eilgang (Schnellgang ohne Materialkontakt)
+// Z0.0 = Spindel senkrecht nach ganz oben fahren (Kollisionsschutz)
+writeWords("G53", "G00", "Z0.0");
+
+// M30 = Hauptprogramm-Ende, Reset und Rücklauf zum Programmanfang
+writeWords("M30");
 ```
 
 * **Was macht `getProperty("developerName")`?**  
@@ -413,6 +472,10 @@ O1001 (CNC FERTIGUNGSPROGRAMM - MUSTERBAUTEIL)
 (DATUM/ZEIT : 2026-10-16 14:15)
 (EINHEITEN  : MILLIMETER - METRISCH G21)
 (==================================================)
+G90 G21 G17 G40 G80 (SICHERHEITSZEILE: G90 ABSOLUT | G21 METRISCH MM | G17 XY-EBENE | G40 RADIUSKORREKTUR AUS | G80 BOHRZYKLEN AUS)
+G53 G00 Z0.0 (G53 MASCHINEN-KOORDINATENSYSTEM | G00 EILGANG | Z0 SPINDEL GANZ NACH OBEN FAHREN)
+M30 (M30 HAUPTPROGRAMMENDE, RESET UND RUECKSPRUNG AUF ZEILE 1)
+%
 ```
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 1 zu 100 % bestanden?
@@ -496,6 +559,23 @@ if (getProperty("writeToolList")) {
   }
   writeComment("-----------------------------------------");
 }
+
+// Sicherheits-Startblock (Safe Start Block):
+// G90 = Absolutmaß (alle Koordinaten beziehen sich fest auf den Werkstück-Nullpunkt G54)
+// G21 = Metrisches Einheitensystem (Maßeinheit Millimeter mm)
+// G17 = Fräsbearbeitung in der XY-Hauptebene (Z-Achse ist die Spindelachse)
+// G40 = Fräserradiuskorrektur ABWÄHLEN (schaltet alte Fräsermittenbahn-Verschiebungen sicher aus)
+// G80 = Alle aktiven Bohrzyklen ABBRECHEN und löschen
+writeWords("G90", "G21", "G17", "G40", "G80");
+
+// Programmende in onClose():
+// G53 = Maschinen-Koordinatensystem
+// G00 = Eilgang (Schnellstmöglicher Verfahrweg ohne Spanabtrag)
+// Z0.0 = Spindel senkrecht nach ganz oben fahren
+writeWords("G53", "G00", "Z0.0");
+
+// M30 = Hauptprogramm-Ende, Reset und Rücklauf zum Programmanfang
+writeWords("M30");
 ```
 
 * **`tool.number`**: Die Platznummer des Werkzeugs im Karussell der Maschine (z. B. `1` wird zu `T01`).
@@ -509,7 +589,20 @@ if (getProperty("writeToolList")) {
 (T01 | D=10.000MM | ECKE R=0.000 | SCHAFTFRAESER 10MM VHM)
 (T02 | D=6.000MM  | ECKE R=0.000 | SPIRALBOHRER 6MM VHM)
 (-----------------------------------------)
+G90 G21 G17 G40 G80 (SICHERHEITSZEILE: G90 ABSOLUT | G21 METRISCH MM | G17 XY-EBENE | G40 RADIUSKORREKTUR AUS | G80 BOHRZYKLEN AUS)
+G53 G00 Z0.0 (G53 MASCHINEN-KOORDINATENSYSTEM | G00 EILGANG | Z0 SPINDEL GANZ NACH OBEN FAHREN)
+M30 (M30 HAUPTPROGRAMMENDE, RESET UND RUECKSPRUNG AUF ZEILE 1)
+%
 ```
+
+### 🛡️ Prüfliste dieser Übung: Wann ist Übung 2 zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. Werkzeugtabelle aktiv** | Schalter `writeToolList: true` gibt den Block `(--- BENOETIGTE WERKZEUGE ---)` aus. | [ ] |
+| **2. Werkzeugnummern formatiert** | Werkzeuge werden sauber 2-stellig als `T01` und `T02` formatiert. | [ ] |
+| **3. Durchmesser & Eckenradius** | Fräser-Durchmesser `D=10.000MM` und Eckradius `ECKE R=0.000` werden exakt ausgewiesen. | [ ] |
+| **4. Konsistenzprüfung** | In [`tests/mein_generierter_gcode.nc`](file:///C:/Projekte/CNC/tests/mein_generierter_gcode.nc) erscheint die Werkzeugliste direkt unter dem Programmkopf. | [ ] |
 
 ---
 
@@ -608,17 +701,51 @@ if (getProperty("showZMinInfo")) {
 (T01 | D=10.000MM | ECKE R=0.000 | Z-MIN=-5.000MM | SCHAFTFRAESER 10MM VHM)
 (T02 | D=6.000MM  | ECKE R=0.000 | Z-MIN=-12.000MM | SPIRALBOHRER 6MM VHM)
 (-----------------------------------------)
-N10 G90 G17 G40 G49 G80 G21
+N10 G90 G17 G40 G49 G80 G21 (SICHERHEITSZEILE: G90 ABSOLUT | G17 XY-EBENE | G40 RADIUSKORREKTUR AUS | G49 LAENGENKORREKTUR AUS | G80 BOHRZYKLEN AUS | G21 METRISCH MM)
 
 (OPERATION: 1. AUSSENKONTUR FRAESEN - 2D KONTUR)
 (SICHERHEITS-INFO: OP Z-MIN=-5.000MM | OP Z-MAX=15.000MM)
+N20 T01 M06 (T01 WERKZEUGPLATZ 1 | M06 AUTOMATISCHER WERKZEUGWECHSEL DURCH GREIFER)
+N30 G54 (G54 ERSTES WERKSTUECK-KOORDINATENSYSTEM / NULLPUNKT AUF BAUTEILECKE)
+N40 S8000 M03 (S8000 SPINDELDREHZAHL 8000 U/MIN | M03 SPINDEL RECHTSLAUF EIN)
+N50 G43 H01 Z15.000 M08 (G43 LAENGENKORREKTUR EIN | H01 REGISTER | Z15.0 SICHERHEITSHOEHE | M08 KUEHLMITTEL AN)
 ```
 
 Der Arbeiter an der Maschine sieht sofort: **`T02` fährt bis `Z-12.000MM`** – ich muss den Aluminium-Block also mindestens `14 mm` weit oben aus dem Schraubstock herausschauen lassen!
 
+### 🛡️ Prüfliste dieser Übung: Wann ist Übung 3 zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. Z-MIN-Berechnung** | Im Header steht für jedes Werkzeug der korrekte tiefste Z-Wert (z. B. `Z-MIN=-5.000MM` und `Z-MIN=-12.000MM`). | [ ] |
+| **2. Operations-Z-Info** | Vor jeder einzelnen Fräsoperation wird `(SICHERHEITS-INFO: OP Z-MIN=... | OP Z-MAX=...)` ausgegeben. | [ ] |
+| **3. Kollisionsschutz** | Der Fräser fährt niemals tiefer als das Bauteil plus Mindest-Spannbackenabstand. | [ ] |
+| **4. Konsistenz im Simulator** | In [`tests/mein_generierter_gcode.nc`](file:///C:/Projekte/CNC/tests/mein_generierter_gcode.nc) stimmen die berechneten Werte mit der 3D-Geometrie überein. | [ ] |
+
 ---
 
 # Übung 4: Ein 3D-Modell als Kundenauftrag bearbeiten (Vom 3D-Bauteil zum G-Code)
+
+### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 4
+
+| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
+|---|---|---|
+| **`T01`, `T02`** | **Werkzeugnummer *(Tool Number)*** | `T01` = Schaftfräser $\varnothing 10\,\text{mm}$ \| `T02` = Spiralbohrer $\varnothing 6\,\text{mm}$. |
+| **`M06`** | **Werkzeugwechsel *(Tool Change)*** | Befiehlt der Fräsmaschine, das Werkzeug mechanisch in die Spindel einzuwechseln. |
+| **`S8000`, `S3500`** | **Spindeldrehzahl *(Spindle Speed)*** | Drehzahl in $\text{U/min}$ *(Umdrehungen pro Minute)* passend zum Werkzeugdurchmesser und Aluminium. |
+| **`M03`** | **Spindel Rechtslauf EIN *(Spindle Clockwise)*** | Startet die Frässpindel im Uhrzeigersinn. |
+| **`G54`** | **Werkstück-Nullpunkt 1 *(Work Coordinate System)*** | Nullpunkt-Lage an der vorderen linken oberen Bauteilecke `(X0, Y0, Z0)`. |
+| **`G00`** | **Eilgang *(Rapid Move)*** | Schnelle Positionierbewegung im Vollgas ohne Werkstoffkontakt. |
+| **`G01`** | **Linearer Arbeitsvorschub *(Linear Feed)*** | Fräsbewegung im Metall mit definierter Vorschubgeschwindigkeit $F$. |
+| **`G03`** | **Kreisbogen gegen Uhrzeigersinn *(Circular Interpolation CCW)*** | Fräst die runde Kreistasche $\varnothing 30\,\text{mm}$ mit Kreisradius-Parametern $I$ und $J$. |
+| **`G83`** | **Tiefbohrzyklus mit Spanbruch *(Deep Hole Peck Drilling)*** | Bohrt stufenweise mit Zustelltiefe $Q$, zieht periodisch zum Spanbrechen ab. |
+| **`Q3.0`** | **Zustelltiefe pro Spanbruch *(Peck Depth)*** | Bohrer taucht jeweils $3\,\text{mm}$ tiefer ein, bevor er kurz entlastet. |
+| **`G43 H...`** | **Werkzeuglängenkorrektur EIN *(Tool Length Compensation)*** | Aktiviert die im Werkzeugspeicher hinterlegte Längenmessung der Werkzeugspitze. |
+| **`M08`** | **Kühlmittel EIN *(Coolant On)*** | Schaltet die Kühlmittelpumpe für Sprüh- oder Flutkühlung an. |
+| **`M09`** | **Kühlmittel AUS *(Coolant Off)*** | Schaltet das Kühlmittel am Operations- oder Programmende ab. |
+| **`M05`** | **Spindel-Stopp *(Spindle Stop)*** | Hält die Spindeldrehung sicher an. |
+| **`G53`** | **Maschinen-Koordinatensystem *(Machine Coordinate System)*** | Fährt bezogen auf den absoluten Maschinen-Nullpunkt *(z. B. Spindel ganz nach oben `Z0`)*. |
+| **`M30`** | **Hauptprogramm-Ende *(Program End and Rewind)*** | Beendet das CNC-Programm und setzt den Programmzeiger auf Zeile 1 zurück. |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -683,9 +810,89 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 6. **Auf „Postprozess“ drücken (G-Code erzeugen):**
    - Sie wählen Ihren Postprozessor [`src/mein_erster_post.cps`](file:///C:/Projekte/CNC/src/mein_erster_post.cps) aus, klicken auf **Start**, und fertig ist die Datei [`tests/output_expected.nc`](file:///C:/Projekte/CNC/tests/output_expected.nc)!
 
+### ✅ So sieht das komplette fertige CNC-Programm mit Erklärungen aller Zeilen aus:
+
+```gcode
+%
+O1001 (KUNDENAUFTRAG FLANSCHPLATTE 80X50X12 MM)
+(--- BENOETIGTE WERKZEUGE - TOOL TABLE ---)
+(T01 | D=10.000MM | ECKE R=0.000 | Z-MIN=-5.000MM | SCHAFTFRAESER 10MM VHM)
+(T02 | D=6.000MM  | ECKE R=0.000 | Z-MIN=-12.000MM | SPIRALBOHRER 6MM VHM)
+(-----------------------------------------)
+N10 G90 G17 G40 G49 G80 G21 (SICHERHEITSZEILE: G90 ABSOLUT | G17 XY-EBENE | G40 RADIUSKORREKTUR AUS | G49 LAENGENKORREKTUR AUS | G80 BOHRZYKLEN AUS | G21 METRISCH MM)
+
+(OPERATION 1: AUSSENKONTUR FRAESEN 80X50X5 MM)
+(SICHERHEITS-INFO: OP Z-MIN=-5.000MM | OP Z-MAX=15.000MM)
+N20 T01 M06 (T01 SCHAFTFRAESER 10MM | M06 AUTOMATISCHER WERKZEUGWECHSEL)
+N30 G54 (G54 ERSTES WERKSTUECK-KOORDINATENSYSTEM / NULLPUNKT AUF BAUTEILECKE)
+N40 S8000 M03 (S8000 DREHZAHL 8000 U/MIN | M03 SPINDEL RECHTSLAUF EIN)
+N50 G43 H01 Z15.000 M08 (G43 LAENGENKORREKTUR | H01 REGISTER 1 | Z15 SICHERHEITSHOEHE | M08 KUEHLMITTEL AN)
+N60 G00 X-10.000 Y-10.000 (G00 EILGANG VOR DAS WERKSTUECK IN DIE LUFT)
+N70 G00 Z2.000 (G00 EILGANG BIS 2MM UEBER DIE BAUTEIL-OBERFLAECHE)
+N80 G01 Z-5.000 F500 (G01 EINTAUCHEN AUF FRAESTIEFE -5MM MIT VORSCHUB 500 MM/MIN)
+N90 G01 X0.000 Y0.000 F1200 (G01 ANFAHREN AN NULLPUNKT MIT FRAESVORSCHUB 1200 MM/MIN)
+N100 G01 X80.000 Y0.000 F1200 (G01 UNTERE KANTE ENTLANGFRAESEN BIS X80)
+N110 G01 X80.000 Y50.000 F1200 (G01 RECHTE KANTE FRAESEN BIS Y50)
+N120 G01 X0.000 Y50.000 F1200 (G01 OBERE KANTE FRAESEN BIS X0)
+N130 G01 X0.000 Y0.000 F1200 (G01 LINKE KANTE FRAESEN ZURUECK ZU Y0)
+N140 G00 Z15.000 (G00 EILGANG SENKRECHT NACH OBEN AUF FREIFAHRHOEHE 15MM)
+
+(OPERATION 2: KREISTASCHE MITTE D30 TIEFE 3MM)
+(SICHERHEITS-INFO: OP Z-MIN=-3.000MM | OP Z-MAX=15.000MM)
+N150 G00 X40.000 Y25.000 (G00 EILGANG ZUR TASCHENMITTE BEI X40 Y25)
+N160 G00 Z2.000 (G00 EILGANG AUF VORPOSITION Z2)
+N170 G01 Z-3.000 F400 (G01 EINTAUCHEN AUF TASCHENTIEFE -3MM MIT VORSCHUB 400 MM/MIN)
+N180 G01 X55.000 Y25.000 F800 (G01 LINEAR AN DEN KREISRAND X55 ANFAHREN - RADIUS 15MM)
+N190 G17 G03 X55.000 Y25.000 I-15.000 J0.000 F1000 (G03 KREISBAHN GEGEN DEN UHRZEIGERSINN MIT MITTELPUNKTVERSATZ I-15)
+N200 G01 X40.000 Y25.000 F1200 (G01 ZURUECK IN DIE TASCHENMITTE FAHREN)
+N210 G00 Z15.000 M09 (G00 EILGANG AUF SICHERHEITSHOEHE 15MM | M09 KUEHLMITTEL AUS)
+
+(OPERATION 3: 4 ECKLOECHER D6 TIEFE 12MM BOHREN)
+(SICHERHEITS-INFO: OP Z-MIN=-12.000MM | OP Z-MAX=15.000MM)
+N220 T02 M06 (T02 SPIRALBOHRER 6MM | M06 AUTOMATISCHER WERKZEUGWECHSEL)
+N230 G54 (G54 NULLPUNKT AUF BAUTEILECKE BEIBEHALTEN)
+N240 S3500 M03 (S3500 DREHZAHL 3500 U/MIN FUER D6 BOHRER | M03 SPINDEL RECHTSLAUF)
+N250 G43 H02 Z15.000 M08 (G43 LAENGENKORREKTUR REGISTER 2 | Z15 SICHERHEITSHOEHE | M08 KUEHLWASSER AN)
+N260 G00 X10.000 Y10.000 (G00 EILGANG ZUR ERSTEN BOHRUNG UNTEN LINKS)
+N270 G00 Z2.000 (G00 EILGANG AUF RUECKZUGSEBENE Z2)
+N280 G98 G83 X10.000 Y10.000 Z-12.000 R2.000 Q3.000 F300 (G98 RUECKZUG Z15 | G83 TIEFBOHRZYKLUS | ENDTIEFE Z-12 | SPANBRUCH Q3 | VORSCHUB F300)
+N290 X70.000 Y10.000 (BOHRUNG 2: UNTEN RECHTS MIT GLEICHEM ZYKLUS)
+N300 X70.000 Y40.000 (BOHRUNG 3: OBEN RECHTS MIT GLEICHEM ZYKLUS)
+N310 X10.000 Y40.000 (BOHRUNG 4: OBEN LINKS MIT GLEICHEM ZYKLUS)
+N320 G80 (G80 BOHRZYKLUS G83 SICHER ABBRECHEN UND DEAKTIVIEREN)
+N330 G00 Z15.000 (G00 EILGANG AUF SICHERHEITSHOEHE 15MM)
+
+(--- SICHERES PROGRAMMENDE - SAFE FOOTER ---)
+N340 M09 (M09 KUEHLSCHMIERSTOFF AUSSCHALTEN)
+N350 G53 G00 Z0.000 (G53 MASCHINENKOORDINATEN | G00 EILGANG | Z0 SPINDEL GANZ NACH OBEN FAHREN)
+N360 M05 (M05 FRAESSPINDEL ANHALTEN)
+N370 G53 G00 Y0.000 (G53 MASCHINENKOORDINATEN | G00 EILGANG | Y0 TISCH NACH VORNE ZUR TUER FAHREN)
+N380 M30 (M30 HAUPTPROGRAMMENDE, RESET UND SPEICHER AUF ZEILE 1 ZURUECKSETZEN)
+%
+```
+
+### 🛡️ Prüfliste dieser Übung: Wann ist Übung 4 zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. Außenkontur vollständig** | Vier lineare Verfahrsätze `G01` umschließen das Rechteck $80 \times 50\,\text{mm}$ auf Tiefe `Z-5.000`. | [ ] |
+| **2. Kreistasche zentriert** | Befehl `G03` fräst Kreis $\varnothing 30\,\text{mm}$ bei `X40 Y25` auf Tiefe `Z-3.000` mit `I-15.000`. | [ ] |
+| **3. Tiefbohrzyklus G83 aktiv** | Alle 4 Löcher werden mit Spanbruch `Q3.0` bis auf `Z-12.000` gebohrt und mit `G80` abgewählt. | [ ] |
+| **4. Sicheres Programmende** | Spindel fährt mit `G53 G00 Z0.` hoch, Kühlung stoppt mit `M09`, Tisch verfährt mit `G53 G00 Y0.` zur Tür, `M30` schließt ab. | [ ] |
+
 ---
 
 # Übung 5: 3D-Simulation im Browser & Einrichteblatt (`Setup Sheet`) für den Kunden erstellen
+
+### 📌 Spickzettel dieser Übung: Alle Einrichte- & Simulations-Kennzeichen in Übung 5
+
+| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
+|---|---|---|
+| **`Setup Sheet`** | **Einrichteblatt *(Maschineneinrichte-Dokument)*** | Verbindliches Datenblatt für den Bediener an der Fräse *(Nullpunkt, Werkzeuge, Rohmaße, Spannmittel)*. |
+| **`G54 (X0, Y0, Z0)`** | **Nullpunkt-Lage *(WCS Origin)*** | Exakte physische Position des Werkstück-Nullpunkts *(z. B. linke vordere Oberkante Fertigteil)*. |
+| **`Stock / Rohteil`** | **Rohteilabmessungen *(Billet / Raw Stock Dimensions)*** | Mindestmaße des Sägezuschnitts *(hier: $85 \times 55 \times 15\,\text{mm}$)* inklusive Aufmaß. |
+| **`Z-MIN & L_min`** | **Tiefster Punkt & Mindest-Auskraglänge *(Minimum Tool Extension)*** | Erforderliche freie Werkzeuglänge aus der Spannzange: $L_{\text{min}} > \lvert Z_{\text{min}}\rvert + 5\,\text{mm}$. |
+| **`Kollisionsprüfung`** | **Spannbacken-Sicherheitsabstand *(Clamping Clearance)*** | Garantiert mindestens $2\,\text{mm}$ Luft zwischen Fräser und Schraubstockbacken. |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -720,9 +927,32 @@ Bevor Sie den fertigen **G-Code (Maschinencode)** an Ihren Kunden schicken und G
    - Öffnen Sie die Datei [kundenauftrag_01_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md).
    - Dieses Dokument drucken Sie als **PDF (Portable Document Format)** aus und schicken es zusammen mit der Datei [tests/output_expected.nc](file:///C:/Projekte/CNC/tests/output_expected.nc) an den Kunden. Damit ist Ihr Auftrag zu 100 % professionell abgeschlossen!
 
+### 🛡️ Prüfliste dieser Übung: Wann ist Übung 5 zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. 3D-Simulation fehlerfrei** | Das Werkzeug fährt im Browser in [`3d_auftrag_simulator.html`](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html) kollisionsfrei alle Fräsbahnen und Bohrungen ab. | [ ] |
+| **2. Nullpunkt eindeutig definiert** | Das Einrichteblatt weist `G54` mit `X0 Y0 Z0` an der vorderen linken Bauteil-Oberkante aus. | [ ] |
+| **3. Werkzeugliste & Mindestlänge** | Alle Fräser/Bohrer sind mit Nummer, Durchmesser und Mindestauskraglänge $L_{\text{min}}$ dokumentiert. | [ ] |
+| **4. Rohteil- und Spannmaße** | Rohteilmaß $85 \times 55 \times 15\,\text{mm}$ und Einspanntiefe von $3\,\text{mm}$ sind für den Maschinenbediener verbindlich vorgegeben. | [ ] |
+
 ---
 
 # Übung 6: Sicherer Rückzug (`Safe Retract`) & Tisch am Programmende zur Tür fahren (`onClose`)
+
+### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 6
+
+| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
+|---|---|---|
+| **`M09`** | **Kühlmittel AUS *(Coolant Off)*** | Stoppt den Kühlmittelfluss vor dem Rückzug, damit die Kabine nicht vollgespritzt wird. |
+| **`G53`** | **Maschinen-Koordinatensystem *(Machine Coordinate System)*** | Fährt bezogen auf den festen Maschinen-Nullpunkt *(unabhängig vom Werkstück-Nullpunkt `G54`)*. |
+| **`G00`** | **Eilgang *(Rapid Move)*** | Schnelle Verfahrbewegung ohne Schnitt. |
+| **`Z0.000` (bei `G53`)** | **Oberer Z-Endpunkt *(Spindle Home / Top of Z-Axis)*** | Fährt die Spindel senkrecht ganz nach oben an die Maschinendecke *(Crash-Schutz)*. |
+| **`M05`** | **Spindel-Stopp *(Spindle Stop)*** | Schaltet den Spindeldrehantrieb nach Verlassen des Bauteils aus. |
+| **`Y0.000` (bei `G53`)** | **Tisch vor zur Kabinentür *(Table to Front Door)*** | Fährt den Maschinentisch ganz nach vorne zum bequemen Werkstückwechsel. |
+| **`G28 G91 Z0.`** | **Inkrementelle Referenzpunktfahrt Z *(Incremental Return to Reference)*** | Haas/Fanuc-Alternative zu `G53 Z0`: Fährt Z um `0 mm` inkrementell zum Maschinenreferenzpunkt. |
+| **`G90`** | **Absolutmaß *(Absolute Distance Mode)*** | Stellt das System nach `G91` sofort wieder auf absolute Koordinaten zurück. |
+| **`M30`** | **Programmende und Rücklauf *(Program End and Rewind)*** | Beendet den Programmlauf und springt zurück auf die allererste Programmzeile. |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -809,17 +1039,37 @@ function onClose() {
 
 ```gcode
 (--- SICHERES PROGRAMMENDE - SAFE FOOTER ---)
-N370 M09
-N380 G53 G00 Z0.000
-N390 M05
-N400 G53 G00 Y0.000
-N410 M30
+N370 M09 (M09 KUEHLSCHMIERSTOFF AUSSCHALTEN)
+N380 G53 G00 Z0.000 (G53 MASCHINENKOORDINATEN | G00 EILGANG | Z0 SPINDEL GANZ NACH OBEN FAHREN)
+N390 M05 (M05 FRAESSPINDELMOTOR AUSSCHALTEN - SPINDELSTOPP)
+N400 G53 G00 Y0.000 (G53 MASCHINENKOORDINATEN | G00 EILGANG | Y0 TISCH NACH VORNE ZUR TUER FAHREN)
+N410 M30 (M30 HAUPTPROGRAMMENDE, RESET UND SPEICHER AUF ZEILE 1 ZURUECKSETZEN)
 %
 ```
+
+### 🛡️ Prüfliste dieser Übung: Wann ist Übung 6 zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. Zuerst Z-Rückzug** | Die Z-Achse fährt in Zeile N380 mit `G53 G00 Z0.` ganz nach oben, BEVOR sich die Y-Achse bewegt. | [ ] |
+| **2. Spindel-Stopp** | Der Spindelmotor wird mit `M05` erst ausgeschaltet, nachdem das Werkzeug das Bauteil verlassen hat. | [ ] |
+| **3. Bedienerkomfort** | Der Tisch fährt in Zeile N400 mit `Y0.` vor zur Kabinentür. | [ ] |
+| **4. Konsistenz im Simulator** | Im 3D-Simulator hebt das Werkzeug senkrecht ab und parkt kollisionsfrei. | [ ] |
 
 ---
 
 # Übung 7: Eigenen Schalter (`Property`) für Zusatzfunktionen wie Blasluft (`M07`) oder Späneförderer bauen
+
+### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 7
+
+| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
+|---|---|---|
+| **`useChipConveyor`**| **Benutzer-Einstellung *(Postprocessor Property)*** | Ein/Aus-Schalter (`boolean`), der in CAM-Dialogen als Häkchen erscheint. |
+| **`M31`** | **Späneförderer EIN Vorwärts *(Chip Conveyor Forward On)*** | Startet das Späne-Kratzband oder die Förderschnecke am Programmanfang. |
+| **`M33`** | **Späneförderer AUS *(Chip Conveyor Stop)*** | Stoppt den Fördermotor am Programmende vor dem Hauptspindel-Reset. |
+| **`M07`** | **Minimalmengenschmierung / Blasluft *(Air Blast / Mist Coolant)*** | Schaltet Druckluft oder Mikrosprühen ein *(Trockenfräsen)*. |
+| **`M08`** | **Flutkühlung EIN *(Flood Coolant On)*** | Standard-Kühlmittel mit hoher Fördermenge. |
+| **`M30`** | **Programmende *(Program End)*** | Schließt die Programmausführung ab. |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -882,6 +1132,7 @@ Damit der Kunde beim Exportieren ein Häkchen setzen kann, fügen wir in `proper
 ```javascript
   if (getProperty("useChipConveyor")) {
     writeComment("SPAENEFOERDERER AUTOMATISCH STARTEN");
+    // M31 = Späneförderer (Kratzband / Förderschnecke) VORWÄRTS STARTEN
     writeBlock(mFormat.format(31)); // Gibt "N... M31" im G-Code aus
   }
 ```
@@ -891,13 +1142,54 @@ Damit der Kunde beim Exportieren ein Häkchen setzen kann, fügen wir in `proper
 ```javascript
   if (getProperty("useChipConveyor")) {
     writeComment("SPAENEFOERDERER STOPPEN");
+    // M33 = Späneförderer STOPP (Bandantrieb anhalten)
     writeBlock(mFormat.format(33)); // Gibt "N... M33" im G-Code aus
   }
 ```
 
+### ✅ So sieht das Ergebnis im fertigen G-Code mit aktivem Späneförderer (`M31` / `M33`) aus:
+
+```gcode
+%
+O1001 (PROGRAMM MIT AUTOMATISCHEM SPAENEFOERDERER)
+(==================================================)
+(SPAENEFOERDERER AUTOMATISCH STARTEN)
+N15 M31 (M31 SPAENEFOERDERER EIN - KRATZBAND LAEUFT VORWAERTS)
+(==================================================)
+N20 G90 G21 G17 G40 G80 (SICHERHEITSZEILE: ABSOLUT | METRISCH | XY-EBENE | RADIUSKORREKTUR AUS | BOHREN AUS)
+...
+(--- SICHERES PROGRAMMENDE - SAFE FOOTER ---)
+N370 M09 (M09 KUEHLMITTEL AUS)
+N380 G53 G00 Z0.000 (G53 MASCHINENKOORDINATEN | G00 EILGANG | Z0 SPINDEL GANZ NACH OBEN)
+N390 M05 (M05 SPINDELSTOPP)
+N395 M33 (M33 SPAENEFOERDERER STOPPEN - BANDANTRIEB AUSSCHALTEN)
+N400 G53 G00 Y0.000 (G53 MASCHINENKOORDINATEN | G00 EILGANG | Y0 TISCH VOR ZUR TUER)
+N410 M30 (M30 HAUPTPROGRAMMENDE, RESET UND RUECKSPRUNG)
+%
+```
+
+### 🛡️ Prüfliste dieser Übung: Wann ist Übung 7 zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. Schalter in Properties** | Die Eigenschaft `useChipConveyor` ist als Ja/Nein-Schalter (`boolean`) definiert. | [ ] |
+| **2. Einschalten bei Start** | Wenn `true`, steht oben im G-Code: `M31` *(Späneförderer AN)*. | [ ] |
+| **3. Ausschalten bei Ende** | Wenn `true`, steht am Programmende vor `M30`: `M33` *(Späneförderer AUS)*. | [ ] |
+| **4. Deaktivierungstest** | Wenn `false`, taucht weder `M31` noch `M33` im Maschinencode auf. | [ ] |
+
 ---
 
 # Übung 8: Zwei Steuerungs-Sprachen vergleichen (Haas/Fanuc vs. Siemens Sinumerik)
+
+### 📌 Spickzettel dieser Übung: Alle verwendeten Steuerungs-Kennzeichen in Übung 8
+
+| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
+|---|---|---|
+| **`controllerDialect`** | **Steuerungs-Auswahl *(Post Dialect Property)*** | Wählt im Postprozessor zwischen `FANUC` *(ISO)* und `SIEMENS` *(Sinumerik)*. |
+| **`(...)` vs. `;`** | **Kommentar-Syntax *(Comment Syntax)*** | Fanuc/Haas verlangt runde Klammern `(...)`, Siemens ein Semikolon `;`. |
+| **`G21` vs. `G71`** | **Metrisches Einheitensystem *(Metric Mode)*** | Fanuc nutzt `G21` für Millimeter, Siemens Sinumerik nutzt `G71`. |
+| **`G83` vs. `CYCLE83`** | **Tiefbohr-Befehl *(Deep Hole Drilling Cycle)*** | Fanuc nutzt modalen Zyklus `G83 Q3.0`, Siemens den Hochsprachenzyklus `CYCLE83(...)`. |
+| **`G53` vs. `SUPA`** | **Maschinenkoordinaten-Rückzug *(Machine Coordinate Retract)*** | Fanuc nutzt `G53 G00 Z0.`, Siemens `SUPA G00 Z0.` *(Satzweise Unterdrückung programmierbarer Nullpunktverschiebungen)*. |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -960,9 +1252,40 @@ function writeComment(text) {
     writeln("(" + filterText(String(text).toUpperCase(), permittedCommentChars) + ")");
   }
 }
+
+// Beispiel 2: Start-Initialisierung je nach Steuerung:
+if (isSiemens) {
+  // Siemens Sinumerik Initialisierung:
+  // G90 = Absolutmaß
+  // G71 = Maßeinheit Millimeter (metrisch nach DIN/ISO)
+  // G17 = Fräsebene XY
+  writeWords("G90", "G71", "G17");
+} else {
+  // Haas / Fanuc ISO Initialisierung:
+  // G90 = Absolutmaß
+  // G21 = Maßeinheit Millimeter (metrisch)
+  // G17 = Fräsebene XY
+  // G40 = Radiuskorrektur ausschalten
+  // G80 = Bohrzyklen abbrechen
+  writeWords("G90", "G21", "G17", "G40", "G80");
+}
+
+// Beispiel 3: Z-Rückzug am Programmende:
+// Siemens: SUPA G00 Z0.0 (SUPA = Satzweise Unterdrückung programmierbarer Nullpunktverschiebungen / Maschinen-Z0)
+// Fanuc: G53 G00 Z0.0 (G53 = Maschinen-Koordinatensystem im Eilgang G00)
+writeWords(isSiemens ? "SUPA G00 Z0.0" : "G53 G00 Z0.0");
 ```
 
 Genau deshalb ist **JavaScript** für diesen Beruf so mächtig: Das **3D-Modell** und die **Fräsbahnen** bleiben zu 100 % gleich – nur Ihr kurzes JavaScript-Skript formt den Text am Ende so um, dass jede Maschine der Welt ihn versteht!
+
+### 🛡️ Prüfliste dieser Übung: Wann ist Übung 8 zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. Dialekt-Auswahl** | Das Dropdown/Property erlaubt die Wahl zwischen `Haas/Fanuc` und `Siemens Sinumerik`. | [ ] |
+| **2. Kommentar-Syntax** | Bei Fanuc stehen runde Klammern `(...)`, bei Siemens steht ein Semikolon `;` am Zeilenanfang. | [ ] |
+| **3. Metrik-Befehl** | Bei Fanuc wird `G21` ausgegeben, bei Siemens korrekt `G71`. | [ ] |
+| **4. Rückzugsbefehl** | Bei Fanuc steht `G53 G00 Z0.`, bei Siemens steht der herstellerspezifische Befehl `SUPA G00 Z0.`. | [ ] |
 
 ---
 
@@ -1256,6 +1579,18 @@ In diesem vierten Teil findest du die **Übungen 9 bis 16**, die dich vom Einste
 
 # Übung 9: Schnittdaten (`S` Drehzahl & `F` Vorschub) berechnen – Warum Aluminium, Baustahl und Edelstahl völlig andere Werte brauchen
 
+### 📌 Spickzettel dieser Übung: Alle verwendeten Schnittdaten- & Technologie-Kennzeichen in Übung 9
+
+| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
+|---|---|---|
+| **`v_c`** | **Schnittgeschwindigkeit *(Cutting Speed in $\text{m/min}$)*** | Umfangsgeschwindigkeit der Schneide am Werkstück *(Alu $300\,\text{m/min}$, Baustahl $160\,\text{m/min}$, Edelstahl $80\,\text{m/min}$)*. |
+| **`S` / $n$** | **Spindeldrehzahl *(Spindle Speed in $\text{U/min}$)*** | Drehzahl der Spindel: $n = (v_c \times 1000) / (\pi \times D)$. Im G-Code: `S8000`. |
+| **`F` / $v_f$**| **Vorschubgeschwindigkeit *(Feedrate in $\text{mm/min}$)*** | Verfahrgeschwindigkeit des Fräsers im Schnitt: $v_f = n \times z \times f_z$. Im G-Code: `F1200`. |
+| **$f_z$** | **Zahnvorschub *(Feed per Tooth in $\text{mm}$)*** | Materialabtrag pro Schneidzahn und Umdrehung *(Alu $0{,}06\,\text{mm}$, Stahl $0{,}05\,\text{mm}$)*. |
+| **$z$** | **Zähnezahl *(Number of Flutes)*** | Anzahl der wirksamen Schneiden am Fräser *(Alu meist 3 Zähne, Stahl meist 4–5 Zähne)*. |
+| **`M03`** | **Spindel Rechtslauf EIN *(Spindle Clockwise)*** | Schaltet den Spindelmotor im Uhrzeigersinn ein. |
+| **`M08`** | **Kühlmittel EIN *(Flood Coolant On)*** | Verhindert Überhitzung der Schneide und spült Späne fort. |
+
 ### 💡 Worum geht es in einfacher Sprache?
 
 Wenn dir ein Online-Kunde ein 3D-Modell schickt, steht auf der Zeichnung immer der **Werkstoff *(das Material, z. B. Aluminium, Baustahl oder Edelstahl)***.
@@ -1280,7 +1615,7 @@ Der häufigste Anfängerfehler im CAM ist es, für Stahl dieselbe **Spindeldrehz
 ### 📊 Praxis-Vergleich für einen $\varnothing\,10\,\text{mm}$ Vollhartmetall-Schaftfräser (VHM):
 
 | Werkstoff (Material) | Schnittgeschwindigkeit $v_c$ [m/min] | Schneiden $z$ | Zahnvorschub $f_z$ [mm] | Berechnete Drehzahl `S` [U/min] | Berechneter Vorschub `F` [mm/min] |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| :--- | :--- :---: | :---: | :---: | :---: | :---: |
 | **1. Aluminium (`EN AW-6061 / 7075`)** | $300\,\text{m/min}$ | $3$ | $0{,}06\,\text{mm}$ | **`S9550`** | **`F1720`** |
 | **2. Baustahl / Vergütungsstahl (`S235 / 42CrMo4`)** | $160\,\text{m/min}$ | $4$ | $0{,}05\,\text{mm}$ | **`S5090`** | **`F1020`** |
 | **3. Edelstahl rostfrei (`1.4301 / V2A`)** | $80\,\text{m/min}$ | $4$ | $0{,}035\,\text{mm}$ | **`S2550`** | **`F357`** |
@@ -1317,18 +1652,61 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 ---
 
 ### 🛠️ Automatische Sicherheitsprüfung im JavaScript-Postprozessor:
-Du kannst in deinem Postprozessor (`onSection()`) sogar eine automatische Warnung einbauen, falls im CAM aus Versehen eine viel zu hohe Drehzahl für große Werkzeuge eingetragen wurde:
+Du kannst in deinem Postprozessor (`onSection()`) eine automatische Schnittdaten-Berechnung und Sicherheitswarnung einbauen, falls im CAM eine zu hohe Schnittgeschwindigkeit eingegeben wurde:
 
 ```javascript
-// Sicherheitsprüfung: Maximale Schnittgeschwindigkeit vc prüfen
+// Sicherheitsprüfung in onSection(): Maximale Schnittgeschwindigkeit vc berechnen und prüfen
 var tool = currentSection.getTool();
-var vc = (Math.PI * tool.diameter * spindleSpeed) / 1000.0; // vc in m/min
+// Formel: vc = (pi * Werkzeugdurchmesser * Spindeldrehzahl) / 1000 in m/min
+var vc = (Math.PI * tool.diameter * spindleSpeed) / 1000.0;
 writeComment("TECHNOLOGIE-CHECK: SCHNITTGESCHWINDIGKEIT VC = " + Math.round(vc) + " M/MIN");
+
+// Warnung bei kritischer Überschreitung (z. B. vc > 400 m/min bei Schaftfräsern):
+if (vc > 400 && tool.diameter > 6) {
+  writeComment("ACHTUNG: SCHNITTGESCHWINDIGKEIT SEHR HOCH! WERKZEUGVERSCHLEISS PRUEFEN!");
+}
 ```
+
+### ✅ So sieht das Ergebnis im fertigen G-Code aus:
+
+```gcode
+(OPERATION 1: AUSSENKONTUR SCHRUPPEN ALUMINIUM)
+(TECHNOLOGIE-CHECK: SCHNITTGESCHWINDIGKEIT VC = 251 M/MIN)
+N20 T01 M06 (T01 SCHAFTFRAESER D10MM VHM | M06 WERKZEUGWECHSEL)
+N30 G54 (G54 WERKSTUECK-NULLPUNKT AKTIVIEREN)
+N40 S8000 M03 (S8000 SPINDELDREHZAHL 8000 U/MIN | M03 SPINDEL RECHTSLAUF EIN)
+N50 G43 H01 Z15.000 M08 (G43 LAENGENKORREKTUR | H01 SPEICHER 1 | Z15 FREIFAHRHOEHE | M08 KUEHLMITTEL AN)
+N60 G00 X-10.000 Y-10.000 (G00 EILGANG VOR DAS MATERIAL)
+N70 G00 Z2.000 (G00 EILGANG AUF SICHERHEITSABSTAND 2MM)
+N80 G01 Z-5.000 F500 (G01 EINTAUCHEN MIT VORSCHUB 500 MM/MIN)
+N90 G01 X0.000 Y0.000 F1200 (G01 FRAESVORSCHUB 1200 MM/MIN ENTSPRICHT FZ = 0.05 MM/ZAHN BEI 3 ZAEHNEN)
+```
+
+### 🛡️ Prüfliste dieser Übung: Wann ist Übung 9 zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. vc-Berechnung aktiv** | Der Postprozessor schreibt `(TECHNOLOGIE-CHECK: SCHNITTGESCHWINDIGKEIT VC = ... M/MIN)` vor die Operation. | [ ] |
+| **2. Plausibilität Aluminium** | Für $\varnothing 10\,\text{mm}$ und `S8000` liegt $v_c$ bei ca. $251\,\text{m/min}$ *(voll im grünen Bereich für Alu)*. | [ ] |
+| **3. Vorschub passend zu Zähnen** | Der Vorschub `F1200` ergibt bei 3 Zähnen $f_z = 0{,}05\,\text{mm/Zahn}$, was für Schaftfräser optimal ist. | [ ] |
+| **4. Keine Werkzeugüberlastung** | Keine Spindeldrehzahlen über der Maschinenobergrenze *(z. B. max. $12.000\,\text{U/min}$)*. | [ ] |
 
 ---
 
 # Übung 10: Die 2. Aufspannung (`G55` / `OP20`) – Wie das 3D-Bauteil umgedreht und der Restboden auf der Rückseite plangefräst wird
+
+### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 10
+
+| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
+|---|---|---|
+| **`G54`** | **1. Werkstück-Nullpunkt *(Work Coordinate System OP10)*** | Nullpunkt für die erste Seite *(Oberseite, Kontur, Bohrungen)*. |
+| **`G55`** | **2. Werkstück-Nullpunkt *(Work Coordinate System OP20)*** | Zweiter Nullpunkt für die Rückseite nach dem Umspannen *(im zweiten Schraubstock)*. |
+| **`M00`** | **Programmstopp Zwingend *(Mandatory Program Stop)*** | Hält die CNC-Maschine an, Spindel stoppt, wartet auf Bediener-Quittierung *(Bauteil wenden)*. |
+| **`T01 M06`** | **Werkzeugwechsel *(Tool Change)*** | Wechselt das Planfräswerkzeug ein. |
+| **`S8000 M03`** | **Spindelstart *(Spindle On Clockwise)*** | Drehzahl $8.000\,\text{U/min}$ im Uhrzeigersinn. |
+| **`G43 H01`** | **Längenkorrektur *(Length Offset 1)*** | Verrechnet die Werkzeuglänge aus Speicher 1. |
+| **`M08`** | **Kühlmittel EIN *(Coolant On)*** | Spült Späne weg und kühlt beim Planfräsen. |
+| **`G01 Z0.0`** | **Arbeitsvorschub auf Fertigmaß *(Linear Feed to Z0)*** | Fräst den $3\,\text{mm}$ dicken Spannrand exakt auf Endmaß $12{,}0\,\text{mm}$ ab. |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -1368,29 +1746,73 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 #### Schritt 4: 3D-Simulation visuell prüfen
 * Kopieren Sie den Code in [https://ncviewer.com](https://ncviewer.com) und beobachten Sie die Fräsbahn der Planbearbeitung.
 
-### 🛠️ So sieht der Wechsel von Aufspannung 1 (`G54`) zu Aufspannung 2 (`G55`) im G-Code aus:
+---
+
+### 🛠️ Wie steuert der JavaScript-Postprozessor den Nullpunktwechsel in `onSection()`?
+
+```javascript
+// Automatische Erkennung des Werkstück-Koordinatensystems (WCS):
+// currentSection.workOffset: 1 = G54, 2 = G55, 3 = G56, usw.
+var wcsNumber = currentSection.workOffset;
+if (wcsNumber == 2) {
+  // Wenn Aufspannung 2 (G55) beginnt, zwingenden Programmstopp einfügen:
+  writeComment("==================================================");
+  writeComment("AUFSPANNUNG 2 - OP20: RUECKSEITE PLANFRAESEN");
+  writeComment("==================================================");
+  // M00 = Maschine stoppt Spindel und Vorschub, wartet auf Bediener-Startknopf
+  writeBlock(mFormat.format(0));
+  // G55 = Zweiter Nullpunkt
+  writeBlock(gFormat.format(55));
+} else {
+  // G54 = Erster Standard-Nullpunkt
+  writeBlock(gFormat.format(54));
+}
+```
+
+### ✅ So sieht der Wechsel von Aufspannung 1 (`G54`) zu Aufspannung 2 (`G55`) im G-Code aus:
 
 ```gcode
 (==================================================)
 (AUFSPANNUNG 2 - OP20: RUECKSEITE PLANFRAESEN AUF 12.0 MM)
 (NULLPUNKT: G55 - LINKER SCHRAUBSTOCK / Z0 = FERTIGMASS)
 (==================================================)
-N500 M00 (PROGRAMMSTOPP: BAUTEIL UMDREHEN UND IN SCHRAUBSTOCK 2 SPANNEN!)
-N510 T01 M06 (SCHAFTFRAESER 10MM VHM)
-N520 S8000 M03
-N530 G55 (ZWEITEN WERKSTUECK-NULLPUNKT G55 AKTIVIEREN!)
-N540 G00 X-10.000 Y25.000
-N550 G43 H01 Z15.000 M08
-N560 G01 Z0.000 F1500 (RESTMATERIAL 3MM ABTRAGEN BIS FERTIGHOEHE Z0)
-N570 G01 X90.000 F1200
+N500 M00 (M00 PROGRAMMSTOPP: BAUTEIL UMDREHEN UND IN SCHRAUBSTOCK 2 SPANNEN!)
+N510 T01 M06 (T01 SCHAFTFRAESER 10MM VHM | M06 AUTOMATISCHER WERKZEUGWECHSEL)
+N520 S8000 M03 (S8000 SPINDELDREHZAHL 8000 U/MIN | M03 SPINDEL RECHTSLAUF EIN)
+N530 G55 (G55 ZWEITEN WERKSTUECK-NULLPUNKT OP20 AKTIVIEREN)
+N540 G00 X-10.000 Y25.000 (G00 EILGANG VOR DIE LINKE BAUTEILKANTE)
+N550 G43 H01 Z15.000 M08 (G43 LAENGENKORREKTUR | H01 SPEICHER 1 | Z15 FREIFAHRHOEHE | M08 KUEHLMITTEL AN)
+N560 G01 Z0.000 F1500 (G01 EINTAUCHEN AUF FERTIGHOEHE Z0 MIT VORSCHUB 1500 MM/MIN)
+N570 G01 X90.000 F1200 (G01 PLANFRAESEN UEBER DAS BAUTEIL BIS X90 MIT VORSCHUB 1200 MM/MIN)
 ```
 
 * **Was macht `M00` *(Programmstopp / Mandatory Stop)***?  
-  Die Maschine hält automatisch an und wartet, bis der Bediener das Bauteil umgespannt hat und wieder auf den grünen **Start-Knopf (`Cycle Start`)** drückt!
+  Die Maschine hält automatisch an, schaltet die Spindel ab und wartet, bis der Bediener das Bauteil im Schraubstock gewendet hat und wieder auf den grünen **Start-Knopf (`Cycle Start`)** drückt!
+
+### 🛡️ Prüfliste dieser Übung: Wann ist Übung 10 zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. Programmstopp M00** | Vor Beginn der Operation `OP20` steht `M00`, damit die Maschine beim Umspannen sicher stoppt. | [ ] |
+| **2. Nullpunkt G55 aktiviert** | Vor der ersten Verfahrbewegung der Rückseite wird `G55` im Maschinencode aufgerufen. | [ ] |
+| **3. Sichere Freifahrhöhe** | Vor und nach `M00` befindet sich das Werkzeug auf sicherer Höhe `Z15.000` oder `G53 Z0.`. | [ ] |
+| **4. Planfräsen auf Z0** | Die Fräsbahn schneidet auf Höhe `Z0.000` den $3\,\text{mm}$ Restspannrand sauber ab. | [ ] |
 
 ---
 
 # Übung 11: Gewindebohren (`G84` Rigid Tapping) – `M6`- und `M8`-Schraubengewinde ohne Werkzeugbruch programmieren (`F = S × Steigung`)
+
+### 📌 Spickzettel dieser Übung: Alle verwendeten Gewindebohr- & Synchron-Kennzeichen in Übung 11
+
+| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
+|---|---|---|
+| **`M29 S...`** | **Starres Gewindebohren EIN *(Rigid Tapping Mode)*** | Schaltet Fanuc/Haas in den Synchronmodus: Spindel-Drehwinkel und Z-Achsenantrieb werden elektronisch starr gekoppelt. |
+| **`G84`** | **Gewindebohrzyklus *(Right-Hand Tapping Cycle)*** | Fährt mit Rechtslauf bis Endtiefe $Z$, stoppt, schaltet automatisch auf Linkslauf `M04` um und fährt auf Rückzugsebene heraus. |
+| **`G98`** | **Rückzug auf Ausgangsebene *(Return to Initial Level)*** | Zieht nach dem Gewindebohren ganz nach oben auf die sichere Ausgangshöhe *(z. B. `Z15.000`)* zurück. |
+| **`P` / Steigung**| **Gewindesteigung *(Thread Pitch in $\text{mm}$)*** | Steigung des Gewindes *(M6 = $1{,}0\,\text{mm}$, M8 = $1{,}25\,\text{mm}$, M10 = $1{,}5\,\text{mm}$)*. |
+| **`F = S × P`** | **Synchroner Gewindevorschub *(Synchronous Feedrate)*** | Verfahrgeschwindigkeit der Z-Achse in $\text{mm/min}$. Bei $S=600\,\text{U/min}$ und $P=1{,}25\,\text{mm}$ zwingend $F=750\,\text{mm/min}$. |
+| **`R...`** | **Rückzugsebene *(Reference Return Plane)*** | Höhenposition kurz vor dem Bauteil *(z. B. `R2.000`)*, ab der der Arbeitsvorschub synchron einsetzt. |
+| **`G80`** | **Bohrzyklus abwählen *(Cancel Modal Canned Cycle)*** | Beendet den Zyklus `G84` nach dem letzten Gewindeloch sicher. |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -1449,19 +1871,66 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 ```javascript
 case "tapping":
 case "right-tapping":
-  // Exakte Berechnung des Synchron-Vorschubs: F = Drehzahl S * Gewindesteigung (tool.threadPitch)
+  // 1. Exakte Berechnung des Synchron-Vorschubs: F = Drehzahl S * Gewindesteigung (tool.threadPitch)
   var tapFeedrate = spindleSpeed * tool.threadPitch;
+
+  // 2. Starres Gewindebohren einschalten (M29 bei Fanuc/Haas):
+  writeBlock(mFormat.format(29), sOutput.format(spindleSpeed));
+
+  // 3. Modalen Zyklus G84 mit Rückzugsebene R und Vorschub F schreiben:
+  // G98 = Rueckzug auf Ausgangshoehe Z15.000
+  // G90 = Absolutmass-Programmierung
+  // G84 = Gewindebohrzyklus Rechtsgewinde
   writeBlock(
-    gRetractModal.format(98), gAbsIncModal.format(90), gCycleModal.format(84),
+    gRetractModal.format(98),
+    gAbsIncModal.format(90),
+    gCycleModal.format(84),
     getCommonCycle(x, y, z, cycle.retract),
     "F" + feedFormat.format(tapFeedrate)
   );
   break;
 ```
 
+### ✅ So sieht das Ergebnis im fertigen G-Code aus:
+
+```gcode
+(OPERATION: GEWINDEBOHREN 4X M8 TIEFE 10MM)
+N240 T03 M06 (T03 GEWINDEBOHRER M8 STEIGUNG 1.25MM VHM | M06 AUTOMATISCHER WERKZEUGWECHSEL)
+N250 G54 (G54 WERKSTUECK-NULLPUNKT AKTIVIEREN)
+N260 M29 S600 (M29 SYNCHRON-GEWINDEBOHREN STARRES TAPPING MIT 600 U/MIN)
+N270 G43 H03 Z15.000 M08 (G43 LAENGENKORREKTUR | H03 SPEICHER 3 | Z15 FREIFAHRHOEHE | M08 KUEHLMITTEL AN)
+N280 G00 X10.000 Y10.000 (G00 EILGANG ZUR ERSTEN BOHRUNG)
+N290 G98 G90 G84 X10.000 Y10.000 Z-10.000 R2.000 F750 (G98 RUECKZUG Z15 | G90 ABSOLUT | G84 GEWINDEZYKLUS | ENDTIEFE Z-10 | R2 VORPOSITION | F750 SYNCHRONVORSCHUB 600*1.25)
+N300 X70.000 Y10.000 (GEWINDE 2 UNTEN RECHTS MIT GLEICHEM ZYKLUS)
+N310 X70.000 Y40.000 (GEWINDE 3 OBEN RECHTS MIT GLEICHEM ZYKLUS)
+N320 X10.000 Y40.000 (GEWINDE 4 OBEN LINKS MIT GLEICHEM ZYKLUS)
+N330 G80 (G80 GEWINDEBOHRZYKLUS G84 SICHER ABBRECHEN UND DEAKTIVIEREN)
+N340 G00 Z15.000 M09 (G00 EILGANG AUF SICHERHEITSHOEHE | M09 KUEHLMITTEL AUS)
+```
+
+### 🛡️ Prüfliste dieser Übung: Wann ist Übung 11 zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. Synchronformel F = S × P** | Der Vorschub `F` entspricht exakt $\text{Drehzahl } S \times \text{Steigung } P$ *(z. B. $600 \times 1{,}25 = 750$)*. | [ ] |
+| **2. Rigid Tapping M29 aktiv** | Vor dem Zyklus `G84` wird `M29 S...` ausgegeben, damit die Steuerung Z-Achse und Spindel elektronisch koppelt. | [ ] |
+| **3. Rückzugsebene R** | `R2.000` liegt mindestens $2\,\text{mm}$ über dem Bauteil in der Luft vor Beginn des Gewindeschnitts. | [ ] |
+| **4. Zyklus-Abwahl G80** | Nach dem letzten Gewindeloch wird der Zyklus mit `G80` sicher deaktiviert, bevor freigefahren wird. | [ ] |
+
 ---
 
 # Übung 12: Werkzeugradiuskorrektur (`G41` / `G42` / `G40`) – Wie der Kunde an der Maschine `0,01 mm` Genauigkeit für Passungen einstellt
+
+### 📌 Spickzettel dieser Übung: Alle verwendeten Radiuskorrektur-Kennzeichen in Übung 12
+
+| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
+|---|---|---|
+| **`G41`** | **Fräserradiuskorrektur LINKS *(Cutter Compensation Left)*** | Verschiebt die Fräsermitte um den Werkzeugradius nach links von der programmierten Kontur *(Gleichlauffräsen)*. |
+| **`G42`** | **Fräserradiuskorrektur RECHTS *(Cutter Compensation Right)*** | Verschiebt die Fräsermitte nach rechts von der Kontur *(Gegenlauffräsen)*. |
+| **`G40`** | **Radiuskorrektur ABWÄHLEN *(Cancel Cutter Compensation)*** | Schaltet jede aktive Bahnkorrektur sicher aus *(muss bei linearer Abfahrbewegung erfolgen!)*. |
+| **`D...` / `D01`**| **Korrekturspeicher-Register *(Diameter Compensation Offset)*** | Gibt an, aus welchem Speicher an der Steuerung das Verschleißmaß gelesen wird *(z. B. `D01` zu `T01`)*. |
+| **`G03`** | **Kreisinterpolation *(Circular Move CCW)*** | Fräst die Passungs-Kreistasche $\varnothing 30\,\text{H7}$ gegen den Uhrzeigersinn. |
+| **`I-15.000`** | **Kreismittelpunkts-Vektor in X *(Incremental Arc Center X)*** | Relativer Abstand vom Startpunkt zum Kreismittelpunkt $(15\,\text{mm}$ nach links in der X-Achse$)$. |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -1502,23 +1971,69 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 #### Schritt 4: 3D-Simulation visuell prüfen
 * Kopieren Sie den G-Code in [https://ncviewer.com](https://ncviewer.com) und prüfen Sie die Kreisbahnen.
 
+---
+
+### 🛠️ Wie steuert der JavaScript-Postprozessor (`onLinear`) die Radiuskorrektur?
+
+```javascript
+// In onLinear() wird die Radiuskorrektur automatisch bei der Anfahrbewegung aktiviert:
+if (pendingRadiusCompensation >= 0) {
+  // G41 = Links / G42 = Rechts / G40 = Aus
+  var compCode = (pendingRadiusCompensation == RADIUS_COMPENSATION_LEFT) ? 41 :
+                 (pendingRadiusCompensation == RADIUS_COMPENSATION_RIGHT) ? 42 : 40;
+  
+  if (compCode != 40) {
+    // Einschalten mit Korrekturspeicher-Nummer D... (entspricht Werkzeugnummer tool.number):
+    writeBlock(
+      gFormat.format(compCode),
+      "D" + ("0" + tool.number).slice(-2),
+      gMotionModal.format(1),
+      xOutput.format(x), yOutput.format(y), feedOutput.format(feed)
+    );
+  } else {
+    // Ausschalten mit G40 bei der Abfahrbewegung:
+    writeBlock(gFormat.format(40), gMotionModal.format(1), xOutput.format(x), yOutput.format(y), feedOutput.format(feed));
+  }
+  pendingRadiusCompensation = -1;
+}
+```
+
 ### ✅ So sieht eine saubere Schlicht-Operation mit `G41` und `G40` im G-Code aus:
 
 ```gcode
 (--- SCHLICHTEN KREISTASCHE D30 H7 MIT WERKZEUGRADIUSKORREKTUR G41 ---)
-N200 G00 X40.000 Y25.000 (FAHRE ZUR MITTE DER TASCHE)
-N210 G01 Z-3.000 F500    (TAUCHE AUF TIEFE -3 MM EIN)
-N220 G41 D01 G01 X55.000 Y25.000 F800 (SCHALTE G41 MIT KORREKTURSPEICHER D01 EIN)
-N230 G03 X55.000 Y25.000 I-15.000 J0.000 (FRAESE VOLLKREIS D30 H7)
-N240 G40 G01 X40.000 Y25.000 F1000 (WICHTIG: MIT G40 KORREKTUR WIEDER AUSSCHALTEN!)
-N250 G00 Z15.000
+N200 G00 X40.000 Y25.000 (G00 EILGANG ZUR TASCHENMITTE BEI X40 Y25)
+N210 G01 Z-3.000 F500    (G01 EINTAUCHEN AUF TASCHENTIEFE -3MM MIT VORSCHUB 500 MM/MIN)
+N220 G41 D01 G01 X55.000 Y25.000 F800 (G41 RADIUSKORREKTUR LINKS EIN | D01 REGISTER 1 | LINEARE ANFAHRBAHN X55 | F800 VORSCHUB)
+N230 G03 X55.000 Y25.000 I-15.000 J0.000 (G03 VOLLKREIS GEGEN UHRZEIGERSINN FRAESEN | RADIUS 15MM DURCH I-15)
+N240 G40 G01 X40.000 Y25.000 F1000 (G40 RADIUSKORREKTUR AUSSCHALTEN | LINEARE ABFAHRBAHN ZUR TASCHENMITTE | F1000 VORSCHUB)
+N250 G00 Z15.000 (G00 EILGANG SENKRECHT AUF SICHERHEITSHOEHE 15MM)
 ```
 
 Jetzt kann der Maschinenbediener direkt an seinem Bildschirm in der Werkzeughalter-Tabelle (`D01`) einfach `-0.02 mm` eintippen – und die Tasche wird sofort um zwei Hundertstel Millimeter größer, ohne dass dein Programm geändert werden muss!
 
+### 🛡️ Prüfliste dieser Übung: Wann ist Übung 12 zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. Anfahrbewegung mit G41** | `G41 D01` wird auf einer linearen Anfahrbewegung vor Konturkontakt aktiviert. | [ ] |
+| **2. Korrekturspeicher D** | Das Register `D01` stimmt mit der aktuellen Werkzeugnummer `T01` überein. | [ ] |
+| **3. Vollkreisbahn G03** | Die Passung $\varnothing 30\,\text{mm}$ wird kreisförmig mit Mittelpunkts-Vektor `I-15.000` abgefahren. | [ ] |
+| **4. Sichere Abwahl G40** | Beim Verlassen der Wandung wird die Korrektur mit `G40` auf linearer Bahn wieder ausgeschaltet. | [ ] |
+
 ---
 
 # Übung 13: Echte 3D-Freiformflächen – `3D Adaptive Clearing` (Wirbelfräsen) & `3D-Schlichten` mit Kugelfräser (`Ball End Mill`)
+
+### 📌 Spickzettel dieser Übung: Alle verwendeten 3D-Freiform- & Kugelfräser-Kennzeichen in Übung 13
+
+| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
+|---|---|---|
+| **`TOOL_MILLING_END_BALL`**| **Werkzeugtyp Kugelfräser *(Ball End Mill)*** | Vollradiusfräser mit halbkugelförmiger Spitze $(R = D/2)$, verhindert Treppenstufen auf Freiformflächen. |
+| **`G01 X... Y... Z...`** | **Simultane 3-Achs-Linearbewegung *(3D Linear Move)*** | Alle 3 Raumachsen verfahren gleichzeitig mit Vorschub $F$, um gekrümmte Hügel und Mulden abzufahren. |
+| **`3D Adaptive Clearing`** | **Trochoidales Schruppen *(High Speed Roughing)*** | Räumt das Rohteil volumenoptimiert mit konstanter Werkzeugumschlingung aus. |
+| **`Scallop / Parallel`** | **3D-Zeilenschlichten *(3D Finishing Strategy)*** | Fährt feine Zeilen *(z. B. $0{,}15\,\text{mm}$ Abstand)* mit Kugelfräser für spiegelglatte Oberflächen ab. |
+| **`Toleranz (0.005 mm)`** | **Sehnen-Toleranz *(Chordal Tolerance / Chord Error)*** | Maximale Abweichung der G-Code-Geraden von der perfekten CAD-Freiformkurve. |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -1567,14 +2082,61 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 ### 🛠️ Wie erkennst du einen Kugelfräser im JavaScript-Postprozessor?
 
 ```javascript
+// Automatische Erkennung des Werkzeugtyps in onSection():
 if (tool.type == TOOL_MILLING_END_BALL) {
-  writeComment("3D-FREIFORM-WERKZEUG: KUGELFRAESER D=" + xyzFormat.format(tool.diameter) + " (R=" + xyzFormat.format(tool.diameter / 2) + ")");
+  // Gibt Werkzeugdurchmesser und Kugelradius (Hälfte des Durchmessers) im G-Code aus:
+  writeComment(
+    "3D-FREIFORM-WERKZEUG: KUGELFRAESER D=" +
+    xyzFormat.format(tool.diameter) +
+    " (R=" + xyzFormat.format(tool.diameter / 2) + ")"
+  );
 }
 ```
+
+### ✅ So sieht das Ergebnis im 3D-Freiform-G-Code aus:
+
+```gcode
+(OPERATION: 3D FREIFORMFLAECHEN SCHLICHTEN MIT KUGELFRAESER)
+(3D-FREIFORM-WERKZEUG: KUGELFRAESER D=6.000 (R=3.000))
+N210 T03 M06 (T03 KUGELFRAESER D6MM VHM R3 | M06 AUTOMATISCHER WERKZEUGWECHSEL)
+N220 G54 (G54 WERKSTUECK-NULLPUNKT AKTIVIEREN)
+N230 S10000 M03 (S10000 HOHE DREHZAHL FUER KUGELSPITZE | M03 SPINDEL RECHTSLAUF)
+N240 G43 H03 Z15.000 M08 (G43 LAENGENKORREKTUR | H03 SPEICHER 3 | Z15 FREIFAHRHOEHE | M08 KUEHLUNG AN)
+N250 G00 X20.000 Y15.000 (G00 EILGANG ZUM STARTPUNKT DER 3D-KUPPEL)
+N260 G00 Z2.000 (G00 EILGANG AUF SICHERHEITSABSTAND 2MM)
+N270 G01 Z-1.250 F800 (G01 EINTAUCHEN AUF KONTURHOEHE MIT VORSCHUB 800 MM/MIN)
+N280 G01 X20.350 Y15.100 Z-1.230 F1500 (G01 DREIDIMENSIONALE LINEARBEWEGUNG IN X, Y UND Z SIMULTAN)
+N290 G01 X20.700 Y15.200 Z-1.205 F1500 (G01 FEINE 3D-BAHNAUFLOESUNG FUER GLATTE OBERFLAECHE)
+N300 G01 X21.050 Y15.300 Z-1.170 F1500 (G01 KONTURPUNKT FOLGT DER MATHEMATISCHEN KUPPELKURVE)
+N310 G00 Z15.000 M09 (G00 EILGANG FREIFAHREN AUF SICHERHEITSHOEHE | M09 KUEHLUNG AUS)
+```
+
+### 🛡️ Prüfliste dieser Übung: Wann ist Übung 13 zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. Kugelfräser-Erkennung** | Der Postprozessor identifiziert `TOOL_MILLING_END_BALL` und weist Radius $R = D/2$ aus. | [ ] |
+| **2. Simultaner 3D-Satz** | In den Sätzen `N280` bis `N300` verfahren $X$, $Y$ und $Z$ gleichzeitig in einem einzigen `G01`-Satz. | [ ] |
+| **3. Vorschub & Drehzahl** | Ausreichend hohe Drehzahl `S10000`, da die Umfangsgeschwindigkeit der Kugelspitze bei $Z$-Mitte gegen Null geht. | [ ] |
+| **4. Kollisionsfreier Rückzug** | Nach dem Schlichten hebt die $Z$-Achse mit `G00 Z15.000` kollisionsfrei von der gewölbten Freiformfläche ab. | [ ] |
 
 ---
 
 # Übung 14: Heidenhain Klartext-Steuerung (`TOOL CALL`, `L ... FMAX`) & 4. Drehachse (`A-Achse`) für Aufträge im deutschsprachigen Raum
+
+### 📌 Spickzettel dieser Übung: Alle verwendeten Heidenhain-Klartext- & Achsen-Kennzeichen in Übung 14
+
+| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
+|---|---|---|
+| **`BEGIN PGM ... MM`** | **Programmanfang *(Program Header)*** | Startet das Klartext-Programm mit Programmnummer/-name in metrischer Maßeinheit *(Millimeter)*. |
+| **`BLK FORM 0.1 / 0.2`** | **Rohteil-Definition *(Blank Form Min/Max)*** | Definiert die Minimal- und Maximalkoordinaten des unzerspanten Rohteilblocks für die Maschinen-Grafik. |
+| **`TOOL CALL <T> Z S...`**| **Werkzeugaufruf *(Tool Call)*** | Wechselt Werkzeug $T$ ein, definiert Spindelachse $Z$ und startet Spindeldrehzahl $S$ *(ohne `M06`!)*. |
+| **`L ... R0 FMAX`** | **Linearer Eilgangsatz *(Linear Rapid)*** | Verfahrbewegung mit Maximalgeschwindigkeit `FMAX` ohne Fräserradiuskorrektur `R0`. |
+| **`L ... R0 F...`** | **Linearer Arbeitsvorschubsatz *(Linear Feed)*** | Geradliniger Schnitt im Material mit Vorschub $F$ in $\text{mm/min}$. |
+| **`M11 / M10`** | **Klemmung der 4. Drehachse *(Rotary Axis Unclamp / Clamp)*** | `M11` löst die hydraulische Klemmung vor dem Drehen, `M10` klemmt die Achse für steifes Fräsen wieder fest. |
+| **`L A+90.000`** | **4. Drehachse drehen *(4th Axis Rotary Move)*** | Dreht den Teilapparat oder Rundtisch um $90^\circ$ für mehrseitige Bearbeitung. |
+| **`M91`** | **Maschinen-Nullpunkt-Bezug *(Machine Datum System)*** | Entspricht ISO `G53`: Verfährt bezogen auf den festen Maschinen-Nullpunkt *(z. B. `L Z+250 R0 FMAX M91`)*. |
+| **`END PGM ... MM`** | **Programmende *(Program End)*** | Schließt das Heidenhain-Programm ab. |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -1626,9 +2188,69 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 
 *(Praxis-Beispiele für vollständige Heidenhain-Programme findest du bereits in deinen 4 Referenzprojekten im Ordner `c:\Projekte\CNC\Portfolio\`!)*
 
+### 🛠️ Wie erzeugt der JavaScript-Postprozessor Heidenhain-Sätze?
+
+```javascript
+// Heidenhain Werkzeugaufruf in onSection():
+writeWords("TOOL CALL " + tool.number + " Z S" + Math.round(spindleSpeed));
+writeWords("M3"); // Spindel Rechtslauf
+writeWords("M8"); // Kuehlmittel ein
+
+// 4. Achse positionieren (z. B. auf 90 Grad fuer Seitenbearbeitung):
+if (currentSection.isMultiAxis && currentSection.isMultiAxis()) {
+  writeWords("M11"); // Klemmung der Rundachse loesen
+  writeWords("L A+90.000 R0 FMAX"); // Drehung im Eilgang FMAX
+  writeWords("M10"); // Rundachse wieder hydraulisch klemmen
+}
+
+// Linearer Verfahrsatz in onLinear():
+writeWords("L " + xOutput.format(x) + " " + yOutput.format(y) + " R0 F" + feedOutput.format(feed));
+```
+
+### ✅ So sieht das vollständige Heidenhain-Klartext-Programm aus:
+
+```gcode
+0 BEGIN PGM BAUTEIL_1001 MM (HEIDENHAIN KLARTEXT PROGRAMMSTART METRISCH MM)
+1 BLK FORM 0.1 Z X-5.000 Y-5.000 Z-15.000 (ROHTEIL-MINIMALPUNKT ECKE UNTEN LINKS)
+2 BLK FORM 0.2 X+85.000 Y+55.000 Z+0.000 (ROHTEIL-MAXIMALPUNKT ECKE OBEN RECHTS)
+3 TOOL CALL 1 Z S8000 (TOOL CALL 1 SCHAFTFRAESER D10 | SPINDELACHSE Z | DREHZAHL 8000 U/MIN)
+4 M3 (M3 SPINDEL RECHTSLAUF STARTEN)
+5 M8 (M8 KUEHLMITTEL EINSCHALTEN)
+6 M11 (M11 4. DREHACHSE ACHSKLEMMUNG LOESEN)
+7 L A+90.000 R0 FMAX (L LINEARSATZ | A+90 RUNDACHSE DREHEN | R0 KEINE RADIUSKORREKTUR | FMAX EILGANG)
+8 M10 (M10 4. DREHACHSE WIEDER FESTKLEMMEN FUER HOHE FRAESSTEIFIGKEIT)
+9 L X+10.000 Y+20.000 R0 FMAX (L EILGANGPOSITIONIERUNG AUF STARTKOORDINATEN)
+10 L Z+2.000 R0 FMAX (L EILGANG BIS 2MM UEBER DIE BAUTEIL-OBERFLAECHE)
+11 L Z-5.000 R0 F500 (L EINTAUCHEN AUF FRAESTIEFE -5MM MIT VORSCHUB 500 MM/MIN)
+12 L X+80.000 Y+20.000 R0 F1200 (L FRAESBEWEGUNG BIS X80 MIT ARBEITSVORSCHUB 1200 MM/MIN)
+13 L Z+250.000 R0 FMAX M91 (L Z-ACHSE GANZ NACH OBEN FAHREN | M91 MASCHINEN-NULLPUNKT BEZUG WIE G53)
+14 M9 (M9 KUEHLWASSER AUSSCHALTEN)
+15 M5 (M5 SPINDELDREHUNG ANHALTEN)
+16 END PGM BAUTEIL_1001 MM (END PGM PROGRAMMENDE UND RUECKSPRUNG AUF SATZ 0)
+```
+
+### 🛡️ Prüfliste dieser Übung: Wann ist Übung 14 zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. Heidenhain Syntax** | Programm beginnt mit `0 BEGIN PGM ... MM` und endet mit `END PGM ... MM`. | [ ] |
+| **2. TOOL CALL Format** | Werkzeugwechsel erfolgt in einem Satz: `TOOL CALL <T> Z S<Drehzahl>` ohne getrenntes `M06`. | [ ] |
+| **3. 4. Achse geklemmt** | Vor der Drehung wird mit `M11` entklemmt, nach Erreichen von `A+90.` wird mit `M10` geklemmt. | [ ] |
+| **4. Sicherer Rückzug M91** | Der Z-Rückzug erfolgt maschinenbezogen mit `M91` (`L Z+250 R0 FMAX M91`), bevor der Bediener entnimmt. | [ ] |
+
 ---
 
 # Übung 15: Kanten entgraten am 3D-Modell (`2D-Fase / Chamfer Milling`) mit einem 45°-Fasenfräser (`T04`)
+
+### 📌 Spickzettel dieser Übung: Alle verwendeten Fasenfräs- & Entgrat-Kennzeichen in Übung 15
+
+| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
+|---|---|---|
+| **`T04`** | **Fasenfräser *(Chamfer Mill / NC-Spot Drill)*** | $90^\circ$-Spitzkegelfräser mit $45^\circ$-Fasenwinkel an den Schneidflanken. |
+| **`Tip Offset`** | **Spitzenversatz *(Tip Offset in $\text{mm}$)*** | Taucht die theoretische Fräserspitze um $1{,}5$ bis $2{,}0\,\text{mm}$ unter die Bauteilkante, damit eine schneidende Flankengeschwindigkeit vorliegt. |
+| **`Z-2.300`** | **Effektive Fasentiefe *(Chamfer Z Depth)*** | Berechnet sich aus: $\text{Fasenbreite } (0{,}3\,\text{mm}) + \text{Spitzenversatz } (2{,}0\,\text{mm}) = 2{,}3\,\text{mm}$ Frästiefe im $Z$-Minus. |
+| **`G41`** | **Radiuskorrektur LINKS *(Cutter Compensation)*** | Hält den Kegel auf exaktem Schneidenabstand zur scharfen Werkstückkante. |
+| **`M08`** | **Kühlmittel EIN *(Flood Coolant On)*** | Verhindert Gratbildung und Aufschweißen von Aluminium an der empfindlichen Fasenschneide. |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -1660,7 +2282,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 
 #### Schritt 3: Den erzeugten G-Code ansehen
 * Öffnen Sie [`tests/mein_generierter_gcode.nc`](file:///C:/Projekte/CNC/tests/mein_generierter_gcode.nc) mit `Strg + P`.
-* Prüfen Sie die effektive Fasentiefe `Z-1.500` (Fase + Spitzenversatz).
+* Prüfen Sie die effektive Fasentiefe `Z-2.300` (Fase + Spitzenversatz).
 
 #### Schritt 4: 3D-Simulation visuell prüfen
 * Kopieren Sie den G-Code in [https://ncviewer.com](https://ncviewer.com).
@@ -1671,24 +2293,60 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 * Fahre niemals mit der **exakten Spitze (`D = 0 mm`)** des $90^\circ$-Kegels an der Kante entlang (dort ist die Schnittgeschwindigkeit gleich null, das gibt eine hässliche Kante!).
 * Stelle im CAM den **Spitzen-Versatz (`Tip Offset`)** immer auf **`1,5 mm` bis `2,0 mm`** ein: Dann taucht die Spitze des Kegelfräsers `2 mm` tiefer neben der Wand ein und schneidet die $45^\circ$-Fase sauber mit der seitlichen Schneidenflanke!
 
+### 🛠️ Wie berechnet der JavaScript-Postprozessor die Fasentiefe?
+
+```javascript
+// Automatische Erkennung und Fasentiefen-Berechnung in onSection():
+if (tool.type == TOOL_MILLING_CHAMFER) {
+  var tipOffset = 2.0; // 2 mm Spitzenversatz neben der Bauteilkante
+  var chamferWidth = 0.3; // 0.3 mm Kantenbrechung
+  var targetZ = -(tipOffset + chamferWidth);
+  writeComment(
+    "FASEN-BERECHNUNG: BREITE=" + chamferWidth + "MM | TIP-OFFSET=" + tipOffset + "MM | Z-TIEFE=" + targetZ + "MM"
+  );
+}
+```
+
+### ✅ So sieht das Ergebnis im fertigen G-Code aus:
+
 ```gcode
 (--- OPERATION 40: ALLE KANTEN AUTOMATISCH ENTGRATEN 0.3 x 45 GRAD ---)
-N350 T04 M06 (90-GRAD FASENFRAESER D10MM VHM)
-N360 S6000 M03
-N370 G54 G00 X-5.000 Y0.000
-N380 G43 H04 Z15.000 M08
-N390 G00 Z2.000
-N400 G01 Z-2.300 F800 (2.0 MM SPITZENVERSATZ + 0.3 MM FASENBREITE = Z-2.3 MM)
-N410 G01 X80.000 Y0.000 F1000
-N420 G01 X80.000 Y50.000
-N430 G01 X0.000 Y50.000
-N440 G01 X0.000 Y0.000
-N450 G00 Z15.000 M09
+(FASEN-BERECHNUNG: BREITE=0.3MM | TIP-OFFSET=2.0MM | Z-TIEFE=-2.3MM)
+N350 T04 M06 (T04 FASENFRAESER 90 GRAD D10MM VHM | M06 AUTOMATISCHER WERKZEUGWECHSEL)
+N360 S6000 M03 (S6000 SPINDELDREHZAHL 6000 U/MIN | M03 SPINDEL RECHTSLAUF EIN)
+N370 G54 G00 X-5.000 Y0.000 (G54 WERKSTUECK-NULLPUNKT | G00 EILGANG VOR DIE KONTUR)
+N380 G43 H04 Z15.000 M08 (G43 LAENGENKORREKTUR | H04 SPEICHER 4 | Z15 FREIFAHRHOEHE | M08 KUEHLMITTEL AN)
+N390 G00 Z2.000 (G00 EILGANG AUF SICHERHEITSHOEHE 2MM)
+N400 G01 Z-2.300 F800 (G01 EINTAUCHEN: 2.0MM SPITZENVERSATZ + 0.3MM FASE = Z-2.3MM | F800 VORSCHUB)
+N410 G01 X80.000 Y0.000 F1000 (G01 UNTERE KANTE ENTGRATEN BIS X80 MIT VORSCHUB 1000 MM/MIN)
+N420 G01 X80.000 Y50.000 F1000 (G01 RECHTE KANTE ENTGRATEN BIS Y50)
+N430 G01 X0.000 Y50.000 F1000 (G01 OBERE KANTE ENTGRATEN BIS X0)
+N440 G01 X0.000 Y0.000 F1000 (G01 LINKE KANTE ENTGRATEN ZURUECK ZU Y0)
+N450 G00 Z15.000 M09 (G00 EILGANG SENKRECHT AUF FREIFAHRHOEHE 15MM | M09 KUEHLMITTEL AUS)
 ```
+
+### 🛡️ Prüfliste dieser Übung: Wann ist Übung 15 zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. Spitzenversatz aktiv** | Die $Z$-Frästiefe liegt bei `Z-2.300`, so dass der Schnitt auf der aktiven Schneidflanke des $90^\circ$-Fräsers erfolgt. | [ ] |
+| **2. Kantenverlauf lückenlos** | Alle 4 Außenkanten des Rechtecks $80 \times 50\,\text{mm}$ werden im geschlossenen Umlauf entgratet. | [ ] |
+| **3. Kühlung aktiv** | `M08` kühlt die feine Fräserspitze, um Riefenbildung und Materialaufschweißen zu verhindern. | [ ] |
+| **4. Sauberer Rückzug** | In Satz `N450` zieht die Z-Achse mit `G00 Z15.000` senkrecht nach oben ab, bevor das Werkzeug geparkt wird. | [ ] |
 
 ---
 
 # Übung 16: Die komplette 5-Punkte-Endabnahme im Simulator vor der Auslieferung an den Online-Kunden (Meister-Prüfung)
+
+### 📌 Spickzettel dieser Übung: Alle verwendeten Meister-Endabnahme-Kennzeichen in Übung 16
+
+| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
+|---|---|---|
+| **`G54 (X0, Y0, Z0)`** | **Nullpunkt-Prüfung *(WCS Origin Audit)*** | Verifiziert die Lage des Nullpunkts am 3D-Modell und Einrichteblatt. |
+| **`Z-MIN & L_min`** | **Kollisions- & Spannprüfmaß *(Minimum Depth & Stickout)*** | Schützt Schraubstockbacken vor Crash und verhindert Werkzeugauszug aus der Spannzange. |
+| **`G00 (Z > 0)`** | **Eilgang-Sicherheitskontrolle *(Rapid Move Clearance)*** | Stellt sicher, dass Eilgänge niemals bei $Z \le 0$ im Metall stattfinden. |
+| **`S, F, M03, M08`** | **Technologie-Vierklang *(Machining Parameters Audit)*** | Prüft Drehzahl, Vorschub, Spindeldrehrichtung und Kühlmittelversorgung. |
+| **`Safe Footer G53`** | **Sicherer 2-Stufen-Rückzug *(Two-Stage Safe Footer)*** | Garantiert: Zuerst Z-Achse hoch, Spindelstopp, erst danach Tisch nach vorne zur Tür. |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -1723,13 +2381,72 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 #### Schritt 4: 3D-Simulation visuell prüfen
 * Kopieren Sie den G-Code in [https://ncviewer.com](https://ncviewer.com) und lassen Sie die gesamte Fertigung vom Schruppen bis zum Entgraten und sicheren Rückzug durchlaufen.
 
+---
+
+### 🛠️ Wie prüft der Meister-Postprozessor die 5 Sicherheitspunkte in JavaScript?
+
+```javascript
+// Meister-Pruefung in onSection() & onClose():
+// 1. Pruefung: Spindeldrehzahl und Drehrichtung gesetzt?
+if (spindleSpeed <= 0) {
+  error("MEISTER-CHECK FEHLER: Keine Spindeldrehzahl S angegeben!");
+}
+
+// 2. Pruefung: Z-MIN Tiefe berechnen und Schraubstock-Abstand pruefen
+var zMin = currentSection.getGlobalZRange().getMinimum();
+if (zMin < -25.0) {
+  warning("MEISTER-CHECK WARNUNG: Z-Tiefe sehr gross (" + zMin + "mm). Schraubstockbacken pruefen!");
+}
+
+// 3. Pruefung: Kuehlmittel sicherstellen
+if (!tool.coolant || tool.coolant == COOLANT_OFF) {
+  writeComment("MEISTER-HINWEIS: Trockenbearbeitung aktiv.");
+}
+```
+
+### ✅ So sieht das vollständige Meisterprüfungs-G-Code-Programm aus:
+
+```gcode
+%
+O1001 (MEISTERSTUECK - FERTIGUNGSPROGRAMM MIT 5-PUNKTE-SICHERHEITSCHECK)
+(==================================================)
+(BENOETIGTE WERKZEUGE - TOOL TABLE)
+(T01 | D=10.000MM | ECKE R=0.000 | Z-MIN=-5.000MM  | SCHAFTFRAESER 10MM VHM)
+(T02 | D=6.000MM  | ECKE R=0.000 | Z-MIN=-12.000MM | SPIRALBOHRER 6MM VHM)
+(T04 | D=10.000MM | 90-GRAD FASE | Z-MIN=-2.300MM  | FASENFRAESER 90 GRAD)
+(==================================================)
+N10 G90 G17 G40 G49 G80 G21 (SICHERHEITSZEILE: G90 ABSOLUT | G17 XY-EBENE | G40 RADIUSKORREKTUR AUS | G49 LAENGENKORREKTUR AUS | G80 BOHRZYKLEN AUS | G21 METRISCH MM)
+(PUNKT 1: NULLPUNKT-CHECK G54)
+N20 T01 M06 (T01 SCHAFTFRAESER D10 | M06 AUTOMATISCHER WERKZEUGWECHSEL)
+N30 G54 (G54 WERKSTUECK-NULLPUNKT AKTIVIEREN - ECKE VORNE LINKS OBEN)
+(PUNKT 4: TECHNOLOGIE-CHECK S8000 M03 M08)
+N40 S8000 M03 (S8000 DREHZAHL 8000 U/MIN FUER ALU | M03 SPINDEL RECHTSLAUF)
+N50 G43 H01 Z15.000 M08 (G43 LAENGENKORREKTUR | H01 SPEICHER 1 | Z15 FREIFAHRHOEHE | M08 KUEHLMITTEL AN)
+(PUNKT 3: EILGANG-CHECK G00 NUR UEBER Z > 0)
+N60 G00 X-10.000 Y-10.000 (G00 EILGANG VOR DAS TEIL BEI SICHERER HOEHE Z15)
+N70 G00 Z2.000 (G00 EILGANG BIS 2MM UEBER OBERFLAECHE)
+(PUNKT 2: TIEFEN- UND SCHRAUBSTOCK-CHECK Z-MIN)
+N80 G01 Z-5.000 F500 (G01 EINTAUCHEN AUF FRAESTIEFE Z-5 - UEBER SCHRAUBSTOCKBACKEN)
+N90 G01 X80.000 Y0.000 F1200 (G01 AUSSENKONTUR FRAESEN MIT VORSCHUB 1200 MM/MIN)
+N100 G00 Z15.000 (G00 FREIFAHREN AUF SICHERHEITSHOEHE)
+(PUNKT 5: SICHERES PROGRAMMENDE - SAFE FOOTER)
+N110 M09 (M09 KUEHLWASSER AUSSCHALTEN)
+N120 G53 G00 Z0.000 (G53 MASCHINENKOORDINATEN | G00 EILGANG | Z0 SPINDEL ZUERST GANZ NACH OBEN)
+N130 M05 (M05 SPINDELSTOPP)
+N140 G53 G00 Y0.000 (G53 MASCHINENKOORDINATEN | G00 EILGANG | Y0 TISCH VOR ZUR TUER)
+N150 M30 (M30 HAUPTPROGRAMMENDE, RESET UND SPEICHER AUF ZEILE 1 ZURUECKSETZEN)
+%
+```
+
+### 🛡️ Prüfliste dieser Übung: Wann ist die Meisterprüfung (Übung 16) zu 100 % bestanden?
+
 | Prüfpunkt | Was du im Simulator & Code kontrollierst | Bestanden? |
 | :--- | :--- | :---: |
-| **1. Nullpunkt-Check (`G54`)** | Liegt der Koordinatenursprung `(X0, Y0, Z0)` im Simulator exakt an der Stelle, die du auf dem Einrichteblatt für den Kunden eingezeichnet hast? | ☐ |
-| **2. Tiefen- & Schraubstock-Check (`Z-MIN`)** | Schau im Header auf den berechneten `Z-MIN`-Wert jedes Werkzeugs: Ist genug Platz zu den Schraubstockbacken UND ist das Werkzeug lang genug eingespannt ($L_{\text{min}} > |Z_{\text{min}}| + 5\,\text{mm}$)? | ☐ |
-| **3. Eilgang-Check (`G00` / `FMAX`)** | Findet jede schnelle `G00`-Bewegung in $X$ und $Y$ garantiert **oberhalb des Bauteils ($Z > 0$)** in der Luft statt? | ☐ |
-| **4. Technologie-Check (`S`, `F`, `M03`, `M08`)** | Dreht sich die Spindel (`M03`) mit plausibler Drehzahl (`S`) für das Material (Alu vs. Stahl) und ist beim Gewindebohren `F = S × Steigung` eingehalten? | ☐ |
-| **5. Sicheres Programmende (`Safe Footer`)** | Zieht das Programm am Ende **zuerst** die $Z$-Achse ganz nach oben (`G53 G00 Z0` bzw. `L Z+250 R0 FMAX M91`), bevor der Tisch zur Tür fährt und `M30` stoppt? | ☐ |
+| **1. Nullpunkt-Check (`G54`)** | Liegt der Koordinatenursprung `(X0, Y0, Z0)` im Simulator exakt an der Stelle, die du auf dem Einrichteblatt für den Kunden eingezeichnet hast? | [ ] |
+| **2. Tiefen- & Schraubstock-Check (`Z-MIN`)** | Schau im Header auf den berechneten `Z-MIN`-Wert jedes Werkzeugs: Ist genug Platz zu den Schraubstockbacken UND ist das Werkzeug lang genug eingespannt ($L_{\text{min}} > |Z_{\text{min}}| + 5\,\text{mm}$)? | [ ] |
+| **3. Eilgang-Check (`G00` / `FMAX`)** | Findet jede schnelle `G00`-Bewegung in $X$ und $Y$ garantiert **oberhalb des Bauteils ($Z > 0$)** in der Luft statt? | [ ] |
+| **4. Technologie-Check (`S`, `F`, `M03`, `M08`)** | Dreht sich die Spindel (`M03`) mit plausibler Drehzahl (`S`) für das Material (Alu vs. Stahl) und ist beim Gewindebohren `F = S × Steigung` eingehalten? | [ ] |
+| **5. Sicheres Programmende (`Safe Footer`)** | Zieht das Programm am Ende **zuerst** die $Z$-Achse ganz nach oben (`G53 G00 Z0` bzw. `L Z+250 R0 FMAX M91`), bevor der Tisch zur Tür fährt und `M30` stoppt? | [ ] |
 
 Wenn du alle 5 Haken setzen kannst, speicherst du das Programm zusammen mit dem **Einrichteblatt** und einem kurzen **Simulationsvideo** ab – und dein Online-Auftrag ist abgabebereit!
 
