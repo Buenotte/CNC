@@ -1,0 +1,17 @@
+# Node.js Abhängigkeiten
+node_modules/
+package-lock.json
+
+# Editor- und Systemdateien
+.vscode/
+.idea/
+*.log
+.DS_Store
+Thumbs.db
+
+# Temporäre Testausgaben
+tests/scratch/
+*.tmp
+
+# Private / Persönliche Dokumente (Datenschutz)
+Reclamacion_Alicante_Calle_Barcelona_3/

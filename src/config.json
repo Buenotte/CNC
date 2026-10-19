@@ -1,0 +1,17 @@
+{
+  "projectInfo": {
+    "name": "CNC-Postprozessor-Entwicklung (Entwicklung von Übersetzungsprogrammen für CNC-Maschinen)",
+    "version": "1.0.0",
+    "developer": "CNC JS Developer (Entwickler für JavaScript-Postprozessoren)",
+    "description": "Konfigurationsdatei (Einstellungsdatei im JSON-Format) für kundenspezifische Postprozessor-Projekte"
+  },
+  "defaultMachineSettings": {
+    "controllerType": "Haas NGC / Fanuc ISO (Standard-CNC-Steuerung nach ISO-Norm)",
+    "units": "mm (Millimeter - Metrisches Maßsystem / G21)",
+    "safeRetractMethod": "G53 (Maschinenkoordinatensystem - Fahrt auf sichere Z-Höhe)",
+    "outputToolListInHeader": true,
+    "showSequenceNumbers": true,
+    "sequenceNumberStart": 10,
+    "sequenceNumberIncrement": 10
+  }
+}
