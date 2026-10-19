@@ -82,6 +82,14 @@ Bevor Sie den Postprozessor *(Übersetzer von CAM-Bearbeitungsbahnen in CNC-Masc
   * Ist die Schneidenlänge *(Nutzlänge mit Schärfe)* mindestens so lang wie die Frästiefe? Wenn der zylindrische Schaft ohne Schneide an der Werkstückwand reibt, verglüht das Werkzeug durch Reibungshitze.
   * Schlägt der dicke Werkzeughalter *(Spannfutter / SK40 / HSK63)* bei tiefen Taschen oben am Werkstück an? Im CAM muss der Halter modelliert sein, damit die Software warnt: *„Halter berührt Bauteil!“*.
 
+### 5. Entwickler-Checkliste: Die 5 unveränderlichen Standard-Regeln im Postprozessor-Code:
+Als Postprozessor-Programmierer müssen Sie keine Werkzeugmaschinen einmessen. Für Ihre JavaScript-Dateien (`.cps`) müssen Sie vor der Ausgabe lediglich diese 5 Regeln verifizieren:
+1. **Sicherheitszeile in `onOpen()`:** `G90 G21 G17 G40 G80` *(Reset aller alten Achs- und Zyklus-Zustände)*.
+2. **Feste Reihenfolge in `onSection()`:** Werkzeugwechsel `T.. M06` $\rightarrow$ Drehzahl `S.. M03` $\rightarrow$ Bauteil-Nullpunkt `G54` $\rightarrow$ Längenkorrektur `G43 H.. Z15.0 M08`.
+3. **Zuerst Z nach oben *(Crash-Schutz)*:** Vor jeder Tischbewegung muss die Z-Achse mit `G53 G00 Z0.` an die Decke gezogen werden.
+4. **Syntax-Schutz:** Niemals runde Klammern in runden Klammern verschachteln *(stürzt bei Fanuc/Haas ab; immer `writeComment()` nutzen)*.
+5. **Sauberes Programmende in `onClose()`:** Kühlmittel AUS (`M09`) $\rightarrow$ Z ganz hoch (`G53 Z0.`) $\rightarrow$ Spindelstopp (`M05`) $\rightarrow$ Tisch zur Tür (`G53 Y0.`) $\rightarrow$ Programmende (`M30`).
+
 ---
 
 ## Phase 2: Geometrie-, Werkzeug- und Kollisionsprüfung im 3D-Simulator

@@ -138,6 +138,131 @@ Viele stellen sich die Frage: *„Muss ich das Dokument [`SICHERHEITS_UND_QUALIT
 
 ---
 
+## 🧠 Die 5 goldenen Postprozessor-Regeln (Was Sie als JavaScript-Entwickler wirklich wissen müssen)
+
+Sie müssen als **Postprozessor-Entwickler *(Software-Entwickler für CAM-Übersetzer)*** weder an einer echten Fräsmaschine gestanden haben noch komplizierte Maschinenkinematik im Kopf ausrechnen. Die Maschine und Autodesk Fusion 360 übernehmen die gesamte Geometrie für Sie. 
+
+Für Ihren JavaScript-Code in den `.cps`-Dateien müssen Sie sich lediglich an diese **5 einfachen, unveränderlichen Grundregeln** halten:
+
+---
+
+### 🛡️ Regel 1: Der Sicherheits-Startblock in `onOpen()` *(Der "Guten-Morgen-Reset-Block")*
+
+Ganz oben in der Funktion [`onOpen()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L205-L255) muss bei Programmstart immer eine feste Kombination aus 5 Sicherheitsbefehlen stehen:
+
+```javascript
+// G90 = Absolutmaß (alle Maße beziehen sich auf den Werkstück-Nullpunkt G54)
+// G21 = Maßeinheit Millimeter (metrisches System)
+// G17 = Fräsen in der XY-Ebene (Standard-Bearbeitung von oben)
+// G40 = Werkzeugradiuskorrektur sicher ausschalten
+// G80 = Alle noch aktiven Bohrzyklen abbrechen und löschen
+writeBlock("G90", "G21", "G17", "G40", "G80");
+```
+* **Warum ist das Pflicht?** Weil die Maschine vor dem Start vergessen soll, was der vorherige Arbeiter vielleicht an falschen Einstellungen aktiv gelassen hat. Das ist der elektronische Reset-Knopf für einen sicheren Start!
+
+---
+
+### 🛡️ Regel 2: Die feste Reihenfolge beim Werkzeugwechsel in `onSection()`
+
+Wann immer eine neue Fräs- oder Bohroperation beginnt, erzeugt die Funktion [`onSection()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L257-L350) immer genau diese **4-Schritte-Reihenfolge**:
+
+1. **Werkzeug holen & einwechseln:** `T01 M06` *(Nimm Werkzeug 1 aus dem Magazin und spanne es ein)*
+2. **Drehzahl & Spindelmotor an:** `S8000 M03` *(Drehe mit 8.000 U/min im Uhrzeigersinn)*
+3. **Nullpunkt aufrufen:** `G54` *(Aktiviert die Heimatadresse der Bauteilecke – siehe Erklärung unten)*
+4. **Längenkorrektur & Kühlwasser an:** `G43 H01 Z15.0 M08` *(Länge verrechnen, auf 15 mm Sicherheitshöhe bleiben, Kühlwasser einschalten)*
+
+* **Warum diese Reihenfolge?** Wenn Sie `M08` *(Kühlwasser)* einschalten, bevor das Werkzeug eingewechselt ist, spritzt das Wasser in die leere Werkzeugaufnahme. Zuerst Werkzeug, dann Motor an, dann Nullpunkt, dann Wasser!
+
+> [!NOTE]
+> **Was bedeutet `G54` für Sie als Programmierer?**  
+> Sie müssen sich über `G54` *(Werkstück-Koordinatensystem 1)* keine Gedanken machen: Es ist einfach der **feste Textbaustein**, mit dem Sie der Maschine sagen: *„Miss alle Maße ab der linken Ecke des Metallblocks und nicht von der fernen Maschinenwand!“* Der Bediener an der Maschine misst diesen Punkt einmal mit dem Taster ein. Sie schreiben im Postprozessor einfach immer `G54` hin!
+
+---
+
+### 🛡️ Regel 3: Zuerst Z nach ganz oben, ERST DANN Tisch bewegen *(Die Crash-Schutz-Regel)*
+
+Das ist der **wichtigste Schutz vor teuren Maschinenschäden**:
+Wenn eine Fräsoperation beendet ist oder das ganze Programm in [`onClose()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L441-L499) stoppt, darf der Maschinentisch niemals zur Tür fahren, solange der Fräser noch unten im Werkstück steckt!
+
+#### 💥 Das Marmeladenglas-Beispiel: Warum "ERST JETZT"?
+Stellen Sie sich vor, Sie stecken einen **Löffel tief in ein Glas Marmelade**:
+* Wenn Sie das Marmeladenglas jetzt mit Schwung zu sich nach vorne ziehen, **während der Löffel noch im Glas steckt**, reißt der Löffel das Glas um und alles geht zu Bruch!
+* In der Maschine ist es genauso: Steckt der Bohrer noch $12\,\text{mm}$ tief im Loch und der Tisch fährt nach vorne, reißt der Bohrer explosionsartig ab und verbiegt die teure Spindel!
+* Was machen Sie stattdessen ganz natürlich?  
+  1. Sie ziehen **ZUERST den Löffel senkrecht nach oben** aus dem Glas.
+  2. **ERST JETZT**, wo der Löffel frei in der Luft ist, ziehen Sie das Glas zu sich heran!
+
+Deshalb gilt im Code zwingend das 2-Stufen-Prinzip:
+```javascript
+// Schritt 1: ZUERST die Z-Achse (senkrecht nach ganz oben an die Decke) fahren:
+writeBlock("G53", "G00", "Z0.0");
+
+// Schritt 2: ERST JETZT darf der Tisch in Y nach vorne zur Tür fahren:
+writeBlock("G53", "G00", "Y0.0");
+```
+
+#### 🔍 Was bedeuten die Befehle Buchstabe für Buchstabe?
+
+1. **Was für Schienen sind das überhaupt? *(Lineare Führungsschienen der Maschine)***:
+   * Ein Maschinentisch wiegt oft $500\,\text{kg}$ bis $2\,\text{Tonnen}$ aus massivem Gusseisen. Er rollt im Maschinenboden auf zwei spiegelblanken **Stahl-Führungsschienen *(Linearführungen / Linear Rails mit gehärteten Rollenlagern)*** wie ein Zug auf Eisenbahngleisen kerzengerade von hinten nach vorne.
+   * Auf diese Stahlschienen hat der Hersteller *(z. B. Haas oder DMG MORI)* ein unbewegliches Maßband graviert:
+     * **Ganz hinten an der Rückwand:** z. B. `Y -500.0 mm`.
+     * **Ganz vorne an der Schiebetür:** exakt der Nullpunkt **`Y 0.0 mm`** *(Endanschlag / Stopper)*.
+
+2. **Warum steht in beiden Zeilen `G53` und `G00`?**
+   * **`G00` = Schnellgang *(Eilgang / Rapid Traverse)***: Fährt mit Maximalgeschwindigkeit durch die Luft, damit der Arbeiter nicht warten muss.
+   * **`G53` = Maschinen-Koordinatensystem *(Umschaltung auf die echte Stahlschiene)***:  
+     * Normalerweise schaut die Steuerung auf Ihr Bauteil (**`G54`**).
+     * Würden Sie nur `G00 Y0.0` schreiben, würde die Fräse an die Kante Ihres Metallblocks fahren und der Tisch bliebe mitten im Raum stehen!
+     * **`G53` befiehlt der Steuerung:** *„Ignoriere den Metallblock im Schraubstock (`G54`)! Schau auf die fest verschraubte Stahlschiene der Maschine und fahre den Tisch auf Schienen-Position 0 ganz nach vorne an die Schiebetür!“*
+
+3. **Der entscheidende Unterschied zwischen `Z` und `Y`:**
+   * **`Z0.0` (Höhenachse senkrecht):** Steuert die Spindel mit dem Fräser. Fährt den Fräser senkrecht nach oben in den sicheren Freiraum unter das Kabinendach.
+   * **`Y0.0` (Tiefenachse von hinten nach vorne):** Steuert den Maschinentisch. Fährt den Tisch nach vorne zu Ihnen an die Glasscheibe!
+
+4. **Warum fährt `Y0.0` genau nach vorne an die Tür? *(Bedienerkomfort / Ergonomie)***:
+   * Die Führungsschiene des Maschinentisches verläuft von der Rückwand nach vorne zur Tür.
+   * Ganz hinten an der Rückwand ist z. B. `Y -500 mm`. Wenn der Tisch nach vorne rollt, werden die Zahlen immer größer: `-400`, `-300`, `-100`...
+   * Der Maschinenhersteller hat den Anschlag ganz vorne direkt hinter der Glasschiebetür als **`0` (`Y0.0`)** festgelegt!
+   * Das ist ein reiner **Bediener-Service**: Wenn das Programm endet, steht das fertige Teil direkt vor der geöffneten Schutztür, sodass der Arbeiter es bequem im Stehen herausnehmen kann, ohne sich in die nass tropfende, ölige Maschine beugen zu müssen!
+
+---
+
+### 🛡️ Regel 4: Niemals runde Klammern innerhalb von Klammern schreiben *(Syntax-Schutz)*
+
+Bei **Fanuc- und Haas-Steuerungen *(den weltweit am weitesten verbreiteten CNC-Computern)*** werden Kommentare und Bedienernotizen in runden Klammern `(...)` geschrieben.
+* Schreibt Ihr Postprozessor versehentlich: `(WERKZEUG 1 (VHM) SCHAFTFRAESER)`
+* ... stürzt die CNC-Steuerung mit einem **Syntaxfehler *(Programmierfehler)*** ab, weil sie die zweite innere Klammer als Maschinenbefehl missversteht!
+
+Nutzen Sie im Postprozessor deshalb immer die sichere Bibliotheks-Funktion:
+```javascript
+writeComment("Text hier"); // Entfernt verbotene Zeichen und schützt vor verschachtelten Klammern
+```
+
+---
+
+### 🛡️ Regel 5: Am Ende das Programm sauber abschließen in `onClose()`
+
+Jedes fertige CNC-Programm muss am Ende in [`onClose()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L441-L499) diese 4 Handgriffe vollautomatisch ausführen:
+1. `M09` $\rightarrow$ Kühlmittelpumpe ausschalten *(damit beim Öffnen der Tür kein Wasser spritzt)*.
+2. `G53 G00 Z0.0` $\rightarrow$ Spindel ganz nach oben fahren *(Kollisionsschutz)*.
+3. `M05` $\rightarrow$ Spindelmotor sicher anhalten.
+4. `G53 G00 Y0.0` $\rightarrow$ Tisch nach vorne zur Schutztür fahren *(Bedienerkomfort)*.
+5. `M30` $\rightarrow$ Hauptprogramm beenden und den Speicher auf Zeile 1 zurücksetzen.
+
+---
+
+### 📊 Die Postprozessor-Architektur im Überblick:
+
+| Phase im Bearbeitungsablauf | Postprozessor-Funktion in JavaScript (`.cps`) | Was wird im G-Code ausgegeben? |
+|---|---|---|
+| **1. Programmstart** | [`onOpen()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L205-L255) | Programm-Kopf, Datum, Werkzeugliste, `G90 G21 G17 G40 G80` |
+| **2. Operationsstart & Werkzeugwechsel** | [`onSection()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L257-L350) | `T.. M06` $\rightarrow$ `S.. M03` $\rightarrow$ `G54` $\rightarrow$ `G43 H.. Z15.0 M08` |
+| **3. Fräs- & Bohrbewegungen** | [`onLinear()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L370-L390) / `onCyclePoint()` | Verfahrkoordinaten `G01 X.. Y.. Z.. F..` oder Zyklen `G83 / G84` |
+| **4. Programmende** | [`onClose()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L441-L499) | `M09` $\rightarrow$ `G53 Z0.` $\rightarrow$ `M05` $\rightarrow$ `G53 Y0.` $\rightarrow$ `M30` |
+
+---
+
 ## 📌 DER GROSSE CNC-MEISTER-SPICKZETTEL: Alle G-Code- & M-Code-Kennzeichen auf einen Blick
 
 Bevor Sie eine Übung starten, finden Sie hier die **zentrale Schnellreferenz aller Maschinenbefehle**. Mehr als diese Kennzeichen benötigen 95 % aller CNC-Fräsmaschinen weltweit nicht!
@@ -1032,8 +1157,10 @@ function onClose() {
 ```
 
 * **Was ist der Unterschied zwischen `G54` und `G53`?**
-  - **`G54` (Werkstück-Nullpunkt):** Bezieht sich auf Ihr **Bauteil im Schraubstock**. `Z0` bei `G54` ist also direkt auf dem Metallblock!
-  - **`G53` (Maschinen-Koordinatensystem):** Bezieht sich fest auf das **Gehäuse der CNC-Maschine**. `G53 G00 Z0.000` bedeutet bei **Haas**, **Siemens** und **Fanuc** immer: *„Fahre die Spindel ganz nach oben unter das Maschinendach, so weit weg vom Schraubstock wie möglich!“*
+  - **`G54` (Werkstück-Nullpunkt):** Bezieht sich auf Ihr **Bauteil im Schraubstock**. `Z0` bei `G54` ist direkt auf der Metallblock-Oberfläche, und `Y0` ist die vordere Ecke des kleinen Metallklotzes!
+  - **`G53` (Maschinen-Koordinatensystem auf den echten Stahlschienen):** Bezieht sich fest auf die **Linearführungs-Schienen der CNC-Maschine**. 
+    - `G53 G00 Z0.0` zieht die Spindel an den obersten Anschlag der Z-Schiene ganz nach oben unter das Maschinendach.
+    - `G53 G00 Y0.0` rollt den tonnenschweren Tisch auf den Bodenschienen nach ganz vorne an den Anschlag direkt vor die geöffnete Glasschiebetür *(Bedienerkomfort: Teil liegt griffbereit vor den Händen!)*.
 
 ### ✅ So sieht das Ergebnis am Ende des G-Codes ([`tests/output_expected.nc`](file:///C:/Projekte/CNC/tests/output_expected.nc#L59-L66)) aus:
 
