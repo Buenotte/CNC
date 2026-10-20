@@ -1,25 +1,12 @@
-(========================================)
-(HALLO WELT - MEIN ERSTER CNC POSTPROZESSOR)
-(ERFOLGREICH ERSTE ZEILE EINGEFUEGT)
-(========================================)
-G90 G17 G21 G94
-G28 G91 Z0.
-G90
-(--- WERKZEUGWECHSEL ---)
-T1 M06
-S8000 M03
-G54
-(--- WERKZEUGWECHSEL ---)
-T1 M06
-S8000 M03
-G54
-(--- WERKZEUGWECHSEL ---)
-T2 M06
-S3500 M03
-G54
-(--- PROGRAMMENDE ---)
-M05
-M09
-G28 G91 Z0.
-G28 Y0.
+%
+O1001 (PROGRAMM MIT WERKZEUGLISTE)
+(==================================================)
+(BENOETIGTE WERKZEUGE FUER DIESEN AUFTRAG TOOL TABLE)
+(==================================================)
+(T01  D=10.000MM  ECKE R=0.000  SCHAFTFRAESER 10MM VHM)
+(T02  D=6.000MM  ECKE R=0.000  SPIRALBOHRER 6MM VHM)
+(==================================================)
+G90 G21 G17 G40 G80
+G53 G00 Z0.0
 M30
+%

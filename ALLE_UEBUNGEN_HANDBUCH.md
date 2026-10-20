@@ -474,6 +474,321 @@ function onClose() {
 | **3. Grundinitialisierung** | Die Sicherheitszeile `G90 G17 G21 G94` sowie der Z-Rückzug `G28 G91 Z0.` stehen direkt unter dem Kommentar. | [ ] |
 | **4. 3D-Simulator-Check** | Im Browser steht das Werkzeug sicher über dem Bauteil-Nullpunkt `G54` auf Höhe `Z +15.0`. | [ ] |
 
+### ❓ Häufige Frage & Klarstellung: Warum steht im 3D-Simulator bei Übung 00b oben „T01 [Z=15.0]“, obwohl im G-Code nichts davon steht?
+
+Wenn Sie den 3D-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html) öffnen und bei Übung 00b auf die Zeile `G28 G91 Z0.` schauen, fallen zwei Dinge auf:
+
+1. **Die optische Täuschung mit dem Minuszeichen:**
+   * Über dem roten Werkzeug-Zylinder stand: `T01 [Z=15.0]`.
+   * Das Zeichen zwischen `Z` und `15.0` ist ein **Gleichheitszeichen `=`**, **KEIN Minuszeichen `-`**!
+   * Bei kleiner Schriftgröße sieht ein `=` schnell wie ein Bindestrich oder Minus aus. Im Kopf liest man dann fälschlicherweise `Z-15`.
+   * Im HUD *(Kopfbereich des Simulators)* steht ganz eindeutig: `POS (G54): X 0.000 | Y 0.000 | Z 15.000` *(eine positive Zahl, also **$+15\,\text{mm}$**)*.
+   * *Hinweis:* Wir haben die Anzeige im Simulator nun auf `[Z: +15.0 mm]` verbessert, damit jedes Missverständnis sofort ausgeschlossen ist!
+
+2. **Warum zeigt der Simulator `T01` und `Z 15.0`, obwohl in der Zeile `G28 G91 Z0.` gar kein `T01` und kein `Z15` steht?**
+   * Die Zeile `G28 G91 Z0.` ist ein reiner Maschinenbefehl *(Z-Achse nach oben auf den Referenzschalter fahren)*. In diesem Befehl stehen weder Koordinaten für das Werkstück noch eine Werkzeugnummer.
+   * Ein 3D-Simulator muss jedoch von der allerersten Sekunde an wissen:
+     * **Welches 3D-Modell soll gerendert werden?** $\rightarrow$ Der Simulator wählt standardmäßig `T01 (Werkzeug)` als Start-Platzhalter, bis im G-Code die erste Zeile mit `T... M06` aufgerufen wird.
+     * **Wo steht die Spindel im Raum?** $\rightarrow$ Der Simulator setzt die Spindel als Standard-Sicherheitsposition auf `X 0.000`, `Y 0.000` und **`Z +15.000`** *(15 mm Sicherheitsabstand in der Luft über der Werkstück-Ecke)*.
+   * Es handelt sich also um die **virtuelle Startposition *(Initialwerte / Default State)*** des Simulators, nicht um einen Schnittbefehl!
+
+**Wie tief fräst Werkzeug T01 wirklich? (Niemals `-15 mm`!):**
+* Das Werkzeug `T01` *(Schaftfräser $\varnothing 10\,\text{mm}$ aus Vollhartmetall VHM)* schneidet:
+  * Bei der Außenkontur: maximal auf **`Z -5.000 mm`** *(5 mm tief ins Aluminium)*.
+  * Bei der Kreistasche: maximal auf **`Z -3.000 mm`** *(3 mm tief ins Aluminium)*.
+* `T01` fährt also zu keinem Zeitpunkt auf $-15\,\text{mm}$ herunter!
+
+**Wo taucht `-15 mm` *(Z-MIN / Backenhöhe)* im Projekt wirklich auf?**
+1. **In Übung 03 *(Schraubstock-Crashschutz)*:**  
+   Dort prüfen wir im Postprozessor die Spannbackenhöhe des Schraubstocks:  
+   `(CRASHSCHUTZ: SCHRAUBSTOCK-BACKENHOEHE Z=-15.000MM -> SICHER!)`  
+   Der Stahl-Schraubstock hält das Aluminium erst ab einer Tiefe von $Z = -15\,\text{mm}$. Weil unser Fräser `T01` nur bis $Z = -5\,\text{mm}$ eintaucht und der Bohrer `T02` nur bis $Z = -12\,\text{mm}$ bohrt, bleibt zur Schraubstockbacke bei $Z = -15\,\text{mm}$ noch ein Sicherheitsabstand von mindestens $3\,\text{mm}$ Luft *(kein Crash)*!
+2. **Beim Rohteil:** Der rohe Aluminiumklotz vor der Bearbeitung ist $15\,\text{mm}$ dick (`85 x 55 x 15 mm`).
+3. **Beim Taschenradius:** Die Kreistasche in der Mitte hat einen Durchmesser von $\varnothing 30\,\text{mm}$, was einem Kreisradius von genau $15\,\text{mm}$ entspricht (`I-15.000`).
+
+### ⚙️ Wer definiert diesen Ausgangszustand eigentlich? (Simulator vs. reale Werkstatt)
+
+Hier muss man genau zwischen der **virtuellen 3D-Simulation** und der **echten CNC-Fräsmaschine in der Werkshalle** unterscheiden:
+
+| Wer? | Wo? | Was wird definiert? | Wie wird es festgelegt? |
+| :--- | :--- | :--- | :--- |
+| **1. Der Software-Entwickler** | Im Browser *(3D-Simulator [`3d_auftrag_simulator.html`](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html#L614))* | Startposition `X0 Y0 Z+15.0` und Startwerkzeug `T01` | Im JavaScript-Code als Fallback-Initialwerte (`let curX = 0, curY = 0, curZ = 15; let curTool = "T01";`), damit das 3D-Canvas nicht leer bleibt, bevor die erste Fahrbewegung aus dem G-Code gelesen wird. |
+| **2. Der Maschinenhersteller *(z. B. Haas, DMG Mori)*** | An der physischen Maschine | Der Maschinen-Nullpunkt *(Home / `G28` / `G53`)* | Fest verdrahtete mechanische und induktive Endschalter ganz oben am Ende der Z-Achsenschiene. Beim Einschalten der Maschine fährt die Spindel dort an den Anschlag. |
+| **3. Der CNC-Fräser *(Bediener an der Maschine)*** | Auf dem Maschinentisch | Der Bauteil-Nullpunkt `G54` (`X0 Y0 Z0`) | Der Bediener spannt den rohen Aluminiumklotz in den Schraubstock, nimmt einen mechanischen Kantentaster oder 3D-Messtaster in die Hand, tastet die linke vordere Ecke und die Oberseite des Metalls ab und drückt auf der Steuerung die Taste **„Nullpunkt G54 übernehmen“**. |
+| **4. Der CAM-Programmierer / Postprozessor-Entwickler** | In Fusion 360 & im CPS-Skript | Die Sicherheitshöhe *(Clearance Height, hier `Z +15.0 mm`)* | Im CAM-System wird im Menü „Höhen *(Heights)*“ der Rückzugsabstand über dem Teil eingegeben *(üblich sind 10 bis 25 mm Luft)*. Der Postprozessor übersetzt diesen Wert später in den ersten Anfahrbefehl `G00 Z15.0`. |
+| **5. Der Zufall / das Vorprogramm *(Spindelinhalt vor Start)*** | In der Frässpindel | Welches Werkzeug steckt vor Programmstart in der Spindel? | Niemand weiß vorab, welches Werkzeug der Kollege der vorherigen Schicht in der Maschine stecken gelassen hat *(z. B. T03 oder T08)*. **Genau deshalb muss jedes saubere CNC-Programm zwingend mit einem eigenen Werkzeugwechsel `T01 M06` beginnen**, um sofort das richtige Werkzeug aus dem Magazin einzuwechseln! |
+
+### 🛠️ Wie wird der Werkzeugwechsel `T01 M06` genau definiert und programmiert?
+
+Um das Werkzeug sauber und sicher einzuwechseln, arbeiten zwei Komponenten Hand in Hand:
+
+#### Schritt 1: Die Definition im CAM-System *(Autodesk Fusion 360 / Mastercam)*
+1. **Werkzeug anlegen:** In der Werkzeugbibliothek *(Tool Library)* legen Sie das Werkzeug an *(z. B. „10 mm Schaftfräser VHM“)*.
+2. **Werkzeugnummer zuweisen:** Im Reiter „Postprozessor“ tragen Sie die Werkzeugnummer ein: **`Nummer: 1`** *(wird zu `T01`)* sowie die Längenkorrekturnummer **`Längenversatz: 1`** *(wird zu Register `H01`)*.
+3. **Schnittdaten eingeben:** Sie tragen die Drehzahl ein *(z. B. `8000 U/min` $\rightarrow$ Spindle Speed)*.
+4. **Operation zuweisen:** Wenn Sie die 2D-Kontur erstellen, wählen Sie dieses Werkzeug aus. Beim Klick auf „Postprozessor ausführen“ übergibt Fusion 360 diese Werte automatisch als Datenpaket an das JavaScript-Skript.
+
+#### Schritt 2: Die Programmierung im Postprozessor *(in der `.cps`-Datei)*
+In JavaScript fangen wir diesen Bearbeitungsschritt in der Funktion [`onSection()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L257) ab:
+
+```javascript
+function onSection() {
+  // 1. Werkzeug-Objekt aus der aktuellen CAM-Operation abrufen:
+  var tool = currentSection.getTool(); // Liefert { number: 1, spindleRPM: 8000, diameter: 10, ... }
+
+  // 2. Den physischen Werkzeugwechsel-Befehl erzeugen:
+  // tool.number ist 1 -> erzeugt im G-Code: T1 M06
+  writeBlock("T" + tool.number, "M06");
+
+  // 3. Spindeldrehzahl und Spindeldrehrichtung Rechtslauf einschalten:
+  // tool.spindleRPM ist 8000 -> erzeugt im G-Code: S8000 M03
+  writeBlock("S" + tool.spindleRPM, "M03");
+
+  // 4. Werkstück-Nullpunkt aktivieren (Bauteilecke):
+  writeBlock("G54");
+
+  // 5. Werkzeuglängenkorrektur aktivieren, auf Sicherheitshöhe fahren und Kühlwasser AN:
+  // tool.lengthOffset ist 1 -> erzeugt im G-Code: G43 H1 Z15.0 M08
+  writeBlock("G43", "H" + (tool.lengthOffset || tool.number), "Z15.0", "M08");
+}
+```
+
+#### Schritt 3: Was passiert in der realen Fräsmaschine bei diesen Zeilen?
+1. **`T1` *(Tool Select)***: Das Werkzeugmagazin *(Ketten- oder Tellermagazin mit 20 bis 40 Plätzen)* dreht Werkzeugplatz 1 direkt vor die Wechseltür.
+2. **`M06` *(Tool Change)***: Der Doppel-Wechselarm fährt vor, zieht das alte Werkzeug aus der Spindel und das neue Werkzeug `T1` aus dem Magazin, dreht sich um 180 Grad und presst Werkzeug 1 mit Feder- und Pneumatikkraft in die Spindelaufnahme *(Spindelklemmung)*.
+3. **`S8000 M03`**: Der Spindelmotor beschleunigt auf 8.000 Umdrehungen pro Minute im Uhrzeigersinn.
+4. **`G43 H01 Z15.0 M08`**: Die Steuerung liest aus Registerspeicher `H01` die exakte Länge des Fräsers *(z. B. 104.32 mm)* aus, verrechnet diese Länge blitzschnell, fährt die Spitze sicher auf $15\,\text{mm}$ über das Werkstück und schaltet das Kühlwasser ein.
+
+### 📖 Woher soll man eigentlich wissen, dass `M06` der Werkzeugwechsel ist?
+
+Als Einsteiger fragt man sich zu Recht: *„Woher soll ich wissen, dass ausgerechnet `M06` das Werkzeug wechselt und nicht M12 oder M99?“*
+
+Hier sind die **3 Quellen**, aus denen jeder CNC-Entwickler dieses Wissen bezieht:
+
+#### 1. Die weltweite Industrie-Norm: DIN 66025 / ISO 6983 (Die weltweite „Bibel“ der CNC-Befehle)
+In den 1980er Jahren haben die internationalen Normungsinstitute *(ISO = International Organization for Standardization, DIN = Deutsches Institut für Normung)* einen einheitlichen Standard verabschiedet.  
+Dort wurde für alle Fräs- und Drehmaschinen auf der ganzen Welt einheitlich festgeschrieben:
+* **`M`** steht für **Miscellaneous Function *(Zusatzfunktion / Maschinen-Schaltbefehl)***.
+* **`M06`** bedeutet auf fast jeder Maschine der Welt: **Automatischer Werkzeugwechsel *(Automatic Tool Change ATC)***.
+
+#### 2. Das Programmierhandbuch der Fräsmaschine *(Maschinendokumentation)*
+Jede Fräsmaschine *(egal ob von Haas, DMG Mori, Mazak oder Fanuc)* wird mit einem dicken Bediener- und Programmierhandbuch ausgeliefert.  
+Im Kapitel **„M-Funktionen / M-Codes“** finden Sie eine fertige Tabelle des Herstellers. Dort steht schwarz auf weiß:
+* `M00` = Programmstopp
+* `M03` = Spindel Rechtslauf EIN *(Spindle Forward)*
+* `M05` = Spindelmotor AUS *(Spindle Stop)*
+* **`M06` = Werkzeugwechsel *(Tool Change)***
+* `M08` = Kühlmittel EIN *(Coolant ON)*
+* `M09` = Kühlmittel AUS *(Coolant OFF)*
+* `M30` = Programmende & Rücklauf *(Program End and Rewind)*
+
+#### 3. Der Spickzettel für Ihren Alltag (Nur 6 M-Codes reichen für 95 % aller Postprozessoren!):
+Sie müssen keine hunderte Befehle auswendig lernen. In der Praxis als Postprozessor-Entwickler brauchen Sie fast immer nur diese **6 goldenen M-Befehle**:
+
+| M-Befehl | Bedeutung auf Deutsch | Wann wird er im Postprozessor aufgerufen? |
+| :--- | :--- | :--- |
+| **`M06`** | **Werkzeugwechsel durch mechanischen Greifer** | In [`onSection()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L257) direkt nach der `T..`-Werkzeugnummer. |
+| **`M03`** | **Spindel im Uhrzeigersinn (Rechtslauf) starten** | In [`onSection()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L257) zusammen mit der Drehzahl `S...`. |
+| **`M08`** | **Kühlschmierstoff (Kühlwasser/Emulsion) EIN** | Kurz vor dem ersten Eintauchen des Fräsers ins Metall. |
+| **`M09`** | **Kühlwasser AUS** | Am Ende der Operation oder in [`onClose()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L370). |
+| **`M05`** | **Frässpindel ausschalten (Spindel-Stopp)** | Nach dem Hochfahren der Z-Achse in [`onClose()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L370). |
+| **M30** | **Hauptprogramm-Ende und Speicher auf Zeile 1 zurücksetzen** | Als allerletzte Zeile der CNC-Datei in [`onClose()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L370). |
+
+### 🎯 Warum wählt der CAM-Programmierer genau `Z +15.0 mm` als Sicherheitshöhe?
+
+Warum tippt der Programmierer in Autodesk Fusion 360 oder Mastercam ausgerechnet `15.0 mm` ein – und nicht `0.5 mm` oder `200 mm`?
+
+Dahinter steckt eine **knallharte physikalische und wirtschaftliche Abwägung**:
+
+#### 1. Schutz vor herausstehenden Spannmitteln *(Spannpratzen, Schrauben, Niederhalter)*
+In der echten Fräsmaschine wird das Aluminium mit Spannpratzen *(gehärtete Stahlklammern mit M10- oder M12-Schrauben)* oder Schraubstockbacken auf dem Tisch festgeklemmt.  
+* Diese Schraubenköpfe und Klemmen ragen oft **5 bis 10 mm über das Werkstück** hinaus.
+* Würde der Programmierer nur `Z +2.0 mm` wählen, würde der Fräser bei der Querfahrt im Eilgang `G00` *(mit rasenden 30 bis 60 Metern pro Minute!)* mit voller Wucht in den Schraubenkopf krachen $\rightarrow$ **Totalschaden an Fräser und Spindel!**
+* Bei **`Z +15.0 mm`** schwebt der Fräser mit sicherem Puffer über allen Befestigungsschrauben hinweg.
+
+#### 2. Der wirtschaftliche Kompromiss: Zeit ist Geld *(Taktzeit / Zykluszeit)*
+Warum fährt man dann nicht gleich auf Nummer sicher und wählt `Z +200 mm`?
+* Ein Werkstück hat oft hunderte Bohrlöcher und Taschen.
+* Müsste der Fräser vor jedem neuen Loch erst 200 mm nach oben und danach wieder 200 mm nach unten fahren, legt er **400 mm Leerweg pro Bohrung** zurück!
+* Bei 50 Löchern sind das 20 Meter unnötige Leerfahrt in der Luft. Das kostet bei Serienfertigung *(z. B. 10.000 Stück)* viele Stunden teure Maschinenzeit und Strom.
+* **`Z +15.0 mm` ist der perfekte „Sweet Spot“ *(die goldene Mitte)***: Hoch genug für 100 % Sicherheit vor Spannmitteln, aber flach genug, um keine teuren Sekunden zu verschenken.
+
+#### 3. Die 5 Höhen-Ebenen im CAM-System *(Reiter „Heights“ in Fusion 360)*
+In modernen CAM-Systemen gibt es nicht nur eine Höhe, sondern ein ausgeklügeltes 5-Stufen-System:
+
+```text
+▲ Z +15.0 mm  ─── 1. SICHERHEITSHÖHE (Clearance Height)  ──> Eilgang G00 quer übers ganze Teil
+│ Z  +5.0 mm  ─── 2. RÜCKZUGSHÖHE (Retract Height)      ──> Kleiner Zwischensprung zum Nachbarloch
+│ Z  +2.0 mm  ─── 3. VORSCHUBHÖHE (Feed Height)         ──> Hier bremst G00 ab, Umschaltung auf G01
+┼ Z   0.0 mm  ─── 4. BAUTEIL-OBERKANTE (Top Height)     ──> Rohteil-Oberfläche (Berührungspunkt)
+▼ Z  -5.0 mm  ─── 5. ENDTIEFE (Bottom Height)           ──> Fräsgrund im Metall (Spanabtrag)
+```
+
+| Höhen-Ebene | Typischer Wert | Funktion an der Maschine |
+| :--- | :--- | :--- |
+| **1. Sicherheitshöhe *(Clearance Height)*** | **`Z +15.0 mm`** | Ebene für weite Fahrten im Eilgang `G00` über alle Spannpratzen und Schrauben hinweg. |
+| **2. Rückzugshöhe *(Retract Height)*** | **`Z +5.0 mm`** | Kurzer Rückzug über die gefräste Fläche, um zum nächsten Nachbarschnitt zu springen. |
+| **3. Vorschubhöhe *(Feed Height)*** | **`Z +2.0 mm`** | Bremspunkt: Hier stoppt der gefährliche Eilgang `G00`, und der Fräser schaltet auf den langsamen Arbeitsvorschub `G01` um. |
+| **4. Oberkante *(Top Height)*** | **`Z 0.0 mm`** | Die plane Oberfläche des Aluminiumteils *(Nullpunkt G54 in Z)*. |
+| **5. Endtiefe *(Bottom Height)*** | **`Z -5.0 mm`** | Die Zieltiefe der Fräsung im Material. |
+
+### ❓ Muss ich das für jede einzelne Maschine auswendig wissen?
+
+Die beruhigende und klare Antwort lautet: **NEIN! Sie müssen das nicht für hunderte Maschinen auswendig im Kopf haben.**
+
+In der CNC-Welt gilt das **90/10-Prinzip**:
+
+#### 1. Die 90 %: Das ist auf fast ALLEN Maschinen der Welt IDENTISCH!
+Wenn Sie dieses Grundprinzip einmal verstanden haben, beherrschen Sie bereits 90 % jeder Fräsmaschine:
+* Das **Höhen-System *(Heights)*** mit Sicherheitshöhe `Z +15.0 mm`, Vorschubhöhe `Z +2.0 mm` und Werkstücknullpunkt `Z 0.0 mm` funktioniert in allen CAM-Systemen *(Fusion 360, Mastercam, SolidCAM, NX)* und auf allen Maschinen exakt gleich.
+* Die **Grundbefehle** sind weltweiter Standard:
+  * `G00` = Eilgang in der Luft
+  * `G01` = Schnitt im Metall
+  * `G54` = Werkstück-Nullpunkt
+  * `M03` = Spindel an
+  * `M05` = Spindel aus
+  * `M06` = Werkzeugwechsel
+  * `M08` / `M09` = Kühlwasser an / aus
+  * `M30` = Programmende
+
+#### 2. Die 10 %: Was unterscheidet sich von Maschine zu Maschine?
+Es gibt in der Realität nur **3 Dinge**, die sich zwischen Herstellern unterscheiden:
+1. **Der Bohrzyklus-Dialekt *(Cycle Syntax)***:
+   * **Fanuc & Haas:** `G83 X.. Y.. Z-12. R2. Q3. F300`
+   * **Siemens Sinumerik:** `CYCLE83(15.0, 0.0, 2.0, -12.0, , 3.0, ...)`
+   * **Heidenhain:** `CYCL DEF 200 BOHREN ...`
+2. **Der sichere Rückzug am Ende:**
+   * Manche bevorzugen `G53 G00 Z0.0`, ältere Maschinen `G28 G91 Z0.0`.
+3. **Sonderausstattung der Maschine:**
+   * Hat die Maschine einen Späneförderer? *(z. B. `M33`)*
+   * Hat sie Hochdruck-Blasluft durch die Spindel? *(z. B. `M07` oder `M88`)*
+
+#### 3. Der Profi-Trick bei echten Kundenaufträgen: Wie arbeiten CNC-Entwickler?
+Niemand programmiert einen Postprozessor aus dem Kopf! Wenn ein Kunde zu Ihnen kommt und sagt:  
+*„Ich habe eine neue 5-Achs-Fräsmaschine von Hermle mit Heidenhain TNC 640. Schreib mir bitte den Postprozessor!“*
+
+Dann verlangen Sie vom Kunden einfach nur **zwei Dinge**:
+1. **Eine funktionierende Muster-Datei *(Master Sample .nc)***:  
+   *„Schick mir bitte ein kleines Programm (z. B. 1 Tasche und 1 Bohrung), das auf deiner Fräsmaschine schon einmal 100 % fehlerfrei gelaufen ist.“*  
+   $\rightarrow$ Daran sehen Sie sofort den exakten Header, den Werkzeugwechsel und das Programmende!
+2. **Das PDF-Handbuch der Steuerung *(Programming Manual)***:  
+   Der Kunde schickt Ihnen das PDF der Steuerung *(oder Sie laden es in 10 Sekunden kostenlos bei Haas, Siemens oder Heidenhain herunter)*. Sie öffnen das PDF, drücken `Strg + F` und suchen nach dem gewünschten Zyklus *(z. B. „Tiefbohren“)*.
+
+### 🧭 Wo wird `G54`, `G53` und `M08` eigentlich definiert? (Im Simulator, in der NC-Datei oder in der Maschine?)
+
+Hier gibt es oft ein großes Verständnisproblem zwischen Programmcode, Visualisierung und Maschinenhardware.  
+Die Antwort lautet: **Jeder der drei Orte hat eine völlig andere Aufgabe!**
+
+Vergleichen Sie es mit einer Musik-App:  
+* Die **Noten auf dem Papier** sind die NC-Datei.  
+* Das **echte Orchester mit Instrumenten** ist die Fräsmaschine.  
+* Die **Visualisierung auf dem Smartphone-Display** ist der Simulator.
+
+Hier ist die genaue Übersicht für `G54`, `G53` und `M08`:
+
+| Befehl | 1. In der NC-Datei (`.nc`) <br>*(Der Aufruf / Das Drehbuch)* | 2. In der echten CNC-Maschine <br>*(Die echte Definition / Hardware)* | 3. Im 3D-Simulator <br>*(Der Visualisierer / Interpreter)* |
+| :--- | :--- | :--- | :--- |
+| **`G54`** *(Werkstück-Nullpunkt)* | In der NC-Datei steht **nur das Wort** `G54`. Es sagt: *„Schalte ab jetzt auf das Bauteil-Koordinatensystem um!“* | **Hier werden die echten Zahlenwerte definiert!** Der Fräser tastet mit der Messuhr die Rohteilkante ab und speichert in der Nullpunkttabelle der Steuerung: <br>`X = -320.5 mm`, `Y = -180.2 mm`, `Z = -410.0 mm`. | Liest das Wort `G54` aus der NC-Datei und verschiebt die 3D-Achsenanzeige optisch auf die linke vordere Ecke des 3D-Modells. |
+| **`G53`** *(Maschinen-Koordinaten)* | In der NC-Datei steht: <br>`G53 G00 Z0.0`. Es sagt: *„Ignoriere das Werkstück und schau nur auf die Maschinenschiene!“* | **Wird fest vom Maschinenhersteller definiert!** Der Hersteller verschraubt die Führungsschienen im Gussbett und setzt ganz oben am Schienenende feste Endschalter. `Z0.0` an der Decke ist mechanisch unverrückbar fest verdrahtet. | Erkennt `G53 Z0` im Code und fährt den roten Werkzeug-Zylinder im Browser senkrecht ganz nach oben in den sicheren Rückzug. |
+| **`M08`** *(Kühlmittel EIN)* | In der NC-Datei steht **nur das Wort** `M08`. Es sagt: *„Wasser marsch!“* | **Definiert in der Maschinen-Elektrik *(SPS / PLC)***: Die Steuerung sendet ein 24V-Stromsignal an ein Relais, das die Hochdruck-Wasserpumpe im Keller der Maschine einschaltet. | Erkennt `M08` im Text und blendet im Statusbereich *(HUD)* ein, dass die Kühlung aktiv ist. |
+
+#### Zusammenfassung in einem Satz:
+* In der **NC-Datei** wird der Befehl **aufgerufen** *(ausgelöst)*.  
+* In der **Maschine** liegt die **reale Definition *(echte Koordinaten und Schalter)***.  
+* Der **Simulator** liest die Datei wie ein Dolmetscher und **stellt das Geschehen für Sie grafisch dar**.
+
+### 🌐 Woher kommen die Werte in [NC Viewer (ncviewer.com)](https://ncviewer.com/)?
+
+Wenn Sie Ihre generierte `.nc`-Datei in den bekannten Online-Dienst [NC Viewer](https://ncviewer.com/) hochladen, fragen Sie sich vielleicht: *„Woher weiß NCViewer, wie das Bauteil aussieht und woher nimmt er die Werte?“*
+
+NCViewer ist ein **reiner WebGL-Geometrie-Plotter *(Wegstrecken-Zeichner)***. Er arbeitet nach einem zweigeteilten Prinzip:
+
+#### 1. Was NCViewer DIREKT aus Ihrer `.nc`-Datei liest:
+* **Fahrbewegungen:** NCViewer liest jedes `X...`, `Y...`, `Z...` aus Ihren G-Code-Zeilen aus und verbindet die Punkte im 3D-Raum mit Linien.
+* **Farben der Linien:** 
+  * `G00` = Rote/gestrichelte Linien *(Eilgang in der Luft)*.
+  * `G01` = Blaue/grüne Linien *(Schnittvorschub)*.
+  * `G02` / `G03` = Kreisbögen *(berechnet aus den `I`- und `J`-Vektoren oder dem `R`-Radius)*.
+
+#### 2. Woher kommen die Werte, die GAR NICHT in der `.nc`-Datei stehen? *(G54, G53, Fräsergröße)*
+Weil NCViewer weder Ihre Werkshalle noch Ihre physische Fräsmaschine kennt, verwendet er **fest einprogrammierte Standard-Voraussetzungen *(Default Simulation Settings)***:
+
+| Information | Wie geht NCViewer damit um? | Woher kommt der Wert? |
+| :--- | :--- | :--- |
+| **`G54` *(Werkstück-Nullpunkt)*** | NCViewer setzt `G54` standardmäßig einfach auf den 3D-Koordinatenursprung **`(0, 0, 0)`**. | **Aus den Software-Voreinstellungen von NCViewer.** In den Einstellungen *(Zahnrad-Symbol)* kann man den Offset manuell verschieben. |
+| **`G53` *(Maschinen-Schiene)*** | Da NCViewer die Maße Ihrer Fräsmaschine nicht kennt, ignoriert er `G53` entweder oder setzt es gleich wie `G54` bzw. springt auf die obere Rastergrenze. | **Aus dem NCViewer-Parser *(Interpreter)***. |
+| **Werkzeugdurchmesser & Länge *(T01, H01)*** | In Ihrer NC-Datei steht nur `T1 M06`. NCViewer weiß daraus nicht automatisch, ob es ein Schaftfräser, Kugelfräser oder Bohrer ist. | **Aus der internen Tool-Tabelle von NCViewer:** NCViewer nimmt als Standard einfach einen virtuellen Zylinder an *(z. B. 6 mm oder 10 mm)*, bis Sie im NCViewer-Menü „Tools“ die echten Fräsermaße von Hand eintippen. |
+| **`M08` / `M09` *(Kühlwasser)*** | NCViewer simuliert kein flüssiges Wasser und keine Physik. | `M08` wird für die 3D-Bahn ignoriert und höchstens als Textzeile angezeigt. |
+
+#### Fazit:
+Kein Simulator der Welt kann „hellsehen“. Was als Zahl in der `.nc`-Datei steht (`X40 Y25 Z-5`), **zeichnet NCViewer exakt ab**. Alles andere *(Nullpunkte, Werkzeugkörper)* ersetzt NCViewer durch **Software-Standardwerte *(Defaults)*** – genau wie unser eigener 3D-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html)!
+
+### 📍 Woher kommt der gezeichnete Anfangspunkt im Simulator, wenn der Simulator die Maschine gar nicht kennt?
+
+Das ist die entscheidende Frage: *„Wenn der Simulator die echte Maschine nicht kennt, wie kann er dann überhaupt einen Startpunkt zeichnen?“*
+
+Hier gibt es technisch **zwei Phasen**:
+
+#### Phase 1: Die ersten Zeilen im Code (Der „Notfall-Startpunkt“ / Fallback)
+Zu Beginn einer NC-Datei *(z. B. Zeile 1 bis 8 bei Übung 00b)* stehen nur Initialisierungsbefehle:
+```gcode
+G90 G17 G21 G94
+G28 G91 Z0.
+T1 M06
+S8000 M03
+G54
+```
+* In diesen Zeilen steht **noch kein einziges `X` und kein `Y`** für das Bauteil!
+* Wenn der Simulator stur darauf warten würde, wüsste er nicht, wo er den Bildschirm zentrieren soll.
+* **Deshalb steht im Quellcode unseres lokalen Simulators [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html#L614-L617) in Zeile 614 schwarz auf weiß:**
+  ```javascript
+  let curX = 0, curY = 0, curZ = 15;
+  let isRapid = true;
+  let curTool = "T01 (Werkzeug)";
+  ```
+* Das ist eine **erfundene Standard-Parkposition *(Default Origin)***, damit der 3D-Canvas von Sekunde 1 an ein Werkzeug anzeigen kann. In [NC Viewer](https://ncviewer.com/) ist dieser Notfall-Startpunkt standardmäßig einfach `(0, 0, 0)`.
+
+#### Phase 2: Sobald die allererste Koordinate im G-Code auftaucht! (Der echte Startpunkt)
+Sobald das Fräsprogramm den ersten echten Verfahrbefehl erreicht:
+```gcode
+N60 G00 X-10.000 Y-10.000 Z15.000
+```
+* **Ab JETZT weiß der Simulator alles ganz genau!**
+* Denn dieser Punkt `X-10.000 Y-10.000 Z15.000` wurde vom **CAM-System *(Fusion 360)*** berechnet. Es ist die sogenannte **Anfahrposition *(Entry Point / Safe Lead-In)*** kurz vor dem Bauteil.
+* Der Simulator liest diese Zeile und zeichnet die erste sichtbare gelbe Eilgang-Linie von der Startposition genau zu diesen Koordinaten.
+
+### 🚗 Häufiges Missverständnis: Ist `G00` eine Ecke auf dem Maschinentisch?
+
+Die ganz klare Antwort lautet: **NEIN! `G00` ist KEINE Ecke und KEIN Ort!**
+
+Hier verwechselt man leicht die **Geschwindigkeit** mit dem **Zielort**:
+
+* **`G00` ist das TEMPO / die ART DER BEWEGUNG:**  
+  `G00` heißt **Eilgang *(Rapid Motion / Vollgas)***.  
+  Es bedeutet: *„Fahre so schnell wie die Servomotoren können durch die freie Luft (mit bis zu 30 bis 60 Metern pro Minute), OHNE ins Metall zu schneiden!“*
+* **Die ECKE ist `G54 X0.0 Y0.0`:**  
+  * **`G54`** ist das **Koordinatensystem *(der Nullpunkt auf dem Bauteil)***.  
+  * **`X0.0 Y0.0`** ist die **genaue geometrische Ecke** *(meistens die linke vordere Ecke der Aluminiumplatte)*.
+
+#### Die einfache Eselsbrücke fürs Auto:
+| CNC-Code | Vergleich beim Autofahren | Was bedeutet das an der Fräsmaschine? |
+| :--- | :--- | :--- |
+| **`G00`** *(Eilgang)* | **Das Gaspedal voll durchtreten** | Vollgasfahrt in der Luft *(kein Kontakt zum Metall)*. |
+| **`G01`** *(Arbeitsvorschub)* | **Im Schritttempo vorsichtig einparken** | Langsame Schnittbewegung im Metall *(Späne fliegen)*. |
+| **`G54`** *(Nullpunkt)* | **Die Stadtgrenze oder das Ortsschild** | Das Bezugssystem *(Bezugspunkt ist das Werkstück)*. |
+| **`X0 Y0`** *(Koordinaten)* | **Die Hausnummer oder die Parklücke** | Die exakte Ecke des Bauteils. |
+
+Wenn in einer CNC-Zeile also steht:
+```gcode
+G54
+G00 X0.0 Y0.0 Z15.0
+```
+Dann sagt das der Fräsmaschine:
+1. **`G54`**: Orientiere dich an der Kante des Aluminiumblocks!
+2. **`X0.0 Y0.0`**: Ziel ist die linke vordere Ecke!
+3. **`Z15.0`**: Bleib dabei 15 mm oben in der Luft!
+4. **`G00`**: Fahr diese Strecke **mit Vollgas im Eilgang**!
+
 ---
 
 ---
@@ -494,6 +809,157 @@ function onClose() {
 | **`G80`** | **Bohrzyklen ABBRECHEN *(Cancel Canned Cycles)*** | Bricht alle aktiven Bohrzyklen zur Sicherheit ab. |
 | **`G53 G00 Z0.0`** | **Sicherheits-Rückzug Z *(Safe Z Retract)*** | Fährt die Z-Achse senkrecht nach ganz oben an die Decke der Fräskabine. |
 | **`M30`** | **Programmende *(Program End and Rewind)*** | Beendet die Bearbeitung und setzt den Speicher auf Zeile 1 zurück. |
+
+### 🖼️ Technische Zeichnung: Was ist der mechanische Endschalter an der Kabinendecke?
+
+Ein **mechanischer Endschalter *(Limit Switch / Referenzendschalter)*** ist ein robuster Elektroschalter *(Mikroschalter mit Metall-Tastrolle oder induktiver Sensor)*, der vom Maschinenhersteller *(z. B. Haas, DMG Mori)* ganz oben am Ende der senkrechten Z-Führungsschiene montiert ist.
+
+Hier ist die Schnittzeichnung einer echten CNC-Fräsmaschine von vorne:
+
+```text
+═══════════════════════════════════════════════════════════════════════════════
+                   MASCHINENKABINE-DECKE (Massiver Stahlguss)
+═══════════════════════════════════════════════════════════════════════════════
+       │                                     ▲
+       │                                 [🛑 ENDSCHALTER] <── G53 Z0.0
+       │                                     │                (Maschinen-Nullpunkt)
+       │                                     │ (Klick!)
+       │  ┌───────────────────────────────┐  ▼
+       │  │      SPINDEL-SCHLITTEN        │  
+       │  │ (Fährt auf Z-Schiene auf/ab)  │  ◄── Hier steht die Spindel bei G53 Z0.0
+       │  │                               │      (Ganz oben, berührt den Schalter)
+       │  │       [ E-MOTOR ]             │
+       │  └──────────────┬────────────────┘
+       │                 │
+       │           ┌─────┴─────┐
+       │           │ Werkzeug- │
+       │           │ Aufnahme  │
+       │           └─────┬─────┘
+       │                 ▼
+       │             │       │
+       │             │Fräser │
+       │             └───┬───┘
+       │                 │
+       │                 ▼  Freie Luft im Arbeitsraum (ca. 400 - 500 mm Freiraum!)
+       │
+       │
+       │                 ┌───┐
+       │                 │   │ ◄── Hier schwebt der Fräser bei G54 Z15.0
+       │                 └───┘     (15 mm Sicherheitshöhe über dem Material)
+       │                   ▲
+       │                   │ 15 mm Luft
+       │       ┌───────────┴───────────┐
+       │       │  ALUMINIUM-WERKSTÜCK  │ ◄── Bauteil-Oberfläche ist G54 Z0.0
+       │       │  (Im Schraubstock)    │
+───────┴───────┴───────────────────────┴───────────────────────────────────────
+                      MASCHINENTISCH (Granit / Gusseisen)
+═══════════════════════════════════════════════════════════════════════════════
+```
+
+#### Wie funktioniert dieser Schalter in der Realität?
+1. **Der physische Schalter an der Decke:**  
+   Ganz oben an der Z-Achse sitzt ein Schalterkasten mit einem federnden Metallhebel.  
+2. **Die Berührung *(Klick)***:  
+   Fährt der Servomotor der Z-Achse nach oben, stößt ein Metallkeil am Spindelkasten gegen den Hebel: **KLICK!**  
+   Der Schalter öffnet einen Stromkreis.
+3. **Der Maschinen-Stopp *(Not-Halt vor Wandkollision)***:  
+   Der Computer der Fräsmaschine registriert den Klick und weiß:  
+   *„Stopp! Hier ist das absolute Ende der Schiene. Weiter nach oben geht es nicht, sonst würde der Spindelkasten die Kabinendecke zertrümmern!“*
+4. **Das ist `G53 Z0.0`:**  
+   Dieser Schalterkontaktpunkt ist die mechanische Heimat der Z-Achse. Wenn der Postprozessor `G53 G00 Z0.0` ausgibt, fährt die Maschine mit Höchstgeschwindigkeit genau an diesen oberen Schalterkontakt. Der Fräser ist dann maximal weit weg vom Werkstück *(ca. 40 bis 50 cm Sicherheitsabstand)*!
+
+### ❓ Häufige Frage: Warum bewegt sich die Spindel bei `G53 G00 Z0.0` im Simulator genau auf 35 mm hoch?
+
+Wenn Sie Übung 1 im [3D-Simulator](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html) abspielen und die Zeile `N20 G53 G00 Z0.000` erreichen, fährt der Fräser auf **`Z = 35 mm`**. Warum steht im Code `Z0.0`, aber die Spindel fährt auf `35 mm`?
+
+1. **Was bedeutet `G53 Z0.0` an der echten Maschine?**
+   * Im Werkstücksystem `G54` ist $Z = 0$ die Oberfläche des Metalls.
+   * Aber **`G53` schaltet das Werkstück ab** und schaut nur auf die **echte Maschinenschiene *(Maschinenkoordinatensystem)***!
+   * Auf der Maschinenschiene ist **`Z0.0` der oberste Endschalter direkt unter der Kabinendecke**. An einer echten Fräsmaschine fährt die Spindel bei `G53 Z0.0` also $400\,\text{mm}$ bis $600\,\text{mm}$ senkrecht nach oben an den oberen mechanischen Anschlag!
+2. **Warum wählt der 3D-Simulator genau 35 mm?**
+   * Unser gefrästes Aluminiumteil ist $85 \times 55\,\text{mm}$ groß und $12\,\text{mm}$ hoch.
+   * Würde der Browser-Simulator die echten $500\,\text{mm}$ Deckenhöhe im Maßstab 1:1 zeichnen, müsste die 3D-Kamera so weit herauszoomen, dass das kleine Bauteil auf Ihrem Bildschirm nur noch ein winziger Punkt wäre.
+   * Deshalb steht im Quellcode von [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html#L650-L654) in Zeile 651:
+     ```javascript
+     if (/G53\s+G00?\s+Z0|G28\s+G91\s+Z0/i.test(line)) {
+       curZ = 35; // Visuelle Deckenhöhe im Simulator
+     }
+     ```
+   * **`Z = 35 mm`** ist die **virtuelle Deckenhöhe des Simulators**: Hoch genug über der $15\,\text{mm}$ Sicherheitshöhe, damit man im 3D-Fenster sofort sieht: *„Die Z-Achse ist komplett nach oben an den Anschlag gefahren!“*, aber kompakt genug, damit das Bauteil auf dem Monitor groß und deutlich sichtbar bleibt.
+
+### 🎨 Warum haben die Wörter im Code verschiedene Farben? (Syntax-Highlighting)
+
+Das, was Sie auf Ihrem Bildschirm sehen, nennt man **Syntax-Highlighting *(Syntaxhervorhebung / farbliche Code-Erkennung)***.  
+Visual Studio Code erkennt anhand der Dateiendung `.nc`, dass es sich um **CNC G-Code** handelt, und färbt die Wörter automatisch nach ihrer Funktion ein.
+
+Hier ist die genaue Farb-Bedeutung aus Ihrem Screenshot:
+
+| Farbe | Zeichen / Befehl | Funktion & Bedeutung an der Fräsmaschine |
+| :--- | :--- | :--- |
+| 🟢 **Grün** | **`(UEBUNG 01...)`, `(ENTWICKLER: ...)`** | **Kommentare *(Bediener-Hinweise)***: Alles in runden Klammern wird von der Fräsmaschine komplett ignoriert. Es dient nur dem Menschen zum Lesen. |
+| 🔵 **Blau / Cyan** | **`O1001`** | **Hauptprogramm-Nummer *(Program Number)***: Der Name der Datei im internen Speicher der Fräsmaschine. |
+| 🌸 **Pink / Magenta** | **`G90`, `G21`, `G17`, `G40`, `G80`, `G00`** | **G-Codes *(Geometrie- und Bewegungsbefehle)***: Sagt der Maschine, *WIE* sie sich verhalten soll *(Absolutmaß, Millimeter, Eilgang usw.)*. |
+| 🟢 **Türkis / Cyan** | **`G53`** | **Nullpunkt-Umschaltung *(Maschinenkoordinatensystem)***: Schaltet die Werkstück-Kompensation ab und wechselt auf die echte Maschinenschiene. |
+| 🔴 **Rot / Orange** | **`Z0.0` *(sowie spätere `X...`, `Y...`)*** | **Achsen & Zielkoordinaten *(Axis Targets)***: Die genauen millimetergenauen Zielpunkte, die die Motoren anfahren sollen. |
+| 🟡 **Gelb** | **`M30`** | **M-Codes *(Maschinen-Schaltfunktionen)***: Schaltbefehle für die Hardware *(Kühlwasser, Spindelmotor, Programmende)*. |
+| ⚪ **Gelb / Weiß** | **`%`** | **Übertragungs-Start/Stopp *(Tape Boundary)***: Kennzeichnet Anfang und Ende der Datenübertragung über das Netzwerk. |
+
+#### Welchen großen Vorteil bringt diese Farbgebung?
+1. **Fehler-Erkennung in einer Sekunde:**  
+   Wenn Sie z. B. die schließende Klammer bei einem Kommentar vergessen: `(ENTWICKLER : MEIN NAME`, wird der gesamte restliche G-Code plötzlich grün eingefärbt! Sie sehen sofort auf einen Blick: *„Achtung, Syntaxfehler – hier fehlt eine Klammer!“*
+2. **Schnelle Orientierung:**  
+   In einem echten NC-Programm mit 5.000 Zeilen erkennt das Auge sofort die gelben Schaltbefehle (`M06`, `M30`) und die roten Koordinaten (`X`, `Y`, `Z`), ohne dass man mühsam jedes einzelne Wort lesen muss.
+
+### ❓ Häufige Frage: Warum sieht man in NC Viewer (ncviewer.com) bei Übung 1 nichts und es gibt keinen Play-Button?
+
+Wenn Sie die Datei [`uebungen/uebung_01_entwickler_header.nc`](file:///C:/Projekte/CNC/uebungen/uebung_01_entwickler_header.nc) in NC Viewer öffnen, bleibt das 3D-Gitter leer und es taucht kein Abspielknopf *(Play-Button)* auf.
+
+Dafür gibt es **zwei ganz einfache, logische Gründe**:
+
+#### 1. Es gibt in Übung 1 noch gar keine Fahrbewegung im Raum!
+* Schauen Sie sich den Code von Übung 1 an:
+  ```gcode
+  G90 G21 G17 G40 G80
+  G53 G00 Z0.0
+  M30
+  ```
+* In dieser Datei steht **kein einziges `X` und kein einziges `Y`**!
+* NC Viewer startet standardmäßig am Koordinatenpunkt `(X0, Y0, Z0)`.
+* Der einzige Befehl ist `Z0.0`. Die Bewegung geht also von $0$ nach $0$.  
+  **Die zurückgelegte Wegstrecke beträgt exakt 0,0 Millimeter!**  
+  Wo keine Strecke gefahren wird, kann auch kein Linienstift eine 3D-Bahn auf das Gitter zeichnen.
+
+#### 2. Warum blendet NC Viewer den Play-Button aus?
+* NC Viewer ist so programmiert: **Wenn eine Datei 0 Bewegungsvektoren enthält, wird die Abspielleiste *(Play / Pause / Timeline)* unten komplett ausgeblendet**, weil es schlichtweg nichts abzuspielen gibt!
+* Sobald Sie in späteren Übungen *(ab Übung 4 oder beim Kundenauftrag)* echte Konturen mit `X40.0 Y25.0` laden, taucht unten rechts in NC Viewer automatisch die Leiste mit dem grünen Play-Button auf.
+* *(Zusatz-Tipp für NC Viewer: Nach jeder Codeänderung muss man links unten auf den grünen Button **`PLOT`** klicken, damit NC Viewer den Text neu einliest).*
+
+#### 3. Der Vorteil unseres lokalen 3D-Simulators:
+Genau deshalb haben wir für Sie unseren eigenen Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html) entwickelt:
+* Unser Simulator stürzt nicht ab und blendet nichts aus: Er zeigt auch bei reinen Header-Dateien die Werkstückplatte, die Werkzeugspindel, die Zeilen-Schaltung mit `⏮ Vorheriger` und `⏭ Nächster Schritt` und den Z-Rückzug `G53 Z0.0` auf die Deckenhöhe von $35\,\text{mm}$ an!
+
+### 📸 Fotovergleich: Der 3D-Simulator vs. Die echte Realität an der Fräsmaschine
+
+Um den Drahtgitter-Simulator mit der echten Werkstatt zu verknüpfen, sehen Sie hier das reale Foto genau dieser Szene aus einer echten Fräsmaschine:
+
+![Echte Fräsmaschine: 1:1-Vergleich zum 3D-Simulator](kundenauftrag_01_flanschplatte/cnc_frasmaschine_realitaet.jpg)
+
+#### Der direkte 1:1-Vergleich zwischen Simulator und Realität:
+
+| Was Sie im 3D-Simulator sehen | Wie das in der echten Werkstatt in Wirklichkeit aussieht |
+| :--- | :--- |
+| **Das weiße Drahtgitter-Rechteck unten** | Der silberne **Aluminiumblock *(unsere Flanschplatte 85 × 55 mm)***. In der Mitte ist die runde gefräste Kreistasche *(Ø 30 mm)* und an den Ecken die 4 Befestigungsbohrungen zu sehen. |
+| **Die Position auf dem Tisch** | Das Aluminium liegt in der Realität nicht frei in der Luft, sondern ist fest in einem schweren **Präzisions-Maschinenschraubstock aus Stahl** auf dem T-Nuten-Tisch der Fräsmaschine eingespannt. |
+| **Der rote Zylinder ganz oben (`T01 [Z=35.0]`)** | Der schwere **Spindelkasten *(Fräskopf)***. Er ist auf den senkrechten Führungsschienen an der Rückwand mit den schwarzen Schutzbälgen *(Faltenbälgen)* **ganz nach oben unter die Kabinendecke gefahren (`G53 G00 Z0.0`)**. |
+| **Die gelb gestrichelte Linie nach oben** | Der riesige **Freiraum von etwa 40 bis 50 Zentimetern** in der Luft zwischen Fräserspitze und Werkstück, damit beim Start oder Programmende absolut gar nichts kollidieren kann! |
+| **Die blaue Linie (Z-Achse)** | Die senkrechte Hubrichtung der Frässpindel nach oben und unten. |
+
+1. **Unten auf dem Maschinentisch:**
+   * **Im Simulator:** Ein weißes Drahtgitter-Rechteck mit grün/roten Achsen.
+   * **In der echten Realität:** Ein massiver Maschinenschraubstock aus gehärtetem Präzisionsstahl. In den Backen ist der silberne Aluminiumklotz *(die $85 \times 55\,\text{mm}$ Flanschplatte mit der runden $\varnothing 30\,\text{mm}$ Kreistasche und den 4 Bohrungen)* fest eingespannt.
+2. **Oben unter der Decke *(Sicherheits-Rückzug `G53 G00 Z0.0`)***:
+   * **Im Simulator:** Ein roter Zylinder auf Höhe `Z = 35 mm`.
+   * **In der echten Realität:** Der schwere Spindelstock mit Motor und Werkzeugaufnahme *(ISO/BT40)* ist an den senkrechten Führungsschienen ganz nach oben unter die Kabinendecke gefahren *(ca. 40 bis 50 cm Sicherheitsabstand)*. Der Schaftfräser `T01` schwebt weit über dem Schraubstock, damit man gefahrlos das Werkstück begutachten kann.
 
 ### 💡 Worum geht es in einfacher Sprache?
 

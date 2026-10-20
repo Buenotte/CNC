@@ -1294,7 +1294,8 @@
       drawCircle3D(curX, curY, curZ + 22, toolRadius, "#f43f5e", 2.2);
       drawLine3D({x:curX, y:curY, z:curZ}, {x:curX, y:curY, z:curZ+28}, "#f43f5e", 3);
 
-      drawText3D(w2.tool.split(" ")[0] + " [Z=" + curZ.toFixed(1) + "]", curX, curY, curZ + 32, "#f43f5e", "bold 11px sans-serif", "rgba(15,23,42,0.9)");
+      const zSign = curZ > 0 ? "+" : "";
+      drawText3D(w2.tool.split(" ")[0] + " [Z: " + zSign + curZ.toFixed(1) + " mm]", curX, curY, curZ + 32, "#f43f5e", "bold 11px sans-serif", "rgba(15,23,42,0.9)");
       checkHoverTooltip();
 
       // HUD & G-Code Zeile aktualisieren
