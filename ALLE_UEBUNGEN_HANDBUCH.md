@@ -126,7 +126,8 @@ Das Zusammenspiel funktioniert über eine **4-stufige Daten-Pipeline *(Architekt
   14. **[Übung 14](#übung-14-heidenhain-klartext-steuerung-tool-call-l--fmax--4-drehachse-a-achse-für-aufträge-im-deutschsprachigen-raum):** **Heidenhain Klartext-Steuerung (`TOOL CALL`, `L ... FMAX`) & 4. Drehachse (`A-Achse`)** für Aufträge im deutschsprachigen Raum.
   15. **[Übung 15](#übung-15-kanten-entgraten-am-3d-modell-2d-fase--chamfer-milling-mit-einem-45-fasenfräser-t04):** **Kanten entgraten am 3D-Modell (`2D-Fase / Chamfer Milling`)** mit einem $90^\circ$/$45^\circ$-Fasenfräser (`T04`).
   16. **[Übung 16](#übung-16-die-komplette-5-punkte-endabnahme-im-simulator-vor-der-auslieferung-an-den-online-kunden-meister-prüfung):** **Die komplette 5-Punkte-Endabnahme im Simulator** vor der Auslieferung an den Online-Kunden (Meister-Prüfung).
-* **🛡️ Meister-Sicherheits- und Qualitätsprüfung:**
+* **🛡️ Meister-Sicherheits- und Qualitätsprüfung & Kunden-Auftragsabwicklung:**
+  * **[Master-Leitfaden: Vollständiger Prozessablauf für jeden Kundenauftrag von A bis Z (Von E-Mail bis Endzahlung)](file:///c:/Projekte/CNC/KUNDENAUFTRAG_VOLLSTAENDIGER_PROZESSABLAUF_A_BIS_Z.md):** Der lückenlose 7-Phasen-Ablauf mit unseren Web-Tools *(Postprozessor-Generator, 3D-Freigabe-Video, Anzahlung & Auslieferung)*.
   * **[Sicherheits- und Qualitätsprüfprotokoll für CNC-G-Code (Null-Kollisions-Garantie & Abnahme-Checkliste)](file:///c:/Projekte/CNC/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md):** Umfassende 5-Stufen-Prüfkette vor dem Ausliefern an den Kunden oder dem ersten Span auf der Fräsmaschine *(CAM-Prüfung, 3D-Simulation, G-Code-Syntaxcheck, Maschinen-Rüsten, Luftschnitt)*.
 
 ---
@@ -2255,6 +2256,25 @@ Wenn Sie Ihren Postprozessor später in Autodesk Fusion 360 einbinden:
 
 ---
 
+#### 13. Das fertige 3D-Simulations-Video (MP4) & der neue Web-Video-Generator (`cnc_video_generator_web.html`)
+
+Um Kunden vor dem ersten Span die absolute Crash-Freiheit zu beweisen und die **50 % Restzahlung vor der G-Code-Lieferung abzusichern**, haben wir zwei neue Werkzeuge integriert:
+
+1. **Das fertige HD-Simulations-Video zu Übung 3 *(MP4-Datei)***:
+   * **Pfad:** [`docs/videos/uebung_03_simulation_video.mp4`](file:///c:/Projekte/CNC/docs/videos/uebung_03_simulation_video.mp4)
+   * Zeigt die komplette 3D-Zerspanung: Außenkontur mit Lead-In-Anschnitt *(Schaftfräser Ø10 mm)*, Kreistasche Mitte und Tiefbohren der 4 Bohrungen *(G83 mit Spanbruch auf Z-12.0 mm)* samt Live-HUD, Werkzeug-Spuren und Z-MIN Schraubstock-Prüfung!
+   * Sie können diese Datei mit jedem Mediaplayer *(VLC, Windows Media Player)* abspielen oder direkt an Kunden versenden.
+
+2. **Das interaktive Web-Video-Aufnahme-Portal (`cnc_video_generator_web.html`)**:
+   * **Pfad:** [`cnc_video_generator_web.html`](file:///c:/Projekte/CNC/cnc_video_generator_web.html) *(per Doppelklick im Browser öffnen!)*
+   * **Was Sie dort tun können:**
+     * Beliebige `.nc`-Dateien per Drag & Drop oder Datei-Upload laden.
+     * Kundenname und Bauteilbezeichnung eingeben *(wird als Wasserzeichen ins Video gerendert)*.
+     * Auf den roten Knopf **„🔴 Video-Aufnahme starten“** klicken.
+     * Der Browser zeichnet die 3D-Zerspanung live als flüssiges Video auf und lädt es nach dem Durchlauf automatisch herunter – bereit für WhatsApp, E-Mail oder Kunden-Präsentation!
+
+---
+
 # Übung 4: Ein 3D-Modell als Kundenauftrag bearbeiten (Vom 3D-Bauteil zum G-Code)
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 4
@@ -2323,6 +2343,69 @@ Warum wählt man zu 90 % die vordere linke obere Ecke? Weil der Fräser mit sein
 
 Viele Kunden wollen gar keinen eigenen **Postprozessor (`.cps`-Übersetzer)** kaufen, sondern schicken Ihnen direkt eine **3D-Datei Ihres Bauteils** (z. B. [kundenauftrag_01_flanschplatte/bauteil_1001.stl](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/bauteil_1001.stl) oder eine `.step`-Datei) und sagen:
 *„Bitte mach mir für dieses 3D-Bauteil das fertige CNC-Programm (G-Code), damit ich es auf meiner Maschine fräsen kann!“*
+
+---
+
+### ❓ Häufige Frage: Wenn der Kunde ein 3D-Modell schickt – wird daraus eine `.cps`-Datei erstellt?
+
+**Klare Antwort: NEIN! Aus einem 3D-Modell wird NIEMALS eine `.cps`-Datei erstellt!**
+
+Das ist eines der häufigsten Missverständnisse für Einsteiger in die CNC-Programmierung. Um die Zusammenhänge zu verstehen, hilft der einfache **Drucker-Vergleich aus dem Büroalltag**:
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ DER BÜRO-DRUCKER-VERGLEICH: WER IST WAS IN DER CNC-WELT?                              │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+  1. Das 3D-Modell (.step / .stl)   ==> Das Word-Dokument (.docx / der Text)
+     (Jedes Mal ein anderes Bauteil, vom Kunden zugeschickt)
+         │
+         ▼
+  2. Die .cps-Datei (Postprozessor) ==> Der Drucker-Treiber (z. B. HP LaserJet Treiber)
+     (Wird EINMAL geschrieben oder installiert. Ändert sich NIEMALS pro Bauteil!)
+         │
+         ▼
+  3. Die .nc-Datei (G-Code)         ==> Das ausgedruckte Blatt Papier
+     (Das fertige Maschinenprogramm, das die Fräsmaschine abarbeitet)
+```
+
+#### Die 4 Schritte des echten Arbeitsablaufs:
+
+1. **Schritt 1 (Kunde schickt Bauteil):**  
+   Der Kunde sendet Ihnen eine 3D-Datei *(z. B. `ventilblock.step` oder `bauteil_1001.stl`)*.
+2. **Schritt 2 (Sie programmieren die Fräsbahnen):**  
+   Sie öffnen diese 3D-Datei in Ihrem CAM-Programm *(Autodesk Fusion 360)* und wählen mit der Maus die Flächen an *(Planfräsen, Außenkontur, Kreistasche, Bohrungen)*.
+3. **Schritt 3 (Sie drücken auf „Post Process / Export“):**  
+   Fusion 360 fragt: *„Welchen Postprozessor (.cps) soll ich als Übersetzer benutzen?“*  
+   Sie wählen Ihre vorhandene Datei [`src/mein_erster_post.cps`](file:///C:/Projekte/CNC/src/mein_erster_post.cps) aus.
+4. **Schritt 4 (Das fertige Produkt entsteht):**  
+   Fusion 360 nutzt die `.cps`-Datei als Schablone und erzeugt die fertige **`.nc`-Datei *(G-Code)***!  
+   👉 **Diese `.nc`-Datei** *(zusammen mit dem Einrichteblatt als PDF)* ist das, was Sie dem Kunden liefern und wofür er Sie bezahlt!
+
+#### Wann verkauft man überhaupt eine `.cps`-Datei?
+
+Es gibt im Markt genau **zwei völlig unterschiedliche Dienstleistungen**, die Sie anbieten können:
+
+| Dienstleistung | Was schickt der Kunde? | Was erstellen & verkaufen Sie? | Typischer Preis |
+|:---|:---|:---|:---:|
+| **Auftragstyp A:<br>CNC-Lohnprogrammierung** *(90 % aller Aufträge)* | Kunde schickt 3D-Modell (`.step` / `.stl`) und nennt den Maschinentyp *(z. B. „Haas VF-2“)*. | Sie nutzen Ihre fertige `.cps`-Datei und verkaufen ihm die fertige **`.nc`-Datei** + **Einrichteblatt**. | **80 € bis 350 €** pro Bauteil |
+| **Auftragstyp B:<br>Postprozessor-Entwicklung** *(Spezialauftrag)* | Kunde hat eine neue Maschine gekauft, besitzt selbst Fusion 360, hat aber keinen passenden Postprozessor. | Sie programmieren ihm eine maßgeschneiderte **`.cps`-Datei** für seinen Maschinenpark. | **1.500 € bis 4.000 €** einmalig |
+
+---
+
+#### 🌐 Neu: Der interaktive Web-Postprozessor-Generator (`kunden_cps_generator_web.html`)
+
+Damit Sie für neue Kundenanfragen nicht jedes Mal von Hand im Code tippen müssen, haben wir ein **grafisches Web-Interface *(Browser-Konfigurator)*** direkt in Ihr Projekt eingebaut:
+
+* **Datei:** [`kunden_cps_generator_web.html`](file:///C:/Projekte/CNC/kunden_cps_generator_web.html) *(einfach per Doppelklick in Google Chrome, Microsoft Edge oder Firefox öffnen!)*
+* **Was Sie dort mit der Maus einstellen können:**
+  1. **Kunden- & Entwicklerdaten:** Firmenname, Ihr Name, Programmnummer und Bauteil-Kommentar.
+  2. **Maschinen-Steuerung:** 🟡 Haas NGC, 🔵 Siemens Sinumerik 840D, 🔴 Fanuc 0i-MF oder 🟢 Heidenhain Klartext.
+  3. **Sicherheits-Schalter:** `Z-MIN` Schraubstock-Prüfung, Werkzeugtabelle *(Tool Table)*, Operations-Sicherheitsinfo und Tisch-Rückzug zur Tür (`G53 Y0`).
+  4. **Kühlmittel-Wahl:** Standard `M08` *(Außen)*, Hochdruck `M88` *(IKZ-Innenkühlung 70 bar)* oder Minimalmengenschmierung `M07`.
+* **Live-Vorschau & 1-Klick-Download:**  
+  Rechts im Fenster sehen Sie in Echtzeit, wie sich der JavaScript-Code verändert. Mit einem Klick auf **„📥 .cps-Datei herunterladen“** speichert Ihr Browser die fertige Datei ab – bereit für Autodesk Fusion 360!
+
+---
 
 In dieser Übung lernen Sie die **6 einfachen Schritte**, wie Sie aus einem **3D-Modell** ohne händisches Tippen von Koordinaten das fertige **G-Code-Programm** erzeugen.
 *(Die komplette Vorlage liegt für Sie im Ordner [kundenauftrag_01_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md)).*

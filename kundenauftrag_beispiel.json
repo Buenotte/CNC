@@ -1,0 +1,17 @@
+{
+  "kundenName": "Mueller Praezisionsteile GmbH",
+  "entwicklerName": "Dipl.-Ing. CNC-Büro",
+  "steuerungsTyp": "siemens",
+  "programmNummer": 2002,
+  "programmKommentar": "VENTILBLOCK OP10",
+  "einheiten": "MM",
+  "features": {
+    "zMinBerechnung": true,
+    "opZMinInfo": true,
+    "werkzeugTabelle": true,
+    "tischZurTuer": true,
+    "kuehlmittelTyp": "M88",
+    "sicherheitsSperreTiefe": -18.0
+  },
+  "ausgabeDatei": "siemens_ventilblock_post.cps"
+}

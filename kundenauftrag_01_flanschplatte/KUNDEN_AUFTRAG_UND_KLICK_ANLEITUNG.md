@@ -88,3 +88,21 @@ Jetzt sitzen Sie vor Ihrem **ThinkPad (Lenovo-Laptop)**. Sie müssen **keine ein
    - `Firmenname / Auftraggeber`: Name des Kunden
    - `Maximale Frästiefe Z-Min ausgeben`: `Ja (true)`
 5. Klicken Sie auf **`Postprozess ausführen (Post)`** – und in einer Sekunde fällt hinten genau die fertige Datei [tests/output_expected.nc](file:///C:/Projekte/CNC/tests/output_expected.nc) heraus!
+
+---
+
+### Schritt 7: 3D-Freigabe-Video aufnehmen (Mit unserem Web-Studio)
+1. Öffnen Sie per Doppelklick die Datei [`cnc_video_generator_web.html`](file:///c:/Projekte/CNC/cnc_video_generator_web.html).
+2. Laden Sie Ihre soeben erzeugte `.nc`-Datei hoch und tragen Sie den Kundennamen ein.
+3. Klicken Sie auf **„🔴 Video-Aufnahme starten“** – das System zeichnet die Fräsbewegungen mit 30 FPS als HD-Video auf.
+4. Speichern Sie das Video als Datei ab und senden Sie es dem Kunden zur Vorab-Freigabe!
+
+### Schritt 8: Finale Auslieferung nach Eingang der 2. Teilzahlung
+1. Sobald der Kunde das Video bestätigt und die restlichen 50 % überwiesen hat:
+2. Senden Sie ihm die finale `.nc`-Datei und das ausgefüllte Einrichteblatt ([`Portfolio/Vorlage_Einrichteblatt_und_Werkzeugliste.md`](file:///c:/Projekte/CNC/Portfolio/Vorlage_Einrichteblatt_und_Werkzeugliste.md)).
+
+---
+
+👉 **Der vollständige Master-Leitfaden von A bis Z:**  
+Die komplette Schritt-für-Schritt-Anleitung aller 7 Phasen *(vom Erstkontakt bis zur Rechnungsstellung)* finden Sie in:  
+[**`KUNDENAUFTRAG_VOLLSTAENDIGER_PROZESSABLAUF_A_BIS_Z.md`**](file:///c:/Projekte/CNC/KUNDENAUFTRAG_VOLLSTAENDIGER_PROZESSABLAUF_A_BIS_Z.md).

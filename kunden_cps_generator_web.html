@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🛠️ Autodesk Fusion Postprozessor Generator (Web Interface)</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #0ea5e9;
+      --accent-hover: #0284c7;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #090d16;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge {
+      background: rgba(14, 165, 233, 0.15);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .header-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .header-links a:hover {
+      color: var(--accent);
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 480px 1fr;
+      overflow: hidden;
+      height: calc(100vh - 65px);
+    }
+
+    /* Linke Spalte: Formular */
+    .form-panel {
+      background: var(--card-bg);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-section {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"], input[type="number"], select {
+      width: 100%;
+      background: #0b1120;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 9px 12px;
+      color: var(--text);
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Steuerungsauswahl Radio-Cards */
+    .machine-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .machine-card {
+      background: #0b1120;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .machine-card input {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .machine-card:hover {
+      border-color: rgba(14, 165, 233, 0.5);
+    }
+
+    .machine-card.active {
+      border-color: var(--accent);
+      background: rgba(14, 165, 233, 0.1);
+    }
+
+    .m-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .m-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Feature Toggles */
+    .toggle-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toggle-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .toggle-item input[type="checkbox"] {
+      margin-top: 3px;
+      cursor: pointer;
+      accent-color: var(--accent);
+      width: 16px;
+      height: 16px;
+    }
+
+    .toggle-text {
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .toggle-title {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .toggle-desc {
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    /* Schnellauswahl Vorlagen Buttons */
+    .presets {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .preset-btn {
+      background: #0b1120;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .preset-btn:hover {
+      color: var(--text);
+      border-color: var(--text-muted);
+    }
+
+    /* Rechte Spalte: Live Code Preview & Aktionen */
+    .preview-panel {
+      background: #0b1120;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .toolbar {
+      background: #111827;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tab-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: var(--card-bg);
+      color: var(--text);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    button.btn-primary {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    button.btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    button.btn-secondary {
+      background: #1e293b;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    button.btn-secondary:hover {
+      background: #334155;
+    }
+
+    .code-container {
+      flex: 1;
+      overflow: auto;
+      padding: 20px;
+      background: #090d16;
+    }
+
+    pre {
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--success);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.2s;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <span class="badge">AUTODESK FUSION</span>
+      <h1>Postprozessor-Generator & Konfigurator</h1>
+    </div>
+    <div class="header-links">
+      <a href="kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html" target="_blank">
+        <span>🎥 Zum 3D-Simulator</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- LINKE SPALTE: FORMULAR -->
+    <div class="form-panel">
+      
+      <!-- Schnell-Vorlagen -->
+      <div class="field">
+        <label>Schnell-Vorlagen für Kundenaufträge:</label>
+        <div class="presets">
+          <button class="preset-btn" onclick="applyPreset('haas')">Haas VF-2 (Standard)</button>
+          <button class="preset-btn" onclick="applyPreset('siemens')">Siemens 840D (IKZ Hochdruck)</button>
+          <button class="preset-btn" onclick="applyPreset('fanuc')">Fanuc 0i-MF</button>
+          <button class="preset-btn" onclick="applyPreset('heidenhain')">Heidenhain Klartext</button>
+        </div>
+      </div>
+
+      <!-- 1. Kunden- & Entwicklerdaten -->
+      <div class="form-section">
+        <div class="section-title">👤 1. Kunden- & Entwicklerdaten</div>
+        <div class="field">
+          <label>Kundenname / Firma:</label>
+          <input type="text" id="kundenName" value="Zerspanungstechnik Schmidt & Partner GmbH" oninput="updateCode()">
+        </div>
+        <div class="field">
+          <label>Ihr Entwickler-Name:</label>
+          <input type="text" id="entwicklerName" value="Dipl.-Ing. CAD/CAM Entwickler" oninput="updateCode()">
+        </div>
+        <div class="field">
+          <label>Programmnummer & Name:</label>
+          <div style="display: grid; grid-template-columns: 90px 1fr; gap: 8px;">
+            <input type="number" id="programmNummer" value="1001" oninput="updateCode()">
+            <input type="text" id="programmKommentar" value="KUNDENAUFTRAG FLANSCHPLATTE OP10" oninput="updateCode()">
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Maschinensteuerung -->
+      <div class="form-section">
+        <div class="section-title">⚙️ 2. Maschinen-Steuerung</div>
+        <div class="machine-grid">
+          <div class="machine-card active" onclick="setMachine('haas', this)">
+            <input type="radio" name="machine" value="haas" checked>
+            <div class="m-title">🟡 Haas NGC</div>
+            <div class="m-sub">G90 G21 G17 G40 / G43</div>
+          </div>
+          <div class="machine-card" onclick="setMachine('siemens', this)">
+            <input type="radio" name="machine" value="siemens">
+            <div class="m-title">🔵 Siemens 840D</div>
+            <div class="m-sub">G90 G71 G64 / SUPA</div>
+          </div>
+          <div class="machine-card" onclick="setMachine('fanuc', this)">
+            <input type="radio" name="machine" value="fanuc">
+            <div class="m-title">🔴 Fanuc 0i-MF</div>
+            <div class="m-sub">Standard ISO G-Code</div>
+          </div>
+          <div class="machine-card" onclick="setMachine('heidenhain', this)">
+            <input type="radio" name="machine" value="heidenhain">
+            <div class="m-title">🟢 Heidenhain</div>
+            <div class="m-sub">TOOL CALL / L Z+0 M91</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Sicherheits-Features -->
+      <div class="form-section">
+        <div class="section-title">🛡️ 3. Sicherheits- & Komfortfunktionen</div>
+        <div class="toggle-list">
+          
+          <label class="toggle-item">
+            <input type="checkbox" id="featZMin" checked onchange="updateCode()">
+            <div class="toggle-text">
+              <div class="toggle-title">Automatische Z-MIN Tiefenprüfung</div>
+              <div class="toggle-desc">Berechnet tiefste Tiefe im Header (Schraubstock-Kollisionsschutz)</div>
+            </div>
+          </label>
+
+          <label class="toggle-item">
+            <input type="checkbox" id="featToolTable" checked onchange="updateCode()">
+            <div class="toggle-text">
+              <div class="toggle-title">Werkzeugtabelle (Tool Table) im Header</div>
+              <div class="toggle-desc">Listet alle Werkzeuge mit Durchmesser und Tiefe für schnelles Rüsten</div>
+            </div>
+          </label>
+
+          <label class="toggle-item">
+            <input type="checkbox" id="featOpInfo" checked onchange="updateCode()">
+            <div class="toggle-text">
+              <div class="toggle-title">Operations-Info vor jedem Schnitt</div>
+              <div class="toggle-desc">Gibt "OP Z-MIN=..." vor jeder Fräsoperation zur Kontrolle aus</div>
+            </div>
+          </label>
+
+          <label class="toggle-item">
+            <input type="checkbox" id="featDoorRetract" checked onchange="updateCode()">
+            <div class="toggle-text">
+              <div class="toggle-title">Tisch am Ende zur Tür fahren (G53 Y0)</div>
+              <div class="toggle-desc">Fährt Werkstück zum leichten Entladen direkt an die Scheibe</div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
+      <!-- 4. Kühlmittel-Wahl -->
+      <div class="form-section">
+        <div class="section-title">💧 4. Kühlmittel-Steuerung</div>
+        <div class="field">
+          <label>Kühlmittel-Typ:</label>
+          <select id="coolantType" onchange="updateCode()">
+            <option value="M08">M08 - Standard Flutkühlung / Außenkühlung</option>
+            <option value="M88">M88 - IKZ Hochdruck-Innenkühlung (durch die Spindel)</option>
+            <option value="M07">M07 - Minimalmengenschmierung (MMS / Sprühnebel)</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RECHTE SPALTE: LIVE CODE PREVIEW -->
+    <div class="preview-panel">
+      <div class="toolbar">
+        <div class="tab-group">
+          <button class="tab-btn active" id="tabCps" onclick="switchTab('cps')">📄 Generierte .cps Datei</button>
+          <button class="tab-btn" id="tabGcode" onclick="switchTab('gcode')">🤖 G-Code Simulation</button>
+        </div>
+        <div class="actions">
+          <button class="btn-secondary" onclick="copyCode()">📋 In Zwischenablage kopieren</button>
+          <button class="btn-primary" onclick="downloadCps()">📥 .cps-Datei herunterladen</button>
+        </div>
+      </div>
+
+      <div class="code-container">
+        <pre><code id="codeViewer"></code></pre>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast">In die Zwischenablage kopiert!</div>
+
+  <script>
+    let currentMachine = 'haas';
+    let currentTab = 'cps';
+
+    function setMachine(machine, elem) {
+      currentMachine = machine;
+      document.querySelectorAll('.machine-card').forEach(el => el.classList.remove('active'));
+      elem.classList.add('active');
+      elem.querySelector('input').checked = true;
+      updateCode();
+    }
+
+    function applyPreset(name) {
+      if (name === 'haas') {
+        document.getElementById('kundenName').value = 'Haas Fertigungstechnik GmbH';
+        document.getElementById('coolantType').value = 'M08';
+        setMachine('haas', document.querySelectorAll('.machine-card')[0]);
+      } else if (name === 'siemens') {
+        document.getElementById('kundenName').value = 'Siemens Maschinenbau AG';
+        document.getElementById('coolantType').value = 'M88';
+        setMachine('siemens', document.querySelectorAll('.machine-card')[1]);
+      } else if (name === 'fanuc') {
+        document.getElementById('kundenName').value = 'Fanuc Lohnzerspanung Süd';
+        document.getElementById('coolantType').value = 'M08';
+        setMachine('fanuc', document.querySelectorAll('.machine-card')[2]);
+      } else if (name === 'heidenhain') {
+        document.getElementById('kundenName').value = 'Präzisionswerkzeuge Hermle & Partner';
+        document.getElementById('coolantType').value = 'M08';
+        setMachine('heidenhain', document.querySelectorAll('.machine-card')[3]);
+      }
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.getElementById('tabCps').classList.toggle('active', tab === 'cps');
+      document.getElementById('tabGcode').classList.toggle('active', tab === 'gcode');
+      updateCode();
+    }
+
+    function generateCpsCode() {
+      const kundenName = document.getElementById('kundenName').value;
+      const entwicklerName = document.getElementById('entwicklerName').value;
+      const progNummer = document.getElementById('programmNummer').value;
+      const progKommentar = document.getElementById('programmKommentar').value;
+      const featZMin = document.getElementById('featZMin').checked;
+      const featToolTable = document.getElementById('featToolTable').checked;
+      const featOpInfo = document.getElementById('featOpInfo').checked;
+      const featDoorRetract = document.getElementById('featDoorRetract').checked;
+      const coolant = document.getElementById('coolantType').value;
+      const isSiemens = currentMachine === 'siemens';
+      const isHeidenhain = currentMachine === 'heidenhain';
+      const isFanuc = currentMachine === 'fanuc';
+
+      return `/**
+ * ==============================================================================
+ * MAßGESCHNEIDERTER KUNDEN-POSTPROZESSOR (.CPS)
+ * ==============================================================================
+ * KUNDE       : ${kundenName}
+ * ENTWICKLER  : ${entwicklerName}
+ * STEUERUNG   : ${currentMachine.toUpperCase()}
+ * PROGRAMM    : O${progNummer} (${progKommentar})
+ * ERSTELLT MIT: Autodesk Fusion Post Configurator
+ * ==============================================================================
+ */
+
+description = "${kundenName} - ${currentMachine.toUpperCase()} Postprozessor";
+vendor = "${kundenName}";
+vendorUrl = "https://github.com/Buenotte/CNC";
+legal = "Erstellt durch ${entwicklerName}. Alle Rechte vorbehalten.";
+certificationLevel = 2;
+minimumRevision = 45700;
+
+extension = "${isHeidenhain ? 'h' : isSiemens ? 'mpf' : 'nc'}";
+programNameIsInteger = true;
+setCodePage("ascii");
+
+capabilities = CAPABILITY_MILLING;
+tolerance = spatial(0.002, MM);
+
+// Formatierer fuer Koordinaten und Vorschub
+var xyzFormat = createFormat({decimals: 3, forceDecimal: true});
+var feedFormat = createFormat({decimals: 0});
+var toolFormat = createFormat({decimals: 0});
+
+var xOutput = createVariable({prefix: "X"}, xyzFormat);
+var yOutput = createVariable({prefix: "Y"}, xyzFormat);
+var zOutput = createVariable({prefix: "Z"}, xyzFormat);
+var feedOutput = createVariable({prefix: "F"}, feedFormat);
+
+// Benutzer-Optionen (Properties in Autodesk Fusion)
+properties = {
+  showZMinInfo: {
+    title: "Z-Min Sicherheitspruefung anzeigen",
+    description: "Berechnet automatisch die tiefste Fraestiefe Z-MIN",
+    type: "boolean",
+    value: ${featZMin}
+  },
+  showToolTable: {
+    title: "Werkzeugtabelle im Header ausgeben",
+    description: "Gibt alle benoetigten Werkzeuge im Programmkopf aus",
+    type: "boolean",
+    value: ${featToolTable}
+  },
+  retractTableToDoor: {
+    title: "Tisch am Ende zur Tuer fahren",
+    description: "Faehrt Maschinentisch zum bequemen Entladen zur Tuer",
+    type: "boolean",
+    value: ${featDoorRetract}
+  }
+};
+
+${featZMin ? `/**
+ * 🛡️ SICHERHEITSFUNKTION: Berechnet die tiefste Z-Koordinate (Z-MIN)
+ */
+function getToolMinimumZ(tool) {
+  var zMin = undefined;
+  var numberOfSections = getNumberOfSections();
+  for (var i = 0; i < numberOfSections; ++i) {
+    var section = getSection(i);
+    if (section.getTool().number == tool.number) {
+      var currentMin = section.getGlobalZRange().getMinimum();
+      if (zMin === undefined || currentMin < zMin) {
+        zMin = currentMin;
+      }
+    }
+  }
+  return zMin;
+}
+` : ''}
+/**
+ * 1. onOpen() - PROGRAMMSTART & HEADER
+ */
+function onOpen() {
+  writeln("%");
+  writeComment("==================================================");
+  writeComment("KUNDE      : " + "${kundenName}");
+  writeComment("PROGRAMM   : O" + ${progNummer} + " (" + "${progKommentar}" + ")");
+  writeComment("STEUERUNG  : " + "${currentMachine.toUpperCase()}");
+  writeComment("ENTWICKLER : " + "${entwicklerName}");
+  writeComment("==================================================");
+
+${featToolTable ? `  if (getProperty("showToolTable")) {
+    writeComment("--- BENOETIGTE WERKZEUGE - TOOL TABLE ---");
+    var tools = getToolTable();
+    for (var i = 0; i < tools.getNumberOfTools(); ++i) {
+      var t = tools.getTool(i);
+      ${featZMin ? `var zMinVal = getToolMinimumZ(t);
+      var zMinStr = (zMinVal !== undefined) ? (" | Z-MIN=" + xyzFormat.format(zMinVal) + "MM") : "";` : 'var zMinStr = "";'}
+      writeComment("T" + toolFormat.format(t.number) + " | D=" + xyzFormat.format(t.diameter) + "MM" + zMinStr + " | " + t.comment);
+    }
+    writeComment("-----------------------------------------");
+  }
+` : ''}
+  // Sicherheits-Startblock (Maschinen-Reset)
+  ${isSiemens ? `writeWords("G90", "G71", "G17", "G40", "G64");` :
+    isHeidenhain ? `writeComment("BEGIN PGM " + ${progNummer} + " MM");` :
+    `writeWords("G90", "G21", "G17", "G40", "G49", "G80");`}
+}
+
+/**
+ * 2. onSection() - WERKZEUGWECHSEL & OPERATIONS-START
+ */
+function onSection() {
+  var tool = currentSection.getTool();
+  writeComment("--------------------------------------------------");
+  var opComment = currentSection.hasParameter("operation-comment") ? currentSection.getParameter("operation-comment") : "OPERATION";
+  writeComment("OPERATION: " + opComment);
+  
+${featOpInfo ? `  if (getProperty("showZMinInfo")) {
+    var zRange = currentSection.getGlobalZRange();
+    writeComment("SICHERHEITS-INFO: OP Z-MIN=" + xyzFormat.format(zRange.getMinimum()) + "MM | OP Z-MAX=" + xyzFormat.format(zRange.getMaximum()) + "MM");
+  }
+` : ''}
+  writeComment("--------------------------------------------------");
+
+  // Werkzeugwechsel
+  ${isSiemens ? `writeWords("T=" + tool.number, "M06");` :
+    isHeidenhain ? `writeWords("TOOL CALL", tool.number, "Z", "S" + tool.spindleRPM);` :
+    `writeWords("T" + tool.number, "M06");`}
+
+  // Nullpunkt G54 aufrufen
+  ${isHeidenhain ? `writeComment("TRANS DATUM 1");` : `writeWords("G54");`}
+
+  // Spindeldrehzahl
+  ${isHeidenhain ? '' : `writeWords("S" + tool.spindleRPM, "M03");`}
+
+  // Laengenkorrektur & Kuehlmittel einschalten (${coolant})
+  ${isSiemens ? `writeWords("D1", "Z15.0", "${coolant}");` :
+    isHeidenhain ? `writeWords("L Z+15.0 R0 FMAX", "M08");` :
+    `writeWords("G43", "H" + tool.number, "Z15.000", "${coolant}");`}
+}
+
+/**
+ * 3. FAHRBEWEGUNGEN
+ */
+function onRapid(x, y, z) {
+  var xStr = xOutput.format(x);
+  var yStr = yOutput.format(y);
+  var zStr = zOutput.format(z);
+  if (xStr || yStr || zStr) {
+    writeWords(${isHeidenhain ? `"L", xStr, yStr, zStr, "R0", "FMAX"` : `"G00", xStr, yStr, zStr`});
+  }
+}
+
+function onLinear(x, y, z, feed) {
+  var xStr = xOutput.format(x);
+  var yStr = yOutput.format(y);
+  var zStr = zOutput.format(z);
+  var fStr = feedOutput.format(feed);
+  writeWords(${isHeidenhain ? `"L", xStr, yStr, zStr, "R0", fStr` : `"G01", xStr, yStr, zStr, fStr`});
+}
+
+function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
+  var cmd = clockwise ? "G02" : "G03";
+  writeWords(cmd, xOutput.format(x), yOutput.format(y), zOutput.format(z), feedOutput.format(feed));
+}
+
+function onCyclePoint(x, y, z) {
+  writeWords("G83", xOutput.format(x), yOutput.format(y), zOutput.format(z), "R2.000", "Q3.000", "F300");
+}
+
+/**
+ * 4. onClose() - PROGRAMMENDE
+ */
+function onClose() {
+  writeWords("M09"); // Kuehlmittel AUS
+  writeWords("M05"); // Spindel AUS
+  ${isSiemens ? `writeWords("SUPA", "G00", "Z0.0", "D0");` :
+    isHeidenhain ? `writeWords("L Z+0.0 R0 FMAX M91");` :
+    `writeWords("G53", "G00", "Z0.000");`}
+
+${featDoorRetract ? `  if (getProperty("retractTableToDoor")) {
+    writeComment("TISCH ZUR TUER FAHREN ZUM BEQUEMEN ENTLADEN");
+    ${isSiemens ? `writeWords("SUPA", "G00", "Y0.0", "D0");` :
+      isHeidenhain ? `writeWords("L Y+0.0 R0 FMAX M91");` :
+      `writeWords("G53", "G00", "Y0.000");`}
+  }
+` : ''}
+  ${isHeidenhain ? `writeComment("END PGM " + ${progNummer} + " MM");` : `writeWords("M30");`}
+  writeln("%");
+}
+`;
+    }
+
+    function generateGcodeSimulation() {
+      const kundenName = document.getElementById('kundenName').value.toUpperCase();
+      const progNummer = document.getElementById('programmNummer').value;
+      const progKommentar = document.getElementById('programmKommentar').value.toUpperCase();
+      const coolant = document.getElementById('coolantType').value;
+      const isSiemens = currentMachine === 'siemens';
+      const isHeidenhain = currentMachine === 'heidenhain';
+
+      if (isHeidenhain) {
+        return `0  BEGIN PGM ${progNummer} MM
+1  ; ==================================================
+2  ; KUNDE      : ${kundenName}
+3  ; PROGRAMM   : ${progKommentar}
+4  ; ==================================================
+5  ; T01 | D=10.000MM | Z-MIN=-5.000MM | SCHAFTFRAESER 10MM
+6  ; T02 | D=6.000MM  | Z-MIN=-12.000MM | SPIRALBOHRER 6MM
+7  ; ==================================================
+8  TOOL CALL 1 Z S8000
+9  L Z+15.000 R0 FMAX M08
+10 L X-10.000 Y-10.000 R0 FMAX
+11 L Z+2.000 R0 FMAX
+12 L Z-5.000 R0 F500
+13 L X+0.000 Y+0.000 R0 F1200  ; LEAD-IN ANSCHNITT
+14 L X+80.000 R0 F1200
+15 L Y+50.000 R0 F1200
+16 L X+0.000 R0 F1200
+17 L Y+0.000 R0 F1200
+18 L Z+15.000 R0 FMAX
+19 L Z+0.000 R0 FMAX M91       ; FREIFAHREN Z HOME
+20 L Y+0.000 R0 FMAX M91       ; TISCH ZUR TUER
+21 M30
+22 END PGM ${progNummer} MM`;
+      }
+
+      if (isSiemens) {
+        return `%_N_O${progNummer}_MPF
+; ==================================================
+; KUNDE      : ${kundenName}
+; PROGRAMM   : ${progKommentar}
+; STEUERUNG  : SIEMENS SINUMERIK 840D
+; ==================================================
+; (T1 | D=10.000MM | Z-MIN=-5.000MM | SCHAFTFRAESER 10MM VHM)
+; (T2 | D=6.000MM  | Z-MIN=-12.000MM | SPIRALBOHRER 6MM VHM)
+N10 G90 G71 G17 G40 G64
+; OPERATION: 1. AUSSENKONTUR FRAESEN
+N20 T="SCHAFTFRAESER_10MM" M06
+N30 D1 S8000 M03 ${coolant}
+N40 G54
+N50 G00 X-10.000 Y-10.000 Z2.000
+N60 G01 Z-5.000 F500
+N70 G01 X0.000 Y0.000 F1200  ; LEAD-IN ANSCHNITT
+N80 X80.000
+N90 Y50.000
+N100 X0.000
+N110 Y0.000
+N120 G00 Z15.000
+N130 M09
+N140 M05
+N150 SUPA G00 Z0.0 D0        ; Z-ACHSE GANZ NACH OBEN
+N160 SUPA G00 Y0.0 D0        ; TISCH ZUR TUER
+N170 M30
+%`;
+      }
+
+      return `%
+O${progNummer} (${progKommentar})
+(==================================================)
+(KUNDE      : ${kundenName})
+(STEUERUNG  : ${currentMachine.toUpperCase()})
+(==================================================)
+(--- BENOETIGTE WERKZEUGE - TOOL TABLE ---)
+(T1 | D=10.000MM | Z-MIN=-5.000MM | SCHAFTFRAESER 10MM VHM)
+(T2 | D=6.000MM  | Z-MIN=-12.000MM | SPIRALBOHRER 6MM VHM)
+(-----------------------------------------)
+N10 G90 G21 G17 G40 G49 G80
+(OPERATION: 1. AUSSENKONTUR FRAESEN)
+(SICHERHEITS-INFO: OP Z-MIN=-5.000MM | OP Z-MAX=15.000MM)
+N20 T1 M06
+N30 G54
+N40 S8000 M03
+N50 G43 H1 Z15.000 ${coolant}
+N60 G00 X-10.000 Y-10.000 Z2.000
+N70 G01 Z-5.000 F500
+N80 G01 X0.000 Y0.000 F1200  (LEAD-IN ANSCHNITT)
+N90 G01 X80.000
+N100 G01 Y50.000
+N110 G01 X0.000
+N120 G01 Y0.000
+N130 G00 Z15.000
+N140 M09
+N150 M05
+N160 G53 G00 Z0.000          (Z-ACHSE GANZ NACH OBEN)
+N170 G53 G00 Y0.000          (TISCH ZUR TUER ZUM ENTLADEN)
+N180 M30
+%`;
+    }
+
+    function updateCode() {
+      const viewer = document.getElementById('codeViewer');
+      if (currentTab === 'cps') {
+        viewer.textContent = generateCpsCode();
+      } else {
+        viewer.textContent = generateGcodeSimulation();
+      }
+    }
+
+    function copyCode() {
+      const code = document.getElementById('codeViewer').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('✅ Code in die Zwischenablage kopiert!');
+      });
+    }
+
+    function downloadCps() {
+      const code = generateCpsCode();
+      const kundenName = document.getElementById('kundenName').value.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+      const fileName = `${kundenName}_${currentMachine}.cps`;
+      const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`📥 ${fileName} heruntergeladen!`);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // Initialisierung beim Laden
+    window.addEventListener('DOMContentLoaded', () => {
+      updateCode();
+    });
+  </script>
+
+</body>
+</html>
