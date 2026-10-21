@@ -4267,7 +4267,8 @@ Damit du dir genau vorstellen kannst, wie die Zusammenarbeit zwischen dir und de
 
 #### 🛡️ Wie Agent 3 (`NC-Safety- & Setup-Agent`) deine Prüf- und Dokumentationsarbeit (Übung 4, 5, 10, 11, 12, 13, 15, 16) übernimmt:
 * **Wichtige Aufteilung (20 % Du / 80 % Agent 3):**
-  * **Deine 20 % am 3D-Modell (Übung 4, 10, 13, 15):** Wenn dir ein Kunde ein 3D-Bauteil (`.step`-Datei) schickt, öffnest du es in deinem 3D-CAM-Programm *(z. B. Fusion 360)*, klickst mit der Maus kurz die Flächen an (*Nullpunkt `G54` setzen, Schruppen, Schlichten, Bohren, Entgraten*) und drückst auf **„G-Code exportieren“**. Dadurch entsteht auf deiner Festplatte die fertige G-Code-Datei *(z. B. `Kunde_Ventilblock.nc`, `.H` oder `.MPF`)*.
+  * **Deine 20 % als Software-Ingenieur (Weg A – Dein Hauptfokus: 0 % CAD-Mausklicks!):** Du schaust dir kurz die vom Postprozessor erzeugten NC-Codesätze an, gleichst sie mit dem Referenz-NC-Programm des Kunden ab und erteilst die Freigabe. Du musst **kein einziges 3D-Modell in Fusion 360 mit der Maus anklicken!**
+  * *(Optionaler Nebenweg B – falls ein Kunde explizit ein Einzelteil gefräst haben will):* Bauteil nach der Klick-Anleitung abarbeiten.
   * **Die 80 % von Agent 3 (Übung 5, 11, 12, 16 – vollautomatisch!):**
     1. Du speicherst die erzeugte G-Code-Datei im Ordner `c:\Projekte\CNC\`.
     2. Du tippst hier im Chat **nur einen einzigen Satz**:

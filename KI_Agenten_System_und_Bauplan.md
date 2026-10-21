@@ -10,7 +10,7 @@ Damit kannst du die Agenten später jederzeit – sobald deine Genehmigung von d
 
 ## 1. Gesamtarchitektur: Wie die 4 KI-Agenten für dich zusammenarbeiten
 
-Als **Diplom-Ingenieur & Senior Software Engineer** mit nur **5 bis 8 Stunden Zeit pro Woche** neben deinem Hauptberuf übernimmst du nur die **20 % Kernarbeit** (Kundengespräch, 3D-CAM-Strategie auswählen, Endkontrolle der Simulation). Die restlichen **80 % Fleiß- und Routinearbeit** erledigen diese 4 KI-Agenten:
+Als **Diplom-Ingenieur & Senior Software Engineer** mit nur **5 bis 8 Stunden Zeit pro Woche** neben deinem Hauptberuf übernimmst du nur die **20 % Kernarbeit** *(Anforderungs-Check, 2-Minuten-Code-Review in VS Code, Freigabe der .cps-Datei – du musst **kein einziges 3D-Modell in Fusion 360 mit der Maus anklicken!**)*. Die restlichen **80 % Fleiß- und Routinearbeit** erledigen diese 4 KI-Agenten:
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐

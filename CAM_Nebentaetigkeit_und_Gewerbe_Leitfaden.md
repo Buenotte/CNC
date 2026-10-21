@@ -906,11 +906,12 @@ Damit alles rechtlich und technisch handfest ist, teilen wir die Aufgaben so auf
   2. Postprozessor-Code (JavaScript, Python, Tcl) und parametrische NC-Makros schreiben und testen.
   3. NC-Programme anhand von **[SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md](file:///C:/Projekte/CNC/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md)** statisch auf Sicherheitsfehler prüfen und Einrichteblätter generieren.
   4. Angebote, Übergabeprotokolle und Rechnungen nach § 18 EStG erstellen.
-* **Was du selbst machst (20 %):**
+* **Was du selbst machst (20 % Kernarbeit als Senior Software Engineer – 0 % CAD-Klicks!):**
   1. Den fertigen Antrag (aus Abschnitt 9.4) ausdrucken, unterschreiben und bei der **Zollcon GmbH** abgeben.
   2. Nach der Genehmigung das Formular in **ELSTER** an das **Finanzamt Hanau** absenden.
-  3. Im CAM-System am 3D-Modell die Fräsbahnen visuell simulieren (**Endkontrolle als verantwortlicher Diplom-Ingenieur** – egal ob in Hessen oder Spanien).
-  4. Wenn ein interessierter Kunde auf die E-Mail antwortet, kurz per E-Mail, Chat oder 5-Minuten-Online-Call (Teams/Zoom) die 3D-STEP-Daten und Werkzeugliste abrufen.
+  3. **In deinem Hauptfokus (Weg A: Postprozessoren & Automatisierung):** Kundenanforderungen prüfen, 2-Minuten-Code-Review in VS Code durchführen und die Freigabe als verantwortlicher Diplom-Ingenieur erteilen. Du musst **kein einziges 3D-Modell in Fusion 360 mit der Maus anklicken!**
+  4. Wenn ein interessierter Kunde oder ein CAM-Systemhaus anfragt: Anforderungen über die 4 goldenen Fragen erfassen *(Maschine, Steuerung, altes Referenz-NC-Programm, Sonderwünsche)*.
+  5. *(Optionaler Nebenweg B – nur falls jemals gewünscht):* Einfache Bauteile anhand der Klick-Anleitung abarbeiten.
 
 
 ---
