@@ -161,6 +161,8 @@ function wrapSection(sec) {
     getTool: () => sec.tool,
     getInitialPosition: () => sec.initialPos,
     getForceToolChange: () => false,
+    hasParameter: (paramName) => paramName === "operation-comment" && !!sec.comment,
+    getParameter: (paramName) => (paramName === "operation-comment" ? sec.comment : ""),
     getGlobalZRange: () => ({
       getMinimum: () => sec.zMin,
       getMaximum: () => sec.zMax

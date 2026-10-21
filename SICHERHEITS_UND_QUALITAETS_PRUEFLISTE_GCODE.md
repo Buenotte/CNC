@@ -75,6 +75,8 @@ Bevor Sie den Postprozessor *(Übersetzer von CAM-Bearbeitungsbahnen in CNC-Masc
   * Wurde der Schraubstock im CAM als **Schutzkörper *(Kollisionszone)*** hinterlegt?
   * **Sicherheitsabstand einhalten:** Die tiefste Konturfräsung muss mindestens **3 bis 5 mm Luft** über den Oberkanten der Stahlbacken bleiben.
 
+![Z-MIN und Kollisionsschutz am Maschinenschraubstock](file:///c:/Projekte/CNC/docs/bilder/cnc_z_min_mit_10mm_beschriftung.jpg)
+
 ### 4. Werkzeug-Auskraglänge und Halterkollision (Tool Gauge Length):
 * **Was bedeutet das einfach erklärt?**  
   Ein Fräser ist in eine Spannzange *(Werkzeugaufnahme)* eingespannt. Wie weit der Fräser aus dem Futter herausragt, nennt man Auskraglänge.
@@ -127,6 +129,39 @@ Hier sehen Sie räumlich in 3D *(dreidimensional)*, was der Maschinencode Zeile 
   * Kreistasche zentrisch: **Ø 30 mm**, Tiefe **4 mm**
   * 4 Bohrungen: **Ø 6 mm**, symmetrisch auf Abstand platziert.
 * Wenn eine Fräsbahn über die 80 × 50 mm Begrenzung hinausschießt, ist entweder der Nullpunkt falsch verrechnet oder die Werkzeugradiuskorrektur fehlerhaft.
+
+### 3. Grenzen der Simulation: Kann man sich bezüglich Crashes zu 100 % auf die Simulation verlassen?
+
+**Klare Antwort für den Fertigungsalltag: JEIN!**  
+*(Ja für die digitale Geometrie am Bildschirm – aber NEIN als Alleingarantie für die physische Werkshalle!)*
+
+Ein Simulator ist ein mächtiges Prüfwerkzeug, aber er sieht nur die virtuelle 3D-Welt. Er schützt zuverlässig vor Programmierfehlern, kann jedoch physische Realitäten in der Werkhalle nicht erraten.
+
+#### Worauf Sie sich in der Simulation zu 100 % verlassen können:
+1. **Mathematische Vorzeichen- und Tippfehler im G-Code:**  
+   Vergisst der Programmierer ein Minus *(z. B. `Z12` statt `Z-12`)* oder tippt versehentlich `Z-50` statt `Z-5`, schlägt der Simulator sofort visuell und im HUD rot Alarm.
+2. **Kollisionen bei Eilgang-Bewegungen (`G00`):**  
+   Fährt der Eilgang mit Höchstgeschwindigkeit quer durch das Werkstück oder schräg in eine Kontur, wird dies sofort als gelbe Crash-Linie sichtbar.
+3. **Durchbrüche und Maximaltiefen:**  
+   Die Simulation zeigt millimetergenau an, ob ein Bohrer oder Fräser die Bauteil-Unterkante ($Z = -12\,\text{mm}$) durchbricht und wie weit er ins Freie austritt *(z. B. $Z = -14{,}5\,\text{mm}$ bei Durchgangsbohrungen)*.
+
+#### Was ein Simulator NIEMALS wissen kann (Die physische Realität in der Werkstatt):
+1. **Die reale Höhe der Schraubstockbacken:**  
+   Der Simulator weiß nicht, ob an der echten Maschine flache Stufenbacken ($25\,\text{mm}$) oder hohe Standardbacken ($50\,\text{mm}$) montiert sind. Liegen die echten Backen bei $Z = -10{,}0\,\text{mm}$, aber der Bohrer fährt auf $Z = -14{,}5\,\text{mm}$, rammt der Bohrer in der Realität in gehärteten Stahl!
+2. **Die reale Werkzeug-Auskraglänge *(Einspanntiefe im Futter)***:  
+   Der Simulator nimmt idealisiert an, dass die Schneide lang genug ist. Hat der Bediener an der Maschine den Fräser jedoch nur $18\,\text{mm}$ kurz eingespannt, schlägt die rotierende Spannzangenmutter bei einer $20\,\text{mm}$ tiefen Tasche auf das Bauteil auf.
+3. **Menschliche Antastfehler am Werkstück-Nullpunkt (`G54`):**  
+   Hat der Bediener beim Antasten mit dem 3D-Messtaster den Kugelradius ($5{,}0\,\text{mm}$) vergessen oder das falsche Koordinatensystem aktiviert, fährt das gesamte Programm um Millimeter versetzt in den Schraubstock.
+4. **Falsches Werkzeug im Magazinplatz:**  
+   Befindet sich auf Platz `T01` wirklich der vorgesehene $\varnothing 10\,\text{mm}$ Schaftfräser oder hat ein Kollege versehentlich einen $\varnothing 50\,\text{mm}$ Planfräskopf stecken gelassen?
+
+#### Die Brücke zwischen Simulator und Werkstatt: Der Z-MIN-Header im Postprozessor
+Genau deshalb berechnet unser Postprozessor für jedes Werkzeug die absolut tiefste Koordinate (`Z-MIN`) und druckt sie gut lesbar in den Programmkopf:
+```gcode
+(T01 | D=10.000MM | Z-MIN=-5.000MM  | SCHAFTFRAESER 10MM VHM)
+(T02 | D=5.000MM  | Z-MIN=-14.500MM | SPIRALBOHRER 5MM VHM)
+```
+Der Zerspanungsmechaniker liest diese Werte vor dem Starten der Spindel und vergleicht sie mit seiner realen Aufspannung. Erst diese Kombination aus **virtueller 3D-Simulation + Z-MIN-Postprozessor-Prüfung + Luftschnitt/Einzelsatz an der Maschine** garantiert eine 100 %ige Null-Crash-Sicherheit!
 
 ---
 
@@ -196,6 +231,27 @@ Schritt 1: Luftschnitt (Z +50 mm)  -->  Schritt 2: Einzelsatz (Single Block)  --
   * Sie blicken durch das Sichtfenster: Ist das Werkzeug noch weit genug vom Material entfernt? Wenn die Anzeige sagt *„noch -40 mm“*, das Werkzeug aber schon fast das Bauteil berührt, **sofort STOPP drücken!** Der Nullpunkt oder die Werkzeuglänge stimmt nicht!
 * **Schrittweises Beschleunigen:**  
   Sobald der Fräser die ersten Späne sauber abhebt, kein ungewöhnliches Geräusch auftritt und die Späne schön silbrig glänzend abfliegen, schalten Sie den Einzelsatz ab und drehen das Vorschub-Poti langsam von 20 % über 50 % auf 100 %.
+
+### Schritt 3: Rechtliche & fachliche Verantwortung – Wer haftet, wenn der Fräser falsche Werte einstellt?
+
+**Klare juristische und fachliche Antwort:**  
+👉 **Der externe CAM-Programmierer / Postprozessor-Entwickler haftet NICHT für Rüst- und Einstellfehler an der realen Maschine!**
+
+In der industriellen Fertigung gilt die klare Trennung der Verantwortungsbereiche:
+
+1. **Die Pflicht des externen CAM-Ingenieurs *(Ihre Verantwortung)***:
+   * Sie liefern den fehlerfreien G-Code und das Einrichteblatt.
+   * Sie weisen im Programmkopf transparent und exakt die maximalen Tiefen aus: `(T02 | BOHRER D=5.0MM | Z-MIN=-14.500MM)`.
+   * Sie haften ausschließlich für die Übereinstimmung Ihres Codes mit dem gelieferten 3D-CAD-Modell.
+2. **Die Letztverantwortung des Maschinenbedieners *(Verantwortung der Werkstatt vor Ort)***:
+   * Ein Zerspanungsmechaniker ist eine gesetzlich anerkannte Fachkraft.
+   * Zu seinen Kernpflichten gehört das **Überprüfen der Rüstsituation**: Er allein entscheidet vor Ort, welche Backenhöhe montiert wird, wie dick die Parallelunterlagen sind und wie weit das Werkzeug ausgespannt wird.
+   * Wählt der Fräser trotz des ausgewiesenen Wertes `Z-MIN = -14.500 mm` zu flache Unterlagen oder tastet den Nullpunkt `G54` falsch an, handelt es sich um einen **Bedien- und Rüstfehler der Werkstatt**.
+3. **Grobe Fahrlässigkeit bei Blindstart ohne Einzelsatz:**
+   * Nach den Unfallverhütungsvorschriften *(DGUV / Berufsgenossenschaft)* und gängiger Rechtsprechung muss jedes Erstteil im **Einzelsatz *(Single Block)*** mit Hand am Poti angefahren werden.
+   * Drückt ein Bediener einfach auf Start und lässt die Maschine unkontrolliert crashen, handelt er **grob fahrlässig** *(Verletzung der elementaren handwerklichen Sorgfaltspflicht)*.
+4. **Vertraglicher Haftungsschutz (AGB & Einrichteblatt-Klausel):**
+   * Mit dem Freigabeprotokoll in [`Portfolio/Vorlage_Einrichteblatt_und_Werkzeugliste.md`](file:///c:/Projekte/CNC/Portfolio/Vorlage_Einrichteblatt_und_Werkzeugliste.md) und der Abnahme-Checkliste zeichnet der Kunde vor Ort ab, dass er die Rüstung eigenverantwortlich geprüft hat.
 
 ---
 

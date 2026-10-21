@@ -31,7 +31,12 @@ properties = {
 
 // 3. FORMATIERER
 var xyzFormat = createFormat({decimals:3, forceDecimal:true}); // 3 Dezimalstellen (z. B. -12.000)
-var permittedCommentChars = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,=_-/:+*%@";
+var feedFormat = createFormat({decimals:0});
+var xOutput = createVariable({prefix:"X"}, xyzFormat);
+var yOutput = createVariable({prefix:"Y"}, xyzFormat);
+var zOutput = createVariable({prefix:"Z"}, xyzFormat);
+var feedOutput = createVariable({prefix:"F"}, feedFormat);
+var permittedCommentChars = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,=_-/:+*%@|";
 
 function formatComment(text) {
   return "(" + filterText(String(text).toUpperCase(), permittedCommentChars) + ")";
@@ -121,6 +126,32 @@ function onSection() {
   // S.. = Spindeldrehzahl in Umdrehungen pro Minute (U/min)
   // M03 = Spindelantrieb im Uhrzeigersinn (Rechtslauf) EIN
   writeWords("S" + tool.spindleRPM, "M03");
+}
+
+// 6b. FAHRBEWEGUNGEN (DAMIT DER 3D-SIMULATOR DIE BAHNEN ZEICHNEN KANN)
+function onRapid(x, y, z) {
+  var xStr = xOutput.format(x);
+  var yStr = yOutput.format(y);
+  var zStr = zOutput.format(z);
+  if (xStr || yStr || zStr) {
+    writeWords("G00", xStr, yStr, zStr);
+  }
+}
+
+function onLinear(x, y, z, feed) {
+  var xStr = xOutput.format(x);
+  var yStr = yOutput.format(y);
+  var zStr = zOutput.format(z);
+  var fStr = feedOutput.format(feed);
+  writeWords("G01", xStr, yStr, zStr, fStr);
+}
+
+function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
+  writeWords(clockwise ? "G02" : "G03", xOutput.format(x), yOutput.format(y), zOutput.format(z), feedOutput.format(feed));
+}
+
+function onCyclePoint(x, y, z) {
+  writeWords("G83", xOutput.format(x), yOutput.format(y), zOutput.format(z), "R2.000", "Q3.000", "F300");
 }
 
 // 7. onClose() - PROGRAMMENDE

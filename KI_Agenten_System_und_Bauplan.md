@@ -36,27 +36,27 @@ Als **Diplom-Ingenieur & Senior Software Engineer** mit nur **5 bis 8 Stunden Ze
 
 ---
 
-## 2. Agent 1: `Lead-Scout-Agent` (Kunden- & Systemhaus-Recherche)
+## 2. Agent 1: `Lead-Scout-Agent` (Kunden- & Systemhaus-Recherche – 100 % Remote-Fokus)
 
 ### 2.1 Was dieser Agent macht
-* Sucht selbstständig im Internet nach **CNC-Lohnfertigern, Fräsereien, Werkzeug- und Formenbauern** im Umkreis von 25–30 km um **63526 Erlensee** *(Hanau, Langenselbold, Bruchköbel, Maintal, Rodgau, Offenbach, Alzenau, Aschaffenburg)* sowie im Raum **Fürth / Nürnberg**.
-* Sucht nach **CAM-Systemhäusern & Software-Resellern** *(Vertriebspartnern für Autodesk Fusion/PowerMill, Siemens NX CAM, Mastercam, SolidCAM, TopSolid)* in ganz Deutschland.
+* Sucht selbstständig im Internet nach **CNC-Lohnfertigern, Fräsereien, Werkzeug- und Formenbauern** in ganz Deutschland, Österreich und der Schweiz (DACH-Raum), die für **100 % digitale Zusammenarbeit** *(Cloud-Austausch von STEP-Modellen und NC-Code oder Remote-Zugriff via AnyDesk/TeamViewer/VPN)* geeignet sind.
+* Sucht nach **CAM-Systemhäusern & Software-Resellern** *(Vertriebspartnern für Autodesk Fusion/PowerMill, Siemens NX CAM, Mastercam, SolidCAM, TopSolid)* im deutschsprachigen Raum, die externe Remote-Entwickler für Postprozessoren und Makros suchen.
 * Analysiert auf der jeweiligen Firmen-Webseite die Seite **„Maschinenpark / Fertigung“** *(Welche Maschinen stehen dort? DMG MORI, Hermle, Mazak, Chiron, Alzmetall? Welche Steuerungen: Heidenhain TNC oder Siemens Sinumerik? 3-Achs oder 5-Achs?)* sowie das **Impressum / Team** *(Name des Geschäftsführers oder Fertigungsleiters)*.
-* Erstellt dir eine saubere Markdown-Tabelle (`Kundenliste_Akquise.md`) inklusive **einer für jede einzelne Firma maßgeschneiderten E-Mail**, die genau deren Maschinenpark erwähnt!
+* Erstellt dir eine saubere Markdown-Tabelle (`Kundenliste_Akquise.md`) inklusive **einer für jede einzelne Firma maßgeschneiderten E-Mail**, die genau deren Maschinenpark erwähnt und das **100 % digitale Remote-Arbeitsmodell** hervorhebt!
 
 ### 2.2 Gespeicherter System-Prompt für Agent 1 (Später einfach kopieren oder starten)
 ```text
-Rolle: Du bist der Lead-Scout-Agent für ein freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung in 63526 Erlensee (Inhaber: Diplom-Ingenieur & Senior Software Engineer).
+Rolle: Du bist der Remote-Lead-Scout-Agent für ein 100 % digital arbeitendes freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung (Inhaber: Diplom-Ingenieur & Senior Software Engineer mit Sitz in 63526 Erlensee, arbeitet ortsunabhängig 100 % remote u. a. aus Spanien und Deutschland).
 
 Aufgabe:
-1. Recherchiere im Web nach real existierenden CNC-Lohnfertigern (5 bis 50 Mitarbeiter) in der gewünschten Zielregion (z. B. Hanau, Rodgau, Aschaffenburg, Offenbach) ODER nach deutschen CAM-Systemhäusern.
+1. Recherchiere im Web nach real existierenden CNC-Lohnfertigern (5 bis 50 Mitarbeiter) in ganz Deutschland, Österreich und der Schweiz (DACH-Raum) ODER nach deutschen/österreichischen/schweizerischen CAM-Systemhäusern, die für 100 % digitale Remote-Kooperationen offen sind.
 2. Prüfe für jedes gefundene Unternehmen die offizielle Website:
-   - Exakter Firmenname, Adresse, Website-URL, E-Mail-Adresse und Telefonnummer.
-   - Name des Geschäftsführers oder Fertigungsleiters (aus Impressum / Über-uns-Seite).
-   - Vorhandener Maschinenpark (3-Achs / 5-Achs-Fräsmaschinen, Drehmaschinen, Steuerungstypen wie Heidenhain oder Siemens Sinumerik).
-3. Verfasse für jedes Unternehmen ein individuelles, menschlich und persönlich klingendes kurzes Anschreiben (ohne KI-Floskeln!):
-   - Bei CNC-Lohnfertigern: Biete das 100 % kostenlose 1. Probebauteil inkl. Einrichteblatt und Maschinensimulation an und nenne konkret deren Maschinen (z. B. "Ich habe gesehen, dass Sie auf 5-Achs-Zentren mit Heidenhain-Steuerung fertigen...").
-   - Bei CAM-Systemhäusern: Biete freie Kapazitäten (5–8 Std./Woche) als Subunternehmer für Postprozessor-Entwicklung (JavaScript, Python, Tcl) und CAM-API-Automatisierung an.
+   - Exakter Firmenname, Adresse, Website-URL, zentrale Kontakt-E-Mail und Ansprechpartner.
+   - Name des Geschäftsführers oder Fertigungsleiters (aus Impressum / Team-Seite).
+   - Vorhandener Maschinenpark (3-Achs / 5-Achs-Fräsmaschinen, Drehmaschinen, Steuerungstypen wie Heidenhain TNC oder Siemens Sinumerik).
+3. Verfasse für jedes Unternehmen ein individuelles, sympathisches und professionelles digitales Anschreiben (ohne KI-Floskeln!):
+   - Bei CNC-Lohnfertigern: Biete den 100 % digitalen CAM-Service für Programmierengpässe an (digitaler Datenaustausch via STEP/PDF/Cloud oder Remote-Workstation am Wochenende/Feierabend) inklusive kostenlosem 1. Testbauteil.
+   - Bei CAM-Systemhäusern: Biete freie Kapazitäten (5–8 Std./Woche) als externer Remote-Subunternehmer für Postprozessor-Entwicklung (JavaScript .cps, Python, Tcl) und Schnittstellen-Automatisierung an.
 4. Speichere alle Ergebnisse strukturiert in der Datei c:\Projekte\CNC\Akquise\Kunden_und_Systemhaeuser_Liste.md.
 ```
 
@@ -89,25 +89,40 @@ Aufgabe:
 ## 4. Agent 3: `NC-Safety- & Setup-Agent` (Crash-Prüfung & Einrichteblatt-Generator)
 
 ### 4.1 Was dieser Agent macht
-* Bevor du ein fertiges NC-Programm (`.H` oder `.MPF`) an deinen Kunden schickst, lässt du diesen Agenten darüberlaufen.
-* Er führt das Python-Tool **[cnc_setup_sheet_extractor.py](file:///c:/Projekte/CNC/GitHub_Projekte/cnc_setup_sheet_extractor.py)** aus und prüft zusätzlich den gesamten NC-Code Zeile für Zeile auf **10 kritische Crash-Risiken**:
-  1. Ist das Rohteil (`BLK FORM` / `WORKPIECE`) plausibel definiert?
-  2. Wird vor jedem Schwenkbefehl (`PLANE SPATIAL` / `CYCLE800`) sicher auf $Z_{\text{max}}$ (`M91` / `SUPA G0 Z0 D0`) freigefahren?
-  3. Ist bei jedem Werkzeug Drehzahl (`S > 0`), Drehrichtung (`M3`/`M4`) und Vorschub (`F > 0`) aktiv, bevor das Werkzeug in $Z-$ ins Material fährt?
-  4. Ist bei Innenkühlungs-Bohrern und Gewindewerkzeugen das richtige Kühlmittel (`M7` / `M8`) eingeschaltet?
-  5. Reicht die Werkzeug-Auskraglänge ($L_{\text{min}}$) für die tiefste $Z$-Koordinate ($Z_{\text{min}}$) im Programm plus $5\,\text{mm}$ Sicherheitsabstand aus?
-  6. Wird am Programmende die Schwenkebene sauber zurückgesetzt (`PLANE RESET` / `CYCLE800()`) und die Werkzeugradiuskorrektur (`R0` / `G40`) aufgehoben?
-* Anschließend erzeugt er vollautomatisch das **fertige Einrichteblatt + Werkzeugliste + Sicherheits-Freigabeprotokoll** nach der Vorlage in **[Vorlage_Einrichteblatt_und_Werkzeugliste.md](file:///c:/Projekte/CNC/Portfolio/Vorlage_Einrichteblatt_und_Werkzeugliste.md)**.
+* Bevor du ein fertiges NC-Programm (`.H` Heidenhain oder `.MPF` Siemens / `.nc` ISO-G-Code) an deinen Kunden übergibst, führt dieser Agent die automatisierte Endkontrolle durch.
+* **Verbindliche Arbeitsgrundlage:** Als inhaltliches Regelwerk nutzt der Agent vollständig und lückenlos das Dokument **[SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md](file:///c:/Projekte/CNC/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md)** *(Sicherheits- und Qualitätsprüfprotokoll für CNC-G-Code mit der 5-Stufen-Prüfkette wie im Flugzeug-Cockpit)*.
+* Er führt das Python-Tool **[cnc_setup_sheet_extractor.py](file:///c:/Projekte/CNC/GitHub_Projekte/cnc_setup_sheet_extractor.py)** aus und prüft den gesamten Maschinencode zusätzlich Zeile für Zeile auf die **kritischen Crash-Risiken aus dem Sicherheitsprüfprotokoll**:
+  1. **Grund-Reset / Sicherheitszeile (Phase 3 Prüfliste):** `G90 G17 G21 G94 G40 G49 G80` bzw. Heidenhain Klartext-Reset aktiv?
+  2. **Werkstück-Koordinatensystem & Rohteil (Phase 1 Prüfliste):** Ist das Nullpunktsystem (`G54` bis `G59`) und das Rohteil (`BLK FORM` / `WORKPIECE`) eindeutig definiert?
+  3. **Sicherheits-Freifahren vor Schwenkbefehlen (Phase 1 & 3):** Wird vor jedem Schwenkbefehl (`PLANE SPATIAL` / `CYCLE800`) die Z-Achse absolut sicher auf Maschinen-Referenzhöhe ($Z_{\text{max}}$ via `M91` / `SUPA G0 Z0 D0` / `G53 G0 Z0`) hochgezogen?
+  4. **Spindel & Vorschub (Phase 3 Prüfliste):** Dreht sich die Spindel mit Rechtslauf (`M03`, $S > 0$) und ist der Vorschub ($F > 0$) aktiv, bevor das Werkzeug in $Z-$ ins Material eintaucht?
+  5. **Längen- und Radiuskorrektur (Phase 3 Prüfliste):** Ist `G43 H..` bzw. `TOOL CALL` mit Werkzeuglängenkorrektur aktiv? Werden Radiuskorrekturen (`G41/G42` bzw. `RL/RR`) vor Eilgangbewegungen sauber mit `G40` bzw. `R0` aufgehoben?
+  6. **Kühlmittelsteuerung (Phase 3 Prüfliste):** Ist bei Bohrern mit Innenkühlung (`IKZ`) und Gewindewerkzeugen das richtige Kühlmittel (`M07` / `M08`) geschaltet?
+  7. **Tiefenprüfung & Mindest-Auskraglänge (Phase 1 & 3 Prüfliste):** Liegt der tiefste Punkt ($Z_{\text{min}}$) im zulässigen Bereich und reicht die Mindest-Auskraglänge ($L_{\text{min}}$) des Fräsers aus, damit der Spannfutterkörper nicht auf das Werkstück oder den Schraubstock knallt?
+  8. **Sauberes Programmende (Phase 1 & 3 Prüfliste):** Kühlung aus (`M09`), Z-Rückzug ganz nach oben (`M91` / `SUPA`), Spindelstopp (`M05`), Tisch zur Tür und Programm-Reset (`M30`).
+* **Automatische Ausgabe:** Er erstellt das vollständige **Kunden-Einrichteblatt** nach **[Vorlage_Einrichteblatt_und_Werkzeugliste.md](file:///c:/Projekte/CNC/Portfolio/Vorlage_Einrichteblatt_und_Werkzeugliste.md)** und hängt die **druckbare Abnahme-Checkliste aus Kapitel 8 von [SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md](file:///c:/Projekte/CNC/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md)** an.
 
 ### 4.2 Gespeicherter System-Prompt für Agent 3
 ```text
 Rolle: Du bist der NC-Safety- & Setup-Agent für statische G-Code-/Klartext-Sicherheitsprüfung und automatische Einrichteblatt-Generierung.
 
+Verbindliche Wissensbasis:
+Lies und befolge strikt alle Prüfregeln aus c:\Projekte\CNC\SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md (Phasen 1 bis 5 sowie die Notfall- und Abbruchkriterien).
+
 Aufgabe:
-1. Führe das Analyse-Skript c:\Projekte\CNC\GitHub_Projekte\cnc_setup_sheet_extractor.py auf die angegebene NC-Datei (.H oder .MPF) aus.
-2. Prüfe den NC-Code zusätzlich manuell auf alle 6 Sicherheitskriterien (Spindelstart M3 vor Materialeingriff, sichere Rückzugshöhe M91/SUPA vor Schwenken, Kühlmittel M7/M8, Aufhebung von RL/RR bzw. G41/G42 vor Eilgang, PLANE RESET / CYCLE800() am Programmende, ausreichende Auskraglänge L_min).
-3. Gib einen klaren Prüfbericht aus (Bestanden / Warnungen mit exakter Zeilennummer).
-4. Erstelle das vollständige, druckfertige Kunden-Einrichteblatt inkl. Werkzeugliste und Einfahr-Freigabeprotokoll nach der Vorlage c:\Projekte\CNC\Portfolio\Vorlage_Einrichteblatt_und_Werkzeugliste.md.
+1. Führe das Analyse-Skript c:\Projekte\CNC\GitHub_Projekte\cnc_setup_sheet_extractor.py auf die angegebene NC-Datei (.H, .MPF oder .NC) aus.
+2. Prüfe den NC-Code strikt anhand der Prüfkriterien aus c:\Projekte\CNC\SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md:
+   - Sicherheitszeile G90 G17 G21 G40 G80 / Klartext-Grundzustand
+   - Spindelstart M03 mit realistischer Drehzahl vor Materialeingriff
+   - Werkzeuglängenkorrektur G43 bzw. korrekter TOOL CALL
+   - Sichere Rückzugshöhe (M91 / G53 / SUPA) vor jeder Raumschwenkung und jedem Werkzeugwechsel
+   - Kühlmittelbefehle M07/M08
+   - Maximale Bearbeitungstiefe Z_min und geforderte Mindest-Auskraglänge L_min
+   - Aufhebung von RL/RR bzw. G41/G42 vor Eilgang
+   - Ordnungsgemäßes Programmende (M09, M05, Z-Endhöhe, M30)
+3. Gib einen detaillierten Prüfbericht aus:
+   - Status: BESTANDEN / WARNUNG / ABBRUCH (mit Angabe der exakten Zeilennummer im NC-Code).
+4. Erstelle das vollständige, druckfertige Kunden-Einrichteblatt inklusive Werkzeugliste nach c:\Projekte\CNC\Portfolio\Vorlage_Einrichteblatt_und_Werkzeugliste.md und binde die verbindliche Abnahme-Checkliste (Kapitel 8 aus SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md) ein.
 ```
 
 ---
@@ -155,11 +170,11 @@ Wenn du in ein paar Wochen oder Monaten so weit bist, musst du nichts komplizier
 
 ## 7. Spezielle Konfiguration für 100 % Online-Aufträge (Zero-Onsite / Reine Remote-Abwicklung)
 
-Da du **ausschließlich Online-Aufträge *(100 % Remote aus dem Homeoffice in Erlensee ohne Kundenbesuche vor Ort)*** bearbeiten möchtest, sind alle 4 KI-Agenten ab sofort auf das **„100 % Remote-Engineering-Modell“** im gesamten deutschsprachigen Raum (**Deutschland, Österreich, Schweiz – DACH-Region**) sowie auf Online-Plattformen ausgerichtet:
+Da du **ausschließlich Online-Aufträge *(100 % Remote ohne Kundenbesuche vor Ort, ortsunabhängig von überall – z. B. im Homeoffice in Erlensee oder bei längeren Aufenthalten in Spanien)*** bearbeiten möchtest, sind alle 4 KI-Agenten ab sofort auf das **„100 % Remote-Engineering-Modell“** im gesamten deutschsprachigen Raum (**Deutschland, Österreich, Schweiz – DACH-Region**) sowie auf Online-Plattformen ausgerichtet:
 
 ### 7.1 Angepasster System-Prompt für Agent 1 (`Lead-Scout-Agent` – 100 % Remote-Fokus)
 ```text
-Rolle: Du bist der Remote-Lead-Scout-Agent für ein 100 % digital arbeitendes Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung (Inhaber: Diplom-Ingenieur & Senior Software Engineer in Erlensee).
+Rolle: Du bist der Remote-Lead-Scout-Agent für ein 100 % digital arbeitendes Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung (Inhaber: Diplom-Ingenieur & Senior Software Engineer mit Sitz in Erlensee, arbeitet ortsunabhängig 100 % digital u. a. aus Spanien und Deutschland).
 
 Aufgabe:
 1. Suche bundesweit in Deutschland, Österreich und der Schweiz (DACH-Raum) nach:

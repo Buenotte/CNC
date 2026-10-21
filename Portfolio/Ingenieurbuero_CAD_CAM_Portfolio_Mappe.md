@@ -1,7 +1,7 @@
 # Ingenieurbüro für CAD/CAM-Fertigungstechnik, CNC-Prozessauslegung & Postprozessor-Entwicklung
 
 **Inhaber:** [Dein Vor- und Nachname], Diplom-Ingenieur *(in Deutschland offiziell anerkannter Hochschulabschluss)* & Senior Software Engineer  
-**Standort:** 63526 Erlensee *(Einsatzgebiet: Rhein-Main-Gebiet / Hanau / Frankfurt / Aschaffenburg sowie Metropolregion Nürnberg / Fürth / Erlangen – bundesweit per Remote-Engineering)*  
+**Standort & Arbeitsweise:** 63526 Erlensee / Deutschland • **100 % Remote-Engineering & Digitale Zusammenarbeit** *(Einsatzgebiet: Deutschland, Österreich, Schweiz [DACH] – ortsunabhängige Betreuung per Cloud-Datenaustausch, Video-Simulation und Remote-Workstation)*  
 **Kontakt:** [Deine E-Mail-Adresse] | [Deine Telefonnummer]
 
 ---

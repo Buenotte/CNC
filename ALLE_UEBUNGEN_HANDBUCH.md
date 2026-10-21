@@ -33,6 +33,74 @@ Hier gibt es eine ganz wichtige Unterscheidung:
   * **Aluminium:** Mittelweich $\rightarrow$ hohe Drehzahl (`S8000`–`S15000` U/min), hoher Vorschub (`F1500`–`F3000` mm/min), spezielle Alu-Fräser mit 2–3 Schneiden *(damit das weiche Alu nicht am Fräser festklebt)*.
   * **Stahl & Edelstahl:** Hart und zäh $\rightarrow$ niedrige Drehzahl (`S1500`–`S4000` U/min), langsamer Vorschub (`F300`–`F800` mm/min) und **viel Kühlwasser (`M08`)**, damit der Fräser nicht ausglüht.
 
+### 5. Wie kommunizieren JavaScript (am PC) und C++ (auf der Fräsmaschine) eigentlich miteinander?
+
+Hier vermuten viele Entwickler ein technisches Rätsel:  
+*„Unser Postprozessor ist in JavaScript geschrieben. Der Computer der echten Fräsmaschine läuft aber mit harter Industrie-Software in C++, SPS und Assembler. Wie reden diese beiden Welten miteinander?“*
+
+Die verblüffende Antwort lautet: **Die Fräsmaschine führt überhaupt kein JavaScript aus!**
+
+Das Zusammenspiel funktioniert über eine **4-stufige Daten-Pipeline *(Architektur-Pipeline)***:
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                       1. BÜRO-PC / ENTWICKLER-LAPTOP                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  Autodesk Fusion 360 (In C++ programmiert)                                  │
+│  │                                                                          │
+│  │  (Eingebettete V8-JavaScript-Engine & C++ Bindings)                      │
+│  ▼                                                                          │
+│  Ihr Postprozessor (.cps) (In JavaScript programmiert)                      │
+│  │                                                                          │
+│  │  (Schreibt per writeBlock Textzeilen)                                    │
+│  ▼                                                                          │
+│  Die fertige Maschinendatei (.nc) (Reiner ASCII G-Code Text)                │
+└──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │
+                                       │ 💾 Übertragung per USB-Stick, 
+                                       │    LAN-Netzwerk (Ethernet) oder RS232
+                                       ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                   2. WERKSTATT / ECHTE CNC-FRÄSMASCHINE                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  CNC-Steuerung (Haas NGC / Fanuc / Siemens - in C++ & SPS Firmware)        │
+│  │                                                                          │
+│  │  (Liest Zeile für Zeile Text wie G00 X80.0 Y50.0)                        │
+│  ▼                                                                          │
+│  Trajektorienplaner & Servomotoren (Schneiden das Metall)                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### Schritt 1: Auf dem Büro-PC (C++ ruft JavaScript auf)
+* Autodesk Fusion 360 ist eine gigantische Desktop-Software, die in **C++** geschrieben ist.
+* Die Autodesk-Entwickler haben eine JavaScript-Engine *(wie Googles V8-Engine in Google Chrome)* direkt in den C++ Kern von Fusion 360 eingebaut.
+* Wenn der Anwender auf **„Postprozessieren“** klickt:
+  1. Der C++ Kern von Fusion 360 holt die Werkzeuge und Fräsbahnen aus dem Arbeitsspeicher *(RAM)*.
+  2. Über C++ Funktionsaufrufe *(Bindings)* ruft die Engine Ihre JavaScript-Funktionen auf:  
+     `onOpen()`, `onSection()`, `onLinear(x, y, z)` und `onClose()`.
+  3. Ihr JavaScript-Code ruft `writeBlock("G00", "X" + x, "Y" + y)` auf.
+  4. Die Engine nimmt diese Textwörter entgegen und speichert sie als **reine Textdatei mit der Endung `.nc`** ab.
+
+#### Schritt 2: Das Bindeglied zwischen PC und Maschine (Die `.nc`-Textdatei)
+* Die Kommunikation zwischen Ihrem JavaScript und der Fräsmaschine erfolgt **niemals über ein Live-Kabel**, sondern über die **fertige Textdatei (`.nc`)**!
+* In dieser Datei steht kein einziges Bit JavaScript mehr, sondern reiner, weltweiter Industrie-Standard *(DIN 66025 G-Code)*:
+  ```gcode
+  T01 M06
+  S8000 M03
+  G00 X0.0 Y0.0 Z15.0
+  G01 Z-5.0 F500
+  ```
+
+#### Schritt 3: In der Fräsmaschine (C++ liest den Text)
+* Die Fräsmaschine hat einen eigenen Industrie-Computer *(Industrie-PC mit Echtzeit-Betriebssystem wie VxWorks oder LinuxCNC)*.
+* Die Firmware der Maschine *(in C++ und C programmiert)* öffnet die `.nc`-Datei.
+* Ein C++ Text-Parser liest Zeile für Zeile:
+  * Liest er `G00 X80.0 Y50.0`, berechnet ein C++ Bahnplanungs-Algorithmus blitzschnell die Beschleunigung der Servomotoren *(z. B. 20.000 elektrische Takte pro Sekunde an die Achstreiber)*.
+  * Liest er `M08`, schaltet die SPS *(Speicherprogrammierbare Steuerung)* das 24V-Relais der Kühlwasserpumpe ein.
+
+#### Fazit in einem Satz:
+**JavaScript ist der Übersetzer am Büro-PC, der Maschinencode (`.nc`) ist der gedruckte Brief, und C++ in der Fräsmaschine ist der Leser, der die Anweisungen mechanisch in Metall umsetzt!**
+
 ---
 
 ## 🧭 Inhaltsverzeichnis aller 16 Übungen (+ 2 Einsteiger-Basis-Übungen)
@@ -1173,6 +1241,69 @@ writeWords("M30");
 * **`tool.diameter`**: Die Dicke (der Durchmesser $\varnothing$) des Fräsers oder Bohrers (z. B. `10.000MM`).
 * **`tool.cornerRadius`**: Der Radius an der unteren Schneidenecke (`0.000` bedeutet: scharfe 90-Grad-Ecke).
 
+### ❓ Warum gibt es kein `import` oder `require` für `getToolTable()`? Woher kommt das ins Programm?
+
+Für jeden JavaScript-Entwickler, der aus Node.js oder der modernen Web-Entwicklung kommt, ist das auf den ersten Blick verblüffend:  
+*„Normalerweise muss ich jede Funktion mit `import { getToolTable } from '...'` oder `const { getToolTable } = require('...')` importieren. Warum funktioniert `var tools = getToolTable();` hier einfach so?“*
+
+Die Antwort lautet: **Autodesk CAM Postprozessoren laufen in einer eingebetteten Host-Laufzeitumgebung *(Embedded Host Environment)***!
+
+#### 1. Der Vergleich mit dem Webbrowser und Node.js
+Denken Sie an alltägliches JavaScript:
+* **Im Webbrowser:** Müssen Sie jemals `import { window, document, console }` schreiben? **Nein!** Der Browser stellt `window`, `document`, `fetch()` und `console.log()` automatisch im **globalen Namensraum *(Global Scope)*** bereit.
+* **In Node.js:** Müssen Sie jemals `import { process, Buffer }` schreiben? **Nein!** Die Node-Laufzeitumgebung injiziert `process`, `Buffer` und `__dirname` von vornherein global.
+* **In Autodesk CAM *(Fusion 360 / Inventor CAM / HSMWorks)***: Exakt genauso! Die interne C++ Postprozessor-Engine lädt Ihre `.cps`-Datei und stellt ihr ein ganzes Arsenal an **fertig injizierten globalen CAM-Funktionen** zur Verfügung.
+
+#### 2. Welche Funktionen sind in `.cps`-Dateien immer automatisch global verfügbar?
+
+| Globale Funktion | Was liefert sie? | Wofür wird sie genutzt? |
+| :--- | :--- | :--- |
+| **`getToolTable()`** | Ein `ToolTable`-Objekt aller verwendeten Werkzeuge | In [`uebung_02_werkzeugliste.cps`](file:///C:/Projekte/CNC/uebungen/uebung_02_werkzeugliste.cps) zum Auflisten von `T01`, `T02` etc. |
+| **`getNumberOfSections()`** | Die Gesamtzahl aller Bearbeitungsschritte *(Operations)* | Um in einer Schleife alle Operationen nach der tiefsten Frästiefe (`Z-MIN`) zu durchsuchen. |
+| **`getSection(index)`** | Die Bearbeitungsoperation an Stelle `index` | Liefert Werkzeug, Schnittdaten, Kühlmittel und Koordinaten einer bestimmten Operation. |
+| **`currentSection`** | Die aktuell laufende Fräsoperation | In [`onSection()`](file:///C:/Projekte/CNC/src/mein_erster_post.cps#L257) für Werkzeugwechsel `T.. M06` und Drehzahl `S.. M03`. |
+| **`writeBlock(...)` / `writeWords(...)`** | Schreibt Befehle getrennt durch Leerzeichen | Erzeugt Zeilen wie `G00 X0 Y0 Z15` in der fertigen `.nc`-Datei. |
+| **`writeComment(text)`** | Schreibt Text in runden Klammern `(...)` | Erzeugt sichere Bediener-Kommentare ohne Maschinenabsturz. |
+| **`getProperty(name)`** | Liest einen Schalterwert aus dem CAM-Menü | Z. B. `getProperty("writeToolList")` prüft, ob der Bediener die Werkzeugliste wünscht. |
+
+#### 3. Wie macht das unser lokaler Testrunner ([`tests/simuliere_post.js`](file:///C:/Projekte/CNC/tests/simuliere_post.js#L318-L323))?
+Wenn Sie `node tests/simuliere_post.js ...` im Terminal ausführen, startet Node.js eine simulierte Sandbox *(einen virtuellen Ausführungs-Kontext)*.  
+In Zeile 318 von `tests/simuliere_post.js` steht deshalb:
+```javascript
+getToolTable: function () {
+  return {
+    getNumberOfTools: () => mockTools.length,
+    getTool: (idx) => mockTools[idx]
+  };
+}
+```
+Unser Testrunner injiziert `getToolTable()` genau wie das echte Fusion 360 direkt als globale Funktion – deshalb läuft Ihre `.cps`-Datei sowohl im echten 200.000-Euro-CAM-System als auch lokal in Ihrem Terminal völlig ohne `import`!
+
+### 🎭 Was bedeutet „mockTools“ im Testskript – und was steht in echtem Autodesk Fusion 360?
+
+Sie haben in [`tests/simuliere_post.js`](file:///C:/Projekte/CNC/tests/simuliere_post.js#L26-L54) den Begriff `mockTools` entdeckt und fragen sich: *„In Autodesk Fusion 360 steht doch sicher kein mockTools?“*
+
+Vollkommen richtig! Hier ist der genaue Unterschied:
+
+#### 1. Was bedeutet „Mock“ in der Softwareentwicklung?
+* Das englische Wort **„to mock“** bedeutet **„nachahmen / nachstellen“**.
+* Ein **Mock-Objekt *(Test-Attrappe / Dummy)*** ist eine künstliche Nachbildung echter Daten, damit man als Software-Entwickler Programme testen kann, **ohne** jedes Mal eine 1.000-Euro-Software oder einen riesigen Cloud-Server starten zu müssen.
+* In unserem Testskript [`tests/simuliere_post.js`](file:///C:/Projekte/CNC/tests/simuliere_post.js) haben wir für Sie die Werkzeuge unseres Kundenauftrags *(T01 10mm-Schaftfräser, T02 6mm-Spiralbohrer)* als `mockTools` hinterlegt, damit der Befehl `node tests/simuliere_post.js ...` in 50 Millisekunden blitzschnell im VS Code Terminal durchläuft.
+
+#### 2. Und was passiert in echtem Autodesk Fusion 360?
+In der echten Fertigung gibt es natürlich **kein `mockTools`**, sondern:
+* Der Fräser öffnet in Fusion 360 die **Werkzeugbibliothek *(Tool Library)***.
+* Er wählt seine echten, physikalischen Werkzeuge aus dem Regal aus *(oder lädt digitale 3D-Werkzeugdaten von Herstellern wie Hoffmann Garant, Sandvik Coromant oder Walter herunter)*.
+* Wenn der Bediener auf **„Postprozessieren“ *(Post Process)*** klickt, liest der C++ CAM-Kern von Fusion 360 diese **echten 3D-Werkzeuge aus dem Speicher der CAD/CAM-Datei** aus.
+* Fusion 360 packt diese echten Werkzeuge in das `ToolTable`-Objekt und übergibt sie an Ihre JavaScript-Funktion `getToolTable()`.
+
+#### 3. Der geniale Vorteil für Sie als Entwickler:
+Ihr Postprozessor ([`uebung_02_werkzeugliste.cps`](file:///C:/Projekte/CNC/uebungen/uebung_02_werkzeugliste.cps) und [`src/mein_erster_post.cps`](file:///C:/Projekte/CNC/src/mein_erster_post.cps)) ist universell:
+* Er ruft einfach nur `var tools = getToolTable();` auf.
+* **Beim Entwickeln am Laptop:** `getToolTable()` liefert die schnellen `mockTools`.
+* **In der Werkhalle an der Fräsmaschine:** `getToolTable()` liefert die echten Fräser von Herrn Müller!
+* Der Code Ihrer `.cps`-Datei muss dafür um **kein einziges Zeichen geändert werden**!
+
 ### ✅ So sieht das Ergebnis im fertigen G-Code aus:
 
 ```gcode
@@ -1194,6 +1325,48 @@ M30 (M30 HAUPTPROGRAMMENDE, RESET UND RUECKSPRUNG AUF ZEILE 1)
 | **2. Werkzeugnummern formatiert** | Werkzeuge werden sauber 2-stellig als `T01` und `T02` formatiert. | [ ] |
 | **3. Durchmesser & Eckenradius** | Fräser-Durchmesser `D=10.000MM` und Eckradius `ECKE R=0.000` werden exakt ausgewiesen. | [ ] |
 | **4. Konsistenzprüfung** | In [`tests/mein_generierter_gcode.nc`](file:///C:/Projekte/CNC/tests/mein_generierter_gcode.nc) erscheint die Werkzeugliste direkt unter dem Programmkopf. | [ ] |
+
+### 💼 Praxis-Leitfaden: Was mache ich bei einem echten Kundenauftrag? (Schritt-für-Schritt)
+
+Wenn Sie den Lehrgang durchgearbeitet haben und ein echter Kunde *(z. B. Herr Müller, Inhaber einer Zerspanungsfirma)* auf Sie zukommt, läuft der Auftrag in **5 glasklaren Schritten** ab:
+
+#### Schritt 1: Der Kunde beauftragt Sie & Sie fordern 2 Dokumente an
+Der Kunde sagt:  
+*„Wir nutzen Autodesk Fusion 360 und haben eine Haas VF-2 Fräsmaschine. Wir brauchen einen sicheren Postprozessor mit Werkzeugliste am Anfang, automatischer Z-MIN-Prüfung gegen Schraubstock-Crashs und sicherem Tisch-Vorfahren am Ende!“*
+
+Sie verlangen vom Kunden per E-Mail einfach nur **zwei Dinge**:
+1. **Eine funktionierende Muster-Datei (`.nc`)**: Ein kleines Programm, das schon einmal fehlerfrei auf seiner Maschine gelaufen ist *(daran sehen Sie den Steuerungsdialekt, z. B. Fanuc oder Siemens)*.
+2. **Den genauen Maschinentyp & Steuerung**: Z. B. *Haas NGC Steuerung*.
+
+#### Schritt 2: Entwicklung & Test an Ihrem Laptop in Visual Studio Code
+Sie müssen nicht in die Firma des Kunden fahren! Sie arbeiten bequem an Ihrem Schreibtisch:
+1. **Ihre Vorlage öffnen:** Sie öffnen entweder Ihren Basis-Postprozessor [`src/mein_erster_post.cps`](file:///C:/Projekte/CNC/src/mein_erster_post.cps) oder die fertige Enddatei aus Übung 16 ([`uebungen/uebung_16_endabnahme_meister_post.cps`](file:///C:/Projekte/CNC/uebungen/uebung_16_endabnahme_meister_post.cps)).
+   *(Warum gibt es beides? Die 16 Übungen sind einzelne, kleine Lernbausteine, damit man nicht überfordert wird. In `src/mein_erster_post.cps` bzw. Übung 16 sind alle 16 Bausteine zu einem einzigen großen, verkaufsfertigen Postprozessor zusammengesetzt).*
+2. Sie passen die Funktionen *(Header, Werkzeugliste, Z-MIN, G53 Z-Rückzug)* mit dem gelernten Wissen an.
+3. Sie testen das Skript blitzschnell im VS Code Terminal:
+   ```powershell
+   node tests/simuliere_post.js src/mein_erster_post.cps
+   ```
+4. Sie prüfen die erzeugte Maschinendatei [`tests/mein_generierter_gcode.nc`](file:///C:/Projekte/CNC/tests/mein_generierter_gcode.nc) und kontrollieren sie im [3D-Simulator](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html).
+
+#### Schritt 3: Sie senden dem Kunden die fertige `.cps`-Datei
+Sie benennen Ihre Datei sauber um, z. B. in `haas_vf2_praezision_mueller.cps`, und schicken sie Herrn Müller per E-Mail mit folgender 2-Klick-Anleitung:
+
+> **Installations-Anleitung für Herrn Müller in Autodesk Fusion 360:**
+> 1. Öffnen Sie Fusion 360 und gehen Sie in den Arbeitsbereich **Fertigen *(Manufacture)***.
+> 2. Klicken Sie oben auf das Symbol **Postprozessieren *(Post Process / NC-Programm erstellen)***.
+> 3. Klicken Sie im Einstellungsfenster auf den Reiter **Post-Konfiguration *(Post Configuration)*** und wählen Sie **„Postprozessor importieren / Aus Datei auswählen“**.
+> 4. Wählen Sie die Datei `haas_vf2_praezision_mueller.cps` aus.  
+> *Fertig! Ab sofort steht Ihr neuer Postprozessor dauerhaft in Fusion 360 zur Verfügung.*
+
+#### Schritt 4: Der Kunde erzeugt seinen G-Code & testet an der Maschine
+* Herr Müller klickt in Fusion 360 auf sein eigenes 3D-Bauteil und drückt auf **„Postprozessieren“**.
+* Fusion 360 ruft **Ihre `.cps`-Datei** auf, liest seine echten Werkzeuge und Fräswege ein und erzeugt sekundenschnell den perfekten Maschinencode.
+* Der Fräser an der Maschine lädt die Datei per USB-Stick oder Netzwerk, fährt den ersten Durchlauf mit dem Handrad *(Single Block / Einzelsatz)* vorsichtig zur Probe ab und sieht: **Alles passt auf den Zehntelmillimeter!**
+
+#### Schritt 5: Rechnung schreiben & bezahlt werden
+* Sie schreiben Herrn Müller Ihre Rechnung *(z. B. „Erstellung & Anpassung des Postprozessors Haas VF-2 für Fusion 360 gem. Anforderung: 600,00 €“)*.
+* Herr Müller bezahlt Ihre Rechnung mit Freude, denn Ihre 50 Zeilen JavaScript schützen seine 150.000-Euro-Fräsmaschine jahrelang vor teuren Crashs!
 
 ---
 
@@ -1219,6 +1392,123 @@ Das Werkstück (der Metallblock) wird in der Maschine unten von einem massiven *
 
 **Die Gefahr:** Wenn das Metallstück nur `10 mm` weit aus dem Schraubstock herausschaut, aber der Bohrer bis auf `Z-12.000 mm` nach unten fährt, bohrt er `2 mm` tief mitten in den teuren Stahl-Schraubstock hinein (**Kollision / Maschinencrash**)!
 Deshalb lassen wir unser JavaScript-Programm automatisch ausrechnen, wie tief jedes Werkzeug maximal nach unten fährt (**`Z-MIN` – kleinster Z-Wert**).
+
+---
+
+### 📸 Anschauliches 3D-Schema zu Übung 3 (Z-MIN-Berechnung & Kollisionsschutz)
+
+Hier siehst du auf einen Blick genau das physikalische Problem, das du in Übung 3 mit deinem Postprozessor löst:
+
+![Z-MIN Berechnung und Maschinencrash-Vermeidung mit Z = -10 mm Beschriftung](file:///c:/Projekte/CNC/docs/bilder/cnc_z_min_mit_10mm_beschriftung.jpg)
+
+#### Was bedeuten die Zahlen und warum entsteht hier der Crash? (Schritt für Schritt erklärt):
+
+Stell dir einen Zollstock *(Maßband)* vor, den du senkrecht an die Kante deines Werkstücks hältst:
+
+1. **$Z = 0.000\,\text{mm}$ (Ganz oben auf dem Deckel):**
+   * Das ist die glatte Oberfläche des Aluminiumblocks. Hier berührt der Fräser das Metall zum ersten Mal.
+2. **$Z = -5.000\,\text{mm}$ (5 mm tief im Metall):**
+   * Der Fräser taucht 5 mm tief ein und schält die Tasche und die Außenkontur ab. Das ist absolut sicher, weil noch reichlich massives Aluminium darunter ist.
+3. **$Z_{\text{min}} = -12.000\,\text{mm}$ (12 mm tief im Metall – Tiefster Punkt):**
+   * Das Bauteil ist 12 mm dick. Der Bohrer muss ganz durch das Metall durchbohren, damit die Löcher offen sind. Der Bohrer fährt also bis auf die Tiefe von $Z = -12{,}0\,\text{mm}$ nach unten.
+
+---
+
+### Jetzt kommt der entscheidende Punkt: Wie ist das Werkstück im Schraubstock eingespannt?
+
+Ein Schraubstock hat zwei massive Stahlbacken, die das Werkstück von den Seiten festhalten. 
+
+Hier gibt es zwei gegensätzliche Szenarien:
+
+#### ❌ Szenario A: Der tödliche Crash (Was passiert, wenn man Z-MIN NICHT kennt!)
+* Ein unvorsichtiger Fräser spannt das 15 mm hohe Rohteil tief in den Schraubstock ein.
+* Die Stahlbacken des Schraubstocks reichen bis auf **$10\,\text{mm}$ unter die Oberkante** hoch.
+* Das bedeutet: Die **Oberkante der harten Stahlbacken liegt bei $Z = -10{,}0\,\text{mm}$**!
+* **Die Katastrophe:** Jetzt startet das CNC-Programm. Der Bohrer bohrt bis auf **$Z = -12{,}0\,\text{mm}$** nach unten – das sind **$2\,\text{mm}$ tiefer als die Stahlbacken**!
+* **Das Ergebnis:** Der Bohrer knallt mit $8.000\,\text{U/min}$ ungebremst in den gehärteten Stahl der Schraubstockbacken. Bohrer bricht explosionsartig ab, Werkstück ist Schrott, Spindel ist zerstört *(30.000 € Schaden)*!
+
+#### ✅ Szenario B: Wie dein Postprozessor mit `Z-MIN` den Crash verhindert!
+* Dein JavaScript-Postprozessor rechnet vorab alle Werkzeugwege durch und schreibt ganz oben in den Programmkopf:
+  ```text
+  (T02 | BOHRER D=6.8MM | Z-MIN=-12.000MM)
+  ```
+* Der Fräser an der Maschine liest diese Zeile: **`Z-MIN = -12.0 mm`**.
+* Er weiß jetzt sofort: *„Achtung, das Werkzeug fährt bis auf $Z = -12\,\text{mm}$ nach unten! Meine Schraubstockbacken dürfen also maximal bis $Z = -15\,\text{mm}$ hochreichen, damit ich mindestens $3\,\text{mm}$ Sicherheitsabstand habe!“*
+* **Was macht der Fräser?** Er legt geschliffene Stahlleisten (**Parallelunterlagen *(Parallels)***) unten in den Schraubstock, sodass das Werkstück viel weiter oben herausschaut!
+* Die Stahlbacken klemmen das Teil jetzt nur noch an den untersten $3\,\text{mm}$ fest (Oberkante der Backen liegt jetzt sicher bei **$Z = -15{,}0\,\text{mm}$**).
+* Wenn der Bohrer nun bis auf $Z = -12{,}0\,\text{mm}$ durchbohrt, bleibt er **$3\,\text{mm}$ sicher über den Stahlbacken in der Luft**.
+* **Kein Crash, keine Zerstörung, fehlerfreies Bauteil!**
+
+---
+
+### 📏 Wie wird $Z = -10\,\text{mm}$ in der Werkstatt gemessen und wo siehst du das genau auf dem Bild?
+
+Hier ist die ganz einfache Erklärung, wie du das im Bild findest und wie es an der echten Maschine gemessen wird:
+
+#### 1. Wo siehst du $Z = -10\,\text{mm}$ auf dem Bild?
+Schau dir die **rote Leuchtkante *(Kollisionsbereich / Crash Danger Zone)*** am Schraubstock an:
+* **Ganz oben ($Z = 0.000$):** Ist die glatte, silbergraue Oberseite des Aluminiumblocks.
+* **Die rote Leuchtlinie:** Das ist die **Oberkante der vorderen Stahl-Spannbacke**!
+* **Der Abstand dazwischen:** Die senkrechte Außenwand des Aluminiumblocks, die von der Oberkante ($Z=0$) nach unten bis zur roten Stahlbacke führt, ist genau **$10\,\text{mm}$ lang**! Da es nach unten ins Minus geht, liegt diese rote Kante auf der Höhe **$Z = -10{,}0\,\text{mm}$**.
+* **Und jetzt schau auf den grünen Pfeil `Z-MIN = -12.0 mm`:**
+  * Der grüne Pfeil zeigt die Bohrtiefe des Werkzeugs.
+  * Du siehst mit bloßem Auge, dass die grüne Linie **tiefer nach unten reicht als die rote Kante** – sie ragt **$2\,\text{mm}$ mitten in den roten Kollisionsbereich hinein**!
+  * Das Bild zeigt dir also optisch: *„Achtung! Der Bohrer fährt tiefer herunter als die Stahlbacken hoch sind – Crash-Gefahr!“*
+
+Hier ist die neue technische Schnittansicht (Querschnitt von der Seite), die dir auf den Millimeter genau zeigt, wie der Fräser bei $Z = -10\,\text{mm}$ auf die Stahlbacke trifft:
+
+![Schnittansicht: Warum der Fräser bei Z = -10 mm in den Schraubstock knallt](file:///c:/Projekte/CNC/docs/bilder/cnc_crash_schnitt_erklaerung.jpg)
+
+---
+
+### 🚇 Das Tunnel-Prinzip: Was passiert, wenn der Bohrer im Zentrum tiefer bohren muss?
+
+Viele fragen sich völlig zu Recht:  
+*„Aber wenn der Bohrer genau in der Mitte bohrt, da gibt es doch gar keine Schraubstockbacken – die sind doch nur links und rechts! Kann er da nicht einfach tiefer bohren?“*
+
+**Genau dafür gibt es in der Werkstatt das geniale Tunnel-Prinzip!**
+
+Hier ist die technische Schnittzeichnung, die zeigt, wie das Tunnel-Prinzip funktioniert:
+
+![Das Tunnel-Prinzip in der CNC-Praxis](file:///c:/Projekte/CNC/docs/bilder/cnc_tunnel_prinzip_parallelunterlagen.jpg)
+
+#### Wie funktioniert das Tunnel-Prinzip Schritt für Schritt?
+1. **Zwei schmale Parallelunterlagen ganz außen:**
+   * Der Fräser legt keine breite Platte unter das Werkstück, sondern **zwei schmale, präzise geschliffene Stahlleisten** *(Parallelunterlagen / Parallels)* ganz an den linken und rechten Rand.
+2. **Der offene Luft-Tunnel im Zentrum:**
+   * Dazwischen entsteht ein völlig **freier Luft-Tunnel**! In der gesamten Mitte befindet sich nur leere Luft.
+3. **Durchbohren ohne Crash:**
+   * Wenn der Spiralbohrer (`T02`) durch das 12 mm dicke Aluminiumblech bricht, taucht seine konische Spitze z. B. **3 mm tief aus dem Aluminium heraus** *(auf $Z_{\text{min}} = -14{,}5\,\text{mm}$)*.
+   * Weil unter dem Loch der Luft-Tunnel liegt, sticht der Bohrer **völlig gefahrlos in die leere Luft**! Das Loch wird unten perfekt sauber und rund.
+4. **Warum auch hier `Z-MIN` lebenswichtig ist:**
+   * Unter dem Luft-Tunnel liegt das massive **Schraubstock-Bett aus Gusseisen** *(im Bild bei $Z = -24{,}0\,\text{mm}$)*.
+   * Wenn dein Postprozessor meldet: `Z-MIN = -14.5 mm`, weiß der Fräser sofort:  
+     *„Zwischen meiner Bohrerspitze ($-14{,}5\,\text{mm}$) und dem harten Schraubstockboden ($-24{,}0\,\text{mm}$) sind noch **$10\,\text{mm}$ Sicherheitsabstand in der Luft** – alles perfekt!“*
+
+---
+
+#### 2. Wie misst der Zerspanungsmechaniker das an der echten Maschine?
+In der Werkstatt steht niemand mit dem Maßband da. Der Fräser nutzt eine von **drei kinderleichten Methoden**:
+
+1. **Methode 1: Mit dem Tiefenmaß des Messschiebers *(Dauert 3 Sekunden)*:**
+   * Jeder Zerspaner hat einen digitalen **Messschieber *(Schieblehre)*** in der Hosentasche.
+   * Hinten am Messschieber fährt eine dünne Metallstange heraus (**Tiefenmessstange *(Depth Probe)***).
+   * Der Zerspaner setzt die flache Kante des Messschiebers oben auf das Werkstück ($Z = 0$) und schiebt die Tiefenstange nach unten, bis sie auf der Oberseite der Schraubstock-Stahlbacke aufsetzt.
+   * Auf dem Digitaldisplay liest er ab: **`10.00 mm`**. Weil er von der Oberkante nach unten gemessen hat, weiß er sofort: **Die Stahlbacken liegen bei $Z = -10{,}0\,\text{mm}$**!
+2. **Methode 2: Rechnerisch über die Parallelunterlagen *(Einfache Addition)***:
+   * Ein erfahrener Fräser weiß die Maße schon vor dem Spannen:
+     * Sein Rohteil ist **$40\,\text{mm}$ hoch**.
+     * Der Schraubstock hat **$40\,\text{mm}$ hohe Backen**.
+     * Wenn er eine **$30\,\text{mm}$ hohe Parallelunterlage *(Stahlleiste)*** unter das Teil legt, hebt das Teil um 30 mm ab.
+     * Das Werkstück schaut also genau $40 - (40 - 30) = \mathbf{10\,\text{mm}}$ oben heraus.
+     * Backenoberkante = **$Z = -10{,}0\,\text{mm}$**.
+3. **Methode 3: Mit dem 3D-Messtaster in der Spindel *(Auf den Tausendstel-Millimeter)***:
+   * Der Fräser fährt mit dem elektronischen **3D-Messtaster *(Haimer Sensor mit roter Kugel)*** mit dem Handrad kurz auf die Oberkante der Schraubstockbacke.
+   * Die Digitalanzeige an der Heidenhain- oder Siemens-Steuerung zeigt direkt den exakten $Z$-Wert an: `Z = -10.000`.
+
+---
+
+---
 
 ### 🛠️ Wo im Code wird das gemacht?
 
@@ -1315,6 +1605,656 @@ Der Arbeiter an der Maschine sieht sofort: **`T02` fährt bis `Z-12.000MM`** –
 
 ---
 
+### 📐 Tiefen-Exkurs: Wie wird $Z = -14{,}5\,\text{mm}$ mathematisch berechnet und WANN wird es im System ermittelt?
+
+Oft liest man im Programmkopf eine Zeile wie:
+```gcode
+(T02 | BOHRER D=5.0MM | Z-MIN=-14.500MM)
+```
+Warum steht dort nicht einfach die Plattendicke von $-12{,}0\,\text{mm}$, sondern $-14{,}5\,\text{mm}$? Woher kommen die zusätzlichen $2{,}5\,\text{mm}$ und zu welchem exakten Zeitpunkt rechnet der Computer das aus?
+
+---
+
+### 📸 Exaktes CAD-Diagramm: Geometrische Berechnung der Durchgangsbohrung ($Z = -14{,}5\,\text{mm}$)
+
+Hier sehen Sie die exakte Schnittansicht durch die Aluminiumplatte mit dem Spiralbohrer, allen Ebenen, Bemaßungspfeilen und der Berechnungsformel:
+
+![Exakte Berechnung der Durchgangsbohrung Z-MIN = -14.500 mm](file:///c:/Projekte/CNC/docs/bilder/cnc_bohrung_z_min_14_5mm_berechnung.jpg)
+
+---
+
+#### 1. Die mathematische Berechnung: Warum reicht $Z = -12{,}0\,\text{mm}$ beim Durchbohren nicht aus?
+
+Ein Spiralbohrer ist unten **kein** flacher Zylinder, sondern hat eine kegelförmige Schneidspitze *(Spitzenwinkel üblicherweise $\sigma = 118^\circ$ bei HSS-Bohrern oder $140^\circ$ bei Vollhartmetall VHM)*:
+
+1. **Bauteildicke *(Plattenstärke)***:
+   * Das fertige Werkstück ist $12{,}0\,\text{mm}$ dick. Die Bauteil-Unterkante liegt also bei $Z = -12{,}0\,\text{mm}$.
+2. **Die Spitzenlänge des Bohrers *(Kegelspitze $l_{\text{Spitze}}$)***:
+   * Würde der Bohrer nur bis $Z = -12{,}0\,\text{mm}$ fahren, würde lediglich die äußerste Nadelspitze unten herausschauen.
+   * Das Loch hätte an der Unterseite noch einen kegeligen Trichter und wäre fast verschlossen, weil der volle zylindrische Schaft das Metall noch gar nicht durchdrungen hat!
+   * Die geometrische Formel für die Spitzenlänge eines Bohrers lautet:
+     $$l_{\text{Spitze}} = \frac{d}{2 \cdot \tan\left(\frac{\sigma}{2}\right)}$$
+     *(wobei $d$ der Bohrerdurchmesser in Millimetern und $\sigma$ der Spitzenwinkel in Grad ist)*.
+   * Für den Standard-Spitzenwinkel von $118^\circ$ gilt in der Zerspanungspraxis die handliche Faustformel:
+     $$l_{\text{Spitze}} \approx 0{,}3 \cdot d$$
+     Bei einem $\varnothing 5{,}0\,\text{mm}$ Bohrer beträgt die Spitzenlänge also:
+     $$l_{\text{Spitze}} \approx 0{,}3 \cdot 5{,}0\,\text{mm} = 1{,}5\,\text{mm}$$
+3. **Die Durchbruch-Zugabe *(Breakthrough / Sicherheits-Überlauf)***:
+   * Damit der Bohrer sauber durchbricht und an der Unterseite kein hässlicher Ausfrans-Grat *(Bohrgrat)* stehen bleibt, stellt der CAM-Programmierer in Autodesk Fusion einen Überlauf von z. B. $1{,}0\,\text{mm}$ in die freie Luft ein *(Option: „Bohrerspitze durch Grund führen / Breakthrough distance“)*.
+4. **Die Gesamtrechnung der Z-Tiefe:**
+   $$\text{Gesamttiefe} = \text{Bauteildicke} + \text{Bohrerspitzenlänge} + \text{Durchbruch-Zugabe}$$
+   $$\text{Gesamttiefe} = 12{,}0\,\text{mm} + 1{,}5\,\text{mm} + 1{,}0\,\text{mm} = 14{,}5\,\text{mm}$$
+   Da sich die Bewegung von der Bauteil-Oberkante ($Z = 0$) nach unten ins Material richtet, lautet die Koordinate im G-Code exakt:
+   $$\mathbf{Z = -14{,}500\,\text{mm}}$$
+
+---
+
+#### 2. WANN wird dieser Wert ermittelt? (Der zeitliche Ablauf in 3 Phasen)
+
+Dieser Wert entsteht nicht zufällig, sondern durchläuft eine präzise zeitliche Kette von 3 Phasen:
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ ZEITLICHE ABFOLGE: WANN WIRD Z = -14.5 MM BERECHNET UND VERWENDET?                     │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+  PHASE 1: Im CAM-System (Autodesk Fusion 360)
+  WANN?     Beim Klick auf "Werkzeugweg generieren (Generate)"
+  WER?      Der CAM-Kernel (Geometrie-Berechnungsmodul von Autodesk)
+  WAS?      Berechnet alle Raumpunkte (X, Y, Z), ermittelt das Minimum (-14.5 mm)
+            und speichert es intern im Operationsobjekt (section.getGlobalZRange()).
+        │
+        ▼
+  PHASE 2: Im Postprozessor (JavaScript / mein_erster_post.cps)
+  WANN?     In der Sekunde, in der Sie auf "Postprozessieren (Post Process)" klicken
+  WER?      Ihre Funktion getToolMinimumZ(tool) in onOpen()
+  WAS?      Liest section.getGlobalZRange().getMinimum() für jedes Werkzeug ab,
+            findet den tiefsten Wert über alle Operationen und druckt ihn in den Programmkopf:
+            (T02 | BOHRER D=5.0MM | Z-MIN=-14.500MM)
+        │
+        ▼
+  PHASE 3: An der echten CNC-Maschine in der Werkshalle
+  WANN?     Beim Rüsten und Einspannen des Werkstücks (VOR dem Drücken von Cycle Start)
+  WER?      Der Fräser / Zerspanungsmechaniker am Bedienpult
+  WAS?      Liest die Zeile im NC-Header, erkennt Z-MIN = -14.5 mm und wählt
+            die passenden Parallelunterlagen mit Tunnel-Freiraum, um Schraubstock-
+            oder Maschinentisch-Kollisionen zu 100 % auszuschließen!
+```
+
+1. **Phase 1: Im CAM-System *(Autodesk Fusion 360)* $\rightarrow$ Vor dem Export:**
+   * Wenn der Ingenieur am CAD/CAM-Arbeitsplatz die Bohr-Operation anlegt, die Plattendicke von $12\,\text{mm}$ aus dem 3D-Volumenmodell wählt und den Haken bei *„Bohrerspitze durch Bauteilunterkante führen“* setzt, rechnet der mathematische Kern von Fusion die Fräsbahn durch.
+   * Fusion erzeugt eine sogenannte Bounding-Box *(dreidimensionaler Raumquader, der alle Verfahrbewegungen dieser Operation umschließt)* und legt den minimalen Z-Wert als fertige Eigenschaft im Speicher ab.
+2. **Phase 2: Im Postprozessor *(beim NC-Export)***:
+   * Wenn Sie auf *„Postprozessieren *(Post Process)“* klicken, startet Ihre Datei [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/src/mein_erster_post.cps).
+   * Die Funktion [`onOpen()`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L202) wird als erstes ausgeführt. Sie ruft [`getToolMinimumZ(tool)`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L182) auf.
+   * Der Postprozessor greift per `section.getGlobalZRange().getMinimum()` auf den in Phase 1 berechneten Wert zu und formatiert ihn druckreif in die Kommentarspalte des Programms: `(T02 | BOHRER D=5.0MM | Z-MIN=-14.500MM)`.
+3. **Phase 3: An der Maschine *(beim Rüsten)***:
+   * Der Zerspanungsmechaniker liest die Zeile noch **vor dem Start der Spindel**.
+   * Er sieht: *„Achtung, Werkzeug 2 bohrt bis auf $-14{,}5\,\text{mm}$ hinunter! Mein Teil ist $12\,\text{mm}$ dick, die Backen sind $10\,\text{mm}$ tief – ich muss unter das Bauteil mindestens $5\,\text{mm}$ dicke Parallelunterlagen legen und in der Mitte einen Tunnel frei lassen, damit der Bohrer unten gefahrlos ins Freie austreten kann!“*
+
+---
+
+### ❓ Häufige Frage: Gilt `Z-MIN` nur für Bohrer oder auch für Fräser?
+
+**Klare Antwort: `Z-MIN` gilt für JEDES Werkzeug – Fräser sind oft sogar noch stärker gefährdet als Bohrer!**
+
+In einem professionellen CNC-Programm besitzt **jedes einzelne Werkzeug** in der Werkzeugtabelle seinen eigenen, exakten `Z-MIN`-Wert:
+
+```gcode
+(--- BENOETIGTE WERKZEUGE - TOOL TABLE ---)
+(T01 | D=10.000MM | ECKE R=0.000 | Z-MIN=-5.000MM  | SCHAFTFRAESER 10MM VHM)
+(T02 | D=5.000MM  | ECKE R=0.000 | Z-MIN=-14.500MM | SPIRALBOHRER 5MM VHM)
+(T03 | D=6.000MM  | ECKE R=0.000 | Z-MIN=-2.500MM  | FASENFRAESER 90 GRAD)
+(T04 | D=50.000MM | ECKE R=0.800 | Z-MIN=-0.500MM  | MESSERKOPF PLANFRAESER)
+(-----------------------------------------)
+```
+
+#### Warum ist `Z-MIN` für Fräser genauso lebenswichtig? (4 Praxis-Beispiele):
+
+1. **Außenkontur-Fräsen *(Der klassische Schraubstock-Crash)***:
+   * Ein Schaftfräser fährt außen um die gesamte Aluminiumplatte herum, um die Kanten spiegelblank zu fräsen.
+   * Wenn das Werkstück $12\,\text{mm}$ dick ist, stellt der Programmierer im CAM oft ein: *„Fräse bis $0{,}5\,\text{mm}$ unter die Plattenunterkante, damit kein Grat stehen bleibt!“* $\rightarrow$ **`Z-MIN = -12.500 mm`**.
+   * Wenn die gehärteten Stahlbacken des Schraubstocks aber bis $Z = -10{,}0\,\text{mm}$ hochreichen, fährt der Fräser auf der gesamten Außenkontur **$2{,}5\,\text{mm}$ tief voll in den gehärteten Stahl der Spannbacke**!
+   * **Die Folge eines Fräser-Crashs:** Ein Bohrer bricht bei einer Kollision meist einfach ab. Ein $\varnothing 10\,\text{mm}$ Schaftfräser aus massivem Vollhartmetall *(VHM)* reißt bei $8.000\,\text{U/min}$ jedoch oft den Schraubstock aus der T-Nut, verbiegt die Kugelgewindetriebe der Maschine und zerstört die Spindellagerung *(Schaden: 20.000 € bis 40.000 €)*!
+2. **Taschenfräsen *(Pocketing)***:
+   * Wenn eine Vertiefung oder Passungstasche im Inneren gefräst wird *(z. B. unsere Kreistasche $\varnothing 30\,\text{mm}$ mit $3\,\text{mm}$ Tiefe)*:
+   * Hier steht: `(T01 | SCHAFTFRAESER | Z-MIN=-3.000MM)`.
+   * Der Maschinenbediener sieht sofort: *„Aha, dieser Fräser geht nur 3 mm tief ins Fleisch. Keine Gefahr für den Schraubstock!“*
+3. **Planfräsen der Oberseite *(Face Milling)***:
+   * Ein großer Planfräser *(Messerkopf $\varnothing 50\,\text{mm}$)* nimmt nur die raue Gusshaut des Rohteils ab *(z. B. $0{,}5\,\text{mm}$ Spanabtrag)*.
+   * Hier lautet `Z-MIN = -0.500MM`.
+4. **Werkzeug-Auskraglänge *(Prüfung der Mindest-Einspannlänge)***:
+   * `Z-MIN` schützt nicht nur vor dem Schraubstock, sondern sagt dem Bediener auch, wie weit das Werkzeug aus dem Fräsfutter *(Spannzangenaufnahme ER32 oder Schrumpffutter)* herausragen muss!
+   * Zeigt der Postprozessor z. B. `Z-MIN = -28.000MM`, weiß der Arbeiter:
+     *„Ich muss die Schneide mindestens $35\,\text{mm}$ weit aus dem Futter herausschauen lassen! Spanne ich den Fräser nur $20\,\text{mm}$ kurz ein, knallt die dicke rotierende Spannmutter mit voller Wucht auf das Werkstück!“*
+
+#### Wie macht unser Postprozessor das im Code?
+In [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L182-L195) prüft die JavaScript-Schleife **automatisch jedes einzelne Werkzeug** in der Werkzeugtabelle `getToolTable()` ab – ganz egal, ob es sich um einen Schaftfräser, Planfräser, Radiusfräser, Fasenfräser oder Spiralbohrer handelt!
+
+---
+
+### ❓ Wird in einer Simulation ein Crash angezeigt, wenn `Z-MIN` falsch berechnet wurde?
+
+Das ist eine der **wichtigsten Fragen für jeden CAM-Ingenieur**! Um die Antwort zu verstehen, muss man zwischen zwei völlig unterschiedlichen Dingen unterscheiden:
+1. **Der tatsächlichen Fahrbewegung *(die Zahlen im G-Code, z. B. `G01 Z-14.500`)***.
+2. **Der reinen Text-Ausgabe im Programmkopf *(die Zeile `(T01 | Z-MIN=-5.000MM)`)***.
+
+---
+
+#### 1. Fall A: Der Werkzeugweg im CAM wurde versehentlich zu tief programmiert
+* **Was passiert?** Der Programmierer hat im CAM versehentlich $Z = -25{,}0\,\text{mm}$ eingestellt.
+* **Wird das in der Simulation als Crash angezeigt?**
+  * **In einer vollwertigen CAM-Simulation *(Autodesk Fusion 360, SolidCAM, Vericut)***:  
+    👉 **JA!** Wenn der Schraubstock im CAM als 3D-Spannmittel definiert wurde, stoppt die Simulation sofort, das Bauteil und der Fräser leuchten rot auf und das System warnt: *„KOLLISION: Werkzeug kollidiert mit Spannbacke!“*
+  * **In einfachen Web-G-Code-Viewern *(z. B. NC Viewer)***:  
+    👉 **NEIN!** Einfache G-Code-Viewer kennen den echten Maschinenschraubstock gar nicht. Sie sehen nur Linien im leeren Raum.
+  * **In unserem 3D-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html)**:  
+    👉 **JA, visuell sofort sichtbar!** Sie sehen im 3D-Canvas und im oberen HUD ganz genau, wie das Werkzeug tief unter die Werkstück-Unterkante ($Z = -12\,\text{mm}$) abtaucht!
+
+---
+
+#### 2. Fall B: Der G-Code fährt richtig, aber der Postprozessor hat einen Rechenfehler im Kommentar
+* **Was passiert?** Der Fräser fährt tatsächlich auf $Z = -14{,}5\,\text{mm}$ herunter. Ein fehlerhafter Postprozessor schreibt aber versehentlich in den Kommentar:  
+  `(T02 | BOHRER | Z-MIN=-5.000MM)` *(er behauptet also fälschlicherweise, das Werkzeug gehe nur 5 mm tief)*.
+* **Wird DAS in der Simulation als Crash angezeigt?**
+  * 👉 **NEIN! Weder im CAM noch an der Maschine!**
+  * **Der Grund:** Für die CNC-Steuerung und für die meisten Simulatoren ist alles in runden Klammern `(...)` **reiner toter Kommentartext**. Kein Computer der Welt prüft automatisch, ob die gedruckte Zahl im Kommentar mit der späteren Verfahrbewegung übereinstimmt!
+* **Die verheerende Folge an der echten Fräsmaschine:**
+  * Der Zerspanungsmechaniker liest morgens den Header: *„Prima, Z-MIN ist nur -5.0 mm. Da brauche ich ja keine hohen Parallelunterlagen!“*
+  * Er spannt den Rohblock flach in den Schraubstock ein *(Backenhöhe $Z = -10\,\text{mm}$)*.
+  * Er drückt auf `Cycle Start`.
+  * Das Programm fährt wie programmiert auf **$Z = -14{,}5\,\text{mm}$** $\rightarrow$ **BOOM! Der Bohrer rammt ungebremst in den gehärteten Stahl!**
+  * Der Postprozessor hat den Menschen angelogen.
+
+---
+
+#### 3. Wie stellt unser Postprozessor sicher, dass Z-MIN zu 100 % fehlerfrei berechnet wird?
+
+Genau aus diesem Grund berechnen wir `Z-MIN` in [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/src/mein_erster_post.cps#L182-L195) niemals über manuelle Schätzungen oder anfällige Text-Parser, sondern greifen **direkt auf den mathematischen Geometriekern von Autodesk Fusion** zu:
+
+```javascript
+var zRange = section.getGlobalZRange(); // Fragt direkt die interne Bounding-Box von Fusion ab
+var currentMin = zRange.getMinimum();   // Liefert die physikalisch exakte Tiefenkoordinate
+```
+
+Da Autodesk Fusion jede einzelne Mikrometer-Bewegung intern kennt, ist dieser Wert **immer zu 100 % identisch mit der tatsächlichen tiefsten Fräsbewegung**. Eine Abweichung zwischen dem Kommentar und der Realität ist dadurch mathematisch ausgeschlossen!
+
+---
+
+#### 4. Wie wird das im 3D-Simulator (`3d_auftrag_simulator.html`) exakt gezeichnet und gemeldet?
+
+In unserem Browser-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html) haben wir eine **4-Stufen-Z-Zonen-Überwachung** mit visueller Warnanzeige integriert:
+
+1. **Wie wird das Werkstück gezeichnet? *(Drahtgitter-Quader)***:
+   * Das Bauteil wird mit `drawBox(0, 0, -12, 80, 50, 0, "#94a3b8", 2.2)` gerendert.
+   * Die Bauteil-Oberkante liegt genau auf $Z = 0.000\,\text{mm}$.
+   * Die Bauteil-Unterkante liegt genau auf $Z = -12.000\,\text{mm}$.
+2. **Wie wird das Werkzeug gezeichnet, wenn es unter $Z = -12\,\text{mm}$ fährt?**:
+   * Der Werkzeugzylinder wird exakt an der aktuellen Position `(curX, curY, curZ)` gezeichnet.
+   * Wenn ein Bohrer auf $Z = -14{,}5\,\text{mm}$ fährt, zeichnet der Canvas den unteren Zylinderkreis bei $Z = -14{,}5\,\text{mm}$. Man sieht mit dem bloßen Auge, wie das Werkzeug $2{,}5\,\text{mm}$ unten aus dem Bauteilboden heraustritt!
+3. **Wie wird der Zustand live im HUD *(Heads-Up Display)* gemeldet?**:
+   Der Simulator überwacht die Z-Höhe in jedem Animationsframe und schaltet die Status-Plakette oben rechts automatisch um:
+
+| Z-Höhe im Simulator | Farbe | Angezeigter Status im HUD & am Werkzeug | Bedeutung & Maschinen-Sicherheit |
+|---|---|---|---|
+| **$Z \ge +30{,}0\,\text{mm}$** | 🟣 **Lila** | `🟣 MASCHINEN-HOME: G53 Z0.0` | Spindel steht sicher am oberen Decken-Endschalter. |
+| **$Z > 0{,}0\,\text{mm}$** | 🟢 **Grün** | `🟢 SICHERHEITSZONE: Z > 0 mm` | Werkzeug schwebt frei in der Luft über dem Werkstück *(z. B. Eilgang G00)*. |
+| **$0 \ge Z \ge -12{,}0\,\text{mm}$** | 🔵 **Blau** | `🔵 ARBEITSBEREICH: Z = ... mm` | Regulärer Spanabtrag im Aluminium *(Tasche oder Kontur)*. |
+| **$-12{,}0 > Z > -15{,}0\,\text{mm}$** | 🟡 **Orange** | `⚠️ DURCHBRUCH: Z = -14.5 mm (Tunnel aktiv!)` | **Werkzeug durchdringt den Bauteilboden ins Freie!** Signalisiert: Tunnel-Unterlagen sind zwingend erforderlich. Werkzeug färbt sich warn-orange! |
+| **$Z \le -15{,}0\,\text{mm}$** | 🔴 **Signalrot** | `🚨 KOLLISION / CRASH: Z <= -15.0 mm!` | **Kollisions-Alarm!** Das Werkzeug penetriert die Ebene der gehärteten Schraubstockbacken. Das Werkzeug blinkt rot mit Warnbox! |
+
+---
+
+#### 5. Wie kann man das jetzt selbst im 3D-Simulator testen? (Wo gibt man falsche Z-Werte ein?)
+
+Sie haben **zwei bequeme Möglichkeiten**, um falsche Z-Werte oder Kollisionen sofort mit eigenen Augen zu testen:
+
+##### Möglichkeit 1: Über das vorgefertigte Dropdown-Menü *(1-Klick-Test)*
+1. Öffnen Sie [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html) in Ihrem Webbrowser.
+2. Klicken Sie oben links auf das Dropdown-Feld **„Programm-Auswahl“**.
+3. Wählen Sie direkt unter der roten Rubrik **„🚨 Crash- & Sicherheits-Tests (Z-MIN)“**:
+   * **`⚠️ Test 1: Bohrungs-Durchbruch (Z = -14.5 mm / Tunnel aktiv)`**:  
+     Klicken Sie auf Zeile `N80 G01 Z-14.5`. Sie sehen sofort, wie der Bohrer durch die Unterkante ins Freie sticht, das Werkzeug auf **orange** wechselt und das HUD `⚠️ DURCHBRUCH` meldet!
+   * **`🚨 Test 2: Schraubstock-Kollision (Z = -18.0 mm / CRASH!)`**:  
+     Klicken Sie auf Zeile `N80 G01 Z-18.0`. Der Fräser rammt $3\,\text{mm}$ tief in die Schraubstockbacken-Ebene! Das Werkzeug blinkt **signalrot**, das HUD schlägt Alarm: `🚨 KOLLISION / CRASH-GEFAHR: Z <= -15.0 mm!` und am Werkzeug erscheint die rote 3D-Crashbox!
+
+##### Möglichkeit 2: Eine eigene `.nc`-Datei mit beliebigem Z-Wert auf der Festplatte testen
+1. Öffnen Sie in Visual Studio Code die Datei [`tests/mein_generierter_gcode.nc`](file:///c:/Projekte/CNC/tests/mein_generierter_gcode.nc).
+2. Suchen Sie eine Fräszeile, z. B.:
+   ```gcode
+   N100 G01 Z-5.000 F500
+   ```
+3. Ändern Sie den Wert absichtlich auf einen falschen / tiefen Crash-Wert um:
+   ```gcode
+   N100 G01 Z-20.000 F500
+   ```
+4. Speichern Sie die Datei mit `Strg + S`.
+5. Öffnen Sie den 3D-Simulator und klicken Sie auf den großen grünen Button:  
+   **„📂 Eigene .nc Datei von Festplatte auswählen & laden“**.
+6. Wählen Sie Ihre geänderte `mein_generierter_gcode.nc` aus.
+7. Der Simulator lädt Ihren Code in einer Millisekunde und schlägt bei Schritt `N100` sofort rot Alarm!
+
+---
+
+#### 6. Die Meisterfrage: Kann man sich bezüglich Crashes zu 100 % auf die Simulation verlassen?
+
+**Klare Antwort aus der Industrie-Praxis: JEIN!**  
+*(Ja für die mathematische Geometrie im G-Code – aber NEIN als Alleingarantie für die physische Werkshalle!)*
+
+In der Zerspanung und im modernen Maschinenbau gilt das eiserne Prinzip der **3-Stufen-Sicherheitskette *(Redundanz-Prinzip / Vier-Augen-Prinzip)***.
+
+##### 1. Worauf Sie sich in der Simulation zu 100 % verlassen können:
+* **Mathematische Geometrie- & Vorzeichenfehler:**  
+  Ein Simulator erkennt absolut fehlerfrei, ob jemand im G-Code ein Minuszeichen vergessen hat *(z. B. `Z12` statt `Z-12`)* oder aus Versehen `Z-50` statt `Z-5` getippt hat.
+* **Falsche Eilgang-Bahnen *(G00)*:**  
+  Rast der Eilgang quer durch das massive Aluminium, zeigt das die Simulation sofort als gelbe Crash-Linie an.
+* **Durchbrüche & Maximaltiefen:**  
+  Die Simulation zeigt exakt an, ob und wie weit ein Werkzeug unter die Bauteil-Unterkante ($Z = -12\,\text{mm}$) abtaucht.
+
+##### 2. Was ein Simulator NIEMALS wissen kann *(Die physische Realität der Werkhalle)*:
+Ein Simulator sieht nur die virtuelle 3D-Welt. Er hat keine Kameras und keine Sensoren in der echten Werkshalle. Er weiß **nicht**:
+1. **Die reale Schraubstock-Höhe:**  
+   Hat der Arbeiter heute Stufenbacken mit $35\,\text{mm}$ Höhe oder Standardbacken mit $50\,\text{mm}$ Höhe montiert? Hat er $5\,\text{mm}$ oder $15\,\text{mm}$ dicke Parallelunterlagen untergelegt?
+2. **Die reale Werkzeug-Auskraglänge *(Einspanntiefe im Futter)***:  
+   Der Simulator nimmt idealisiert an, der Fräser ist lang genug. Hat der Arbeiter den Fräser aber nur $18\,\text{mm}$ kurz in die Spannzange gespannt, knallt die dicke Überwurfmutter bei einer $20\,\text{mm}$ tiefen Kontur mit voller Wucht auf das Werkstück!
+3. **Menschliche Einstellfehler am Maschinentaster *(G54 Nullpunkt)***:  
+   Hat der Bediener beim Antasten mit dem 3D-Messtaster den Nullpunkt exakt auf die Bauteiloberkante gesetzt oder hat er versehentlich das falsche Koordinatensystem *(z. B. G55 statt G54)* aufgerufen?
+4. **Vergessene Werkzeuge im Magazin:**  
+   Steckt auf Magazinplatz `T01` wirklich der geplante $\varnothing 10\,\text{mm}$ Schaftfräser oder hat ein Kollege der vorherigen Schicht dort einen großen $\varnothing 50\,\text{mm}$ Messerkopf stecken gelassen?
+
+##### 3. Die professionelle 3-Stufen-Sicherheitskette der Zerspanungsbetriebe:
+
+```
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ DIE 3-STUFEN-SICHERHEITSKETTE ZUM 100%IGEN CRASH-SCHUTZ                           │
+└──────────────────────────────────────────────────────────────────────────────────┘
+  STUFE 1: Am Computer (3D-Simulation / CAM & 3d_auftrag_simulator.html)
+  └─ Fängt alle digitalen Programmier- und Geometriefehler zu 100 % ab.
+        │
+        ▼
+  STUFE 2: Im Postprozessor (Z-MIN & Werkzeugliste im G-Code-Header)
+  └─ Gibt dem Menschen an der Maschine die Kontrollwerte schwarz auf weiß vor.
+        │
+        ▼
+  STUFE 3: An der echten CNC-Fräsmaschine (Rüsten & Erstteil-Einfahren)
+  └─ Der Fräser vergleicht Z-MIN mit seinen echten Spannbacken und fährt das
+     erste Teil im Einzelsatz (Single Block) mit reduziertem Handrad-Vorschub ein!
+```
+
+**Fazit für Sie als beratender CAM-Ingenieur:**  
+Die Simulation ist unverzichtbar und verhindert 95 % aller Fehler bereits am Schreibtisch. Aber erst das Zusammenspiel aus **sauberer Simulation + Z-MIN-Header im Postprozessor + sorgfältigem Einrichten an der Maschine** garantiert absolute Crash-Freiheit!
+
+---
+
+#### 7. Haftung & Verantwortung: Wer ist schuld, wenn der Fräser in der Werkstatt falsches Z-MIN einstellt?
+
+**Ganz klare Antwort: NEIN! Sie sind daran NICHT schuld! Die rechtliche und fachliche Verantwortung liegt zu 100 % bei der Werkstatt und beim Maschinenbediener!**
+
+In der Industrie und im deutschen Vertragsrecht *(Bürgerliches Gesetzbuch [BGB])* gibt es hierfür eine glasklare Trennung:
+
+1. **Ihre Pflicht als Remote-Ingenieur *(Programmierer)***:
+   * Sie liefern den Code passend zum 3D-CAD-Modell des Kunden.
+   * Sie weisen im Programmkopf unübersehbar die maximale Tiefe aus: `(T02 | BOHRER D=5.0MM | Z-MIN=-14.500MM)`.
+   * Sie haben Ihre vertragliche Aufklärungs- und Sorgfaltspflicht damit zu 100 % vorbildlich erfüllt.
+2. **Die gesetzliche Pflicht des Maschinenbedieners *(Zerspanungsmechaniker vor Ort)***:
+   * Ein Zerspanungsmechaniker ist ein ausgebildeter Facharbeiter. Zu seinen Kernaufgaben gehört das **eigenverantwortliche Rüsten**: Er prüft die Schraubstockbacken, wählt die Parallelunterlagen und misst die Werkzeuge ein.
+   * Wenn im Programmkopf `Z-MIN = -14.500 mm` steht, der Fräser aber aus Bequemlichkeit oder Unachtsamkeit keine hohen Parallelunterlagen unterlegt, ist das ein **klassischer Rüstfehler der Werkstatt**.
+3. **Grobe Fahrlässigkeit des Bedieners:**
+   * Nach den Berufsgenossenschafts-Vorschriften *(DGUV)* **darf ein neues NC-Programm niemals blind im Automatikbetrieb gestartet werden**.
+   * Es **muss** im Einzelsatz *(Single Block)* mit der Hand am Vorschub-Potentiometer eingefahren werden. Wer die Maschine blind auf 100 % Eilgang ins Metall krachen lässt, handelt juristisch grob fahrlässig.
+4. **Ihr vertraglicher Schutzschild *(AGB & Einrichteblatt)***:
+   * In unserem Einrichteblatt ([`Portfolio/Vorlage_Einrichteblatt_und_Werkzeugliste.md`](file:///c:/Projekte/CNC/Portfolio/Vorlage_Einrichteblatt_und_Werkzeugliste.md)) und der Prüfliste ([`SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md`](file:///c:/Projekte/CNC/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md)) ist verbindlich geregelt:  
+     *„Die Überprüfung der realen Spannsituation, Werkzeugauskraglänge und Nullpunkte obliegt vor Ort dem Maschinenbediener. Für Rüst- und Einstellfehler an der Maschine wird keine Haftung übernommen.“*
+   * Vor dem ersten Span unterschreibt der Einrichter das Protokoll. Damit sind Sie als externer Dienstleister rechtlich vollkommen abgesichert.
+
+---
+
+#### 8. Wort für Wort erklärt: Was bedeutet „Das Erstteil im Einzelsatz mit Hand am Vorschub-Poti und Blick auf die Restweganzeige einfahren“?
+
+Dieser Satz klingt für Einsteiger wie eine fremde Geheimsprache. In Wirklichkeit beschreibt er den **wichtigsten Handgriff eines jeden Zerspanungsmechanikers der Welt**. Hier ist jeder Begriff ganz einfach und anschaulich erklärt:
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ DIE 5 LEBENSRETTER-BEGRIFFE AN DER CNC-MASCHINE                                       │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+  1. DAS ERSTTEIL        --> Das allererste Test-Werkstück einer Serie (Musterstück)
+  2. EINFAHREN           --> Vorsichtiges Prüfen des neuen Programms bei der ersten Fahrt
+  3. EINZELSATZ          --> Taste "Single Block": Maschine stoppt nach JEDER Zeile G-Code
+  4. VORSCHUB-POTI       --> Runder Drehregler (0% bis 150%): Das "Bremspedal" für die Hand
+  5. RESTWEGANZEIGE      --> Display-Fenster "Distance-to-Go": Wie weit fährt die Achse noch?
+```
+
+---
+
+##### 1. Was ist das „Erstteil“ *(First Part / Musterteil)*?
+* Wenn ein Kunde z. B. **500 Stück** unserer Flanschplatte bestellt, legt man nicht einfach 500 Metallklötze in die Halle und drückt mit Vollgas auf Start.
+* Man nimmt den **allerersten rohen Metallklotz** aus der Kiste. Das ist das **Erstteil**.
+* Dieses erste Teil wird mit maximaler Vorsicht gefräst, danach ausgespannt, mit dem Messschieber und Mikrometer komplett vermessen und geprüft. Erst wenn dieses Erstteil zu 100 % perfekt ist, darf die Maschine die restlichen 499 Teile automatisch in Serie produzieren.
+
+##### 2. Was bedeutet „Einfahren“ *(Prove-Out / Run-In)*?
+* „Einfahren“ nennt man den Übergang von der Theorie am Computer *(CAD/CAM & Postprozessor)* in die harte physische Realität der Werkshalle.
+* Es bedeutet: Ein neues CNC-Programm zum allerersten Mal auf der Maschine abspielen, um zu prüfen, ob die Drehrichtung stimmt, die Späne sauber fliegen, das Werkzeug nirgends aneckt und kein Maß falsch ist.
+
+##### 3. Was ist der „Einzelsatz“ *(Single Block)*?
+* Normalerweise arbeitet ein CNC-Computer vollautomatisch: Wenn Sie auf Start drücken, rast das Programm von Zeile 1 bis Zeile 2.000 ohne Pause im Sekundentakt durch.
+* Auf dem Bedienpult der Fräsmaschine *(egal ob Haas, Siemens, Heidenhain oder Fanuc)* gibt es eine Taste mit der Aufschrift:  
+  👉 **`SINGLE BLOCK` *(Einzelsatz)***.
+* **Was passiert, wenn diese Taste aktiv ist?**  
+  Die Steuerung führt **nur eine einzige Zeile G-Code** aus *(z. B. `N70 G00 Z15.0`)* und **stoppt danach sofort mitten im Raum**!  
+  Die Spindel dreht sich weiter, aber die Achsen bleiben stehen. Die Maschine wartet, bis der Bediener mit den Augen geprüft hat, dass alles sicher ist, und erneut auf den grünen Start-Knopf drückt. So wird Satz für Satz *(Zeile für Zeile)* einzeln abgearbeitet.  
+  *(Genau das macht in unserem Browser-Simulator der Knopf **„⏭ Nächster Schritt“**!)*
+
+##### 4. Was ist das „Vorschub-Poti“ *(Feedrate Override Potentiometer)*?
+* An jedem CNC-Bedienpult gibt es einen großen, geriffelten Drehknopf mit einer Prozent-Skala von **`0 %` bis `150 %`**. Das ist ein Potentiometer *(elektrischer Drehregler)*.
+* Das ist das **Gaspedal und die Notbremse** des Fräsers:
+  * Dreht man den Knopf auf **`0 %`**: Die Bewegung friert augenblicklich in der Luft ein *(0 mm/min Vorschub)*.
+  * Dreht man auf **`10 %`**: Die Achsen schleichen im Schneckentempo *(z. B. nur 50 mm/min statt 500 mm/min)*.
+* **Was bedeutet „mit der Hand am Poti“?**  
+  Der Zerspanungsmechaniker lässt seine rechte Hand während des gesamten ersten Durchlaufs **fest auf diesem Drehknopf** liegen! Seine Finger umschließen den Knopf. Wenn das Werkzeug sich dem Metallklotz nähert, dreht er das Poti auf 10 % herunter. Sieht irgendetwas verdächtig oder zu eng aus, reißt er den Knopf in 0,05 Sekunden nach links auf **0 %** – die Maschine steht augenblicklich still, noch bevor etwas berührt wird!  
+  *(In unserem Browser-Simulator ist das der Schieberegler **„Geschwindigkeit: 0.05x bis 1.5x“**!)*
+
+##### 5. Was ist die „Restweganzeige“ *(Distance-to-Go)*?
+* Auf dem Computer-Bildschirm der CNC-Steuerung gibt es neben den absoluten Koordinaten ein großes Zahlenfeld mit der Überschrift **`RESTWEG` *(Distance-to-go / Verbleibender Weg)***.
+* Es beantwortet die Frage: *„Wie viele Millimeter will das Werkzeug in diesem Satz noch fahren, bis es am Zielpunkt ankommt?“*
+* **Das lebensrettende Werkstatt-Szenario:**
+  1. Der Bohrer fährt von oben nach unten auf das Werkstück zu.
+  2. Der Fräser dreht das Poti auf 10 % herunter.
+  3. Er blickt durch die Scheibe: **Das Werkzeug ist mit den Augen sichtbar nur noch $3\,\text{mm}$ von der Werkstückoberkante entfernt!**
+  4. Er blickt auf den Bildschirm auf die **Restweganzeige**: Dort steht: **`Z: noch -38.000 mm`**!
+  5. Der Fräser erkennt den tödlichen Widerspruch in einer Sekunde:  
+     *„Halt! Die Maschine will noch 38 mm nach unten rasen, aber das Metall kommt schon in 3 mm! Wenn ich sie weiterfahren lasse, rammt der Bohrer 35 mm tief ins feste Metall und zerschlägt den Schraubstock!“*
+  6. **Reaktion:** Poti auf 0 %, Not-Aus! Ursache suchen: Entweder wurde der Nullpunkt `G54` falsch angetastet oder die Werkzeuglänge `H` falsch vermessen.
+  7. **Ergebnis:** Null Schaden, Null Crash – dank dem Blick auf die Restweganzeige!
+
+---
+
+#### 9. Häufige Frage zum Simulator: Warum zeigt die Anfahrbewegung außerhalb des Werkstücks eine BLAUE Linie (`G01`) statt einer GELB GESTRICHELTEN Linie (`G00`)?
+
+Wenn man das Programm im [3D-Simulator](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html) abspielt, fällt sofort etwas Verblüffendes auf:
+Ganz zu Beginn von Operation 1 steht der Fräser bei `X -10.0 Y -10.0 Z -5.0` – also scheinbar völlig frei in der Luft außerhalb des Bauteils.
+Doch wenn er von dort zur Ecke `X0 Y0` fährt, zeichnet der Simulator **keine gelbe gestrichelte Eilgang-Linie (`G00`)**, sondern eine **durchgezogene BLAUE Linie (`G01 F1200`)**!
+Warum ist das so? Warum fährt die Maschine diesen Weg nicht im schnellen Eilgang?
+
+---
+
+### 📸 Exaktes CAD-Diagramm: Warum die Anfahrbewegung (Lead-In) BLAU ist & Kollisionsschutz bei Rohteil-Aufmaß
+
+Hier ist die maßstabsgetreue CAD-Zeichnung mit 2D-Draufsicht und Schritt-für-Schritt-G-Code-Analyse, die genau erklärt, warum hier zwingend mit Vorschub `G01` geschnitten werden muss:
+
+![Physikalische Erklärung der Anfahrbewegung Lead-In und Kollisionsschutz bei Rohteil-Übermaß](file:///c:/Projekte/CNC/docs/bilder/cnc_anfahrbewegung_lead_in_erklaerung.jpg)
+
+---
+
+##### 1. Der physikalische Grund: Das Rohteil-Übermaß *(Stock Allowance / Rohteilaufmaß)*
+
+* Ein fertiges Bauteil fällt niemals magisch aus der Luft: Es wird aus einem **größeren rohen Metallblock *(Rohteil)*** herausgefräst!
+* Unser fertiges Bauteil misst **$80 \times 50\,\text{mm}$**.
+* Das Rohteil, das der Arbeiter in den Schraubstock spannt, misst jedoch **$85 \times 55\,\text{mm}$**!
+* Das bedeutet: An allen vier Außenkanten stehen noch **$2{,}5\,\text{mm}$ rohes Aluminium *(Rohteilaufmaß)*** über die Fertigteil-Kontur hinaus!
+* Wenn der Nullpunkt `G54` auf der vorderen linken Fertigteilecke liegt (`X = 0`, `Y = 0`), beginnt das echte Metall in Wirklichkeit schon bei:
+  * **$X = -2{,}5\,\text{mm}$** *(links)*
+  * **$Y = -2{,}5\,\text{mm}$** *(vorne)*
+
+##### 2. Was würde passieren, wenn die Maschine hier im Eilgang (`G00`) fahren würde? *(CRASH-SZENARIO)*
+
+1. Der Eilgang **`G00`** *(Rapid Move)* fährt mit Höchstgeschwindigkeit: üblicherweise **$30.000\,\text{mm/min}$** *(30 Meter in der Minute bzw. 1.800 km/h im Zerspanungsmaßstab)*!
+2. Im Eilgang ist die Frässpindel **nicht** darauf ausgelegt, Material zu berühren. Es ist eine reine Eilfahrt durch die freie Luft.
+3. Wenn der Programmierer befehlen würde:
+   ```gcode
+   N50 G00 X0.0 Y0.0 Z-5.0  (LEBENSGEFÄHRLICHER CRASH-BEFEHL!)
+   ```
+   dann rast der $\varnothing 10\,\text{mm}$ Fräser mit $30\,\text{m/min}$ in voller Fahrt **mitten in das $2{,}5\,\text{mm}$ dicke Rohteil-Aluminium hinein**!
+4. **Das verheerende Ergebnis:**
+   * Ein Fräser kann bei $30\,\text{m/min}$ keine Späne abführen.
+   * Der Fräser explodiert in Sekundenbruchteilen mit einem lauten Knall in hunderte messerscharfe Hartmetallsplitter.
+   * Die Kugelgewindetriebe und die Spindellagerung der Maschine erleiden einen irreparablen Stoßschaden *(Reparaturkosten: 5.000 € bis 15.000 €)*.
+   * Das Werkstück wird aus dem Schraubstock gerissen.
+
+##### 3. Die professionelle CAM-Lösung: Der sichere Anfahrweg *(Lead-In / Rampen-Anfahrt)*
+
+Genau deshalb erzeugen professionelle CAM-Systeme *(wie Autodesk Fusion 360)* und unser Postprozessor die sogenannte **Lead-In-Bewegung *(Schnittanfahrt)***:
+
+```
+┌───────────────────────────────────────────────────────────────────────────────────────┐
+│ DIE 4-PHASEN-SICHERHEITSKETTE BEIM ANFAHREN DER AUSSENKONTUR                         │
+└───────────────────────────────────────────────────────────────────────────────────────┘
+  1. G00 Eilgang in sichere Luft:
+     N45 G00 X-10.0 Y-10.0 Z2.0    --> Gelbe gestrichelte Linie: 10 mm Sicherheitsabstand!
+        │
+        ▼
+  2. G01 Senkrecht auf Frästiefe abtauchen:
+     N50 G01 Z-5.0 F500            --> Blaue Linie: Taucht in der freien Luft sanft ab.
+        │
+        ▼
+  3. G01 Lead-In: Horizontales Schneiden durch das Rohteil:
+     N55 G01 X0.0 Y0.0 F1200       --> DAS IST DEINE BLAUE LINIE! Schneidet mit geregeltem
+                                       Vorschub F1200 mm/min sanft durch das 2.5 mm Aufmaß!
+        │
+        ▼
+  4. G01 Fertigkontur fräsen:
+     N60 G01 X80.0 Y0.0 F1200      --> Fräst spiegelblank an der Fertigteilkante entlang.
+```
+
+##### 4. Fazit und eiserne Zerspanungs-Regel:
+
+* **Gelb gestrichelt (`G00` Eilgang):** Darf im CNC-Programm **ausschließlich dann verwendet werden**, wenn das Werkzeug sich mit $100\,\%$iger Sicherheit frei in der Luft befindet *(über dem Werkstück bei $Z > 0$ oder mit großzügigem Sicherheitsabstand neben dem Rohteil)*.
+* **Blau durchgezogen (`G01` Vorschub):** Sobald das Werkzeug sich auf Bearbeitungstiefe ($Z = -5{,}0\,\text{mm}$) befindet und sich dem Rohteil nähert, **MUSS** jede Bewegung mit geregeltem Arbeitsvorschub (`F...`) programmiert sein. Selbst wenn die Koordinate noch außerhalb der Fertigteilkante liegt, schneidet sie bereits in das Rohteilaufmaß ein!
+
+---
+
+#### 10. Wie wird der „Sicherheits-Anschnitt im Arbeitsvorschub“ (Lead-In) exakt definiert und berechnet?
+
+Hinter dem Begriff **„Sicherheits-Anschnitt im Arbeitsvorschub“ *(Lead-In / Anfahrweg / Schnittanfahrt)*** steckt ein präziser mathematischer und fertigungstechnischer Standard. Hier ist die Definition, die Parameter im CAM-System und die geometrische Formel Schritt für Schritt erklärt:
+
+##### 1. Definition des Begriffs
+
+> **Definition Lead-In *(Sicherheits-Anschnitt / Anfahrbewegung)*:**  
+> Der Lead-In ist eine gezielt programmierte Verfahrbewegung vor dem eigentlichen Fräsen der Kontur. Er führt das Werkzeug von einem berührungsfreien Startpunkt in der freien Luft mit geregeltem **Arbeitsvorschub (`G01`, `G02` oder `G03`)** sanft in das Material hinein.  
+> **Die zwei Hauptaufgaben:**
+> 1. **Kollisionsschutz:** Gefahrloses Durchschneiden des überstehenden Rohteilaufmaßes ohne Eilgang-Crash.
+> 2. **Oberflächengüte:** Vermeidung von Stoßstellen, Rattermarken *(Vibrationen)* oder Werkzeugabdrücken auf der fertigen Werkstückkante.
+
+---
+
+##### 2. Wo wird das im CAM-System (Autodesk Fusion 360) definiert?
+
+Wenn Sie im CAM-System eine 2D- oder 3D-Fräsoperation anlegen *(z. B. 2D-Kontur)*, finden Sie diese Einstellungen im Operationen-Dialog unter dem **5. Reiter: „Verknüpfungen *(Linking)*“** im Bereich **„Anfahren & Wegfahren *(Lead-In & Lead-Out)*“**:
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ CAM-EINSTELLUNGEN IN AUTODESK FUSION 360 (REITER: LINKING / VERKNÜPFUNGEN)            │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+  ☑ Anfahren verwenden (Lead-In)
+  ├─ Linearer Anfahrweg (Linear Lead-In Distance):     5.0 mm bis 10.0 mm
+  ├─ Anfahrradius (Lead-In Radius):                     5.0 mm (oft gleich Werkzeugradius)
+  ├─ Anfahrwinkel (Sweep Angle):                        45° oder 90°
+  └─ Sicherheitsabstand (Clearance / Safe Distance):    2.0 mm bis 5.0 mm
+  
+  Vorschub-Einstellungen (Reiter: Tool / Werkzeug):
+  ├─ Schnittvorschub (Cutting Feedrate):                F1200 mm/min (100 %)
+  ├─ Anfahrvorschub (Lead-In Feedrate):                 F1200 mm/min (100 %)
+  └─ Eintauchvorschub (Plunge Feedrate):                F500 mm/min  (ca. 30–50 % von F)
+```
+
+---
+
+##### 3. Die mathematische Berechnung der Startkoordinate $(X_{\text{start}}, Y_{\text{start}})$
+
+Wie kommt das System auf die konkreten Koordinaten `X -10.0 Y -10.0`?
+
+Hier sind die realen Werte unseres Kundenbauteils:
+* **Soll-Kontur *(Fertigteil)***: $80 \times 50\,\text{mm}$ mit Nullpunkt `G54` auf der Ecke:
+  $$\text{Fertigteilecke} = (X_0, Y_0) = (0{,}0\,\text{mm}, 0{,}0\,\text{mm})$$
+* **Rohteil-Aufmaß *(Stock Allowance $a_{\text{stock}}$)***:
+  An jeder Kante stehen $2{,}5\,\text{mm}$ rohes Aluminium über:
+  $$X_{\text{rohteil}} = -2{,}5\,\text{mm}, \quad Y_{\text{rohteil}} = -2{,}5\,\text{mm}$$
+* **Werkzeug-Radius *(Tool Radius $R_{\text{fr}}$)***:
+  Fräser-Durchmesser $D = 10{,}0\,\text{mm} \implies R_{\text{fr}} = \frac{D}{2} = 5{,}0\,\text{mm}$.
+* **Gewünschter Mindest-Luftspalt *(Sicherheitsabstand in der Luft $d_{\text{luft}}$)***:
+  Mindestens $2{,}0\,\text{mm}$ bis $3{,}0\,\text{mm}$ freie Luft zwischen Fräserschneide und Rohteilkante.
+
+###### Die Formel für den linearen Mindestabstand in einer Achse:
+$$X_{\text{Offset}} = a_{\text{stock}} + R_{\text{fr}} + d_{\text{luft}}$$
+Setzen wir unsere Werte ein:
+$$X_{\text{Offset}} = 2{,}5\,\text{mm} + 5{,}0\,\text{mm} + 2{,}5\,\text{mm} = \mathbf{10{,}0\,\text{mm}}$$
+
+Da der Anfahrvektor symmetrisch unter $45^\circ$ auf die Ecke zielt, gilt für beide Achsen:
+$$X_{\text{start}} = X_0 - X_{\text{Offset}} = 0 - 10{,}0\,\text{mm} = \mathbf{-10{,}000\,\text{mm}}$$
+$$Y_{\text{start}} = Y_0 - Y_{\text{Offset}} = 0 - 10{,}0\,\text{mm} = \mathbf{-10{,}000\,\text{mm}}$$
+
+###### Der mathematische Sicherheits-Check *(Abstand Fräserkante zu Rohteil)*:
+* Abstand des Fräser-Mittelpunkts $(-10, -10)$ zur Rohteil-Außenecke $(-2{,}5, -2{,}5)$:
+  $$\Delta X = |-10 - (-2{,}5)| = 7{,}5\,\text{mm}$$
+  $$\Delta Y = |-10 - (-2{,}5)| = 7{,}5\,\text{mm}$$
+  $$\text{Abstand Mittelpunkt } d = \sqrt{\Delta X^2 + \Delta Y^2} = \sqrt{7{,}5^2 + 7{,}5^2} = \sqrt{112{,}5} \approx \mathbf{10{,}61\,\text{mm}}$$
+* Da die Fräserschneide einen Radius von $R_{\text{fr}} = 5{,}0\,\text{mm}$ hat, beträgt der tatsächliche Luftspalt zwischen der äußersten Schneide und dem Rohteil:
+  $$\text{Luftspalt} = d - R_{\text{fr}} = 10{,}61\,\text{mm} - 5{,}0\,\text{mm} = \mathbf{5{,}61\,\text{mm}}$$
+
+👉 **Ergebnis:** Beim senkrechten Eintauchen auf $Z = -5{,}0\,\text{mm}$ hat der Fräser **$5{,}61\,\text{mm}$ völlig freie Luft rund um seine Schneiden**. Er berührt absolut gar nichts.
+
+Erst beim anschließenden horizontalen Verfahren entlang der blauen Linie `G01 X0 Y0 F1200` durchquert er die $5{,}61\,\text{mm}$ Luft und schneidet dann mit genau $1.200\,\text{mm/min}$ sauber durch das $2{,}5\,\text{mm}$ Rohteilaufmaß, bis er exakt an der Sollkante `(0, 0)` ankommt.
+
+---
+
+##### 4. Die zwei gängigen Lead-In-Formen in der Zerspanung:
+
+| Lead-In-Typ | G-Code-Befehle | Form der Anfahrbahn | Wann wird es verwendet? |
+|---|---|---|---|
+| **1. Linearer Lead-In *(Geradlinig)*** | `G01 X... Y... F...` | Gerade Schräglinie *(wie bei unserer Übung 3)* | Sehr einfach, ideal zum Start an offenen Ecken oder Rohteilrändern. |
+| **2. Tangentialer Kreisbogen *(Circular Arc)*** | `G03 X... Y... R... F...` oder `G02` | Sanfter $90^\circ$- oder $45^\circ$-Viertelkreisbogen | Standard bei Passungen und Sichtkanten: Das Werkzeug schmiegt sich tangential an, sodass auf der Bauteilwand kein minimaler Ansatzstreifen entsteht. |
+
+---
+
+#### 11. Wo und wann wird der Lead-In in unserem konkreten Software-Projekt berechnet?
+
+Um als Entwickler die Software-Architektur zu verstehen, muss man die klare **Aufgabenteilung zwischen dem CAM-System und dem Postprozessor** kennen:
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ DIE SOFTWARE-ARCHITEKTUR: WER BERECHNET WAS UND WANN?                                 │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+  1. SCHRITT: GEOMETRIE-BERECHNUNG (CAM-System / simuliere_post.js)
+  ├─ WO?    In tests/simuliere_post.js (Zeilen 89–108) bzw. im CAM-Kernel von Autodesk Fusion
+  ├─ WANN?  Beim Start des Befehls: node tests/simuliere_post.js ...
+  └─ WAS?   Rechnet X-10 Y-10 Z-5 und den Vektor nach X0 Y0 aus
+            und feuert das Ereignis: onLinear(0.0, 0.0, -5.0, 1200)
+                    │
+                    ▼
+  2. SCHRITT: G-CODE TEXT-FORMATIERUNG (Postprozessor / .cps)
+  ├─ WO?    In uebungen/uebung_03_z_min_berechnung.cps (Zeilen 141–147) & mein_erster_post.cps
+  ├─ WANN?  In der Sekunde, in der die Funktion onLinear() die Zahlenwerte empfängt
+  └─ WAS?   Nimmt (0.0, 0.0, -5.0, 1200) entgegen und druckt den sauberen Text:
+            G01 X0.000 Y0.000 Z-5.000 F1200
+```
+
+##### 1. Wo steht das ganz konkret in unserem Code?
+
+1. **Die CAM-Ereignisse in [`tests/simuliere_post.js`](file:///C:/Projekte/CNC/tests/simuliere_post.js#L95-L107):**
+   In unserer Node.js-Testumgebung simuliert `simuliere_post.js` das Verhalten von Autodesk Fusion 360. In Zeilen 95–107 wird genau dieser Ablauf aufgerufen:
+   ```javascript
+   // 1. Eilgang in die sichere Luft (10 mm vor das Werkstück):
+   sandbox.onRapid(-10.0, -10.0, 2.0);
+
+   // 2. Senkrecht auf Frästiefe abtauchen (außerhalb des Rohteils):
+   sandbox.onLinear(-10.0, -10.0, -5.0, 500);
+
+   // 3. HIER IST DER LEAD-IN: Mit Vorschub ins Rohteil einfahren:
+   sandbox.onLinear(0.0, 0.0, -5.0, 1200);
+   ```
+
+2. **Die Übersetzung im Postprozessor in [`uebungen/uebung_03_z_min_berechnung.cps`](file:///C:/Projekte/CNC/uebungen/uebung_03_z_min_berechnung.cps#L141-L147):**
+   Der Postprozessor (`.cps`) rechnet die Fräsbahn nicht selbst aus – er ist ein **Compiler *(Code-Übersetzer)***. Er nimmt die fertigen Raumpunkte entgegen und formatiert sie:
+   ```javascript
+   function onLinear(x, y, z, feed) {
+     var xStr = xOutput.format(x);
+     var yStr = yOutput.format(y);
+     var zStr = zOutput.format(z);
+     var fStr = feedOutput.format(feed);
+     writeWords("G01", xStr, yStr, zStr, fStr);
+   }
+   ```
+   Daraus entsteht im fertigen NC-Programm die Zeile:
+   ```gcode
+   N55 G01 X0.000 Y0.000 Z-5.000 F1200
+   ```
+
+##### 2. Wie läuft es in der Industrie-Praxis (mit Autodesk Fusion 360)?
+* **WANN?** Genau in der Sekunde, in der Sie im CAM-Programm mit der rechten Maustaste auf die Operation klicken und **„Werkzeugweg generieren *(Generate)*“** wählen.
+* **WO?** Im mathematischen Geometriekern von Autodesk. Dort werden 3D-Modell, Rohteilaufmaß und Fräsergeometrie verrechnet.
+* Wenn Sie anschließend auf **„Postprozessieren *(Post Process)*“** klicken, übergibt Fusion 360 diese fertig berechneten Punkte als Ereignisse an unsere Datei [`src/mein_erster_post.cps`](file:///C:/Projekte/CNC/src/mein_erster_post.cps).
+
+---
+
+#### 12. Warum stehen in `tests/simuliere_post.js` feste Zahlen *(Hardcoded Coordinates)*?
+
+Das ist eine **exzellente Programmierer-Frage**! Wenn man sich `tests/simuliere_post.js` ansieht:
+
+```javascript
+sandbox.onLinear(-10.0, -10.0, -5.0, 500);
+sandbox.onLinear(0.0, 0.0, -5.0, 1200);
+sandbox.onLinear(80.0, 0.0, -5.0, 1200);
+```
+
+stellt sich sofort die Frage: *„Warum tippen wir hier feste Zahlen wie `-10.0`, `0.0`, `80.0` oder `1200` von Hand ein? Müsste das nicht dynamisch für jedes beliebige Bauteil der Welt berechnet werden?“*
+
+Die Antwort liegt im Unterschied zwischen **zwei völlig verschiedenen Werkzeugen**:
+
+##### 1. Was ist `tests/simuliere_post.js`? *(Ein Test-Dummy / Mock-Prüfstand)*
+* **Der Zweck von `simuliere_post.js`:**  
+  Sie möchten Ihren Postprozessor (`.cps`) in Visual Studio Code in 0,1 Sekunden testen, **ohne** jedes Mal das riesige, 2-Gigabyte schwere CAD-Programm *Autodesk Fusion 360* starten zu müssen.
+* In der professionellen Softwareentwicklung nennt man das ein **Mock-Objekt *(Test-Dummy / synthetischer Prüfstand)***:
+  * `simuliere_post.js` tut so, als wäre es Autodesk Fusion 360.
+  * Und welches Werkstück simuliert es? **Genau unsere Flanschplatte aus Übung 4 und dem Kundenauftrag 1** ([`kundenauftrag_01_flanschplatte/bauteil_1001.stl`](file:///c:/Projekte/CNC/kundenauftrag_01_flanschplatte/bauteil_1001.stl))!
+  * Diese Platte hat exakt die festen Maße **$80 \times 50\,\text{mm}$**, eine Dicke von **$12\,\text{mm}$**, eine Frästiefe von **$-5\,\text{mm}$**, eine Kreistasche in der Mitte bei **$(40, 25)$** und 4 Bohrungen bei **$(10, 10)$ bis $(70, 40)$**.
+* **Warum feste Zahlen?**  
+  Damit automatisierte Tests *(Unit-Tests)* **reproduzierbar *(deterministisch)*** sind! Jedes Mal, wenn Sie `node tests/simuliere_post.js` ausführen, müssen exakt dieselben Zahlen herauskommen, damit wir den erzeugten G-Code mit [`tests/output_expected.nc`](file:///C:/Projekte/CNC/tests/output_expected.nc) vergleichen können.
+
+---
+
+##### 2. Wo stehen die dynamischen Variablen? *(Im Postprozessor `.cps`)*
+
+Schauen Sie sich im Vergleich dazu Ihre Postprozessor-Datei an ([`uebungen/uebung_03_z_min_berechnung.cps`](file:///C:/Projekte/CNC/uebungen/uebung_03_z_min_berechnung.cps#L141-L147) bzw. [`src/mein_erster_post.cps`](file:///C:/Projekte/CNC/src/mein_erster_post.cps)):
+
+```javascript
+function onLinear(x, y, z, feed) {
+  var xStr = xOutput.format(x);
+  var yStr = yOutput.format(y);
+  var zStr = zOutput.format(z);
+  var fStr = feedOutput.format(feed);
+  writeWords("G01", xStr, yStr, zStr, fStr);
+}
+```
+
+👉 **Im Postprozessor steht KEINE EINZIGE feste Zahl!**  
+* Hier stehen **ausschließlich Variablen**: `x`, `y`, `z` und `feed`.
+* Unser Postprozessor funktioniert daher für **JEDES Bauteil der Welt**:
+  * Egal ob eine $2.000\,\text{mm}$ lange Flugzeug-Tragfläche,
+  * ein winziges $3\,\text{mm}$ Zahnrad für eine Armbanduhr,
+  * oder ein Zylinderkopf mit 50.000 Freiform-Punkten!
+
+---
+
+##### 3. Wer berechnet die Zahlen in der echten Realität dynamisch? *(Autodesk Fusion 360)*
+
+Wenn Sie Ihren Postprozessor später in Autodesk Fusion 360 einbinden:
+1. Sie öffnen eine beliebige 3D-CAD-Datei *(z. B. ein Kundenteil mit $123{,}4\,\text{mm} \times 67{,}8\,\text{mm}$)*.
+2. Fusion 360 liest die 3D-Kanten ein, berechnet den Fräserradius und den Lead-In vollautomatisch.
+3. Fusion ruft Ihren Postprozessor auf:
+   ```javascript
+   // Fusion übergibt live die echten Maße des neuen Kundenteils:
+   onLinear(123.4, 67.8, -10.0, 1500);
+   ```
+4. Ihr Postprozessor nimmt die Variablen entgegen und druckt den perfekten G-Code:
+   ```gcode
+   N120 G01 X123.400 Y67.800 Z-10.000 F1500
+   ```
+
+##### 💡 Zusammenfassung:
+* **In `tests/simuliere_post.js`:** Feste Zahlen als **fester Prüfstein *(Benchmark-Referenzbauteil Flanschplatte 80x50 mm)***, um den Code ohne CAD-Software blitzschnell testen zu können.
+* **In `.cps` *(Postprozessor)*:** Reiner dynamischer Code mit Variablen `(x, y, z, feed)`, universell für jedes Kundenbauteil der Welt.
+* **In Autodesk Fusion 360:** Der mathematische Geometriekern, der die Variablen live aus dem 3D-Modell berechnet und an den Postprozessor weiterreicht.
+
+---
+
 # Übung 4: Ein 3D-Modell als Kundenauftrag bearbeiten (Vom 3D-Bauteil zum G-Code)
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 4
@@ -1337,6 +2277,47 @@ Der Arbeiter an der Maschine sieht sofort: **`T02` fährt bis `Z-12.000MM`** –
 | **`M05`** | **Spindel-Stopp *(Spindle Stop)*** | Hält die Spindeldrehung sicher an. |
 | **`G53`** | **Maschinen-Koordinatensystem *(Machine Coordinate System)*** | Fährt bezogen auf den absoluten Maschinen-Nullpunkt *(z. B. Spindel ganz nach oben `Z0`)*. |
 | **`M30`** | **Hauptprogramm-Ende *(Program End and Rewind)*** | Beendet das CNC-Programm und setzt den Programmzeiger auf Zeile 1 zurück. |
+
+### 🧭 Häufige Frage: Warum sieht `G54 (X0 Y0 Z0)` im 3D-Simulator wie die „hintere linke Ecke“ aus und nicht wie vorne?
+
+Auf dem 3D-Screenshot fällt sofort auf: Die Ecke mit dem Schild `G54 (X0 Y0 Z0)` liegt im Bild optisch weiter oben/hinten, während die grüne Y-Achse nach schräg vorne unten auf den Betrachter zu läuft. Warum ist das so?
+
+Hier treffen **zwei Dinge** aufeinander: Eine **optische 3D-Perspektive** und die **physische DIN-Norm der Fräsmaschine**:
+
+#### 1. Die optische Täuschung durch den 3D-Kamerawinkel
+* Im [3D-Simulator](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html) blickt die virtuelle Kamera von schräg links oben auf das Werkstück.
+* In diesem Blickwinkel läuft die grüne Linie *(die Y-Achse)* schräg nach vorne unten auf Ihren Bildschirm zu.
+* Weil die grüne Linie nach vorne wächst *(von `Y = 0` bis `Y = +50 mm`)*, erscheint die Ecke bei `Y = +50` optisch im Vordergrund – und der Nullpunkt `Y = 0` wirkt, als läge er „hinten“.
+* **Probieren Sie es im Simulator aus:** Klicken Sie mit der linken Maustaste in das 3D-Fenster und drehen Sie das Modell nach Wunsch.
+* **Neuer Standard-Startwinkel:** Wir haben den Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html#L876) nun dauerhaft auf diesen natürlichen Fräser-Blickwinkel (`rotZ = -2.05`) voreingestellt. Wenn Sie den Simulator öffnen oder auf `🎥 3D-Ansicht Reset` klicken, liegt die `G54`-Nullpunkt-Ecke jetzt von der ersten Sekunde an immer direkt vorne links im Vordergrund!
+
+#### 2. Wie ist es an der ECHTEN Fräsmaschine in der Werkhalle?
+
+Hier ist die neue technische 3D-Gesamtübersicht, die genau zeigt, **wo der Mensch steht**, **wohin er blickt** und wie die Achsen zu seinem Körper ausgerichtet sind:
+
+![Bediener-Standort, Blickrichtung und Achsen an der CNC-Maschine](file:///c:/Projekte/CNC/docs/bilder/cnc_operator_standort_koordinaten.jpg)
+
+Hier ist das reale Werkstatt-Foto genau dieser Situation – der Blickwinkel des Zerspanungsmechanikers von vorne durch die geöffnete Maschinentür:
+
+![Echte Fräsmaschine: 3D-Messtaster tastet G54 Nullpunkt an der vorderen linken oberen Ecke ab](file:///c:/Projekte/CNC/docs/bilder/cnc_g54_nullpunkt_ecke.jpg)
+
+* **Was Sie auf diesen Darstellungen glasklar erkennen:**
+  * **Standort des Menschen:** Der Zerspanungsmechaniker steht direkt **vor der geöffneten Kabinentür** am Bedienpult.
+  * **Blickrichtung *(Line of Sight)***: Sein Blick wandert von der Tür geradeaus nach vorne in die Tiefe der Maschine direkt auf den Maschinenschraubstock.
+  * **🔴 Roter Pfeil ($+X$):** Zeigt von der linken Hand zur **rechten Hand** *(nach rechts entlang der Vorderkante)*.
+  * **🟢 Grüner Pfeil ($+Y$):** Zeigt vom Bauch des Bedieners **nach hinten in die Tiefe der Maschine** *(vom Menschen weg zur Maschinenrückwand)*.
+  * **🔵 Blauer Pfeil ($+Z$):** Zeigt von unten nach **oben zur Frässpindel / Decke**.
+  * 👉 **G54 Nullpunkt-Lage:** Die **vordere linke obere Ecke** ist dem Menschen körperlich am nächsten *(links vorne)* und lässt sich mit dem 3D-Messtaster durch die geöffnete Tür am einfachsten ankratzen!
+
+#### 3. Kann man den Nullpunkt auch auf eine andere Ecke legen?
+**JA!** Im CAM-System *(Autodesk Fusion 360)* kann der Programmierer im Menü **Setup *(Aufspannung)*** völlig frei wählen:
+* Vordere linke Ecke *(Standard)*
+* Vordere rechte Ecke
+* Bauteil-Mitte *(besonders beliebt bei runden Flanschen oder Gussrohteilen)*
+* Hintere linke Ecke
+* Unterseite des Teils *(z. B. auf den Schraubstockbacken)*
+
+Warum wählt man zu 90 % die vordere linke obere Ecke? Weil der Fräser mit seinem Messtaster oder Kantensucher bei geöffneter Tür am leichtesten an die vordere linke Kante herankommt!
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -2310,6 +3291,26 @@ Warum mussten wir einen `15 mm` dicken Block nehmen, wenn das fertige Teil nur `
   1. **1. Aufspannung (`OP10` mit Nullpunkt `G54`):** Oberseite planfräsen, Außenkontur bis `12,5 mm` Tiefe umfräsen, Taschen und Löcher fertigen. Unten bleibt ein `3 mm` dicker „Hutrand“ stehen.
   2. **Bauteil umdrehen (`OP20` mit zweitem Nullpunkt `G55`):** Der Arbeiter nimmt das Teil aus dem Schraubstock, dreht es auf den Kopf, spannt es in einen zweiten Schraubstock (mit Nullpunkt **`G55`**) und fräst den übrig gebliebenen `3 mm` Boden weg + entgratet die unteren Kanten!
 
+---
+
+### 📸 Zweisprachiges 3D-Schema zu Übung 10: 1. vs. 2. Aufspannung (OP10 vs. OP20 / G54 vs. G55)
+
+Hier siehst du den Ablauf des zweistufigen Fertigungsprozesses mit allen deutschen und englischen Fachbegriffen im Überblick:
+
+![1. und 2. Aufspannung OP10 und OP20 mit G54 und G55](file:///c:/Projekte/CNC/docs/bilder/cnc_op10_op20_setup.jpg)
+
+#### Zweisprachige Begriffserklärung zum Bild *(Bilingual Terminology)*:
+* **Links – 1. Aufspannung / Setup 1 (`OP10` mit `G54`):**
+  * `Werkstücknullpunkt G54 / Work Coordinate System G54 (WCS 1)`: Bezugspunkt auf der Bauteil-Oberkante vorne links *(direkt an der dem Bediener zugewandten Kante)*.
+  * `Rohteil-Spannrand / Raw Stock Clamping Margin (3 mm)`: Der untere Bereich des Aluminiumblocks, der fest im Maschinenschraubstock *(Machine Vise)* eingespannt ist.
+  * `Schaftfräser / Solid Carbide End Mill`: Fräst die Kontur, die Tasche und die Bohrungen von oben, ohne die Spannbacken zu berühren.
+* **Rechts – 2. Aufspannung / Setup 2 (`OP20` mit `G55`):**
+  * `180° umgedreht / Flipped 180°`: Das Werkstück wird gewendet und auf präzise Parallelunterlagen *(Parallels)* oder weiche Backen *(Soft Jaws)* gelegt.
+  * `Zweiter Nullpunkt G55 / Second Datum G55 (WCS 2)`: Neuer Höhenbezugspunkt auf der bereits fertigen Referenzfläche.
+  * `Planfräser / Face Mill`: Ein Messerkopf mit Wendeschneidplatten fräst die verbliebenen 3 mm Spannrand ab (`Face Milling to Final Height`), sodass das Bauteil exakt auf sein Sollmaß *(12,0 mm)* gebracht wird.
+
+---
+
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
@@ -2534,6 +3535,25 @@ Wenn der Kunde auf der Zeichnung eine hochpräzise **Passung *(z. B. $\varnothin
 * **`G41` *(Cutter Compensation Left)***: Schaltet die Korrektur **links** von der Fahrtrichtung ein (Standard beim **Gleichlauffräsen *(Climb Milling)***).
 * **`G42` *(Cutter Compensation Right)***: Schaltet die Korrektur **rechts** von der Fahrtrichtung ein.
 * **`G40` *(Cancel Cutter Compensation)***: Schaltet die Korrektur nach dem Schlichtschnitt wieder **aus**.
+
+---
+
+### 📸 Zweisprachiges 3D-Schema zu Übung 12: Werkzeugradiuskorrektur (G41 / G42 / G40 & Cutter Radius Compensation)
+
+Hier siehst du, wie die Werkzeugradiuskorrektur zwischen programmierter Fertigteil-Kontur und der tatsächlichen Spindel-Mittelpunktsbahn unterscheidet:
+
+![Werkzeugradiuskorrektur G41 G42 und G40](file:///c:/Projekte/CNC/docs/bilder/cnc_cutter_radius_compensation_g41_g42.jpg)
+
+#### Zweisprachige Begriffserklärung zum Bild *(Bilingual Terminology)*:
+* `Fertigteil-Kontur / Finished Part Contour (Sollmaß)`: Die im G-Code programmierte Soll-Geometrie des Werkstücks (entspricht exakt der bemaßten Konstruktionszeichnung).
+* `Werkzeugmittelpunktsbahn / Tool Centerline Path (G40)`: Der Verfahrweg der Spindelmitte, der um den Radius $R$ parallel versetzt verläuft.
+* `Werkzeugradius R / Tool Radius R`: Der reale Fräserradius (z. B. $5{,}00\,\text{mm}$ bei einem $\varnothing\,10\,\text{mm}$ Schaftfräser).
+* `G41 – Fräser links der Kontur / Cutter Left (Climb Milling)`: Fräser fährt links der programmierten Konturlinie *(Standard für beste Oberflächengüte im Gleichlauf)*.
+* `G42 – Fräser rechts der Kontur / Cutter Right (Conventional Milling)`: Fräser fährt rechts der Konturlinie *(Gegenlauffräsen)*.
+* `G40 – Korrektur aufheben / Cancel Compensation`: Schaltet die Verschiebung wieder aus, damit das Werkzeug frei abfahren kann.
+* `Passung H7 / Precision Tolerance Adjustment (+0.02 mm / -0.01 mm)`: Der Maschinenbediener kann an der Steuerung im Werkzeugregister den Verschleißwert nachstellen, ohne dass du den G-Code neu generieren musst!
+
+---
 
 ### 🛠️ Wo im Code wird das gemacht?
 
@@ -2850,6 +3870,26 @@ writeWords("L " + xOutput.format(x) + " " + yOutput.format(y) + " R0 F" + feedOu
 Wenn man Metall fräst, bleibt an jeder oberen Kante ein messerscharfer Metallgrat stehen, an dem sich der Arbeiter sofort in den Finger schneidet.
 Früher musste der Arbeiter jedes Teil mit einer Handfeile oder Klinge mühsam von Hand entgraten (**Handentgraten**).
 Heute erwartet jeder gute Kunde von dir als **CAM-Spezialist**, dass dein Programm am Ende automatisch einen **$90^\circ$-Fasenfräser (`Chamfer Mill` / `NC-Anbohrer`)** einwechselt und einmal mit einer kleinen $45^\circ$-Schräge (**Fase von z. B. $0{,}3 \times 45^\circ$**) um alle Außenkanten und Taschenränder fährt!
+
+---
+
+### 📸 Zweisprachige CAD-Schnittschemata zu Übung 15: Fasenfräsen & Spitzen-Versatz (Chamfer Milling & Tip Offset)
+
+Hier siehst du im Detail, warum ein Fasenfräser mit einem sogenannten **Spitzen-Versatz *(Tip Offset)*** tiefer eingetaucht werden muss:
+
+![Fasenfräsen und Spitzen-Versatz Tip Offset 3D Schnitt](file:///c:/Projekte/CNC/docs/bilder/cnc_chamfer_tip_offset_diagram.jpg)
+
+![Fasenfräsen Außenkante 2D Schnitt](file:///c:/Projekte/CNC/docs/bilder/cnc_chamfer_outer_edge_diagram.jpg)
+
+#### Zweisprachige Begriffserklärung zum Bild *(Bilingual Terminology)*:
+* `Fasenfräser / Chamfer Mill (45° / 90°)`: Kegelförmiges Werkzeug zum Entgraten scharfer Werkstückkanten.
+* `Fasenbreite / Chamfer Width (0.5 mm x 45°)`: Die gewünschte Schräge an der Kante zur Beseitigung von Schärfe und Grat.
+* `Spitzen-Versatz / Tip Offset (1.5 - 2.0 mm)`: Das gezielte Absenken der Werkzeugspitze unter die Werkstückkante in die Luft.
+* **Warum ist der Spitzen-Versatz lebenswichtig?**
+  * An der exakten Werkzeugspitze im Drehzentrum ist der Durchmesser $d = 0\,\text{mm}$. Damit ist auch die **Schnittgeschwindigkeit $v_c = 0\,\text{m/min}$** *(Reibung & Verschleiß statt Schnitt)*.
+  * Durch den Spitzenversatz schneidet die Fase in der **grünen optimalen Schneidzone *(Effective cutting zone mit $v_c > 0$)*** an den messerscharfen Außenflanken des Fräsers. Das Werkzeug schneidet sauber, rattert nicht und bricht nicht ab!
+
+---
 
 ### 🛠️ Wo im Code wird das gemacht?
 

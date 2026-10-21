@@ -194,6 +194,10 @@
         <optgroup label="📁 Eigene Datei">
           <option id="optCustom" value="custom" style="display:none; color:#34d399; font-weight:bold;">[Geladene Datei]</option>
         </optgroup>
+        <optgroup label="🚨 Crash- & Sicherheits-Tests (Z-MIN)">
+          <option value="test_durchbruch">⚠️ Test 1: Bohrungs-Durchbruch (Z = -14.5 mm / Tunnel aktiv)</option>
+          <option value="test_crash">🚨 Test 2: Schraubstock-Kollision (Z = -18.0 mm / CRASH!)</option>
+        </optgroup>
         <optgroup label="⭐ Basis- & Grund-Übungen (1 bis 8)">
           <option value="kundenauftrag">Kundenauftrag: Bauteil 1001 (Komplette Fräsung)</option>
           <option value="uebung_00b">Übung 00b: Hallo Welt (Erste eigene Zeile)</option>
@@ -278,6 +282,7 @@
       <div id="hud-op">OPERATION: BEREIT</div>
       <div id="hud-tool">WERKZEUG : T01 (Ø10.0 MM SCHAFTFRÄSER)</div>
       <div id="hud-pos">POS (G54): X   0.000 | Y   0.000 | Z  15.000</div>
+      <div id="hud-status" style="margin-top:6px; padding:4px 8px; border-radius:4px; font-weight:bold; font-size:11px; background:rgba(16,185,129,0.2); border:1px solid #10b981; color:#34d399; display:inline-block; transition:all 0.2s;">🟢 SICHERHEITSZONE: Z > 0 mm (In freier Luft)</div>
     </div>
     <div class="legend">
       <div style="font-weight:bold; width:100%; color:#38bdf8; margin-bottom:2px; border-bottom:1px solid #334155; padding-bottom:4px; display:flex; justify-content:space-between; align-items:center;">
@@ -438,6 +443,48 @@
 
     const PRESET_GCODES = {
       "kundenauftrag": gcodeLinesKundenauftrag.join("\n"),
+      "test_durchbruch": [
+        "%",
+        "O1001 (TEST 1: BOHRUNGS-DURCHBRUCH MIT TUNNEL)",
+        "(==================================================)",
+        "(INFO: BOHRER TAUCHT DURCH BAUTEILBODEN INS FREIE)",
+        "(T02 | BOHRER D=5.0MM | Z-MIN=-14.500MM | TUNNEL FREI)",
+        "(==================================================)",
+        "N10 G90 G21 G17 G40 G80",
+        "N20 G53 G00 Z0.0",
+        "N30 T02 M06",
+        "N40 S3500 M03",
+        "N50 G54",
+        "N60 G00 X40.0 Y25.0 Z15.0",
+        "N70 G00 Z2.0",
+        "N80 G01 Z-14.5 F300 (DURCHBRUCH: Z=-14.5 MM IM TUNNEL)",
+        "N90 G00 Z15.0",
+        "N100 G53 G00 Z0.0",
+        "N110 M30",
+        "%"
+      ].join("\n"),
+      "test_crash": [
+        "%",
+        "O1001 (TEST 2: FEHLERHAFTER Z-WERT / SCHRAUBSTOCK CRASH)",
+        "(==================================================)",
+        "(ACHTUNG: FRAESER TAUCHT TIEFER ALS SCHRAUBSTOCKBACKE)",
+        "(SCHRAUBSTOCK-BACKEN LIEGEN BEI Z = -15.0 MM)",
+        "(PROGRAMMIERTER VERFAHRBEFEHL FAEHRT AUF Z = -18.0 MM!)",
+        "(==================================================)",
+        "N10 G90 G21 G17 G40 G80",
+        "N20 G53 G00 Z0.0",
+        "N30 T01 M06",
+        "N40 S8000 M03",
+        "N50 G54",
+        "N60 G00 X0.0 Y0.0 Z15.0",
+        "N70 G00 Z2.0",
+        "N80 G01 Z-18.0 F500 (CRASH: Z=-18.0 MM RAMMT IN STAHLBACKE!)",
+        "N90 G01 X80.0 Y0.0 F1200",
+        "N100 G00 Z15.0",
+        "N110 G53 G00 Z0.0",
+        "N120 M30",
+        "%"
+      ].join("\n"),
       "uebung_00b": gcodeLinesUebung00b.join("\n"),
       "uebung_01": [
         "%",
@@ -660,13 +707,14 @@
           return;
         }
 
-        // 5. Koordinaten X, Y, Z, R, I, J
-        const xMatch = line.match(/\bX([-\d.]+)\b/i);
-        const yMatch = line.match(/\bY([-\d.]+)\b/i);
-        const zMatch = line.match(/\bZ([-\d.]+)\b/i);
-        const rMatch = line.match(/\bR([-\d.]+)\b/i);
-        const iMatch = line.match(/\bI([-\d.]+)\b/i);
-        const jMatch = line.match(/\bJ([-\d.]+)\b/i);
+        // 5. Koordinaten X, Y, Z, R, I, J (Kommentare vorher entfernen, damit Z-MIN oder X-Achse nicht als NaN geparst werden!)
+        const cleanLine = line.replace(/\(.*?\)/g, "").replace(/;.*$/, "").trim();
+        const xMatch = cleanLine.match(/\bX\s*([+-]?\d+(?:\.\d+)?)/i);
+        const yMatch = cleanLine.match(/\bY\s*([+-]?\d+(?:\.\d+)?)/i);
+        const zMatch = cleanLine.match(/\bZ\s*([+-]?\d+(?:\.\d+)?)/i);
+        const rMatch = cleanLine.match(/\bR\s*([+-]?\d+(?:\.\d+)?)/i);
+        const iMatch = cleanLine.match(/\bI\s*([+-]?\d+(?:\.\d+)?)/i);
+        const jMatch = cleanLine.match(/\bJ\s*([+-]?\d+(?:\.\d+)?)/i);
 
         const targetX = xMatch ? parseFloat(xMatch[1]) : curX;
         const targetY = yMatch ? parseFloat(yMatch[1]) : curY;
@@ -878,10 +926,14 @@
     let showStock = true;
 
     function resize() {
-      canvas.width = canvas.clientWidth * window.devicePixelRatio;
-      canvas.height = canvas.clientHeight * window.devicePixelRatio;
+      if (canvas.clientWidth > 0 && canvas.clientHeight > 0) {
+        canvas.width = canvas.clientWidth * window.devicePixelRatio;
+        canvas.height = canvas.clientHeight * window.devicePixelRatio;
+      }
     }
     window.addEventListener("resize", resize);
+    window.addEventListener("load", resize);
+    resize();
 
     // Buttons für schnelle Höhen-Umschaltung des G-Code-Fensters
     const gcodeBoxEl = document.getElementById("gcode-box");
@@ -1193,6 +1245,14 @@
 
     let lastHighlight = -1;
     function render() {
+      if (!waypoints || waypoints.length === 0) {
+        waypoints = [{ x: 0, y: 0, z: 15, rapid: true, line: 0, tool: "T01 (Werkzeug)", op: "Bereit" }];
+      }
+
+      if (canvas.width === 0 || canvas.height === 0 || canvas.width !== Math.floor(canvas.clientWidth * window.devicePixelRatio)) {
+        resize();
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // 1. Rohteil (Stock 85x55x15mm)
@@ -1277,44 +1337,104 @@
         );
       }
 
-      const w1 = waypoints[idx];
-      const w2 = waypoints[Math.min(idx + 1, waypoints.length - 1)];
+      const safeIdx = Math.max(0, Math.min(idx, waypoints.length - 1));
+      const nextIdx = Math.max(0, Math.min(safeIdx + 1, waypoints.length - 1));
+      const w1 = waypoints[safeIdx] || waypoints[0];
+      const w2 = waypoints[nextIdx] || w1;
       const curX = w1.x + (w2.x - w1.x) * frac;
       const curY = w1.y + (w2.y - w1.y) * frac;
       const curZ = w1.z + (w2.z - w1.z) * frac;
 
-      drawLine3D(w1, {x:curX, y:curY, z:curZ}, w2.rapid ? "#facc15" : "#38bdf8", 2.5);
+      drawLine3D(w1, {x:curX, y:curY, z:curZ}, (w2 && w2.rapid) ? "#facc15" : "#38bdf8", 2.5);
 
       // 7. Aktuelles Fräswerkzeug (Spindel + Fräser/Bohrer) an (curX, curY, curZ) zeichnen
       curToolPos = { x: curX, y: curY, z: curZ };
-      curToolInfo = { tool: w2.tool, op: w2.op };
+      const curToolName = (w2 && w2.tool) ? String(w2.tool) : "T01 (Ø10mm Fräser)";
+      const curOpName = (w2 && w2.op) ? String(w2.op) : "Bereit";
+      curToolInfo = { tool: curToolName, op: curOpName };
 
-      const toolRadius = w2.tool.includes("T01") ? 5 : 3;
-      drawCircle3D(curX, curY, curZ, toolRadius, "#f43f5e", 2.2);
-      drawCircle3D(curX, curY, curZ + 22, toolRadius, "#f43f5e", 2.2);
-      drawLine3D({x:curX, y:curY, z:curZ}, {x:curX, y:curY, z:curZ+28}, "#f43f5e", 3);
+      // Dynamische Sicherheits- und Z-Status-Überwachung
+      let statusBg = "rgba(16, 185, 129, 0.2)";
+      let statusBorder = "#10b981";
+      let statusColor = "#34d399";
+      let statusText = "🟢 SICHERHEITSZONE: Z > 0 mm (In freier Luft)";
+      let toolColor = "#f43f5e"; // Standard Rosa-Rot
+
+      if (curZ >= 30.0) {
+        statusBg = "rgba(168, 85, 247, 0.2)";
+        statusBorder = "#a855f7";
+        statusColor = "#c084fc";
+        statusText = "🟣 MASCHINEN-HOME: G53 Z0.0 (Spindel oben am Referenzschalter)";
+        toolColor = "#a855f7";
+      } else if (curZ <= 0 && curZ >= -12.0) {
+        statusBg = "rgba(56, 189, 248, 0.2)";
+        statusBorder = "#0284c7";
+        statusColor = "#38bdf8";
+        statusText = "🔵 ARBEITSBEREICH: Z = " + curZ.toFixed(2) + " mm (Spanabtrag im Aluminium)";
+        toolColor = "#f43f5e";
+      } else if (curZ < -12.0 && curZ > -15.0) {
+        statusBg = "rgba(245, 158, 11, 0.25)";
+        statusBorder = "#d97706";
+        statusColor = "#fbbf24";
+        statusText = "⚠️ DURCHBRUCH: Z = " + curZ.toFixed(2) + " mm (Boden durchdrungen -> Freiraum / Tunnel aktiv!)";
+        toolColor = "#f59e0b"; // Warn-Orange
+      } else if (curZ <= -15.0) {
+        statusBg = "rgba(239, 68, 68, 0.35)";
+        statusBorder = "#dc2626";
+        statusColor = "#f87171";
+        statusText = "🚨 KOLLISION / CRASH-GEFAHR: Z = " + curZ.toFixed(2) + " mm (Schraubstock-Ebene berührt!)";
+        toolColor = "#dc2626"; // Signalrot für Kollision
+      }
+
+      const hudStatusEl = document.getElementById("hud-status");
+      if (hudStatusEl) {
+        hudStatusEl.style.background = statusBg;
+        hudStatusEl.style.border = "1px solid " + statusBorder;
+        hudStatusEl.style.color = statusColor;
+        hudStatusEl.textContent = statusText;
+      }
+
+      const toolRadius = curToolName.includes("T01") ? 5 : 3;
+      drawCircle3D(curX, curY, curZ, toolRadius, toolColor, 2.4);
+      drawCircle3D(curX, curY, curZ + 22, toolRadius, toolColor, 2.2);
+      drawLine3D({x:curX, y:curY, z:curZ}, {x:curX, y:curY, z:curZ+28}, toolColor, 3);
 
       const zSign = curZ > 0 ? "+" : "";
-      drawText3D(w2.tool.split(" ")[0] + " [Z: " + zSign + curZ.toFixed(1) + " mm]", curX, curY, curZ + 32, "#f43f5e", "bold 11px sans-serif", "rgba(15,23,42,0.9)");
+      const toolShortName = curToolName.split(" ")[0] || "T01";
+      drawText3D(toolShortName + " [Z: " + zSign + curZ.toFixed(1) + " mm]", curX, curY, curZ + 32, toolColor, "bold 11px sans-serif", "rgba(15,23,42,0.9)");
+
+      // 3D-Warnhinweis direkt am Werkzeug einblenden
+      if (curZ <= -15.0) {
+        drawText3D("🚨 CRASH-ZONE: Z <= -15 mm!", curX, curY, curZ - 8, "#ef4444", "bold 11px sans-serif", "rgba(15,23,42,0.95)");
+      } else if (curZ < -12.0) {
+        drawText3D("⚠️ DURCHBRUCH (Tunnel)", curX, curY, curZ - 6, "#f59e0b", "bold 10px sans-serif", "rgba(15,23,42,0.95)");
+      }
+
       checkHoverTooltip();
 
       // HUD & G-Code Zeile aktualisieren
-      document.getElementById("hud-op").textContent   = "OPERATION: " + w2.op;
-      document.getElementById("hud-tool").textContent = "WERKZEUG : " + w2.tool;
-      document.getElementById("hud-pos").textContent  =
-        `POS (G54): X ${curX.toFixed(3).padStart(7)} | Y ${curY.toFixed(3).padStart(7)} | Z ${curZ.toFixed(3).padStart(7)}`;
+      const hudOpEl = document.getElementById("hud-op");
+      if (hudOpEl) hudOpEl.textContent = "OPERATION: " + curOpName;
+      const hudToolEl = document.getElementById("hud-tool");
+      if (hudToolEl) hudToolEl.textContent = "WERKZEUG : " + curToolName;
+      const hudPosEl = document.getElementById("hud-pos");
+      if (hudPosEl) {
+        hudPosEl.textContent =
+          `POS (G54): X ${curX.toFixed(3).padStart(7)} | Y ${curY.toFixed(3).padStart(7)} | Z ${curZ.toFixed(3).padStart(7)}`;
+      }
 
-      if (w2.line !== lastHighlight) {
+      const activeLineIdx = (w2 && typeof w2.line === "number") ? w2.line : -1;
+      if (activeLineIdx !== lastHighlight && activeLineIdx >= 0) {
         if (lastHighlight >= 0) {
           const prevEl = document.getElementById("gline-" + lastHighlight);
           if (prevEl) prevEl.classList.remove("gcode-active");
         }
-        const curEl = document.getElementById("gline-" + w2.line);
+        const curEl = document.getElementById("gline-" + activeLineIdx);
         if (curEl) {
           curEl.classList.add("gcode-active");
           curEl.scrollIntoView({ block: "center", behavior: "smooth" });
         }
-        lastHighlight = w2.line;
+        lastHighlight = activeLineIdx;
       }
 
       requestAnimationFrame(render);
