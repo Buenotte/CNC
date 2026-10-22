@@ -234,13 +234,30 @@ Beim Ausfüllen des Fragebogens beim Finanzamt Hanau musst du dich bei der **Ums
 
 Im Gegensatz zu normaler Web-Entwicklung hat die Arbeit als CAM-Spezialist zwei Besonderheiten, die viele am Anfang unterschätzen:
 
-### 6.1 Kommerzielle CAM-Lizenzen (Kein Einsatz von Education-/Crack-Versionen!)
+### 6.1 Kommerzielle CAM-Lizenzen & Remote-Arbeit auf Kundenmaschinen (100 % Rechtssicherheit)
 * CAM-Hersteller *(wie Siemens, Autodesk, Open Mind, Tebis, Mastercam)* überwachen ihre Lizenzen extrem streng über **Telemetrie *(automatische Hintergrund-Datenübertragung der Software an den Hersteller-Server)*** und **Wasserzeichen im Postprozessor-Lauf *(unsichtbare Kennung in Projektdateien)***.
 * Wenn du für einen Kunden eine CAM-Datei öffnest oder speicherst, darfst du niemals eine Studentenlizenz oder nicht-kommerzielle Lizenz nutzen – die Hersteller schicken sonst sofort teure Nachforderungen (oft 15.000–50.000 €) an dich oder sogar an deinen Endkunden!
 * **Praxis-Lösung für den günstigen Start:**
   1. **Arbeiten auf der Lizenz des Kunden:** Viele Zerspanungsbetriebe haben eigene CAM-Lizenzen (Dongle *(Hardware-Kopierschutzstecker)* oder Floating-Lizenz *(Netzwerklizenz)*), auf die du dich per **Remote-Zugang *(Fernzugriff über TeamViewer, AnyDesk oder VPN [Virtual Private Network])* ** aufschaltest oder vor Ort arbeitest. Dann brauchst du gar keine eigene teure CAM-Lizenz!
   2. **Autodesk Fusion mit Manufacturing Extension *(bezahlbares Cloud-CAD/CAM-System mit monatlicher oder jährlicher Miete)***: Ideal für den Einstieg mit überschaubaren Fixkosten.
   3. **Fokus auf Postprozessoren & API-Entwicklung:** Da du bereits **Software Engineer** bist, ist dein größter Hebel die Programmierung von **Postprozessoren** (JavaScript, Python, Tcl *(Tool Command Language – Skriptsprache, auf der z. B. Siemens NX Post Configurator / Post Builder basiert)*) und **Makros/Automatisierung**. Dafür brauchst du oft nur einen Texteditor *(z. B. VS Code)* und Testläufe beim Kunden!
+
+#### Der genaue 3-Phasen-Lizenz-Fahrplan & Remote-Zugriff im Detail:
+1. **Phase 1: Vorbereitung & Portfolio-Aufbau (JETZT):**  
+   * **Kosten: 0,00 €!**  
+   * Für eigene Übungen, das Schreiben von Postprozessoren und G-Code-Prüfungen brauchst du keine teure kommerzielle Lizenz. Unsere Node.js-Testsuite (`simuliere_post.js`), die Python-Tools und der Universal 3D Viewer laufen komplett Open Source und kostenfrei.
+2. **Phase 2: Echter Kundenauftrag mit Fernzugriff (Remote auf Kunden-PC per AnyDesk / TeamViewer / VPN):**  
+   * **Kosten für dich: 0,00 €!**  
+   * Du wählst dich per **AnyDesk, TeamViewer oder VPN** auf die Workstation des Kunden ein und arbeitest direkt in dessen CAM-System *(z. B. Siemens NX, Hypermill, Mastercam)*.
+   * **Rechtslage & Lizenzrecht:** Dies ist zu **100 % legal**. Der Kunde ist der offizielle Lizenznehmer. Nach internationalem und deutschem Lizenzrecht dürfen beauftragte Dritte *(Authorized Contractors / freiberufliche Ingenieure)* die Software auf den Rechnern des Lizenznehmers für dessen Projekte nutzen. Es wird zu jedem Zeitpunkt nur die eine bezahlte Lizenz des Kunden genutzt.
+   * **Vorteile für den Kunden:** Keine vertraulichen CAD-Daten müssen das Kundennetzwerk verlassen (perfekt für Geheimhaltung / NDA). Zudem hast du direkten Zugriff auf alle werkseigenen Maschinen- und Werkzeugbibliotheken des Betriebs.
+3. **Phase 3: Echter Kundenauftrag auf eigenem Rechner in Erlensee (Autodesk Fusion):**  
+   * Erst wenn ein Kunde ein Angebot unterschrieben hat (z. B. 480 €) und die Bearbeitung auf deinem Laptop stattfinden soll, buchst du ein **flexibles Monatsabo für Autodesk Fusion *(ca. 60–70 € / Monat)***.
+   * Die Lizenzkosten werden direkt aus dem Kundenhonorar bezahlt und beim Finanzamt Hanau zu **100 % als Betriebsausgabe nach § 18 EStG** abgesetzt *(mindert deine Steuerlast)*. Nach Auftragsende kann das Abo pausiert werden.
+
+#### Nutzungsrechte an Postprozessoren (.cps-Dateien):
+* Die von Autodesk bereitgestellten Basis-Postprozessoren stehen unter freier Open-Source-Lizenz. Du darfst diese für Kunden beliebig modifizieren, programmieren und weitergeben.
+* Der Kunde erhält mit deinem Honorar das **dauerhafte, uneingeschränkte Nutzungsrecht** an der für ihn programmierten Postprozessor-Datei für all seine Maschinen im Betrieb.
 
 ### 6.2 Haftung bei Maschinencrashs *(Spindelschaden / Werkzeugbruch)*
 * Wenn ein CNC-Fräszentrum für 400.000 € wegen eines falschen `G0 Z-100` *(Eilgangbewegung direkt ins Werkstück oder in den Maschinentisch)* crasht, kostet eine neue Motorspindel *(Hauptantriebseinheit der Fräsmaschine)* schnell 15.000 bis 35.000 €.
@@ -984,9 +1001,15 @@ Damit du niemals in die Werkshalle eines Kunden fahren musst und das Programm tr
 
 ---
 
-### 16.3 Die 2 besten Arbeitsmodelle für 100 % Online-CAM-Aufträge
+### 16.3 Die 2 Arbeitsmodelle für 100 % Online-CAM-Aufträge (Normalfall: Eigener Laptop!)
 
-#### Modell A: Remote-Desktop direkt auf den CAM-Rechner des Kunden (Genial: 0 € eigene Lizenzkosten!)
+#### Modell B (Der 95-%-Normalfall): 100 % Bearbeitung auf deinem eigenen Laptop in Erlensee
+* **Wie das abläuft:** Der Kunde lädt dir die Daten in einen geteilten Cloud-Ordner *(z. B. Nextcloud, OneDrive, Google Drive oder per E-Mail)* hoch.
+* Du bearbeitest den Auftrag zu 100 % autark auf deinem privaten Rechner in Erlensee: 3D-Modellprüfung im Universal 3D Viewer, Postprozessor-Testung mit Node.js `simuliere_post.js`, G-Code-Generierung, 5-Stufen-Crashcheck und 3D-Video-Rendering.
+* Du schickst dem Kunden das fertige Paket inklusive **Simulationsvideo (`.MP4`)** und **PDF-Einrichteblatt** online zurück.
+* **Dein größter Vorteil:** Du musst auf keinen fremden Rechner gehen, bist an keine Termine gebunden und arbeitest in aller Ruhe, wann es dir passt (z. B. am Wochenende oder abends) mit deiner gewohnten Tool-Suite.
+
+#### Modell A (Die 5-%-Ausnahme auf Kundenwunsch): Remote-Desktop auf den CAM-Rechner des Kunden (0 € eigene Lizenzkosten)
 * **Wie das abläuft:** Viele Zerspanungsbetriebe in Deutschland haben im Büro einen teuren CAM-Arbeitsplatz *(z. B. Siemens NX, hyperMILL, SolidCAM, Mastercam oder Tebis)*, der ab 16:00 Uhr und das ganze Wochenende über ungenutzt leer steht!
 * Der Kunde gibt dir über **AnyDesk**, **TeamViewer** oder **VPN *(Virtual Private Network – verschlüsselte Netzwerkverbindung)*** am Wochenende Zugriff auf seinen CAM-PC.
 * **Deine Vorteile:**

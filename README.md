@@ -35,6 +35,7 @@ c:\Projekte\CNC\
 │
 └── 📂 04_Recht_Steuern_und_Backoffice/ ◄── Freiberufler-Status, Steuern & KI-Agenten
     ├── 📑 CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md (Rechtssicher nach § 18 EStG, FA Hanau)
+    ├── 💼 PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md (LinkedIn/XING-Texte, Einwandbehandlung)
     ├── 🤖 KI_Agenten_System_und_Bauplan.md (System-Prompts & Bauplan deiner 4 KI-Agenten)
     ├── 📁 Vorlagen_Vertraege_Rechnungen/ (Muster-Angebote & § 14 UStG Rechnungen)
     └── 📁 Portfolio/                   (Kunden-Einrichteblätter & Referenz-Präsentationen)
@@ -67,6 +68,7 @@ c:\Projekte\CNC\
 
 ### 4. Recht, Steuern & Backoffice (Säule 4)
 * 👉 **[Freiberufler-Leitfaden (§ 18 EStG)](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md):** Nebentätigkeit, Finanzamt Hanau, Befreiung von Gewerbesteuer und IHK.
+* 👉 **[Leitfaden: Profil-Positionierung & Kundengespräche](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md):** Schlüsselfertige Profiltexte für LinkedIn/XING, Argumentationsleitfaden für Telefonate (wie man auch ohne Werkstatterfahrung souverän auftritt) und Haftungsabsicherung.
 * 👉 **[KI-Agenten Bauplan & System-Prompts](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/KI_Agenten_System_und_Bauplan.md):** Rollen und Prompts für deine 4 KI-Agenten (`Lead-Scout`, `Post-Coder`, `NC-Safety`, `Backoffice`).
 * 👉 **[Vorlagen für Angebote & Rechnungen](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/Vorlagen_Vertraege_Rechnungen/):** Rechtssichere B2B-Muster mit technischer Haftungsbegrenzung.
 
