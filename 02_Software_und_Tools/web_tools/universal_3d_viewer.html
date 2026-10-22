@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal 3D CAD/CAM Viewer & Messwerkzeug | Dipl.-Ing. Buenotte</title>
+    <style>
+        :root {
+            --bg-dark: #0b1120;
+            --panel-bg: rgba(23, 32, 51, 0.94);
+            --panel-border: rgba(255, 255, 255, 0.14);
+            --accent-blue: #38bdf8;
+            --accent-green: #4ade80;
+            --accent-amber: #f59e0b;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* Vollbild-Drag-and-Drop Overlay */
+        #fullscreen-drop-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(14, 165, 233, 0.35);
+            backdrop-filter: blur(8px);
+            border: 4px dashed #38bdf8;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            pointer-events: none;
+        }
+        #fullscreen-drop-overlay.active {
+            display: flex;
+        }
+        .drop-modal-box {
+            background: #0f172a;
+            padding: 32px 48px;
+            border-radius: 16px;
+            text-align: center;
+            border: 2px solid #38bdf8;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+        .drop-modal-box h2 {
+            font-size: 24px; color: #38bdf8; margin-bottom: 8px;
+        }
+
+        /* Haupt-Bedienpanel links */
+        #sidebar {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            width: 380px;
+            max-height: calc(100vh - 32px);
+            background: var(--panel-bg);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--panel-border);
+            border-radius: 14px;
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            z-index: 10;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        #sidebar::-webkit-scrollbar { width: 6px; }
+        #sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+        .brand-header {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 12px;
+        }
+        .brand-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            letter-spacing: -0.02em;
+        }
+        .brand-sub {
+            font-size: 11px;
+            color: var(--text-sub);
+            margin-top: 2px;
+        }
+
+        /* GROSSER UPLOAD-BEREICH */
+        .upload-section {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(14, 165, 233, 0.04) 100%);
+            border: 2px dashed rgba(56, 189, 248, 0.5);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        .upload-section:hover {
+            border-color: var(--accent-blue);
+            background: rgba(56, 189, 248, 0.18);
+        }
+        .btn-upload-big {
+            display: inline-block;
+            width: 100%;
+            background: #0284c7;
+            color: #fff;
+            padding: 11px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 1px solid #38bdf8;
+            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .btn-upload-big:hover {
+            background: #0369a1;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(2, 132, 199, 0.6);
+        }
+        .upload-drag-hint {
+            font-size: 11px;
+            color: var(--text-sub);
+            margin-top: 8px;
+        }
+
+        /* Sektionen */
+        .section-box {
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 9px;
+            padding: 12px 14px;
+        }
+        .sec-header {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-sub);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .data-row:last-child { border-bottom: none; }
+        .data-label { color: var(--text-sub); }
+        .data-val {
+            font-family: 'Consolas', monospace;
+            font-weight: 600;
+            color: #fff;
+        }
+        .data-val.highlight { color: var(--accent-green); }
+        .data-val.amber { color: var(--accent-amber); }
+
+        /* Button Grid */
+        .btn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .btn {
+            background: #1e293b;
+            border: 1px solid rgba(255,255,255,0.14);
+            color: var(--text-main);
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .btn:hover {
+            background: #0284c7;
+            border-color: var(--accent-blue);
+            color: #fff;
+        }
+        .btn.active {
+            background: #0284c7;
+            border-color: var(--accent-blue);
+            color: #fff;
+        }
+
+        /* Unterer Statusstreifen */
+        #bottom-bar {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--panel-border);
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-size: 12px;
+            color: var(--text-sub);
+            z-index: 10;
+            pointer-events: none;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+
+        /* 3D Bemaßungs-Badges */
+        .dim-badge {
+            position: absolute;
+            background: rgba(15, 23, 42, 0.92);
+            color: #38bdf8;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: 'Consolas', monospace;
+            border: 1px solid #0284c7;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            z-index: 5;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            transition: opacity 0.15s;
+        }
+
+        .theme-switch {
+            display: flex;
+            gap: 8px;
+        }
+        .theme-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .theme-dot.active { border-color: #fff; }
+        .theme-dot.light { background: #f1f5f9; }
+        .theme-dot.dark { background: #0f172a; }
+        .theme-dot.cad { background: #1e293b; }
+    </style>
+    <!-- Three.js + Controls + STLLoader -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+</head>
+<body>
+
+    <!-- Vollbild Drag & Drop Overlay -->
+    <div id="fullscreen-drop-overlay">
+        <div class="drop-modal-box">
+            <h2>📥 STL-Datei hier ablegen</h2>
+            <p style="color:#cbd5e1;font-size:14px;">Wird sofort in 3D geladen und ausgemessen</p>
+        </div>
+    </div>
+
+    <!-- Hauptpanel -->
+    <div id="sidebar">
+        <div class="brand-header">
+            <div class="brand-title">Universal 3D CAD/CAM Viewer</div>
+            <div class="brand-sub">Ingenieurbüro Dipl.-Ing. Buenotte &bull; Maß- & Geometrieprüfung</div>
+        </div>
+
+        <!-- DATEI-HOCHLADEN & AUSWÄHLEN -->
+        <div class="upload-section">
+            <label class="btn-upload-big" for="file-input">
+                📂 Datei auswählen / hochladen (.stl)
+            </label>
+            <input type="file" id="file-input" accept=".stl,.obj" style="display:none" onchange="handleFileSelect(event)">
+            <div class="upload-drag-hint">
+                Oder beliebige STL-Datei <strong>einfach ins Browserfenster ziehen</strong>
+            </div>
+        </div>
+
+        <!-- ERMITTELTE 3D-GEOMETRIE -->
+        <div class="section-box">
+            <div class="sec-header">
+                <span>Ermittelte 3D-Maße</span>
+                <span id="badge-watertight" style="color:var(--accent-green);font-size:10px;font-weight:700;">Solid (Watertight)</span>
+            </div>
+            <div class="data-row"><span class="data-label">Bauteil:</span><span class="data-val" id="val-filename" style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Flanschplatte 1001</span></div>
+            <div class="data-row"><span class="data-label">Länge X:</span><span class="data-val highlight" id="val-dx">80.00 mm</span></div>
+            <div class="data-row"><span class="data-label">Breite Y:</span><span class="data-val highlight" id="val-dy">50.00 mm</span></div>
+            <div class="data-row"><span class="data-label">Höhe / Dicke Z:</span><span class="data-val highlight" id="val-dz">12.00 mm</span></div>
+            <div class="data-row"><span class="data-label">Dreiecke (Facets):</span><span class="data-val" id="val-triangles">862</span></div>
+        </div>
+
+        <!-- PHYSIKALISCHE WERTE -->
+        <div class="section-box">
+            <div class="sec-header"><span>Volumen & Bauteilgewicht</span></div>
+            <div class="data-row"><span class="data-label">Volumen (V):</span><span class="data-val" id="val-vol">44.53 cm³</span></div>
+            <div class="data-row"><span class="data-label">Oberfläche (A):</span><span class="data-val" id="val-area">120.81 cm²</span></div>
+            <div class="data-row"><span class="data-label">Aluminium (2,70 g/cm³):</span><span class="data-val highlight" id="val-mass-al">120.24 g</span></div>
+            <div class="data-row"><span class="data-label">Baustahl (7,85 g/cm³):</span><span class="data-val amber" id="val-mass-steel">349.58 g</span></div>
+        </div>
+
+        <!-- KAMERA & ANSICHTEN -->
+        <div class="section-box">
+            <div class="sec-header"><span>Kamera & Blickwinkel</span></div>
+            <div class="btn-grid">
+                <button class="btn" onclick="setView('iso')">Isometrie (ISO)</button>
+                <button class="btn" onclick="setView('top')">Draufsicht (Z0)</button>
+                <button class="btn" onclick="setView('front')">Vorderansicht</button>
+                <button class="btn" onclick="setView('side')">Seitenansicht</button>
+            </div>
+        </div>
+
+        <!-- CAD-OPTIONEN -->
+        <div class="section-box">
+            <div class="sec-header"><span>Darstellung & CAD-Kanten</span></div>
+            <div class="btn-grid">
+                <button id="btn-dim" class="btn active" onclick="toggleDimensions()">3D-Maßketten</button>
+                <button id="btn-edges" class="btn active" onclick="toggleEdges()">CAD-Kanten</button>
+                <button id="btn-orient" class="btn" onclick="toggleOrientation()">Achsen drehen</button>
+                <button id="btn-wire" class="btn" onclick="toggleWireframe()">Drahtgitter</button>
+            </div>
+            <div style="margin-top:12px; display:flex; justify-content:space-between; align-items:center;">
+                <span class="data-label" style="font-size:11px;">Hintergrund:</span>
+                <div class="theme-switch">
+                    <div class="theme-dot light" onclick="setTheme('light')" title="Helles Fotostudio"></div>
+                    <div class="theme-dot dark active" onclick="setTheme('dark')" title="Dunkler Hintergrund"></div>
+                    <div class="theme-dot cad" onclick="setTheme('cad')" title="CAD Technisches Blau"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bottom-bar">
+        Maus links: 3D Drehen &bull; Mausrad: Zoomen &bull; Maus rechts: Verschieben (Pan)
+    </div>
+
+    <div id="canvas-container"></div>
+    <div id="labels-container"></div>
+
+    <script>
+        let scene, camera, renderer, controls;
+        let currentMesh = null;
+        let edgeLines = null;
+        let dimGroup = new THREE.Group();
+        let gridHelper = null;
+        let axesHelper = null;
+        let labelElements = [];
+        let isZUp = true;
+        let showDims = true;
+        let showEdges = true;
+
+        initScene();
+        setupDragAndDrop();
+        loadBuiltinFlanschplatte();
+
+        function initScene() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x0b1120);
+
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 3000);
+            camera.position.set(110, 115, 120);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+
+            // Beleuchtung
+            const ambient = new THREE.AmbientLight(0xffffff, 0.72);
+            scene.add(ambient);
+
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.75);
+            dirLight.position.set(120, 220, 160);
+            dirLight.castShadow = true;
+            scene.add(dirLight);
+
+            const fillLight = new THREE.DirectionalLight(0x94a3b8, 0.4);
+            fillLight.position.set(-120, -80, -100);
+            scene.add(fillLight);
+
+            // Bodengitter
+            gridHelper = new THREE.GridHelper(300, 30, 0x334155, 0x1e293b);
+            gridHelper.position.y = 0;
+            scene.add(gridHelper);
+
+            // Koordinatenursprung
+            axesHelper = new THREE.AxesHelper(35);
+            scene.add(axesHelper);
+
+            scene.add(dimGroup);
+
+            window.addEventListener('resize', onWindowResize);
+            animate();
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            updateLabelPositions();
+            renderer.render(scene, camera);
+        }
+
+        // VOLLBILD DRAG & DROP
+        function setupDragAndDrop() {
+            const overlay = document.getElementById('fullscreen-drop-overlay');
+            let dragCounter = 0;
+
+            window.addEventListener('dragenter', (e) => {
+                e.preventDefault();
+                dragCounter++;
+                overlay.classList.add('active');
+            });
+
+            window.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                dragCounter--;
+                if(dragCounter <= 0) {
+                    overlay.classList.remove('active');
+                    dragCounter = 0;
+                }
+            });
+
+            window.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+
+            window.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dragCounter = 0;
+                overlay.classList.remove('active');
+                const files = e.dataTransfer.files;
+                if(files.length > 0) {
+                    loadFile(files[0]);
+                }
+            });
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if(file) loadFile(file);
+        }
+
+        function loadFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                try {
+                    const loader = new THREE.STLLoader();
+                    const geometry = loader.parse(evt.target.result);
+                    displayGeometry(geometry, file.name);
+                } catch(err) {
+                    alert('Fehler beim Lesen der STL-Datei: ' + err.message);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function displayGeometry(geometry, filename) {
+            if(currentMesh) scene.remove(currentMesh);
+            clearLabels();
+            dimGroup.clear();
+
+            geometry.computeVertexNormals();
+            geometry.computeBoundingBox();
+
+            const bbox = geometry.boundingBox;
+            const dx = bbox.max.x - bbox.min.x;
+            const dy = bbox.max.y - bbox.min.y;
+            const dz = bbox.max.z - bbox.min.z;
+            const center = new THREE.Vector3();
+            bbox.getCenter(center);
+
+            const material = new THREE.MeshStandardMaterial({
+                color: 0x60a5fa,
+                roughness: 0.32,
+                metalness: 0.35,
+                flatShading: false
+            });
+
+            currentMesh = new THREE.Mesh(geometry, material);
+            currentMesh.castShadow = true;
+            currentMesh.receiveShadow = true;
+
+            // Orientierung
+            if(isZUp) {
+                currentMesh.rotation.x = -Math.PI / 2;
+                currentMesh.position.set(-center.x, center.z, center.y);
+            } else {
+                currentMesh.rotation.set(0,0,0);
+                currentMesh.position.set(-center.x, -bbox.min.y, -center.z);
+            }
+
+            scene.add(currentMesh);
+
+            // CAD Kantenlinien (Schwarze Konturen)
+            const edgesGeo = new THREE.EdgesGeometry(geometry, 24);
+            const edgesMat = new THREE.LineBasicMaterial({ color: 0x090d16, linewidth: 2 });
+            edgeLines = new THREE.LineSegments(edgesGeo, edgesMat);
+            currentMesh.add(edgeLines);
+            edgeLines.visible = showEdges;
+
+            // Messungen & Masse
+            calculateMetrics(geometry, dx, dy, dz, filename);
+
+            // 3D Bemaßungen aufbauen
+            buildDimensions(dx, dy, dz);
+
+            // Kamera optimal ausrichten
+            const maxDim = Math.max(dx, dy, dz);
+            camera.position.set(maxDim * 1.4, maxDim * 1.5, maxDim * 1.7);
+            controls.target.set(0, 0, 0);
+            controls.update();
+        }
+
+        function calculateMetrics(geometry, dx, dy, dz, filename) {
+            document.getElementById('val-filename').innerText = filename;
+            document.getElementById('val-dx').innerText = dx.toFixed(2) + " mm";
+            document.getElementById('val-dy').innerText = dy.toFixed(2) + " mm";
+            document.getElementById('val-dz').innerText = dz.toFixed(2) + " mm";
+
+            const pos = geometry.attributes.position.array;
+            const triCount = pos.length / 9;
+            document.getElementById('val-triangles').innerText = triCount.toLocaleString();
+
+            let volume = 0;
+            let area = 0;
+            const p1 = new THREE.Vector3(), p2 = new THREE.Vector3(), p3 = new THREE.Vector3();
+            const e1 = new THREE.Vector3(), e2 = new THREE.Vector3(), cross = new THREE.Vector3();
+
+            for(let i = 0; i < pos.length; i += 9) {
+                p1.set(pos[i], pos[i+1], pos[i+2]);
+                p2.set(pos[i+3], pos[i+4], pos[i+5]);
+                p3.set(pos[i+6], pos[i+7], pos[i+8]);
+
+                volume += p1.dot(cross.crossVectors(p2, p3)) / 6.0;
+
+                e1.subVectors(p2, p1);
+                e2.subVectors(p3, p1);
+                cross.crossVectors(e1, e2);
+                area += cross.length() * 0.5;
+            }
+
+            const vol_cm3 = Math.abs(volume) / 1000.0;
+            const area_cm2 = area / 100.0;
+            const mass_al = vol_cm3 * 2.70;
+            const mass_steel = vol_cm3 * 7.85;
+
+            document.getElementById('val-vol').innerText = vol_cm3.toFixed(2) + " cm³";
+            document.getElementById('val-area').innerText = area_cm2.toFixed(2) + " cm²";
+            document.getElementById('val-mass-al').innerText = mass_al.toFixed(2) + " g (" + (mass_al/1000).toFixed(3) + " kg)";
+            document.getElementById('val-mass-steel').innerText = mass_steel.toFixed(2) + " g (" + (mass_steel/1000).toFixed(3) + " kg)";
+        }
+
+        function buildDimensions(dx, dy, dz) {
+            dimGroup.clear();
+            clearLabels();
+
+            const mat = new THREE.LineBasicMaterial({ color: 0x38bdf8, linewidth: 2 });
+            const hx = dx / 2, hy = dy / 2, hz = dz / 2;
+
+            function addLine(p1, p2) {
+                const g = new THREE.BufferGeometry().setFromPoints([p1, p2]);
+                dimGroup.add(new THREE.Line(g, mat));
+            }
+
+            if(isZUp) {
+                const off = 8;
+                addLine(new THREE.Vector3(-hx, 0, hz + off), new THREE.Vector3(hx, 0, hz + off));
+                addLine(new THREE.Vector3(-hx, 0, hz), new THREE.Vector3(-hx, 0, hz + off + 2));
+                addLine(new THREE.Vector3(hx, 0, hz), new THREE.Vector3(hx, 0, hz + off + 2));
+                addLabel(new THREE.Vector3(0, 0, hz + off), "L: " + dx.toFixed(1) + " mm");
+
+                addLine(new THREE.Vector3(hx + off, 0, -hz), new THREE.Vector3(hx + off, 0, hz));
+                addLine(new THREE.Vector3(hx, 0, -hz), new THREE.Vector3(hx + off + 2, 0, -hz));
+                addLine(new THREE.Vector3(hx, 0, hz), new THREE.Vector3(hx + off + 2, 0, hz));
+                addLabel(new THREE.Vector3(hx + off, 0, 0), "B: " + dy.toFixed(1) + " mm");
+
+                addLine(new THREE.Vector3(hx + off, 0, hz), new THREE.Vector3(hx + off, dz, hz));
+                addLabel(new THREE.Vector3(hx + off, dz / 2, hz), "H: " + dz.toFixed(1) + " mm");
+            }
+            dimGroup.visible = showDims;
+        }
+
+        function addLabel(pos3d, text) {
+            const el = document.createElement('div');
+            el.className = 'dim-badge';
+            el.innerText = text;
+            document.getElementById('labels-container').appendChild(el);
+            labelElements.push({ el, pos: pos3d });
+        }
+
+        function clearLabels() {
+            labelElements.forEach(l => l.el.remove());
+            labelElements = [];
+        }
+
+        function updateLabelPositions() {
+            if(!showDims) {
+                labelElements.forEach(l => l.el.style.opacity = '0');
+                return;
+            }
+            labelElements.forEach(l => {
+                const p = l.pos.clone().project(camera);
+                if(p.z > 1) {
+                    l.el.style.opacity = '0';
+                    return;
+                }
+                const x = (p.x * 0.5 + 0.5) * window.innerWidth;
+                const y = (-(p.y * 0.5) + 0.5) * window.innerHeight;
+                l.el.style.left = `${x}px`;
+                l.el.style.top = `${y}px`;
+                l.el.style.opacity = '1';
+            });
+        }
+
+        function toggleDimensions() {
+            showDims = !showDims;
+            dimGroup.visible = showDims;
+            document.getElementById('btn-dim').classList.toggle('active', showDims);
+            updateLabelPositions();
+        }
+
+        function toggleEdges() {
+            showEdges = !showEdges;
+            if(edgeLines) edgeLines.visible = showEdges;
+            document.getElementById('btn-edges').classList.toggle('active', showEdges);
+        }
+
+        function toggleWireframe() {
+            if(currentMesh) {
+                currentMesh.material.wireframe = !currentMesh.material.wireframe;
+                document.getElementById('btn-wire').classList.toggle('active', currentMesh.material.wireframe);
+            }
+        }
+
+        function toggleOrientation() {
+            isZUp = !isZUp;
+            document.getElementById('btn-orient').classList.toggle('active', !isZUp);
+            if(currentMesh) {
+                displayGeometry(currentMesh.geometry, document.getElementById('val-filename').innerText);
+            }
+        }
+
+        function setView(view) {
+            const maxDim = 80;
+            if(view === 'iso') {
+                camera.position.set(maxDim * 1.3, maxDim * 1.4, maxDim * 1.5);
+            } else if(view === 'top') {
+                camera.position.set(0, maxDim * 2.2, 0.001);
+            } else if(view === 'front') {
+                camera.position.set(0, 0, maxDim * 2.2);
+            } else if(view === 'side') {
+                camera.position.set(maxDim * 2.2, 0, 0);
+            }
+            controls.target.set(0, 0, 0);
+            controls.update();
+        }
+
+        function setTheme(t) {
+            document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+            if(t === 'light') {
+                scene.background = new THREE.Color(0xf1f5f9);
+                gridHelper.material.color.setHex(0x94a3b8);
+                document.querySelector('.theme-dot.light').classList.add('active');
+            } else if(t === 'dark') {
+                scene.background = new THREE.Color(0x0b1120);
+                gridHelper.material.color.setHex(0x334155);
+                document.querySelector('.theme-dot.dark').classList.add('active');
+            } else if(t === 'cad') {
+                scene.background = new THREE.Color(0x1e293b);
+                gridHelper.material.color.setHex(0x475569);
+                document.querySelector('.theme-dot.cad').classList.add('active');
+            }
+        }
+
+        function loadBuiltinFlanschplatte() {
+            // Lade die Muster-Flanschplatte
+            const loader = new THREE.STLLoader();
+            loader.load('../01_Kundenauftraege/test_auftrag_ubung_03/bauteil_1001.stl', function(geometry) {
+                displayGeometry(geometry, 'bauteil_1001.stl (Flanschplatte)');
+            }, undefined, function() {
+                // Fallback Box
+                const boxGeo = new THREE.BoxGeometry(80, 50, 12);
+                displayGeometry(boxGeo, 'Standard-Körper (80x50x12 mm)');
+            });
+        }
+    </script>
+</body>
+</html>

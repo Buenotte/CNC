@@ -22,7 +22,7 @@ c:\Projekte\CNC\
 │   ├── 📁 src/                         (Haupt-Postprozessor mein_erster_post.cps)
 │   ├── 📁 tests/                       (Lokaler Test-Runner simuliere_post.js & .nc-Outputs)
 │   ├── 📁 scripts/                     (Python- & JS-Generatoren, Video-Renderer)
-│   ├── 📁 web_tools/                   (Web-Interfaces: CPS- & Video-Generator)
+│   ├── 📁 web_tools/                   (Web-Interfaces: Universal 3D CAD/CAM Viewer, CPS- & Video-Generator)
 │   └── 📁 GitHub_Projekte/             (cnc_setup_sheet_extractor.py)
 │
 ├── 📂 03_Fachdokumentation_und_Wissen/ ◄── Ingenieurwissen, Handbücher & Sicherheit
@@ -57,6 +57,7 @@ c:\Projekte\CNC\
   ```
 * 👉 **[Python Rüstblatt-Extractor (`cnc_setup_sheet_extractor.py`)](file:///c:/Projekte/CNC/02_Software_und_Tools/GitHub_Projekte/cnc_setup_sheet_extractor.py):** Statische G-Code-Analyse und Einrichteblatt-Erzeugung.
 * 👉 **[Web-Interface Postprozessor-Generator](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/kunden_cps_generator_web.html):** Grafische Oberfläche zur Konfiguration von Postprozessoren.
+* 👉 **[Universal 3D CAD/CAM Viewer & Messwerkzeug](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/universal_3d_viewer.html):** Universeller browserbasierter 3D-Viewer mit Drag & Drop für beliebige Kunden-STLs, automatischer 3D-Bemaßung (Länge, Breite, Dicke), Volumen-, Oberflächen- und Bauteilgewichtsberechnung (Aluminium/Stahl) sowie scharfen CAD-Kantenlinien.
 
 ### 3. Fachwissen & Qualitätssicherung (Säule 3)
 * 👉 **[Großes Praxis-Übungshandbuch (`ALLE_UEBUNGEN_HANDBUCH.md`)](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md):** 17 detaillierte Übungen von *Hallo Welt* bis zur *5-Punkte-Meisterprüfung*.
