@@ -1,98 +1,84 @@
-# CNC-Postprozessor-Entwicklung (Entwicklung von Übersetzungsprogrammen für computergesteuerte Werkzeugmaschinen)
+# 🚀 CNC-Ingenieurbüro Dipl.-Ing. Buenotte – Zentrale Projekt-Steuerung & Dashboard
 
-Willkommen in Ihrem Entwicklungs-Workspace (Arbeitsbereich) unter `C:\Projekte\CNC`. Dieses Projekt dient als professionelle Entwicklungsumgebung für **Autodesk Fusion Postprozessoren (JavaScript-basierte `.cps`-Übersetzungsskripte, die neutrale CAM-Werkzeugwege in maschinenspezifischen G-Code umwandeln)**.
+Willkommen in der organisierten Entwicklungsumgebung und dem digitalen Ingenieurbüro von **Dipl.-Ing. Buenotte** unter `C:\Projekte\CNC`. 
+
+Dieses Projekt vereint die **Software-Entwicklung von CNC-Postprozessoren *(JavaScript-basierte `.cps`-Übersetzungsskripte für Autodesk Fusion, Python/Tcl für Siemens NX und Heidenhain)*, automatisierte G-Code-Sicherheitsprüfungen** sowie die **vollständig digitale Abwicklung von B2B-Kundenaufträgen *(100 % Remote-Engineering nach § 18 EStG)***.
 
 ---
 
-## 📂 Ordnerstruktur (Verzeichnisaufbau des Projekts)
+## 🏛️ Die 4 Kernbereiche der Projektstruktur
 
-```text
-C:\Projekte\CNC\
-├── doc.txt                                              # Ursprüngliche Anforderungs- und Einstiegsnotiz
-├── ANLEITUNG_BERUFSEINSTIEG_UND_IMPLEMENTATION_PLAN.md  # Vollständiger Leitfaden für Berufseinstieg & Implementierungsplan (Umsetzungsplan)
-├── SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md       # Umfassendes Sicherheits- und Qualitätsprüfprotokoll (Null-Kollisions-Garantie vor Auslieferung)
-├── README.md                                            # Diese Projekt-Dokumentation (Übersicht und Bedienungsanleitung)
-├── docs/                                                # Wissensdatenbank & Handbücher (Dokumentation für Entwickler und KI)
-│   └── API_KURZREFERENZ.md                              # Nachschlagewerk der wichtigsten Autodesk Post-API-Funktionen (Programmierschnittstellen)
-├── src/                                                 # Quellcode-Verzeichnis (Source Code)
-│   ├── mein_erster_post.cps                             # Ihr erster CNC-Postprozessor (JavaScript-Datei mit erweitertem onOpen()-Header)
-│   └── config.json                                      # Optionale Konfigurationsdatei (JSON-Format – JavaScript Object Notation)
-├── uebungen/                                            # Einzelne Source-Dateien (.cps) für alle 16 Übungen
-│   ├── uebung_00b_hallo_welt.cps                        # Basis-Übung B: Hallo Welt
-│   ├── uebung_01_entwickler_header.cps                  # Übung 01: Entwickler-Infoblock onOpen()
-│   ├── uebung_02_werkzeugliste.cps                      # Übung 02: Werkzeugliste getToolTable()
-│   ├── uebung_03_z_min_berechnung.cps                   # Übung 03: Z-MIN Berechnung
-│   ├── uebung_04_3d_modell_cam.cps                      # Übung 04/05: CAM-Operationen
-│   ├── uebung_06_sicherer_rueckzug.cps                  # Übung 06: Sicherer Rückzug Z/Y
-│   ├── uebung_07_spaenefoerderer_schalter.cps           # Übung 07: Späneförderer Schalter M31/M33
-│   ├── uebung_08_fanuc_siemens_dialekt.cps              # Übung 08: Fanuc vs. Siemens Umschaltung
-│   ├── uebung_09_schnittdaten_check.cps                 # Übung 09: Drehzahl- und Vorschubprüfung
-│   ├── uebung_10_zweite_aufspannung_g55.cps             # Übung 10: 2. Aufspannung G55
-│   ├── uebung_11_gewindebohren_g84.cps                  # Übung 11: Gewindebohren G84
-│   ├── uebung_12_radiuskorrektur_g41.cps                # Übung 12: Radiuskorrektur G41/G42/G40
-│   ├── uebung_13_3d_freiformflaechen.cps                # Übung 13: 3D-Freiformflächen
-│   ├── uebung_14_heidenhain_klartext_4achse.cps         # Übung 14: Heidenhain Klartext & 4. Achse
-│   ├── uebung_15_fasenfraesen_entgraten.cps             # Übung 15: Fasenfräsen & Entgraten 45°
-│   └── uebung_16_endabnahme_meister_post.cps            # Übung 16: Meister-Post Endabnahme
-└── tests/                                               # Test- und Simulationsumgebung (Qualitätssicherung)
-    ├── simuliere_post.js                                # Lokaler Simulator (führt jede beliebige .cps-Datei aus)
-    ├── mein_generierter_gcode.nc                        # Zuletzt generierter G-Code
-    └── output_expected.nc                               # Beispiel-Ausgabe (G-Code-Maschinenprogramm) zum direkten Testen im 3D-Simulator
+Das gesamte Workspace ist in **4 logische, streng voneinander getrennte Säulen** unterteilt:
+
+```
+c:\Projekte\CNC\
+│
+├── 📂 01_Kundenauftraege/             ◄── Operatives Kundengeschäft & Auftragsakten
+│   ├── 📁 auftragsakten_00b_bis_16/    (Alle 17 abgeschlossenen Kundenakten mit Angebot, Code & Setup Sheet)
+│   ├── 📁 test_auftrag_ubung_03/       (Interaktiver Übungs- & Testordner zum Selbst-Durchspielen)
+│   └── 📁 referenz_auftrag_flanschplatte/ (Ursprüngliches 3D-Referenzbauteil 1001)
+│
+├── 📂 02_Software_und_Tools/          ◄── Postprozessor-Entwicklung, Test-Suite & Generatoren
+│   ├── 📁 src/                         (Haupt-Postprozessor mein_erster_post.cps)
+│   ├── 📁 tests/                       (Lokaler Test-Runner simuliere_post.js & .nc-Outputs)
+│   ├── 📁 scripts/                     (Python- & JS-Generatoren, Video-Renderer)
+│   ├── 📁 web_tools/                   (Web-Interfaces: CPS- & Video-Generator)
+│   └── 📁 GitHub_Projekte/             (cnc_setup_sheet_extractor.py)
+│
+├── 📂 03_Fachdokumentation_und_Wissen/ ◄── Ingenieurwissen, Handbücher & Sicherheit
+│   ├── 📘 ALLE_UEBUNGEN_HANDBUCH.md    (Großes Praxishandbuch aller 17 Übungen)
+│   ├── 🛡️ SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md (5-Stufen-Cockpit-Sicherheitscheck)
+│   ├── 🔧 FRAESER_UND_BOHRER_PRAXISGUIDE.md (Werkzeuggeometrien, Schneidstoffe, vc-Werte)
+│   ├── 🏗️ BAUINGENIEUR_WISSEN_FUER_CNC_GUIDE.md (Transferwissen Statik/Dynamik zu Zerspanung)
+│   ├── 📁 docs/                        (Bilder, CAD-Zeichnungen, Renderings & Simulationsvideos)
+│   └── 📁 uebungen/                    (Originale Quellcode-Dateien .cps & .nc)
+│
+└── 📂 04_Recht_Steuern_und_Backoffice/ ◄── Freiberufler-Status, Steuern & KI-Agenten
+    ├── 📑 CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md (Rechtssicher nach § 18 EStG, FA Hanau)
+    ├── 🤖 KI_Agenten_System_und_Bauplan.md (System-Prompts & Bauplan deiner 4 KI-Agenten)
+    ├── 📁 Vorlagen_Vertraege_Rechnungen/ (Muster-Angebote & § 14 UStG Rechnungen)
+    └── 📁 Portfolio/                   (Kunden-Einrichteblätter & Referenz-Präsentationen)
 ```
 
 ---
 
-## 🚀 Schnellstart: So testen Sie Ihren ersten Postprozessor
+## 🧭 Schnelleinstieg & Direkte Links zu den wichtigsten Werkzeugen
 
-### 1. Code ansehen und anpassen
-Öffnen Sie die Datei [src/mein_erster_post.cps](file:///C:/Projekte/CNC/src/mein_erster_post.cps).
-Dort finden Sie in der Funktion [`onOpen()`](file:///C:/Projekte/CNC/src/mein_erster_post.cps#L125-L215) (Start-Funktion beim Öffnen der Ausgabedatei) bereits Ihren fertig programmierten **Entwickler-Infoblock (Header-Kommentar)** mit:
-- Entwickler-Name (`developerName`)
-- Automatischem Datum & Uhrzeit (`new Date()`)
-- Automatischer **Werkzeugliste (Tool Table – Übersicht aller im Programm verwendeten Fräser und Bohrer)**
-- Sicherheits-Startbefehlen (`G90 G21 G17 G40 G49 G80` – **Sicherheitszeile / Safe Start Block zur Grundinitialisierung der CNC-Steuerung**)
+### 1. Kundengeschäft & Aufträge (Säule 1)
+* 👉 **[Zentrale Auftrags-Übersicht (Alle 17 Kundenaufträge)](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/UEBERSICHT_ALLE_KUNDENAUFTRAEGE.md):** Tabelle aller Firmen, Budgets und Direktlinks zu den Auftragsordnern.
+* 👉 **[Aktiver Test-Ordner zum Selbermachen (Übung 3)](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/WORKFLOW_UND_PROMPTS.md):** Schritt-für-Schritt-Anleitung mit den 4 fertigen Prompts für deine KI-Agenten.
+* 👉 **[Vollständiger Prozessablauf von A bis Z](file:///c:/Projekte/CNC/01_Kundenauftraege/KUNDENAUFTRAG_VOLLSTAENDIGER_PROZESSABLAUF_A_BIS_Z.md):** Wie ein Kundenauftrag von der ersten E-Mail bis zum Geldeingang abläuft.
 
-### 2. Simulation in Antigravity IDE (Integrierte Entwicklungsumgebung)
-1. Installieren Sie im Bereich **Extensions (Erweiterungen)** (`Strg + Umschalt + X`) das offizielle Plugin **`Autodesk Fusion Post Processor Utility`**.
-2. Öffnen Sie [src/mein_erster_post.cps](file:///C:/Projekte/CNC/src/mein_erster_post.cps).
-3. Öffnen Sie die **Command Palette (Befehlspalette)** mit `Strg + Umschalt + P` und wählen Sie **`Autodesk Fusion Post Processor: Post Process`** (oder drücken Sie die vom Plugin angezeigte Tastenkombination).
-4. Wählen Sie eine der mitgelieferten **Benchmark-Dateien (`.cnc` Testdateien)** aus – sofort erscheint rechts daneben der frisch generierte **G-Code (Maschinencode)**!
+### 2. Software-Entwicklung & Lokale Test-Suite (Säule 2)
+* 👉 **[Haupt-Postprozessor (`src/mein_erster_post.cps`)](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps):** Basis-Postprozessor mit Sicherheitszeile und Werkzeugliste.
+* 👉 **[Lokaler Simulator-Runner (`tests/simuliere_post.js`)](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/simuliere_post.js):** Führt jede `.cps`-Datei lokal mit Node.js in unter 1 Sekunde ohne Fusion 360 aus:
+  ```powershell
+  node 02_Software_und_Tools/tests/simuliere_post.js
+  ```
+* 👉 **[Python Rüstblatt-Extractor (`cnc_setup_sheet_extractor.py`)](file:///c:/Projekte/CNC/02_Software_und_Tools/GitHub_Projekte/cnc_setup_sheet_extractor.py):** Statische G-Code-Analyse und Einrichteblatt-Erzeugung.
+* 👉 **[Web-Interface Postprozessor-Generator](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/kunden_cps_generator_web.html):** Grafische Oberfläche zur Konfiguration von Postprozessoren.
 
-### 3. Visuelle 3D-Prüfung im Simulator (Backplotter)
-1. Öffnen Sie die Datei [tests/output_expected.nc](file:///C:/Projekte/CNC/tests/output_expected.nc) (diese enthält genau den **G-Code**, den `mein_erster_post.cps` erzeugt).
-2. Kopieren Sie den gesamten Inhalt (`Strg + A`, dann `Strg + C`).
-3. Öffnen Sie im Browser **NCViewer** (`https://ncviewer.com`), fügen Sie den Text im linken Fenster ein und klicken Sie auf **Plot (Zeichnen)** bzw. **Play (Abspielen)**.
-4. Sie sehen nun live in 3D (dreidimensional), wie der Fräser das Werkstück bearbeitet!
+### 3. Fachwissen & Qualitätssicherung (Säule 3)
+* 👉 **[Großes Praxis-Übungshandbuch (`ALLE_UEBUNGEN_HANDBUCH.md`)](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md):** 17 detaillierte Übungen von *Hallo Welt* bis zur *5-Punkte-Meisterprüfung*.
+* 👉 **[Sicherheits- & Qualitätsprüfliste (`SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md`)](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md):** 5-Stufen-Prüfkette wie im Flugzeugcockpit zur 100 % Null-Kollisions-Garantie.
+* 👉 **[Fräser & Bohrer Praxisguide](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/FRAESER_UND_BOHRER_PRAXISGUIDE.md):** Schnittgeschwindigkeiten $v_c$, Zahnvorschübe $f_z$ und Werkzeugarten.
+* 👉 **[Bauingenieur-Wissen für CNC](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/BAUINGENIEUR_WISSEN_FUER_CNC_GUIDE.md):** Elastizitätstheorie, Schnittkräfte und Schwingungsdämpfung beim Fräsen.
 
----
-
-## 📘 Zentrales Übungshandbuch & 3D-Kundenauftrag-Simulation
-
-Alle praktischen Übungen (sowohl für **JavaScript-Postprozessoren** als auch für **3D-Modelle als Kundenauftrag**) sind in einfacher Sprache und mit Schritt-für-Schritt-Erklärungen in dieser zentralen Datei zusammengefasst:
-
-* **[ALLE_UEBUNGEN_HANDBUCH.md](file:///C:/Projekte/CNC/ALLE_UEBUNGEN_HANDBUCH.md)** – Das komplette Übungshandbuch (Übung 1 bis Übung 8), in dem auch alle zukünftigen Übungen gesammelt werden.
-* **[kundenauftrag_01_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md)** – Komplette Simulation eines echten **3D-Modell-Kundenauftrags (`80 x 50 x 12 mm` Aluminium-Platte)** mit Klick-für-Klick-Anleitung für **Autodesk Fusion (CAD/CAM-Software)**.
-* **[kundenauftrag_01_flanschplatte/bauteil_1001.stl](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/bauteil_1001.stl)** – Das echte **3D-Modell (im STL-Format – Standard Tessellation Language)** zum Öffnen in **Autodesk Fusion**, **FreeCAD** oder dem **Windows 3D-Viewer**.
-* **[kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html)** – Interaktiver **3D-Browser-Simulator (per Doppelklick im Browser startbar)**, der das 3D-Bauteil, den **Nullpunkt (`G54`)**, die Werkzeuge (`T01` und `T02`) und den **G-Code (`O1001`)** live animiert darstellt.
-* **[kundenauftrag_01_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md)** – Das fertige **Einrichteblatt (`Setup Sheet` – Rüstplan für den Maschinenbediener)** zur Übergabe an den Kunden.
-* **[SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md](file:///C:/Projekte/CNC/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md)** – Das **Sicherheits- und Qualitätsprüfprotokoll für CNC-G-Code** (Null-Kollisions-Garantie, 5-Stufen-Prüfkette und druckbare Checkliste für den Kundenauftrag).
-
-* **Aktualisierter Umfang in [ALLE_UEBUNGEN_HANDBUCH.md](file:///C:/Projekte/CNC/ALLE_UEBUNGEN_HANDBUCH.md):** Enthält jetzt vollständig **alle 16 Haupt-Übungen (`Übung 1` bis `Übung 16`)** sowie die **2 Einsteiger-Vorübungen (`Basis-Übung A` und `Basis-Übung B`)** inklusive direkter Simulator-Prüfanleitungen unter jeder einzelnen Übung!
-
+### 4. Recht, Steuern & Backoffice (Säule 4)
+* 👉 **[Freiberufler-Leitfaden (§ 18 EStG)](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md):** Nebentätigkeit, Finanzamt Hanau, Befreiung von Gewerbesteuer und IHK.
+* 👉 **[KI-Agenten Bauplan & System-Prompts](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/KI_Agenten_System_und_Bauplan.md):** Rollen und Prompts für deine 4 KI-Agenten (`Lead-Scout`, `Post-Coder`, `NC-Safety`, `Backoffice`).
+* 👉 **[Vorlagen für Angebote & Rechnungen](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/Vorlagen_Vertraege_Rechnungen/):** Rechtssichere B2B-Muster mit technischer Haftungsbegrenzung.
 
 ---
 
-## 🖥️ Wo starte und teste ich die Programme? (Direkt hier in VSC / Antigravity IDE & im Browser)
+## 🤖 So steuerst du deine 4 KI-Agenten im Chat:
 
-1. **JavaScript-Code bearbeiten (Oben im VSC / Antigravity IDE Editor):**
-   - Öffnen Sie [src/mein_erster_post.cps](file:///C:/Projekte/CNC/src/mein_erster_post.cps), ändern Sie eine Zeile und speichern Sie mit **`Strg + S`**.
-2. **Programm ausführen & G-Code erzeugen (Unten im VSC / Antigravity IDE Terminal):**
-   - Öffnen Sie das Terminal über das Menü **`Terminal` $\rightarrow$ `New Terminal`** (oder mit **`Strg + Ö`**).
-   - Starten Sie den lokalen Simulator-Lauf mit:
-     ```powershell
-     node tests/simuliere_post.js
-     ```
-   - Der frisch generierte **G-Code (Maschinencode)** erscheint sofort im Terminal und wird in `tests/mein_generierter_gcode.nc` gespeichert!
-3. **3D-Bewegung im Browser anschauen:**
-   - **Fertiger 3D-Kundenauftrag-Simulator:** Doppelklick auf [kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html](file:///C:/Projekte/CNC/kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html).
-   - **Online-3D-Simulator (`NCViewer`):** Text aus `tests/mein_generierter_gcode.nc` kopieren, auf **`https://ncviewer.com`** links einfügen und auf **`Plot`** klicken.
+Schreibe mir hier im Chat einfach einen kurzen Satz, um einen der 4 registrierten Agenten zu aktivieren:
+1. **Agent 1 (Akquise):** *„Starte Agent 1: Suche 5 CNC-Fräsereien mit Heidenhain-Steuerung im Raum Hanau/Aschaffenburg.“*
+2. **Agent 2 (Software):** *„Starte Agent 2: Passe den Postprozessor an das Referenzprogramm im Ordner XY an.“*
+3. **Agent 3 (Sicherheit):** *„Starte Agent 3: Führe den 5-Stufen-Crashcheck für das NC-Programm durch und erstelle das Einrichteblatt.“*
+4. **Agent 4 (Backoffice):** *„Starte Agent 4: Erstelle ein B2B-Angebot über 480 € netto nach § 18 EStG für Kunde XY.“*
+
+---
+
+*Inhaber: Dipl.-Ing. Buenotte | Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik | 63526 Erlensee*
