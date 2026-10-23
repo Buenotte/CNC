@@ -3157,6 +3157,100 @@ Dass aus wenig JavaScript so viel Maschinencode wird, liegt an den wiederholten 
 
 ---
 
+### 🔄 Die vollständige Prozesskette: Vom Kundenauftrag über CPS bis zum G-Code (Wie, Wann und Wer?)
+
+Um als CAM-Spezialist und Postprozessor-Entwickler absolute Souveränität zu besitzen, müssen Sie genau verstehen, **wie aus dem Kundenbriefing die JavaScript-Funktionen entstehen, wer die Reihenfolge der N-Sätze bestimmt und wann welcher Funktionsaufruf in den Maschinencode übergeht**:
+
+```text
+┌────────────────────────────────────────────────────────────────────────┐
+│                   VOM KUNDENAUFTRAG ZUM G-CODE                         │
+├────────────────────────────────────────────────────────────────────────┤
+│ 1. KUNDENAUFTRAG (PDF / STEP / Text)                                   │
+│    "Lagerplatte 80x50x12 mm, Haas VF-2, T01 Fräser D10, T02 Bohrer D6" │
+│                         │                                              │
+│                         ▼                                              │
+│ 2. CAM-SYSTEM (Autodesk Fusion 360) / CAM-KERNEL                       │
+│    • 3D-Modell laden, Nullpunkt G54 setzen                             │
+│    • Operationsbaum anlegen (Reihenfolge der Features)                 │
+│    • Erzeugt geometrische Zwischensprache (CL-Data)                    │
+│                         │                                              │
+│                         ▼ (Kernel feuert Events)                       │
+│ 3. POSTPROZESSOR (.CPS / JavaScript)                                   │
+│    • onOpen()       ──► Programmkopf & Sicherheitszeile (N10)          │
+│    • onSection()    ──► Werkzeugwechsel T01/T02 & Drehzahl (N20-N50)   │
+│    • onLinear()     ──► Konturfräsen G01 (N80-N130)                    │
+│    • onCircular()   ──► Kreistasche G03 (N190)                         │
+│    • onCyclePoint() ──► 4x Bohrungen G83 (N280-N310)                   │
+│    • onClose()      ──► Rückzug G53 Z0 / Y0 & M30 (N340-N380)          │
+│                         │                                              │
+│                         ▼ (Ausgabezeilen sammeln)                      │
+│ 4. MASCHINENDATEI (.NC / G-Code)                                       │
+│    56 Zeilen fertiger Maschinencode von N10 bis N380                   │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+#### 0. Die fundamentale Rolle des CAM-Kernels: Wer erzeugt die .nc-Datei aus der .cps-Datei?
+Ein weit verbreiteter Irrtum bei Einsteigern ist der Glaube, dass die `.cps`-Datei die `.nc`-Datei ganz alleine erzeugt. **Das ist technisch falsch!**
+* Die `.cps`-Datei ist **nur reiner Programmcode (ein Skript / eine Funktionsbibliothek in JavaScript)**. Sie kann von sich aus überhaupt nichts tun und erzeugt keine Datei.
+* Der eigentliche **Motor und Dateierzeuger ist der CAM-Kernel *(die interne Postprozessor-Engine des CAM-Systems)***!
+
+```text
+┌────────────────────────────────────────────────────────────────────────┐
+│                   DAS DREIECK DER CODE-GENERIERUNG                     │
+├────────────────────────────────────────────────────────────────────────┤
+│ INPUT 1: 3D-Werkzeugbahnen (Geometrie CL-Data aus dem 3D-CAD/CAM-Setup)│
+│          +                                                             │
+│ INPUT 2: Deine .cps-Datei  (JavaScript-Regelwerk / Druckertreiber)     │
+├────────────────────────────────────────────────────────────────────────┤
+│ DER CAM-KERNEL (Die Verarbeitungs-Engine / z. B. in Fusion oder Node): │
+│ • Liest die 3D-Bahnen Schritt für Schritt durch                        │
+│ • Führt die JavaScript-Funktionen in der .cps-Datei mit echten Werten  │
+│ • Sammelt alle generierten Textzeilen (writeBlock / writeln)           │
+├────────────────────────────────────────────────────────────────────────┤
+│ OUTPUT : Fertige .nc-Datei (G-Code auf der Festplatte gespeichert!)    │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+**Der Vergleich aus der Computerwelt (Wie ein Drucker):**
+* **Das Dokument (Word-Datei):** Das sind die berechneten Werkzeugbahnen im CAM.
+* **Der Druckertreiber:** Das ist Ihre `.cps`-Datei *(sie übersetzt: „Mein Gerät versteht Haas NGC oder Siemens 840D“)*.
+* **Das Betriebssystem / Druckprogramm:** Das ist der **CAM-Kernel**. Er schickt die Daten durch den Treiber und erzeugt das fertige Druckergebnis *(die `.nc`-Datei)*.
+
+**Woher stammt diese Definition? (Offizielle Quellen):**
+1. **Autodesk HSM Post Processor Training Guide & Reference Manual:** Offizieller Standard von Autodesk (Entwickler von Fusion 360 und Inventor CAM).
+2. **Autodesk Open-Source Post Processor Library (GitHub):** Standardisierte Schnittstelle für Hunderte CNC-Maschinensteuerungen weltweit.
+3. **Unser lokaler Simulator (`simuliere_post.js`):** In unserem Projekt fungiert das Node.js-Skript `simuliere_post.js` als leichtgewichtiger CAM-Kernel. Es lädt die `.cps`-Datei in eine V8-JavaScript-Sandbox, führt alle Sektionen aus und schreibt die fertige `.nc`-Datei direkt neben die Übung!
+
+---
+
+#### 1. Wie aus dem Kundenauftrag die .cps-Datei entsteht:
+* **Eingangsdaten:** Der Kunde liefert das 3D-Modell (`bauteil_1001.stl`) und das Briefing: Haas VF-2, Haas NGC-Steuerung, Schaftfräser T01 D10, Bohrer T02 D6.
+* **Erstellung durch Agent 2:** Agent 2 deklariert im Postprozessor die Maschineneigenschaften (`vendor = "Haas"`, `extension = "nc"`), richtet die Satznummern-Zählfunktion `nextN()` ein und implementiert die standardisierten Event-Funktionen (`onOpen`, `onSection`, `onLinear`, `onCircular`, `onCyclePoint`, `onClose`).
+
+#### 2. Wer legt die Reihenfolge der N-Operationen im Maschinencode fest?
+Die Reihenfolge entsteht **NICHT** zufällig, sondern durch ein Zusammenspiel aus Ingenieur-Logik und CAM-Kernel:
+* **Technologische Zerspanungs-Logik (Agent 2):**
+  1. *Werkzeugwechsel minimieren:* Alle Operationen mit Fräser T01 (Außenkontur + Kreistasche) werden direkt hintereinander ausgeführt. Erst danach wird auf Bohrer T02 gewechselt. Dadurch gibt es im gesamten Programm nur einen einzigen Werkzeugwechsel (`M06`).
+  2. *Fräsen vor Bohren:* Das Fräsen der Vollflächen erfolgt zwingend vor dem Bohren. Würde man zuerst bohren, schlagen die Fräserschneiden bei nachfolgenden Schnitten an den Bohrungskanten ins Leere (unterbrochener Schnitt, Werkzeugschwingungen und Gratbildung).
+* **Ausführung durch den CAM-Kernel (Autodesk Fusion 360):**
+  Im CAM-Operationsbaum liegen die Sektionen untereinander: 1. Kontur -> 2. Kreistasche -> 3. Bohrungen. Der CAM-Kernel arbeitet diesen Baum streng von oben nach unten ab und ruft für jede Sektion nacheinander `onSection()` auf.
+
+#### 3. Wann passiert welcher Funktionsaufruf in der .cps und was erzeugt er in der .nc?
+Hier ist die lückenlose Zuordnung aller Funktionsaufrufe zum generierten G-Code:
+
+| Phase im Ablauf | Aufgerufene CPS-Funktion | Wann feuert der CAM-Kernel? | Erzeugte Zeilen im G-Code (.nc) |
+| :--- | :--- | :--- | :--- |
+| **Programm-Start** | `onOpen()` | Genau 1x ganz zu Beginn vor der ersten Fräsbahn. | Start-%, Programmkopf `O1001`, Tool Table für T01/T02 und Sicherheitszeile `N10 G90 G17 G40 G49 G80 G21`. |
+| **Start OP 1 (Kontur)** | `onSection()` *(section 1)* | Beim Betreten der ersten CAM-Operation. | `N20 T01 M06` (Werkzeugwechsel), `N30 G54`, `N40 S8000 M03`, `N50 G43 H01 Z15. M08`, `N60 G00 X-10. Y-10.`. |
+| **Bahnen OP 1** | `onRapid()`, `onLinear()` | Beim Eintauchen und Abfahren der 4 Außenkanten. | `N70` Eilgang Z2, `N80` Eintauchen Z-5 F500, `N90-N130` Kontur abfahren F1200, `N140` Freifahren Z15. |
+| **Start OP 2 (Tasche)** | `onSection()` *(section 2)* | Beim Wechsel auf die Kreistasche (Werkzeug T01 bleibt aktiv). | `N150 G00 X40. Y25.` (Eilgang zur Taschenmitte). |
+| **Kreisbahn OP 2** | `onCircular()` | Beim Fräsen des Vollkreises der Tasche. | `N160-N180` Anfahren Rand, **`N190 G17 G03 X55. Y25. I-15. J0. F1000`**, `N200-N210` Freifahren & M09. |
+| **Start OP 3 (Bohren)** | `onSection()` *(section 3)* | Beim Wechsel auf die Bohroperation (neues Werkzeug T02). | `N220 T02 M06`, `N230 G54`, `N240 S3500 M03`, `N250 G43 H02 Z15. M08`, `N260 G00 X10. Y10.`. |
+| **Bohrzyklus OP 3** | `onCycle()`, `onCyclePoint()` | Für jedes der 4 Löcher nacheinander (modale Abarbeitung). | `N270 G00 Z2.`, **`N280 G98 G83 X10. Y10. Z-12. R2. Q3. F300`** (Loch 1), `N290-N310` (Löcher 2-4), **`N320 G80`** (Zyklus-Aus). |
+| **Programm-Ende** | `onClose()` | Genau 1x ganz am Ende, wenn alle Operationen fertig sind. | `N340 M09`, **`N350 G53 G00 Z0.`** (Spindel hoch), `N360 M05`, **`N370 G53 G00 Y0.`** (Tisch zur Tür), `N380 M30`, End-%. |
+
+---
+
 ### ✅ So sieht das komplette fertige CNC-Programm mit Erklärungen aller Zeilen aus:
 
 ```gcode
