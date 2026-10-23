@@ -35,6 +35,7 @@ Von hier aus kannst du jede einzelne ergänzende Datei deines kompletten Ingenie
 | **5. Fräser- & Bohrer-Praxisguide mit Bildern** | 👉 **[FRAESER_UND_BOHRER_PRAXISGUIDE.md](file:///C:/Projekte/CNC/03_Fachdokumentation_und_Wissen/FRAESER_UND_BOHRER_PRAXISGUIDE.md)** | Bebilderte Werkzeugkunde für CAM-Spezialisten: Die **5 Fräser-Typen**, Bohrwerkzeuge *(Zentrieren, Kernloch, Gewinde)*, Schnittdaten *(ToolScout-Nutzung)*, Auskraglänge und Crash-Vermeidung *(näher beschrieben in **Abschnitt 27**)*. |
 | **6. Bauingenieur-Wissen für CNC & CAM** | 👉 **[BAUINGENIEUR_WISSEN_FUER_CNC_GUIDE.md](file:///C:/Projekte/CNC/03_Fachdokumentation_und_Wissen/BAUINGENIEUR_WISSEN_FUER_CNC_GUIDE.md)** | Was du aus deinem 40 Jahre zurückliegenden Bauingenieurstudium wirklich brauchst: Die **4 simplen Brücken** *(Koordinatensystem Z=0, Schwenkungen, Schnitte/Passungen, Kragarm-Durchbiegung)* und was du zu 100 % vergessen kannst! |
 | **7. Sicherheits- & Qualitätsprüfprotokoll (G-Code-Cockpit)** | 👉 **[SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md](file:///C:/Projekte/CNC/03_Fachdokumentation_und_Wissen/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md)** | Das lückenlose **5-Stufen-Prüfprotokoll** *(CAM & Postprozessor, 3D-Simulator, G-Code-Inspektion, Maschinenrüsten & Luftschnitt)* inkl. **druckbarer Kunden-Abnahmecheckliste** – **die verbindliche Arbeitsgrundlage für KI-Agent 3 (`NC-Safety & Setup`)**! |
+| **8. Profil-Positionierung & Kundengespräche** | 👉 **[PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md)** | Strategische Einwandbehandlung, remote Stundensätze (100–150 €/h) und **Kapitel 7: Digitale Kommunikations-Zentrale (E-Mail-Setup & Google Drive Cloud)**. |
 
 ---
 
@@ -821,6 +822,17 @@ Damit dein GitHub-Profil sowohl auf CAM-Systemhäuser als auch auf Fertigungsbet
 | **2. `cnc-setup-sheet-generator`** *(Echtes Python-Tool!)* | Ein in **Python** geschriebenes Analyse-Skript, das ein beliebiges Heidenhain- (`.H`) oder Siemens-NC-Programm (`.MPF`) einliest, automatisch alle Werkzeuge (`TOOL CALL` / `T="..."`), Drehzahlen, Vorschübe und Rohteilmaße (`BLK FORM` / `WORKPIECE`) ausliest und daraus vollautomatisch ein **Einrichteblatt** generiert. | Beweist auf einen Schlag deine einzigartige Kombination aus **Software Engineer + CNC-Experte**. Kein normaler CAM-Bediener kann so ein Tool programmieren! |
 | **3. `cam-postprocessor-extensions`** | Sauber dokumentierte Code-Module (JavaScript / Tcl / Python) für Postprozessoren: Automatische Berechnung der Mindest-Auskraglänge ($L_{\text{min}}$), automatische Laser-Werkzeugbruchkontrolle (`TCH PROBE 586`) und sichere 5-Achs-Rückzugsroutinen. | Zeigt CAM-Systemhäusern und Industriekunden, dass du ihre Postprozessoren sauber, modular und absturzsicher programmieren kannst. |
 | **4. `parametric-cnc-macros`** | Mathematische NC-Unterprogramme mit **Heidenhain Q-Parametern *(Variablenprogrammierung `FN 0` bis `FN 18`)*** und **Siemens R-Parametern (`R1`..`R99`)** – z. B. für variables Taschenfräsen, Ellipsenkonturen oder automatische Teilkreisberechnung direkt an der Maschine. | Zeigt deine starke mathematisch-geometrische Ingenieurausbildung aus Moskau! |
+
+---
+
+### 13.4 Verknüpfung mit deinem E-Mail- & Cloud-Setup (Google Drive & professioneller Absender)
+
+Für den reibungslosen Datenaustausch mit Kunden über GitHub, Cloud-Speicher und ein separates Ingenieur-Postfach beachte die konkreten Praxisschritte in:
+👉 **[PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md (Kapitel 7: Digitale Kommunikations-Zentrale)](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md#L329)**  
+Dort findest du:
+* Die empfohlene Namensgebung für dein separates Google-Konto *(z. B. `buenotte.engineering@gmail.com`)*.
+* Die Einrichtung der 15 GB kostenlosen Google Drive Cloud für große 3D-STEP- und MP4-Simulationsdateien.
+* Den verbindlichen professionellen Absendernamen: **`Dipl.-Ing. Buenotte | CAD/CAM Engineering`**.
 
 
 ---

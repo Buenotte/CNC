@@ -17,9 +17,28 @@ const vm = require("vm");
 // Wenn ein Pfad als Befehlszeilen-Argument übergeben wurde (z.B. node tests/simuliere_post.js uebungen/uebung_01_entwickler_header.cps),
 // wird dieser geladen. Andernfalls wird standardmäßig "src/mein_erster_post.cps" ausgeführt.
 const targetArg = process.argv[2];
-const cpsPath = targetArg 
-  ? path.resolve(process.cwd(), targetArg)
-  : path.join(__dirname, "..", "src", "mein_erster_post.cps");
+let cpsPath;
+if (targetArg) {
+  const directPath = path.resolve(process.cwd(), targetArg);
+  if (fs.existsSync(directPath)) {
+    cpsPath = directPath;
+  } else {
+    // Intelligente Pfadauflösung für verschobene Ordnerstrukturen (03_Fachdokumentation_und_Wissen etc.)
+    const candidates = [
+      path.resolve(process.cwd(), "03_Fachdokumentation_und_Wissen", targetArg),
+      path.resolve(process.cwd(), "02_Software_und_Tools", targetArg),
+      path.resolve(process.cwd(), "01_Kundenauftraege", targetArg),
+      path.resolve(__dirname, "..", targetArg),
+      path.resolve(__dirname, "..", "..", targetArg),
+      path.resolve(__dirname, "..", "..", "03_Fachdokumentation_und_Wissen", targetArg)
+    ];
+    const found = candidates.find(c => fs.existsSync(c));
+    cpsPath = found || directPath;
+  }
+} else {
+  const defaultLocal = path.join(__dirname, "src", "mein_erster_post.cps");
+  cpsPath = fs.existsSync(defaultLocal) ? defaultLocal : path.join(__dirname, "..", "src", "mein_erster_post.cps");
+}
 const exerciseName = path.basename(cpsPath, path.extname(cpsPath));
 const directNcPath = path.join(path.dirname(cpsPath), exerciseName + ".nc");
 const exerciseNcPath = path.join(__dirname, exerciseName + ".nc");
@@ -417,13 +436,13 @@ if (typeof sandbox.onClose === "function") {
 // 3. Speichere den frisch generierten G-Code sowohl direkt bei der Übung als auch im tests-Ordner
 const finalGCode = outputLines.join("\n") + "\n";
 fs.writeFileSync(directNcPath, finalGCode, "utf8");
-fs.writeFileSync(exerciseNcPath, finalGCode, "utf8");
-fs.writeFileSync(outNcPath, finalGCode, "utf8");
+
+
 
 console.log("==================================================================");
 console.log("✅ POSTPROZESSOR ERFOLGREICH AUSGEFÜHRT (" + path.basename(cpsPath) + ")");
 console.log("📄 Direkt bei Ihrer Übung       : " + path.relative(process.cwd(), directNcPath));
-console.log("📄 Im Tests-Ordner              : tests/" + exerciseName + ".nc");
-console.log("📄 Standard-Ausgabedatei        : tests/mein_generierter_gcode.nc");
+
+
 console.log("==================================================================\n");
 console.log(finalGCode);

@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>3D-Kundenauftrag & CAM/G-Code Simulator – Bauteil 1001 (80x50x12mm)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #sidebar {
+      width: 430px;
+      background: #1e293b;
+      border-right: 1px solid #334155;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      gap: 12px;
+      overflow-y: auto;
+    }
+    h1 { font-size: 16px; color: #38bdf8; line-height: 1.35; }
+    .badge {
+      display: inline-block;
+      background: #0284c7;
+      color: #fff;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    .card {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+    .card h2 {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    button {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 12.5px;
+      transition: background 0.15s;
+    }
+    button:hover { background: #0369a1; }
+    button.secondary { background: #334155; }
+    button.secondary:hover { background: #475569; }
+    #gcode-box {
+      height: 400px;
+      min-height: 180px;
+      max-height: 85vh;
+      resize: vertical;
+      overflow: auto;
+      background: #020617;
+      border: 2px solid #334155;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'Consolas', monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      white-space: pre;
+      color: #cbd5e1;
+      transition: height 0.2s ease;
+    }
+    #gcode-box:hover {
+      border-color: #0284c7;
+    }
+    #resizer {
+      width: 6px;
+      background: #1e293b;
+      border-left: 1px solid #334155;
+      border-right: 1px solid #334155;
+      cursor: col-resize;
+      transition: background 0.15s;
+      flex-shrink: 0;
+    }
+    #resizer:hover, #resizer.dragging {
+      background: #38bdf8;
+    }
+    .gcode-line { padding: 2px 6px; border-radius: 4px; cursor: pointer; transition: background 0.1s; }
+    .gcode-line:hover { background: #1e293b; color: #38bdf8; }
+    .gcode-active { background: #0284c7 !important; color: #fff !important; font-weight: bold; }
+    .gcode-comment { color: #38bdf8; }
+    .gcode-safety { color: #fbbf24; font-weight: bold; }
+    #viewport {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    #canvas3d {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+    }
+    #canvas3d:active { cursor: grabbing; }
+    #hud {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: 'Consolas', monospace;
+      font-size: 13px;
+      pointer-events: none;
+    }
+    .legend {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      max-width: calc(100% - 32px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+    }
+    .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+    #tooltip3d {
+      position: absolute;
+      display: none;
+      pointer-events: none;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid #38bdf8;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12.5px;
+      color: #f8fafc;
+      z-index: 100;
+      max-width: 320px;
+      line-height: 1.45;
+      transform: translate(14px, 14px);
+    }
+    #tooltip3d b { color: #38bdf8; }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <div>
+      <span class="badge">PRAXIS-SIMULATION: 3D-KUNDENAUFTRAG</span>
+      <h1>Vom 3D-Modell (80×50×12 mm) zum fertigen G-Code (O1001)</h1>
+    </div>
+
+    <div class="card">
+      <h2>1. Auftragsdaten (Bauteil_1001)</h2>
+      <div><b>Fertigteil (Quader):</b> 80 × 50 × 12 mm (Aluminium EN AW-6082)</div>
+      <div><b>Rohteil (Stock):</b> 85 × 55 × 15 mm (Gestrichelter Kasten)</div>
+      <div><b>Geometrie:</b> Kreistasche Ø30 mm (Tiefe -3) + 4× Bohrung Ø6 mm (Tiefe -12)</div>
+      <div><b>Nullpunkt (G54):</b> Vorne-Links-Oben (X0, Y0, Z0)</div>
+      <div><b>Werkzeuge:</b> T01 = Ø10mm Fräser | T02 = Ø6mm Bohrer</div>
+      <div style="font-size:11px; color:#38bdf8; margin-top:4px; border-top:1px solid #334155; padding-top:4px;">
+        📌 <b>Woher stammen diese Daten?</b> Aus der CAD-Datei <code>bauteil_1001.stl</code> & Kundenauftrag 01 (Flanschplatte).
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Programm-Auswahl & .nc Datei laden</h2>
+      <div style="font-size:11.5px; color:#94a3b8; margin-bottom:6px;">
+        Wählen Sie eine vorbereitete Übung <b>ODER</b> laden Sie Ihre eigene erzeugte <code>.nc</code>-Datei von der Festplatte:
+      </div>
+      <select id="programSelect" style="width:100%; padding:8px 10px; background:#020617; color:#38bdf8; border:1px solid #0284c7; border-radius:6px; font-weight:600; font-size:12px; cursor:pointer;">
+        <optgroup label="📁 Eigene Datei">
+          <option id="optCustom" value="custom" style="display:none; color:#34d399; font-weight:bold;">[Geladene Datei]</option>
+        </optgroup>
+        <optgroup label="🚨 Crash- & Sicherheits-Tests (Z-MIN)">
+          <option value="test_durchbruch">⚠️ Test 1: Bohrungs-Durchbruch (Z = -14.5 mm / Tunnel aktiv)</option>
+          <option value="test_crash">🚨 Test 2: Schraubstock-Kollision (Z = -18.0 mm / CRASH!)</option>
+        </optgroup>
+        <optgroup label="⭐ Basis- & Grund-Übungen (1 bis 8)">
+          <option value="kundenauftrag">Kundenauftrag: Bauteil 1001 (Komplette Fräsung)</option>
+          <option value="uebung_00b">Übung 00b: Hallo Welt (Erste eigene Zeile)</option>
+          <option value="uebung_01">Übung 01: Entwickler-Header (onOpen & Safe Start)</option>
+          <option value="uebung_02">Übung 02: Werkzeugliste Tool Table (for-Schleife)</option>
+          <option value="uebung_03">Übung 03: Z-MIN Berechnung (Schraubstock-Crashschutz)</option>
+          <option value="uebung_04">Übung 04: 3D-Modell CAM-Operationen (Bauteil 1001)</option>
+          <option value="uebung_06">Übung 06: Sicherer Rückzug (G53 Z0 & Tisch zur Tür)</option>
+          <option value="uebung_07">Übung 07: Späneförderer & Blasluft Schalter</option>
+          <option value="uebung_08">Übung 08: Fanuc vs. Siemens Dialekt (G83 vs CYCLE83)</option>
+        </optgroup>
+        <optgroup label="🚀 Profi-Übungen für Online-Aufträge (9 bis 16)">
+          <option value="uebung_09">Übung 09: Schnittdaten-Check (Drehzahl & Vorschub)</option>
+          <option value="uebung_10">Übung 10: 2. Aufspannung G55 (OP20 Restboden Planfräsen)</option>
+          <option value="uebung_11">Übung 11: Gewindebohren G84 (Rigid Tapping M6/M8)</option>
+          <option value="uebung_12">Übung 12: Radiuskorrektur G41/G42 (Passungen 0.01mm)</option>
+          <option value="uebung_13">Übung 13: 3D-Freiformflächen (Kugelfräser Schlichten)</option>
+          <option value="uebung_14">Übung 14: Heidenhain Klartext & 4. Drehachse (A-Achse)</option>
+          <option value="uebung_15">Übung 15: Fasenfräsen & Entgraten (45° mit Tip Offset)</option>
+          <option value="uebung_16">Übung 16: Meister-Post 5-Punkte-Endabnahme</option>
+        </optgroup>
+      </select>
+
+      <div style="margin-top:10px;">
+        <input type="file" id="ncFileInput" accept=".nc,.gcode,.tap,.txt" style="display:none;" />
+        <button id="btnChooseFile" style="width:100%; padding:10px 14px; background:#10b981; color:#ffffff; border:none; border-radius:6px; font-weight:bold; font-size:12.5px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 2px 4px rgba(0,0,0,0.3); transition:background 0.2s;">
+          📂 Eigene .nc Datei von Festplatte auswählen & laden
+        </button>
+        <div id="fileLoadedBadge" style="display:none; margin-top:6px; font-size:11.5px; color:#34d399; background:rgba(16,185,129,0.15); border:1px solid #059669; padding:5px 8px; border-radius:4px;">
+          ✅ Geladene Datei: <span id="fileLoadedName" style="font-weight:bold;"></span> (<span id="fileLoadedLines"></span> Zeilen)
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>2. Interaktive 3D-Simulation steuern</h2>
+      <div class="controls" style="margin-bottom:8px;">
+        <button id="btnPlay" style="background:#0284c7; min-width:110px;">▶ Abspielen</button>
+        <button id="btnStepPrev" class="secondary" title="Einen Schritt zurück">⏮ Vorheriger</button>
+        <button id="btnStepNext" class="secondary" title="Einen Schritt vorwärts">⏭ Nächster Schritt</button>
+        <button id="btnReset" class="secondary" title="Programm zurück an den Anfang">↺ Code Reset</button>
+        <button id="btnResetCamera" class="secondary" title="3D-Blickwinkel und Zoom auf Ausgangsposition zurücksetzen">🎥 3D-Ansicht Reset</button>
+        <button id="btnToggleStock" class="secondary">Rohteil Ein/Aus</button>
+        <button id="btnToggleDim" style="background:#0284c7;" title="Maße und Pfeile direkt am 3D-Modell ein-/ausblenden">📐 Maße Ein/Aus</button>
+      </div>
+      <div style="margin-top:8px; display:flex; align-items:center; gap:8px; font-size:12px; background:#020617; padding:6px 10px; border-radius:6px; border:1px solid #334155;">
+        <span style="white-space:nowrap; font-weight:600;">Geschwindigkeit:</span>
+        <input type="range" id="speedSlider" min="0.05" max="1.5" step="0.05" value="0.25" style="flex:1; cursor:pointer;" />
+        <span id="speedVal" style="color:#38bdf8; font-weight:bold; min-width:65px;">0.25x (Ruhig)</span>
+      </div>
+      <div style="margin-top:8px; font-size:11.5px; color:#94a3b8; line-height:1.4;">
+        💡 <b>Tipps:</b> Nutzen Sie <b>„⏭ Nächster Schritt“</b> oder <b>klicken Sie links auf eine G-Code-Zeile</b>. Mit dem Button <b>„🎥 3D-Ansicht Reset“</b> (oder einem <b>Doppelklick ins 3D-Fenster</b>) setzen Sie Blickwinkel und Zoom sofort wieder auf die Ausgangsposition zurück!
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px; flex-wrap:wrap; gap:6px;">
+      <div style="font-size:12.5px; font-weight:700; color:#f8fafc; display:flex; align-items:center; gap:6px;">
+        <span>3. G-Code Fenster:</span>
+        <span id="gcode-file-title" style="color:#38bdf8; font-weight:bold; font-size:12px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:200px;">Kundenauftrag: Bauteil 1001</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:4px;">
+        <span style="font-size:11px; color:#94a3b8; margin-right:2px;">Größe:</span>
+        <button id="btnHNormal" type="button" style="background:#334155; padding:3px 8px; font-size:11px; border-radius:4px;" title="Standardhöhe 260px einstellen">↕ 260px</button>
+        <button id="btnHLarge" type="button" style="background:#0284c7; padding:3px 8px; font-size:11px; border-radius:4px;" title="Große Ansicht 450px einstellen">↕ 450px</button>
+        <button id="btnHMax" type="button" style="background:#10b981; padding:3px 8px; font-size:11px; border-radius:4px;" title="Maximale Höhe 650px einstellen">↕ 650px</button>
+      </div>
+    </div>
+    <div id="gcode-box"></div>
+    <div style="font-size:11px; color:#94a3b8; display:flex; justify-content:space-between; align-items:center; margin-top:-6px;">
+      <span>💡 <b>Tipp:</b> Ziehen Sie an der rechten unteren Ecke des Fensters zum freien Vergrößern!</span>
+      <span style="color:#38bdf8;">↕ Frei ziehbar</span>
+    </div>
+  </div>
+
+  <div id="resizer" title="Hier mit der Maus ziehen, um die Seitenleiste breiter oder schmaler zu machen"></div>
+
+  <div id="viewport">
+    <canvas id="canvas3d"></canvas>
+    <div id="tooltip3d"></div>
+    <div id="hud">
+      <div style="color:#38bdf8; font-weight:bold; margin-bottom:4px;">LIVE CNC-STEUERUNG (HAAS NGC / FANUC)</div>
+      <div id="hud-op">OPERATION: BEREIT</div>
+      <div id="hud-tool">WERKZEUG : T01 (Ø10.0 MM SCHAFTFRÄSER)</div>
+      <div id="hud-pos">POS (G54): X   0.000 | Y   0.000 | Z  15.000</div>
+      <div id="hud-status" style="margin-top:6px; padding:4px 8px; border-radius:4px; font-weight:bold; font-size:11px; background:rgba(16,185,129,0.2); border:1px solid #10b981; color:#34d399; display:inline-block; transition:all 0.2s;">🟢 SICHERHEITSZONE: Z > 0 mm (In freier Luft)</div>
+    </div>
+    <div class="legend">
+      <div style="font-weight:bold; width:100%; color:#38bdf8; margin-bottom:2px; border-bottom:1px solid #334155; padding-bottom:4px; display:flex; justify-content:space-between; align-items:center;">
+        <span>🎨 Farblegende der 3D-Simulation (Bedeutung aller Linien):</span>
+        <span style="color:#facc15; font-weight:600; font-size:11.5px;">💡 Fahren Sie mit der Maus über jede beliebige Linie für Details!</span>
+      </div>
+      <div><span class="dot" style="background:#ef4444;"></span><b>Rote Linie:</b> X-Achse (Länge nach rechts)</div>
+      <div><span class="dot" style="background:#22c55e;"></span><b>Grüne Linie:</b> Y-Achse (Breite nach hinten)</div>
+      <div><span class="dot" style="background:#3b82f6;"></span><b>Blaue Linie:</b> Z-Achse (Höhe nach oben)</div>
+      <div><span class="dot" style="background:#facc15;"></span><b>Gelbe Linie (gestrichelt):</b> G00 Eilgang (Luftfahrt ohne Schnitt)</div>
+      <div><span class="dot" style="background:#38bdf8;"></span><b>Hellblaue Linie (Cyan):</b> G01/G03 Fräsbahn (Fräsen im Metall)</div>
+      <div><span class="dot" style="background:#f43f5e;"></span><b>Roter Zylinder:</b> Fräswerkzeug (Spindel/Fräser)</div>
+      <div><span class="dot" style="background:#94a3b8;"></span><b>Grauer Rahmen:</b> Fertigteil-Kontur (80×50×12 mm)</div>
+    </div>
+  </div>
+
+  <script>
+    const gcodeLinesKundenauftrag = [
+      "%",
+      "O1001 (CNC FERTIGUNGSPROGRAMM - MUSTERBAUTEIL)",
+      "(==================================================)",
+      "(AUTOMATISCH GENERIERTER CNC G-CODE - MASCHINENCODE)",
+      "(ENTWICKLER : JAVASCRIPT CNC-ENTWICKLER)",
+      "(BETRIEB    : PRAEZISIONS-ZERSPANUNG GMBH)",
+      "(EINHEITEN  : MILLIMETER - METRISCH G21)",
+      "(==================================================)",
+      "(--- BENOETIGTE WERKZEUGE - TOOL TABLE ---)",
+      "(T01 | D=10.000MM | ECKE R=0.000 | Z-MIN=-5.000MM | SCHAFTFRAESER 10MM VHM)",
+      "(T02 | D=6.000MM  | ECKE R=0.000 | Z-MIN=-12.000MM | SPIRALBOHRER 6MM VHM)",
+      "(-----------------------------------------)",
+      "N10 G90 G17 G40 G49 G80 G21",
+      "(OPERATION: 1. AUSSENKONTUR FRAESEN - 2D KONTUR)",
+      "(SICHERHEITS-INFO: OP Z-MIN=-5.000MM | OP Z-MAX=15.000MM)",
+      "N20 G53 G00 Z0.000",
+      "N30 T01 M06",
+      "N40 S8000 M03",
+      "N50 G54",
+      "N60 G90 G00 X-10.000 Y-10.000",
+      "N70 G00 G43 Z15.000 H01",
+      "N80 M08",
+      "N90 G00 Z2.000",
+      "N100 G01 Z-5.000 F500",
+      "N110 G01 X0.000 Y0.000 F1200",
+      "N120 G01 X80.000 Y0.000",
+      "N130 G01 X80.000 Y50.000",
+      "N140 G01 X0.000 Y50.000",
+      "N155 G01 X0.000 Y0.000",
+      "N160 G00 Z15.000",
+      "(OPERATION: 2. KREISTASCHE IN DER MITTE - G02/G03)",
+      "(SICHERHEITS-INFO: OP Z-MIN=-3.000MM | OP Z-MAX=15.000MM)",
+      "N170 G00 X40.000 Y25.000",
+      "N180 G00 Z2.000",
+      "N190 G01 Z-3.000 F400",
+      "N200 G01 X55.000 Y25.000 F1000",
+      "N210 G17 G03 X55.000 Y25.000 I-15.000 J0.000 F1000",
+      "N220 G01 X40.000 Y25.000",
+      "N230 G00 Z15.000",
+      "(OPERATION: 3. VIER BEFESTIGUNGSBOHRUNGEN - G83)",
+      "(SICHERHEITS-INFO: OP Z-MIN=-12.000MM | OP Z-MAX=15.000MM)",
+      "N240 G53 G00 Z0.000",
+      "N250 T02 M06",
+      "N260 S3500 M03",
+      "N270 G54",
+      "N280 G90 G00 X10.000 Y10.000",
+      "N290 G00 G43 Z15.000 H02",
+      "N300 M08",
+      "N310 G90 G83 X10.000 Y10.000 Z-12.000 R2.000 Q3.000 F300",
+      "N320 X70.000 Y10.000",
+      "N330 X70.000 Y40.000",
+      "N340 X10.000 Y40.000",
+      "N350 G80",
+      "N360 G00 Z15.000",
+      "(--- SICHERES PROGRAMMENDE - SAFE FOOTER ---)",
+      "N370 M09",
+      "N380 G53 G00 Z0.000",
+      "N390 M05",
+      "N400 G53 G00 Y0.000",
+      "N410 M30",
+      "%"
+    ];
+
+    const gcodeLinesUebung00b = [
+      "(========================================)",
+      "(HALLO WELT - MEIN ERSTER CNC POSTPROZESSOR)",
+      "(ERFOLGREICH ERSTE ZEILE EINGEFUEGT)",
+      "(========================================)",
+      "G90 G17 G21 G94",
+      "G28 G91 Z0.",
+      "G90",
+      "(--- WERKZEUGWECHSEL ---)",
+      "T1 M06",
+      "S8000 M03",
+      "G54",
+      "(--- WERKZEUGWECHSEL ---)",
+      "T1 M06",
+      "S8000 M03",
+      "G54",
+      "(--- WERKZEUGWECHSEL ---)",
+      "T2 M06",
+      "S3500 M03",
+      "G54",
+      "(--- PROGRAMMENDE ---)",
+      "M05",
+      "M09",
+      "G28 G91 Z0.",
+      "G28 Y0.",
+      "M30"
+    ];
+
+    // Segmente der Werkzeugbewegung für die 3D-Animation
+    const waypointsKundenauftrag = [
+      { x: -10, y: -10, z: 25, rapid: true, line: 19, tool: "T01 (Ø10mm Fräser)", op: "1. AUSSENKONTUR FRÄSEN" },
+      { x: -10, y: -10, z: 15, rapid: true, line: 20, tool: "T01 (Ø10mm Fräser)", op: "1. AUSSENKONTUR FRÄSEN" },
+      { x: -10, y: -10, z: 2,  rapid: true, line: 22, tool: "T01 (Ø10mm Fräser)", op: "1. AUSSENKONTUR FRÄSEN" },
+      { x: -10, y: -10, z: -5, rapid: false, line: 23, tool: "T01 (Ø10mm Fräser)", op: "1. AUSSENKONTUR FRÄSEN" },
+      { x: 0,   y: 0,   z: -5, rapid: false, line: 24, tool: "T01 (Ø10mm Fräser)", op: "1. AUSSENKONTUR FRÄSEN" },
+      { x: 80,  y: 0,   z: -5, rapid: false, line: 25, tool: "T01 (Ø10mm Fräser)", op: "1. AUSSENKONTUR FRÄSEN" },
+      { x: 80,  y: 50,  z: -5, rapid: false, line: 26, tool: "T01 (Ø10mm Fräser)", op: "1. AUSSENKONTUR FRÄSEN" },
+      { x: 0,   y: 50,  z: -5, rapid: false, line: 27, tool: "T01 (Ø10mm Fräser)", op: "1. AUSSENKONTUR FRÄSEN" },
+      { x: 0,   y: 0,   z: -5, rapid: false, line: 28, tool: "T01 (Ø10mm Fräser)", op: "1. AUSSENKONTUR FRÄSEN" },
+      { x: 0,   y: 0,   z: 15, rapid: true,  line: 29, tool: "T01 (Ø10mm Fräser)", op: "1. AUSSENKONTUR FRÄSEN" },
+      // Operation 2: Kreistasche bei X40, Y25, R15 (Ø30mm)
+      { x: 40,  y: 25,  z: 15, rapid: true,  line: 32, tool: "T01 (Ø10mm Fräser)", op: "2. KREISTASCHE Ø30MM" },
+      { x: 40,  y: 25,  z: 2,  rapid: true,  line: 33, tool: "T01 (Ø10mm Fräser)", op: "2. KREISTASCHE Ø30MM" },
+      { x: 40,  y: 25,  z: -3, rapid: false, line: 34, tool: "T01 (Ø10mm Fräser)", op: "2. KREISTASCHE Ø30MM" },
+      { x: 55,  y: 25,  z: -3, rapid: false, line: 35, tool: "T01 (Ø10mm Fräser)", op: "2. KREISTASCHE Ø30MM" }
+    ];
+    for (let i = 1; i <= 24; i++) {
+      const ang = (i / 24) * Math.PI * 2;
+      waypointsKundenauftrag.push({
+        x: 40 + 15 * Math.cos(ang),
+        y: 25 + 15 * Math.sin(ang),
+        z: -3,
+        rapid: false,
+        line: 36,
+        tool: "T01 (Ø10mm Fräser)",
+        op: "2. KREISTASCHE Ø30MM (G03)"
+      });
+    }
+    waypointsKundenauftrag.push(
+      { x: 40, y: 25, z: -3, rapid: false, line: 37, tool: "T01 (Ø10mm Fräser)", op: "2. KREISTASCHE Ø30MM" },
+      { x: 40, y: 25, z: 15, rapid: true,  line: 38, tool: "T01 (Ø10mm Fräser)", op: "2. KREISTASCHE Ø30MM" },
+      // Operation 3: 4 Bohrungen G83
+      { x: 10, y: 10, z: 15,  rapid: true,  line: 45, tool: "T02 (Ø6mm Spiralbohrer)", op: "3. TIEFBOHREN G83 (4× Ø6MM)" },
+      { x: 10, y: 10, z: 2,   rapid: true,  line: 48, tool: "T02 (Ø6mm Spiralbohrer)", op: "3. TIEFBOHREN G83 (LOCH 1)" },
+      { x: 10, y: 10, z: -12, rapid: false, line: 48, tool: "T02 (Ø6mm Spiralbohrer)", op: "3. TIEFBOHREN G83 (LOCH 1)" },
+      { x: 10, y: 10, z: 2,   rapid: true,  line: 48, tool: "T02 (Ø6mm Spiralbohrer)", op: "3. TIEFBOHREN G83 (LOCH 1)" },
+      { x: 70, y: 10, z: 2,   rapid: true,  line: 49, tool: "T02 (Ø6mm Spiralbohrer)", op: "3. TIEFBOHREN G83 (LOCH 2)" },
+      { x: 70, y: 10, z: -12, rapid: false, line: 49, tool: "T02 (Ø6mm Spiralbohrer)", op: "3. TIEFBOHREN G83 (LOCH 2)" },
+      { x: 70, y: 10, z: 2,   rapid: true,  line: 49, tool: "T02 (Ø6mm Spiralbohrer)", op: "3. TIEFBOHREN G83 (LOCH 2)" },
+      { x: 70, y: 40, z: 2,   rapid: true,  line: 50, tool: "T02 (Ø6mm Spiralbohrer)", op: "3. TIEFBOHREN G83 (LOCH 3)" },
+      { x: 70, y: 40, z: -12, rapid: false, line: 50, tool: "T02 (Ø6mm Spiralbohrer)", op: "3. TIEFBOHREN G83 (LOCH 3)" },
+      { x: 70, y: 40, z: 2,   rapid: true,  line: 50, tool: "T02 (Ø6mm Spiralbohrer)", op: "3. TIEFBOHREN G83 (LOCH 3)" },
+      { x: 10, y: 40, z: 2,   rapid: true,  line: 51, tool: "T02 (Ø6mm Spiralbohrer)", op: "3. TIEFBOHREN G83 (LOCH 4)" },
+      { x: 10, y: 40, z: -12, rapid: false, line: 51, tool: "T02 (Ø6mm Spiralbohrer)", op: "3. TIEFBOHREN G83 (LOCH 4)" },
+      { x: 10, y: 40, z: 15,  rapid: true,  line: 53, tool: "T02 (Ø6mm Spiralbohrer)", op: "PROGRAMMENDE (M30)" }
+    );
+
+    const PRESET_GCODES = {
+      "kundenauftrag": gcodeLinesKundenauftrag.join("\n"),
+      "test_durchbruch": [
+        "%",
+        "O1001 (TEST 1: BOHRUNGS-DURCHBRUCH MIT TUNNEL)",
+        "(==================================================)",
+        "(INFO: BOHRER TAUCHT DURCH BAUTEILBODEN INS FREIE)",
+        "(T02 | BOHRER D=5.0MM | Z-MIN=-14.500MM | TUNNEL FREI)",
+        "(==================================================)",
+        "N10 G90 G21 G17 G40 G80",
+        "N20 G53 G00 Z0.0",
+        "N30 T02 M06",
+        "N40 S3500 M03",
+        "N50 G54",
+        "N60 G00 X40.0 Y25.0 Z15.0",
+        "N70 G00 Z2.0",
+        "N80 G01 Z-14.5 F300 (DURCHBRUCH: Z=-14.5 MM IM TUNNEL)",
+        "N90 G00 Z15.0",
+        "N100 G53 G00 Z0.0",
+        "N110 M30",
+        "%"
+      ].join("\n"),
+      "test_crash": [
+        "%",
+        "O1001 (TEST 2: FEHLERHAFTER Z-WERT / SCHRAUBSTOCK CRASH)",
+        "(==================================================)",
+        "(ACHTUNG: FRAESER TAUCHT TIEFER ALS SCHRAUBSTOCKBACKE)",
+        "(SCHRAUBSTOCK-BACKEN LIEGEN BEI Z = -15.0 MM)",
+        "(PROGRAMMIERTER VERFAHRBEFEHL FAEHRT AUF Z = -18.0 MM!)",
+        "(==================================================)",
+        "N10 G90 G21 G17 G40 G80",
+        "N20 G53 G00 Z0.0",
+        "N30 T01 M06",
+        "N40 S8000 M03",
+        "N50 G54",
+        "N60 G00 X0.0 Y0.0 Z15.0",
+        "N70 G00 Z2.0",
+        "N80 G01 Z-18.0 F500 (CRASH: Z=-18.0 MM RAMMT IN STAHLBACKE!)",
+        "N90 G01 X80.0 Y0.0 F1200",
+        "N100 G00 Z15.0",
+        "N110 G53 G00 Z0.0",
+        "N120 M30",
+        "%"
+      ].join("\n"),
+      "uebung_00b": gcodeLinesUebung00b.join("\n"),
+      "uebung_01": [
+        "%",
+        "O1001 (UEBUNG 01 - ENTWICKLER HEADER IN ONOPEN)",
+        "(==================================================)",
+        "(AUTOMATISCH GENERIERTER CNC G-CODE - MASCHINENCODE)",
+        "(ENTWICKLER : JAVASCRIPT CNC-ENTWICKLER)",
+        "(BETRIEB    : PRAEZISIONS-ZERSPANUNG GMBH)",
+        "(DATUM/ZEIT : " + new Date().toISOString().slice(0, 10) + ")",
+        "(EINHEITEN  : MILLIMETER - METRISCH G21)",
+        "(==================================================)",
+        "N10 G90 G17 G40 G49 G80 G21",
+        "N20 G53 G00 Z0.000",
+        "N30 T01 M06",
+        "N40 S8000 M03",
+        "N50 G54",
+        "N60 G00 X0.000 Y0.000 Z15.000",
+        "N70 G00 Z2.000",
+        "N80 G01 Z-5.000 F500",
+        "N90 G01 X80.000 Y0.000 F1200",
+        "N100 G00 Z15.000",
+        "N110 M09",
+        "N120 G53 G00 Z0.000",
+        "N130 M05",
+        "N140 M30",
+        "%"
+      ].join("\n"),
+      "uebung_02": [
+        "%",
+        "O1001 (UEBUNG 02 - WERKZEUGLISTE TOOL TABLE)",
+        "(==================================================)",
+        "(--- BENOETIGTE WERKZEUGE - TOOL TABLE ---)",
+        "(T01 | D=10.000MM | ECKE R=0.000 | Z-MIN=-5.000MM | SCHAFTFRAESER 10MM VHM)",
+        "(T02 | D=6.000MM  | ECKE R=0.000 | Z-MIN=-12.000MM | SPIRALBOHRER 6MM VHM)",
+        "(-----------------------------------------)",
+        "N10 G90 G17 G40 G80 G21",
+        "N20 G53 G00 Z0.000",
+        "N30 T01 M06",
+        "N40 S8000 M03",
+        "N50 G54",
+        "N60 G00 X10.000 Y10.000 Z15.000",
+        "N70 G01 Z-5.000 F500",
+        "N80 G01 X70.000 Y10.000",
+        "N90 G00 Z15.000",
+        "N100 T02 M06",
+        "N110 S3500 M03",
+        "N120 G83 X40.000 Y25.000 Z-12.000 R2.000 Q3.000 F300",
+        "N130 G80",
+        "N140 G00 Z15.000",
+        "N150 M30",
+        "%"
+      ].join("\n"),
+      "uebung_03": [
+        "%",
+        "O1001 (UEBUNG 03 - Z-MIN SCHRAUBSTOCK CRASHSCHUTZ)",
+        "(==================================================)",
+        "(SICHERHEITSPRUEFUNG: TIEFSTE FRAESTIEFE Z-MIN)",
+        "(T01 | Z-MIN = -5.000MM | SCHAFTFRAESER T01)",
+        "(T02 | Z-MIN = -12.000MM | SPIRALBOHRER T02)",
+        "(CRASHSCHUTZ: SCHRAUBSTOCK-BACKENHOEHE Z=-15.000MM -> SICHER!)",
+        "(==================================================)",
+        "N10 G90 G21 G17",
+        "N20 G53 G00 Z0.0",
+        "N30 T01 M06",
+        "N40 S8000 M03",
+        "N50 G54",
+        "N60 G00 X0.0 Y0.0 Z15.0",
+        "N70 G01 Z-5.0 F500",
+        "N80 G01 X80.0 Y50.0 F1200",
+        "N90 G00 Z15.0",
+        "N100 M30",
+        "%"
+      ].join("\n"),
+      "uebung_06": [
+        "%",
+        "O1001 (UEBUNG 06 - SICHERER RUECKZUG ONCLOSE)",
+        "N10 G90 G21 G17",
+        "N20 T01 M06",
+        "N30 S8000 M03",
+        "N40 G54",
+        "N50 G00 X20.0 Y20.0 Z15.0",
+        "N60 G01 Z-3.0 F400",
+        "N70 G01 X60.0 Y20.0 F1000",
+        "N80 G00 Z15.0",
+        "(--- SICHERES PROGRAMMENDE IN ONCLOSE ---)",
+        "N90 M09 (KUEHLMITTEL AUS)",
+        "N100 G53 G00 Z0.0 (Z-ACHSE HOCH AN DIE DECKE)",
+        "N110 M05 (SPINDELMOTOR STOPP)",
+        "N120 G53 G00 Y0.0 (MASCHINENTISCH VOLLSTAENDIG ZUR TUER FAHREN)",
+        "N130 M30 (PROGRAMMENDE UND SPEICHER-RUECKLAUF)",
+        "%"
+      ].join("\n"),
+      "uebung_07": [
+        "%",
+        "O1001 (UEBUNG 07 - PROPERTY SPAENEFOERDERER & BLASLUFT)",
+        "(PROPERTY: SPANFOERDERER AKTIV = JA)",
+        "N10 M31 (SPAENEFOERDERER START)",
+        "N20 G90 G21 G17",
+        "N30 T01 M06",
+        "N40 S8000 M03",
+        "N50 G54",
+        "N60 G00 X0.0 Y0.0 Z15.0",
+        "N70 M07 (BLASLUFT EIN)",
+        "N80 G01 Z-4.0 F600",
+        "N90 G01 X80.0 Y0.0",
+        "N100 G00 Z15.0",
+        "N110 M09 (BLASLUFT AUS)",
+        "N120 M33 (SPAENEFOERDERER STOPP)",
+        "N130 M30",
+        "%"
+      ].join("\n"),
+      "uebung_08": [
+        "%",
+        "O1001 (UEBUNG 08 - FANUC VS SIEMENS DIALEKT)",
+        "; SIEMENS SINUMERIK DIALEKT",
+        "G90 G71 G17",
+        "T=\"FRAESER_10\" M6",
+        "S8000 M3",
+        "G54",
+        "G0 X40.0 Y25.0 Z15.0",
+        "; SIEMENS TIEFBOHRZYKLUS CYCLE83",
+        "CYCLE83(15.0, 0.0, 2.0, -12.0, , 3.0, , , , , , ,)",
+        "G0 Z15.0",
+        "M30",
+        "%"
+      ].join("\n"),
+      "uebung_11": [
+        "%",
+        "O1001 (UEBUNG 11 - GEWINDEBOHREN G84 RIGID TAPPING M6)",
+        "(GEWINDE: METRISCH M6 | STEIGUNG P = 1.000MM)",
+        "(FORMEL: VORSCHUB F = DREHZAHL S * STEIGUNG = 500 * 1.0 = 500 MM/MIN)",
+        "N10 G90 G21 G17",
+        "N20 T03 M06 (GEWINDEBOHRER M6)",
+        "N30 S500 M03",
+        "N40 G54",
+        "N50 G00 X10.0 Y10.0 Z15.0",
+        "N60 G84 X10.0 Y10.0 Z-10.0 R3.0 F500",
+        "N70 X70.0 Y10.0",
+        "N80 X70.0 Y40.0",
+        "N90 X10.0 Y40.0",
+        "N100 G80",
+        "N110 G00 Z15.0",
+        "N120 M30",
+        "%"
+      ].join("\n"),
+      "uebung_12": [
+        "%",
+        "O1001 (UEBUNG 12 - RADIUSKORREKTUR G41 PASSUNG H7)",
+        "(KORREKTUR: LINKS DER KONTUR G41 MIT D01)",
+        "N10 G90 G21 G17",
+        "N20 T01 M06",
+        "N30 S8000 M03",
+        "N40 G54",
+        "N50 G00 X-15.0 Y-10.0 Z15.0",
+        "N60 G00 Z-5.0",
+        "N70 G01 G41 X0.0 Y0.0 D01 F800 (RADIUSKORREKTUR AKTIVIEREN)",
+        "N80 G01 X80.0 Y0.0",
+        "N90 G01 X80.0 Y50.0",
+        "N100 G01 X0.0 Y50.0",
+        "N110 G01 X0.0 Y0.0",
+        "N120 G01 G40 X-15.0 Y-10.0 (RADIUSKORREKTUR AUFHEBEN)",
+        "N130 G00 Z15.0",
+        "N140 M30",
+        "%"
+      ].join("\n")
+    };
+
+    let centerOffset = { x: 40, y: 25, z: -4 };
+
+    // Universeller G-Code Parser für jede .nc-Datei
+    function parseGCodeToSimulation(rawText, sourceTitle) {
+      const lines = rawText.split(/\r?\n/).filter(l => l.trim().length > 0);
+      const wpList = [];
+      let curX = 0, curY = 0, curZ = 15;
+      let isRapid = true;
+      let curTool = "T01 (Werkzeug)";
+      let curOp = sourceTitle || "CNC-Bearbeitung";
+      let minX = Infinity, maxX = -Infinity;
+      let minY = Infinity, maxY = -Infinity;
+      let minZ = Infinity, maxZ = -Infinity;
+      let foundCoords = false;
+
+      lines.forEach((rawLine, idx) => {
+        const line = rawLine.trim();
+
+        // 1. Kommentar / Operations-Name
+        const commentMatch = line.match(/\((.*?)\)/);
+        if (commentMatch) {
+          const c = commentMatch[1].trim();
+          if (/OPERATION|OP\d+|KONTUR|TASCHE|BOHR|HEADER|WERKZEUG|ENDE|START|UEBUNG/i.test(c)) {
+            curOp = c;
+          }
+        }
+
+        // 2. Werkzeugaufruf T... M06
+        const tMatch = line.match(/\bT0?(\d+)\b/i);
+        if (tMatch) {
+          const tNum = parseInt(tMatch[1], 10);
+          curTool = `T${tNum < 10 ? '0' + tNum : tNum}` + (tNum === 1 ? " (Ø10mm Fräser)" : (tNum === 2 ? " (Ø6mm Bohrer)" : (tNum === 3 ? " (M6 Gewindebohrer)" : ` (Wkz ${tNum})`)));
+        }
+
+        // 3. Bewegungs-Modus
+        if (/\bG00?\b/i.test(line)) isRapid = true;
+        if (/\bG0?1\b/i.test(line)) isRapid = false;
+        const isArcCW = /\bG0?2\b/i.test(line);
+        const isArcCCW = /\bG0?3\b/i.test(line);
+        const isDrill = /\bG8[123]\b/i.test(line);
+
+        // 4. Sicherheits-Rückzüge
+        if (/G53\s+G00?\s+Z0|G28\s+G91\s+Z0/i.test(line)) {
+          curZ = 35;
+          isRapid = true;
+          wpList.push({ x: curX, y: curY, z: curZ, rapid: true, line: idx, tool: curTool, op: "SICHERHEITS-RUECKZUG Z (G53/G28)" });
+          return;
+        }
+        if (/G28\s+Y0|G53\s+G00?\s+Y0/i.test(line)) {
+          curY = -25;
+          isRapid = true;
+          wpList.push({ x: curX, y: curY, z: curZ, rapid: true, line: idx, tool: curTool, op: "TISCH ZUR TUER (G28 Y0)" });
+          return;
+        }
+
+        // 5. Koordinaten X, Y, Z, R, I, J (Kommentare vorher entfernen, damit Z-MIN oder X-Achse nicht als NaN geparst werden!)
+        const cleanLine = line.replace(/\(.*?\)/g, "").replace(/;.*$/, "").trim();
+        const xMatch = cleanLine.match(/\bX\s*([+-]?\d+(?:\.\d+)?)/i);
+        const yMatch = cleanLine.match(/\bY\s*([+-]?\d+(?:\.\d+)?)/i);
+        const zMatch = cleanLine.match(/\bZ\s*([+-]?\d+(?:\.\d+)?)/i);
+        const rMatch = cleanLine.match(/\bR\s*([+-]?\d+(?:\.\d+)?)/i);
+        const iMatch = cleanLine.match(/\bI\s*([+-]?\d+(?:\.\d+)?)/i);
+        const jMatch = cleanLine.match(/\bJ\s*([+-]?\d+(?:\.\d+)?)/i);
+
+        const targetX = xMatch ? parseFloat(xMatch[1]) : curX;
+        const targetY = yMatch ? parseFloat(yMatch[1]) : curY;
+        const targetZ = zMatch ? parseFloat(zMatch[1]) : curZ;
+
+        if (xMatch || yMatch || zMatch) {
+          minX = Math.min(minX, targetX); maxX = Math.max(maxX, targetX);
+          minY = Math.min(minY, targetY); maxY = Math.max(maxY, targetY);
+          minZ = Math.min(minZ, targetZ); maxZ = Math.max(maxZ, targetZ);
+          foundCoords = true;
+        }
+
+        // Bohrzyklus Simulation
+        if (isDrill) {
+          const drillR = rMatch ? parseFloat(rMatch[1]) : 2.0;
+          const drillZ = zMatch ? parseFloat(zMatch[1]) : -12.0;
+          wpList.push({ x: targetX, y: targetY, z: curZ, rapid: true, line: idx, tool: curTool, op: curOp });
+          wpList.push({ x: targetX, y: targetY, z: drillR, rapid: true, line: idx, tool: curTool, op: curOp });
+          wpList.push({ x: targetX, y: targetY, z: drillZ, rapid: false, line: idx, tool: curTool, op: curOp });
+          wpList.push({ x: targetX, y: targetY, z: drillR, rapid: true, line: idx, tool: curTool, op: curOp });
+          curX = targetX; curY = targetY; curZ = drillR;
+          return;
+        }
+
+        // Kreisinterpolation G02/G03
+        if ((isArcCW || isArcCCW) && (iMatch || jMatch)) {
+          const iVal = iMatch ? parseFloat(iMatch[1]) : 0;
+          const jVal = jMatch ? parseFloat(jMatch[1]) : 0;
+          const centerX = curX + iVal;
+          const centerY = curY + jVal;
+          const startAngle = Math.atan2(curY - centerY, curX - centerX);
+          let endAngle = Math.atan2(targetY - centerY, targetX - centerX);
+
+          if (isArcCW && endAngle >= startAngle) endAngle -= Math.PI * 2;
+          if (isArcCCW && endAngle <= startAngle) endAngle += Math.PI * 2;
+
+          const steps = 16;
+          for (let s = 1; s <= steps; s++) {
+            const theta = startAngle + (endAngle - startAngle) * (s / steps);
+            const radius = Math.hypot(iVal, jVal);
+            const arcX = centerX + radius * Math.cos(theta);
+            const arcY = centerY + radius * Math.sin(theta);
+            const arcZ = curZ + (targetZ - curZ) * (s / steps);
+            wpList.push({ x: arcX, y: arcY, z: arcZ, rapid: false, line: idx, tool: curTool, op: curOp });
+          }
+          curX = targetX; curY = targetY; curZ = targetZ;
+          return;
+        }
+
+        // Normale Bewegung oder Block ohne Koordinaten
+        if (xMatch || yMatch || zMatch) {
+          curX = targetX; curY = targetY; curZ = targetZ;
+          wpList.push({ x: curX, y: curY, z: curZ, rapid: isRapid, line: idx, tool: curTool, op: curOp });
+        } else {
+          wpList.push({ x: curX, y: curY, z: curZ, rapid: isRapid, line: idx, tool: curTool, op: curOp });
+        }
+      });
+
+      if (wpList.length === 0) {
+        wpList.push({ x: 0, y: 0, z: 15, rapid: true, line: 0, tool: "T01", op: "Bereit" });
+      }
+
+      if (foundCoords && isFinite(minX) && isFinite(maxX)) {
+        centerOffset = {
+          x: (minX + maxX) / 2,
+          y: (minY + maxY) / 2,
+          z: (minZ + maxZ) / 2
+        };
+      } else {
+        centerOffset = { x: 40, y: 25, z: -4 };
+      }
+
+      return { lines, waypoints: wpList };
+    }
+
+    let gcodeLines = gcodeLinesKundenauftrag;
+    let waypoints = waypointsKundenauftrag;
+
+    let speed = 0.25;
+    let playing = false;
+    let progress = 0;
+
+    const btnPlay = document.getElementById("btnPlay");
+    function updatePlayButton() {
+      btnPlay.textContent = playing ? "⏸ Pause" : (progress >= waypoints.length - 1 ? "↺ Neustart" : "▶ Abspielen");
+      btnPlay.style.background = playing ? "#f59e0b" : "#0284c7";
+    }
+
+    const gcodeBox = document.getElementById("gcode-box");
+    function renderGCodeBox() {
+      gcodeBox.innerHTML = "";
+      gcodeLines.forEach((line, idx) => {
+        const div = document.createElement("div");
+        div.className = "gcode-line";
+        if (line.includes("Z-MIN")) div.classList.add("gcode-safety");
+        else if (line.startsWith("(") || line.startsWith(";")) div.classList.add("gcode-comment");
+        div.id = "gline-" + idx;
+        div.textContent = line;
+        div.title = "Klicken, um diesen Schritt in 3D zu sehen";
+        div.onclick = () => {
+          let targetWp = 0;
+          for (let w = 0; w < waypoints.length; w++) {
+            if (waypoints[w].line === idx) { targetWp = w; break; }
+            if (waypoints[w].line <= idx) { targetWp = w; }
+          }
+          progress = targetWp;
+          playing = false;
+          updatePlayButton();
+        };
+        gcodeBox.appendChild(div);
+      });
+    }
+    renderGCodeBox();
+
+    // Funktion zum Laden und Verarbeiten von beliebigem G-Code-Text
+    function loadGCodeText(rawText, sourceTitle, isCustomFile = false) {
+      try {
+        if (!isCustomFile && sourceTitle === "Kundenauftrag: Bauteil 1001" && typeof waypointsKundenauftrag !== "undefined") {
+          gcodeLines = gcodeLinesKundenauftrag;
+          waypoints = waypointsKundenauftrag;
+        } else {
+          const parsed = parseGCodeToSimulation(rawText, sourceTitle);
+          gcodeLines = parsed.lines;
+          waypoints = parsed.waypoints;
+        }
+
+        progress = 0;
+        lastHighlight = -1;
+        playing = false;
+
+        const badge = document.getElementById("fileLoadedBadge");
+        const optCustom = document.getElementById("optCustom");
+        const progSelect = document.getElementById("programSelect");
+        const titleEl = document.getElementById("gcode-file-title");
+
+        if (titleEl) {
+          titleEl.textContent = (isCustomFile ? "📁 " : "") + sourceTitle;
+        }
+
+        if (isCustomFile) {
+          if (badge) badge.style.display = "block";
+          const nameEl = document.getElementById("fileLoadedName");
+          if (nameEl) nameEl.textContent = sourceTitle;
+          const linesEl = document.getElementById("fileLoadedLines");
+          if (linesEl) linesEl.textContent = gcodeLines.length;
+          if (optCustom) {
+            optCustom.style.display = "block";
+            optCustom.textContent = `📁 Geladen: ${sourceTitle} (${gcodeLines.length} Zeilen)`;
+          }
+          if (progSelect) progSelect.value = "custom";
+        } else {
+          if (badge) badge.style.display = "none";
+        }
+
+        updatePlayButton();
+        renderGCodeBox();
+      } catch (err) {
+        console.error("Fehler beim Laden von G-Code:", err);
+        alert("Fehler beim Laden der Datei: " + err.message);
+      }
+    }
+
+    // Dropdown-Auswahl
+    document.getElementById("programSelect").onchange = (e) => {
+      const val = e.target.value;
+      if (val === "custom") return;
+      const title = e.target.options[e.target.selectedIndex].text;
+      const code = PRESET_GCODES[val] || PRESET_GCODES["kundenauftrag"];
+      loadGCodeText(code, title, false);
+    };
+
+    // Dateiauswahl über Button
+    const fileInput = document.getElementById("ncFileInput");
+    document.getElementById("btnChooseFile").onclick = () => {
+      fileInput.value = "";
+      fileInput.click();
+    };
+
+    fileInput.onchange = (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        loadGCodeText(evt.target.result, file.name, true);
+      };
+      reader.readAsText(file);
+    };
+
+    // Drag-and-Drop Unterstützung für das gesamte Fenster
+    window.addEventListener("dragover", (e) => {
+      e.preventDefault();
+    });
+    window.addEventListener("drop", (e) => {
+      e.preventDefault();
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        const file = e.dataTransfer.files[0];
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          loadGCodeText(evt.target.result, file.name, true);
+        };
+        reader.readAsText(file);
+      }
+    });
+
+    const canvas = document.getElementById("canvas3d");
+    const ctx = canvas.getContext("2d");
+    let rotX = 0.85, rotZ = -0.65, zoom = 4.2;
+    let dragging = false, lastX = 0, lastY = 0;
+    let showStock = true;
+
+    function resize() {
+      if (canvas.clientWidth > 0 && canvas.clientHeight > 0) {
+        canvas.width = canvas.clientWidth * window.devicePixelRatio;
+        canvas.height = canvas.clientHeight * window.devicePixelRatio;
+      }
+    }
+    window.addEventListener("resize", resize);
+    window.addEventListener("load", resize);
+    resize();
+
+    // Buttons für schnelle Höhen-Umschaltung des G-Code-Fensters
+    const gcodeBoxEl = document.getElementById("gcode-box");
+    document.getElementById("btnHNormal").onclick = () => { gcodeBoxEl.style.height = "260px"; };
+    document.getElementById("btnHLarge").onclick   = () => { gcodeBoxEl.style.height = "450px"; };
+    document.getElementById("btnHMax").onclick     = () => { gcodeBoxEl.style.height = "650px"; };
+
+    // Horizontales Verschieben der Seitenleiste (Breite anpassen)
+    const resizerEl = document.getElementById("resizer");
+    const sidebarEl = document.getElementById("sidebar");
+    let isResizingSidebar = false;
+
+    if (resizerEl && sidebarEl) {
+      resizerEl.addEventListener("mousedown", (e) => {
+        isResizingSidebar = true;
+        resizerEl.classList.add("dragging");
+        document.body.style.cursor = "col-resize";
+        document.body.style.userSelect = "none";
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!isResizingSidebar) return;
+        const newWidth = Math.max(320, Math.min(window.innerWidth - 300, e.clientX));
+        sidebarEl.style.width = newWidth + "px";
+        resize();
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (isResizingSidebar) {
+          isResizingSidebar = false;
+          resizerEl.classList.remove("dragging");
+          document.body.style.cursor = "";
+          document.body.style.userSelect = "";
+          resize();
+        }
+      });
+    }
+    resize();
+
+    let hoverMouse = { x: -999, y: -999, clientX: 0, clientY: 0 };
+    const tooltip3d = document.getElementById("tooltip3d");
+
+    canvas.addEventListener("mousedown", e => {
+      dragging = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      if (tooltip3d) tooltip3d.style.display = "none";
+    });
+    window.addEventListener("mouseup", () => dragging = false);
+    canvas.addEventListener("mousemove", e => {
+      const rect = canvas.getBoundingClientRect();
+      hoverMouse.clientX = e.clientX - rect.left;
+      hoverMouse.clientY = e.clientY - rect.top;
+      hoverMouse.x = hoverMouse.clientX * window.devicePixelRatio;
+      hoverMouse.y = hoverMouse.clientY * window.devicePixelRatio;
+
+      if (dragging) {
+        rotZ += (e.clientX - lastX) * 0.01;
+        rotX = Math.max(0.05, Math.min(1.55, rotX + (e.clientY - lastY) * 0.01));
+        lastX = e.clientX;
+        lastY = e.clientY;
+        if (tooltip3d) tooltip3d.style.display = "none";
+      } else {
+        checkHoverTooltip();
+      }
+    });
+    canvas.addEventListener("mouseleave", () => {
+      hoverMouse.x = -999;
+      hoverMouse.y = -999;
+      if (tooltip3d) tooltip3d.style.display = "none";
+    });
+    canvas.addEventListener("wheel", e => {
+      zoom = Math.max(1.8, Math.min(9.0, zoom - e.deltaY * 0.003));
+      if (tooltip3d) tooltip3d.style.display = "none";
+    });
+
+    btnPlay.onclick = () => {
+      if (progress >= waypoints.length - 1) progress = 0;
+      playing = !playing;
+      updatePlayButton();
+    };
+
+    document.getElementById("btnStepNext").onclick = () => {
+      playing = false;
+      progress = Math.min(waypoints.length - 1, Math.floor(progress) + 1);
+      updatePlayButton();
+    };
+
+    document.getElementById("btnStepPrev").onclick = () => {
+      playing = false;
+      progress = Math.max(0, Math.ceil(progress) - 1);
+      updatePlayButton();
+    };
+
+    function resetCamera() {
+      rotX = 0.85;
+      rotZ = -0.65;
+      zoom = 4.2;
+    }
+
+    document.getElementById("btnReset").onclick = () => {
+      progress = 0;
+      playing = false;
+      lastHighlight = -1;
+      resetCamera();
+      updatePlayButton();
+    };
+
+    document.getElementById("btnResetCamera").onclick = resetCamera;
+    canvas.addEventListener("dblclick", resetCamera);
+
+    document.getElementById("btnToggleStock").onclick = () => {
+      showStock = !showStock;
+    };
+
+    let showDimensions = true;
+    const btnToggleDim = document.getElementById("btnToggleDim");
+    if (btnToggleDim) {
+      btnToggleDim.onclick = () => {
+        showDimensions = !showDimensions;
+        btnToggleDim.style.background = showDimensions ? "#0284c7" : "#334155";
+      };
+    }
+
+    const speedSlider = document.getElementById("speedSlider");
+    const speedVal = document.getElementById("speedVal");
+    speedSlider.oninput = (e) => {
+      speed = parseFloat(e.target.value);
+      const text = speed <= 0.35 ? "(Ruhig)" : (speed >= 0.8 ? "(Schnell)" : "(Normal)");
+      speedVal.textContent = speed.toFixed(2) + "x " + text;
+    };
+
+    function project(x, y, z) {
+      // Dynamische Zentrierung um Bauteilmitte
+      const cx = x - centerOffset.x, cy = y - centerOffset.y, cz = z - centerOffset.z;
+      const cosZ = Math.cos(rotZ), sinZ = Math.sin(rotZ);
+      const x1 = cx * cosZ - cy * sinZ;
+      const y1 = cx * sinZ + cy * cosZ;
+      const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+      const y2 = y1 * cosX - cz * sinX;
+      const z2 = y1 * sinX + cz * cosX;
+      const scale = zoom * window.devicePixelRatio * (420 / (420 - z2));
+      return {
+        px: canvas.width / 2 + x1 * scale,
+        py: canvas.height / 2 + y2 * scale
+      };
+    }
+
+    function drawLine3D(p1, p2, color, width = 1.5, dash = []) {
+      const a = project(p1.x, p1.y, p1.z);
+      const b = project(p2.x, p2.y, p2.z);
+      ctx.beginPath();
+      ctx.setLineDash(dash);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width * window.devicePixelRatio;
+      ctx.moveTo(a.px, a.py);
+      ctx.lineTo(b.px, b.py);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    function drawBox(xmin, ymin, zmin, xmax, ymax, zmax, color, width, dash = []) {
+      const c = [
+        {x:xmin, y:ymin, z:zmin}, {x:xmax, y:ymin, z:zmin}, {x:xmax, y:ymax, z:zmin}, {x:xmin, y:ymax, z:zmin},
+        {x:xmin, y:ymin, z:zmax}, {x:xmax, y:ymin, z:zmax}, {x:xmax, y:ymax, z:zmax}, {x:xmin, y:ymax, z:zmax}
+      ];
+      for (let i=0; i<4; i++) {
+        drawLine3D(c[i], c[(i+1)%4], color, width, dash);
+        drawLine3D(c[i+4], c[((i+1)%4)+4], color, width, dash);
+        drawLine3D(c[i], c[i+4], color, width, dash);
+      }
+    }
+
+    function drawCircle3D(cx, cy, cz, r, color, width = 1.5) {
+      ctx.beginPath();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width * window.devicePixelRatio;
+      for (let i = 0; i <= 36; i++) {
+        const ang = (i / 36) * Math.PI * 2;
+        const pt = project(cx + r * Math.cos(ang), cy + r * Math.sin(ang), cz);
+        if (i === 0) ctx.moveTo(pt.px, pt.py);
+        else ctx.lineTo(pt.px, pt.py);
+      }
+      ctx.stroke();
+    }
+
+    function drawText3D(text, x, y, z, color = "#f8fafc", font = "bold 11px sans-serif", bg = null) {
+      const pt = project(x, y, z);
+      ctx.save();
+      ctx.font = font;
+      if (bg) {
+        const textWidth = ctx.measureText(text).width;
+        ctx.fillStyle = bg;
+        if (ctx.roundRect) {
+          ctx.beginPath();
+          ctx.roundRect(pt.px - 4, pt.py - 12, textWidth + 8, 16, 4);
+          ctx.fill();
+        } else {
+          ctx.fillRect(pt.px - 4, pt.py - 12, textWidth + 8, 16);
+        }
+      }
+      ctx.fillStyle = color;
+      ctx.fillText(text, pt.px, pt.py);
+      ctx.restore();
+    }
+
+    function distToSegment(px, py, x1, y1, x2, y2) {
+      const dx = x2 - x1, dy = y2 - y1;
+      const l2 = dx * dx + dy * dy;
+      if (l2 === 0) return Math.hypot(px - x1, py - y1);
+      let t = ((px - x1) * dx + (py - y1) * dy) / l2;
+      t = Math.max(0, Math.min(1, t));
+      return Math.hypot(px - (x1 + t * dx), py - (y1 + t * dy));
+    }
+
+    let curToolPos = { x: 0, y: 0, z: 15 };
+    let curToolInfo = { tool: "T01", op: "Bereit" };
+
+    function checkHoverTooltip() {
+      if (!tooltip3d || hoverMouse.x < 0 || dragging) return;
+
+      const mx = hoverMouse.x;
+      const my = hoverMouse.y;
+
+      // 1. Tool-Position (Fräswerkzeug)
+      const pTool = project(curToolPos.x, curToolPos.y, curToolPos.z);
+      if (Math.hypot(mx - pTool.px, my - pTool.py) < 28) {
+        tooltip3d.innerHTML = '<b>🔴 Fräswerkzeug (Spindel)</b><br>Werkzeug: <b>' + curToolInfo.tool + '</b><br>Position: X=' + curToolPos.x.toFixed(2) + ' | Y=' + curToolPos.y.toFixed(2) + ' | Z=' + curToolPos.z.toFixed(2) + ' mm<br>Operation: ' + curToolInfo.op;
+        showTooltipAt(hoverMouse.clientX, hoverMouse.clientY);
+        return;
+      }
+
+      // 2. G54 Nullpunkt
+      const pG54 = project(0, 0, 0);
+      if (Math.hypot(mx - pG54.px, my - pG54.py) < 22) {
+        tooltip3d.innerHTML = '<b>🎯 G54 Werkstück-Nullpunkt (X0, Y0, Z0)</b><br>Vordere linke obere Ecke des Bauteils.<br>Alle CNC-Koordinaten beziehen sich auf diesen Referenzpunkt.';
+        showTooltipAt(hoverMouse.clientX, hoverMouse.clientY);
+        return;
+      }
+
+      // 3. X-Achse (Rote Linie)
+      const pXEnd = project(24, 0, 0);
+      if (distToSegment(mx, my, pG54.px, pG54.py, pXEnd.px, pXEnd.py) < 14) {
+        tooltip3d.innerHTML = '<b>🔴 Rote Linie: X-Achse (Längsachse)</b><br>Verfahrachse von links nach rechts (Werkstück-Länge: 80 mm).';
+        showTooltipAt(hoverMouse.clientX, hoverMouse.clientY);
+        return;
+      }
+
+      // 4. Y-Achse (Grüne Linie)
+      const pYEnd = project(0, 24, 0);
+      if (distToSegment(mx, my, pG54.px, pG54.py, pYEnd.px, pYEnd.py) < 14) {
+        tooltip3d.innerHTML = '<b>🟢 Grüne Linie: Y-Achse (Querachse)</b><br>Verfahrachse von vorne nach hinten (Werkstück-Breite: 50 mm).';
+        showTooltipAt(hoverMouse.clientX, hoverMouse.clientY);
+        return;
+      }
+
+      // 5. Z-Achse (Blaue Linie)
+      const pZEnd = project(0, 0, 24);
+      if (distToSegment(mx, my, pG54.px, pG54.py, pZEnd.px, pZEnd.py) < 14) {
+        tooltip3d.innerHTML = '<b>🔵 Blaue Linie: Z-Achse (Höhenachse)</b><br>Senkrechte Achse: Werte > 0 fahren frei in der Luft, Werte < 0 tauchen spanend ins Metall ein!';
+        showTooltipAt(hoverMouse.clientX, hoverMouse.clientY);
+        return;
+      }
+
+      // 6. Werkzeugbahnen (Gelb / Cyan)
+      const currentIdx = Math.floor(progress);
+      let closestDist = Infinity;
+      let closestWp = null;
+
+      for (let i = 0; i < currentIdx; i++) {
+        if (!waypoints[i] || !waypoints[i+1]) continue;
+        const p1 = project(waypoints[i].x, waypoints[i].y, waypoints[i].z);
+        const p2 = project(waypoints[i+1].x, waypoints[i+1].y, waypoints[i+1].z);
+        const d = distToSegment(mx, my, p1.px, p1.py, p2.px, p2.py);
+        if (d < closestDist) {
+          closestDist = d;
+          closestWp = waypoints[i+1];
+        }
+      }
+
+      if (closestDist < 14 && closestWp) {
+        const lineCode = gcodeLines[closestWp.line] || '';
+        if (closestWp.rapid) {
+          tooltip3d.innerHTML = '<b>🟡 Gelbe gestrichelte Linie: G00 Eilgang</b><br>Schnelle Positionierung im Vollgas durch die Luft (kein Kontakt zum Metall).<br><div style="margin-top:4px; font-family:monospace; color:#fbbf24; background:#020617; padding:3px 6px; border-radius:4px;">Zeile ' + (closestWp.line + 1) + ': ' + lineCode + '</div>';
+        } else {
+          tooltip3d.innerHTML = '<b>🔷 Cyan / Hellblaue Linie: G01/G03 Fräsbahn</b><br>Spanende Arbeitsbewegung im Metall (Fräser schneidet Span mit Vorschub F).<br><div style="margin-top:4px; font-family:monospace; color:#38bdf8; background:#020617; padding:3px 6px; border-radius:4px;">Zeile ' + (closestWp.line + 1) + ': ' + lineCode + '</div>';
+        }
+        showTooltipAt(hoverMouse.clientX, hoverMouse.clientY);
+        return;
+      }
+
+      // 7. Werkstück-Rahmen (Grau)
+      const pMid = project(40, 25, -6);
+      if (Math.hypot(mx - pMid.px, my - pMid.py) < 65) {
+        tooltip3d.innerHTML = '<b>⬜ Grauer Rahmen: Fertigteil</b><br>Werkstück: 80 × 50 × 12 mm (Aluminium EN AW-6082).<br>Tasche Ø30 mm (Tiefe -3 mm) & 4× Bohrung Ø6 mm (Tiefe -12 mm).';
+        showTooltipAt(hoverMouse.clientX, hoverMouse.clientY);
+        return;
+      }
+
+      tooltip3d.style.display = 'none';
+    }
+
+    function showTooltipAt(cx, cy) {
+      if (!tooltip3d) return;
+      tooltip3d.style.left = Math.min(window.innerWidth - 340, cx) + 'px';
+      tooltip3d.style.top = (cy - 10) + 'px';
+      tooltip3d.style.display = 'block';
+    }
+
+    let lastHighlight = -1;
+    function render() {
+      if (!waypoints || waypoints.length === 0) {
+        waypoints = [{ x: 0, y: 0, z: 15, rapid: true, line: 0, tool: "T01 (Werkzeug)", op: "Bereit" }];
+      }
+
+      if (canvas.width === 0 || canvas.height === 0 || canvas.width !== Math.floor(canvas.clientWidth * window.devicePixelRatio)) {
+        resize();
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 1. Rohteil (Stock 85x55x15mm)
+      if (showStock) {
+        drawBox(-2.5, -2.5, -15, 82.5, 52.5, 0, "rgba(148, 163, 184, 0.35)", 1, [4, 4]);
+      }
+
+      // 2. Fertigteil (3D-Modell 80x50x12mm)
+      drawBox(0, 0, -12, 80, 50, 0, "#94a3b8", 2.2);
+
+      // 3. Kreistasche Ø30mm (R=15) bei X40, Y25, Tiefe Z=0 bis Z=-3
+      drawCircle3D(40, 25, 0, 15, "#64748b", 1.8);
+      drawCircle3D(40, 25, -3, 15, "#64748b", 1.8);
+
+      // 4. 4× Durchgangsbohrung Ø6mm (R=3) bei (10,10), (70,10), (70,40), (10,40)
+      [[10,10], [70,10], [70,40], [10,40]].forEach(([hx, hy]) => {
+        drawCircle3D(hx, hy, 0, 3, "#64748b", 1.5);
+        drawCircle3D(hx, hy, -12, 3, "#64748b", 1.2);
+      });
+
+      // 4b. Technische Bemaßung am 3D-Modell einblenden (CAD-Maße)
+      if (showDimensions) {
+        // Länge 80 mm (X-Richtung unten)
+        drawLine3D({x:0, y:-8, z:0}, {x:80, y:-8, z:0}, "#38bdf8", 1.5);
+        drawLine3D({x:0, y:-12, z:0}, {x:0, y:-4, z:0}, "#38bdf8", 1.5);
+        drawLine3D({x:80, y:-12, z:0}, {x:80, y:-4, z:0}, "#38bdf8", 1.5);
+        drawText3D("80 mm Länge", 40, -10, 0, "#38bdf8", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+
+        // Breite 50 mm (Y-Richtung rechts)
+        drawLine3D({x:88, y:0, z:0}, {x:88, y:50, z:0}, "#22c55e", 1.5);
+        drawLine3D({x:84, y:0, z:0}, {x:92, y:0, z:0}, "#22c55e", 1.5);
+        drawLine3D({x:84, y:50, z:0}, {x:92, y:50, z:0}, "#22c55e", 1.5);
+        drawText3D("50 mm Breite", 90, 25, 0, "#22c55e", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+
+        // Dicke 12 mm (Z-Richtung links senkrecht)
+        drawLine3D({x:-8, y:0, z:0}, {x:-8, y:0, z:-12}, "#fbbf24", 1.5);
+        drawLine3D({x:-12, y:0, z:0}, {x:-4, y:0, z:0}, "#fbbf24", 1.5);
+        drawLine3D({x:-12, y:0, z:-12}, {x:-4, y:0, z:-12}, "#fbbf24", 1.5);
+        drawText3D("12 mm Dicke", -10, 0, -6, "#fbbf24", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+
+        // Kreistasche Ø30 mm
+        drawText3D("Kreistasche Ø 30 mm (Z-3)", 40, 25, 2, "#93c5fd", "bold 10.5px sans-serif", "rgba(15,23,42,0.85)");
+
+        // Bohrungen Ø6 mm
+        drawText3D("4× Bohrung Ø 6 mm (Z-12)", 70, 40, 2, "#93c5fd", "bold 10px sans-serif", "rgba(15,23,42,0.85)");
+
+        // Rohteil-Maße (Stock)
+        if (showStock) {
+          drawText3D("Rohteil (Stock): 85 × 55 × 15 mm", -2.5, 54, 0, "#94a3b8", "10px sans-serif", "rgba(15,23,42,0.85)");
+        }
+      }
+
+      // 5. Werkstück-Nullpunkt G54 (X=Rot, Y=Grün, Z=Blau bei 0,0,0)
+      drawLine3D({x:0,y:0,z:0}, {x:24,y:0,z:0}, "#ef4444", 3);
+      drawLine3D({x:0,y:0,z:0}, {x:0,y:24,z:0}, "#22c55e", 3);
+      drawLine3D({x:0,y:0,z:0}, {x:0,y:0,z:24}, "#3b82f6", 3);
+
+      drawText3D("X-Achse (Länge)", 26, 0, 0, "#ef4444", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+      drawText3D("Y-Achse (Breite)", 0, 26, 0, "#22c55e", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+      drawText3D("Z-Achse (Höhe)", 0, 0, 26, "#38bdf8", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+      drawText3D("G54 (X0 Y0 Z0)", 0, 0, -2, "#f8fafc", "bold 10px sans-serif", "rgba(15,23,42,0.85)");
+
+      // 6. Fräsbahnen bis zum aktuellen Animationsfortschritt zeichnen
+      if (playing) {
+        progress += 0.05 * speed;
+        if (progress >= waypoints.length - 1) {
+          progress = waypoints.length - 1;
+          playing = false;
+          updatePlayButton();
+        }
+      }
+      const idx = Math.floor(progress);
+      const frac = progress - idx;
+
+      for (let i = 0; i < idx; i++) {
+        drawLine3D(
+          waypoints[i],
+          waypoints[i+1],
+          waypoints[i+1].rapid ? "#facc15" : "#38bdf8",
+          waypoints[i+1].rapid ? 1.3 : 2.5,
+          waypoints[i+1].rapid ? [5, 4] : []
+        );
+      }
+
+      const safeIdx = Math.max(0, Math.min(idx, waypoints.length - 1));
+      const nextIdx = Math.max(0, Math.min(safeIdx + 1, waypoints.length - 1));
+      const w1 = waypoints[safeIdx] || waypoints[0];
+      const w2 = waypoints[nextIdx] || w1;
+      const curX = w1.x + (w2.x - w1.x) * frac;
+      const curY = w1.y + (w2.y - w1.y) * frac;
+      const curZ = w1.z + (w2.z - w1.z) * frac;
+
+      drawLine3D(w1, {x:curX, y:curY, z:curZ}, (w2 && w2.rapid) ? "#facc15" : "#38bdf8", 2.5);
+
+      // 7. Aktuelles Fräswerkzeug (Spindel + Fräser/Bohrer) an (curX, curY, curZ) zeichnen
+      curToolPos = { x: curX, y: curY, z: curZ };
+      const curToolName = (w2 && w2.tool) ? String(w2.tool) : "T01 (Ø10mm Fräser)";
+      const curOpName = (w2 && w2.op) ? String(w2.op) : "Bereit";
+      curToolInfo = { tool: curToolName, op: curOpName };
+
+      // Dynamische Sicherheits- und Z-Status-Überwachung
+      let statusBg = "rgba(16, 185, 129, 0.2)";
+      let statusBorder = "#10b981";
+      let statusColor = "#34d399";
+      let statusText = "🟢 SICHERHEITSZONE: Z > 0 mm (In freier Luft)";
+      let toolColor = "#f43f5e"; // Standard Rosa-Rot
+
+      if (curZ >= 30.0) {
+        statusBg = "rgba(168, 85, 247, 0.2)";
+        statusBorder = "#a855f7";
+        statusColor = "#c084fc";
+        statusText = "🟣 MASCHINEN-HOME: G53 Z0.0 (Spindel oben am Referenzschalter)";
+        toolColor = "#a855f7";
+      } else if (curZ <= 0 && curZ >= -12.0) {
+        statusBg = "rgba(56, 189, 248, 0.2)";
+        statusBorder = "#0284c7";
+        statusColor = "#38bdf8";
+        statusText = "🔵 ARBEITSBEREICH: Z = " + curZ.toFixed(2) + " mm (Spanabtrag im Aluminium)";
+        toolColor = "#f43f5e";
+      } else if (curZ < -12.0 && curZ > -15.0) {
+        statusBg = "rgba(245, 158, 11, 0.25)";
+        statusBorder = "#d97706";
+        statusColor = "#fbbf24";
+        statusText = "⚠️ DURCHBRUCH: Z = " + curZ.toFixed(2) + " mm (Boden durchdrungen -> Freiraum / Tunnel aktiv!)";
+        toolColor = "#f59e0b"; // Warn-Orange
+      } else if (curZ <= -15.0) {
+        statusBg = "rgba(239, 68, 68, 0.35)";
+        statusBorder = "#dc2626";
+        statusColor = "#f87171";
+        statusText = "🚨 KOLLISION / CRASH-GEFAHR: Z = " + curZ.toFixed(2) + " mm (Schraubstock-Ebene berührt!)";
+        toolColor = "#dc2626"; // Signalrot für Kollision
+      }
+
+      const hudStatusEl = document.getElementById("hud-status");
+      if (hudStatusEl) {
+        hudStatusEl.style.background = statusBg;
+        hudStatusEl.style.border = "1px solid " + statusBorder;
+        hudStatusEl.style.color = statusColor;
+        hudStatusEl.textContent = statusText;
+      }
+
+      const toolRadius = curToolName.includes("T01") ? 5 : 3;
+      drawCircle3D(curX, curY, curZ, toolRadius, toolColor, 2.4);
+      drawCircle3D(curX, curY, curZ + 22, toolRadius, toolColor, 2.2);
+      drawLine3D({x:curX, y:curY, z:curZ}, {x:curX, y:curY, z:curZ+28}, toolColor, 3);
+
+      const zSign = curZ > 0 ? "+" : "";
+      const toolShortName = curToolName.split(" ")[0] || "T01";
+      drawText3D(toolShortName + " [Z: " + zSign + curZ.toFixed(1) + " mm]", curX, curY, curZ + 32, toolColor, "bold 11px sans-serif", "rgba(15,23,42,0.9)");
+
+      // 3D-Warnhinweis direkt am Werkzeug einblenden
+      if (curZ <= -15.0) {
+        drawText3D("🚨 CRASH-ZONE: Z <= -15 mm!", curX, curY, curZ - 8, "#ef4444", "bold 11px sans-serif", "rgba(15,23,42,0.95)");
+      } else if (curZ < -12.0) {
+        drawText3D("⚠️ DURCHBRUCH (Tunnel)", curX, curY, curZ - 6, "#f59e0b", "bold 10px sans-serif", "rgba(15,23,42,0.95)");
+      }
+
+      checkHoverTooltip();
+
+      // HUD & G-Code Zeile aktualisieren
+      const hudOpEl = document.getElementById("hud-op");
+      if (hudOpEl) hudOpEl.textContent = "OPERATION: " + curOpName;
+      const hudToolEl = document.getElementById("hud-tool");
+      if (hudToolEl) hudToolEl.textContent = "WERKZEUG : " + curToolName;
+      const hudPosEl = document.getElementById("hud-pos");
+      if (hudPosEl) {
+        hudPosEl.textContent =
+          `POS (G54): X ${curX.toFixed(3).padStart(7)} | Y ${curY.toFixed(3).padStart(7)} | Z ${curZ.toFixed(3).padStart(7)}`;
+      }
+
+      const activeLineIdx = (w2 && typeof w2.line === "number") ? w2.line : -1;
+      if (activeLineIdx !== lastHighlight && activeLineIdx >= 0) {
+        if (lastHighlight >= 0) {
+          const prevEl = document.getElementById("gline-" + lastHighlight);
+          if (prevEl) prevEl.classList.remove("gcode-active");
+        }
+        const curEl = document.getElementById("gline-" + activeLineIdx);
+        if (curEl) {
+          curEl.classList.add("gcode-active");
+          curEl.scrollIntoView({ block: "center", behavior: "smooth" });
+        }
+        lastHighlight = activeLineIdx;
+      }
+
+      requestAnimationFrame(render);
+    }
+    render();
+  </script>
+</body>
+</html>

@@ -70,6 +70,21 @@ Aufgabe:
   1. Ein **altes Beispiel-NC-Programm des Kunden** *(das auf der Maschine des Kunden bereits perfekt läuft – als Referenz für den gewünschten Ziel-Code)*.
   2. Den **Quellcode des Ausgangs-Postprozessors** *(z. B. `.cps` in JavaScript für Autodesk Fusion/HSM, `.tcl` & `.def` für Siemens NX Post Builder / Post Configurator oder `.gpp` für SolidCAM)*.
 * Er programmiert die gewünschten Änderungen direkt in den Postprozessor ein und dokumentiert jede geänderte Zeile.
+* **Erweiterte B2B-Ingenieurfunktionen von Agent 2 fuer reale Kundenauftraege:**
+  - **A. Kundenspezifische Maschinenkinematik *(Machine Kinematics)*:**
+    - Automatische Schaltung von **Hochdruck-Innenkuehlung *(IKZ bis 70 bar durch die Spindel via M88 Ein / M89 Aus)***, gezielter Werkzeug-Blasluft / Minimalmengenschmierung *(MMS via M07)* und Standardflutkuehlung *(M08)* ueber die CAM-Konstanten 	ool.coolant.
+    - Vollstaendige Einbindung von **4- und 5-Achs-Kinematiken *(MachineConfiguration)*** mit Vektordefinitionen (createAxis) fuer Dreh- und Schwenkachsen *(A-, B- und C-Achsen)*, Raumebenen *(PLANE SPATIAL bei Heidenhain, CYCLE800 bei Siemens)* und **TCPM *(Tool Center Point Management -- Werkzeugspitzenfuehrung G43.4 / TRAORI / FUNCTION TCPM)***.
+  - **B. Intelligente Fehlerabsicherung *(Error Handling & Syntax Protection)*:**
+    - **Klammer- und Zeichensatz-Schutz:** Automatische Filterung und Maskierung (ormatComment / ilterText) aller runden Klammern (...) und Sonderzeichen, um Systemabstuerze und Syntax-Alarme *(z. B. Alarm 004)* auf aelteren Fanuc- oder Haas-Steuerungen zuverlaessig auszuschliessen.
+    - **Mathematische NaN- und Nullwert-Pruefung *(Not-a-Number)*:** Automatische Abfangroutinen gegen ungueltige Berechnungen, fehlende CAM-Vorschubwerte oder Null-Divisionen, damit niemals fehlerhafter Maschinencode **(z. B. X NaN)** in die .nc-Datei gelangt.
+  - **C. Das 3-Saeulen-System zur Identifikation aller Maschinencharakteristika (inkl. brandneuer Modelle):**
+    - **Saeule 1: Das goldene Referenz-NC-Programm des Kunden (Primaere Quelle):** Der Agent fordert ein bewaehrtes Programm der Kundenmaschine an und analysiert automatisch Header-Syntax, Sicherheitszeilen (M91/SUPA/G53), Freifahrstrategien und herstellerspezifische M-Befehle (z. B. M88/M89 IKZ, M07 Blasluft).
+    - **Saeule 2: Steuerungs-Familien und ISO-Standards:** Systematischer Rueckgriff auf die 4 Haupt-Steuerungsfamilien (Heidenhain Klartext TNC 640/TNC7 mit PLANE SPATIAL; Siemens Sinumerik 840D/ONE mit CYCLE800/TRAORI/SUPA; Fanuc/Haas ISO mit G43.4 TCPM; Mazak/Mitsubishi/Okuma DIN 66025).
+    - **Saeule 3: Echtzeit-Web-Recherche & Autodesk-Bibliotheksabgleich:** Bei brandneuen Maschinenmodellen recherchiert der Agent online in offiziellen Herstellerhandbuechern und gleicht Kinematik-Vektoren (createAxis fuer Dreh- und Schwenkachsen) mit der Autodesk HSM Post Processor Library ab.
+  - **D. Entscheidungs-Matrix zur Postprozessor-Ausgabe (Was wird wann generiert?):**
+    - **Fehlerschutz & Sicherheit (IMMER AKTIV):** Klammer-/Sonderzeichen-Schutz (formatComment), NaN-Pruefung und 2-Stufen-Rueckzug (G53 Z0 vor Y0) werden grundsaetzlich und ausnahmslos in JEDE .cps-Datei eingebaut, selbst wenn der Kunde nichts dazu angibt.
+    - **Hardware-Sonderfunktionen (IKZ, Blasluft, Spaenefoerderer):** Werden als modulare Schalter (Properties / Checkboxen im CAM-Menue) implementiert, sodass der Kunde sie flexibel zu- oder abschalten kann.
+    - **Mehrachs-Kinematik (4-/5-Achsen & TCPM):** Wird nur bei ausdruecklicher Mehrachs-Maschinenkonfiguration aktiviert, um Syntaxalarme auf reinen 3-Achs-Maschinen zu vermeiden.
 
 ### 3.2 Gespeicherter System-Prompt für Agent 2
 ```text
@@ -81,7 +96,12 @@ Aufgabe:
    - Welche Sicherheitszeilen stehen vor und nach dem Werkzeugwechsel (z. B. L Z+250 R0 FMAX M91, PLANE RESET, SUPA G0 Z0 D0)?
    - Welche Zyklen und M-Funktionen (M7, M8, M5, M9, M30) verwendet die Maschine?
 2. Vergleiche diesen Aufbau mit dem aktuellen Postprozessor-Skript und implementiere die fehlenden oder anzupassenden Routinen sauber, modular und mit deutschen Code-Kommentaren.
-3. Stelle sicher, dass Sicherheitsfunktionen (wie Mindest-Auskraglänge L_min im Header und sicheres Rückschwenken vor Werkzeugwechsel) niemals verletzt werden.
+3. Beachte stets die fortgeschrittenen B2B-Anforderungen:
+   - Maschinenkinematik: Exakte Kuehlmittelsteuerung (IKZ M88/M89, Blasluft M07, Flood M08) und TCPM / 5-Achs-Kinematik (G43.4 / TRAORI / PLANE SPATIAL).
+   - Intelligente Fehlerabsicherung: Klammer- und Zeichensatz-Filterung (formatComment) gegen Steuerungs-Syntaxfehler sowie NaN-Validierung aller Bahnkoordinaten.
+   - 3-Saeulen-Maschinenanalyse: Werte das Referenz-NC-Programm des Kunden aus, identifiziere die Steuerungsfamilie (Heidenhain, Siemens, Fanuc/Haas) und passe Kinematik-Vektoren exakt an Neumaschinen an.
+   - Entscheidungslogik: Sicherheits- und Fehlerschutz immer aktiv halten; herstellerspezifische Hardware-Features modular als Properties anlegen.
+4. Stelle sicher, dass Sicherheitsfunktionen (wie Mindest-Auskraglaenge L_min im Header und sicheres Rueckschwenken vor Werkzeugwechsel) niemals verletzt werden.
 ```
 
 ---
@@ -101,6 +121,14 @@ Aufgabe:
   7. **Tiefenprüfung & Mindest-Auskraglänge (Phase 1 & 3 Prüfliste):** Liegt der tiefste Punkt ($Z_{\text{min}}$) im zulässigen Bereich und reicht die Mindest-Auskraglänge ($L_{\text{min}}$) des Fräsers aus, damit der Spannfutterkörper nicht auf das Werkstück oder den Schraubstock knallt?
   8. **Sauberes Programmende (Phase 1 & 3 Prüfliste):** Kühlung aus (`M09`), Z-Rückzug ganz nach oben (`M91` / `SUPA`), Spindelstopp (`M05`), Tisch zur Tür und Programm-Reset (`M30`).
 * **Automatische Ausgabe:** Er erstellt das vollständige **Kunden-Einrichteblatt** nach **[Vorlage_Einrichteblatt_und_Werkzeugliste.md](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/Portfolio/Vorlage_Einrichteblatt_und_Werkzeugliste.md)** und hängt die **druckbare Abnahme-Checkliste aus Kapitel 8 von [SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md)** an.
+* **Rolle als unabhaengiger Qualitaets-Controller & Safety-Auditor (4-Augen-Prinzip):**
+  - **Funktionstrennung (Separation of Concerns):** Agent 2 (Programmierer) darf seinen eigenen Maschinencode niemals selbst freigeben. Agent 3 fungiert als unbestechlicher Controller und Sicherheits-Auditor.
+  - **Automatisierte Pruefkette bei Fehlern von Agent 2:**
+    1. *Statischer Code-Audit:* Pruefung auf fehlende Drehzahlen (M03 S), fehlenden Vorschub (F), falsche Ebenen (G17) oder fehlende Laengenkorrekturen (G43 / TOOL CALL).
+    2. *Kollisions- & Schraubstock-Audit:* Berechnung des tiefsten Fraespunkts (Z_min) und Abgleich gegen Spannmittel und Tischunterkante.
+    3. *3D-Werkzeugbahn-Simulation:* Ueberpruefung im virtuellen Raum via 3d_auftrag_simulator.html zur Detektion von verbotenen Eilgang-Kollisionen (G00 im Material).
+  - **Veto- und Abbruchrecht (STOP-Authority):** Findet Agent 3 eine Abweichung oder ein Sicherheitsrisiko, wird die Uebergabe an den Kunden SOFORT blockiert (Status: ABBRUCH). Agent 2 erhaelt ein detailliertes Maengelprotokoll mit Zeilennummer und muss nachbessern, bis Agent 3 das Pruefsiegel (Status: BESTANDEN) erteilt.
+  - **Mensch-im-Loop (Dipl.-Ing. Letztfreigabe):** Erst nach Freigabe durch Agent 3 prueft der verantwortliche Ingenieur die Ergebnisse und gibt das Projekt fuer Angebot, Rechnung und Kundenlieferung frei.
 
 ### 4.2 Gespeicherter System-Prompt für Agent 3
 ```text
@@ -122,6 +150,7 @@ Aufgabe:
    - Ordnungsgemäßes Programmende (M09, M05, Z-Endhöhe, M30)
 3. Gib einen detaillierten Prüfbericht aus:
    - Status: BESTANDEN / WARNUNG / ABBRUCH (mit Angabe der exakten Zeilennummer im NC-Code).
+   - Agiere als strikter Qualitaets-Controller: Gib niemals fehlerhaften Code frei. Setze bei Crash-Gefahr den Status sofort auf ABBRUCH und fordere Korrekturen von Agent 2 an.
 4. Erstelle das vollständige, druckfertige Kunden-Einrichteblatt inklusive Werkzeugliste nach c:\Projekte\CNC\04_Recht_Steuern_und_Backoffice\Portfolio\Vorlage_Einrichteblatt_und_Werkzeugliste.md und binde die verbindliche Abnahme-Checkliste (Kapitel 8 aus SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md) ein.
 ```
 
