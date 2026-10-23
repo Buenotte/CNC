@@ -15,7 +15,7 @@ c:\Projekte\CNC\
 │
 ├── 📂 01_Kundenauftraege/             ◄── Operatives Kundengeschäft & Auftragsakten
 │   ├── 📁 auftragsakten_00b_bis_16/    (Alle 17 abgeschlossenen Kundenakten mit Angebot, Code & Setup Sheet)
-│   ├── 📁 test_auftrag_ubung_03/       (Interaktiver Übungs- & Testordner zum Selbst-Durchspielen)
+│   ├── 📁 test_ubungen/                (Interaktive Testordner: test_auftrag_ubung_03, test_auftrag_ubung_04)
 │   └── 📁 referenz_auftrag_flanschplatte/ (Ursprüngliches 3D-Referenzbauteil 1001)
 │
 ├── 📂 02_Software_und_Tools/          ◄── Postprozessor-Entwicklung, Test-Suite & Generatoren
@@ -47,7 +47,8 @@ c:\Projekte\CNC\
 
 ### 1. Kundengeschäft & Aufträge (Säule 1)
 * 👉 **[Zentrale Auftrags-Übersicht (Alle 17 Kundenaufträge)](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/UEBERSICHT_ALLE_KUNDENAUFTRAEGE.md):** Tabelle aller Firmen, Budgets und Direktlinks zu den Auftragsordnern.
-* 👉 **[Aktiver Test-Ordner zum Selbermachen (Übung 3)](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/WORKFLOW_UND_PROMPTS.md):** Schritt-für-Schritt-Anleitung mit den 4 fertigen Prompts für deine KI-Agenten.
+* 👉 **[Aktiver Test-Ordner zum Selbermachen (Übung 3)](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/WORKFLOW_UND_PROMPTS.md):** Schritt-für-Schritt-Anleitung mit den 4 fertigen Prompts für deine KI-Agenten.
+* 👉 **[Neuer Test-Ordner zum Selbermachen (Übung 4)](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/KUNDENAUFTRAG.md):** Unberührter Testauftrag für 3D-Lagerplatte (nur Briefing und 3D-Modell).
 * 👉 **[Vollständiger Prozessablauf von A bis Z](file:///c:/Projekte/CNC/01_Kundenauftraege/KUNDENAUFTRAG_VOLLSTAENDIGER_PROZESSABLAUF_A_BIS_Z.md):** Wie ein Kundenauftrag von der ersten E-Mail bis zum Geldeingang abläuft.
 
 ### 2. Software-Entwicklung & Lokale Test-Suite (Säule 2)

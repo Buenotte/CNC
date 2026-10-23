@@ -84,6 +84,92 @@ Freiberuflicher Diplom-Ingenieur für CAM-Postprozessor-Entwicklung (Autodesk Fu
 **Relevante Schlagwörter (Skills / Tags) zum Eintragen:**  
 `Autodesk Fusion 360`, `Siemens NX`, `Postprozessor`, `Heidenhain TNC`, `Siemens Sinumerik 840D`, `Fanuc`, `Haas Automation`, `G-Code`, `CAM-Programmierung`, `Einrichteblatt / Setup Sheet`, `Zerspanungstechnik`, `JavaScript CPS`, `Python Automation`, `Null-Kollisions-Prüfung`.
 
+### D. Vollständige Vorlage für das separate GitHub-Firmenprofil (Account / Organization)
+
+Wenn Sie Ihren privaten GitHub-Account sauber trennen und eine offizielle Präsenz für das Ingenieurbüro einrichten (z. B. als neuer Account oder kostenlose GitHub-Organisation `buenotte-engineering` / `buenotte-cad-cam`), tragen Sie folgende Daten ein:
+
+#### 1. Die Profil-Stammdaten:
+* **Name:** `Dipl.-Ing. Buenotte | CAD/CAM Engineering`
+* **Bio (Kurz-Info):** `Freiberuflicher Ingenieur für CNC-Postprozessoren, Z-MIN-Kollisionsschutz & Fertigungsdokumentation • 100 % Remote nach § 18 EStG • Erlensee, Hessen`
+* **Company (Firma):** `Ingenieurbüro Dipl.-Ing. Buenotte`
+* **Location (Standort):** `Erlensee / Frankfurt am Main, Germany`
+* **Website / Link:** Link zum LinkedIn-Profil oder zur Portfolio-Mappe
+
+#### 2. Das Profil-README (`README.md` im Profil-Repository):
+```markdown
+# 🏛️ Ingenieurbüro Dipl.-Ing. Buenotte
+### CAD/CAM-Fertigungstechnik • Postprozessor-Engineering • NC-Sicherheitsautomation
+
+Willkommen auf der offiziellen Entwicklungs- und Code-Präsenz des **Ingenieurbüros Dipl.-Ing. Buenotte** (Sitz in 63526 Erlensee bei Frankfurt am Main). 
+
+Wir unterstützen Zerspanungsbetriebe, Lohnfertiger und Werkzeugbauer im gesamten DACH-Raum (Deutschland, Österreich, Schweiz) mit **100 % digitalem Remote-Engineering**: Von der maßgeschneiderten Postprozessor-Entwicklung über die mathematische Null-Kollisions-Prüfung bis zu schlüsselfertigen Einrichteblättern für den Maschinenbediener.
+
+---
+
+### ⚙️ Technische Kernkompetenzen & Software-Stack
+
+* **CAM-Systeme & Schnittstellen:** Autodesk Fusion 360, Siemens NX CAM, SolidCAM, Mastercam.
+* **Postprozessor-Entwicklung:** JavaScript (`.cps`-Engine), Python, Tcl (Siemens Post Configurator), Makro-Programmierung.
+* **CNC-Steuerungen & Zyklen:**
+  * **Heidenhain:** Klartext-Dialog & DIN/ISO (iTNC 530, TNC 640, TNC7, `PLANE SPATIAL`, `CYCLE 247`).
+  * **Siemens Sinumerik:** 840D sl / ONE (`CYCLE800`, Unterprogrammtechnik, Satzvorlauf-Sicherheit).
+  * **Fanuc & Haas Automation:** ISO G-Code, Nullpunktverschiebungen G54–G59, Bohrzyklen G81–G84.
+* **Sicherheitsautomation:** Automatisierte Z-MIN-Tiefenberechnung, Kollisionsschutz zu Spannmitteln und Auskraglängen-Prüfung.
+
+---
+
+### 🛡️ Unser 5-Stufen-Prüfprozess vor dem ersten Spanschnitt
+
+Jedes von uns entwickelte Postprozessor-Skript und jedes NC-Fertigungspaket durchläuft vor der Freigabe fünf standardisierte Qualitätsstufen:
+
+1. **Mathematische Z-MIN-Verifikation:** Rechnerischer Kollisionscheck der tiefsten Fräs- und Bohrpunkte gegen die Schraubstockbacken.
+2. **Standardisierte Sicherheitszeilen:** Zwingende Initialisierung (`G90 G17 G21 G94 G40 G49 G80`) und definierte Rückzugsebenen.
+3. **Virtuelle Werkzeugbahn-Simulation:** 3D-Prüfung auf Unterschnitte, Eilgänge im Material und Frässtrategien.
+4. **Werkstattfertige Dokumentation:** Automatisierte Erstellung von Einrichteblättern (Setup Sheets) mit Werkzeugauskraglängen und Nullpunktlagen.
+5. **Freigabe per Simulationsvideo:** Bereitstellung eines MP4-Videos zur visuellen Kontrolle durch den Kunden vor der Maschineninbetriebnahme.
+
+---
+
+### 🏆 Technische Referenzprojekte (Arbeitsproben & Fertigungspakete)
+
+Da Bauteile im Kundenauftrag strenger Geheimhaltung (NDA) unterliegen, finden Sie hier vier anonymisierte, voll ausgearbeitete Referenzpakete inklusive Spannplan, Werkzeugliste und echtem NC-Code:
+
+| Projekt | Werkstoff & Bauteil | Steuerung & Kinematik | Technologische Highlights |
+| :--- | :--- | :--- | :--- |
+| **[Projekt 01: 2,5D-Präzision](https://github.com/Buenotte/CNC/tree/main/04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_01_25D_Praezisionsfraesteil)** | `42CrMo4`<br>Lagergehäuse | 3-Achs Fräszentrum<br>(Haas / Fanuc ISO) | • Passungsbohrung **Ø 52 H7**<br>• Trochoidales Schruppen (HPC)<br>• OP10/OP20 mit 3 mm Spannrand |
+| **[Projekt 02: 3+2-Mehrseiten](https://github.com/Buenotte/CNC/tree/main/04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_02_3plus2_Mehrseiten_Ventilblock)** | `EN AW-7075`<br>Hydraulik-Ventilblock | 5-Achs Dreh-Schwenktisch<br>(Heidenhain / Siemens) | • 5-Seiten-Bearbeitung in 1 Aufspannung<br>• Ebenen-Transformation **`PLANE SPATIAL`** & **`CYCLE800`**<br>• Sichere Rückzugsstrategie |
+| **[Projekt 03: 3D-Freiform & 5-Achs](https://github.com/Buenotte/CNC/tree/main/04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_03_3D_Freiform_und_5Achs)** | `1.2379` / `TiAl6V4`<br>Strömungs-Leitrad | 5-Achs Simultanfräsen<br>(Hermle / DMG MORI) | • Kreissegment-/Tonnenfräser ($R_z < 2\,\mu\text{m}$)<br>• Vektorführung zur Vermeidung von $v_c = 0$<br>• Restmaterial-Kaskade |
+| **[Projekt 04: Postprozessor](https://github.com/Buenotte/CNC/tree/main/04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_04_Postprozessor_und_CAM_Automatisierung)** | Universell<br>CPS-Automatisierung | Heidenhain TNC 640 &<br>Sinumerik 840D sl | • Automatische Z-MIN-Kollisionsberechnung<br>• Satzvorlauf-Sicherheit (LBL-Struktur)<br>• Laser-Werkzeugbruchkontrolle |
+
+---
+
+### 📂 Ausgewählte Werkzeuge & Repositories in diesem Workspace
+
+* 🔹 **[CNC-Postprocessor-Toolkit](https://github.com/Buenotte/CNC):** Vollständige Testumgebung mit lokalem Node.js-Simulator (`simuliere_post.js`) zur sekundenschnellen Postprozessor-Validierung ohne CAD-Lizenz.
+* 🔹 **Universal 3D CAD/CAM Viewer:** Browserbasiertes 3D-Messwerkzeug mit automatischer Bounding-Box-Bemaßung, Kantenanalyse und Bauteilgewichtsberechnung (Aluminium/Stahl).
+* 🔹 **Setup Sheet Extractor:** Python-Tool zur statischen G-Code-Inspektion und automatischen Rüstblatt-Generierung.
+
+---
+
+### 💼 Zusammenarbeit & Kontakt
+
+* **Modell:** Freiberufliche Ingenieurdienstleistung auf Honorarbasis nach § 18 EStG (steuerrechtlich anerkannt, kein Gewerbe).
+* **Zusammenarbeit:** 100 % Remote-Engineering über sicheren Cloud-Datenaustausch oder Fernzugriff (AnyDesk / VPN).
+* **Reaktionszeit:** Garantiertes Feedback innerhalb von 24 Stunden.
+
+📫 **Projektanfragen & Kontakt:**  
+* E-Mail: info@[ihre-domain].de  
+* Standort: 63526 Erlensee / Hessen • Deutschland  
+* Xing / LinkedIn: [Link zu Ihrem Profil]
+```
+
+#### 3. Wie das Projekt mit 1 Befehl auf den neuen GitHub-Account umgezogen wird:
+Sobald der neue Account oder die Organisation angelegt ist, wird das Repository im Terminal einfach mit diesen zwei Zeilen umgezogen:
+```powershell
+git remote set-url origin https://github.com/[NEUER_ACCOUNT_NAME]/CNC.git
+git push -u origin main
+```
+
 ---
 
 ## 📞 4. Leitfaden für Kundengespräche & Telefonate (Souverän & Verhandlungssicher)
@@ -117,6 +203,77 @@ Wenn ein potenzieller Kunde anruft oder im Chat Fragen stellt, antworten Sie mit
 > *„Als Remote-Ingenieurbüro arbeite ich primär fokussiert in festen Entwicklungsblöcken, um fehlerfreie Code-Qualität zu garantieren. Sie erreichen mich jederzeit per E-Mail und über unseren Cloud-Kanal mit einer garantierten Rückmeldezeit von unter 24 Stunden. Telefonische Abstimmungen zu neuen Aufträgen planen wir ganz flexibel per kurzem Termin-Slot ein.“*
 > 
 > *(Das wirkt extrem souverän, professionell strukturiert und verhindert jegliche Nachfragen nach festen Bürozeiten!)*
+
+---
+
+### Frage 5: *„Können Sie auch Heidenhain PLANE SPATIAL oder Siemens CYCLE800 auf 5-Achs-Maschinen?“*
+> **Ihre Antwort:**  
+> *„Ja, das ist Standard in meinem 5-Achs-Workflow. Schauen Sie sich dazu gerne mein Referenzprojekt 02 auf GitHub an, dort ist die 5-Seiten-Bearbeitung mit Schwenkzyklus exakt dokumentiert. Senden Sie mir am besten einfach Ihre 3D-STEP-Datei und Ihre Werkzeugliste rüber. Ich schaue mir die Geometrie an und arbeite Ihnen das schlüsselfertig aus.“*
+
+---
+
+### 🧠 4.1 Der Spickzettel für Sie: Was Sie über die 4 Referenzprojekte im Kopf wissen müssen (Nur 2 Sätze pro Projekt!)
+
+Sie müssen **niemals** Codezeilen oder Winkel auswendig lernen! Alles, was Sie jemals über Ihre 4 Projekte im Kopf behalten müssen, passt auf einen kleinen Notizzettel:
+
+1. **Projekt 01 (Lagergehäuse aus 42CrMo4-Stahl):**  
+   * *Worum geht es?* Ein massives Stahlbauteil, das in zwei Aufspannungen (OP10 oben / OP20 unten) gefräst wird.  
+   * *Das Highlight:* Fräsen mit nur **$3\,\text{mm}$ Spannrand** und eine hochpräzise Passungsbohrung **$\varnothing 52\,\text{H7}$**.
+2. **Projekt 02 (Hydraulik-Ventilblock aus 7075 Flugzeug-Aluminium):**  
+   * *Worum geht es?* Ein Aluminiumklotz mit schrägen Hydraulikbohrungen, der von **5 Seiten** bearbeitet wird.  
+   * *Das Highlight:* Anstatt 5 Mal von Hand umzuspannen, kippt die 5-Achs-Maschine den Tisch automatisch per Software-Befehl (**`PLANE SPATIAL`** bei Heidenhain / **`CYCLE800`** bei Siemens).
+3. **Projekt 03 (Strömungsleitrad / Freiformfläche aus 1.2379 / Titan):**  
+   * *Worum geht es?* Kompliziert geschwungene Schaufelflächen für Turbinen oder Formeinsätze.  
+   * *Das Highlight:* Echte **5-Achs-Simultanbearbeitung** (alle 5 Achsen bewegen sich gleichzeitig) mit modernen Tonnenfräsern für spiegelglatte Oberflächen ($R_z < 2\,\mu\text{m}$).
+4. **Projekt 04 (Postprozessor-Engineering & Automatisierung):**  
+   * *Worum geht es?* Reines Code- und Software-Engineering für Werkzeugmaschinen.  
+   * *Das Highlight:* Automatische **Z-MIN-Kollisionsberechnung**, Satzvorlauf-Sicherheit (LBL-Struktur) und 1-Klick-Einrichteblatt.
+
+---
+
+### 💡 4.2 Die universelle Profi-Antwort bei tiefen technischen Detailfragen:
+Egal welche tiefe Detailfrage ein Kunde am Telefon stellt: Ein Profi-Ingenieur gibt am Telefon niemals Schätzungen ab, sondern verweist immer auf die Daten:
+
+> **Ihre Universalaussage:**  
+> *„Genau solche Anforderungen löse ich regelmäßig. Da jedes Bauteil und jede Spannsituation individuell ist: Senden Sie mir einfach die 3D-STEP-Datei und Ihre Werkzeugliste per Mail rüber. Ich werfe das in meine CAD/CAM-Umgebung, prüfe die Zugänglichkeit und gebe Ihnen ein verbindliches Angebot mit Frässtrategie ab.“*
+
+*(Danach kopieren Sie die Kunden-STEP-Datei einfach in unseren Chat – und wir generieren gemeinsam die perfekte Lösung!)*
+
+---
+
+### 🚨 4.3 Notfall-Leitfaden: Was tun, wenn der Kunde unbekannte Fachbegriffe oder Aufgaben nennt?
+
+In der Zerspanungsindustrie gibt es hunderte Maschinentypen und jede Werkstatt hat eigene firmeninterne Abkürzungen und Werkstatt-Slang. **Niemand kennt alle Begriffe auswendig – nicht einmal ein Zerspanungs-Altmeister mit 30 Jahren Erfahrung!**
+
+Wenn Sie am Telefon oder im Chat einen Begriff hören, den Sie noch nie gehört haben: **Geraten Sie niemals in Panik!** Nutzen Sie eine dieser 3 souveränen Profi-Strategien:
+
+#### Strategie 1: Der „Referenzprogramm-Joker“ (Die stärkste Universalwaffe)
+Ein erfahrener Ingenieur verlässt sich niemals auf mündliche Begriffe, sondern verlangt immer die echten Daten der Kundenmaschine:
+> **Ihre Antwort:**  
+> *„Um das für Ihre konkrete Steuerung und Kinematik absolut prozesssicher zu beurteilen, brauche ich ein funktionierendes Referenzprogramm von Ihrer Maschine. Schicken Sie mir einfach ein bewährtes NC-Programm und die Zeichnung per Mail rüber. Ich gleiche den Syntax mit meinem Postprozessor ab und gebe Ihnen bis morgen ein verbindliches Feedback.“*
+> 
+> *Wirkung beim Kunden:* Sie wirken extrem gewissenhaft und sicherheitsorientiert. Das Gespräch ist entspannt beendet. Sobald die Datei da ist, laden Sie sie in unseren Chat hoch – die KI liest die Zyklen und Syntax in 5 Sekunden aus und erklärt Ihnen auf Deutsch, worum es geht!
+
+#### Strategie 2: Die „Konkretisierungs-Frage“ (Lassen Sie den Kunden erklären!)
+Wenn der Kunde einen speziellen Steuerungsbegriff nennt (z. B. *„Können Sie auch M128 oder Trochoidal-Eintauchen mit Kinematik-Override?“*):
+> **Ihre Antwort:**  
+> *„Auf welche konkrete Funktion oder welchen Steuerungszyklus beziehen Sie sich da bei Ihrer Maschine genau?“*  
+> *(oder: „Wie haben Sie diesen Prozess bisher bei sich an der Maschine eingefahren? Nutzen Sie dafür einen Heidenhain-Standardzyklus oder ein eigenes Unterprogramm?“)*
+> 
+> *Wirkung beim Kunden:* Zerspaner und Werkstattleiter lieben es, über ihre Maschinen zu sprechen! Der Kunde erklärt es Ihnen sofort in einfachen Worten. Sie wirken nicht unwissend, sondern hochprofessionell, weil Sie den genauen Maschinenkontext hinterfragen.
+
+#### Strategie 3: Die ehrliche „Spezifikations-Notiz“
+Wenn es um eine sehr spezielle Software- oder Postprozessor-Option geht:
+> **Ihre Antwort:**  
+> *„Das notiere ich mir direkt in die Anforderungsliste. Ich gleiche das kurz mit den Parametern Ihres Maschinenhandbuchs ab und berücksichtige das direkt in der Machbarkeitsprüfung.“*
+> 
+> *Wirkung beim Kunden:* Niemand erwartet, dass ein Software-Ingenieur 10.000 G-Code-Befehle im Kopf hat. Ein echter Ingenieur gleicht das Handbuch ab – genau das schafft maximales Vertrauen.
+
+#### Ihr 4-Punkte-Notfallplan für den Schreibtisch:
+1. **Notizblock & Stift bereithalten:** Schreiben Sie das fremde Wort einfach lautgetreu auf (z. B. „G68.2“, „Trochoid“, „Zyklus 247“).
+2. **Nicht raten, nicht schätzen:** Niemals einfach *„Ja klar, mache ich!“* sagen, wenn Sie es nicht genau kennen.
+3. **Immer nach Daten fragen:** *„Schicken Sie mir bitte ein Beispielprogramm von Ihrer Maschine und die 3D-STEP-Datei.“*
+4. **Sofort in den Chat:** Sie schreiben das Wort und die Kunden-Datei hier in den Chat – und 1 Minute später wissen Sie ganz genau, worum es geht und wie es gelöst wird!
 
 ---
 
@@ -169,7 +326,30 @@ Im Zerspanungsgeschäft haftet niemand blind für Maschinenunfälle, wenn ein Be
 
 ---
 
-## 📁 7. Zugehörige Arbeitsdokumente im Workspace
+## 📧 7. Digitale Kommunikations-Zentrale: Separates E-Mail-Setup & Google Drive Cloud
+
+Ein separates E-Mail-Konto ist die professionelle Basis für den sauberen Start Ihres Ingenieurbüros:
+
+### A. Warum ein separates Konto zwingend erforderlich ist:
+1. **Strikte Trennung von Privatem & Hauptjob:** Keine privaten Mails und keine Vermischung mit der Zollcon GmbH.
+2. **Datenschutz & Geheimhaltung (NDA):** Sensible Kundenzeichnungen und Verträge liegen an einem geschützten, isolierten Ort.
+3. **Kostenlose Projekt-Cloud (15 GB Google Drive):** 3D-STEP-Dateien, CAD-Modelle und gerenderte 3D-Simulationsvideos (.MP4), die zu groß für normale E-Mail-Anhänge sind, können direkt über sichere Google-Drive-Download-Links für den Kunden bereitgestellt werden.
+
+### B. Namens-Empfehlungen für die neue Gmail-Adresse:
+* `buenotte.engineering@gmail.com` (Favorit 1)
+* `ing.buenotte@gmail.com` (Favorit 2)
+* `dipl.ing.buenotte@gmail.com` (Favorit 3)
+* `cadcam.buenotte@gmail.com` (Favorit 4)
+
+### C. Wichtige Absender-Einstellung in Google:
+Tragen Sie in den Google-Konto-Einstellungen als offiziellen Absendernamen ein:  
+👉 **`Dipl.-Ing. Buenotte | CAD/CAM Engineering`**  
+*Wirkung beim Kunden:* Der Kunde sieht im E-Mail-Postfach sofort den professionellen Absender:  
+*„Dipl.-Ing. Buenotte | CAD/CAM Engineering <buenotte.engineering@gmail.com>“*.
+
+---
+
+## 📁 8. Zugehörige Arbeitsdokumente im Workspace
 
 * 👉 **[Die vollständige Portfolio-Mappe](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/Portfolio/Ingenieurbuero_CAD_CAM_Portfolio_Mappe.md):** 4 detaillierte Referenzprojekte mit Werkstoff- und Laufzeitberechnungen.
 * 👉 **[Freiberufler-Leitfaden § 18 EStG](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md):** Steuerliche Einordnung, Befreiung von Gewerbesteuer und IHK beim Finanzamt Hanau.

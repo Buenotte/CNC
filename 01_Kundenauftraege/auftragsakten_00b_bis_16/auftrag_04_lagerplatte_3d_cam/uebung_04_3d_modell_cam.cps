@@ -15,9 +15,9 @@ setCodePage("ascii");
 
 function onOpen() {
   writeComment("========================================");
-  writeComment("UEBUNG 04 & 05: FERTIGUNG FLANSCHPLATTE 1001");
+  writeComment("UEBUNG 04 & 05: FERTIGUNG LAGERPLATTE 1001 (HAAS VF-2)");
   writeComment("BAUTEIL: bauteil_1001.stl");
-  writeComment("ROHMATERIAL: 105 x 105 x 25 mm (ALUMINIUM)");
+  writeComment("ROHMATERIAL: 85 x 55 x 15 mm (ALUMINIUM EN AW-6082)");
   writeComment("========================================");
   
   // Grundinitialisierung der Fräsmaschine:

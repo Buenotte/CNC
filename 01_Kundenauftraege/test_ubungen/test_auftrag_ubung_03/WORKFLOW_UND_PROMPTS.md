@@ -1,8 +1,8 @@
 # 📋 Workflow-Beschreibung & Prompts zur Erledigung des Auftrags
 
-Mit dieser Anleitung kannst du den Kundenauftrag aus [`KUNDENAUFTRAG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/KUNDENAUFTRAG.md) Schritt für Schritt mithilfe deiner 4 KI-Agenten bearbeiten.
+Mit dieser Anleitung kannst du den Kundenauftrag aus [`KUNDENAUFTRAG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/KUNDENAUFTRAG.md) Schritt für Schritt mithilfe deiner 4 KI-Agenten bearbeiten.
 
-Kopiere einfach nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten erzeugen dann alle geforderten Artefakte direkt in diesem Ordner [`c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03).
+Kopiere einfach nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten erzeugen dann alle geforderten Artefakte direkt in diesem Ordner [`c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03).
 
 ---
 
@@ -12,12 +12,12 @@ Sobald du die Agenten beauftragst, entstehen direkt in diesem Ordner die folgend
 
 | Artefakt-Dateiname | Was ist das? | Wo steht die Datei? *(Speicherort)* | Wer erzeugt sie? |
 | :--- | :--- | :--- | :---: |
-| **`02_ANGEBOT_DIPL_ING_BUENOTTE.md`** | Rechtssicheres B2B-Ingenieurangebot *(Festpreis 480 € netto)* | [`c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\02_ANGEBOT_DIPL_ING_BUENOTTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/02_ANGEBOT_DIPL_ING_BUENOTTE.md) | **Agent 4** *(Backoffice)* |
-| **`uebung_03_z_min_berechnung.nc`** | Fertiger Maschinencode für Haas VF-2 *(mit Z-MIN Header)* | [`c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\uebung_03_z_min_berechnung.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/uebung_03_z_min_berechnung.nc) | **Agent 2** *(Post-Coder)* |
-| **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | 5-Stufen-Sicherheitsprüfbericht *(Null-Kollisions-Garantie)* | [`c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | **Agent 3** *(NC-Safety)* |
-| **`06_EINRICHTEBLATT_SETUP_SHEET.md`** | Werkstatt-Rüstdatenblatt für den Maschinenbediener vor Ort | [`c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/06_EINRICHTEBLATT_SETUP_SHEET.md) | **Agent 3** *(NC-Safety)* |
-| **`uebung_03_simulation_video.mp4`** | **3D-Maschinensimulationsvideo *(MP4 zur Kundenfreigabe)*** | [`c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\uebung_03_simulation_video.mp4`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/uebung_03_simulation_video.mp4) | **Agent 3** *(NC-Safety)* |
-| **`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`** | Revisionssichere Honorarrechnung *(nach § 14 UStG & § 18 EStG)* | [`c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) | **Agent 4** *(Backoffice)* |
+| **`02_ANGEBOT_DIPL_ING_BUENOTTE.md`** | Rechtssicheres B2B-Ingenieurangebot *(Festpreis 480 € netto)* | [`c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\02_ANGEBOT_DIPL_ING_BUENOTTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/02_ANGEBOT_DIPL_ING_BUENOTTE.md) | **Agent 4** *(Backoffice)* |
+| **`uebung_03_z_min_berechnung.nc`** | Fertiger Maschinencode für Haas VF-2 *(mit Z-MIN Header)* | [`c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\uebung_03_z_min_berechnung.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/uebung_03_z_min_berechnung.nc) | **Agent 2** *(Post-Coder)* |
+| **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | 5-Stufen-Sicherheitsprüfbericht *(Null-Kollisions-Garantie)* | [`c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | **Agent 3** *(NC-Safety)* |
+| **`06_EINRICHTEBLATT_SETUP_SHEET.md`** | Werkstatt-Rüstdatenblatt für den Maschinenbediener vor Ort | [`c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/06_EINRICHTEBLATT_SETUP_SHEET.md) | **Agent 3** *(NC-Safety)* |
+| **`uebung_03_simulation_video.mp4`** | **3D-Maschinensimulationsvideo *(MP4 zur Kundenfreigabe)*** | [`c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\uebung_03_simulation_video.mp4`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/uebung_03_simulation_video.mp4) | **Agent 3** *(NC-Safety)* |
+| **`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`** | Revisionssichere Honorarrechnung *(nach § 14 UStG & § 18 EStG)* | [`c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) | **Agent 4** *(Backoffice)* |
 
 ---
 
@@ -62,8 +62,8 @@ Sobald du die Agenten beauftragst, entstehen direkt in diesem Ordner die folgend
 #### Prompt zum Kopieren in den Chat:
 ```text
 Starte bitte Agent 4 (Backoffice-Agent):
-Lies die Kundenanfrage in c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\KUNDENAUFTRAG.md.
-Erstelle direkt im Ordner c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\ das formelle B2B-Angebot "02_ANGEBOT_DIPL_ING_BUENOTTE.md" für Markus Weber (Schmidt Präzisionstechnik GmbH) über 480,00 € netto. Verwende ausschließlich ingenieurmäßige Leistungsbeschreibungen nach § 18 EStG und binde die verbindliche Haftungsausschluss-Klausel für das Einfahren des ersten Werkstücks im Einzelsatz ein.
+Lies die Kundenanfrage in c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\KUNDENAUFTRAG.md.
+Erstelle direkt im Ordner c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\ das formelle B2B-Angebot "02_ANGEBOT_DIPL_ING_BUENOTTE.md" für Markus Weber (Schmidt Präzisionstechnik GmbH) über 480,00 € netto. Verwende ausschließlich ingenieurmäßige Leistungsbeschreibungen nach § 18 EStG und binde die verbindliche Haftungsausschluss-Klausel für das Einfahren des ersten Werkstücks im Einzelsatz ein.
 ```
 
 #### 🔍 Wie wird das Angebot getestet und geprüft?
@@ -79,7 +79,7 @@ Erstelle direkt im Ordner c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_
 #### Prompt zum Kopieren in den Chat:
 ```text
 Starte bitte Agent 2 (Postprocessor-Coder-Agent):
-Generiere für die Haas VF-2 Fräsmaschine im Ordner c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\ das fertige NC-Programm "uebung_03_z_min_berechnung.nc" für die Flanschplatte aus dem 3D-Modell bauteil_1001.stl.
+Generiere für die Haas VF-2 Fräsmaschine im Ordner c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\ das fertige NC-Programm "uebung_03_z_min_berechnung.nc" für die Flanschplatte aus dem 3D-Modell bauteil_1001.stl.
 Integriere im Header die exakte Z-MIN Tiefenberechnung für Werkzeug T01 (Außenkontur Z -5.0 mm, Kreistasche Z -3.0 mm) und den Nullpunkt G54 vorne links oben, damit der Maschinenbediener vor Crashs mit den Schraubstockbacken gewarnt wird.
 ```
 
@@ -109,7 +109,7 @@ Es stehen dir **3 Test-Methoden** zur Verfügung:
 #### Prompt zum Kopieren in den Chat:
 ```text
 Starte bitte Agent 3 (NC-Safety- & Setup-Agent):
-Führe für die Datei "uebung_03_z_min_berechnung.nc" im Ordner c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\ die 5-Stufen-Sicherheitsprüfung nach SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md durch.
+Führe für die Datei "uebung_03_z_min_berechnung.nc" im Ordner c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\ die 5-Stufen-Sicherheitsprüfung nach SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md durch.
 Prüfe insbesondere den Z-MIN Abstand von Z = -5.0 mm zu den Schraubstockbacken bei Z = -12.0 mm (Spannrand 3.0 mm).
 Erstelle im selben Ordner:
 1. "05_SICHERHEITS_CRASH_PRUEFBERICHT.md" mit Freigabestatus BESTANDEN.
@@ -143,7 +143,7 @@ Erstelle im selben Ordner:
 #### Prompt zum Kopieren in den Chat:
 ```text
 Starte bitte Agent 4 (Backoffice-Agent):
-Der Auftrag im Ordner c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\ ist technisch erfolgreich abgeschlossen.
+Der Auftrag im Ordner c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\ ist technisch erfolgreich abgeschlossen.
 Erstelle jetzt im selben Ordner die steuersichere Honorarrechnung "07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md" über 480,00 € netto (571,20 € brutto) an die Schmidt Präzisionstechnik GmbH mit allen Pflichtangaben nach § 14 UStG und freiberuflicher Leistungsabgrenzung für das Finanzamt Hanau.
 ```
 
@@ -159,9 +159,9 @@ Erstelle jetzt im selben Ordner die steuersichere Honorarrechnung "07_RECHNUNG_N
 ## 🛡️ 4. Abnahme-Kriterien (Checkliste für 100 % Erledigung)
 
 Sobald du die 4 Prompts ausgeführt hast, befinden sich alle Artefakte in deinem Test-Ordner:
-* [ ] [`02_ANGEBOT_DIPL_ING_BUENOTTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/02_ANGEBOT_DIPL_ING_BUENOTTE.md) existiert und wurde geprüft.
-* [ ] [`uebung_03_z_min_berechnung.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/uebung_03_z_min_berechnung.nc) existiert mit Z-MIN Header und lief im Simulator.
-* [ ] [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) bescheinigt Status **BESTANDEN (GRÜN)**.
-* [ ] [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/06_EINRICHTEBLATT_SETUP_SHEET.md) liegt druckfertig vor.
-* [ ] [`uebung_03_simulation_video.mp4`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/uebung_03_simulation_video.mp4) wurde gerendert und zeigt kollisionsfreie Fräsbahnen.
-* [ ] [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_auftrag_ubung_03/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) ist für das Finanzamt Hanau abgelegt.
+* [ ] [`02_ANGEBOT_DIPL_ING_BUENOTTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/02_ANGEBOT_DIPL_ING_BUENOTTE.md) existiert und wurde geprüft.
+* [ ] [`uebung_03_z_min_berechnung.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/uebung_03_z_min_berechnung.nc) existiert mit Z-MIN Header und lief im Simulator.
+* [ ] [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) bescheinigt Status **BESTANDEN (GRÜN)**.
+* [ ] [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/06_EINRICHTEBLATT_SETUP_SHEET.md) liegt druckfertig vor.
+* [ ] [`uebung_03_simulation_video.mp4`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/uebung_03_simulation_video.mp4) wurde gerendert und zeigt kollisionsfreie Fräsbahnen.
+* [ ] [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) ist für das Finanzamt Hanau abgelegt.

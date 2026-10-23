@@ -21,7 +21,7 @@ Damit dieser Auftrag zu 100 % erledigt ist, müssen **alle folgenden Artefakte d
 | :--- | :---: | :---: | :--- |
 | **`00_AUFTRAGS_LEITFADEN_UND_AGENTEN_ANLEITUNG.md`** | Doku | *System* | Diese verbindliche Schritt-für-Schritt-Anleitung. |
 | **`KUNDENAUFTRAG_BRIEFING.md`** | Briefing | `Agent 1` / Kunde | Original-Auftrag mit Maschinenpark, Werkzeugen und Vorgaben. |
-| **`ANGEBOT_DIPL_ING_BUENOTTE.md`** | Vertrag | **`Agent 4`** | Rechtssicheres B2B-Angebot nach § 18 EStG inkl. Haftungsausschluss. |
+| **`02_ANGEBOT_DIPL_ING_BUENOTTE.md`** | Vertrag | **`Agent 4`** | Rechtssicheres B2B-Angebot nach § 18 EStG inkl. Haftungsausschluss. |
 | **`uebung_04_3d_modell_cam.cps`** | JavaScript | **`Agent 2`** | Maschinenspezifischer Postprozessor-Quellcode. |
 | **`uebung_04_3d_modell_cam.nc`** | G-Code / Klartext | **`Agent 2`** | Fertig generiertes NC-Maschinenprogramm für die Kundenmaschine. |
 | **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | Prüfbericht | **`Agent 3`** | 5-Stufen-Sicherheitsbericht (Crash-Check & Z-MIN Verifikation). |
@@ -37,7 +37,7 @@ Du musst die Arbeit nicht selbst programmieren. Nutze einfach die 4 spezialisier
 ### Schritt 1: Angebot erstellen & kalkulieren (Agent 4)
 * **Aufgabe:** Prüft die Kundenanfrage in `KUNDENAUFTRAG_BRIEFING.md`, kalkuliert den Festpreis von **380,00 € netto** und erstellt das B2B-Angebot.
 * **Befehl im Chat:**
-  > *„Starte bitte **Agent 4**: Überprüfe das Briefing im Ordner `auftrag_04_lagerplatte_3d_cam` und erstelle das formelle Angebot `ANGEBOT_DIPL_ING_BUENOTTE.md` inklusive der Klausel zum Einfahren des ersten Bauteils im Einzelsatz.“*
+  > *„Starte bitte **Agent 4**: Überprüfe das Briefing im Ordner `auftrag_04_lagerplatte_3d_cam` und erstelle das formelle Angebot `02_ANGEBOT_DIPL_ING_BUENOTTE.md` inklusive der Klausel zum Einfahren des ersten Bauteils im Einzelsatz.“*
 
 ### Schritt 2: Code & Postprozessor umsetzen (Agent 2)
 * **Aufgabe:** Generiere die optimierten Werkzeugbahnen für die Lagerplatte und passe die Schnittparameter an.

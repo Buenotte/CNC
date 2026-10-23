@@ -74,3 +74,36 @@ Checkliste aller 6 erzeugten Dateien mit Prüfpunkten für den Projektabschluss:
 * [ ] Einrichteblatt liegt druckfertig vor.
 * [ ] **3D-Simulationsvideo wurde gerendert und zeigt kollisionsfreie Fräsbahnen.**
 * [ ] Rechnung ist für das Finanzamt Hanau abgelegt.
+
+---
+
+## 3. Strikte Konsistenz- und Synchronitätsprüfung vor Bearbeitungsstart (Zero-Tolerance-Konsistenzgebot)
+
+Um Inkonsistenzen zwischen Kundenanfrage, Workflow-Prompts und Handbuchkapiteln systematisch zu unterbinden, gilt ab sofort folgende verbindliche Prüfregel vor jeder Auftragsbearbeitung:
+
+1. **Maschinen- und Steuerungs-Synchronität:**
+   * Die im Briefing genannte Fräsmaschine *(z. B. Haas VF-2 oder DMG MORI CMX 600 V)* und deren Steuerung *(z. B. Haas NGC, Siemens Sinumerik 840D oder Heidenhain TNC 640)* müssen im Metadatenkopf von `KUNDENAUFTRAG.md`, im Fließtext des Kundenbriefings, in allen 4 Prompts von `WORKFLOW_UND_PROMPTS.md` und im Postprozessor bzw. Handbuch **zu 100 % identisch** sein.
+   * Es ist streng verboten, in Vorlagen oder Kopfzeilen andere Maschinenmodelle stehenzulassen *(Verbot von Template-Drift durch unvollständiges Copy-Paste)*.
+
+2. **Kaufmännische Synchronität & Zahlungskonditionen:**
+   * Zahlungsbedingungen aus dem Kundenbriefing *(z. B. 50 % Anzahlung sofort, 50 % nach Vorlage des Freigabevideos)* müssen exakt so in das Angebot `02_ANGEBOT_DIPL_ING_BUENOTTE.md` und in die spätere Abrechnung übernommen werden.
+
+3. **Einheitliche Dateinamen-Konvention (Präfix-Standard):**
+   * Alle Artefakte müssen ausnahmslos der definierten Nomenklatur folgen:
+     - `02_ANGEBOT_DIPL_ING_BUENOTTE.md` *(immer mit führendem `02_`)*
+     - `[auftragsname].nc`
+     - `05_SICHERHEITS_CRASH_PRUEFBERICHT.md`
+     - `06_EINRICHTEBLATT_SETUP_SHEET.md`
+     - `[auftragsname]_simulation_video.mp4`
+     - `07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`
+   * Veraltete Bezeichnungen ohne Präfix *(wie `ANGEBOT_DIPL_ING_BUENOTTE.md`)* sind sofort auf den Standard `02_...` zu vereinheitlichen.
+
+4. **Bereinigung redundanter Alt-Dateien (No Duplicate Briefings):**
+   * Es darf im Auftragsordner nur **eine einzige, maßgebliche `KUNDENAUFTRAG.md`** geben. Veraltete Dubletten wie `KUNDENAUFTRAG_BRIEFING.md`, `00_AUFTRAGS_LEITFADEN...` oder `STATUS_UND_DATEIEN.md` dürfen bei Neuaufträgen nicht mehr angelegt werden; in Bestandsordnern sind diese Dokumente auf den aktuellen Stand von `KUNDENAUFTRAG.md` zu synchronisieren.
+
+5. **Geometrie- und Rohteil-Prüfung:**
+   * Rohteilabmessungen *(z. B. $85 \times 55 \times 15\,\text{mm}$)*, Fertigmaße *(z. B. $80 \times 50 \times 12\,\text{mm}$)* und Werkzeuglisten *(z. B. T01 Fräser $\varnothing 10\,\text{mm}$, T02 Bohrer $\varnothing 6\,\text{mm}$)* müssen zwischen Kundenbriefing, `.cps`-Kommentaren und NC-Code zeichengenau übereinstimmen.
+
+6. **Reines Kundenbriefing in `KUNDENAUFTRAG.md` (Keine internen Agenten-Hinweise):**
+   * In der Datei `KUNDENAUFTRAG.md` darf **AUSSCHLIESSLICH der reale Kundenauftrag** *(die E-Mail bzw. das Original-Briefing des Kunden mit Absender, Empfänger, Bauteildaten, Maschinentyp, Spannsituation und Honorar)* stehen.
+   * Interne Bearbeitungshinweise *(wie z. B. „Zuständiger Agent für Angebot: Agent 4“, „Agent 2 für Umsetzung“)*, Lösungstipps oder Lehrbuchtexte haben in `KUNDENAUFTRAG.md` **nichts verloren**. Alle agentenspezifischen Anweisungen und Arbeitsabläufe gehören ausnahmslos in die Datei `WORKFLOW_UND_PROMPTS.md`.
