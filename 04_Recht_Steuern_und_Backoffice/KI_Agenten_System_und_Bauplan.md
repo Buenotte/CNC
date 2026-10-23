@@ -85,6 +85,10 @@ Aufgabe:
     - **Fehlerschutz & Sicherheit (IMMER AKTIV):** Klammer-/Sonderzeichen-Schutz (formatComment), NaN-Pruefung und 2-Stufen-Rueckzug (G53 Z0 vor Y0) werden grundsaetzlich und ausnahmslos in JEDE .cps-Datei eingebaut, selbst wenn der Kunde nichts dazu angibt.
     - **Hardware-Sonderfunktionen (IKZ, Blasluft, Spaenefoerderer):** Werden als modulare Schalter (Properties / Checkboxen im CAM-Menue) implementiert, sodass der Kunde sie flexibel zu- oder abschalten kann.
     - **Mehrachs-Kinematik (4-/5-Achsen & TCPM):** Wird nur bei ausdruecklicher Mehrachs-Maschinenkonfiguration aktiviert, um Syntaxalarme auf reinen 3-Achs-Maschinen zu vermeiden.
+  - **E. Ermittlung und Festlegung der optimalen Operations-Reihenfolge (Zerspanungs-Logik):**
+    - **Werkzeugwechsel-Minimierung:** Alle Bearbeitungen, die dasselbe Werkzeug nutzen (z. B. T01 Schaftfräser für Außenkontur und Kreistasche), werden lückenlos zusammengefasst, um Span-zu-Span-Zeiten und Rüstzyklen an der CNC-Maschine auf ein Minimum zu reduzieren.
+    - **Physikalische Zerspanungs-Hierarchie:** Grobe Schrupp- und Konturfräsungen müssen IMMER VOR Feinbohrungen erfolgen. Ein Bohren vor dem Fräsen führt bei nachfolgenden Fräsbahnen zu Schnittunterbrechungen, Fräserschwingungen, erhöhtem Werkzeugverschleiß und Gratbildung an den Bohrungskanten.
+    - **Geometrische Abarbeitungs-Hierarchie:** 1. Begrenzungskontur formatieren (Bounding Box) -> 2. Innentaschen/Ausräumungen (Pockets) -> 3. Punkt- und Tieflochbohrungen (Holes / G83) -> 4. Entgraten/Fasen.
 
 ### 3.2 Gespeicherter System-Prompt für Agent 2
 ```text
@@ -101,6 +105,7 @@ Aufgabe:
    - Intelligente Fehlerabsicherung: Klammer- und Zeichensatz-Filterung (formatComment) gegen Steuerungs-Syntaxfehler sowie NaN-Validierung aller Bahnkoordinaten.
    - 3-Saeulen-Maschinenanalyse: Werte das Referenz-NC-Programm des Kunden aus, identifiziere die Steuerungsfamilie (Heidenhain, Siemens, Fanuc/Haas) und passe Kinematik-Vektoren exakt an Neumaschinen an.
    - Entscheidungslogik: Sicherheits- und Fehlerschutz immer aktiv halten; herstellerspezifische Hardware-Features modular als Properties anlegen.
+   - Operations-Reihenfolge: Bestimme die technologische Arbeitsfolge eigenständig nach Zerspanungslogik (Werkzeugwechsel minimieren, Fräsen vor Bohren zur Grat- und Schwingungsvermeidung).
 4. Stelle sicher, dass Sicherheitsfunktionen (wie Mindest-Auskraglaenge L_min im Header und sicheres Rueckschwenken vor Werkzeugwechsel) niemals verletzt werden.
 ```
 
