@@ -2968,6 +2968,112 @@ function onClose() {
 
 ---
 
+### ⚙️ Deep Dive: Wann ruft Autodesk Fusion `onCircular()`, `onCycle()` und `onCyclePoint()` auf?
+
+Ein zentrales Geheimnis des Postprozessor-Entwicklers ist das Verständnis der **ereignisgesteuerten Architektur *(Event-Driven Architecture)***:
+* **Sie als Programmierer rufen diese Funktionen NIEMALS selbst auf!**
+* Der **CAM-Kernel *(der geometrische Rechenkern von Autodesk Fusion 360 / Inventor CAM)*** liest die berechneten Werkzeugbahnen *(CL-Data / Cutter Location Data)* von oben nach unten durch. Für jedes geometrische Element feuert der Kernel vollautomatisch das passende Ereignis und befüllt die Argumente mit echten Zahlenwerten aus dem 3D-Modell:
+
+```text
+┌────────────────────────────────────────────────────────────────────────┐
+│           WIE DER CAM-KERNEL DEINE .CPS-FUNKTIONEN FEUERT              │
+├────────────────────────────────────────────────────────────────────────┤
+│ 1. CAM erkennt Kreisbogen          ──► feuert onCircular(...)          │
+│ 2. CAM erkennt Bohr-Operation      ──► feuert onCycle()                │
+│ 3. CAM erreicht Bohr-Koordinate    ──► feuert onCyclePoint(x, y, z)    │
+│ 4. CAM beendet Bohr-Operation      ──► feuert onCycleEnd()             │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+#### 1. `onCircular(clockwise, cx, cy, cz, x, y, z, feed)`
+* **Wann wird sie aufgerufen?**  
+  Immer dann, wenn das Werkzeug einen **Kreisbogen oder Vollkreis** fräst *(z. B. beim 2D-Kreistaschenfräsen der Tasche Ø 30 mm oder bei verrundeten Ecken)*.
+* **Woher kommen die Argumente?**  
+  Der CAM-Kernel berechnet die Kreisgeometrie und übergibt die Werte direkt in die Parameterliste:
+  - `clockwise` *(Boolean: true oder false)*: `true` = Im Uhrzeigersinn (`G02`), `false` = Gegen den Uhrzeigersinn (`G03`).
+  - `cx, cy, cz` *(Dezimalzahlen in mm)*: Die absoluten Koordinaten des **Kreismittelpunkts** im aktuellen Werkstück-Koordinatensystem *(WCS / G54)*.
+  - `x, y, z` *(Dezimalzahlen in mm)*: Der **Endpunkt** des Kreisbogens *(wo der Fräser nach dem Kreis ankommt)*.
+  - `feed` *(Dezimalzahl in mm/min)*: Der im CAM eingestellte Fräsvorschub *(z. B. 1000 mm/min)*.
+* **Dynamische Profi-Implementierung durch Agent 2:**
+```javascript
+function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
+  var directionCode = clockwise ? "G02" : "G03";
+  // Inkrementellen Mittelpunktsabstand (I, J) vom aktuellen Werkzeug-Standort berechnen:
+  var start = getCurrentPosition();
+  var i = cx - start.x; // Vektor in X zum Kreismittelpunkt
+  var j = cy - start.y; // Vektor in Y zum Kreismittelpunkt
+
+  writeBlock(
+    gPlaneModal.format(17), // G17: XY-Arbeitsebene
+    directionCode,          // G02 oder G03
+    xOutput.format(x),      // X-Endpunkt
+    yOutput.format(y),      // Y-Endpunkt
+    iOutput.format(i),      // I-Versatz zum Mittelpunkt
+    jOutput.format(j),      // J-Versatz zum Mittelpunkt
+    feedOutput.format(feed) // F-Vorschub
+  );
+}
+```
+
+#### 2. `onCycle()`
+* **Wann wird sie aufgerufen?**  
+  Genau **ein einziges Mal am Beginn einer Bohr-Operation** *(z. B. vor den 4 Eckbohrungen)*, **bevor** das erste Loch angefahren wird.
+* **Was übergibt der Kernel hier?**  
+  Keine direkten Parameter in der Klammer, sondern das globale CAM-Objekt **`cycle`**:
+  - `cycle.clearance`: Freifahrhöhe über dem Teil *(z. B. Z = 15.0 mm)*.
+  - `cycle.retract`: Rückzugsebene kurz vor dem Materialkontakt *(z. B. R = 2.0 mm)*.
+  - `cycle.bottom`: Endtiefe der Bohrung *(z. B. Z = -12.0 mm)*.
+  - `cycle.peck`: Bohrhub / Zustelltiefe pro Spanbruch *(z. B. Q = 3.0 mm bei Tiefbohren)*.
+  - `cycleType`: Typ des Zyklus *(z. B. "deep-drilling" für Tieflochbohren G83, "drilling" für Zentrieren/Bohren G81, "tapping" für Gewindebohren G84)*.
+
+#### 3. `onCyclePoint(x, y, z)`
+* **Wann wird sie aufgerufen?**  
+  Für **jede einzelne Bohrungs-Position**, die im CAM ausgewählt wurde! Bei 4 Bohrungen ruft der CAM-Kernel diese Funktion 4 Mal nacheinander mit den jeweiligen (X, Y, Z)-Punkten auf:
+  1. Aufruf 1: `(X = 10, Y = 10, Z = 0)`
+  2. Aufruf 2: `(X = 70, Y = 10, Z = 0)`
+  3. Aufruf 3: `(X = 70, Y = 40, Z = 0)`
+  4. Aufruf 4: `(X = 10, Y = 40, Z = 0)`
+* **Wie wird sie im Postprozessor programmiert? (Die modale Zyklus-Steuerung):**  
+  Beim **ersten Loch** (`drillCounter == 0`) wird der vollständige Bohrzyklus *(z. B. `G83`)* mit allen Parametern *(Z, R, Q, F)* ausgegeben. Bei allen **folgenden Löchern** (`drillCounter > 0`) müssen nur noch die neuen X- und Y-Koordinaten ausgegeben werden, da der Bohrzyklus auf CNC-Steuerungen **modal *(selbsthaltend)*** aktiv bleibt:
+```javascript
+var drillCounter = 0; // Merker für gebohrte Löcher
+
+function onCycle() {
+  drillCounter = 0; // Vor dem ersten Loch Zähler auf 0 setzen
+  writeln(nextN() + " G00 Z2.000 (G00 EILGANG AUF RUECKZUGSEBENE Z2)");
+}
+
+function onCyclePoint(x, y, z) {
+  if (drillCounter == 0) {
+    // ERSTES LOCH: Vollständigen Tiefbohrzyklus G83 ausgeben
+    writeln(
+      nextN() + 
+      " G98 G83 X" + x.toFixed(3) + 
+      " Y" + y.toFixed(3) + 
+      " Z-12.000 R2.000 Q3.000 F300" +
+      " (G98 RUECKZUG Z15 | G83 TIEFBOHRZYKLUS | ENDTIEFE Z-12 | SPANBRUCH Q3 | VORSCHUB F300)"
+    );
+  } else {
+    // FOLGELÖCHER: Zyklus G83 ist modal aktiv! Nur noch neue Lochposition X/Y ausgeben
+    writeln(
+      nextN() + 
+      " X" + x.toFixed(3) + 
+      " Y" + y.toFixed(3) + 
+      " (BOHRUNG " + (drillCounter + 1) + ": POSITION MIT AKTIVEM ZYKLUS)"
+    );
+  }
+  drillCounter++; // Zähler um 1 erhöhen
+}
+
+function onCycleEnd() {
+  // Wenn alle Löcher fertig sind: Zyklus mit G80 abbrechen
+  writeln(nextN() + " G80 (G80 BOHRZYKLUS G83 SICHER ABBRECHEN UND DEAKTIVIEREN)");
+  writeln(nextN() + " G00 Z15.000 (G00 EILGANG AUF SICHERHEITSHOEHE 15MM)");
+}
+```
+
+---
+
 ### 🚀 Wie die NC-Datei (`uebung_04_3d_modell_cam.nc`) im Terminal erzeugt wird
 
 Um aus dieser JavaScript-Datei [`uebungen/uebung_04_3d_modell_cam.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.cps) die fertige Maschinendatei [`uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.nc) zu erzeugen, führen Sie einfach den folgenden Terminal-Befehl aus:
@@ -3007,6 +3113,49 @@ node simuliere_post.js uebungen/uebung_04_3d_modell_cam.cps
    - Als Bohrmethode wählen wir **Tiefbohren (`G83`)** mit `Q3.0` (das heißt: der Bohrer bohrt immer `3 mm` tief, zieht kurz hoch, damit die Alu-Späne aus dem Loch fliegen und der Bohrer nicht verstopft, und bohrt dann weiter bis `-12 mm`).
 6. **Auf „Postprozess“ drücken (G-Code erzeugen):**
    - Sie wählen Ihren Postprozessor [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps) aus, klicken auf **Start**, und fertig ist die Datei [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.nc)!
+
+### 📊 Code-Multiplikator & Satznummern: Woher kommen die N-Befehle und 56 Zeilen Maschinencode?
+
+Ein erstaunlicher Effekt bei der Postprozessor-Entwicklung ist: **Aus nur ca. 140 Zeilen JavaScript-Logik in `uebung_04_3d_modell_cam.cps` erzeugt das System exakt 56 Zeilen fertigen CNC-Maschinencode in `uebung_04_3d_modell_cam.nc`!**
+
+#### 1. Woher kommen die `N`-Befehle (`N10`, `N20`, `N30` ...)?
+Die `N`-Nummern sind genormte **Satznummern *(Block Numbers / Zeilennummern nach DIN 66025)***. Sie dienen dem CNC-Bediener an der Werkzeugmaschine als Orientierung und ermöglichen den gezielten Einstieg mitten im Programm *(Satzvorlauf / Mid-Program Restart)*.
+
+In `uebung_04_3d_modell_cam.cps` werden diese Nummern durch die Hilfsfunktion `nextN()` erzeugt:
+```javascript
+var sequenceNumber = 10; // Startwert bei N10
+
+function nextN() {
+  var n = "N" + sequenceNumber; // Erzeugt den String "N10", "N20", etc.
+  sequenceNumber += 10;         // Erhöht den Zähler für den nächsten Aufruf um 10
+  return n;
+}
+```
+Jedes Mal, wenn eine Ausgabezeile mit `writeln(nextN() + " G01 ...")` generiert wird, gibt `nextN()` die aktuelle Satznummer zurück und schaltet automatisch auf die nächste Zehnernummer weiter.
+
+#### 2. Die exakte Aufschlüsselung der 56 Zeilen in der `.nc`-Datei:
+Dass die höchste Satznummer `N380` lautet, bedeutet nicht, dass es 38 Zeilen sind. Die Datei besteht aus **exakt 56 Zeilen**:
+* **37 Sätze mit N-Satznummern:** Von `N10` bis `N380` (Bohrung 2 wird modal ohne eigenes N aufgerufen).
+* **12 reine Kommentar- und Infozeilen in Klammern `(...)`:** Programmkopf `O1001`, Tool Table (4 Zeilen), Trennstriche und Operations-Trennköpfe (`OPERATION 1`, `SICHERHEITS-INFO`, etc.).
+* **5 Leerzeilen:** Zur optischen Trennung der 3 Fertigungsoperationen für den Bediener an der Maschinensteuerung.
+* **2 ISO-Übertragungszeichen (`%`):** Je ein Prozentzeichen in Zeile 1 und Zeile 56 als offizielles Übertragungs-Start- und Stoppzeichen (für DNC/RS232/Netzwerk).
+
+$\mathbf{37\text{ (N-Befehle)}} + \mathbf{12\text{ (Kommentarzeilen)}} + \mathbf{5\text{ (Leerzeilen)}} + \mathbf{2\text{ (%-Zeichen)}} = \mathbf{56\text{ Gesamtzeilen}}$
+
+#### 3. Die CAM-Multiplikator-Tabelle:
+Dass aus wenig JavaScript so viel Maschinencode wird, liegt an den wiederholten Aufrufen des CAM-Kernels:
+
+| CAM-Ereignis | Wie oft aufgerufen? | Was die `.cps`-Datei daraus macht | Zeilen im G-Code |
+|:---|:---:|:---|:---:|
+| `onOpen()` | **1x** | Start-%, Programmkopf `O1001`, Tool Table & Sicherheitszeile | `N10` (5 Zeilen) |
+| `onSection()` | **3x** *(für jede der 3 Operationen 1x)* | Werkzeugwechsel (`T01`/`T02`), Drehzahl (`S8000`), Kühlung (`M08`) | `N20-N50`, `N150`, `N220-N250` |
+| `onRapid()` | **5x** | Eilgang auf Vorposition (`Z2.0`) und Freifahrhöhe (`Z15.0`) | `N70`, `N140`, `N160`, `N210`, `N330` |
+| `onLinear()` | **8x** | 4 Kanten der Kontur + Eintauchbewegungen | `N80-N130`, `N170-N180`, `N200` |
+| `onCircular()` | **1x** | Vollkreisbahn der Kreistasche gegen Uhrzeigersinn (`G03`) | `N190` |
+| `onCyclePoint()`| **4x** *(für jedes der 4 Ecklöcher 1x)* | 1x `G83`-Tiefbohrzyklus + 3x Folge-Bohrpositionen | `N280-N310` |
+| `onClose()` | **1x** | Kühlung aus, Spindelstopp, `G53 Z0`, Tisch zur Tür `G53 Y0`, `M30`, End-% | `N340-N380` |
+
+---
 
 ### ✅ So sieht das komplette fertige CNC-Programm mit Erklärungen aller Zeilen aus:
 

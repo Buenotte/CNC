@@ -15,7 +15,8 @@ Da dieses Dokument im Laufe unserer Detailanalyse stetig gewachsen ist *(mit dei
 | **SCHRITT 2**<br>*(Vor dem 1. Euro Umsatz)* | **Genehmigung bei deinem Arbeitgeber (Zollcon GmbH, Fürth) einholen:**<br>• Nutze die **speziell auf dein Ingenieurstudium abgestimmte Vorlage aus Abschnitt 9.4** *(darin ist das Wort „Softwareentwicklung“ für die Nebentätigkeit bewusst weggelassen, damit es 0 % Überschneidung mit der Zoll-Software gibt!)*.<br>• Kurz mündlich ankündigen, unterschreiben lassen und abheften. | • **Abschnitt 8.1 & 8.3** *(Analyse Zollcon GmbH)*<br>• **Abschnitt 9.3 & 9.4** *(Perfekter Antrag für Zollcon GmbH)* |
 | **SCHRITT 3**<br>*(Direkt nach Zollcon-Okay)* | **Steuerliche Anmeldung als „Freiberuflicher Ingenieur“ beim Finanzamt Hanau:**<br>• **WICHTIG:** Da dein Moskauer Diplom in Deutschland bereits offiziell anerkannt ist, gilt **Abschnitt 11** *(du musst **KEIN Gewerbe** im Rathaus Erlensee anmelden!)*.<br>• Du meldest dich nur online über **ELSTER** beim **Finanzamt Hanau** als **Freiberuflicher Ingenieur nach § 18 EStG** an und hängst deine Diplom-Anerkennung als PDF an. | • **Abschnitt 11** *(Gamechanger: Anerkanntes Diplom = Freiberufler ohne Gewerbeamt & ohne Gewerbesteuer!)*<br>• **Abschnitt 5** *(Umsatzsteuer: Kleinunternehmer vs. 19 % Regelbesteuerung)* |
 | **SCHRITT 4**<br>*(Parallel zur Steuernummer)* | **Absicherung gegen Maschinencrashs & Separates Bankkonto:**<br>• Separates Giro-/Unterkonto für deine Einnahmen/Ausgaben anlegen.<br>• In jedem Angebot und Einrichteblatt das **Sicherheits- und Einfahrprotokoll** *(Pflicht zur Endkontrolle durch den Maschinenbediener)* verwenden + Berufshaftpflicht prüfen. | • **Abschnitt 6.1 & 6.2** *(Lizenzen & Haftungsschutz)*<br>• **[Vorlage Einrichteblatt](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/Portfolio/Vorlage_Einrichteblatt_und_Werkzeugliste.md)** |
-| **SCHRITT 5**<br>*(Start der 100 % Online-Akquise)* | **Profile für 100 % Online-/Remote-Aufträge freischalten:**<br>• **Fiverr.com & Upwork.com:** Die 2 fertigen Gig-Vorlagen *(Postprozessor & 3–5-Achs-CAM)* online stellen.<br>• **Malt.de & Freelancermap.de:** Remote-Profil mit den 20 Schlagworten und deinem Portfolio-PDF anlegen.<br>• **LinkedIn (optional):** Das „Kombi-Profil“ (`Software Engineer @ Zollcon GmbH | Dipl.-Ing. • CAD/CAM...`) einrichten. | • **Abschnitt 16** *(100 % Online-Arbeitsmodell)*<br>• **Abschnitt 17.1 & 17.2** *(Upwork, Fiverr, Malt, Freelancermap)*<br>• **Abschnitt 18** *(LinkedIn-Kombi-Profil)* |
+| **SCHRITT 4.5**<br>*(Fundament vor jeder Registrierung!)* | **Offizielle Geschäfts-E-Mail `bujanovski.engineering@gmail.com` anlegen:**<br>• **WICHTIGSTE REGEL:** Ohne diese E-Mail-Adresse darfst du KEIN EINZIGES Profil anlegen!<br>• Du brauchst diese Mailadresse ZWINGEND zur Registrierung auf **ELSTER**, **Upwork**, **Fiverr**, **Malt**, **Freelancermap**, **GitHub** und für dein Bankkonto.<br>• Niemals deine private Mailadresse oder die Zollcon-Firmenmail verwenden! | • **Abschnitt 13.4** *(E-Mail-Setup & Google Drive)*<br>• 👉 **[PROFIL-LEITFADEN (Kapitel 7)](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md#L328)** |
+| **SCHRITT 5**<br>*(Start der 100 % Online-Akquise)* | **Profile für 100 % Online-/Remote-Aufträge freischalten (mit bujanovski.engineering@gmail.com):**<br>• **Fiverr.com & Upwork.com:** Die 2 fertigen Gig-Vorlagen *(Postprozessor & 3–5-Achs-CAM)* online stellen.<br>• **Malt.de & Freelancermap.de:** Remote-Profil mit den 20 Schlagworten und deinem Portfolio-PDF anlegen.<br>• **LinkedIn (optional):** Das „Kombi-Profil“ (`Software Engineer @ Zollcon GmbH | Dipl.-Ing. • CAD/CAM...`) einrichten. | • **Abschnitt 16** *(100 % Online-Arbeitsmodell)*<br>• **Abschnitt 17.1 & 17.2** *(Upwork, Fiverr, Malt, Freelancermap)*<br>• **Abschnitt 18** *(LinkedIn-Kombi-Profil)* |
 | **SCHRITT 6**<br>*(Lukrative Daueraufträge)* | **Deutsche CAM-Systemhäuser für Remote-Postprozessor-Aufträge anschreiben:**<br>• Schreibe 5 bis 10 Systemhäuser aus der Tabelle in **Abschnitt 17.3** *(z. B. JANUS Engineering, WDS GmbH Weiterstadt, Mensch und Maschine, SolidCAM)* mit der fertigen E-Mail-Vorlage an. | • **Abschnitt 14 (Kanal 1)**<br>• **Abschnitt 17.3** *(Konkrete Firmenliste & Anschreiben an Systemhäuser)* |
 | **SCHRITT 7**<br>*(Im laufenden Betrieb)* | **80 % der Arbeit durch deine 4 KI-Agenten erledigen lassen:**<br>• Nutze die 4 vorbereiteten KI-Agenten für Kundensuche (`Lead-Scout`), Postprozessor-Programmierung (`Postprocessor-Coder`), G-Code-Sicherheitscheck & Einrichteblatt (`NC-Safety & Setup`) sowie Angebote/Rechnungen nach § 18 EStG (`Backoffice-Agent`). | • **Abschnitt 15** *(Übersicht KI-Agenten)*<br>• **[KI_Agenten_System_und_Bauplan.md](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/KI_Agenten_System_und_Bauplan.md)** |
 
@@ -263,7 +264,32 @@ Im Gegensatz zu normaler Web-Entwicklung hat die Arbeit als CAM-Spezialist zwei 
 ### 6.2 Haftung bei Maschinencrashs *(Spindelschaden / Werkzeugbruch)*
 * Wenn ein CNC-Fräszentrum für 400.000 € wegen eines falschen `G0 Z-100` *(Eilgangbewegung direkt ins Werkstück oder in den Maschinentisch)* crasht, kostet eine neue Motorspindel *(Hauptantriebseinheit der Fräsmaschine)* schnell 15.000 bis 35.000 €.
 * **Schutzmaßnahme 1 (Vertraglich / AGB):** Vereinbare in jedem Angebot schriftlich, dass du **NC-Programmvorschläge** lieferst und die **Endkontrolle, das Einfahren an der Maschine *(erster vorsichtiger Testlauf mit reduziertem Vorschub [Feedrate Override])* sowie die Freigabe der Aufspannung und Werkzeuge zwingend durch den Maschinenbediener des Auftraggebers** erfolgen müssen.
-* **Schutzmaßnahme 2 (Versicherung):** Schließe vor dem ersten echten Fertigungsauftrag eine **IT- und Ingenieur-Berufshaftpflichtversicherung *(Versicherung gegen Vermögens-, Personen- und Sachschäden durch Programmier- oder Beratungsfehler, z. B. über Hiscox, Exali oder Markel)*** ab (kostet für Nebenerwerbler meist nur ca. 200–350 € im Jahr und ist zu 100 % steuerlich absetzbar).
+* **Schutzmaßnahme 2 (Die IT- und Ingenieur-Berufshaftpflichtversicherung im Detail):**
+
+#### A. Springt die Versicherung SOFORT nach Abschluss an?
+**JA, zu 100 % SOFORT!**
+* Bei modernen gewerblichen Haftpflichtversicherern für IT und Ingenieure *(speziell **Hiscox**, **Exali** oder **Markel**)* gilt **sofortiger Versicherungsschutz ab dem vertraglich vereinbarten Beginn (in der Regel 00:00 Uhr des Folgetages oder sofort nach Online-Antragstellung)**.
+* **Keine Wartezeit für Haftpflichtschäden:** Im Gegensatz zu einer Rechtsschutzversicherung *(die oft 3 Monate Wartezeit hat)* gibt es bei der Berufshaftpflicht **KEINE Wartezeit**. Sobald der Vertrag online abgeschlossen ist und die Bestätigung vorliegt, bist du gegen Schäden geschützt.
+* **Wichtig (Vorab-Schäden ausgeschlossen):** Du kannst die Versicherung natürlich nicht erst abschließen, wenn der Fräser schon in die Spindel gekracht ist. Der Schadenfall muss *nach* Versicherungsbeginn eintreten.
+
+#### B. Wann genau sollst du die Versicherung abschließen?
+* **Wann NICHT:** Jetzt während der Übungsphase (Übung 00b bis 16) brauchst du **noch KEINE Versicherung**! Du übst nur auf deinem Laptop und simulierst virtuell – es entstehen 0,00 € Kosten.
+* **Der perfekte Zeitpunkt:** Schließe die Versicherung **erst in Phase 4 / kurz vor Auslieferung deines ALLERERSTEN bezahlten Kundenauftrags** ab!
+  1. Sobald ein Kunde dir ein Angebot unterschreibt (z. B. über 380 € oder 800 €).
+  2. Gehst du auf das Online-Portal von **Exali.de** oder **Hiscox.de**.
+  3. Du wählst die Tarifoption **„Ingenieur- und IT-Haftpflicht für Nebenerwerb / Freiberufler“** (Jahresumsatz anfangs bis 25.000 €).
+  4. Die Beantragung dauert online nur ca. **10 Minuten**.
+  5. Der Versicherungsschein liegt sofort per PDF in deinem Postfach – und du lieferst deinen Code mit absolut ruhigem Gewissen aus!
+
+#### C. Was kostet die Versicherung und wie wird sie bezahlt?
+* **Kosten:** Für nebenberufliche Freiberufler und Ingenieure liegt der Beitrag bei nur ca. **180 € bis 300 € pro JAHR** (ca. 15 bis 25 € im Monat).
+* **100 % steuerlich absetzbar:** Der Versicherungsbeitrag ist zu 100 % eine **Betriebsausgabe** nach § 18 EStG. Du reichst die Rechnung beim Finanzamt Hanau ein und minderst damit direkt deine Einkommensteuer!
+* **Deckungssumme:** Üblich und empfohlen sind **1.000.000 € bis 2.000.000 € pauschal für Personen- und Sachschäden** sowie mindestens **250.000 € für echte Vermögensschäden** (z. B. Produktionsausfallkosten, wenn die Fräsmaschine des Kunden stillsteht).
+
+#### D. Die 3-fache Schutzmauer (Warum du praktisch NIEMALS privat zahlen musst):
+1. **1. Schutzlinie (Vertragsklausel):** Dein Kunde bestätigt im Angebot schriftlich, dass sein eigener Maschinenbediener das Programm im Einzelsatzbetrieb *(Single Block)* vorsichtig einfährt.
+2. **2. Schutzlinie (Agent 3 Sicherheits-Audit):** Vor der Auslieferung prüft Agent 3 alle $Z_{\text{min}}$-Tiefen, Spindeldrehzahlen und Eilgangbewegungen ab.
+3. **3. Schutzlinie (Berufshaftpflicht Hiscox / Exali):** Sollte trotz allem ein unvorhersehbarer Schaden entstehen, wehrt die Versicherung unberechtigte Forderungen ab *(passiver Rechtsschutz)* oder bezahlt den Sachschaden an der Spindel vollständig.
 
 ---
 
@@ -633,7 +659,23 @@ Sobald du die Unterschrift der **Zollcon GmbH** für deine Nebentätigkeit hast,
    * **Datum der Urkunde:** **19. Mai 1994** (mit offiziellem Landessiegel des Landes Hessen).
    * **Genehmigter akademischer Grad:** **DIPLOM - Ingenieur (Fachhochschule) / Sowjetunion**, Kurzform: **`Dipl.-Ing. (FH)/SU`** *(Abschluss am Institut für Bauingenieurwesen in Moskau vom 30.06.1987, Dipl.-Nr. NW 577 455, Reg.Nr. 59 012)*.
    * **Warum das der unanfechtbare Hauptgewinn ist:** Das **Finanzamt Hanau** untersteht der hessischen Finanzverwaltung. Eine Urkunde des **Hessischen Ministeriums für Wissenschaft und Kunst** stammt von der obersten hessischen Landesbehörde – keine nachgeordnete Behörde in Hessen kann diese Urkunde jemals infrage stellen!
-6. Nach ca. 2 bis 4 Wochen schickt dir das Finanzamt Hanau per Post deine neue **Steuernummer für deine freiberufliche Tätigkeit** zu – und du kannst sofort deine erste offizielle Rechnung schreiben!
+6. Nach ca. 2 bis 4 Wochen schickt dir das Finanzamt Hanau per Post deine neue **Steuernummer für deine freiberufliche Tätigkeit** zu.
+
+### 11.2.1 Musst du 2 bis 4 Wochen auf den Finanzamts-Bescheid warten, bevor du echte Kundenaufträge annimmst?
+**NEIN! Du musst KEINE 2 bis 4 Wochen tatenlos warten!**
+
+Im deutschen Wirtschafts- und Steuerrecht gilt der Grundsatz: **Die unternehmerische bzw. freiberufliche Tätigkeit beginnt mit der allerersten Vorbereitungshandlung**, nicht erst am Tag, an dem der Brief vom Finanzamt im Briefkasten liegt!
+
+* **Sofortiger Auftragsstart:** Sobald du den Fragebogen zur steuerlichen Erfassung bei ELSTER online übermittelt hast, ist deine gesetzliche Anzeigepflicht nach § 138 Abgabenordnung *(AO)* erfüllt. Du darfst ab Minute 1 Kunden ansprechen, Angebote abgeben, Verträge schließen und Postprozessoren oder NC-Code programmieren.
+* **Wie schreibst du eine Rechnung, solange die Steuernummer noch mit der Post unterwegs ist?**  
+  Nach § 14 Absatz 4 Nummer 2 Umsatzsteuergesetz *(UStG)* muss eine Rechnung zwar eine Steuernummer enthalten, für die Übergangszeit gibt es aber eine bundesweit anerkannte, vollkommen legale Standard-Regelung:
+  - Du schreibst oben auf deine Rechnung einfach:  
+    > **`Steuernummer: Beantragt beim Finanzamt Hanau (ELSTER-Übermittlung vom [Datum])`**
+  - Sobald der Brief vom Finanzamt Hanau nach 2 bis 4 Wochen eintrifft, reichst du die Nummer per kurzer E-Mail an die Buchhaltung des Kunden nach: *„Zur Vervollständigung Ihrer Unterlagen: Unsere neue Steuernummer lautet 022/xxx/xxxxx.“*
+  - Alternativ kannst du auf der Rechnung zusätzlich deine persönliche 11-stellige **Steuer-Identifikationsnummer *(Steuer-ID / IdNr.)*** angeben, die du bereits über deinen Hauptjob bei der Zollcon GmbH besitzt.
+* **Was du in den 2 bis 4 Wochen Wartezeit aktiv erledigen solltest:**
+  1. Deine Profile auf **Upwork, Malt und Freelancermap** freischalten (die Profilprüfung dort dauert auch 1 bis 2 Tage).
+  2. Die ersten 5 bis 10 **CAM-Systemhäuser** (nach der Vorlage aus Abschnitt 17.3) kontaktieren. Bis ein erstes Fachgespräch stattfindet, vergehen ohnehin 1 bis 2 Wochen – exakt die Zeitspanne, bis deine Steuernummer per Post da ist!
 
 ---
 
@@ -822,6 +864,30 @@ Damit dein GitHub-Profil sowohl auf CAM-Systemhäuser als auch auf Fertigungsbet
 | **2. `cnc-setup-sheet-generator`** *(Echtes Python-Tool!)* | Ein in **Python** geschriebenes Analyse-Skript, das ein beliebiges Heidenhain- (`.H`) oder Siemens-NC-Programm (`.MPF`) einliest, automatisch alle Werkzeuge (`TOOL CALL` / `T="..."`), Drehzahlen, Vorschübe und Rohteilmaße (`BLK FORM` / `WORKPIECE`) ausliest und daraus vollautomatisch ein **Einrichteblatt** generiert. | Beweist auf einen Schlag deine einzigartige Kombination aus **Software Engineer + CNC-Experte**. Kein normaler CAM-Bediener kann so ein Tool programmieren! |
 | **3. `cam-postprocessor-extensions`** | Sauber dokumentierte Code-Module (JavaScript / Tcl / Python) für Postprozessoren: Automatische Berechnung der Mindest-Auskraglänge ($L_{\text{min}}$), automatische Laser-Werkzeugbruchkontrolle (`TCH PROBE 586`) und sichere 5-Achs-Rückzugsroutinen. | Zeigt CAM-Systemhäusern und Industriekunden, dass du ihre Postprozessoren sauber, modular und absturzsicher programmieren kannst. |
 | **4. `parametric-cnc-macros`** | Mathematische NC-Unterprogramme mit **Heidenhain Q-Parametern *(Variablenprogrammierung `FN 0` bis `FN 18`)*** und **Siemens R-Parametern (`R1`..`R99`)** – z. B. für variables Taschenfräsen, Ellipsenkonturen oder automatische Teilkreisberechnung direkt an der Maschine. | Zeigt deine starke mathematisch-geometrische Ingenieurausbildung aus Moskau! |
+
+---
+
+### 13.4 Dein offizielles E-Mail- & Cloud-Setup (bujanovski.engineering@gmail.com & Google Drive)
+
+Für dein 100 % Online-Ingenieurbüro ist die Wahl der E-Mail-Adresse das wichtigste Aushängeschild gegenüber Kunden *(CNC-Fräsereien, CAM-Systemhäuser)* und Behörden:
+
+#### 1. Warum `bujanovski.engineering@gmail.com` die beste Wahl ist (Favorit Nr. 1):
+* **Firmen-Charakter statt privates Hobby:** Eine Adresse wie `vadim.bujanovski@...` wirkt wie ein privater Freizeit-Account. Das Wort **`engineering`** signalisiert dem Kunden sofort ein professionelles Ingenieurbüro. Dadurch akzeptieren B2B-Kunden sofort hohe Ingenieur-Stundensätze (85 € bis 150 €/Std.) und Festpreise ohne Diskussion.
+* **Fokus auf den Nachnamen:** Der Vorname muss nicht in die Mailadresse gequetscht werden. Er gehört stattdessen in den offiziellen Absendernamen!
+* **International & modern:** Sowohl im deutschsprachigen Raum (D-A-CH) als auch auf Plattformen wie Upwork, Freelancermap und Malt genießt dieser Begriff höchste Wertschätzung.
+* **Geprüfte Alternativen:**
+  1. `bujanovski.engineering@gmail.com` (**Favorit 1** – Maximale B2B-Wirkung)
+  2. `ing.vadim.bujanovski@gmail.com` (Favorit 2 – Klassischer Ingenieur-Titel)
+  3. `dipl.ing.bujanovski@gmail.com` (Favorit 3 – Deutscher Standes-Klassiker)
+
+#### 2. Wichtige Absender-Einstellung in deinem Google-Konto:
+Trage in deinen Gmail-Einstellungen unter *„Konten und Import -> Senden als“* deinen vollständigen Namen ein:
+> **`Dipl.-Ing. Vadim Bujanovski | CAD/CAM Engineering <bujanovski.engineering@gmail.com>`**
+
+So sieht jeder Kunde schon in der Betreffzeile seines Postfachs deinen akademischen Titel und deinen Vornamen, während die Adresse selbst kurz und büromäßig bleibt.
+
+#### 3. Kostenlose 15 GB Projekt-Cloud (Google Drive):
+* Für den schnellen Austausch von großen 3D-CAD-Dateien (`.step`, `.stl`), Postprozessoren (`.cps`) und 3D-Simulationsvideos (`.mp4`), die zu groß für normale E-Mail-Anhänge sind, nutzt du direkt den mit `bujanovski.engineering@gmail.com` verknüpften Google Drive Speicher.
 
 ---
 
