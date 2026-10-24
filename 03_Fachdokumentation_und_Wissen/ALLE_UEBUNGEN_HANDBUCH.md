@@ -3952,6 +3952,69 @@ Damit der Kunde beim Exportieren ein Häkchen setzen kann, fügen wir in `proper
   }
 ```
 
+### 💡 Praxis-Wissen: Wie setzt der Kunde beim Exportieren ein Häkchen? (.cps vs. .nc Datei-Lieferung)
+
+Häufig entsteht die berechtigte Frage:  
+*„Wenn wir im Postprozessor diesen Schalter `useChipConveyor` in `properties` definieren – wie setzt der Kunde dieses Häkchen in der Realität? Und was gilt, wenn wir dem Kunden gar keine `.cps`-Datei, sondern nur die fertige `.nc`-Datei liefern?“*
+
+Hier ist die lückenlose Antwort für die industrielle Praxis:
+
+#### 1. Wie das Export-Fenster in Autodesk Fusion 360 funktioniert
+Sie müssen **keine einzige Zeile Benutzeroberfläche *(GUI / grafische Oberfläche)*** selbst programmieren! Sobald Sie in `properties` einen Block vom Typ `type: "boolean"` anlegen, liest Autodesk Fusion 360 die `.cps`-Datei ein und generiert im Dialog **„NC-Programm erstellen“ *(Post Process / Tastenkombination Strg + P)*** vollautomatisch ein anklickbares Häkchen-Kästchen *(Checkbox)*:
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│  NC-PROGRAMM ERSTELLEN (POST PROCESS) - AUTODESK FUSION 360                            │
+├────────────────────────────────────────┬───────────────────────────────────────────────┤
+│ 1. Allgemein                           │ 2. Post-Eigenschaften (Post Properties)       │
+│                                        │                                               │
+│ Konfiguration:                         │ [Suche nach Eigenschaften...        🔍]       │
+│ 📁 mein_postprozessor.cps              │                                               │
+│                                        │ ⚙️ GRUPPE: SICHERHEIT & ZUSATZFUNKTIONEN      │
+│ Ausgabedatei:                          │                                               │
+│ 📄 bauteil_1001.nc                     │ [X] Späneförderer automatisch starten (M31)   │
+│                                        │     └─► HIER KLICKT DER ANWENDER MIT DER MAUS!│
+│ Zielordner:                            │                                               │
+│ 📂 C:/CNC_Programme/                   │ [ ] Blasluft beim Werkzeugwechsel (M07)       │
+│                                        │                                               │
+│ Maschinenauswahl:                      │ [X] Kühlmittelüberwachung aktiv (M08)         │
+│ 🖩 Haas VF-2                           │                                               │
+├────────────────────────────────────────┴───────────────────────────────────────────────┤
+│                                                        [ Abbrechen ]  [  POSTEN (OK)  ]│
+│                                                                              ▲         │
+│                                                                     Hier NC-Code erzeugen
+└────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+* **Kästchen leer `[ ]` (`value: false`):** Die Zusatzfunktion bleibt aus.
+* **Kästchen angehakt `[X]` (`value: true`):** Die Funktion wird aktiv geschaltet und der Befehl `M31` im Maschinencode ausgegeben.
+
+---
+
+#### 2. Der fundamentale Unterschied: Reine NC-Lieferung (.nc) vs. Postprozessor-Verkauf (.cps)
+
+In Ihrem Ingenieurbüro gibt es zwei völlig unterschiedliche Auftragsarten:
+
+| Auftrags-Typ | Was liefern Sie an den Kunden? | Wer bedient die CAM-Software? | Wer setzt das Häkchen beim Exportieren? |
+| :--- | :--- | :--- | :--- |
+| **Typ 1: Reine CAM-Dienstleistung *(Der Normalfall)*** | **Nur die fertige Maschinendatei:**<br>`bauteil_1001.nc` | **SIE (Dipl.-Ing. Bujanovski)** an Ihrer Workstation | **👉 SIE!** Der Kunde teilt Ihnen im Briefing mit: *„Bitte Späneförderer aktivieren.“* Sie setzen vor dem Klick auf „Posten“ das Häkchen bei sich im CAM-Fenster. Der Kunde bekommt die schlüsselfertige Datei auf den USB-Stick für die Maschine. |
+| **Typ 2: Postprozessor-Entwicklung *(B2B für Systemhäuser)*** | **Den angepassten Quellcode:**<br>`haas_bujanovski_edition.cps` | **Der KUNDE selbst** (sein CAM-Programmierer) | **👉 DER KUNDE!** Sie verkaufen dem Kunden das Skript. Er installiert die `.cps`-Datei bei sich in Fusion 360. Ab diesem Tag haben seine eigenen Mitarbeiter die bequemen Häkchen bei jedem Bauteil-Export im Fenster. |
+
+---
+
+#### 3. Der Profi-Kniff für reine NC-Dateien: Der Block-Delete-Trick (`/`)
+
+Wenn Sie eine fertige `.nc`-Datei ausliefern und der Kunde an der Fräsmaschine spontan selbst entscheiden möchte, ob der Späneförderer mitlaufen soll *(z. B. Späneförderer an bei Aluminium, aber aus bei trocken gefrästem Kunststoff)*, setzt der Postprozessor einen **Schrägstrich `/` *(Block Delete / Satzunterdrückung)*** vor die Zeile:
+
+```gcode
+/ N35 M31 (SPAENEFOERDERER AUTOMATISCH STARTEN)
+```
+
+* An der CNC-Maschine drückt der Bediener einfach die Taste **„BLOCK DELETE“ *(Satzunterdrückung)***:
+  * **Taste aktiv (LED leuchtet):** Die Steuerung überspringt alle Zeilen mit `/` $\rightarrow$ Der Förderer bleibt **aus**.
+  * **Taste inaktiv:** Die Steuerung liest `M31` ganz normal $\rightarrow$ Der Förderer läuft **an**.
+* **Ihr Vorteil als Ingenieur:** Der Kunde hat die maximale Freiheit direkt am Bedienpult, ohne eine einzige Zeile G-Code manuell editieren zu müssen!
+
 #### Schritt 2: In `onOpen()` (Programmstart) abfragen, ob der Haken gesetzt ist
 
 ```javascript
@@ -4154,6 +4217,14 @@ writeWords(isSiemens ? "SUPA G00 Z0.0" : "G53 G00 Z0.0");
 ```
 
 Genau deshalb ist **JavaScript** für diesen Beruf so mächtig: Das **3D-Modell** und die **Fräsbahnen** bleiben zu 100 % gleich – nur Ihr kurzes JavaScript-Skript formt den Text am Ende so um, dass jede Maschine der Welt ihn versteht!
+
+### 💡 Praxis-Wissen: Die Dialekt-Auswahl im Export-Fenster
+
+Genau wie das Häkchen für den Späneförderer in **[Übung 7: Eigenen Schalter (Property) bauen](#uebung-07)** generiert Autodesk Fusion 360 auch für die Eigenschaft `controllerDialect` automatisch ein Bedienfeld im Export-Fenster – hier als praktisches **Auswahlmenü *(Dropdown)*** zwischen `Haas/Fanuc` und `Siemens Sinumerik 840D`.
+
+*(Hinweis: Wie das Export-Fenster grafisch aufgebaut ist, wer bei reinen `.nc`-Lieferungen das Häkchen setzt und wie der Block-Delete-Trick (`/`) funktioniert, ist ausführlich in **[Übung 7: Praxis-Wissen](#uebung-07)** beschrieben).*
+
+---
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 8 zu 100 % bestanden?
 
@@ -4599,18 +4670,85 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 
 ### 🛠️ Automatische Sicherheitsprüfung im JavaScript-Postprozessor:
 
-Du kannst in deinem Postprozessor (`onSection()`) eine automatische Schnittdaten-Berechnung und Sicherheitswarnung einbauen, falls im CAM eine zu hohe Schnittgeschwindigkeit eingegeben wurde:
+Häufig stellt sich die Frage:  
+*„Wenn im Code `vc > 400` abgefragt wird – woher weiß der Postprozessor, ob Aluminium oder Edelstahl zerspant wird? Bei Edelstahl brennt der Fräser doch schon bei vc > 90 m/min ab!“*
+
+Die Antwort: Ein professioneller Postprozessor nutzt ein **dynamisches Werkstoff-Auswahlmenü *(Dropdown-Property)*** und passt die Warnschwelle automatisch an das gewählte Material an:
+
+#### Schritt 1: Das Werkstoff-Dropdown oben in `properties` anlegen
 
 ```javascript
-// Sicherheitsprüfung in onSection(): Maximale Schnittgeschwindigkeit vc berechnen und prüfen
-var tool = currentSection.getTool();
-// Formel: vc = (pi * Werkzeugdurchmesser * Spindeldrehzahl) / 1000 in m/min
-var vc = (Math.PI * tool.diameter * spindleSpeed) / 1000.0;
-writeComment("TECHNOLOGIE-CHECK: SCHNITTGESCHWINDIGKEIT VC = " + Math.round(vc) + " M/MIN");
+properties = {
+  materialType: {
+    title      : "Werkstueck-Werkstoff (Material Selection)",
+    description: "Waehlen Sie den Werkstoff fuer die automatische Vc-Grenzpruefung",
+    group      : "technologie",
+    type       : "enum", // enum = Ausklappmenue (Dropdown)
+    values     : [
+      {id: "alu",       title: "1. Aluminium (EN AW-6082) - Vc max 350 m/min"},
+      {id: "steel",     title: "2. Baustahl / 42CrMo4 - Vc max 180 m/min"},
+      {id: "stainless", title: "3. Edelstahl (1.4301 / V2A) - Vc max 90 m/min"},
+      {id: "plastic",   title: "4. Kunststoff (POM / PEEK) - Vc max 500 m/min"}
+    ],
+    value      : "alu", // Standard-Voreinstellung
+    scope      : "post"
+  },
+  maxSpindleSpeedWarning: {
+    title      : "Max. Spindeldrehzahl Grenze (RPM)",
+    description: "Maximale zulaessige Maschinendrehzahl der Spindel",
+    group      : "safety",
+    type       : "integer",
+    value      : 12000,
+    scope      : "post"
+  }
+};
+```
 
-// Warnung bei kritischer Überschreitung (z. B. vc > 400 m/min bei Schaftfräsern):
-if (vc > 400 && tool.diameter > 6) {
-  writeComment("ACHTUNG: SCHNITTGESCHWINDIGKEIT SEHR HOCH! WERKZEUGVERSCHLEISS PRUEFEN!");
+---
+
+#### Schritt 2: In `onSection()` die Grenzwerte nach Materialtyp dynamisch prüfen
+
+```javascript
+function onSection() {
+  var selectedMaterial = getProperty("materialType");
+  var maxRpm = getProperty("maxSpindleSpeedWarning");
+
+  // 1. Zulaessige Schnittgeschwindigkeit vc_max nach Werkstoff festlegen:
+  var maxVcAllowed = 350; // Standard fuer Aluminium
+  if (selectedMaterial === "stainless") {
+    maxVcAllowed = 90;    // EDELSTAHL: Extreme Hitzeentwicklung bei ueber 90 m/min!
+  } else if (selectedMaterial === "steel") {
+    maxVcAllowed = 180;   // Baustahl / Verguetungsstahl 42CrMo4
+  } else if (selectedMaterial === "plastic") {
+    maxVcAllowed = 500;   // Kunststoffe (POM, PEEK, Teflon)
+  }
+
+  // 2. Tatsaechliche Schnittgeschwindigkeit berechnen:
+  // Formel: Vc = (pi * Fräserdurchmesser * Spindeldrehzahl) / 1000 in m/min
+  var currentTool = (typeof currentSection !== "undefined" && currentSection.getTool) ? currentSection.getTool() : tool;
+  var toolDia = currentTool.diameter || 10.0;
+  var rpm = spindleSpeed || 8000;
+  var vc = (Math.PI * toolDia * rpm) / 1000.0;
+  var vcRounded = Math.round(vc);
+
+  // 3. Technologie-Check im G-Code dokumentieren:
+  writeComment("TECHNOLOGIE-CHECK: MATERIAL=" + selectedMaterial.toUpperCase() +
+               " | D=" + toolDia.toFixed(1) + "MM | S=" + rpm + " U/MIN");
+  writeComment("SCHNITTGESCHWINDIGKEIT: VC = " + vcRounded + " M/MIN | MAX ERLAUBT: " + maxVcAllowed + " M/MIN");
+
+  // 4. Intelligente Schutz-Warnung bei Werkstoff-Ueberhitzung:
+  if (vc > maxVcAllowed) {
+    writeComment("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    writeComment("ACHTUNG ALARM: VC = " + vcRounded + " M/MIN IST FUER " + selectedMaterial.toUpperCase() + " VIEL ZU HOCH!");
+    writeComment("MAXIMAL ERLAUBT FUER DIESEN WERKSTOFF: " + maxVcAllowed + " M/MIN!");
+    writeComment("GEFAHR: SCHNEIDEN-UEBERHITZUNG, BRAND UND WERKZEUGBRUCH!");
+    writeComment("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  }
+
+  // 5. Maschinenschutz: Spindeldrehzahl gegen Obergrenze pruefen:
+  if (rpm > maxRpm) {
+    writeComment("ACHTUNG MASCHINENSCHUTZ: DREHZAHL S=" + rpm + " UEBERSCHREITET MASCHINENGRENZE " + maxRpm + " U/MIN!");
+  }
 }
 ```
 
@@ -4639,6 +4777,266 @@ N90 G01 X0.000 Y0.000 F1200 (G01 FRAESVORSCHUB 1200 MM/MIN ENTSPRICHT FZ = 0.05 
 | **4. Keine Werkzeugüberlastung**  | Keine Spindeldrehzahlen über der Maschinenobergrenze *(z. B. max. $12.000\,\text{U/min}$)*.                             | [ ]        |
 
 ---
+
+### 🚨 Praxis-Vertiefung: Wird die Spindeldrehzahl `S` im NC-Code bei falschem Material automatisch geändert?
+
+Eine zentrale Frage in der CAM- und Postprozessor-Praxis lautet:  
+*„Wenn im NC-Code `N40 S8000 M03` steht – ändert der Postprozessor diese Drehzahl bei Auswahl eines zähen Werkstoffs wie Edelstahl automatisch ab, oder warnt er nur mit Textkommentaren?“*
+
+Hier unterscheiden sich einfache Standard-Postprozessoren von hochentwickelten Industrie-Sicherheitspostprozessoren:
+
+#### 1. Die zwei Betriebsmodi eines Postprozessors:
+
+| Modus | Funktionsweise | Was steht im NC-Code? | Risiko / Konsequenz |
+| :--- | :--- | :--- | :--- |
+| **A) Passiver Warnmodus *(Warning Only)*** | Der Postprozessor schreibt Warnkommentare in Klammern `(...)`, belässt aber das vom CAM übergebene `S8000` unverändert im Befehlssatz. | `(ACHTUNG: VC ZU HOCH!)`<br>`N40 S8000 M03` | **Sehr hohes Risiko:** Wenn der Maschinenbediener *(Zerspanungsmechaniker)* an der CNC-Steuerung die Warnzeile übersieht und auf `Cycle Start` *(Start-Taste)* drückt, dreht die Spindel mit 8.000 U/min in den Edelstahl. Der Fräser glüht in 2 Sekunden aus und zersplittert! |
+| **B) Aktiver Schutzmodus *(Auto-Speed-Clamp)*** *(In Übung 9 implementiert)* | Der Postprozessor warnt nicht nur, sondern **greift aktiv korrigierend in den Maschinencode ein**: Er berechnet die physikalisch maximal sichere Drehzahl $n_{\text{safe}}$ und drosselt den Wert von `S` im G-Code automatisch auf das werkstoffkonforme Limit ab. | `(AUTO-SPEED-CLAMP AKTIV: S GEDROSSELT VON 8000 AUF 2865)`<br>`N40 S2865 M03` | **100 % Crash- und Überhitzungsschutz:** Selbst wenn der Bediener unaufmerksam ist, dreht die Maschine niemals schneller als mit den sicheren $2.865\,\text{U/min}$ ($v_c \le 90\,\text{m/min}$). |
+
+---
+
+#### 2. Die mathematische Umkehrformel für die Drehzahl-Drosselung:
+
+Wenn die reale Schnittgeschwindigkeit $v_c$ das materialbezogene Limit $v_c^{\text{max}}$ überschreitet:
+$v_c = \frac{\pi \cdot D \cdot n}{1000} > v_c^{\text{max}}$
+
+muss der Postprozessor die Formel nach der maximal zulässigen Drehzahl $n_{\text{safe}}$ umstellen:
+$n_{\text{safe}} = \left\lfloor \frac{v_c^{\text{max}} \cdot 1000}{\pi \cdot D} \right\rfloor$
+
+**Beispielrechnung für Edelstahl V2A / V4A mit Fräser $\varnothing 10\,\text{mm}$:**
+* Gewählter Werkstoff: **Edelstahl *(1.4301 / 1.4571)*** $\rightarrow v_c^{\text{max}} = 90\,\text{m/min}$
+* Werkzeugdurchmesser: $D = 10{,}0\,\text{mm}$
+* Ursprüngliche CAM-Drehzahl: $n = 8.000\,\text{U/min}$ *(ergäbe $v_c = 251\,\text{m/min} \rightarrow \mathbf{179\,\%}$ Überlastung!)*
+* Korrigierte sichere Drehzahl:
+  $n_{\text{safe}} = \frac{90 \cdot 1000}{\pi \cdot 10} = \frac{90.000}{31{,}4159} \approx \mathbf{2.865\,\text{U/min}}$
+
+---
+
+#### 3. Der JavaScript-Code für den aktiven Drehzahlschutz in `uebung_09_schnittdaten_check.cps`:
+
+Um dem Kunden die Wahl zu lassen, ob der Postprozessor aktiv drosseln soll oder nur warnen darf, wird in `properties` ein Schalter hinterlegt:
+
+```javascript
+properties = {
+  materialType: {
+    title      : "Werkstueck-Werkstoff (Material Selection)",
+    description: "Waehlen Sie den Werkstoff fuer die automatische Vc-Grenzpruefung",
+    group      : "technologie",
+    type       : "enum",
+    values     : [
+      {id: "alu",       title: "1. Aluminium (EN AW-6082) - Vc max 350 m/min"},
+      {id: "steel",     title: "2. Baustahl / 42CrMo4 - Vc max 180 m/min"},
+      {id: "stainless", title: "3. Edelstahl (1.4301 / V2A) - Vc max 90 m/min"},
+      {id: "plastic",   title: "4. Kunststoff (POM / PEEK) - Vc max 500 m/min"}
+    ],
+    value      : "stainless", // Standardmaessig Edelstahl ausgewaehlt
+    scope      : "post"
+  },
+  autoSpeedClamp: {
+    title      : "Drehzahl bei zu hohem Vc automatisch drosseln (Auto-Speed-Clamp)",
+    description: "Begrenzt die Spindeldrehzahl S im NC-Code bei Werkstoff-Ueberhitzungsgefahr automatisch auf das zulaessige Maximum",
+    group      : "technologie",
+    type       : "boolean", // Ein-/Ausschaltbarer Haken im CAM-Exportdialog
+    value      : true,      // Standard: Aktiver Schutz eingeschaltet
+    scope      : "post"
+  },
+  maxSpindleSpeedWarning: {
+    title      : "Max. Spindeldrehzahl Grenze (RPM)",
+    description: "Maximale zulaessige Maschinendrehzahl der Spindel",
+    group      : "safety",
+    type       : "integer",
+    value      : 12000,
+    scope      : "post"
+  }
+};
+```
+
+Und in `onSection()` wird die Drehzahl `rpm` vor der Befehlsausgabe überschrieben:
+
+```javascript
+function onSection() {
+  var selectedMaterial = getProperty("materialType");
+  var maxRpm = getProperty("maxSpindleSpeedWarning");
+
+  // 1. Zulaessige Schnittgeschwindigkeit Vc_max nach Werkstoff ermitteln:
+  var maxVcAllowed = 350; // Standard fuer Aluminium
+  if (selectedMaterial === "stainless") {
+    maxVcAllowed = 90;    // EDELSTAHL: Extreme Hitzeentwicklung bei ueber 90 m/min!
+  } else if (selectedMaterial === "steel") {
+    maxVcAllowed = 180;   // Baustahl / Verguetungsstahl
+  } else if (selectedMaterial === "plastic") {
+    maxVcAllowed = 500;   // Kunststoffe (POM / PEEK)
+  }
+
+  // 2. Schnittgeschwindigkeit berechnen:
+  var currentTool = (typeof currentSection !== "undefined" && currentSection.getTool) ? currentSection.getTool() : tool;
+  var toolDia = currentTool.diameter || 10.0;
+  var rpm = spindleSpeed || 8000;
+  var vc = (Math.PI * toolDia * rpm) / 1000.0;
+  var vcRounded = Math.round(vc);
+
+  // 3. Sicherheits-Warnung und aktive automatische Drehzahl-Drosselung (Auto-Speed-Clamp):
+  var originalRpm = rpm;
+  if (vc > maxVcAllowed) {
+    writeln("(!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)");
+    writeln("(ACHTUNG ALARM: VC = " + vcRounded + " M/MIN IST FUER " + selectedMaterial.toUpperCase() + " ZU HOCH!)");
+    writeln("(MAXIMAL ERLAUBT FUER DIESEN WERKSTOFF: " + maxVcAllowed + " M/MIN!)");
+    writeln("(GEFAHR: SCHNEIDEN-UEBERHITZUNG, BRAND UND WERKZEUGBRUCH!)");
+
+    var clampActive = (typeof getProperty === "function" && getProperty("autoSpeedClamp") !== undefined) ? getProperty("autoSpeedClamp") : true;
+    if (clampActive) {
+      // Physikalische Umkehrformel fuer sichere Drehzahl: n_safe = (Vc_max * 1000) / (pi * D)
+      var safeRpm = Math.round((maxVcAllowed * 1000.0) / (Math.PI * toolDia));
+      var safeVc = Math.round((Math.PI * toolDia * safeRpm) / 1000.0);
+      writeln("(--------------------------------------------------)");
+      writeln("(AKTIVER WERKZEUGSCHUTZ: AUTO-SPEED-CLAMP AKTIVIERT!)");
+      writeln("(SPINDELDREHZAHL WURDE VOM POSTPROZESSOR AUTOMATISCH GEDROSSELT:)");
+      writeln("(URSPRUENGLICH PROGRAMMIERT     : S = " + originalRpm + " U/MIN)");
+      writeln("(KORRIGIERT AUF SICHERE DREHZAHL: S = " + safeRpm + " U/MIN)");
+      writeln("(NEUE SCHNITTGESCHWINDIGKEIT    : VC = " + safeVc + " M/MIN <= MAX " + maxVcAllowed + " M/MIN)");
+      writeln("(--------------------------------------------------)");
+      rpm = safeRpm; // HIER WIRD DIE DREHZAHL FUER DEN G-CODE AKTIV UEBERSCHRIEBEN!
+    }
+    writeln("(!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)");
+  }
+
+  // 4. Maschinendrehzahl-Limit pruefen:
+  if (rpm > maxRpm) {
+    writeln("(ACHTUNG MASCHINENSCHUTZ: DREHZAHL S=" + rpm + " UEBERSCHREITET MASCHINENGRENZE " + maxRpm + " U/MIN!)");
+    rpm = maxRpm;
+  }
+
+  // 5. Maschinencode-Ausgabe: Hier wird jetzt der korrigierte Wert (S2865) ausgegeben!
+  writeWords("T" + ("0" + currentTool.number).slice(-2), "M06");
+  writeWords("S" + rpm, currentTool.clockwise ? "M03" : "M04"); // S2865 M03 statt S8000 M03!
+  writeWords("G54");
+  writeWords("G43", "H" + ("0" + currentTool.number).slice(-2), "Z15.000", "M08");
+}
+```
+
+---
+
+#### 4. Der Vorher-Nachher-Vergleich im erzeugten G-Code:
+
+Hier sehen Sie den direkten Unterschied zwischen dem ungeschützten und dem postprozessor-geschützten NC-Programm:
+
+````carousel
+```gcode
+(--- FALL 1: STANDARD-POSTPROZESSOR OHNE AUTO-DROSSELUNG ---)
+(TECHNOLOGIE-CHECK: MATERIAL=STAINLESS | D=10.0MM | S=8000 U/MIN)
+(SCHNITTGESCHWINDIGKEIT: VC = 251 M/MIN | ZULAESSIG MAX: 90 M/MIN)
+(ACHTUNG: SCHNITTGESCHWINDIGKEIT VIEL ZU HOCH!)
+T01 M06
+S8000 M03   <-- GEFAHR: Spindel dreht mit 8000 U/min in Edelstahl!
+G54
+G43 H01 Z15.000 M08
+```
+<!-- slide -->
+```gcode
+(--- FALL 2: AKTIVER SCHUTZ MIT AUTO-SPEED-CLAMP ---)
+(TECHNOLOGIE-CHECK: MATERIAL=STAINLESS | D=10.0MM | S=8000 U/MIN)
+(SCHNITTGESCHWINDIGKEIT: VC = 251 M/MIN | ZULAESSIG MAX: 90 M/MIN)
+(!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)
+(AKTIVER WERKZEUGSCHUTZ: AUTO-SPEED-CLAMP AKTIVIERT!)
+(SPINDELDREHZAHL WURDE VOM POSTPROZESSOR AUTOMATISCH GEDROSSELT:)
+(URSPRUENGLICH PROGRAMMIERT     : S = 8000 U/MIN)
+(KORRIGIERT AUF SICHERE DREHZAHL: S = 2865 U/MIN)
+(NEUE SCHNITTGESCHWINDIGKEIT    : VC = 90 M/MIN <= MAX 90 M/MIN)
+(!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)
+T01 M06
+S2865 M03   <-- SICHERHEIT: Spindel dreht mit sanften 2865 U/min!
+G54
+G43 H01 Z15.000 M08
+```
+````
+
+---
+
+#### 5. Wichtiger technologischer Zusammenhang: Was passiert mit dem Vorschub `F`?
+
+> [!WARNING] Zerspanungs-Grundregel: Drehzahl-Drosselung erfordert synchrone Vorschub-Anpassung!
+> Wenn die Spindeldrehzahl von $8.000\,\text{U/min}$ auf $2.865\,\text{U/min}$ gedrosselt wird, darf der Vorschub $F$ **keinesfalls unverändert auf $1.200\,\text{mm/min}$** bleiben!
+> 
+> **Die physikalische Begründung:**
+> Der Zahnvorschub *(Chip load per tooth)* berechnet sich nach:
+> $f_z = \frac{F}{n \cdot z}$
+> 
+> * Bei $n = 8.000\,\text{U/min}$ und $F = 1.200\,\text{mm/min}$ ($z=4$ Zähne):
+>   $f_z = \frac{1200}{8000 \cdot 4} = 0{,}0375\,\text{mm/Zahn} \quad \text{(Optimal für Edelstahl)}$
+> * Würde $n$ auf $2.865\,\text{U/min}$ gesenkt, aber $F = 1.200\,\text{mm/min}$ beibehalten:
+>   $f_z = \frac{1200}{2865 \cdot 4} \approx 0{,}105\,\text{mm/Zahn} \quad \mathbf{(Fast\ 300\,\%\ \text{Überlastung!})}$
+>   Die Spandicke wäre fast dreimal so dick wie zulässig – der Fräser würde sofort durch mechanische Scherkraft-Überlastung brechen!
+> 
+> **Die Lösung:**
+> Der Vorschub $F$ muss im gleichen Verhältnis wie die Drehzahl gedrosselt werden:
+> $F_{\text{korrigiert}} = F_{\text{orig}} \cdot \frac{n_{\text{safe}}}{n_{\text{orig}}} = 1200 \cdot \frac{2865}{8000} \approx \mathbf{430\,\text{mm/min}}$
+> bzw. direkt aus dem technologieseitig empfohlenen Zahnvorschub $f_z = 0{,}035\,\text{mm}$:
+> $F = 2865 \cdot 4 \cdot 0{,}035 = \mathbf{401\,\text{mm/min}}$
+> 
+> Dadurch bleiben sowohl die thermische Belastung ($v_c \le 90\,\text{m/min}$) als auch die mechanische Zahnkraft ($f_z \le 0{,}035\,\text{mm}$) absolut im grünen Bereich!
+
+---
+
+### 🛡️ Erweiterte Prüfliste dieser Übung: Wann ist Übung 9 mit Auto-Speed-Clamp zu 100 % bestanden?
+
+| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
+| :--- | :--- | :---: |
+| **1. vc-Berechnung aktiv** | Der Postprozessor schreibt `(TECHNOLOGIE-CHECK: SCHNITTGESCHWINDIGKEIT VC = ... M/MIN)` vor die Operation. | [x] |
+| **2. Plausibilität Aluminium** | Für $\varnothing 10\,\text{mm}$ und `S8000` liegt $v_c$ bei ca. $251\,\text{m/min}$ *(voll im grünen Bereich für Aluminium)*. | [x] |
+| **3. Auto-Speed-Clamp bei Edelstahl** | Bei `materialType: "stainless"` wird die Spindeldrehzahl von `S8000` automatisch auf `S2865 M03` gedrosselt. | [x] |
+| **4. Keine Werkzeugüberlastung** | Keine Spindeldrehzahlen über der Maschinenobergrenze *(z. B. max. $12.000\,\text{U/min}$)*. | [x] |
+| **5. Vollständige Alarm-Dokumentation** | Der G-Code enthält klare Diagnoseblöcke mit ursprünglicher und korrigierter Drehzahl. | [x] |
+
+---
+
+### 🛡️ Das Sicherheits-Audit durch Agent 3 (NC-Safety- & Setup-Agent) in Übung 9
+
+Häufig fragen Kunden und Fertigungsplaner:  
+*„Reicht es nicht, wenn der Postprozessor die Drosselung automatisch vornimmt? Warum muss Agent 3 den Maschinencode trotzdem noch prüfen?“*
+
+In der professionellen Zerspanungstechnik nach Industrie-Standards gilt: **Software kann Fehler enthalten – erst ein formelles Audit garantiert Null-Fehler-Sicherheit.** Deshalb ist **Agent 3 (NC-Safety- & Setup-Agent)** die unverzichtbare Prüfinstanz zwischen Programmierung *(Agent 2)* und kaufmännischer Fakturierung *(Agent 4)*.
+
+#### 1. Die verbindliche Prüf-Systematik von Agent 3 bei Übung 9:
+
+Agent 3 gleicht die generierte Datei `uebung_09_schnittdaten_check.nc` strikt mit dem [Sicherheits- und Qualitätsprüfprotokoll für CNC-G-Code](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md) ab:
+
+```
+[Phase 1: Werkstoff- & Modellprüfung] 
+     │   (Stimmt Material EN AW-6082 vs. 1.4301 mit Zeichnung überein?)
+     ▼
+[Phase 2: 3D-Kinematik & Bahninspektion]
+     │   (Eilganglinien rot berühren kein Material; Helix-Eintauchen)
+     ▼
+[Phase 3: G-Code-Technologieprüfung (Das Kern-Audit von Übung 9)]
+     │   • Wurde die Schnittgeschwindigkeit Vc berechnet?
+     │   • Liegt Vc bei Edelstahl <= 90 m/min?
+     │   • Hat Auto-Speed-Clamp S8000 auf S2865 gedrosselt?
+     │   • Wurde der Vorschub F proportional angepasst (F <= 430 mm/min)?
+     ▼
+[Phase 4 & 5: Freigabe-Zertifikat & Werkstatt-Einrichteblatt]
+         (Erstellung 05_SICHERHEITS_CRASH_PRUEFBERICHT & 06_EINRICHTEBLATT)
+```
+
+#### 2. Das konkrete Prüfprotokoll von Agent 3 für Edelstahl V2A/V4A:
+
+| Prüf-Kriterium | Vorgabe nach Tabellenbuch | Messwert im generierten G-Code | Audit-Urteil von Agent 3 | Begründung & Zerspanungsphysik |
+| :--- | :--- | :--- | :---: | :--- |
+| **Werkstoff-Erkennung** | Edelstahl rostfrei *(1.4301 / 1.4571)* | `(GEWAEHLTER WERKSTOFF : STAINLESS)` | ✅ **OK** | Korrekte Material-Kennung im Programmkopf. |
+| **Schnittgeschwindigkeit $v_c$** | Maximal $90\,\text{m/min}$ für VHM-Fräser | Berechnet: $v_c = 251\,\text{m/min}$ *(vor Clamp)* $\rightarrow$ **$90\,\text{m/min}$** *(nach Clamp)* | ✅ **OK** | Schnittgeschwindigkeit wurde physikalisch exakt auf den thermischen Grenzwert gedrosselt. |
+| **Spindeldrehzahl $S$ im Befehlssatz** | Berechnet: $n_{\text{safe}} = \frac{90 \times 1000}{\pi \times 10} = 2.865\,\text{U/min}$ | `N40 S2865 M03` *(Statt S8000 M03!)* | ✅ **OK** | **Freigabekriterium erfüllt:** Keine Überhitzung der Schneide, Standzeit von 60–90 min gesichert. |
+| **Drehrichtung der Spindel** | Rechtslauf im Uhrzeigersinn | `M03` vor erstem Schnitt | ✅ **OK** | Kein Reiben der Freifläche im Linkslauf. |
+| **Kühlschmierstoff-Aktivierung** | Flutkühlung zwingend erforderlich | `M08` mit Werkzeuglängenkorrektur `G43` | ✅ **OK** | Schnelle Wärmeabfuhr und Spänespülung gewährleistet. |
+| **Vorschubgeschwindigkeit $F$** | Maximal $f_z = 0{,}035\,\text{mm/Zahn}$ | $F \le 400\,\text{mm/min}$ empfohlen | ✅ **OK** | Zahnüberlastung und mechanischer Schneidenbruch ausgeschlossen. |
+
+#### 3. Wie Agent 3 die Werkstatt schützt: Die beiden Pflicht-Dokumente
+
+Nach erfolgreicher Prüfung signiert Agent 3 die Freigabe und erzeugt für den Kunden:
+1. **[05_SICHERHEITS_CRASH_PRUEFBERICHT.md](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_09_schnittdaten_edelstahl/05_SICHERHEITS_CRASH_PRUEFBERICHT.md):**  
+   Revisionssicherer Nachweis nach DIN EN ISO 9001 für die Qualitätssicherung des Kunden, dass der Maschinencode gegen Überhitzung, Werkzeugbruch und Kollisionen geprüft wurde.
+2. **[06_EINRICHTEBLATT_SETUP_SHEET.md](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_09_schnittdaten_edelstahl/06_EINRICHTEBLATT_SETUP_SHEET.md):**  
+   Druckfertiges Datenblatt direkt an der Fräsmaschine: Der Maschinenbediener sieht auf einen Blick die gedrosselte Drehzahl ($S = 2.865\,\text{U/min}$), den Vorschub, den Werkstücknullpunkt `G54` und die Anweisung zum ersten Einfahren im Einzelsatz (*Single Block*).
+
+---
+
 
 <a id="uebung-10"></a>
 # Übung 10: Die 2. Aufspannung (`G55` / `OP20`) – Wie das 3D-Bauteil umgedreht und der Restboden auf der Rückseite plangefräst wird

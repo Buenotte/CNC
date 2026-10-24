@@ -8,6 +8,7 @@
 ## 📋 Inhaltsverzeichnis
 1. [Sicherheitsphilosophie: Warum ist CNC-Prüfung wie der Check im Flugzeugcockpit?](#1-sicherheitsphilosophie-warum-ist-cnc-prüfung-wie-der-check-im-flugzeugcockpit)
 2. [Die 5-Stufen-Prüfkette im Überblick](#die-5-stufen-prüfkette-im-überblick)
+   * 2.1 [Verbindliche Dienstanweisung & Mandat von Agent 3 (NC-Safety- & Setup-Agent)](#21-verbindliche-dienstanweisung--mandat-von-agent-3-nc-safety--setup-agent)
 3. [Phase 1: Prüfungen im CAM-System und Postprozessor (Vor dem Erzeugen des Codes)](#phase-1-prüfungen-im-cam-system-und-postprozessor-vor-dem-erzeugen-des-codes)
 4. [Phase 2: Geometrie-, Werkzeug- und Kollisionsprüfung im 3D-Simulator](#phase-2-geometrie--werkzeug--und-kollisionsprüfung-im-3d-simulator)
 5. [Phase 3: G-Code-Textinspektion (Befehl für Befehl einfach erklärt)](#phase-3-g-code-textinspektion-befehl-für-befehl-einfach-erklärt)
@@ -48,6 +49,34 @@ Ein Crash entsteht fast nie durch einen einzigen großen Fehler, sondern durch e
 
 ---
 
+## 2.1 Verbindliche Dienstanweisung & Mandat von Agent 3 (NC-Safety- & Setup-Agent)
+
+### 🛡️ Wer ist Agent 3 und warum existiert dieses Prüfprotokoll?
+
+In der Ingenieurpraxis von **Dipl.-Ing. Bujanovski** gilt der Grundsatz:  
+*„Wer programmiert, darf sich niemals selbst freigeben – das Vier-Augen-Prinzip ist die Lebensversicherung jeder Zerspanungswerkstatt!“*
+
+Deshalb ist **Agent 3 (NC-Safety- & Setup-Agent)** der fest mandatierte, unabhängige Qualitäts- und Sicherheitsprüfingenieur im Workflow. Dieses Prüfprotokoll ([SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md)) stellt die **verbindliche Standard Operating Procedure (SOP – offizielle Dienst- und Prüfanweisung)** für Agent 3 dar.
+
+### 📋 Die 6 Kernaufgaben und Befugnisse von Agent 3 bei jedem Kundenauftrag:
+
+1. **Vollständige Prüfung aller 5 Sicherheitsphasen:**  
+   Agent 3 arbeitet vor jeder Kundenauslieferung alle fünf Phasen dieses Dokuments Punkt für Punkt ab. Keine Zeile G-Code wird ungeprüft übergeben.
+2. **Die 2 verbindlichen Liefer-Dokumente von Agent 3:**  
+   Für jeden Kundenauftrag *(von Auftrag 00b bis 16)* erstellt Agent 3 eigenhändig:
+   * [05_SICHERHEITS_CRASH_PRUEFBERICHT.md](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/05_SICHERHEITS_CRASH_PRUEFBERICHT.md): Das vollständige Protokoll des 5-Stufen-Cockpit-Checks mit Status **BESTANDEN (GRÜN)** oder **ABGELEHNT (ROT)**.
+   * [06_EINRICHTEBLATT_SETUP_SHEET.md](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/06_EINRICHTEBLATT_SETUP_SHEET.md): Das verbindliche Werkstattdatenblatt mit Werkzeugliste, Nullpunktlage G54, Unterlagenhöhe $h$, Einspanntiefe und Drehmoment.
+3. **Striktes Veto-Recht vor Abrechnung:**  
+   Kein CNC-Programm darf an einen Kunden versendet werden, und **Agent 4 (Backoffice-Agent)** darf **keine Honorarrechnung nach § 18 EStG** ausstellen, solange Agent 3 nicht das Prüfsiegel mit grünem Status erteilt hat.
+4. **Schnittdaten- & Werkstoff-Validierung (Auto-Speed-Clamp-Audit aus Übung 09):**  
+   Agent 3 prüft nicht nur geometrische Kollisionen, sondern vergleicht in Phase 3 die Schnittgeschwindigkeit $v_c$ mit dem Werkstoff. Bei zähem Edelstahl *(1.4301 / 1.4571)* prüft Agent 3 zwingend, ob der Postprozessor die Spindeldrehzahl via Auto-Speed-Clamp aktiv von $8.000\,\text{U/min}$ auf sichere $2.865\,\text{U/min}$ ($v_c \le 90\,\text{m/min}$) gedrosselt hat.
+5. **Klare Haftungsabgrenzung zwischen Ingenieurbüro und Kundenwerkstatt:**  
+   Agent 3 garantiert die 100 % mathematische und code-technische Fehlerfreiheit des gelieferten Maschinencodes gemäß CAD-Modell. Für die physische Rüstung an der echten Maschine sichert Agent 3 den Kunden durch das 4-Stufen-Remote-Sicherheitssystem ab: Unmissverständliche Einrichteblätter, 3D-Simulationsvideos, Luftschnitt-Vorschrift in $Z+50\,\text{mm}$ und das Einfahren im Einzelsatz (*Single Block*) mit Override 10–20 %.
+6. **Rechtliche Absicherung nach § 18 EStG und BGUV-Vorschriften:**  
+   Durch das strukturierte Prüfprotokoll weist Dipl.-Ing. Bujanovski nach, dass alle ingenieurmäßigen Sorgfaltspflichten nach dem Stand der Technik lückenlos erfüllt wurden.
+
+---
+
 ## Phase 1: Prüfungen im CAM-System und Postprozessor (Vor dem Erzeugen des Codes)
 
 Bevor Sie den Postprozessor *(Übersetzer von CAM-Bearbeitungsbahnen in CNC-Maschinencode)* starten, müssen im CAM-System *(Computer-Aided Manufacturing – rechnergestützte Fertigungsplanung, z. B. Autodesk Fusion)* vier elementare Punkte geprüft werden:
@@ -60,6 +89,51 @@ Bevor Sie den Postprozessor *(Übersetzer von CAM-Bearbeitungsbahnen in CNC-Masc
   * **Z0 (Die Höhe):** Liegt `Z0` auf der **Fertigteil-Oberkante** oder auf der **Rohteil-Oberkante**?  
     * *Empfohlener Industriestandard:* `Z0` immer auf die geplante Fertigteil-Oberseite legen. Wenn das Rohteil 2 mm dicker aus der Säge kommt, fräst das Werkzeug im Planfräsgang einfach 2 mm Span ab (`Z +2.0` bis `Z 0.0`), ohne dass Konturen zu tief geraten.
   * **Dokumentationspflicht:** Die Lage von `X0 Y0 Z0` muss unverwechselbar im Einrichteblatt ([`EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md)) mit einer Skizze vermerkt sein!
+
+#### 1.1 Wer legt welchen Nullpunkt fest? (Maschinennullpunkt M vs. Werkstücknullpunkt W nach DIN 66217)
+
+In der industriellen Zerspanungstechnik herrscht eine strikte, international genormte Aufgabenteilung zwischen Maschinenbau und Fertigungsplanung:
+
+| Nullpunkt-Typ | Fachbegriff & G-Code | Wer legt ihn fest? | Veränderbarkeit & Funktion |
+| :--- | :--- | :--- | :--- |
+| **Maschinennullpunkt $M$** | Machine Zero / $M$ (`G53`) | **Werkzeugmaschinen-Hersteller** *(z. B. Haas, DMG MORI, Hermle)* | **Absolut unveränderlich.** Fest in mechanischen Endanschlägen und optischen Glasmaßstäben verankert. Dient der Maschine für Werkzeugwechsler, Parkpositionen und Software-Endschalter. |
+| **Werkstücknullpunkt $W$** | Workpiece Zero / $W$ (`G54` bis `G59`) | **Zweistufig:**<br>1. **CAM-Ingenieur** *(im Computer)*<br>2. **Zerspanungsmechaniker** *(an der Maschine)* | **Frei wählbar für jedes Bauteil.**<br>• *Schritt A (Theorie):* Der CAM-Ingenieur *(Dipl.-Ing. Bujanovski)* definiert den Bezugspunkt im CAD/CAM-Modell und dokumentiert ihn im Einrichteblatt.<br>• *Schritt B (Praxis):* Der Zerspanungsmechaniker tastet genau diese Kanten mit dem 3D-Kantentaster oder der Messtaster-Sonde an und speichert die Koordinaten im G54-Register der Steuerung. |
+
+##### Warum gilt die *vordere linke obere Ecke* in 95 % aller Fräsbetriebe als Industriestandard?
+1. **Feste Schraubstockbacke:** Die hintere Backe des Maschinenschraubstocks ist fest und präzise rechtwinklig zum Maschinenbett ausgerichtet (Y+).
+2. **Fester Werkstückanschlag:** Der wiederholgenaue mechanische Seitenanschlag sitzt in der Praxis fast ausnahmslos auf der **linken Seite** (X0).
+3. **Durchgängig positive Bauteilkoordinaten:** Vom Nullpunkt vorne links aus verläuft die gesamte Bauteilgeometrie nach rechts ($+X$) und nach hinten ($+Y$). Lediglich die Frästiefe ins Metall hinein ist negativ ($-Z$). Dies minimiert Vorzeichenfehler und Fehlbedienungen an der Steuerung drastisch.
+
+#### 1.2 Wo steht die Spindel und braucht der Programmierer ihre Koordinate? (Die automatische 3-Glieder-Kompensation)
+
+* **Braucht der Programmierer oder Bediener die Koordinaten der Spindel?**  
+  **NEIN!** Sie müssen die absolute Position der Spindel im Maschinenraum **zu keinem Zeitpunkt** von Hand wissen, messen oder in den G-Code eintragen.
+* **Wo steht die Spindel in der Fräspraxis? (Die 3 Hauptzustände):**
+
+```
+       ▲  [G53 Z0.0] ═══════════════════════════ 1. PARK- & WECHSELPOSITION (Ganz oben am Maschinenanschlag)
+       │
+       │                                         (Spindel steht völlig frei – maximaler Sicherheitsraum)
+       │
+       │
+       │  [Z +15.0 mm] ───────────────────────── 2. SICHERHEITSEBENE (Im Eilgang G00 über dem Rohteil)
+       │
+       │  [Z   0.0 mm] ═════════════════════════ WERKSTÜCK-OBERKANTE (G54 Nullpunkt)
+       │
+       ▼  [Z  -5.0 mm] ───────────────────────── 3. FRÄSTIEFE IM METALL (G01 Spanabtrag)
+```
+
+1. **Park- und Wechselposition *(Ganz oben am Anschlag via G53 Z0.0)***: Die Spindel fährt an ihren mechanischen Höchststand im Maschinenkoordinatensystem. Hier greift der Werkzeugwechsler *(ATC – Automatic Tool Changer)* absolut kollisionsfrei.
+2. **Sicherheitsebene *(Über dem Werkstück via Z+15.0 mm)***: Vor jedem Schnitt fährt das Werkzeug im Eilgang (`G00`) über das Werkstück, um ohne Materialkontakt schnell umzupositionieren.
+3. **Im Schnitt *(Spanende Bearbeitung via Z-5.0 mm)***: Die Fräserspitze taucht exakt auf die programmierte Tiefe ins Metall ein.
+
+##### Wie rechnet die CNC-Steuerung die Spindelposition vollautomatisch aus?
+Die Steuerung bildet in Echtzeit die mathematische Summe aus drei Werten:
+
+$$\text{Reale Spindelposition} = \underbrace{\text{Werkstück-Nullpunkt (G54)}}_{\text{Abstand des Werkstücks zum Maschinennullpunkt}} + \underbrace{\text{Werkzeuglänge (G43 H01)}}_{\text{Länge des Fräsers aus der Spindelnase}} + \underbrace{\text{Programmierter Z-Wert}}_{\text{Soll-Tiefe des Fräsers}}$$
+
+* **Beispiel:** Liegt das Teil bei $Z = -350{,}00\,\text{mm}$ im Maschinentisch, das Werkzeug ist $120{,}00\,\text{mm}$ lang und im Code steht `G01 Z-5.0`, so verfährt die Steuerung die Spindelachse exakt auf $-235{,}00\,\text{mm}$.
+* **Die einzige Ausnahme im G-Code:** Nur beim sicheren Freifahren am Programmende ruft der Code mit `G53 G00 Z0.0` direkt die Spindelachse auf, um sie vor dem Türöffnen auf den mechanischen Höchststand zu befehlen.
 
 ### 2. Das Rohteil-Aufmaß (Stock Allowance / Materialzugabe):
 * **Was bedeutet das einfach erklärt?**  
@@ -174,6 +248,7 @@ Der Zerspanungsmechaniker liest diese Werte vor dem Starten der Spindel und verg
 | **1. Sicherheitszeile** | `G90 G17 G21 G94 G40 G49 G80` | **Grund-Reset der Steuerung:**<br>• `G90`: Alle Maße sind absolut vom Nullpunkt.<br>• `G17`: Bearbeitungsebene ist XY.<br>• `G21`: Alle Maße in Millimeter.<br>• `G94`: Vorschub in mm/min.<br>• `G40`: Fräserradiuskorrektur ausschalten.<br>• `G49`: Werkzeuglängenkorrektur löschen.<br>• `G80`: Alle Bohrzyklen abbrechen. | Stand die Maschine vorher im Modus `G20` *(Zoll)* oder `G91` *(Kettenmaße / Relativmaße)*, fährt sie ohne diese Zeile um das 25,4-fache zu weit oder addiert Verfahrwege auf – **sofortiger Totalschaden!** |
 | **2. Werkzeugwechsel** | `T01 M06` | **Werkzeug holen:** Holt Werkzeug Platz 1 *(Schaftfräser Ø 10 mm)* aus dem Magazin und wechselt es in die Spindel ein. | Steht hier `T05`, wechselt die Maschine vielleicht ein Sägeblatt oder einen Zentrierbohrer ein und ruiniert das Teil. |
 | **3. Spindelstart** | `S8000 M03` | **Motor einschalten:** Dreht die Frässpindel mit 8.000 U/min im Uhrzeigersinn *(Rechtslauf)*. | Fährt das Werkzeug ins Aluminium, während die Spindel noch stillsteht, bricht der Fräser sofort mit einem lauten Knall ab! |
+| **3b. Schnittdaten- & Werkstoff-Check (Agent 3 Prüfpflicht)** | `S2865 M03` *(Edelstahl)*<br>`S8000 M03` *(Aluminium)* | **Schnittgeschwindigkeits- & Drehzahlschutz (Auto-Speed-Clamp):**<br>Agent 3 prüft, ob die Schnittgeschwindigkeit $v_c = \frac{\pi \cdot D \cdot n}{1000}$ zum Werkstoff passt *(Alu max. $350\,\text{m/min}$, Stahl max. $180\,\text{m/min}$, Edelstahl max. $90\,\text{m/min}$)*. | Steht bei Edelstahl $8.000\,\text{U/min}$ im Code ($v_c = 251\,\text{m/min}$), glüht der VHM-Fräser in 2 Sekunden aus und zersplittert! Agent 3 verweigert die Freigabe, wenn Auto-Speed-Clamp nicht aktiv drosselt! |
 | **4. Längenkorrektur** | `G43 H01 Z15.0` | **Werkzeuglänge aktivieren:** `G43` liest aus Register `H01` die exakt vermessene Länge von Werkzeug 1 aus und stoppt 15 mm über dem Teil. | Fehlt `G43`, weiß die Steuerung nicht, wie lang das Werkzeug ist, nimmt Länge 0 an und rammt das Futter ungebremst in den Maschinentisch. |
 | **5. Kühlung an** | `M08` | **Kühlschmierstoff an:** Schaltet die KSS-Pumpe ein, die Wasser-Öl-Emulsion auf die Schneide spritzt. | Ohne Kühlung verschmilzt weiches Aluminium bei 8.000 U/min innerhalb von 3 Sekunden mit dem Fräser *(Aufbauschneide)* – Fräser reißt ab. |
 | **6. Tiefenprüfung** | `Z -12.5` *(Beispiel)* | **Maximale Frästiefe (`Z_min`):** Der tiefste Punkt, den die Z-Achse im gesamten Programm anfährt. | Wenn das Bauteil 12 mm dick ist und `Z -35.0` im Code steht, bohrt das Werkzeug 23 mm tief in den Schraubstock oder Maschinentisch! |

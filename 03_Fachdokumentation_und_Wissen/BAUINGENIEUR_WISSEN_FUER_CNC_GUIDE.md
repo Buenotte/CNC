@@ -18,6 +18,8 @@ Dieses Dokument nimmt dir jede Sorge und zeigt dir klipp und klar:
    - [Brücke 4: Der Kragträger (Balkon) $\rightarrow$ Warum Fräser vibrieren oder abbrechen](#brücke-4-der-kragträger-balkon-rightarrow-warum-fräser-vibrieren-oder-abbrechen)
 3. [Was hat dein Bauingenieur-Diplom mit Postprozessoren zu tun? (Die 10 % Ingenieur-Anteil im Detail)](#3-was-hat-dein-bauingenieur-diplom-mit-postprozessoren-zu-tun)
    - [3.1 Die logische Verknüpfung der Raumachsen: X, Y, Z und die Drehachsen A, B, C (DIN 66217)](#31-die-logische-verknüpfung-der-raumachsen-x-y-z-und-die-drehachsen-a-b-c-din-66217)
+     - [3.1.1 Kann die Spindel nur in Z fahren? Die 3 Maschinenbauarten im Vergleich (3-Achs vs. 5-Achs)](#311-kann-die-spindel-nur-in-z-fahren-die-3-maschinenbauarten-im-vergleich-3-achs-vs-5-achs)
+     - [3.1.2 Wie fertigt eine 3-Achs-Maschine seitliche Bohrungen? (Querbohrungen in der Werkstattpraxis)](#312-wie-fertigt-eine-3-achs-maschine-seitliche-bohrungen-querbohrungen-in-der-werkstattpraxis)
    - [3.2 Was ist eine Rotationsmatrix – und warum musst du sie NICHT von Hand rechnen?](#32-was-ist-eine-rotationsmatrix--und-warum-musst-du-sie-nicht-von-hand-rechnen)
    - [3.3 Wie das CAM-System die Vektoren liefert (forward.x, forward.y, forward.z)](#33-wie-das-cam-system-die-vektoren-liefert-forwardx-forwardy-forwardz)
    - [3.4 Die Übersetzung in Maschinencode: Die zwei Wege (Heidenhain vs. Siemens)](#34-die-übersetzung-in-maschinencode-die-zwei-wege-heidenhain-vs-siemens)
@@ -203,6 +205,169 @@ flowchart TD
     
     ToolSide ==>|"Gemeinsame Relativbewegung"| WorkSide
 ```
+
+---
+
+#### 3.1.1 Kann die Spindel nur in Z fahren? Die 3 Maschinenbauarten im Vergleich (3-Achs vs. 5-Achs)
+
+In der Zerspanungspraxis taucht häufig die Frage auf: *„Kann die Frässpindel physikalisch wirklich nur auf und ab (Z) fahren?“*  
+Die Antwort lautet: **Auf einer klassischen 3-Achs-Maschine ja – auf modernen 5-Achs-Maschinen jedoch keineswegs!**
+
+Hier sind die drei wichtigsten industriellen Kinematik-Konzepte im direkten Vergleich:
+
+##### Bauart 1: Klassische 3-Achs-Maschine (Kreuztisch-Bauweise / z. B. Haas VF-2)
+Die Spindel ist starr an der senkrechten Guss-Säule montiert und verfährt **ausschließlich in Z (hoch und runter)**. Der Maschinentisch bewegt das Bauteil darunter in **X (links/rechts)** und **Y (vor/zurück)**:
+
+```
+        ╔════════════════════════════════╗
+        ║       MASCHINENSÄULE (GUSS)    ║
+        ║                                ║
+        ║        ┌─────────────┐         ║
+        ║        │ SPINDELKOPF │ ◄───────╢─── Fährt NUR AUF & AB (Z-Achse)
+        ║        └──────┬──────┘         ║
+        ║               │ [Spindel]      ║
+        ║               ▼                ║
+        ║             [Fräser]           ║
+        ║                │               ║
+        ║            ┌───┴───┐           ║
+        ║            │Teil/G54           ║
+        ║     ┌──────┴───────┴──────┐    ║
+        ║     │    MASCHINENTISCH   │ ◄──╢─── Fährt RECHTS/LINKS (X-Achse)
+        ║     └─────────────────────┘    ║    und VORNE/HINTEN (Y-Achse)
+        ╚════════════════════════════════╝
+```
+
+##### Bauart 2: 5-Achs-Präzisionsmaschine mit Schwenkrundtisch (Tisch-Tisch / z. B. Hermle C22 / C42)
+Das modifizierte Gantry-Prinzip *(Portal-Bauweise)* der Hermle AG teilt die Freiheitsgrade hochpräzise auf:
+* **Die Spindel macht alle drei linearen Raumachsen:** Der Fräskopf verfährt in **X, Y und Z**.
+* **Der Tisch schwenkt und rotiert:** Das Werkstück ruht auf einem Rundtisch *(C-Achse, 360° unbegrenzt)*, der in einer massiven Schwenkwiege *(A-Achse, +/-115° Schwenkwinkel)* gelagert ist.
+
+```
+       ╔══════════════════════════════════════════════╗
+       ║          HERMLE GANTRY-PORTAL                ║
+       ║                                              ║
+       ║     ◄─── X-Schlitten (Links / Rechts) ───►   ║
+       ║     ▲─── Y-Schlitten (Vorne / Hinten) ───▼   ║
+       ║                                              ║
+       ║               ┌─────────────┐                ║
+       ║               │ SPINDELKOPF │ ◄──────────────╢── Fährt X, Y UND Z!
+       ║               └──────┬──────┘                ║
+       ║                      │                       ║
+       ║                   [Fräser]                   ║
+       ║                      │                       ║
+       ║                 ╭────┴────╮                  ║
+       ║                 │ Bauteil │                  ║
+       ║            ╔════╧═════════╧════╗             ║
+       ║            ║ RUNDTISCH (C 360°)║ ◄───────────╢── Rotiert endlos (C-Achse)
+       ║         ╭──╨───────────────────╨──╮          ║
+       ║         │ SCHWENKWIEGE (A +/-115°)│ ◄────────╢── Kippt das Werkstück (A-Achse)
+       ║         ╰─────────────────────────╯          ║
+       ╚══════════════════════════════════════════════╝
+```
+
+##### Bauart 3: 5-Achs-Großmaschine mit Schwenkkopf (Kopf-Kopf / Head-Head / z. B. Flugzeug- & Formenbau)
+Bei extrem schweren Werkstücken *(z. B. mehrere Tonnen schwere Turbinengehäuse oder Automobil-Pressformen)* darf der Tisch nicht bewegt werden:
+* **Der Maschinentisch steht absolut starr.**
+* **Die Spindel übernimmt alle 5 Freiheitsgrade:** Sie verfährt im Portal in **X, Y und Z** und verfügt über ein motorisiertes Drehgelenk *(B- und C-Achse)*, mit dem sich der Fräser schräg in jeden Hinterschnitt neigen kann wie das Handgelenk eines Roboters.
+
+```
+                    ╔══════════════════════════╗
+                    ║    PORTAL-QUERTRÄGER     ║
+                    ║                          ║
+                    ║     ┌────────────────┐   ║
+                    ║     │ Z-SCHLITTEN    │   ║
+                    ║     └───────┬────────┘   ║
+                    ║             │            ║
+                    ║        ┌────┴─────┐      ║
+                    ║        │ DREHKOPF │ ◄────╢── Rotiert um 360° (C-Achse)
+                    ║        └────┬─────┘      ║
+                    ║             │            ║
+                    ║      ╭──────┴──────╮     ║
+                    ║      │ SCHWENKGABEL│ ◄───╢── Neigt Fräser schräg (B-Achse)
+                    ║      ╰──────┬──────╯     ║
+                    ║             │            ║
+                    ║          [Fräser] ──┐    ║
+                    ║                     │    ║
+                    ║       ┌───────────┐ └─── ╢── Schrägschnitt an Hinterschneidung!
+                    ║       │  Bauteil  │      ║
+                    ║ ══════╧═══════════╧═════ ║
+                    ║   STARRES MASCHINENBETT  ║ ◄ Werkstück liegt völlig unbewegt
+                    ╚══════════════════════════╝
+```
+
+| Maschinen-Typ | Wer bewegt X / Y / Z? *(Lineare Achsen)* | Wer bewegt die Drehachsen? *(Rotation)* | Typische Werkstücke |
+| :--- | :--- | :--- | :--- |
+| **1. Kreuztisch *(Haas VF-2)*** | Tisch macht X & Y, **Spindel macht nur Z** | Keine (reine 3-Achs-Maschine) | Flanschplatten, Lagergehäuse, OP10-Standardteile |
+| **2. Tisch-Tisch *(Hermle C22)*** | **Spindel macht X, Y und Z** | **Tisch** schwenkt (A) und dreht (C) | 5-Achs-Impeller, Medizintechnik, hochpräzise Elektroden |
+| **3. Kopf-Kopf *(DMG MORI Portal)*** | **Spindel macht X, Y und Z** | **Spindel** neigt sich (B) und rotiert (C) | CFK-Flugzeugflügel, Presswerkzeuge für PKW-Seitenteile |
+
+---
+
+#### 3.1.2 Wie fertigt eine 3-Achs-Maschine seitliche Bohrungen? (Querbohrungen in der Werkstattpraxis)
+
+An einer 3-Achs-Maschine steht die Spindel unveränderlich senkrecht von oben nach unten ($-Z$). Wie wird nun eine Bohrung in die **Seitenwand** eines Bauteils eingebracht?  
+Dafür gibt es in der industriellen Praxis drei erprobte Lösungen:
+
+##### Lösung 1: Der Werkstatt-Klassiker – Umspannen (Zweite Aufspannung / OP20 mit G55)
+Die mit Abstand häufigste und kostengünstigste Methode in 90 % aller Lohnfertigungen:
+* **OP10:** Das Teil liegt flach im Schraubstock. Die Spindel bearbeitet Oberseite, Tasche und vertikale Bohrungen.
+* **Bauteil um 90° kippen:** Der Zerspanungsmechaniker löst den Schraubstock, stellt das Teil hochkant auf die Seitenfläche und spannt es erneut ein.
+* **OP20:** Die zu bohrende Seitenwand zeigt nun senkrecht nach oben zur Spindel. Über den zweiten Nullpunkt `G55` fährt der Bohrer ganz normal von oben hinein.
+
+```
+       OP10: Flach gespannt                 OP20: Um 90° auf die Seite gekippt
+                                                        │
+                 │                                      │ [Bohrer T02]
+                 ▼ [Fräser T01]                         ▼
+          ┌─────────────┐                        ┌──────┐
+          │  Werkstück  │                        │ W    │ ◄── Seitenfläche zeigt
+     ═════╧═════════════╧═════              ═════╡ e    ╞═════     jetzt nach oben!
+     Schraubstock: Flach gespannt                │ r    │
+                                                 │ k    │
+                                                 └──────┘
+                                            Schraubstock: Hochkant gespannt
+```
+*(Wird detailliert behandelt in **Übung 10: Zweite Aufspannung OP20 & Nullpunkt G55**).*
+
+##### Lösung 2: Das mechanische Getriebewerkzeug – Der 90°-Winkelkopf (Angle Head)
+Ist das Werkstück zu lang oder zu sperrig, um aufrecht in den Maschinenraum zu passen, wird ein **Winkelkopf *(Aggregat mit internem 90°-Kegelradgetriebe)*** in die Werkzeugspindel eingewechselt:
+* Ein gehärteter Arretierbolzen *(Drehmomentstütze)* verhindert das Mitdrehen des Gehäuses.
+* Das Getriebe lenkt die Spindeldrehung um $90^\circ$ in die Horizontale um.
+* Der Bohrer ragt waagerecht heraus. Die Vorschubbewegung erfolgt nicht über Z, sondern der Maschinentisch fährt in **X oder Y** gegen den Bohrer.
+
+```
+                  ┌────────────────┐
+                  ║ FRÄSSPINDELE   ║ (Dreht senkrecht)
+                  └───────┬────────┘
+                          │ [SK40 / HSK63 Aufnahme]
+                 ┌────────┴────────┐
+                 │   WINKELKOPF    │ ◄── Gehäuse gegen Mitdrehen arretiert
+                 │ [90°-Getriebe]  ├───► [Bohrer ragt waagerecht heraus!]
+                 └─────────────────┘        │
+                                            ▼  Horizontale Seitenbohrung
+                                       ┌──────────┐
+                                       │ Bauteil  │
+                                  ═════╧══════════╧═════
+```
+
+##### Lösung 3: Das 4.-Achs-Upgrade – Motorisierter Teilapparat (CNC-Rundtisch / A-Achse)
+Auf den Tisch der 3-Achs-Maschine wird ein programmierbarer Teilapparat *(z. B. Haas HRT210)* aufgespannt:
+* Das Werkstück wird in das Dreibackenfutter des Teilapparats gespannt.
+* Im NC-Programm dreht der Befehl `A90.0` das Teil wie an einem Drehspieß um $90^\circ$ nach oben.
+* Die Seitenfläche steht nun exakt unter der Spindel, sodass Bohrungen und Fräsungen ohne manuelles Umspannen vollautomatisch gefertigt werden.
+
+```
+                                  │
+                                  ▼ [Bohrer fährt senkrecht Z-]
+                               ╭──────╮
+                               │ Seite│
+                          ┌────┴──────┴────┐
+                          │    Bauteil     │
+                     ╔════╧════════════════╧════╗
+                     ║  4. ACHSE (TEILAPPARAT)  ║ ◄── Rotiert das Bauteil automatisch (A-Achse)
+                     ╚══════════════════════════╝
+```
+*(Wird detailliert behandelt in **Übung 14: Heidenhain 4-Achs-Teilapparat**).*
 
 ---
 

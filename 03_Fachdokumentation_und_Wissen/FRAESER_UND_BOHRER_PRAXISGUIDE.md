@@ -175,6 +175,31 @@ Um in das gebohrte Loch die Gewindegänge hineinzubringen, gibt es zwei Methoden
 
 ---
 
+### 3.4 Sonderaggregat: Der 90°-Winkelkopf für seitliche Querbohrungen (Angle Head)
+
+Wenn an einer 3-Achs-Maschine *(Spindel zeigt senkrecht nach unten)* eine seitliche Bohrung in die Bauteilwand eingebracht werden muss, ohne das Teil aufwendig umzuspannen, kommt ein **90°-Winkelkopf *(Winkelbohrkopf / Angle Head)*** zum Einsatz:
+
+```
+                  ┌────────────────┐
+                  ║ FRÄSSPINDELE   ║ (Dreht senkrecht)
+                  └───────┬────────┘
+                          │ [SK40 / HSK63 Aufnahme]
+                 ┌────────┴────────┐
+                 │   WINKELKOPF    │ ◄── Drehmomentstütze gegen Mitdrehen arretiert
+                 │ [90°-Getriebe]  ├───► [Bohrer ragt waagerecht heraus!]
+                 └─────────────────┘        │
+                                            ▼  Horizontale Seitenbohrung
+                                       ┌──────────┐
+                                       │ Bauteil  │
+                                  ═════╧══════════╧═════
+```
+
+* **Funktionsweise:** Das interne Präzisions-Kegelradgetriebe lenkt die Drehbewegung der senkrechten Maschinenspindel um $90^\circ$ in die Horizontale um.
+* **Vorschubrichtung:** Der Bohrvorschub erfolgt nicht über die Z-Achse, sondern der Maschinentisch verfährt in **X oder Y** direkt gegen den Bohrer.
+* **Einsatz:** Ideal bei langen Profilen oder sperrigen Platten, die aufrecht zu hoch für den Maschinenraum wären.
+
+---
+
 ## 4. Die 4 magischen Schnittdaten-Werte: Was bedeuten sie und woher kommen sie?
 
 Wenn du im CAM-System auf ein Werkzeug klickst, siehst du vier Felder. Hier ist die alltagstaugliche Übersetzung dieser Begriffe:

@@ -205,6 +205,21 @@ Wenn ein potenzieller Kunde anruft oder im Chat Fragen stellt, antworten Sie mit
 
 ---
 
+### Frage 3b: *„Für welche Kunden haben Sie bisher gearbeitet?“ (Wenn Sie noch am Anfang stehen und keine Altkunden haben)*
+
+> [!TIP]
+> **Hintergrundwissen & Psychologie:**  
+> Im deutschen Maschinen- und Werkzeugbau, in der Medizintechnik sowie in der Luft- und Raumfahrt unterliegen über 95 % aller Bauteile strengen **Geheimhaltungsverträgen *(NDA – Non-Disclosure Agreement / Zeichnungsschutz)***. Wenn ein Dienstleister freimütig Kundennamen und Bauteile herumzeigt, schreckt das seriöse Fertigungsleiter ab, weil sie fürchten, dass ihre eigenen Patente und Prototypen ebenfalls an Dritte weitergegeben werden. Diskretion ist hier das stärkste Qualitätsmerkmal eines Ingenieurs!
+
+> **Ihre 3-Satz-Meisterantwort:**  
+> *„Aus Gründen des strengen Geheimhaltungsschutzes (NDA) und der Diskretion gegenüber meinen Auftraggebern im Werkzeug-, Vorrichtungs- und Präzisionsmaschinenbau nenne ich grundsätzlich keine Kundennamen und gebe keine internen Bauteildaten an Dritte weiter – genau diese 100%ige Vertraulichkeit und Datensicherheit garantiere ich selbstverständlich auch Ihrem Hause.*  
+>  
+> *Damit Sie sich jedoch ein lückenloses Bild von meiner Programmierqualität, den Aufspannkonzepten und der 5-Stufen-Kollisionssicherheit machen können, habe ich eine vollständige Portfolio-Mappe mit vier technisch anspruchsvollen Referenz-Fertigungspaketen (2,5D-Lagergehäuse, 3+2-Achs-Ventilblock, 5-Achs-Freiformfläche und Postprozessor-Algorithmen) ausgearbeitet, die ich Ihnen gerne als PDF-Portfolio zur Verfügung stelle.*  
+>  
+> *Lassen Sie uns für Ihr nächstes Teil ganz unkompliziert starten: Senden Sie mir die 3D-STEP-Datei und Ihre Werkzeugdaten rüber. Ich erstelle Ihnen das NC-Fertigungspaket inklusive 3D-Simulationsvideo und Werkstatt-Einrichteblatt. Ihr Zerspanungsmechaniker fährt das Programm an der Maschine im Einzelsatz (Single Block) ein – und Sie überzeugen sich direkt an der Spindel von der sauberen Laufruhe und der absoluten Kollisionsfreiheit!“*
+
+---
+
 ### Frage 4: *„Wie sind Ihre Arbeitszeiten und wie erreichen wir Sie tagsüber bei dringenden Fragen?“*
 > **Ihre Antwort:**  
 > *„Als Remote-Ingenieurbüro arbeite ich primär fokussiert in festen Entwicklungsblöcken, um fehlerfreie Code-Qualität zu garantieren. Sie erreichen mich jederzeit per E-Mail und über unseren Cloud-Kanal mit einer garantierten Rückmeldezeit von unter 24 Stunden. Telefonische Abstimmungen zu neuen Aufträgen planen wir ganz flexibel per kurzem Termin-Slot ein.“*
