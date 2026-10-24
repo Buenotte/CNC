@@ -2,7 +2,7 @@
 **Projekt / Auftrag:** Auftrag 04 – 3D-CAD-Lagerplatte CAM-Bearbeitung  
 **Kunde:** Franken Präzisionsteile GmbH *(Michael Brandner, Fertigungsleiter)*  
 **Prüfdatum:** 23. Oktober 2026  
-**Prüfender Ingenieur:** Dipl.-Ing. Buenotte  
+**Prüfender Ingenieur:** Dipl.-Ing. Bujanovski  
 **Geprüfte NC-Datei:** [`kunden_auftrag_04.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/kunden_auftrag_04.nc) *(Haas VF-2 / Haas NGC Steuerung)*  
 **Status:** **BESTANDEN (GRÜN) – Freigabe zum Einfahren erteilt**
 
@@ -40,4 +40,4 @@
 Das NC-Programm [`kunden_auftrag_04.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/kunden_auftrag_04.nc) ist syntaktisch, geometrisch und kinematisch fehlerfrei geprüft. Gemäß ingenieurrechtlicher Sorgfaltspflicht muss das erste Bauteil vom qualifizierten Bediener an der Haas VF-2 im Einzelsatz *(Single Block)* bei 25 % Eilgangübersteuerung *(Rapid Feed Override)* eingefahren werden.
 
 **Freigegeben am:** 23. Oktober 2026  
-**Freigabevermerk:** Dipl.-Ing. Buenotte *(CAD/CAM-Ingenieurbüro)*
+**Freigabevermerk:** Dipl.-Ing. Bujanovski *(CAD/CAM-Ingenieurbüro)*

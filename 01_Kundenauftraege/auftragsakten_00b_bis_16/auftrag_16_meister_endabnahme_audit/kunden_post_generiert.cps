@@ -3,7 +3,7 @@
  * MAßGESCHNEIDERTER KUNDEN-POSTPROZESSOR (.CPS)
  * ==============================================================================
  * KUNDE       : Zerspanungstechnik Schmidt & Partner GmbH
- * ENTWICKLER  : Dipl.-Ing. CAD/CAM Entwickler
+ * ENTWICKLER  : Dipl.-Ing. Bujanovski
  * STEUERUNG   : HAAS
  * GENERIERT AM: 2026-10-21 17:14
  * BESCHREIBUNG: KUNDENAUFTRAG FLANSCHPLATTE
@@ -12,7 +12,7 @@
 
 description = "Zerspanungstechnik Schmidt & Partner GmbH - HAAS Postprozessor";
 vendor = "Zerspanungstechnik Schmidt & Partner GmbH";
-vendorUrl = "https://github.com/Buenotte/CNC";
+vendorUrl = "https://github.com/Bujanovski/CNC";
 legal = "Erstellt durch CAD/CAM Ingenieurbuero. Alle Rechte vorbehalten.";
 certificationLevel = 2;
 minimumRevision = 45700;
@@ -91,7 +91,7 @@ function onOpen() {
   writeComment("KUNDE      : " + "Zerspanungstechnik Schmidt & Partner GmbH");
   writeComment("PROGRAMM   : O" + 1001 + " (" + "KUNDENAUFTRAG FLANSCHPLATTE" + ")");
   writeComment("STEUERUNG  : " + "HAAS");
-  writeComment("ENTWICKLER : " + "Dipl.-Ing. CAD/CAM Entwickler");
+  writeComment("ENTWICKLER : " + "Dipl.-Ing. Bujanovski");
   writeComment("DATUM/ZEIT : " + "2026-10-21 17:14");
   writeComment("EINHEITEN  : " + "METRISCH (MM)");
   writeComment("==================================================");

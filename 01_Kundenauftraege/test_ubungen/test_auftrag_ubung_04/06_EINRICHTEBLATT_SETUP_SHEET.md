@@ -2,7 +2,7 @@
 **Bauteil-Name:** Lagerplatte Alu 50 Stück *(Auftrag 04 / Übung 04)*  
 **Zeichnungs- / Modelldatei:** `bauteil_1001.stl` / `bauteil_1001.step`  
 **Kunde:** Franken Präzisionsteile GmbH *(Michael Brandner, Fertigungsleiter)*  
-**Erstellt von:** Dipl.-Ing. Buenotte *(CAD/CAM-Ingenieurbüro)*  
+**Erstellt von:** Dipl.-Ing. Bujanovski *(CAD/CAM-Ingenieurbüro)*  
 **Zielmaschine:** Haas VF-2 *(3-Achs-Vertikal-Fräszentrum mit Haas NGC Steuerung)*  
 **NC-Programm:** [`kunden_auftrag_04.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/kunden_auftrag_04.nc)  
 

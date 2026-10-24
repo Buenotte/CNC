@@ -1,6 +1,6 @@
 # 📩 Kundenauftrag: Übung 4: Ein 3D-Modell als Kundenauftrag bearbeiten (Vom 3D-Bauteil zum G-Code)
 **Auftrags-Kategorie:** 4 (CAM-Programmierauftrag Lagerplatte)
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
 
 ---
@@ -10,11 +10,11 @@
 So sieht ein typischer vollständiger Programmierauftrag aus, den ein Fertigungsbetrieb mit Engpässen an dein Ingenieurbüro vergibt:
 
 > **Von:** Michael Brandner *(Fertigungsleiter)* `<m.brandner@franken-praezision.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 18. Oktober 2026, 10:15 Uhr  
 > **Betreff:** Eilauftrag CAM-Programmierung: Lagerplatte Alu (50 Stück) – 3D-STEP anbei  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
 > 
 > wir haben in unserer Fräserei einen kurzfristigen Programmier-Engpass. Anbei senden wir Ihnen das 3D-CAD-Modell `bauteil_1001.step` für eine Lagerplatte aus Aluminium EN AW-6082 (Stückzahl: 50).  
 > 
@@ -37,6 +37,6 @@ So sieht ein typischer vollständiger Programmierauftrag aus, den ein Fertigungs
 ---
 
 ## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUENOTTE.md` in diesem Ordner.
+* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
 * **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
 * **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

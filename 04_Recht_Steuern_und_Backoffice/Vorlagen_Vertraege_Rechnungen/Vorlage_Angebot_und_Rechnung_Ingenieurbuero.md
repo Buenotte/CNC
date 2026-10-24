@@ -11,9 +11,9 @@ Diese Datei enthält zwei direkt kopierbare Vorlagen für dein freiberufliches I
 ```text
 ================================================================================
 INGENIEURBÜRO FÜR CAD/CAM-FERTIGUNGSTECHNIK & CNC-SYSTEMPROGRAMMIERUNG
-Dipl.-Ing. [Dein Vor- und Nachname]
+Dipl.-Ing. Bujanovski
 [Deine Straße und Hausnummer] • 63526 Erlensee
-Tel.: [Deine Telefonnummer] • E-Mail: [Deine E-Mail-Adresse]
+Tel.: [Deine Telefonnummer] • E-Mail: kontakt@ingenieurbuero-bujanovski.de
 Steuernummer (Finanzamt Hanau): [Deine Steuernummer]
 ================================================================================
 
@@ -70,7 +70,7 @@ Zur Auftragserteilung genügt eine kurze formlose Bestätigung per E-Mail unter 
 
 Mit freundlichen Grüßen
 
-Dipl.-Ing. [Dein Vor- und Nachname]
+Dipl.-Ing. Bujanovski
 ```
 
 ---
@@ -80,9 +80,9 @@ Dipl.-Ing. [Dein Vor- und Nachname]
 ```text
 ================================================================================
 INGENIEURBÜRO FÜR CAD/CAM-FERTIGUNGSTECHNIK & CNC-SYSTEMPROGRAMMIERUNG
-Dipl.-Ing. [Dein Vor- und Nachname]
+Dipl.-Ing. Bujanovski
 [Deine Straße und Hausnummer] • 63526 Erlensee
-Tel.: [Deine Telefonnummer] • E-Mail: [Deine E-Mail-Adresse]
+Tel.: [Deine Telefonnummer] • E-Mail: kontakt@ingenieurbuero-bujanovski.de
 Steuernummer (Finanzamt Hanau): [Deine Steuernummer]
 [Optional: USt-IdNr.: DE.........]
 ================================================================================
@@ -124,7 +124,7 @@ Pos.  Bezeichnung der freiberuflichen Ingenieurleistung   Menge    Einzelpreis  
 Zahlungsziel:
 Bitte überweisen Sie den Rechnungsbetrag innerhalb von 14 Tagen ohne Abzug unter Angabe der Rechnungsnummer RE-2026-001 auf folgendes Konto:
 
-Kontoinhaber : Dipl.-Ing. [Dein Vor- und Nachname]
+Kontoinhaber : Dipl.-Ing. Bujanovski
 Bank         : [Name deiner Bank]
 IBAN         : [DE.. .... .... .... .... ..]
 BIC          : [........]
@@ -133,5 +133,5 @@ Vielen Dank für die angenehme Zusammenarbeit!
 
 Mit freundlichen Grüßen
 
-Dipl.-Ing. [Dein Vor- und Nachname]
+Dipl.-Ing. Bujanovski
 ```

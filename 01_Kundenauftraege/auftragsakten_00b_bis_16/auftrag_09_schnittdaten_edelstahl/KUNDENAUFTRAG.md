@@ -2,7 +2,7 @@
 
 **Auftraggeber:** Frank Lehmann (Produktionsleiter)  
 **Unternehmen:** Krupp & Partner Maschinenteile  
-**Empfänger:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 **Zielmaschine:** **Gildemeister CTX beta 800**  
 **Vereinbartes Budget:** **85,00 € / Std. (ca. 340 € netto)** (404,60 € brutto)  
 
@@ -12,7 +12,7 @@
 
 # 📩 Kundenauftrag: Übung 9: Schnittdaten (`S` Drehzahl & `F` Vorschub) berechnen – Warum Aluminium, Baustahl und Edelstahl völlig andere Werte brauchen
 **Auftrags-Kategorie:** 9 (Werkzeugbruch-Verhütung bei Edelstahl-Umstellung)
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
 
 ---
@@ -22,11 +22,11 @@
 So sieht eine typische Anfrage aus, wenn ein Kunde beim Wechsel von Aluminium auf zähen Edelstahl teuren Werkzeugbruch erleidet:
 
 > **Von:** Frank Lehmann *(Produktionsleiter)* `<f.lehmann@krupp-maschinenteile.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 23. Oktober 2026, 08:45 Uhr  
 > **Betreff:** EILIGE ANFRAGE: Schnittdaten-Optimierung Edelstahl V4A 1.4571 – Fräser brennen ab  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
 > 
 > wir haben ein massives Fertigungsproblem in Duisburg: Wir fertigen seit Jahren ein Gehäuse aus Aluminium mit $8.000\,\text{U/min}$ und $1.200\,\text{mm/min}$ Vorschub. Jetzt hat unser Großkunde das Material auf hochlegierten Edelstahl V4A *(Werkstoff 1.4571 / X6CrNiMoTi17-12-2)* umgestellt.  
 > 
@@ -48,7 +48,7 @@ So sieht eine typische Anfrage aus, wenn ein Kunde beim Wechsel von Aluminium au
 ---
 
 ## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUENOTTE.md` in diesem Ordner.
+* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
 * **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
 * **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.
 

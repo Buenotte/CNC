@@ -4,7 +4,7 @@ Dieses Verzeichnis ist das **Muster-Beispiel für einen 100 % vollständigen Kun
 
 **Auftrag:** Auftrag 03 – Flanschplatte Z-MIN & Kollisionsschutz  
 **Kunde:** Schmidt Präzisionstechnik GmbH (Markus Weber, Fertigungsleiter)  
-**Auftragnehmer:** Dipl.-Ing. Buenotte (Freiberufliches Ingenieurbüro nach § 18 EStG)  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski (Freiberufliches Ingenieurbüro nach § 18 EStG)  
 **Gesamt-Budget:** 480,00 € netto (Festpreis)
 
 ---
@@ -20,7 +20,7 @@ c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_03_flanschpl
 │
 ├── 📩 01_KUNDENAUFTRAG_BRIEFING.md                  (Phase 1: Original-Kundenanfrage)
 │
-├── 📄 02_ANGEBOT_DIPL_ING_BUENOTTE.md               (Phase 2: B2B-Angebot nach § 18 EStG von Agent 4)
+├── 📄 02_ANGEBOT_DIPL_ING_BUJANOVSKI.md               (Phase 2: B2B-Angebot nach § 18 EStG von Agent 4)
 │
 ├── 💻 03_POSTPROZESSOR_uebung_03.cps                (Phase 3: JavaScript-Postprozessor von Agent 2)
 ├── ⚙️ 04_MASCHINENPROGRAMM_HAAS.nc                  (Phase 3: Fertiger Maschinencode für Haas VF-2)
@@ -46,7 +46,7 @@ c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_03_flanschpl
 * **Inhalt:** Das vollständige technische Briefing: Bauteilmaße ($80 \times 50 \times 12\,\text{mm}$), Rohteilmaße ($85 \times 55 \times 15\,\text{mm}$), Material (EN AW-6082), Maschinentyp (Haas VF-2), Werkzeuge (T01 D=10 mm, T02 D=6 mm) und Budget (480 €).
 
 ### 2. Phase 2: Kaufmännische Angebotslegung
-* **Artefakt:** `02_ANGEBOT_DIPL_ING_BUENOTTE.md`
+* **Artefakt:** `02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`
 * **Zuständiger Agent:** **`Agent 4 (Backoffice-Agent)`**
 * **Inhalt:** Rechtssicheres B2B-Ingenieurangebot mit Leistungsbeschreibung nach § 18 EStG *(„Ingenieurtechnische CAD/CAM-Prozessauslegung“)*, Zahlungszielen und dem unabdingbaren Haftungsausschluss *(Verpflichtung des Auftraggebers zum Einfahren des ersten Bauteils im Einzelsatz)*.
 

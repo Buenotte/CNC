@@ -10,7 +10,7 @@ Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten er
 
 | Artefakt-Dateiname | Was ist das? | Wo steht die Datei? *(Speicherort)* | Wer erzeugt sie? |
 | :--- | :--- | :--- | :---: |
-| **`02_ANGEBOT_DIPL_ING_BUENOTTE.md`** | Rechtssicheres B2B-Angebot (580,00 € netto) | [`02_ANGEBOT_DIPL_ING_BUENOTTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_12_radiuskorrektur_g41_h7/02_ANGEBOT_DIPL_ING_BUENOTTE.md) | **Agent 4** *(Backoffice)* |
+| **`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`** | Rechtssicheres B2B-Angebot (580,00 € netto) | [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_12_radiuskorrektur_g41_h7/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | **Agent 4** *(Backoffice)* |
 | **`uebung_12_radiuskorrektur_g41.nc`** | Fertiger Maschinencode für DMG MORI NVX 5080 | [`uebung_12_radiuskorrektur_g41.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_12_radiuskorrektur_g41_h7/uebung_12_radiuskorrektur_g41.nc) | **Agent 2** *(Post-Coder)* |
 | **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | 5-Stufen-Sicherheitsprüfbericht *(Null-Kollisions-Garantie)* | [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_12_radiuskorrektur_g41_h7/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | **Agent 3** *(NC-Safety)* |
 | **`06_EINRICHTEBLATT_SETUP_SHEET.md`** | Rüstdatenblatt für den Maschinenbediener vor Ort | [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_12_radiuskorrektur_g41_h7/06_EINRICHTEBLATT_SETUP_SHEET.md) | **Agent 3** *(NC-Safety)* |
@@ -26,7 +26,7 @@ Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten er
                              ▼
  ┌────────────────────────────────────────────────────────────────────────┐
  │ SCHRITT 1: ANGEBOT ERSTELLEN (Agent 4: Backoffice-Agent)              │
- │ Prompt 1 ausführen ──► Erzeugt: 02_ANGEBOT_DIPL_ING_BUENOTTE.md        │
+ │ Prompt 1 ausführen ──► Erzeugt: 02_ANGEBOT_DIPL_ING_BUJANOVSKI.md        │
  └───────────────────────────┬────────────────────────────────────────────┘
                              │
                              ▼
@@ -58,7 +58,7 @@ Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten er
 ```text
 Starte bitte Agent 4 (Backoffice-Agent):
 Lies die Kundenanfrage in c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_12_radiuskorrektur_g41_h7\KUNDENAUFTRAG.md.
-Erstelle direkt im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_12_radiuskorrektur_g41_h7\ das formelle B2B-Angebot "02_ANGEBOT_DIPL_ING_BUENOTTE.md" für Alexander Wagner (Werkstattleiter) (Wagner Getriebebau GmbH) über 580,00 € netto. Verwende ausschließlich ingenieurmäßige Leistungsbeschreibungen nach § 18 EStG und binde die verbindliche Haftungsausschluss-Klausel für das Einfahren des ersten Werkstücks im Einzelsatz ein.
+Erstelle direkt im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_12_radiuskorrektur_g41_h7\ das formelle B2B-Angebot "02_ANGEBOT_DIPL_ING_BUJANOVSKI.md" für Alexander Wagner (Werkstattleiter) (Wagner Getriebebau GmbH) über 580,00 € netto. Verwende ausschließlich ingenieurmäßige Leistungsbeschreibungen nach § 18 EStG und binde die verbindliche Haftungsausschluss-Klausel für das Einfahren des ersten Werkstücks im Einzelsatz ein.
 ```
 
 #### 🔍 Wie wird das Angebot getestet und geprüft?
@@ -114,7 +114,7 @@ Erstelle jetzt im selben Ordner die steuersichere Honorarrechnung "07_RECHNUNG_N
 ---
 
 ## 🛡️ 4. Abnahme-Kriterien (Checkliste für 100 % Erledigung)
-* [ ] [`02_ANGEBOT_DIPL_ING_BUENOTTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_12_radiuskorrektur_g41_h7/02_ANGEBOT_DIPL_ING_BUENOTTE.md) existiert und wurde geprüft.
+* [ ] [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_12_radiuskorrektur_g41_h7/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) existiert und wurde geprüft.
 * [ ] [`uebung_12_radiuskorrektur_g41.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_12_radiuskorrektur_g41_h7/uebung_12_radiuskorrektur_g41.nc) existiert und lief fehlerfrei im Simulator.
 * [ ] [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_12_radiuskorrektur_g41_h7/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) bescheinigt Status **BESTANDEN (GRÜN)**.
 * [ ] [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_12_radiuskorrektur_g41_h7/06_EINRICHTEBLATT_SETUP_SHEET.md) liegt vor.

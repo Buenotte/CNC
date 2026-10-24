@@ -12,7 +12,7 @@ Sobald du die Agenten beauftragst, entstehen direkt in diesem Ordner die folgend
 
 | Artefakt-Dateiname | Was ist das? | Wo steht die Datei? *(Speicherort)* | Wer erzeugt sie? |
 | :--- | :--- | :--- | :---: |
-| **`02_ANGEBOT_DIPL_ING_BUENOTTE.md`** | Rechtssicheres B2B-Ingenieurangebot *(Festpreis 480 € netto)* | [`c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\02_ANGEBOT_DIPL_ING_BUENOTTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/02_ANGEBOT_DIPL_ING_BUENOTTE.md) | **Agent 4** *(Backoffice)* |
+| **`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`** | Rechtssicheres B2B-Ingenieurangebot *(Festpreis 480 € netto)* | [`c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | **Agent 4** *(Backoffice)* |
 | **`uebung_03_z_min_berechnung.nc`** | Fertiger Maschinencode für Haas VF-2 *(mit Z-MIN Header)* | [`c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\uebung_03_z_min_berechnung.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/uebung_03_z_min_berechnung.nc) | **Agent 2** *(Post-Coder)* |
 | **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | 5-Stufen-Sicherheitsprüfbericht *(Null-Kollisions-Garantie)* | [`c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | **Agent 3** *(NC-Safety)* |
 | **`06_EINRICHTEBLATT_SETUP_SHEET.md`** | Werkstatt-Rüstdatenblatt für den Maschinenbediener vor Ort | [`c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/06_EINRICHTEBLATT_SETUP_SHEET.md) | **Agent 3** *(NC-Safety)* |
@@ -29,7 +29,7 @@ Sobald du die Agenten beauftragst, entstehen direkt in diesem Ordner die folgend
                              ▼
  ┌────────────────────────────────────────────────────────────────────────┐
  │ SCHRITT 1: ANGEBOT ERSTELLEN (Agent 4: Backoffice-Agent)              │
- │ Prompt 1 ausführen ──► Erzeugt: 02_ANGEBOT_DIPL_ING_BUENOTTE.md        │
+ │ Prompt 1 ausführen ──► Erzeugt: 02_ANGEBOT_DIPL_ING_BUJANOVSKI.md        │
  └───────────────────────────┬────────────────────────────────────────────┘
                              │
                              ▼
@@ -63,11 +63,11 @@ Sobald du die Agenten beauftragst, entstehen direkt in diesem Ordner die folgend
 ```text
 Starte bitte Agent 4 (Backoffice-Agent):
 Lies die Kundenanfrage in c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\KUNDENAUFTRAG.md.
-Erstelle direkt im Ordner c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\ das formelle B2B-Angebot "02_ANGEBOT_DIPL_ING_BUENOTTE.md" für Markus Weber (Schmidt Präzisionstechnik GmbH) über 480,00 € netto. Verwende ausschließlich ingenieurmäßige Leistungsbeschreibungen nach § 18 EStG und binde die verbindliche Haftungsausschluss-Klausel für das Einfahren des ersten Werkstücks im Einzelsatz ein.
+Erstelle direkt im Ordner c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\ das formelle B2B-Angebot "02_ANGEBOT_DIPL_ING_BUJANOVSKI.md" für Markus Weber (Schmidt Präzisionstechnik GmbH) über 480,00 € netto. Verwende ausschließlich ingenieurmäßige Leistungsbeschreibungen nach § 18 EStG und binde die verbindliche Haftungsausschluss-Klausel für das Einfahren des ersten Werkstücks im Einzelsatz ein.
 ```
 
 #### 🔍 Wie wird das Angebot getestet und geprüft?
-Öffne nach Erstellung die Datei `02_ANGEBOT_DIPL_ING_BUENOTTE.md` und prüfe folgende **3 Kriterien**:
+Öffne nach Erstellung die Datei `02_ANGEBOT_DIPL_ING_BUJANOVSKI.md` und prüfe folgende **3 Kriterien**:
 1. **Honorar-Prüfung:** Steht dort exakt der Festpreis von **`480,00 € netto`** *(zzgl. 19 % USt.)*?
 2. **Freiberufler-Prüfung:** Werden Begriffe wie *„Ingenieurtechnische CAD/CAM-Prozessauslegung“* verwendet *(Finanzamtssicher nach § 18 EStG, keine gewerbliche Einstufung als Lohnfertiger)*?
 3. **Haftungsausschluss-Check:** Ist die Klausel enthalten, dass das erste Werkstück vom qualifizierten Personal des Kunden im Einzelsatz *(Single Block)* an der Haas VF-2 eingefahren werden muss?
@@ -159,7 +159,7 @@ Erstelle jetzt im selben Ordner die steuersichere Honorarrechnung "07_RECHNUNG_N
 ## 🛡️ 4. Abnahme-Kriterien (Checkliste für 100 % Erledigung)
 
 Sobald du die 4 Prompts ausgeführt hast, befinden sich alle Artefakte in deinem Test-Ordner:
-* [ ] [`02_ANGEBOT_DIPL_ING_BUENOTTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/02_ANGEBOT_DIPL_ING_BUENOTTE.md) existiert und wurde geprüft.
+* [ ] [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) existiert und wurde geprüft.
 * [ ] [`uebung_03_z_min_berechnung.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/uebung_03_z_min_berechnung.nc) existiert mit Z-MIN Header und lief im Simulator.
 * [ ] [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) bescheinigt Status **BESTANDEN (GRÜN)**.
 * [ ] [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/06_EINRICHTEBLATT_SETUP_SHEET.md) liegt druckfertig vor.

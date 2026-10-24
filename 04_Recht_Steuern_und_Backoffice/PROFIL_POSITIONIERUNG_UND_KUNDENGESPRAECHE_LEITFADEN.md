@@ -8,7 +8,7 @@
 ---
 
 **Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung**  
-*Inhaber: Dipl.-Ing. Buenotte • 63526 Erlensee • 100 % Remote-Engineering nach § 18 EStG*
+*Inhaber: Dipl.-Ing. Bujanovski • 63526 Erlensee • 100 % Remote-Engineering nach § 18 EStG*
 
 ---
 
@@ -52,7 +52,7 @@ Erwähnen Sie niemals „Feierabend“ oder „am Wochenende“. Nutzen Sie die 
 
 ### A. Profil-Slogan / Headline (LinkedIn & XING)
 ```text
-Dipl.-Ing. Buenotte | Remote Engineering für CNC-Postprozessoren, NC-Sicherheitsautomation & CAM-Fertigungsdokumentation
+Dipl.-Ing. Bujanovski | Remote Engineering für CNC-Postprozessoren, NC-Sicherheitsautomation & CAM-Fertigungsdokumentation
 Spezialisiert auf Autodesk Fusion, Heidenhain, Siemens Sinumerik & Fanuc • Null-Kollisions-Prüfung nach § 18 EStG
 ```
 
@@ -93,21 +93,21 @@ Freiberuflicher Diplom-Ingenieur für CAM-Postprozessor-Entwicklung (Autodesk Fu
 
 ### D. Vollständige Vorlage für das separate GitHub-Firmenprofil (Account / Organization)
 
-Wenn Sie Ihren privaten GitHub-Account sauber trennen und eine offizielle Präsenz für das Ingenieurbüro einrichten (z. B. als neuer Account oder kostenlose GitHub-Organisation `buenotte-engineering` / `buenotte-cad-cam`), tragen Sie folgende Daten ein:
+Wenn Sie Ihren privaten GitHub-Account sauber trennen und eine offizielle Präsenz für das Ingenieurbüro einrichten (z. B. als neuer Account oder kostenlose GitHub-Organisation `bujanovski-engineering` / `bujanovski-cad-cam`), tragen Sie folgende Daten ein:
 
 #### 1. Die Profil-Stammdaten:
-* **Name:** `Dipl.-Ing. Buenotte | CAD/CAM Engineering`
+* **Name:** `Dipl.-Ing. Bujanovski | CAD/CAM Engineering`
 * **Bio (Kurz-Info):** `Freiberuflicher Ingenieur für CNC-Postprozessoren, Z-MIN-Kollisionsschutz & Fertigungsdokumentation • 100 % Remote nach § 18 EStG • Erlensee, Hessen`
-* **Company (Firma):** `Ingenieurbüro Dipl.-Ing. Buenotte`
+* **Company (Firma):** `Ingenieurbüro Dipl.-Ing. Bujanovski`
 * **Location (Standort):** `Erlensee / Frankfurt am Main, Germany`
 * **Website / Link:** Link zum LinkedIn-Profil oder zur Portfolio-Mappe
 
 #### 2. Das Profil-README (`README.md` im Profil-Repository):
 ```markdown
-# 🏛️ Ingenieurbüro Dipl.-Ing. Buenotte
+# 🏛️ Ingenieurbüro Dipl.-Ing. Bujanovski
 ### CAD/CAM-Fertigungstechnik • Postprozessor-Engineering • NC-Sicherheitsautomation
 
-Willkommen auf der offiziellen Entwicklungs- und Code-Präsenz des **Ingenieurbüros Dipl.-Ing. Buenotte** (Sitz in 63526 Erlensee bei Frankfurt am Main). 
+Willkommen auf der offiziellen Entwicklungs- und Code-Präsenz des **Ingenieurbüros Dipl.-Ing. Bujanovski** (Sitz in 63526 Erlensee bei Frankfurt am Main). 
 
 Wir unterstützen Zerspanungsbetriebe, Lohnfertiger und Werkzeugbauer im gesamten DACH-Raum (Deutschland, Österreich, Schweiz) mit **100 % digitalem Remote-Engineering**: Von der maßgeschneiderten Postprozessor-Entwicklung über die mathematische Null-Kollisions-Prüfung bis zu schlüsselfertigen Einrichteblättern für den Maschinenbediener.
 
@@ -143,16 +143,16 @@ Da Bauteile im Kundenauftrag strenger Geheimhaltung (NDA) unterliegen, finden Si
 
 | Projekt | Werkstoff & Bauteil | Steuerung & Kinematik | Technologische Highlights |
 | :--- | :--- | :--- | :--- |
-| **[Projekt 01: 2,5D-Präzision](https://github.com/Buenotte/CNC/tree/main/04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_01_25D_Praezisionsfraesteil)** | `42CrMo4`<br>Lagergehäuse | 3-Achs Fräszentrum<br>(Haas / Fanuc ISO) | • Passungsbohrung **Ø 52 H7**<br>• Trochoidales Schruppen (HPC)<br>• OP10/OP20 mit 3 mm Spannrand |
-| **[Projekt 02: 3+2-Mehrseiten](https://github.com/Buenotte/CNC/tree/main/04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_02_3plus2_Mehrseiten_Ventilblock)** | `EN AW-7075`<br>Hydraulik-Ventilblock | 5-Achs Dreh-Schwenktisch<br>(Heidenhain / Siemens) | • 5-Seiten-Bearbeitung in 1 Aufspannung<br>• Ebenen-Transformation **`PLANE SPATIAL`** & **`CYCLE800`**<br>• Sichere Rückzugsstrategie |
-| **[Projekt 03: 3D-Freiform & 5-Achs](https://github.com/Buenotte/CNC/tree/main/04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_03_3D_Freiform_und_5Achs)** | `1.2379` / `TiAl6V4`<br>Strömungs-Leitrad | 5-Achs Simultanfräsen<br>(Hermle / DMG MORI) | • Kreissegment-/Tonnenfräser ($R_z < 2\,\mu\text{m}$)<br>• Vektorführung zur Vermeidung von $v_c = 0$<br>• Restmaterial-Kaskade |
-| **[Projekt 04: Postprozessor](https://github.com/Buenotte/CNC/tree/main/04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_04_Postprozessor_und_CAM_Automatisierung)** | Universell<br>CPS-Automatisierung | Heidenhain TNC 640 &<br>Sinumerik 840D sl | • Automatische Z-MIN-Kollisionsberechnung<br>• Satzvorlauf-Sicherheit (LBL-Struktur)<br>• Laser-Werkzeugbruchkontrolle |
+| **[Projekt 01: 2,5D-Präzision](https://github.com/Bujanovski/CNC/tree/main/04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_01_25D_Praezisionsfraesteil)** | `42CrMo4`<br>Lagergehäuse | 3-Achs Fräszentrum<br>(Haas / Fanuc ISO) | • Passungsbohrung **Ø 52 H7**<br>• Trochoidales Schruppen (HPC)<br>• OP10/OP20 mit 3 mm Spannrand |
+| **[Projekt 02: 3+2-Mehrseiten](https://github.com/Bujanovski/CNC/tree/main/04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_02_3plus2_Mehrseiten_Ventilblock)** | `EN AW-7075`<br>Hydraulik-Ventilblock | 5-Achs Dreh-Schwenktisch<br>(Heidenhain / Siemens) | • 5-Seiten-Bearbeitung in 1 Aufspannung<br>• Ebenen-Transformation **`PLANE SPATIAL`** & **`CYCLE800`**<br>• Sichere Rückzugsstrategie |
+| **[Projekt 03: 3D-Freiform & 5-Achs](https://github.com/Bujanovski/CNC/tree/main/04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_03_3D_Freiform_und_5Achs)** | `1.2379` / `TiAl6V4`<br>Strömungs-Leitrad | 5-Achs Simultanfräsen<br>(Hermle / DMG MORI) | • Kreissegment-/Tonnenfräser ($R_z < 2\,\mu\text{m}$)<br>• Vektorführung zur Vermeidung von $v_c = 0$<br>• Restmaterial-Kaskade |
+| **[Projekt 04: Postprozessor](https://github.com/Bujanovski/CNC/tree/main/04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_04_Postprozessor_und_CAM_Automatisierung)** | Universell<br>CPS-Automatisierung | Heidenhain TNC 640 &<br>Sinumerik 840D sl | • Automatische Z-MIN-Kollisionsberechnung<br>• Satzvorlauf-Sicherheit (LBL-Struktur)<br>• Laser-Werkzeugbruchkontrolle |
 
 ---
 
 ### 📂 Ausgewählte Werkzeuge & Repositories in diesem Workspace
 
-* 🔹 **[CNC-Postprocessor-Toolkit](https://github.com/Buenotte/CNC):** Vollständige Testumgebung mit lokalem Node.js-Simulator (`simuliere_post.js`) zur sekundenschnellen Postprozessor-Validierung ohne CAD-Lizenz.
+* 🔹 **[CNC-Postprocessor-Toolkit](https://github.com/Bujanovski/CNC):** Vollständige Testumgebung mit lokalem Node.js-Simulator (`simuliere_post.js`) zur sekundenschnellen Postprozessor-Validierung ohne CAD-Lizenz.
 * 🔹 **Universal 3D CAD/CAM Viewer:** Browserbasiertes 3D-Messwerkzeug mit automatischer Bounding-Box-Bemaßung, Kantenanalyse und Bauteilgewichtsberechnung (Aluminium/Stahl).
 * 🔹 **Setup Sheet Extractor:** Python-Tool zur statischen G-Code-Inspektion und automatischen Rüstblatt-Generierung.
 
@@ -343,16 +343,16 @@ Ein separates E-Mail-Konto ist die professionelle Basis für den sauberen Start 
 3. **Kostenlose Projekt-Cloud (15 GB Google Drive):** 3D-STEP-Dateien, CAD-Modelle und gerenderte 3D-Simulationsvideos (.MP4), die zu groß für normale E-Mail-Anhänge sind, können direkt über sichere Google-Drive-Download-Links für den Kunden bereitgestellt werden.
 
 ### B. Namens-Empfehlungen für die neue Gmail-Adresse:
-* `buenotte.engineering@gmail.com` (Favorit 1)
-* `ing.buenotte@gmail.com` (Favorit 2)
-* `dipl.ing.buenotte@gmail.com` (Favorit 3)
-* `cadcam.buenotte@gmail.com` (Favorit 4)
+* `bujanovski.engineering@gmail.com` (Favorit 1)
+* `ing.bujanovski@gmail.com` (Favorit 2)
+* `dipl.ing.bujanovski@gmail.com` (Favorit 3)
+* `cadcam.bujanovski@gmail.com` (Favorit 4)
 
 ### C. Wichtige Absender-Einstellung in Google:
 Tragen Sie in den Google-Konto-Einstellungen als offiziellen Absendernamen ein:  
-👉 **`Dipl.-Ing. Buenotte | CAD/CAM Engineering`**  
+👉 **`Dipl.-Ing. Bujanovski | CAD/CAM Engineering`**  
 *Wirkung beim Kunden:* Der Kunde sieht im E-Mail-Postfach sofort den professionellen Absender:  
-*„Dipl.-Ing. Buenotte | CAD/CAM Engineering <buenotte.engineering@gmail.com>“*.
+*„Dipl.-Ing. Bujanovski | CAD/CAM Engineering <bujanovski.engineering@gmail.com>“*.
 
 ---
 

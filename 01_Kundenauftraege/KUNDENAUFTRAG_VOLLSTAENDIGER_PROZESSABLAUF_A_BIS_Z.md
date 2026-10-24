@@ -122,7 +122,7 @@ Falls ein Kunde nur knapp schreibt *(„Hallo, wir brauchen einen Postprozessor 
 > Nach Erhalt dieser Angaben erstelle ich Ihnen umgehend das Festpreisangebot und liefere den fertigen Postprozessor innerhalb von 24 bis 48 Stunden aus.
 > 
 > Mit freundlichen Grüßen  
-> Dipl.-Ing. Buenotte – Diplom-Ingenieur & Senior Software Engineer
+> Dipl.-Ing. Bujanovski – Diplom-Ingenieur & Senior Software Engineer
 
 #### 4. Wie gibst du die Kundenanforderungen an Agent 2 weiter?
 Sobald der Kunde geantwortet hat, kopierst du die Anforderungen einfach in diesen Chat-Prompt:
@@ -325,7 +325,7 @@ Viele Werkstatt-Chefs und Lohnfertiger (5 bis 20 Mitarbeiter) suchen bei Engpäs
 > Kontaktieren Sie mich gerne mit einer Zeichnung oder einem 3D-Modell für ein unverbindliches Festpreisangebot!  
 > 
 > **Ingenieurbüro für CAD/CAM-Technik**  
-> Dipl.-Ing. Dipl.-Ing. Buenotte  
+> Dipl.-Ing. Dipl.-Ing. Bujanovski  
 > E-Mail: [Ihre geschäftliche E-Mail]  
 > Sitz: 63526 Erlensee / 100 % Remote deutschlandweit
 > 
@@ -567,7 +567,7 @@ Sie versenden die von Agent 4 erstellte E-Mail an Ihren Kunden:
 > Bitte geben Sie das Video kurz frei. Nach Eingang der 2. Teilzahlung (Restbetrag: [Betrag] €) erhalten Sie umgehend die fertige `.NC`-Maschinendatei sowie das ausdruckbare Einrichteblatt für Ihren Fräser.  
 > 
 > Mit freundlichen Grüßen  
-> Dipl.-Ing. Buenotte – CAD/CAM Ingenieurbüro
+> Dipl.-Ing. Bujanovski – CAD/CAM Ingenieurbüro
 
 👉 **Der psychologische Effekt:** Der Kunde sieht das Video, ist begeistert, weil er genau sieht, dass alles passt, gibt die Freigabe und überweist sofort das Geld!
 
@@ -710,7 +710,7 @@ Viele Einsteiger fragen: *„Muss ich das Werkstück nicht mit einer echten Kame
 > Bitte bestätigen Sie dieses Angebot kurz per E-Mail. Nach Eingang der Anzahlung beginnen wir umgehend mit der Programmierung.
 > 
 > Mit freundlichen Grüßen  
-> Dipl.-Ing. Buenotte – Diplom-Ingenieur & Senior Software Engineer
+> Dipl.-Ing. Bujanovski – Diplom-Ingenieur & Senior Software Engineer
 
 ---
 
@@ -730,7 +730,7 @@ Viele Einsteiger fragen: *„Muss ich das Werkstück nicht mit einer echten Kame
 > Bitte geben Sie das Video kurz frei. Nach Ausgleich der beiliegenden Schlussrechnung über [Restbetrag] € senden wir Ihnen umgehend die fertige `.NC`-Datei und das Einrichteblatt für Ihren Maschinenbediener zu.
 > 
 > Mit freundlichen Grüßen  
-> Dipl.-Ing. Buenotte – CAD/CAM Ingenieurbüro
+> Dipl.-Ing. Bujanovski – CAD/CAM Ingenieurbüro
 
 ---
 
@@ -750,7 +750,7 @@ Viele Einsteiger fragen: *„Muss ich das Werkstück nicht mit einer echten Kame
 > Wir wünschen eine erfolgreiche und späneintensive Fertigung und freuen uns auf das nächste gemeinsame Projekt!
 > 
 > Mit freundlichen Grüßen  
-> Dipl.-Ing. Buenotte – CAD/CAM Ingenieurbüro
+> Dipl.-Ing. Bujanovski – CAD/CAM Ingenieurbüro
 
 ---
 

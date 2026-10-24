@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Repariert alle gefundenen Pfade und Platzhalter:
-1. Ersetzt [Ihr Name] / [Ihre Unterschrift] mit Dipl.-Ing. Buenotte
+1. Ersetzt [Ihr Name] / [Ihre Unterschrift] mit Dipl.-Ing. Bujanovski
 2. Korrigiert alle verschobenen Dateipfade (web_tools, Vorlagen, referenz_auftrag, etc.)
 """
 
@@ -68,8 +68,8 @@ az_file = os.path.join(BASE_DIR, "01_Kundenauftraege", "KUNDENAUFTRAG_VOLLSTAEND
 if os.path.exists(az_file):
     with open(az_file, "r", encoding="utf-8") as f:
         az_c = f.read()
-    az_c = az_c.replace("[Ihr Name]", "Dipl.-Ing. Buenotte")
-    az_c = az_c.replace("[Ihre Unterschrift]", "Dipl.-Ing. Buenotte")
+    az_c = az_c.replace("[Ihr Name]", "Dipl.-Ing. Bujanovski")
+    az_c = az_c.replace("[Ihre Unterschrift]", "Dipl.-Ing. Bujanovski")
     with open(az_file, "w", encoding="utf-8") as f:
         f.write(az_c)
 

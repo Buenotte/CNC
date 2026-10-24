@@ -1,6 +1,6 @@
 # 📩 Kundenauftrag: Übung 10: Die 2. Aufspannung (`G55` / `OP20`) – Wie das 3D-Bauteil umgedreht und der Restboden auf der Rückseite plangefräst wird
 **Auftrags-Kategorie:** 10 (Restboden-Planfräsen in der 2. Aufspannung)
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
 
 ---
@@ -10,11 +10,11 @@
 So sieht eine typische Anfrage aus, wenn ein Bauteil nach der ersten Aufspannung noch den Spannrand am Boden hat und komplett auf Fertigmaß gebracht werden muss:
 
 > **Von:** Robert Schneider *(Fertigungsleiter)* `<r.schneider@alutech-gehaeuse.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 24. Oktober 2026, 10:30 Uhr  
 > **Betreff:** CAM-Programmierung OP20: Umdrehen & Planfräsen auf Fertigdicke 12.0 mm  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
 > 
 > wir fertigen in unserem Werk in Friedrichshafen 200 Elektronik-Gehäuse. Die 1. Aufspannung *(OP10: Kontur, Taschen und Bohrungen)* läuft bereits.  
 > 
@@ -36,6 +36,6 @@ So sieht eine typische Anfrage aus, wenn ein Bauteil nach der ersten Aufspannung
 ---
 
 ## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUENOTTE.md` in diesem Ordner.
+* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
 * **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
 * **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

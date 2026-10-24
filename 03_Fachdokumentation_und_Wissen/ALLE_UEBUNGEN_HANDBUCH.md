@@ -5,27 +5,70 @@ Jede neue Übung, die wir gemeinsam machen, wird hier vollständig dokumentiert 
 
 ---
 
+## 🚀 Schnell-Navigation: Direktsprung zu jeder Übung (Cockpit-Übersicht)
+
+Nutze diese interaktive Sprungleiste und die Übersichtstabelle, um mit einem Klick direkt zu jeder gewünschten Übung, der dazugehörigen Quellcodedatei (`.cps`) oder der realen Kundenauftragsakte zu springen:
+
+### ⚡ 1-Klick-Schnellzugriff (Direktsprung-Leiste):
+> **Einsteiger:** [`⭐ Basis A`](#basis-uebung-a) • [`⭐ Basis B`](#basis-uebung-b) • [`Übung 00b (Hallo Welt)`](#uebung-00b)  
+> **Grundlagen (1–8):** [`Übung 1`](#uebung-01) • [`Übung 2`](#uebung-02) • [`Übung 3`](#uebung-03) • [`Übung 4`](#uebung-04) • [`Übung 5`](#uebung-05) • [`Übung 6`](#uebung-06) • [`Übung 7`](#uebung-07) • [`Übung 8`](#uebung-08)  
+> **Profi (9–16):** [`Übung 9`](#uebung-09) • [`Übung 10`](#uebung-10) • [`Übung 11`](#uebung-11) • [`Übung 12`](#uebung-12) • [`Übung 13`](#uebung-13) • [`Übung 14`](#uebung-14) • [`Übung 15`](#uebung-15) • [`Übung 16 (Meister)`](#uebung-16)  
+> **Spezial-Tools:** [`3D-Viewer & Simulator`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/universal_3d_viewer.html) • [`Rüst-Lehrvideo (MP4)`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/videos/zerspanungsmechaniker_ruest_und_spann_anleitung.mp4) • [`Sicherheitsprüfliste`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md)
+
+---
+
+### 📋 Vollständige Navigationstabelle aller 16 Übungen (+ Basis-Übungen):
+
+| Nr. | Thema & Kernfunktion *(Erklärung)* | Schwierigkeit | Direktsprung Handbuch | Quellcode-Datei (`.cps`) | Kundenauftrags-Akte *(Ordner)* |
+| :---: | :--- | :---: | :---: | :---: | :---: |
+| **A** | **G-Code-Grundlagen:** Die 5 wichtigsten Zeilen lesen lernen | ⭐☆☆☆☆ | [📖 Kapitel öffnen](#basis-uebung-a) | — | [`Theorie & Syntax`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md#basis-uebung-a) |
+| **B** | **Erste Code-Änderung:** Eine Zeile im Postprozessor anpassen | ⭐⭐☆☆☆ | [📖 Kapitel öffnen](#basis-uebung-b) | [`uebung_00b.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_00b_hallo_welt.cps) | [`auftrag_00b`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/) |
+| **00b** | **Hallo Welt:** Erster eigener Text im Maschinencode | ⭐⭐☆☆☆ | [📖 Kapitel öffnen](#uebung-00b) | [`uebung_00b.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_00b_hallo_welt.cps) | [`auftrag_00b`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/) |
+| **01** | **Entwickler-Header:** Infoblock in `onOpen()` für Rückverfolgbarkeit | ⭐⭐☆☆☆ | [📖 Kapitel öffnen](#uebung-01) | [`uebung_01.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_01_entwickler_header.cps) | [`auftrag_01_header`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_01_header_werkzeugbau/) |
+| **02** | **Werkzeugliste (`Tool Table`):** Automatische Rüstliste am Start | ⭐⭐⭐☆☆ | [📖 Kapitel öffnen](#uebung-02) | [`uebung_02.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_02_werkzeugliste.cps) | [`auftrag_02_werkzeugliste`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_02_werkzeugliste_feinmechanik/) |
+| **03** | **Z-MIN Berechnung:** Kollisionsschutz gegen Schraubstock-Crash | ⭐⭐⭐☆☆ | [📖 Kapitel öffnen](#uebung-03) | [`uebung_03.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_03_z_min_berechnung.cps) | [`auftrag_03_flanschplatte`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_03_flanschplatte_z_min/) |
+| **04** | **3D-Modell & CAM-Post:** Reales Kundenbauteil vom CAD zum Code | ⭐⭐⭐☆☆ | [📖 Kapitel öffnen](#uebung-04) | [`uebung_04.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.cps) | [`auftrag_04_lagerplatte`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_04_lagerplatte_3d_cam/) |
+| **05** | **3D-Simulation & Setup Sheet:** Browser-Prüfung & Rüstdatenblatt | ⭐⭐⭐☆☆ | [📖 Kapitel öffnen](#uebung-05) | [`uebung_05_doku.md`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_05_3d_simulation_und_einrichteblatt.md) | [`auftrag_05_einrichtedoku`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/) |
+| **06** | **Sicherer Rückzug (`onClose`):** Tisch fährt am Ende zur Kabinentür | ⭐⭐⭐☆☆ | [📖 Kapitel öffnen](#uebung-06) | [`uebung_06.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.cps) | [`auftrag_06_sicherer_rueckzug`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_06_sicherer_rueckzug_arbeitsschutz/) |
+| **07** | **Späneförderer-Schalter:** Menü-Checkbox für Zusatzfunktionen (`M07`) | ⭐⭐⭐☆☆ | [📖 Kapitel öffnen](#uebung-07) | [`uebung_07.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_07_spaenefoerderer_schalter.cps) | [`auftrag_07_spaenefoerderer`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_07_spaenefoerderer_schalter/) |
+| **08** | **Dialekt-Vergleich:** Haas/Fanuc ISO vs. Siemens Sinumerik | ⭐⭐⭐⭐☆ | [📖 Kapitel öffnen](#uebung-08) | [`uebung_08.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_08_fanuc_siemens_dialekt.cps) | [`auftrag_08_migration_siemens`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_08_migration_siemens_ventilblock/) |
+| **09** | **Schnittdaten-Rechner:** Plausibilitätsprüfung Drehzahl $S$ & Vorschub $F$ | ⭐⭐⭐⭐☆ | [📖 Kapitel öffnen](#uebung-09) | [`uebung_09.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_09_schnittdaten_check.cps) | [`auftrag_09_schnittdaten`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_09_schnittdaten_edelstahl/) |
+| **10** | **2. Aufspannung (`G55 / OP20`):** Werkstück umdrehen & Restboden planen | ⭐⭐⭐⭐☆ | [📖 Kapitel öffnen](#uebung-10) | [`uebung_10.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_10_zweite_aufspannung_g55.cps) | [`auftrag_10_zweite_aufspannung`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_10_zweite_aufspannung_op20/) |
+| **11** | **Gewindebohren (`G84 Rigid Tapping`):** Synchronisation $F = S \times P$ | ⭐⭐⭐⭐☆ | [📖 Kapitel öffnen](#uebung-11) | [`uebung_11.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_11_gewindebohren_g84.cps) | [`auftrag_11_gewindebohren`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_11_gewindebohren_g84_m8/) |
+| **12** | **Radiuskorrektur (`G41/G42`):** Passungstoleranzen $0{,}01\,\text{mm}$ anpassen | ⭐⭐⭐⭐☆ | [📖 Kapitel öffnen](#uebung-12) | [`uebung_12.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_12_radiuskorrektur_g41.cps) | [`auftrag_12_radiuskorrektur`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_12_radiuskorrektur_g41_h7/) |
+| **13** | **3D-Freiformflächen:** Wirbelfräsen & Kugelfräser-Schlichten | ⭐⭐⭐⭐⭐ | [📖 Kapitel öffnen](#uebung-13) | [`uebung_13.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_13_3d_freiformflaechen.cps) | [`auftrag_13_3d_freiform`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_13_3d_freiformflaeche_alu/) |
+| **14** | **Heidenhain Klartext & 4. Achse:** `TOOL CALL` & Teilapparat ($A$-Achse) | ⭐⭐⭐⭐⭐ | [📖 Kapitel öffnen](#uebung-14) | [`uebung_14.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_14_heidenhain_klartext_4achse.cps) | [`auftrag_14_heidenhain_4achs`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/) |
+| **15** | **Fasenfräsen (`Chamfer Milling`):** Automatisches 45°-Entgraten | ⭐⭐⭐⭐⭐ | [📖 Kapitel öffnen](#uebung-15) | [`uebung_15.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_15_fasenfraesen_entgraten.cps) | [`auftrag_15_fasenfraesen`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_15_fasenfraesen_entgraten/) |
+| **16** | **Meister-Endabnahme:** 5-Punkte-Audit & Gesamt-Zertifizierung | ⭐⭐⭐⭐⭐ | [📖 Kapitel öffnen](#uebung-16) | [`uebung_16.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_16_endabnahme_meister_post.cps) | [`auftrag_16_meister_audit`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_16_meister_endabnahme_audit/) |
+
+---
+
 ## 💡 GRUNDWISSEN VORAB: Warum muss man für CNC-Maschinen JavaScript programmieren – und warum zahlen Metall-Firmen dafür 400 € bis 800 €?
 
 Bevor du mit Übung 1 startest, ist hier in 3 einfachen Punkten erklärt, **warum** du in diesem Handbuch sowohl **CNC-G-Code** als auch **JavaScript (`.cps`)** lernst und warum genau diese Kombination deine Goldgrube ist:
 
 ### 1. Warum muss man für eine CNC-Fräsmaschine überhaupt JavaScript programmieren?
+
 * Wenn ein Betrieb im Büro ein **3D-CAM-Programm *(Software zur Fertigungsplanung am PC, z. B. Autodesk Fusion 360)*** nutzt, klickt man dort nur mit der Maus auf ein 3D-Bauteil.
 * Jede CNC-Fräsmaschine in der Werkhalle spricht aber einen **anderen Dialekt** *(Heidenhain Klartext, Siemens Sinumerik, Fanuc, Haas, Mazak)* und jeder Werkstatt-Chef hat eigene Sicherheits-Sonderwünsche *(z. B. eine automatische Werkzeugliste am Programmanfang, die Berechnung der tiefsten Frästiefe `Z-MIN` gegen Schraubstock-Crashs oder das Parken des Tisches an der Kabinentür)*.
 * **Das Entscheidende:** Für diese Sonderwünsche gibt es im CAM-Programm **keine Knöpfe zum Anklicken**! Stattdessen benutzt das CAM-Programm im Hintergrund eine **Übersetzungs-Datei mit der Endung `.cps` (den Postprozessor)** – und diese Datei ist zu **100 % in der Programmiersprache JavaScript** geschrieben *(bei Siemens NX in Tcl/Python)*. Wer also möchte, dass aus dem CAM-Programm auf Knopfdruck perfekter, sicherer Maschinencode herauskommt, **muss diese `.cps`-JavaScript-Datei öffnen und darin JavaScript-Code programmieren**!
 
 ### 2. Warum können der Chef der Metall-Firma („Herr Müller“) und seine Fräser das nicht selbst?
+
 * Ein **Zerspanungsmechaniker *(CNC-Fräser)*** oder **Industriemeister Metall** lernt in seiner 3,5-jährigen Ausbildung alles über Stahl, Aluminium, Fräser, Schraubstöcke und Messschieber – aber **keine einzige Stunde Softwareentwicklung oder JavaScript**!
 * Wenn Herr Müller die Datei `mein_erster_post.cps` öffnet und dort 4.000 Zeilen JavaScript-Code (`function onOpen()`, `for`-Schleifen, `getGlobalZRange()`) sieht, versteht er kein Wort.
 * Umgekehrt verstehen normale Web-/App-Programmierer zwar JavaScript, wissen aber nicht, was ein Schraubstock, Kühlmittel (`M08`), Gewindebohren (`G84`) oder eine Frästiefe (`Z-MIN`) ist.
 
 ### 3. Wofür zahlt Herr Müller DIR mit Freude 400 € bis 800 €?
+
 * Ohne angepassten Postprozessor sieht der Arbeiter an der 200.000-€-Fräsmaschine am Programmanfang nicht, welche Werkzeuge er braucht und wie tief der Fräser nach unten fährt (`Z-MIN`). Spannt er das Metallteil 5 mm zu tief in den Schraubstock, knallt der Fräser in den Stahl-Schraubstock (**5.000 € bis 15.000 € Reparaturkosten!**).
 * Du als **Software Engineer & Diplom-Ingenieur** baust Herrn Müller genau die Funktionen aus diesen **16 Übungen** *(automatische Werkzeugliste, `Z-MIN`-Tiefe, Schnittdaten-Check, sicherer Rückzug)* in seine `.cps`-JavaScript-Datei ein.
 * Herr Müller bezahlt dich **einmalig (z. B. 400 € bis 800 €)**, bekommt deine umprogrammierte `.cps`-Datei per E-Mail geschickt, und ab diesem Tag kommt bei ihm in der Firma bei jedem Knopfdruck automatisch der perfekte, crashsichere Maschinencode heraus!
 
 ### 4. Spielt das Material eine Rolle? (Stahl vs. Aluminium vs. Holz & Kunststoff)
+
 Hier gibt es eine ganz wichtige Unterscheidung:
+
 * **Für die Postprozessor-Programmierung in JavaScript (`.cps`): NEIN – das Material ist zu 99 % egal!**
   Egal ob eine CNC-Maschine **Stahl**, **Aluminium**, **Kunststoff (Plastik)** oder **Holz *(in einer Schreinerei / Tischlerei / im Möbel- und Messebau)*** fräst: **Jede** CNC-Maschine braucht einen Postprozessor (`.cps`), der aus dem 3D-Modell den Maschinencode erzeugt! Und ein Tischlermeister (Holz) kann genauso wenig JavaScript programmieren wie ein Metallbauer. Gerade Schreinereien und Aluminium-/Kunststoff-Betriebe kaufen sich extrem oft *Autodesk Fusion 360* und zahlen dir gutes Geld dafür, dass du ihren Postprozessor anpasst *(z. B. damit sich bei einer Holz-CNC-Fräse automatisch die **Staubabsaugung [Späneabsaugung]** und der **Vakuumtisch [Unterdruck-Plattenspannung]** einschalten statt Kühlwasser!)*.
 * **Für die CAM-Programmierung der Schnittdaten (siehe Übung 9): JA – hier entscheidet das Material über Drehzahl (`S`), Vorschub (`F`) und Kühlung!**
@@ -72,6 +115,7 @@ Das Zusammenspiel funktioniert über eine **4-stufige Daten-Pipeline *(Architekt
 ```
 
 #### Schritt 1: Auf dem Büro-PC (C++ ruft JavaScript auf)
+
 * Autodesk Fusion 360 ist eine gigantische Desktop-Software, die in **C++** geschrieben ist.
 * Die Autodesk-Entwickler haben eine JavaScript-Engine *(wie Googles V8-Engine in Google Chrome)* direkt in den C++ Kern von Fusion 360 eingebaut.
 * Wenn der Anwender auf **„Postprozessieren“** klickt:
@@ -82,8 +126,10 @@ Das Zusammenspiel funktioniert über eine **4-stufige Daten-Pipeline *(Architekt
   4. Die Engine nimmt diese Textwörter entgegen und speichert sie als **reine Textdatei mit der Endung `.nc`** ab.
 
 #### Schritt 2: Das Bindeglied zwischen PC und Maschine (Die `.nc`-Textdatei)
+
 * Die Kommunikation zwischen Ihrem JavaScript und der Fräsmaschine erfolgt **niemals über ein Live-Kabel**, sondern über die **fertige Textdatei (`.nc`)**!
 * In dieser Datei steht kein einziges Bit JavaScript mehr, sondern reiner, weltweiter Industrie-Standard *(DIN 66025 G-Code)*:
+
   ```gcode
   T01 M06
   S8000 M03
@@ -92,6 +138,7 @@ Das Zusammenspiel funktioniert über eine **4-stufige Daten-Pipeline *(Architekt
   ```
 
 #### Schritt 3: In der Fräsmaschine (C++ liest den Text)
+
 * Die Fräsmaschine hat einen eigenen Industrie-Computer *(Industrie-PC mit Echtzeit-Betriebssystem wie VxWorks oder LinuxCNC)*.
 * Die Firmware der Maschine *(in C++ und C programmiert)* öffnet die `.nc`-Datei.
 * Ein C++ Text-Parser liest Zeile für Zeile:
@@ -99,6 +146,7 @@ Das Zusammenspiel funktioniert über eine **4-stufige Daten-Pipeline *(Architekt
   * Liest er `M08`, schaltet die SPS *(Speicherprogrammierbare Steuerung)* das 24V-Relais der Kühlwasserpumpe ein.
 
 #### Fazit in einem Satz:
+
 **JavaScript ist der Übersetzer am Büro-PC, der Maschinencode (`.nc`) ist der gedruckte Brief, und C++ in der Fräsmaschine ist der Leser, der die Anweisungen mechanisch in Metall umsetzt!**
 
 ---
@@ -140,12 +188,14 @@ Um die Architektur Ihres Projekts auf einen Blick zu verstehen:
 
 1. **Die Einzeldateien (`uebungen/uebung_01_...cps` bis `uebung_16_...cps`):**  
    Das sind **isolierte Trainings- und Lernbausteine**. Jede dieser Dateien enthält nur die rund 30 bis 50 Zeilen Code, die genau zu diesem einen Thema gehören *(z. B. nur der `onOpen`-Header, nur die `Z-MIN`-Schleife oder nur der `G84`-Gewindezyklus)*.  
+
    * **Vorteil:** Sie können den Code in Sekunden erfassen, ohne sich in tausenden Zeilen zu verirren, und die Datei unabhängig testen.
 
 2. **Der Haupt-Postprozessor (`src/mein_erster_post.cps`):**  
    Das ist das **Gesamtkunstwerk (das fertige Endprodukt)**. Hier sind **alle 16 Bausteine aus den Übungen zusammengeführt** und bilden einen vollständigen, 500-zeiligen Postprozessor für 3-Achs-Fräsmaschinen.
 
 3. **Der rote Faden (Die Verbindung):**  
+
    * Jede Funktion, die Sie in einer Einzeldatei isoliert testen *(z. B. `writeComment` in Übung 1, `getToolTable` in Übung 2, `getGlobalZRange` in Übung 3 oder `onClose` in Übung 6)*, ist **haargenau an der entsprechenden Stelle in `src/mein_erster_post.cps` eingebaut**.
    * Wenn Sie eine Einzeldatei verstanden und geändert haben, können Sie denselben Codeblock 1:1 in den Haupt-Postprozessor übernehmen.
    * Am Ende mündet alles in **Übung 16 ([`uebung_16_endabnahme_meister_post.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_16_endabnahme_meister_post.cps))**, die die geprüfte Essenz des gesamten Projekts darstellt.
@@ -156,25 +206,25 @@ Um die Architektur Ihres Projekts auf einen Blick zu verstehen:
 
 Alle Quellcodedateien *(JavaScript `.cps` Postprozessoren, 3D-CAD-Modelle und Simulatoren)* befinden sich fertig vorbereitet im Ordner [`C:\Projekte\CNC\uebungen\`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/) sowie im Kundenauftrags-Ordner. Sie können jede dieser Dateien einzeln in Visual Studio Code öffnen, anpassen und direkt im Terminal *(Befehlsfenster)* mit dem Simulator ausführen:
 
-| Nr. | Übungsthema | Quelldatei *(Pfad)* | Ausführen & Testen im Terminal *(Befehl)* |
-|---|---|---|---|
-| **00b** | Basis-Übung B *(Hallo Welt)* | [`uebungen/uebung_00b_hallo_welt.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_00b_hallo_welt.cps) | `node simuliere_post.js uebungen/uebung_00b_hallo_welt.cps` |
-| **01** | Entwickler-Header *(onOpen)* | [`uebungen/uebung_01_entwickler_header.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_01_entwickler_header.cps) | `node simuliere_post.js uebungen/uebung_01_entwickler_header.cps` |
-| **02** | Werkzeugliste *(Tool Table)* | [`uebungen/uebung_02_werkzeugliste.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_02_werkzeugliste.cps) | `node simuliere_post.js uebungen/uebung_02_werkzeugliste.cps` |
-| **03** | Z-MIN Berechnung *(Crashschutz)* | [`uebungen/uebung_03_z_min_berechnung.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_03_z_min_berechnung.cps) | `node simuliere_post.js uebungen/uebung_03_z_min_berechnung.cps` |
-| **04** | 3D-Modell CAM-Operationen | [`uebungen/uebung_04_3d_modell_cam.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.cps) & [`bauteil_1001.stl`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl) | `node simuliere_post.js uebungen/uebung_04_3d_modell_cam.cps` |
-| **05** | 3D-Simulator & Einrichteblatt | [`3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) & [`EINRICHTEBLATT.md`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md) | Doppelklick im Windows-Explorer auf `3d_auftrag_simulator.html` |
-| **06** | Sicherer Rückzug *(Safe Retract)* | [`uebungen/uebung_06_sicherer_rueckzug.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.cps) | `node simuliere_post.js uebungen/uebung_06_sicherer_rueckzug.cps` |
-| **07** | Späneförderer Schalter *(Property)* | [`uebungen/uebung_07_spaenefoerderer_schalter.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_07_spaenefoerderer_schalter.cps) | `node simuliere_post.js uebungen/uebung_07_spaenefoerderer_schalter.cps` |
-| **08** | Fanuc vs. Siemens Sinumerik | [`uebungen/uebung_08_fanuc_siemens_dialekt.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_08_fanuc_siemens_dialekt.cps) | `node simuliere_post.js uebungen/uebung_08_fanuc_siemens_dialekt.cps` |
-| **09** | Schnittdaten-Plausibilitätsprüfung | [`uebungen/uebung_09_schnittdaten_check.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_09_schnittdaten_check.cps) | `node simuliere_post.js uebungen/uebung_09_schnittdaten_check.cps` |
-| **10** | 2. Aufspannung *(G55 OP20)* | [`uebungen/uebung_10_zweite_aufspannung_g55.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_10_zweite_aufspannung_g55.cps) | `node simuliere_post.js uebungen/uebung_10_zweite_aufspannung_g55.cps` |
-| **11** | Gewindebohren *(G84 Rigid Tapping)*| [`uebungen/uebung_11_gewindebohren_g84.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_11_gewindebohren_g84.cps) | `node simuliere_post.js uebungen/uebung_11_gewindebohren_g84.cps` |
-| **12** | Radiuskorrektur *(G41/G42/G40)* | [`uebungen/uebung_12_radiuskorrektur_g41.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_12_radiuskorrektur_g41.cps) | `node simuliere_post.js uebungen/uebung_12_radiuskorrektur_g41.cps` |
-| **13** | 3D-Freiformflächen-Fräsen | [`uebungen/uebung_13_3d_freiformflaechen.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_13_3d_freiformflaechen.cps) | `node simuliere_post.js uebungen/uebung_13_3d_freiformflaechen.cps` |
-| **14** | Heidenhain Klartext & 4. Achse | [`uebungen/uebung_14_heidenhain_klartext_4achse.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_14_heidenhain_klartext_4achse.cps) | `node simuliere_post.js uebungen/uebung_14_heidenhain_klartext_4achse.cps` |
-| **15** | Fasenfräsen & Entgraten *(45°)* | [`uebungen/uebung_15_fasenfraesen_entgraten.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_15_fasenfraesen_entgraten.cps) | `node simuliere_post.js uebungen/uebung_15_fasenfraesen_entgraten.cps` |
-| **16** | Meister-Post Endabnahme | [`uebungen/uebung_16_endabnahme_meister_post.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_16_endabnahme_meister_post.cps) | `node simuliere_post.js uebungen/uebung_16_endabnahme_meister_post.cps` |
+| Nr.     | Übungsthema                         | Quelldatei *(Pfad)*                                                                                                                                                                                                                                       | Ausführen & Testen im Terminal *(Befehl)*                                  |
+| ------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| **00b** | Basis-Übung B *(Hallo Welt)*        | [`uebungen/uebung_00b_hallo_welt.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_00b_hallo_welt.cps)                                                                                                                        | `node simuliere_post.js uebungen/uebung_00b_hallo_welt.cps`                |
+| **01**  | Entwickler-Header *(onOpen)*        | [`uebungen/uebung_01_entwickler_header.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_01_entwickler_header.cps)                                                                                                            | `node simuliere_post.js uebungen/uebung_01_entwickler_header.cps`          |
+| **02**  | Werkzeugliste *(Tool Table)*        | [`uebungen/uebung_02_werkzeugliste.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_02_werkzeugliste.cps)                                                                                                                    | `node simuliere_post.js uebungen/uebung_02_werkzeugliste.cps`              |
+| **03**  | Z-MIN Berechnung *(Crashschutz)*    | [`uebungen/uebung_03_z_min_berechnung.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_03_z_min_berechnung.cps)                                                                                                              | `node simuliere_post.js uebungen/uebung_03_z_min_berechnung.cps`           |
+| **04**  | 3D-Modell CAM-Operationen           | [`uebungen/uebung_04_3d_modell_cam.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.cps) & [`bauteil_1001.stl`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl) | `node simuliere_post.js uebungen/uebung_04_3d_modell_cam.cps`              |
+| **05**  | 3D-Simulator & Einrichteblatt       | [`uebung_05_doku.md`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_05_3d_simulation_und_einrichteblatt.md) & [`3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) | Doppelklick im Windows-Explorer auf `3d_auftrag_simulator.html`            |
+| **06**  | Sicherer Rückzug *(Safe Retract)*   | [`uebungen/uebung_06_sicherer_rueckzug.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.cps)                                                                                                            | `node simuliere_post.js uebungen/uebung_06_sicherer_rueckzug.cps`          |
+| **07**  | Späneförderer Schalter *(Property)* | [`uebungen/uebung_07_spaenefoerderer_schalter.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_07_spaenefoerderer_schalter.cps)                                                                                              | `node simuliere_post.js uebungen/uebung_07_spaenefoerderer_schalter.cps`   |
+| **08**  | Fanuc vs. Siemens Sinumerik         | [`uebungen/uebung_08_fanuc_siemens_dialekt.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_08_fanuc_siemens_dialekt.cps)                                                                                                    | `node simuliere_post.js uebungen/uebung_08_fanuc_siemens_dialekt.cps`      |
+| **09**  | Schnittdaten-Plausibilitätsprüfung  | [`uebungen/uebung_09_schnittdaten_check.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_09_schnittdaten_check.cps)                                                                                                          | `node simuliere_post.js uebungen/uebung_09_schnittdaten_check.cps`         |
+| **10**  | 2. Aufspannung *(G55 OP20)*         | [`uebungen/uebung_10_zweite_aufspannung_g55.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_10_zweite_aufspannung_g55.cps)                                                                                                  | `node simuliere_post.js uebungen/uebung_10_zweite_aufspannung_g55.cps`     |
+| **11**  | Gewindebohren *(G84 Rigid Tapping)* | [`uebungen/uebung_11_gewindebohren_g84.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_11_gewindebohren_g84.cps)                                                                                                            | `node simuliere_post.js uebungen/uebung_11_gewindebohren_g84.cps`          |
+| **12**  | Radiuskorrektur *(G41/G42/G40)*     | [`uebungen/uebung_12_radiuskorrektur_g41.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_12_radiuskorrektur_g41.cps)                                                                                                        | `node simuliere_post.js uebungen/uebung_12_radiuskorrektur_g41.cps`        |
+| **13**  | 3D-Freiformflächen-Fräsen           | [`uebungen/uebung_13_3d_freiformflaechen.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_13_3d_freiformflaechen.cps)                                                                                                        | `node simuliere_post.js uebungen/uebung_13_3d_freiformflaechen.cps`        |
+| **14**  | Heidenhain Klartext & 4. Achse      | [`uebungen/uebung_14_heidenhain_klartext_4achse.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_14_heidenhain_klartext_4achse.cps)                                                                                          | `node simuliere_post.js uebungen/uebung_14_heidenhain_klartext_4achse.cps` |
+| **15**  | Fasenfräsen & Entgraten *(45°)*     | [`uebungen/uebung_15_fasenfraesen_entgraten.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_15_fasenfraesen_entgraten.cps)                                                                                                  | `node simuliere_post.js uebungen/uebung_15_fasenfraesen_entgraten.cps`     |
+| **16**  | Meister-Post Endabnahme             | [`uebungen/uebung_16_endabnahme_meister_post.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_16_endabnahme_meister_post.cps)                                                                                                | `node simuliere_post.js uebungen/uebung_16_endabnahme_meister_post.cps`    |
 
 * **🤖 Nach den 16 Übungen – Deine 4 KI-Agenten im Praxiseinsatz:**
   * **[WANN und WIE du deine 4 KI-Agenten verwendest (Zeilen 935–971)](#🤖-wann-und-wie-du-deine-4-ki-agenten-verwendest-goldene-regel-für-die-übungen--praxisanleitung-nach-übung-16):** Warum du Übung 1–15 erst selbst ohne KI machst und welcher KI-Agent dir ab Übung 16 welche Übungen zu 80 % abnimmt.
@@ -186,21 +236,23 @@ Alle Quellcodedateien *(JavaScript `.cps` Postprozessoren, 3D-CAD-Modelle und Si
 Viele stellen sich die Frage: *„Muss ich das Dokument [`SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md) als allererstes komplett von vorn bis hinten durchlesen?“*
 
 ### Die kurze Antwort: NEIN, auf keinen Fall als Erstes auswendig lernen!
+
 * **Die Sicherheitsprüfliste ist dein Referenz-Handbuch und Schutzschild:**  
   Genau wie die Checkliste im Cockpit eines Passagierflugzeugs liest man sie nicht wie einen Roman durch, sondern nutzt sie als **begleitenden Spickzettel und professionelles Abnahme-Protokoll**.
 * **Für deine Übungen gilt:** Du beginnst ganz entspannt Schritt für Schritt mit **Übung 01** ([`uebungen/uebung_01_entwickler_header.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_01_entwickler_header.cps)). Jede Übung baut genau einen Baustein dieser Sicherheitskette auf.
 
 ### 🗺️ Fahrplan: Welche Übung baut welche Phase der Sicherheitsprüfliste auf?
 
-| Phase aus [`SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md) | Was wird dort geprüft? | In welchen Übungen lernst und baust du das? |
-| :--- | :--- | :--- |
-| **Phase 1:<br>CAM-System & Postprozessor** | Nullpunkt `G54` *(Werkstück-Koordinatensystem)*, Rohteilaufmaß, Spannmittelschutz, Auskraglänge | • **Übung 4:** 3D-Modell CAM-Setup und Nullpunkt `G54`<br>• **Übung 9:** Schnittdatenprüfung Drehzahl `S` und Vorschub `F`<br>• **Übung 10:** 2. Aufspannung `G55` *(umgedrehtes Teil)* |
-| **Phase 2:<br>3D-Simulation & Bemaßung** | Rote Eilganglinien `G00` *(Schnellgang)*, grüne Schnittbahnen `G01` *(Arbeitsgang)*, Maße-Check `📐` | • **Übung 00b:** Erste Simulation im Browser<br>• **Übung 5:** 3D-Simulation und Einrichteblatt<br>• **Übung 13:** 3D-Freiformflächen im Simulator prüfen |
-| **Phase 3:<br>G-Code-Textinspektion** | Sicherheitszeile (`G90 G17...`), Werkzeugliste, Längenkorrektur `G43`, tiefste Tiefe `Z_min`, Rückzug `G53 Z0` | • **Übung 01:** Entwickler-Header & Sicherheitszeile in `onOpen()`<br>• **Übung 02:** Automatische Werkzeugtabelle *(Tool Table)*<br>• **Übung 03:** Automatische Berechnung von `Z_min` *(Crash-Schutz)*<br>• **Übung 06:** Sicherer Rückzug in `onClose()`<br>• **Übung 11 & 12:** `G84` Gewindebohren & `G41` Radiuskorrektur |
-| **Phase 4:<br>Maschinen-Rüstung** | Werkzeug einmessen, 3D-Taster, Spannkraft im Schraubstock | • **Übung 5 & Portfolio:** Einrichteblatt für den Maschinenbediener mit allen Rüstdaten |
-| **Phase 5:<br>Einfahren & First-Part Run** | Luftschnitt (`Z +50 mm`), Einzelsatz (`Single Block`), Vorschub-Poti | • **Übung 16:** Die komplette 5-Punkte-Endabnahme vor der Auslieferung an den Kunden! |
+| Phase aus [`SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md) | Was wird dort geprüft?                                                                                         | In welchen Übungen lernst und baust du das?                                                                                                                                                                                                                                                                                      |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:-------------------------------------------------------------------------------------------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Phase 1:<br>CAM-System & Postprozessor**                                                                                                                           | Nullpunkt `G54` *(Werkstück-Koordinatensystem)*, Rohteilaufmaß, Spannmittelschutz, Auskraglänge                | • **Übung 4:** 3D-Modell CAM-Setup und Nullpunkt `G54`<br>• **Übung 9:** Schnittdatenprüfung Drehzahl `S` und Vorschub `F`<br>• **Übung 10:** 2. Aufspannung `G55` *(umgedrehtes Teil)*                                                                                                                                          |
+| **Phase 2:<br>3D-Simulation & Bemaßung**                                                                                                                             | Rote Eilganglinien `G00` *(Schnellgang)*, grüne Schnittbahnen `G01` *(Arbeitsgang)*, Maße-Check `📐`           | • **Übung 00b:** Erste Simulation im Browser<br>• **Übung 5:** 3D-Simulation und Einrichteblatt<br>• **Übung 13:** 3D-Freiformflächen im Simulator prüfen                                                                                                                                                                        |
+| **Phase 3:<br>G-Code-Textinspektion**                                                                                                                                | Sicherheitszeile (`G90 G17...`), Werkzeugliste, Längenkorrektur `G43`, tiefste Tiefe `Z_min`, Rückzug `G53 Z0` | • **Übung 01:** Entwickler-Header & Sicherheitszeile in `onOpen()`<br>• **Übung 02:** Automatische Werkzeugtabelle *(Tool Table)*<br>• **Übung 03:** Automatische Berechnung von `Z_min` *(Crash-Schutz)*<br>• **Übung 06:** Sicherer Rückzug in `onClose()`<br>• **Übung 11 & 12:** `G84` Gewindebohren & `G41` Radiuskorrektur |
+| **Phase 4:<br>Maschinen-Rüstung**                                                                                                                                    | Werkzeug einmessen, 3D-Taster, Spannkraft im Schraubstock                                                      | • **Übung 5 & Portfolio:** Einrichteblatt für den Maschinenbediener mit allen Rüstdaten                                                                                                                                                                                                                                          |
+| **Phase 5:<br>Einfahren & First-Part Run**                                                                                                                           | Luftschnitt (`Z +50 mm`), Einzelsatz (`Single Block`), Vorschub-Poti                                           | • **Übung 16:** Die komplette 5-Punkte-Endabnahme vor der Auslieferung an den Kunden!                                                                                                                                                                                                                                            |
 
 ### 🚀 Wann holst du die Checkliste ganz konkret heraus?
+
 1. **Beim Lernen (Übung 1–15):** Wann immer eine Übung eine neue Zeile G-Code erzeugt, wirfst du einen kurzen Blick in die Spickzettel-Tabelle von Phase 3, um den Befehl auf Deutsch zu verstehen.
 2. **Bei Übung 16 (Meisterprüfung):** Du nimmst die **Druckbare Abnahme-Checkliste** aus [`SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md) und hakst Punkt für Punkt ab.
 3. **Im echten Kundenauftrag (Später im Beruf / bei Freelancer-Aufträgen):** Du druckst die Checkliste aus, hakst sie ab und legst sie unterschrieben deiner Rechnung bei – damit hat der Kunde 100 % Vertrauen und du bist rechtlich gegen Regressansprüche abgesichert!
@@ -227,6 +279,7 @@ Ganz oben in der Funktion [`onOpen()`](file:///c:/Projekte/CNC/02_Software_und_T
 // G80 = Alle noch aktiven Bohrzyklen abbrechen und löschen
 writeBlock("G90", "G21", "G17", "G40", "G80");
 ```
+
 * **Warum ist das Pflicht?** Weil die Maschine vor dem Start vergessen soll, was der vorherige Arbeiter vielleicht an falschen Einstellungen aktiv gelassen hat. Das ist der elektronische Reset-Knopf für einen sicheren Start!
 
 ---
@@ -239,7 +292,6 @@ Wann immer eine neue Fräs- oder Bohroperation beginnt, erzeugt die Funktion [`o
 2. **Drehzahl & Spindelmotor an:** `S8000 M03` *(Drehe mit 8.000 U/min im Uhrzeigersinn)*
 3. **Nullpunkt aufrufen:** `G54` *(Aktiviert die Heimatadresse der Bauteilecke – siehe Erklärung unten)*
 4. **Längenkorrektur & Kühlwasser an:** `G43 H01 Z15.0 M08` *(Länge verrechnen, auf 15 mm Sicherheitshöhe bleiben, Kühlwasser einschalten)*
-
 * **Warum diese Reihenfolge?** Wenn Sie `M08` *(Kühlwasser)* einschalten, bevor das Werkzeug eingewechselt ist, spritzt das Wasser in die leere Werkzeugaufnahme. Zuerst Werkzeug, dann Motor an, dann Nullpunkt, dann Wasser!
 
 > [!NOTE]
@@ -254,7 +306,9 @@ Das ist der **wichtigste Schutz vor teuren Maschinenschäden**:
 Wenn eine Fräsoperation beendet ist oder das ganze Programm in [`onClose()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L441-L499) stoppt, darf der Maschinentisch niemals zur Tür fahren, solange der Fräser noch unten im Werkstück steckt!
 
 #### 💥 Das Marmeladenglas-Beispiel: Warum "ERST JETZT"?
+
 Stellen Sie sich vor, Sie stecken einen **Löffel tief in ein Glas Marmelade**:
+
 * Wenn Sie das Marmeladenglas jetzt mit Schwung zu sich nach vorne ziehen, **während der Löffel noch im Glas steckt**, reißt der Löffel das Glas um und alles geht zu Bruch!
 * In der Maschine ist es genauso: Steckt der Bohrer noch $12\,\text{mm}$ tief im Loch und der Tisch fährt nach vorne, reißt der Bohrer explosionsartig ab und verbiegt die teure Spindel!
 * Was machen Sie stattdessen ganz natürlich?  
@@ -262,6 +316,7 @@ Stellen Sie sich vor, Sie stecken einen **Löffel tief in ein Glas Marmelade**:
   2. **ERST JETZT**, wo der Löffel frei in der Luft ist, ziehen Sie das Glas zu sich heran!
 
 Deshalb gilt im Code zwingend das 2-Stufen-Prinzip:
+
 ```javascript
 // Schritt 1: ZUERST die Z-Achse (senkrecht nach ganz oben an die Decke) fahren:
 writeBlock("G53", "G00", "Z0.0");
@@ -273,12 +328,14 @@ writeBlock("G53", "G00", "Y0.0");
 #### 🔍 Was bedeuten die Befehle Buchstabe für Buchstabe?
 
 1. **Was für Schienen sind das überhaupt? *(Lineare Führungsschienen der Maschine)***:
+
    * Ein Maschinentisch wiegt oft $500\,\text{kg}$ bis $2\,\text{Tonnen}$ aus massivem Gusseisen. Er rollt im Maschinenboden auf zwei spiegelblanken **Stahl-Führungsschienen *(Linearführungen / Linear Rails mit gehärteten Rollenlagern)*** wie ein Zug auf Eisenbahngleisen kerzengerade von hinten nach vorne.
    * Auf diese Stahlschienen hat der Hersteller *(z. B. Haas oder DMG MORI)* ein unbewegliches Maßband graviert:
      * **Ganz hinten an der Rückwand:** z. B. `Y -500.0 mm`.
      * **Ganz vorne an der Schiebetür:** exakt der Nullpunkt **`Y 0.0 mm`** *(Endanschlag / Stopper)*.
 
 2. **Warum steht in beiden Zeilen `G53` und `G00`?**
+
    * **`G00` = Schnellgang *(Eilgang / Rapid Traverse)***: Fährt mit Maximalgeschwindigkeit durch die Luft, damit der Arbeiter nicht warten muss.
    * **`G53` = Maschinen-Koordinatensystem *(Umschaltung auf die echte Stahlschiene)***:  
      * Normalerweise schaut die Steuerung auf Ihr Bauteil (**`G54`**).
@@ -286,10 +343,12 @@ writeBlock("G53", "G00", "Y0.0");
      * **`G53` befiehlt der Steuerung:** *„Ignoriere den Metallblock im Schraubstock (`G54`)! Schau auf die fest verschraubte Stahlschiene der Maschine und fahre den Tisch auf Schienen-Position 0 ganz nach vorne an die Schiebetür!“*
 
 3. **Der entscheidende Unterschied zwischen `Z` und `Y`:**
+
    * **`Z0.0` (Höhenachse senkrecht):** Steuert die Spindel mit dem Fräser. Fährt den Fräser senkrecht nach oben in den sicheren Freiraum unter das Kabinendach.
    * **`Y0.0` (Tiefenachse von hinten nach vorne):** Steuert den Maschinentisch. Fährt den Tisch nach vorne zu Ihnen an die Glasscheibe!
 
 4. **Warum fährt `Y0.0` genau nach vorne an die Tür? *(Bedienerkomfort / Ergonomie)***:
+
    * Die Führungsschiene des Maschinentisches verläuft von der Rückwand nach vorne zur Tür.
    * Ganz hinten an der Rückwand ist z. B. `Y -500 mm`. Wenn der Tisch nach vorne rollt, werden die Zahlen immer größer: `-400`, `-300`, `-100`...
    * Der Maschinenhersteller hat den Anschlag ganz vorne direkt hinter der Glasschiebetür als **`0` (`Y0.0`)** festgelegt!
@@ -300,10 +359,12 @@ writeBlock("G53", "G00", "Y0.0");
 ### 🛡️ Regel 4: Niemals runde Klammern innerhalb von Klammern schreiben *(Syntax-Schutz)*
 
 Bei **Fanuc- und Haas-Steuerungen *(den weltweit am weitesten verbreiteten CNC-Computern)*** werden Kommentare und Bedienernotizen in runden Klammern `(...)` geschrieben.
+
 * Schreibt Ihr Postprozessor versehentlich: `(WERKZEUG 1 (VHM) SCHAFTFRAESER)`
 * ... stürzt die CNC-Steuerung mit einem **Syntaxfehler *(Programmierfehler)*** ab, weil sie die zweite innere Klammer als Maschinenbefehl missversteht!
 
 Nutzen Sie im Postprozessor deshalb immer die sichere Bibliotheks-Funktion:
+
 ```javascript
 writeComment("Text hier"); // Entfernt verbotene Zeichen und schützt vor verschachtelten Klammern
 ```
@@ -313,6 +374,7 @@ writeComment("Text hier"); // Entfernt verbotene Zeichen und schützt vor versch
 ### 🛡️ Regel 5: Am Ende das Programm sauber abschließen in `onClose()`
 
 Jedes fertige CNC-Programm muss am Ende in [`onClose()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L441-L499) diese 4 Handgriffe vollautomatisch ausführen:
+
 1. `M09` $\rightarrow$ Kühlmittelpumpe ausschalten *(damit beim Öffnen der Tür kein Wasser spritzt)*.
 2. `G53 G00 Z0.0` $\rightarrow$ Spindel ganz nach oben fahren *(Kollisionsschutz)*.
 3. `M05` $\rightarrow$ Spindelmotor sicher anhalten.
@@ -323,12 +385,12 @@ Jedes fertige CNC-Programm muss am Ende in [`onClose()`](file:///c:/Projekte/CNC
 
 ### 📊 Die Postprozessor-Architektur im Überblick:
 
-| Phase im Bearbeitungsablauf | Postprozessor-Funktion in JavaScript (`.cps`) | Was wird im G-Code ausgegeben? |
-|---|---|---|
-| **1. Programmstart** | [`onOpen()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L205-L255) | Programm-Kopf, Datum, Werkzeugliste, `G90 G21 G17 G40 G80` |
-| **2. Operationsstart & Werkzeugwechsel** | [`onSection()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L257-L350) | `T.. M06` $\rightarrow$ `S.. M03` $\rightarrow$ `G54` $\rightarrow$ `G43 H.. Z15.0 M08` |
-| **3. Fräs- & Bohrbewegungen** | [`onLinear()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L370-L390) / `onCyclePoint()` | Verfahrkoordinaten `G01 X.. Y.. Z.. F..` oder Zyklen `G83 / G84` |
-| **4. Programmende** | [`onClose()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L441-L499) | `M09` $\rightarrow$ `G53 Z0.` $\rightarrow$ `M05` $\rightarrow$ `G53 Y0.` $\rightarrow$ `M30` |
+| Phase im Bearbeitungsablauf              | Postprozessor-Funktion in JavaScript (`.cps`)                                                                       | Was wird im G-Code ausgegeben?                                                                |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| **1. Programmstart**                     | [`onOpen()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L205-L255)                      | Programm-Kopf, Datum, Werkzeugliste, `G90 G21 G17 G40 G80`                                    |
+| **2. Operationsstart & Werkzeugwechsel** | [`onSection()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L257-L350)                   | `T.. M06` $\rightarrow$ `S.. M03` $\rightarrow$ `G54` $\rightarrow$ `G43 H.. Z15.0 M08`       |
+| **3. Fräs- & Bohrbewegungen**            | [`onLinear()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L370-L390) / `onCyclePoint()` | Verfahrkoordinaten `G01 X.. Y.. Z.. F..` oder Zyklen `G83 / G84`                              |
+| **4. Programmende**                      | [`onClose()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L441-L499)                     | `M09` $\rightarrow$ `G53 Z0.` $\rightarrow$ `M05` $\rightarrow$ `G53 Y0.` $\rightarrow$ `M30` |
 
 ---
 
@@ -336,40 +398,40 @@ Jedes fertige CNC-Programm muss am Ende in [`onClose()`](file:///c:/Projekte/CNC
 
 Bevor Sie eine Übung starten, finden Sie hier die **zentrale Schnellreferenz aller Maschinenbefehle**. Mehr als diese Kennzeichen benötigen 95 % aller CNC-Fräsmaschinen weltweit nicht!
 
-| Kennzeichen | Fachbegriff & Erklärung | Was die Fräsmaschine exakt tut: |
-|---|---|---|
-| **`(...)`** | **Kommentar *(Bediener-Notiz)*** | Reiner Text für den Fräser am Bildschirm. Die Steuerung ignoriert den Text und führt keine Achsbewegung aus. |
-| **`G90`** | **Absolutmaß *(Absolute Positioning)*** | Alle Verfahrkoordinaten $X, Y, Z$ beziehen sich fest auf den Bauteil-Nullpunkt `G54`. |
-| **`G91`** | **Inkrementalmaß / Kettenmaß *(Incremental)*** | Maße beziehen sich relativ auf die jeweils letzte Werkzeugposition. |
-| **`G17`** | **XY-Bearbeitungsebene *(Plane Selection)*** | Standard-Fräsebene von oben *(Werkzeugachse ist die Z-Achse)*. |
-| **`G21`** | **Metrisches Einheitensystem *(Metric Mode)*** | Alle Weg- und Vorschubangaben werden in **Millimetern** interpretiert. |
-| **`G20`** | **Zoll-Einheitensystem *(Imperial Mode)*** | Alle Wegangaben werden in **Inch / Zoll** ($1\,\text{Zoll} = 25,4\,\text{mm}$) interpretiert. |
-| **`G94`** | **Vorschub pro Minute *(Feed per Minute)*** | Vorschubgeschwindigkeit $F$ wird in **$\text{mm/min}$ *(Millimeter pro Minute)*** gerechnet. |
-| **`G00`** | **Eilgang *(Rapid Traverse)*** | Schnellstmögliche Bewegung der Achsen durch die Luft *(ohne Materialberührung)*. |
-| **`G01`** | **Linearer Fräsvorschub *(Linear Interpolation)*** | Gerade Schnittbewegung im Werkstoff mit programmierter Arbeitsgeschwindigkeit $F$. |
-| **`G02`** | **Kreisbogen im Uhrzeigersinn *(Circular CW)*** | Fräst eine kreisförmige Bahn nach rechts mit Radius $R$ oder Mittelpunkt $I, J$. |
-| **`G03`** | **Kreisbogen gegen Uhrzeigersinn *(Circular CCW)*** | Fräst eine kreisförmige Bahn nach links *(Standard beim Gleichlauffräsen von Taschen)*. |
-| **`G28`** | **Referenzpunktfahrt *(Return to Home)*** | Fährt die Achsen an die festen Maschinen-Endschalter *(z. B. `G28 G91 Z0.` ganz nach oben)*. |
-| **`G53`** | **Maschinen-Koordinatensystem *(Machine Coordinates)*** | Nicht-verschiebbarer Nullpunkt der Fräsmaschine *(meist oben an der Kabinendecke)*. |
-| **`G54`–`G59`**| **Werkstück-Koordinatensysteme *(Work Offsets)*** | Bauteil-Nullpunkte: `G54` = 1. Aufspannung, `G55` = 2. Aufspannung *(umgedrehtes Teil)*. |
-| **`G40`** | **Radiuskorrektur ABWÄHLEN *(Cutter Comp Off)*** | Schaltet Fräserradiuskorrekturen aus; Werkzeug fährt exakt mit der Mitte auf der Kontur. |
-| **`G41`** | **Fräserradiuskorrektur LINKS *(Cutter Comp Left)*** | Fräser fährt links an der Werkstückkontur entlang *(für Passungen auf 0,01 mm genau)*. |
-| **`G42`** | **Fräserradiuskorrektur RECHTS *(Cutter Comp Right)***| Fräser fährt rechts an der Kontur entlang *(Gegenlauffräsen)*. |
-| **`G43`** | **Werkzeuglängenkorrektur EIN *(Tool Length Comp)***| Aktiviert die gespeicherte Werkzeuglänge `H...` aus der Vermessung. |
-| **`G80`** | **Bohrzyklen ABBRECHEN *(Cancel Canned Cycle)*** | Beendet alle aktiven Bohrbefehle sicher vor dem nächsten Schritt. |
-| **`G81`** | **Bohrzyklus Standard *(Drilling Cycle)*** | Einfaches Zentrieren und Bohren bis zur Tiefe $Z$, danach sofortiger Rückzug. |
-| **`G83`** | **Tieflochbohren mit Spanbruch *(Peck Drilling)*** | Bohrer taucht stufenweise ein (`Q`), zieht zwischendurch ganz heraus, um Späne auszuwerfen. |
-| **`G84`** | **Gewindebohren synchronisiert *(Rigid Tapping)*** | Schneidet Schraubengewinde synchron mit Drehzahl und Steigung *(Vorschub $F = S \times \text{Steigung}$)*. |
-| **`T01`–`T99`**| **Tool-Nummer *(Werkzeugplatz)*** | Nummer des Werkzeugs im Magazin-Karussell der Fräsmaschine. |
-| **`M06`** | **Werkzeugwechsel *(Tool Change)*** | Mechanischer Greifarm holt das gewählte Werkzeug $T$ physisch in die Spindel. |
-| **`S...`** | **Spindeldrehzahl *(Speed)*** | Rotationsgeschwindigkeit der Spindel in $\text{U/min}$ *(Umdrehungen pro Minute)*. |
-| **`M03`** | **Spindel Rechtslauf EIN *(Spindle Clockwise)***| Startet den Spindelmotor im Uhrzeigersinn *(Schneidrichtung von 99 % aller Fräser)*. |
-| **`M04`** | **Spindel Linkslauf EIN *(Spindle CCW)*** | Startet Spindel gegen den Uhrzeigersinn *(für Linksgewinde oder Linksschneider)*. |
-| **`M05`** | **Spindel-Stopp *(Spindle Stop)*** | Schaltet den Spindelmotor sicher ab. |
-| **`M07`** | **Blasluft / Minimalmengenschmierung *(Air Blast)*** | Schaltet Druckluft oder Späneabsaugung EIN *(wichtig für Holz und Kunststoff)*. |
-| **`M08`** | **Kühlmittel EIN *(Flood Coolant)*** | Schaltet die Hochdruck-Kühlwasserpumpe EIN *(wichtig für Stahl und Aluminium)*. |
-| **`M09`** | **Kühlmittel AUS *(Coolant Off)*** | Schaltet alle Kühlmittelpumpen und Luftdüsen AUS. |
-| **`M30`** | **Programmende & Rücksprung *(Program End)*** | Beendet das Fräsprogramm, schaltet Aggregate aus und setzt den Zeiger auf Zeile 1 zurück. |
+| Kennzeichen     | Fachbegriff & Erklärung                                 | Was die Fräsmaschine exakt tut:                                                                              |
+| --------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **`(...)`**     | **Kommentar *(Bediener-Notiz)***                        | Reiner Text für den Fräser am Bildschirm. Die Steuerung ignoriert den Text und führt keine Achsbewegung aus. |
+| **`G90`**       | **Absolutmaß *(Absolute Positioning)***                 | Alle Verfahrkoordinaten $X, Y, Z$ beziehen sich fest auf den Bauteil-Nullpunkt `G54`.                        |
+| **`G91`**       | **Inkrementalmaß / Kettenmaß *(Incremental)***          | Maße beziehen sich relativ auf die jeweils letzte Werkzeugposition.                                          |
+| **`G17`**       | **XY-Bearbeitungsebene *(Plane Selection)***            | Standard-Fräsebene von oben *(Werkzeugachse ist die Z-Achse)*.                                               |
+| **`G21`**       | **Metrisches Einheitensystem *(Metric Mode)***          | Alle Weg- und Vorschubangaben werden in **Millimetern** interpretiert.                                       |
+| **`G20`**       | **Zoll-Einheitensystem *(Imperial Mode)***              | Alle Wegangaben werden in **Inch / Zoll** ($1\,\text{Zoll} = 25,4\,\text{mm}$) interpretiert.                |
+| **`G94`**       | **Vorschub pro Minute *(Feed per Minute)***             | Vorschubgeschwindigkeit $F$ wird in **$\text{mm/min}$ *(Millimeter pro Minute)*** gerechnet.                 |
+| **`G00`**       | **Eilgang *(Rapid Traverse)***                          | Schnellstmögliche Bewegung der Achsen durch die Luft *(ohne Materialberührung)*.                             |
+| **`G01`**       | **Linearer Fräsvorschub *(Linear Interpolation)***      | Gerade Schnittbewegung im Werkstoff mit programmierter Arbeitsgeschwindigkeit $F$.                           |
+| **`G02`**       | **Kreisbogen im Uhrzeigersinn *(Circular CW)***         | Fräst eine kreisförmige Bahn nach rechts mit Radius $R$ oder Mittelpunkt $I, J$.                             |
+| **`G03`**       | **Kreisbogen gegen Uhrzeigersinn *(Circular CCW)***     | Fräst eine kreisförmige Bahn nach links *(Standard beim Gleichlauffräsen von Taschen)*.                      |
+| **`G28`**       | **Referenzpunktfahrt *(Return to Home)***               | Fährt die Achsen an die festen Maschinen-Endschalter *(z. B. `G28 G91 Z0.` ganz nach oben)*.                 |
+| **`G53`**       | **Maschinen-Koordinatensystem *(Machine Coordinates)*** | Nicht-verschiebbarer Nullpunkt der Fräsmaschine *(meist oben an der Kabinendecke)*.                          |
+| **`G54`–`G59`** | **Werkstück-Koordinatensysteme *(Work Offsets)***       | Bauteil-Nullpunkte: `G54` = 1. Aufspannung, `G55` = 2. Aufspannung *(umgedrehtes Teil)*.                     |
+| **`G40`**       | **Radiuskorrektur ABWÄHLEN *(Cutter Comp Off)***        | Schaltet Fräserradiuskorrekturen aus; Werkzeug fährt exakt mit der Mitte auf der Kontur.                     |
+| **`G41`**       | **Fräserradiuskorrektur LINKS *(Cutter Comp Left)***    | Fräser fährt links an der Werkstückkontur entlang *(für Passungen auf 0,01 mm genau)*.                       |
+| **`G42`**       | **Fräserradiuskorrektur RECHTS *(Cutter Comp Right)***  | Fräser fährt rechts an der Kontur entlang *(Gegenlauffräsen)*.                                               |
+| **`G43`**       | **Werkzeuglängenkorrektur EIN *(Tool Length Comp)***    | Aktiviert die gespeicherte Werkzeuglänge `H...` aus der Vermessung.                                          |
+| **`G80`**       | **Bohrzyklen ABBRECHEN *(Cancel Canned Cycle)***        | Beendet alle aktiven Bohrbefehle sicher vor dem nächsten Schritt.                                            |
+| **`G81`**       | **Bohrzyklus Standard *(Drilling Cycle)***              | Einfaches Zentrieren und Bohren bis zur Tiefe $Z$, danach sofortiger Rückzug.                                |
+| **`G83`**       | **Tieflochbohren mit Spanbruch *(Peck Drilling)***      | Bohrer taucht stufenweise ein (`Q`), zieht zwischendurch ganz heraus, um Späne auszuwerfen.                  |
+| **`G84`**       | **Gewindebohren synchronisiert *(Rigid Tapping)***      | Schneidet Schraubengewinde synchron mit Drehzahl und Steigung *(Vorschub $F = S \times \text{Steigung}$)*.   |
+| **`T01`–`T99`** | **Tool-Nummer *(Werkzeugplatz)***                       | Nummer des Werkzeugs im Magazin-Karussell der Fräsmaschine.                                                  |
+| **`M06`**       | **Werkzeugwechsel *(Tool Change)***                     | Mechanischer Greifarm holt das gewählte Werkzeug $T$ physisch in die Spindel.                                |
+| **`S...`**      | **Spindeldrehzahl *(Speed)***                           | Rotationsgeschwindigkeit der Spindel in $\text{U/min}$ *(Umdrehungen pro Minute)*.                           |
+| **`M03`**       | **Spindel Rechtslauf EIN *(Spindle Clockwise)***        | Startet den Spindelmotor im Uhrzeigersinn *(Schneidrichtung von 99 % aller Fräser)*.                         |
+| **`M04`**       | **Spindel Linkslauf EIN *(Spindle CCW)***               | Startet Spindel gegen den Uhrzeigersinn *(für Linksgewinde oder Linksschneider)*.                            |
+| **`M05`**       | **Spindel-Stopp *(Spindle Stop)***                      | Schaltet den Spindelmotor sicher ab.                                                                         |
+| **`M07`**       | **Blasluft / Minimalmengenschmierung *(Air Blast)***    | Schaltet Druckluft oder Späneabsaugung EIN *(wichtig für Holz und Kunststoff)*.                              |
+| **`M08`**       | **Kühlmittel EIN *(Flood Coolant)***                    | Schaltet die Hochdruck-Kühlwasserpumpe EIN *(wichtig für Stahl und Aluminium)*.                              |
+| **`M09`**       | **Kühlmittel AUS *(Coolant Off)***                      | Schaltet alle Kühlmittelpumpen und Luftdüsen AUS.                                                            |
+| **`M30`**       | **Programmende & Rücksprung *(Program End)***           | Beendet das Fräsprogramm, schaltet Aggregate aus und setzt den Zeiger auf Zeile 1 zurück.                    |
 
 ---
 
@@ -378,7 +440,9 @@ Bevor Sie eine Übung starten, finden Sie hier die **zentrale Schnellreferenz al
 Auf Ihrem System sind die wichtigsten Erweiterungen bereits installiert. Hier ist die genaue Übersicht, welche davon für Ihre CNC-Postprozessor-Übungen unverzichtbar sind und wie Sie sie mit wenigen Klicks bedienen:
 
 ### 1. `Autodesk HSM Post Processor` (`autodesk.hsm-post-processor`) – Der offizielle Post-Simulator von Autodesk
+
 Dies ist die wichtigste Profi-Erweiterung für Autodesk Fusion Postprozessoren!
+
 * **Wofür ist sie da?**  
   Sie ermöglicht es, eine `.cps`-Datei direkt in VS Code per Mausklick gegen echte CAM-Testdateien *(sogenannte `.intermediate` oder `.cnc` Benchmark-Werkzeugwege)* laufen zu lassen – ganz ohne Fusion 360 installieren zu müssen!
 * **Wie benutzen Sie diese Erweiterung Schritt für Schritt?**
@@ -389,12 +453,14 @@ Dies ist die wichtigste Profi-Erweiterung für Autodesk Fusion Postprozessoren!
   5. **Ergebnis:** Rechts neben Ihrem Code öffnet sich automatisch ein zweiter Editor-Reiter mit dem frisch erzeugten CNC-Code!
 
 ### 2. `Stingray Debug` (`jschmidt42.stingray-debug`) – Der Postprozessor-Debugger
+
 * **Wofür ist sie da?**  
   Arbeitet nahtlos mit der Autodesk Post-Erweiterung zusammen. Sie erlaubt es, **Breakpoints (rote Haltepunkte)** im JavaScript-Code zu setzen.
 * **Wie benutzen Sie sie?**
   * Wenn Sie links neben eine Zeilennummer im Code klicken *(roter Punkt erscheint)*, stoppt die Ausführung bei `Post Process` genau an dieser Zeile, und Sie können sich den Inhalt aller Variablen *(z. B. Werkzeugdurchmesser oder Z-Höhen)* live ansehen.
 
 ### 3. `GitHub Copilot & Copilot Chat` (`github.copilot`, `github.copilot-chat`) & `Claude Code`
+
 * **Wofür sind sie da?**  
   Ihre KI-Programmier-Assistenten direkt in der Seitenleiste von VS Code.
 * **Wie benutzen Sie sie?**
@@ -403,6 +469,7 @@ Dies ist die wichtigste Profi-Erweiterung für Autodesk Fusion Postprozessoren!
   * *(Hinweis: Wie im Handbuch empfohlen, sollten Sie die Übungen 1 bis 15 zuerst selbst durchführen, um die Mechanik wirklich zu verstehen, und die KI als Erklär-Helfer nutzen).*
 
 ### 4. `Markdown PDF` (`yzane.markdown-pdf`) – Handbuch und Einrichteblatt als PDF drucken
+
 * **Wofür ist sie da?**  
   Wandelt Markdown-Dokumente (`.md`) mit einem Klick in druckbare PDF-Dateien für den Kunden oder Maschinenbediener um.
 * **Wie benutzen Sie sie?**
@@ -413,6 +480,7 @@ Dies ist die wichtigste Profi-Erweiterung für Autodesk Fusion Postprozessoren!
 
 ---
 
+<a id="uebung-00b"></a>
 # Übung 00b: Hallo Welt (Erste eigene Zeile im Postprozessor)
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -430,34 +498,28 @@ In dieser allerersten Übung machen Sie Ihren ersten praktischen Schritt als ang
 
 ---
 
-
-
-
-
-
-
-  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 12. Oktober 2026, 11:20 Uhr  
 > **Betreff:** Freelance-Kooperation: Qualifikations-Test Auftrag Postprozessor Autodesk Fusion (.cps)  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
-> 
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
+>
 > als autorisiertes CAM-Systemhaus für Autodesk Fusion 360 haben wir aktuell mehr Kundenanfragen für Postprozessoren, als unsere interne Abteilung bewältigen kann. Wir suchen daher verlässliche freiberufliche Software-Ingenieure auf Honorarbasis.  
-> 
+>
 > Um Ihre Arbeitsweise und die JavaScript-Schnittstelle zu testen, möchten wir Ihnen einen ersten kleinen Kennenlern-Auftrag erteilen:  
-> 
+>
 > **Aufgabenstellung:**  
 > Erstellen Sie ein sauberes, schlankes Basis-Postprozessor-Skript (`.cps`), das für eine Standard-3-Achs-Fräsmaschine (Haas/Fanuc-kompatibel) folgendes leistet:  
+>
 > 1. Korrekte Ausgabe der ISO-Sicherheitszeile (`G90 G17 G21 G94 G40 G80`).  
 > 2. Ausgabe eines Begrüßungs- und Versionskommentars mit `writeComment()` im Programmkopf.  
-> 3. Saubere Beendigung mit Spindel-Stopp `M05`, Kühlmittel-Aus `M09` und `M30`.  
-> 
+> 3. Saubere Beendigung mit Spindel-Stopp `M05`, Kühlmittel-Aus `M09` und `M30`.
+>
 > **Vergütung:**  
 > Für diesen ersten Schnittstellentest zahlen wir pauschal **250,00 € netto** bei erfolgreichem Testlauf in unserem Simulator. Nach erfolgreicher Abnahme listen wir Ihr Ingenieurbüro als festen Subunternehmer für Folgeaufträge.  
-> 
+>
 > Bitte senden Sie uns Ihr Angebot zu!  
-> 
+>
 > Mit freundlichen Grüßen  
 > **Dipl.-Ing. Jens Becker** – Mensch und Maschine Systemhaus GmbH  
 
@@ -465,23 +527,23 @@ In dieser allerersten Übung machen Sie Ihren ersten praktischen Schritt als ang
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 00b
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`(...)`** | **Kommentar *(Bediener-Notiz / Information für den Fräser)*** | Schreibt reine Notizen wie `writeComment("HALLO WELT...")`, die von der Fräsmaschinen-Steuerung komplett ignoriert werden. |
-| **`G90`** | **Absolutmaß *(Absolute Mode)*** | Alle Maße beziehen sich auf den Werkstück-Nullpunkt `G54`. |
-| **`G17`** | **XY-Bearbeitungsebene *(Plane Selection)*** | Standard-Fräsebene von oben *(Werkzeugachse ist die Z-Achse)*. |
-| **`G21`** | **Metrisches Einheitensystem *(Metric Mode)*** | Alle Maßangaben sind in Millimetern. |
-| **`G94`** | **Vorschub-Einheit *(Feed per Minute)*** | Vorschubgeschwindigkeit $F$ wird in $\text{mm/min}$ *(Millimeter pro Minute)* gerechnet. |
-| **`G28 G91 Z0.`** | **Referenzpunktfahrt Z *(Return to Home Z)*** | Z-Achse fährt senkrecht nach oben an den oberen Maschinen-Endschalter *(Crash-Schutz)*. |
-| **`T1` / `T2`** | **Werkzeugnummer *(Tool Number)*** | `T1` = Schaftfräser $\varnothing 10\,\text{mm}$ \| `T2` = Spiralbohrer $\varnothing 6\,\text{mm}$. |
-| **`M06`** | **Werkzeugwechsel *(Tool Change)*** | Mechanischer Greifarm holt das Werkzeug $T$ physisch in die Frässpindel. |
-| **`S8000` / `S3500`** | **Spindeldrehzahl *(Spindle Speed)*** | Drehzahl des Fräsers in $\text{U/min}$ *(Umdrehungen pro Minute)*. |
-| **`M03`** | **Spindel Rechtslauf EIN *(Spindle Clockwise)*** | Schaltet den Frässpindelmotor im Uhrzeigersinn ein. |
-| **`G54`** | **Werkstück-Nullpunkt 1 *(Work Coordinate System)*** | Nullpunkt-Lage an der vorderen linken oberen Bauteilecke. |
-| **`M05`** | **Spindel-Stopp *(Spindle Stop)*** | Schaltet den Frässpindelmotor am Programmende aus. |
-| **`M09`** | **Kühlmittel AUS *(Coolant Off)*** | Schaltet die Kühlwasserpumpe aus. |
-| **`G28 Y0.`** | **Tisch zur Schutztür *(Table to Door)*** | Fährt den Maschinentisch nach vorne zum bequemen Entnehmen des fertigen Werkstücks. |
-| **`M30`** | **Programmende *(Program End and Rewind)*** | Beendet die Abarbeitung und setzt den Programmzeiger im Speicher auf Zeile 1 zurück. |
+| Kennzeichen           | Fachbegriff & Erklärung                                       | Bedeutung & Funktion in dieser Übung                                                                                       |
+| --------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **`(...)`**           | **Kommentar *(Bediener-Notiz / Information für den Fräser)*** | Schreibt reine Notizen wie `writeComment("HALLO WELT...")`, die von der Fräsmaschinen-Steuerung komplett ignoriert werden. |
+| **`G90`**             | **Absolutmaß *(Absolute Mode)***                              | Alle Maße beziehen sich auf den Werkstück-Nullpunkt `G54`.                                                                 |
+| **`G17`**             | **XY-Bearbeitungsebene *(Plane Selection)***                  | Standard-Fräsebene von oben *(Werkzeugachse ist die Z-Achse)*.                                                             |
+| **`G21`**             | **Metrisches Einheitensystem *(Metric Mode)***                | Alle Maßangaben sind in Millimetern.                                                                                       |
+| **`G94`**             | **Vorschub-Einheit *(Feed per Minute)***                      | Vorschubgeschwindigkeit $F$ wird in $\text{mm/min}$ *(Millimeter pro Minute)* gerechnet.                                   |
+| **`G28 G91 Z0.`**     | **Referenzpunktfahrt Z *(Return to Home Z)***                 | Z-Achse fährt senkrecht nach oben an den oberen Maschinen-Endschalter *(Crash-Schutz)*.                                    |
+| **`T1` / `T2`**       | **Werkzeugnummer *(Tool Number)***                            | `T1` = Schaftfräser $\varnothing 10\,\text{mm}$ \| `T2` = Spiralbohrer $\varnothing 6\,\text{mm}$.                         |
+| **`M06`**             | **Werkzeugwechsel *(Tool Change)***                           | Mechanischer Greifarm holt das Werkzeug $T$ physisch in die Frässpindel.                                                   |
+| **`S8000` / `S3500`** | **Spindeldrehzahl *(Spindle Speed)***                         | Drehzahl des Fräsers in $\text{U/min}$ *(Umdrehungen pro Minute)*.                                                         |
+| **`M03`**             | **Spindel Rechtslauf EIN *(Spindle Clockwise)***              | Schaltet den Frässpindelmotor im Uhrzeigersinn ein.                                                                        |
+| **`G54`**             | **Werkstück-Nullpunkt 1 *(Work Coordinate System)***          | Nullpunkt-Lage an der vorderen linken oberen Bauteilecke.                                                                  |
+| **`M05`**             | **Spindel-Stopp *(Spindle Stop)***                            | Schaltet den Frässpindelmotor am Programmende aus.                                                                         |
+| **`M09`**             | **Kühlmittel AUS *(Coolant Off)***                            | Schaltet die Kühlwasserpumpe aus.                                                                                          |
+| **`G28 Y0.`**         | **Tisch zur Schutztür *(Table to Door)***                     | Fährt den Maschinentisch nach vorne zum bequemen Entnehmen des fertigen Werkstücks.                                        |
+| **`M30`**             | **Programmende *(Program End and Rewind)***                   | Beendet die Abarbeitung und setzt den Programmzeiger im Speicher auf Zeile 1 zurück.                                       |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -562,12 +624,14 @@ function onClose() {
    Ändern Sie z. B. `"HALLO WELT - MEIN ERSTER CNC POSTPROZESSOR"` in Ihren eigenen Namen oder Grußtext. Speichern Sie die Datei mit `Strg + S`.
 3. **Im Terminal übersetzen (Simulation ausführen):**  
    Öffnen Sie das Terminal in Visual Studio Code (`Strg + Ö` oder Menü `Terminal` $\rightarrow$ `Neues Terminal`) und geben Sie folgenden Befehl ein:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_00b_hallo_welt.cps
    ```
 4. **Ergebnis-Datei ansehen:**  
    Der Postprozessor erzeugt blitzschnell die Maschinendatei [`uebungen/uebung_00b_hallo_welt.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_00b_hallo_welt.nc).  
    Dort sehen Sie ganz oben Ihre eigenen Zeilen:
+
    ```gcode
    (========================================)
    (HALLO WELT - MEIN ERSTER CNC POSTPROZESSOR)
@@ -584,18 +648,19 @@ function onClose() {
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 00b zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Terminal-Erfolg** | Der Befehl `node simuliere_post.js ...` läuft fehlerfrei durch und meldet `SIMULATION ERFOLGREICH`. | [ ] |
-| **2. Kommentar im Code** | In [`uebungen/uebung_00b_hallo_welt.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_00b_hallo_welt.nc) steht in runden Klammern `(HALLO WELT...)`. | [ ] |
-| **3. Grundinitialisierung** | Die Sicherheitszeile `G90 G17 G21 G94` sowie der Z-Rückzug `G28 G91 Z0.` stehen direkt unter dem Kommentar. | [ ] |
-| **4. 3D-Simulator-Check** | Im Browser steht das Werkzeug sicher über dem Bauteil-Nullpunkt `G54` auf Höhe `Z +15.0`. | [ ] |
+| Prüfpunkt                   | Was muss im Code / Simulator zu sehen sein?                                                                                                                                     | Bestanden? |
+|:--------------------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:----------:|
+| **1. Terminal-Erfolg**      | Der Befehl `node simuliere_post.js ...` läuft fehlerfrei durch und meldet `SIMULATION ERFOLGREICH`.                                                                             | [ ]        |
+| **2. Kommentar im Code**    | In [`uebungen/uebung_00b_hallo_welt.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_00b_hallo_welt.nc) steht in runden Klammern `(HALLO WELT...)`. | [ ]        |
+| **3. Grundinitialisierung** | Die Sicherheitszeile `G90 G17 G21 G94` sowie der Z-Rückzug `G28 G91 Z0.` stehen direkt unter dem Kommentar.                                                                     | [ ]        |
+| **4. 3D-Simulator-Check**   | Im Browser steht das Werkzeug sicher über dem Bauteil-Nullpunkt `G54` auf Höhe `Z +15.0`.                                                                                       | [ ]        |
 
 ### ❓ Häufige Frage & Klarstellung: Warum steht im 3D-Simulator bei Übung 00b oben „T01 [Z=15.0]“, obwohl im G-Code nichts davon steht?
 
 Wenn Sie den 3D-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) öffnen und bei Übung 00b auf die Zeile `G28 G91 Z0.` schauen, fallen zwei Dinge auf:
 
 1. **Die optische Täuschung mit dem Minuszeichen:**
+
    * Über dem roten Werkzeug-Zylinder stand: `T01 [Z=15.0]`.
    * Das Zeichen zwischen `Z` und `15.0` ist ein **Gleichheitszeichen `=`**, **KEIN Minuszeichen `-`**!
    * Bei kleiner Schriftgröße sieht ein `=` schnell wie ein Bindestrich oder Minus aus. Im Kopf liest man dann fälschlicherweise `Z-15`.
@@ -603,6 +668,7 @@ Wenn Sie den 3D-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.
    * *Hinweis:* Wir haben die Anzeige im Simulator nun auf `[Z: +15.0 mm]` verbessert, damit jedes Missverständnis sofort ausgeschlossen ist!
 
 2. **Warum zeigt der Simulator `T01` und `Z 15.0`, obwohl in der Zeile `G28 G91 Z0.` gar kein `T01` und kein `Z15` steht?**
+
    * Die Zeile `G28 G91 Z0.` ist ein reiner Maschinenbefehl *(Z-Achse nach oben auf den Referenzschalter fahren)*. In diesem Befehl stehen weder Koordinaten für das Werkstück noch eine Werkzeugnummer.
    * Ein 3D-Simulator muss jedoch von der allerersten Sekunde an wissen:
      * **Welches 3D-Modell soll gerendert werden?** $\rightarrow$ Der Simulator wählt standardmäßig `T01 (Werkzeug)` als Start-Platzhalter, bis im G-Code die erste Zeile mit `T... M06` aufgerufen wird.
@@ -610,12 +676,14 @@ Wenn Sie den 3D-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.
    * Es handelt sich also um die **virtuelle Startposition *(Initialwerte / Default State)*** des Simulators, nicht um einen Schnittbefehl!
 
 **Wie tief fräst Werkzeug T01 wirklich? (Niemals `-15 mm`!):**
+
 * Das Werkzeug `T01` *(Schaftfräser $\varnothing 10\,\text{mm}$ aus Vollhartmetall VHM)* schneidet:
   * Bei der Außenkontur: maximal auf **`Z -5.000 mm`** *(5 mm tief ins Aluminium)*.
   * Bei der Kreistasche: maximal auf **`Z -3.000 mm`** *(3 mm tief ins Aluminium)*.
 * `T01` fährt also zu keinem Zeitpunkt auf $-15\,\text{mm}$ herunter!
 
 **Wo taucht `-15 mm` *(Z-MIN / Backenhöhe)* im Projekt wirklich auf?**
+
 1. **In Übung 03 *(Schraubstock-Crashschutz)*:**  
    Dort prüfen wir im Postprozessor die Spannbackenhöhe des Schraubstocks:  
    `(CRASHSCHUTZ: SCHRAUBSTOCK-BACKENHOEHE Z=-15.000MM -> SICHER!)`  
@@ -627,25 +695,27 @@ Wenn Sie den 3D-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.
 
 Hier muss man genau zwischen der **virtuellen 3D-Simulation** und der **echten CNC-Fräsmaschine in der Werkshalle** unterscheiden:
 
-| Wer? | Wo? | Was wird definiert? | Wie wird es festgelegt? |
-| :--- | :--- | :--- | :--- |
-| **1. Der Software-Entwickler** | Im Browser *(3D-Simulator [`3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html#L614))* | Startposition `X0 Y0 Z+15.0` und Startwerkzeug `T01` | Im JavaScript-Code als Fallback-Initialwerte (`let curX = 0, curY = 0, curZ = 15; let curTool = "T01";`), damit das 3D-Canvas nicht leer bleibt, bevor die erste Fahrbewegung aus dem G-Code gelesen wird. |
-| **2. Der Maschinenhersteller *(z. B. Haas, DMG Mori)*** | An der physischen Maschine | Der Maschinen-Nullpunkt *(Home / `G28` / `G53`)* | Fest verdrahtete mechanische und induktive Endschalter ganz oben am Ende der Z-Achsenschiene. Beim Einschalten der Maschine fährt die Spindel dort an den Anschlag. |
-| **3. Der CNC-Fräser *(Bediener an der Maschine)*** | Auf dem Maschinentisch | Der Bauteil-Nullpunkt `G54` (`X0 Y0 Z0`) | Der Bediener spannt den rohen Aluminiumklotz in den Schraubstock, nimmt einen mechanischen Kantentaster oder 3D-Messtaster in die Hand, tastet die linke vordere Ecke und die Oberseite des Metalls ab und drückt auf der Steuerung die Taste **„Nullpunkt G54 übernehmen“**. |
-| **4. Der CAM-Programmierer / Postprozessor-Entwickler** | In Fusion 360 & im CPS-Skript | Die Sicherheitshöhe *(Clearance Height, hier `Z +15.0 mm`)* | Im CAM-System wird im Menü „Höhen *(Heights)*“ der Rückzugsabstand über dem Teil eingegeben *(üblich sind 10 bis 25 mm Luft)*. Der Postprozessor übersetzt diesen Wert später in den ersten Anfahrbefehl `G00 Z15.0`. |
-| **5. Der Zufall / das Vorprogramm *(Spindelinhalt vor Start)*** | In der Frässpindel | Welches Werkzeug steckt vor Programmstart in der Spindel? | Niemand weiß vorab, welches Werkzeug der Kollege der vorherigen Schicht in der Maschine stecken gelassen hat *(z. B. T03 oder T08)*. **Genau deshalb muss jedes saubere CNC-Programm zwingend mit einem eigenen Werkzeugwechsel `T01 M06` beginnen**, um sofort das richtige Werkzeug aus dem Magazin einzuwechseln! |
+| Wer?                                                            | Wo?                                                                                                                                               | Was wird definiert?                                         | Wie wird es festgelegt?                                                                                                                                                                                                                                                                                              |
+|:--------------------------------------------------------------- |:------------------------------------------------------------------------------------------------------------------------------------------------- |:----------------------------------------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Der Software-Entwickler**                                  | Im Browser *(3D-Simulator [`3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html#L614))* | Startposition `X0 Y0 Z+15.0` und Startwerkzeug `T01`        | Im JavaScript-Code als Fallback-Initialwerte (`let curX = 0, curY = 0, curZ = 15; let curTool = "T01";`), damit das 3D-Canvas nicht leer bleibt, bevor die erste Fahrbewegung aus dem G-Code gelesen wird.                                                                                                           |
+| **2. Der Maschinenhersteller *(z. B. Haas, DMG Mori)***         | An der physischen Maschine                                                                                                                        | Der Maschinen-Nullpunkt *(Home / `G28` / `G53`)*            | Fest verdrahtete mechanische und induktive Endschalter ganz oben am Ende der Z-Achsenschiene. Beim Einschalten der Maschine fährt die Spindel dort an den Anschlag.                                                                                                                                                  |
+| **3. Der CNC-Fräser *(Bediener an der Maschine)***              | Auf dem Maschinentisch                                                                                                                            | Der Bauteil-Nullpunkt `G54` (`X0 Y0 Z0`)                    | Der Bediener spannt den rohen Aluminiumklotz in den Schraubstock, nimmt einen mechanischen Kantentaster oder 3D-Messtaster in die Hand, tastet die linke vordere Ecke und die Oberseite des Metalls ab und drückt auf der Steuerung die Taste **„Nullpunkt G54 übernehmen“**.                                        |
+| **4. Der CAM-Programmierer / Postprozessor-Entwickler**         | In Fusion 360 & im CPS-Skript                                                                                                                     | Die Sicherheitshöhe *(Clearance Height, hier `Z +15.0 mm`)* | Im CAM-System wird im Menü „Höhen *(Heights)*“ der Rückzugsabstand über dem Teil eingegeben *(üblich sind 10 bis 25 mm Luft)*. Der Postprozessor übersetzt diesen Wert später in den ersten Anfahrbefehl `G00 Z15.0`.                                                                                                |
+| **5. Der Zufall / das Vorprogramm *(Spindelinhalt vor Start)*** | In der Frässpindel                                                                                                                                | Welches Werkzeug steckt vor Programmstart in der Spindel?   | Niemand weiß vorab, welches Werkzeug der Kollege der vorherigen Schicht in der Maschine stecken gelassen hat *(z. B. T03 oder T08)*. **Genau deshalb muss jedes saubere CNC-Programm zwingend mit einem eigenen Werkzeugwechsel `T01 M06` beginnen**, um sofort das richtige Werkzeug aus dem Magazin einzuwechseln! |
 
 ### 🛠️ Wie wird der Werkzeugwechsel `T01 M06` genau definiert und programmiert?
 
 Um das Werkzeug sauber und sicher einzuwechseln, arbeiten zwei Komponenten Hand in Hand:
 
 #### Schritt 1: Die Definition im CAM-System *(Autodesk Fusion 360 / Mastercam)*
+
 1. **Werkzeug anlegen:** In der Werkzeugbibliothek *(Tool Library)* legen Sie das Werkzeug an *(z. B. „10 mm Schaftfräser VHM“)*.
 2. **Werkzeugnummer zuweisen:** Im Reiter „Postprozessor“ tragen Sie die Werkzeugnummer ein: **`Nummer: 1`** *(wird zu `T01`)* sowie die Längenkorrekturnummer **`Längenversatz: 1`** *(wird zu Register `H01`)*.
 3. **Schnittdaten eingeben:** Sie tragen die Drehzahl ein *(z. B. `8000 U/min` $\rightarrow$ Spindle Speed)*.
 4. **Operation zuweisen:** Wenn Sie die 2D-Kontur erstellen, wählen Sie dieses Werkzeug aus. Beim Klick auf „Postprozessor ausführen“ übergibt Fusion 360 diese Werte automatisch als Datenpaket an das JavaScript-Skript.
 
 #### Schritt 2: Die Programmierung im Postprozessor *(in der `.cps`-Datei)*
+
 In JavaScript fangen wir diesen Bearbeitungsschritt in der Funktion [`onSection()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L257) ab:
 
 ```javascript
@@ -671,6 +741,7 @@ function onSection() {
 ```
 
 #### Schritt 3: Was passiert in der realen Fräsmaschine bei diesen Zeilen?
+
 1. **`T1` *(Tool Select)***: Das Werkzeugmagazin *(Ketten- oder Tellermagazin mit 20 bis 40 Plätzen)* dreht Werkzeugplatz 1 direkt vor die Wechseltür.
 2. **`M06` *(Tool Change)***: Der Doppel-Wechselarm fährt vor, zieht das alte Werkzeug aus der Spindel und das neue Werkzeug `T1` aus dem Magazin, dreht sich um 180 Grad und presst Werkzeug 1 mit Feder- und Pneumatikkraft in die Spindelaufnahme *(Spindelklemmung)*.
 3. **`S8000 M03`**: Der Spindelmotor beschleunigt auf 8.000 Umdrehungen pro Minute im Uhrzeigersinn.
@@ -683,14 +754,18 @@ Als Einsteiger fragt man sich zu Recht: *„Woher soll ich wissen, dass ausgerec
 Hier sind die **3 Quellen**, aus denen jeder CNC-Entwickler dieses Wissen bezieht:
 
 #### 1. Die weltweite Industrie-Norm: DIN 66025 / ISO 6983 (Die weltweite „Bibel“ der CNC-Befehle)
+
 In den 1980er Jahren haben die internationalen Normungsinstitute *(ISO = International Organization for Standardization, DIN = Deutsches Institut für Normung)* einen einheitlichen Standard verabschiedet.  
 Dort wurde für alle Fräs- und Drehmaschinen auf der ganzen Welt einheitlich festgeschrieben:
+
 * **`M`** steht für **Miscellaneous Function *(Zusatzfunktion / Maschinen-Schaltbefehl)***.
 * **`M06`** bedeutet auf fast jeder Maschine der Welt: **Automatischer Werkzeugwechsel *(Automatic Tool Change ATC)***.
 
 #### 2. Das Programmierhandbuch der Fräsmaschine *(Maschinendokumentation)*
+
 Jede Fräsmaschine *(egal ob von Haas, DMG Mori, Mazak oder Fanuc)* wird mit einem dicken Bediener- und Programmierhandbuch ausgeliefert.  
 Im Kapitel **„M-Funktionen / M-Codes“** finden Sie eine fertige Tabelle des Herstellers. Dort steht schwarz auf weiß:
+
 * `M00` = Programmstopp
 * `M03` = Spindel Rechtslauf EIN *(Spindle Forward)*
 * `M05` = Spindelmotor AUS *(Spindle Stop)*
@@ -700,16 +775,17 @@ Im Kapitel **„M-Funktionen / M-Codes“** finden Sie eine fertige Tabelle des 
 * `M30` = Programmende & Rücklauf *(Program End and Rewind)*
 
 #### 3. Der Spickzettel für Ihren Alltag (Nur 6 M-Codes reichen für 95 % aller Postprozessoren!):
+
 Sie müssen keine hunderte Befehle auswendig lernen. In der Praxis als Postprozessor-Entwickler brauchen Sie fast immer nur diese **6 goldenen M-Befehle**:
 
-| M-Befehl | Bedeutung auf Deutsch | Wann wird er im Postprozessor aufgerufen? |
-| :--- | :--- | :--- |
-| **`M06`** | **Werkzeugwechsel durch mechanischen Greifer** | In [`onSection()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L257) direkt nach der `T..`-Werkzeugnummer. |
-| **`M03`** | **Spindel im Uhrzeigersinn (Rechtslauf) starten** | In [`onSection()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L257) zusammen mit der Drehzahl `S...`. |
-| **`M08`** | **Kühlschmierstoff (Kühlwasser/Emulsion) EIN** | Kurz vor dem ersten Eintauchen des Fräsers ins Metall. |
-| **`M09`** | **Kühlwasser AUS** | Am Ende der Operation oder in [`onClose()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L370). |
-| **`M05`** | **Frässpindel ausschalten (Spindel-Stopp)** | Nach dem Hochfahren der Z-Achse in [`onClose()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L370). |
-| **M30** | **Hauptprogramm-Ende und Speicher auf Zeile 1 zurücksetzen** | Als allerletzte Zeile der CNC-Datei in [`onClose()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L370). |
+| M-Befehl  | Bedeutung auf Deutsch                                        | Wann wird er im Postprozessor aufgerufen?                                                                                             |
+|:--------- |:------------------------------------------------------------ |:------------------------------------------------------------------------------------------------------------------------------------- |
+| **`M06`** | **Werkzeugwechsel durch mechanischen Greifer**               | In [`onSection()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L257) direkt nach der `T..`-Werkzeugnummer. |
+| **`M03`** | **Spindel im Uhrzeigersinn (Rechtslauf) starten**            | In [`onSection()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L257) zusammen mit der Drehzahl `S...`.     |
+| **`M08`** | **Kühlschmierstoff (Kühlwasser/Emulsion) EIN**               | Kurz vor dem ersten Eintauchen des Fräsers ins Metall.                                                                                |
+| **`M09`** | **Kühlwasser AUS**                                           | Am Ende der Operation oder in [`onClose()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L370).             |
+| **`M05`** | **Frässpindel ausschalten (Spindel-Stopp)**                  | Nach dem Hochfahren der Z-Achse in [`onClose()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L370).        |
+| **M30**   | **Hauptprogramm-Ende und Speicher auf Zeile 1 zurücksetzen** | Als allerletzte Zeile der CNC-Datei in [`onClose()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L370).    |
 
 ### 🎯 Warum wählt der CAM-Programmierer genau `Z +15.0 mm` als Sicherheitshöhe?
 
@@ -718,19 +794,24 @@ Warum tippt der Programmierer in Autodesk Fusion 360 oder Mastercam ausgerechnet
 Dahinter steckt eine **knallharte physikalische und wirtschaftliche Abwägung**:
 
 #### 1. Schutz vor herausstehenden Spannmitteln *(Spannpratzen, Schrauben, Niederhalter)*
+
 In der echten Fräsmaschine wird das Aluminium mit Spannpratzen *(gehärtete Stahlklammern mit M10- oder M12-Schrauben)* oder Schraubstockbacken auf dem Tisch festgeklemmt.  
+
 * Diese Schraubenköpfe und Klemmen ragen oft **5 bis 10 mm über das Werkstück** hinaus.
 * Würde der Programmierer nur `Z +2.0 mm` wählen, würde der Fräser bei der Querfahrt im Eilgang `G00` *(mit rasenden 30 bis 60 Metern pro Minute!)* mit voller Wucht in den Schraubenkopf krachen $\rightarrow$ **Totalschaden an Fräser und Spindel!**
 * Bei **`Z +15.0 mm`** schwebt der Fräser mit sicherem Puffer über allen Befestigungsschrauben hinweg.
 
 #### 2. Der wirtschaftliche Kompromiss: Zeit ist Geld *(Taktzeit / Zykluszeit)*
+
 Warum fährt man dann nicht gleich auf Nummer sicher und wählt `Z +200 mm`?
+
 * Ein Werkstück hat oft hunderte Bohrlöcher und Taschen.
 * Müsste der Fräser vor jedem neuen Loch erst 200 mm nach oben und danach wieder 200 mm nach unten fahren, legt er **400 mm Leerweg pro Bohrung** zurück!
 * Bei 50 Löchern sind das 20 Meter unnötige Leerfahrt in der Luft. Das kostet bei Serienfertigung *(z. B. 10.000 Stück)* viele Stunden teure Maschinenzeit und Strom.
 * **`Z +15.0 mm` ist der perfekte „Sweet Spot“ *(die goldene Mitte)***: Hoch genug für 100 % Sicherheit vor Spannmitteln, aber flach genug, um keine teuren Sekunden zu verschenken.
 
 #### 3. Die 5 Höhen-Ebenen im CAM-System *(Reiter „Heights“ in Fusion 360)*
+
 In modernen CAM-Systemen gibt es nicht nur eine Höhe, sondern ein ausgeklügeltes 5-Stufen-System:
 
 ```text
@@ -741,13 +822,13 @@ In modernen CAM-Systemen gibt es nicht nur eine Höhe, sondern ein ausgeklügelt
 ▼ Z  -5.0 mm  ─── 5. ENDTIEFE (Bottom Height)           ──> Fräsgrund im Metall (Spanabtrag)
 ```
 
-| Höhen-Ebene | Typischer Wert | Funktion an der Maschine |
-| :--- | :--- | :--- |
-| **1. Sicherheitshöhe *(Clearance Height)*** | **`Z +15.0 mm`** | Ebene für weite Fahrten im Eilgang `G00` über alle Spannpratzen und Schrauben hinweg. |
-| **2. Rückzugshöhe *(Retract Height)*** | **`Z +5.0 mm`** | Kurzer Rückzug über die gefräste Fläche, um zum nächsten Nachbarschnitt zu springen. |
-| **3. Vorschubhöhe *(Feed Height)*** | **`Z +2.0 mm`** | Bremspunkt: Hier stoppt der gefährliche Eilgang `G00`, und der Fräser schaltet auf den langsamen Arbeitsvorschub `G01` um. |
-| **4. Oberkante *(Top Height)*** | **`Z 0.0 mm`** | Die plane Oberfläche des Aluminiumteils *(Nullpunkt G54 in Z)*. |
-| **5. Endtiefe *(Bottom Height)*** | **`Z -5.0 mm`** | Die Zieltiefe der Fräsung im Material. |
+| Höhen-Ebene                                 | Typischer Wert   | Funktion an der Maschine                                                                                                   |
+|:------------------------------------------- |:---------------- |:-------------------------------------------------------------------------------------------------------------------------- |
+| **1. Sicherheitshöhe *(Clearance Height)*** | **`Z +15.0 mm`** | Ebene für weite Fahrten im Eilgang `G00` über alle Spannpratzen und Schrauben hinweg.                                      |
+| **2. Rückzugshöhe *(Retract Height)***      | **`Z +5.0 mm`**  | Kurzer Rückzug über die gefräste Fläche, um zum nächsten Nachbarschnitt zu springen.                                       |
+| **3. Vorschubhöhe *(Feed Height)***         | **`Z +2.0 mm`**  | Bremspunkt: Hier stoppt der gefährliche Eilgang `G00`, und der Fräser schaltet auf den langsamen Arbeitsvorschub `G01` um. |
+| **4. Oberkante *(Top Height)***             | **`Z 0.0 mm`**   | Die plane Oberfläche des Aluminiumteils *(Nullpunkt G54 in Z)*.                                                            |
+| **5. Endtiefe *(Bottom Height)***           | **`Z -5.0 mm`**  | Die Zieltiefe der Fräsung im Material.                                                                                     |
 
 ### ❓ Muss ich das für jede einzelne Maschine auswendig wissen?
 
@@ -756,7 +837,9 @@ Die beruhigende und klare Antwort lautet: **NEIN! Sie müssen das nicht für hun
 In der CNC-Welt gilt das **90/10-Prinzip**:
 
 #### 1. Die 90 %: Das ist auf fast ALLEN Maschinen der Welt IDENTISCH!
+
 Wenn Sie dieses Grundprinzip einmal verstanden haben, beherrschen Sie bereits 90 % jeder Fräsmaschine:
+
 * Das **Höhen-System *(Heights)*** mit Sicherheitshöhe `Z +15.0 mm`, Vorschubhöhe `Z +2.0 mm` und Werkstücknullpunkt `Z 0.0 mm` funktioniert in allen CAM-Systemen *(Fusion 360, Mastercam, SolidCAM, NX)* und auf allen Maschinen exakt gleich.
 * Die **Grundbefehle** sind weltweiter Standard:
   * `G00` = Eilgang in der Luft
@@ -769,7 +852,9 @@ Wenn Sie dieses Grundprinzip einmal verstanden haben, beherrschen Sie bereits 90
   * `M30` = Programmende
 
 #### 2. Die 10 %: Was unterscheidet sich von Maschine zu Maschine?
+
 Es gibt in der Realität nur **3 Dinge**, die sich zwischen Herstellern unterscheiden:
+
 1. **Der Bohrzyklus-Dialekt *(Cycle Syntax)***:
    * **Fanuc & Haas:** `G83 X.. Y.. Z-12. R2. Q3. F300`
    * **Siemens Sinumerik:** `CYCLE83(15.0, 0.0, 2.0, -12.0, , 3.0, ...)`
@@ -781,10 +866,12 @@ Es gibt in der Realität nur **3 Dinge**, die sich zwischen Herstellern untersch
    * Hat sie Hochdruck-Blasluft durch die Spindel? *(z. B. `M07` oder `M88`)*
 
 #### 3. Der Profi-Trick bei echten Kundenaufträgen: Wie arbeiten CNC-Entwickler?
+
 Niemand programmiert einen Postprozessor aus dem Kopf! Wenn ein Kunde zu Ihnen kommt und sagt:  
 *„Ich habe eine neue 5-Achs-Fräsmaschine von Hermle mit Heidenhain TNC 640. Schreib mir bitte den Postprozessor!“*
 
 Dann verlangen Sie vom Kunden einfach nur **zwei Dinge**:
+
 1. **Eine funktionierende Muster-Datei *(Master Sample .nc)***:  
    *„Schick mir bitte ein kleines Programm (z. B. 1 Tasche und 1 Bohrung), das auf deiner Fräsmaschine schon einmal 100 % fehlerfrei gelaufen ist.“*  
    $\rightarrow$ Daran sehen Sie sofort den exakten Header, den Werkzeugwechsel und das Programmende!
@@ -797,19 +884,21 @@ Hier gibt es oft ein großes Verständnisproblem zwischen Programmcode, Visualis
 Die Antwort lautet: **Jeder der drei Orte hat eine völlig andere Aufgabe!**
 
 Vergleichen Sie es mit einer Musik-App:  
+
 * Die **Noten auf dem Papier** sind die NC-Datei.  
 * Das **echte Orchester mit Instrumenten** ist die Fräsmaschine.  
 * Die **Visualisierung auf dem Smartphone-Display** ist der Simulator.
 
 Hier ist die genaue Übersicht für `G54`, `G53` und `M08`:
 
-| Befehl | 1. In der NC-Datei (`.nc`) <br>*(Der Aufruf / Das Drehbuch)* | 2. In der echten CNC-Maschine <br>*(Die echte Definition / Hardware)* | 3. Im 3D-Simulator <br>*(Der Visualisierer / Interpreter)* |
-| :--- | :--- | :--- | :--- |
-| **`G54`** *(Werkstück-Nullpunkt)* | In der NC-Datei steht **nur das Wort** `G54`. Es sagt: *„Schalte ab jetzt auf das Bauteil-Koordinatensystem um!“* | **Hier werden die echten Zahlenwerte definiert!** Der Fräser tastet mit der Messuhr die Rohteilkante ab und speichert in der Nullpunkttabelle der Steuerung: <br>`X = -320.5 mm`, `Y = -180.2 mm`, `Z = -410.0 mm`. | Liest das Wort `G54` aus der NC-Datei und verschiebt die 3D-Achsenanzeige optisch auf die linke vordere Ecke des 3D-Modells. |
-| **`G53`** *(Maschinen-Koordinaten)* | In der NC-Datei steht: <br>`G53 G00 Z0.0`. Es sagt: *„Ignoriere das Werkstück und schau nur auf die Maschinenschiene!“* | **Wird fest vom Maschinenhersteller definiert!** Der Hersteller verschraubt die Führungsschienen im Gussbett und setzt ganz oben am Schienenende feste Endschalter. `Z0.0` an der Decke ist mechanisch unverrückbar fest verdrahtet. | Erkennt `G53 Z0` im Code und fährt den roten Werkzeug-Zylinder im Browser senkrecht ganz nach oben in den sicheren Rückzug. |
-| **`M08`** *(Kühlmittel EIN)* | In der NC-Datei steht **nur das Wort** `M08`. Es sagt: *„Wasser marsch!“* | **Definiert in der Maschinen-Elektrik *(SPS / PLC)***: Die Steuerung sendet ein 24V-Stromsignal an ein Relais, das die Hochdruck-Wasserpumpe im Keller der Maschine einschaltet. | Erkennt `M08` im Text und blendet im Statusbereich *(HUD)* ein, dass die Kühlung aktiv ist. |
+| Befehl                              | 1. In der NC-Datei (`.nc`) <br>*(Der Aufruf / Das Drehbuch)*                                                            | 2. In der echten CNC-Maschine <br>*(Die echte Definition / Hardware)*                                                                                                                                                                | 3. Im 3D-Simulator <br>*(Der Visualisierer / Interpreter)*                                                                   |
+|:----------------------------------- |:----------------------------------------------------------------------------------------------------------------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |:---------------------------------------------------------------------------------------------------------------------------- |
+| **`G54`** *(Werkstück-Nullpunkt)*   | In der NC-Datei steht **nur das Wort** `G54`. Es sagt: *„Schalte ab jetzt auf das Bauteil-Koordinatensystem um!“*       | **Hier werden die echten Zahlenwerte definiert!** Der Fräser tastet mit der Messuhr die Rohteilkante ab und speichert in der Nullpunkttabelle der Steuerung: <br>`X = -320.5 mm`, `Y = -180.2 mm`, `Z = -410.0 mm`.                  | Liest das Wort `G54` aus der NC-Datei und verschiebt die 3D-Achsenanzeige optisch auf die linke vordere Ecke des 3D-Modells. |
+| **`G53`** *(Maschinen-Koordinaten)* | In der NC-Datei steht: <br>`G53 G00 Z0.0`. Es sagt: *„Ignoriere das Werkstück und schau nur auf die Maschinenschiene!“* | **Wird fest vom Maschinenhersteller definiert!** Der Hersteller verschraubt die Führungsschienen im Gussbett und setzt ganz oben am Schienenende feste Endschalter. `Z0.0` an der Decke ist mechanisch unverrückbar fest verdrahtet. | Erkennt `G53 Z0` im Code und fährt den roten Werkzeug-Zylinder im Browser senkrecht ganz nach oben in den sicheren Rückzug.  |
+| **`M08`** *(Kühlmittel EIN)*        | In der NC-Datei steht **nur das Wort** `M08`. Es sagt: *„Wasser marsch!“*                                               | **Definiert in der Maschinen-Elektrik *(SPS / PLC)***: Die Steuerung sendet ein 24V-Stromsignal an ein Relais, das die Hochdruck-Wasserpumpe im Keller der Maschine einschaltet.                                                     | Erkennt `M08` im Text und blendet im Statusbereich *(HUD)* ein, dass die Kühlung aktiv ist.                                  |
 
 #### Zusammenfassung in einem Satz:
+
 * In der **NC-Datei** wird der Befehl **aufgerufen** *(ausgelöst)*.  
 * In der **Maschine** liegt die **reale Definition *(echte Koordinaten und Schalter)***.  
 * Der **Simulator** liest die Datei wie ein Dolmetscher und **stellt das Geschehen für Sie grafisch dar**.
@@ -821,6 +910,7 @@ Wenn Sie Ihre generierte `.nc`-Datei in den bekannten Online-Dienst [NC Viewer](
 NCViewer ist ein **reiner WebGL-Geometrie-Plotter *(Wegstrecken-Zeichner)***. Er arbeitet nach einem zweigeteilten Prinzip:
 
 #### 1. Was NCViewer DIREKT aus Ihrer `.nc`-Datei liest:
+
 * **Fahrbewegungen:** NCViewer liest jedes `X...`, `Y...`, `Z...` aus Ihren G-Code-Zeilen aus und verbindet die Punkte im 3D-Raum mit Linien.
 * **Farben der Linien:** 
   * `G00` = Rote/gestrichelte Linien *(Eilgang in der Luft)*.
@@ -828,16 +918,18 @@ NCViewer ist ein **reiner WebGL-Geometrie-Plotter *(Wegstrecken-Zeichner)***. Er
   * `G02` / `G03` = Kreisbögen *(berechnet aus den `I`- und `J`-Vektoren oder dem `R`-Radius)*.
 
 #### 2. Woher kommen die Werte, die GAR NICHT in der `.nc`-Datei stehen? *(G54, G53, Fräsergröße)*
+
 Weil NCViewer weder Ihre Werkshalle noch Ihre physische Fräsmaschine kennt, verwendet er **fest einprogrammierte Standard-Voraussetzungen *(Default Simulation Settings)***:
 
-| Information | Wie geht NCViewer damit um? | Woher kommt der Wert? |
-| :--- | :--- | :--- |
-| **`G54` *(Werkstück-Nullpunkt)*** | NCViewer setzt `G54` standardmäßig einfach auf den 3D-Koordinatenursprung **`(0, 0, 0)`**. | **Aus den Software-Voreinstellungen von NCViewer.** In den Einstellungen *(Zahnrad-Symbol)* kann man den Offset manuell verschieben. |
-| **`G53` *(Maschinen-Schiene)*** | Da NCViewer die Maße Ihrer Fräsmaschine nicht kennt, ignoriert er `G53` entweder oder setzt es gleich wie `G54` bzw. springt auf die obere Rastergrenze. | **Aus dem NCViewer-Parser *(Interpreter)***. |
-| **Werkzeugdurchmesser & Länge *(T01, H01)*** | In Ihrer NC-Datei steht nur `T1 M06`. NCViewer weiß daraus nicht automatisch, ob es ein Schaftfräser, Kugelfräser oder Bohrer ist. | **Aus der internen Tool-Tabelle von NCViewer:** NCViewer nimmt als Standard einfach einen virtuellen Zylinder an *(z. B. 6 mm oder 10 mm)*, bis Sie im NCViewer-Menü „Tools“ die echten Fräsermaße von Hand eintippen. |
-| **`M08` / `M09` *(Kühlwasser)*** | NCViewer simuliert kein flüssiges Wasser und keine Physik. | `M08` wird für die 3D-Bahn ignoriert und höchstens als Textzeile angezeigt. |
+| Information                                  | Wie geht NCViewer damit um?                                                                                                                              | Woher kommt der Wert?                                                                                                                                                                                                  |
+|:-------------------------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`G54` *(Werkstück-Nullpunkt)***            | NCViewer setzt `G54` standardmäßig einfach auf den 3D-Koordinatenursprung **`(0, 0, 0)`**.                                                               | **Aus den Software-Voreinstellungen von NCViewer.** In den Einstellungen *(Zahnrad-Symbol)* kann man den Offset manuell verschieben.                                                                                   |
+| **`G53` *(Maschinen-Schiene)***              | Da NCViewer die Maße Ihrer Fräsmaschine nicht kennt, ignoriert er `G53` entweder oder setzt es gleich wie `G54` bzw. springt auf die obere Rastergrenze. | **Aus dem NCViewer-Parser *(Interpreter)***.                                                                                                                                                                           |
+| **Werkzeugdurchmesser & Länge *(T01, H01)*** | In Ihrer NC-Datei steht nur `T1 M06`. NCViewer weiß daraus nicht automatisch, ob es ein Schaftfräser, Kugelfräser oder Bohrer ist.                       | **Aus der internen Tool-Tabelle von NCViewer:** NCViewer nimmt als Standard einfach einen virtuellen Zylinder an *(z. B. 6 mm oder 10 mm)*, bis Sie im NCViewer-Menü „Tools“ die echten Fräsermaße von Hand eintippen. |
+| **`M08` / `M09` *(Kühlwasser)***             | NCViewer simuliert kein flüssiges Wasser und keine Physik.                                                                                               | `M08` wird für die 3D-Bahn ignoriert und höchstens als Textzeile angezeigt.                                                                                                                                            |
 
 #### Fazit:
+
 Kein Simulator der Welt kann „hellsehen“. Was als Zahl in der `.nc`-Datei steht (`X40 Y25 Z-5`), **zeichnet NCViewer exakt ab**. Alles andere *(Nullpunkte, Werkzeugkörper)* ersetzt NCViewer durch **Software-Standardwerte *(Defaults)*** – genau wie unser eigener 3D-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html)!
 
 ### 📍 Woher kommt der gezeichnete Anfangspunkt im Simulator, wenn der Simulator die Maschine gar nicht kennt?
@@ -847,7 +939,9 @@ Das ist die entscheidende Frage: *„Wenn der Simulator die echte Maschine nicht
 Hier gibt es technisch **zwei Phasen**:
 
 #### Phase 1: Die ersten Zeilen im Code (Der „Notfall-Startpunkt“ / Fallback)
+
 Zu Beginn einer NC-Datei *(z. B. Zeile 1 bis 8 bei Übung 00b)* stehen nur Initialisierungsbefehle:
+
 ```gcode
 G90 G17 G21 G94
 G28 G91 Z0.
@@ -855,9 +949,11 @@ T1 M06
 S8000 M03
 G54
 ```
+
 * In diesen Zeilen steht **noch kein einziges `X` und kein `Y`** für das Bauteil!
 * Wenn der Simulator stur darauf warten würde, wüsste er nicht, wo er den Bildschirm zentrieren soll.
 * **Deshalb steht im Quellcode unseres lokalen Simulators [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html#L614-L617) in Zeile 614 schwarz auf weiß:**
+
   ```javascript
   let curX = 0, curY = 0, curZ = 15;
   let isRapid = true;
@@ -866,10 +962,13 @@ G54
 * Das ist eine **erfundene Standard-Parkposition *(Default Origin)***, damit der 3D-Canvas von Sekunde 1 an ein Werkzeug anzeigen kann. In [NC Viewer](https://ncviewer.com/) ist dieser Notfall-Startpunkt standardmäßig einfach `(0, 0, 0)`.
 
 #### Phase 2: Sobald die allererste Koordinate im G-Code auftaucht! (Der echte Startpunkt)
+
 Sobald das Fräsprogramm den ersten echten Verfahrbefehl erreicht:
+
 ```gcode
 N60 G00 X-10.000 Y-10.000 Z15.000
 ```
+
 * **Ab JETZT weiß der Simulator alles ganz genau!**
 * Denn dieser Punkt `X-10.000 Y-10.000 Z15.000` wurde vom **CAM-System *(Fusion 360)*** berechnet. Es ist die sogenannte **Anfahrposition *(Entry Point / Safe Lead-In)*** kurz vor dem Bauteil.
 * Der Simulator liest diese Zeile und zeichnet die erste sichtbare gelbe Eilgang-Linie von der Startposition genau zu diesen Koordinaten.
@@ -888,19 +987,23 @@ Hier verwechselt man leicht die **Geschwindigkeit** mit dem **Zielort**:
   * **`X0.0 Y0.0`** ist die **genaue geometrische Ecke** *(meistens die linke vordere Ecke der Aluminiumplatte)*.
 
 #### Die einfache Eselsbrücke fürs Auto:
-| CNC-Code | Vergleich beim Autofahren | Was bedeutet das an der Fräsmaschine? |
-| :--- | :--- | :--- |
-| **`G00`** *(Eilgang)* | **Das Gaspedal voll durchtreten** | Vollgasfahrt in der Luft *(kein Kontakt zum Metall)*. |
+
+| CNC-Code                      | Vergleich beim Autofahren                | Was bedeutet das an der Fräsmaschine?                 |
+|:----------------------------- |:---------------------------------------- |:----------------------------------------------------- |
+| **`G00`** *(Eilgang)*         | **Das Gaspedal voll durchtreten**        | Vollgasfahrt in der Luft *(kein Kontakt zum Metall)*. |
 | **`G01`** *(Arbeitsvorschub)* | **Im Schritttempo vorsichtig einparken** | Langsame Schnittbewegung im Metall *(Späne fliegen)*. |
-| **`G54`** *(Nullpunkt)* | **Die Stadtgrenze oder das Ortsschild** | Das Bezugssystem *(Bezugspunkt ist das Werkstück)*. |
-| **`X0 Y0`** *(Koordinaten)* | **Die Hausnummer oder die Parklücke** | Die exakte Ecke des Bauteils. |
+| **`G54`** *(Nullpunkt)*       | **Die Stadtgrenze oder das Ortsschild**  | Das Bezugssystem *(Bezugspunkt ist das Werkstück)*.   |
+| **`X0 Y0`** *(Koordinaten)*   | **Die Hausnummer oder die Parklücke**    | Die exakte Ecke des Bauteils.                         |
 
 Wenn in einer CNC-Zeile also steht:
+
 ```gcode
 G54
 G00 X0.0 Y0.0 Z15.0
 ```
+
 Dann sagt das der Fräsmaschine:
+
 1. **`G54`**: Orientiere dich an der Kante des Aluminiumblocks!
 2. **`X0.0 Y0.0`**: Ziel ist die linke vordere Ecke!
 3. **`Z15.0`**: Bleib dabei 15 mm oben in der Luft!
@@ -910,6 +1013,7 @@ Dann sagt das der Fräsmaschine:
 
 ---
 
+<a id="uebung-01"></a>
 # Übung 1: Der erste eigene Text im G-Code (Entwickler-Infoblock in `onOpen()`)
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -927,33 +1031,32 @@ In dieser Übung lösen Sie ein reales Industrieproblem aus dem Werkzeugbau:
 
 ---
 
-
-
 ## 📩 Der reale Kundenauftrag zu Übung 1 (Qualitäts-Rückverfolgbarkeit für Werkzeugbau)
 
 So sieht eine typische Anfrage aus, wenn ein Fertigungsbetrieb Qualitätsprobleme bei Schichtwechseln hat und Programme lückenlos nachvollziehbar machen muss:
 
 > **Von:** Stefan Klausner *(Geschäftsführer)* `<s.klausner@klausner-formenbau.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 14. Oktober 2026, 14:40 Uhr  
 > **Betreff:** Anpassung Programmkopf Fusion 360 Postprozessor – ISO 9001 Dokumentation  
 >
-> Sehr geehrter Herr Kollege Buenotte,  
-> 
+> Sehr geehrter Herr Kollege Bujanovski,  
+>
 > in unserem Formenbau in Stuttgart fertigen wir mit 8 CNC-Fräszentren im 3-Schicht-Betrieb. Bei unserer letzten ISO 9001 Qualitäts-Audits wurde bemängelt, dass auf den Steuerungsmonitoren unserer Maschinen nicht sofort ersichtlich ist, wann ein G-Code-Programm erzeugt wurde und wer dafür die Verantwortung trägt.  
-> 
+>
 > Oft werden ältere Versionen aus dem Netzwerk aufgespielt, was letzte Woche zu Ausschuss bei einer teuren Spritzgussform geführt hat.  
-> 
+>
 > **Aufgabenstellung:**  
 > Passen Sie unseren Postprozessor in der Funktion `onOpen()` so an, dass ganz oben vor dem ersten Frässatz automatisch folgende Daten in genormter Kommentarsyntax ausgegeben werden:  
-> 1. Entwickler-Name *(Dipl.-Ing. Buenotte / CAM-Büro)*  
+>
+> 1. Entwickler-Name *(Dipl.-Ing. Bujanovski / CAM-Büro)*  
 > 2. Firmenname des Kunden *(Klausner Formenbau & CNC-Technik GmbH)*  
 > 3. Generierungsdatum und exakte Uhrzeit  
-> 4. Programm-Kommentar mit Bauteilbezeichnung  
-> 
+> 4. Programm-Kommentar mit Bauteilbezeichnung
+>
 > **Budget:**  
 > Wir vergüten diese Anpassung mit **350,00 € netto** gegen ordentliche Ingenieurrechnung.  
-> 
+>
 > Mit freundlichen Grüßen  
 > **Stefan Klausner** – Klausner Formenbau GmbH, Stuttgart  
 
@@ -961,18 +1064,18 @@ So sieht eine typische Anfrage aus, wenn ein Fertigungsbetrieb Qualitätsproblem
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 1
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`(...)`** | **Kommentar *(Bediener-Information)*** | Schreibt Ihren Entwicklernamen, Betrieb und Datum in runden Klammern, ignoriert von der Maschinensteuerung. |
-| **`%`** | **Übertragungs-Start/Ende *(Paper Tape Rewind)*** | Leitet auf Fanuc- und Haas-Maschinen die Dateiübertragung über Netzwerk/RS232 ein. |
-| **`O1001`** | **Hauptprogramm-Nummer *(Program Number)*** | Die vierstellige Programmnummer im Speicher der Fräsmaschine. |
-| **`G90`** | **Absolutmaß *(Absolute Mode)*** | Alle Maße beziehen sich auf den Werkstück-Nullpunkt `G54`. |
-| **`G21`** | **Metrisches Einheitensystem *(Metric Mode)*** | Schaltet die Maschine fest auf Millimeter ein. |
-| **`G17`** | **XY-Bearbeitungsebene *(Plane Selection)*** | Standard-Fräsebene von oben *(Werkzeugachse ist die Z-Achse)*. |
-| **`G40`** | **Radiuskorrektur AUS *(Cutter Comp Cancel)*** | Schaltet eventuell noch aktive Korrekturwerte aus vorigen Programmen ab. |
-| **`G80`** | **Bohrzyklen ABBRECHEN *(Cancel Canned Cycles)*** | Bricht alle aktiven Bohrzyklen zur Sicherheit ab. |
-| **`G53 G00 Z0.0`** | **Sicherheits-Rückzug Z *(Safe Z Retract)*** | Fährt die Z-Achse senkrecht nach ganz oben an die Decke der Fräskabine. |
-| **`M30`** | **Programmende *(Program End and Rewind)*** | Beendet die Bearbeitung und setzt den Speicher auf Zeile 1 zurück. |
+| Kennzeichen        | Fachbegriff & Erklärung                           | Bedeutung & Funktion in dieser Übung                                                                        |
+| ------------------ | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **`(...)`**        | **Kommentar *(Bediener-Information)***            | Schreibt Ihren Entwicklernamen, Betrieb und Datum in runden Klammern, ignoriert von der Maschinensteuerung. |
+| **`%`**            | **Übertragungs-Start/Ende *(Paper Tape Rewind)*** | Leitet auf Fanuc- und Haas-Maschinen die Dateiübertragung über Netzwerk/RS232 ein.                          |
+| **`O1001`**        | **Hauptprogramm-Nummer *(Program Number)***       | Die vierstellige Programmnummer im Speicher der Fräsmaschine.                                               |
+| **`G90`**          | **Absolutmaß *(Absolute Mode)***                  | Alle Maße beziehen sich auf den Werkstück-Nullpunkt `G54`.                                                  |
+| **`G21`**          | **Metrisches Einheitensystem *(Metric Mode)***    | Schaltet die Maschine fest auf Millimeter ein.                                                              |
+| **`G17`**          | **XY-Bearbeitungsebene *(Plane Selection)***      | Standard-Fräsebene von oben *(Werkzeugachse ist die Z-Achse)*.                                              |
+| **`G40`**          | **Radiuskorrektur AUS *(Cutter Comp Cancel)***    | Schaltet eventuell noch aktive Korrekturwerte aus vorigen Programmen ab.                                    |
+| **`G80`**          | **Bohrzyklen ABBRECHEN *(Cancel Canned Cycles)*** | Bricht alle aktiven Bohrzyklen zur Sicherheit ab.                                                           |
+| **`G53 G00 Z0.0`** | **Sicherheits-Rückzug Z *(Safe Z Retract)***      | Fährt die Z-Achse senkrecht nach ganz oben an die Decke der Fräskabine.                                     |
+| **`M30`**          | **Programmende *(Program End and Rewind)***       | Beendet die Bearbeitung und setzt den Speicher auf Zeile 1 zurück.                                          |
 
 ### 🖼️ Technische Zeichnung: Was ist der mechanische Endschalter an der Kabinendecke?
 
@@ -1021,6 +1124,7 @@ Hier ist die Schnittzeichnung einer echten CNC-Fräsmaschine von vorne:
 ```
 
 #### Wie funktioniert dieser Schalter in der Realität?
+
 1. **Der physische Schalter an der Decke:**  
    Ganz oben an der Z-Achse sitzt ein Schalterkasten mit einem federnden Metallhebel.  
 2. **Die Berührung *(Klick)***:  
@@ -1044,6 +1148,7 @@ Wenn Sie Übung 1 im [3D-Simulator](file:///c:/Projekte/CNC/02_Software_und_Tool
    * Unser gefrästes Aluminiumteil ist $85 \times 55\,\text{mm}$ groß und $12\,\text{mm}$ hoch.
    * Würde der Browser-Simulator die echten $500\,\text{mm}$ Deckenhöhe im Maßstab 1:1 zeichnen, müsste die 3D-Kamera so weit herauszoomen, dass das kleine Bauteil auf Ihrem Bildschirm nur noch ein winziger Punkt wäre.
    * Deshalb steht im Quellcode von [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html#L650-L654) in Zeile 651:
+
      ```javascript
      if (/G53\s+G00?\s+Z0|G28\s+G91\s+Z0/i.test(line)) {
        curZ = 35; // Visuelle Deckenhöhe im Simulator
@@ -1058,17 +1163,18 @@ Visual Studio Code erkennt anhand der Dateiendung `.nc`, dass es sich um **CNC G
 
 Hier ist die genaue Farb-Bedeutung aus Ihrem Screenshot:
 
-| Farbe | Zeichen / Befehl | Funktion & Bedeutung an der Fräsmaschine |
-| :--- | :--- | :--- |
-| 🟢 **Grün** | **`(UEBUNG 01...)`, `(ENTWICKLER: ...)`** | **Kommentare *(Bediener-Hinweise)***: Alles in runden Klammern wird von der Fräsmaschine komplett ignoriert. Es dient nur dem Menschen zum Lesen. |
-| 🔵 **Blau / Cyan** | **`O1001`** | **Hauptprogramm-Nummer *(Program Number)***: Der Name der Datei im internen Speicher der Fräsmaschine. |
-| 🌸 **Pink / Magenta** | **`G90`, `G21`, `G17`, `G40`, `G80`, `G00`** | **G-Codes *(Geometrie- und Bewegungsbefehle)***: Sagt der Maschine, *WIE* sie sich verhalten soll *(Absolutmaß, Millimeter, Eilgang usw.)*. |
-| 🟢 **Türkis / Cyan** | **`G53`** | **Nullpunkt-Umschaltung *(Maschinenkoordinatensystem)***: Schaltet die Werkstück-Kompensation ab und wechselt auf die echte Maschinenschiene. |
-| 🔴 **Rot / Orange** | **`Z0.0` *(sowie spätere `X...`, `Y...`)*** | **Achsen & Zielkoordinaten *(Axis Targets)***: Die genauen millimetergenauen Zielpunkte, die die Motoren anfahren sollen. |
-| 🟡 **Gelb** | **`M30`** | **M-Codes *(Maschinen-Schaltfunktionen)***: Schaltbefehle für die Hardware *(Kühlwasser, Spindelmotor, Programmende)*. |
-| ⚪ **Gelb / Weiß** | **`%`** | **Übertragungs-Start/Stopp *(Tape Boundary)***: Kennzeichnet Anfang und Ende der Datenübertragung über das Netzwerk. |
+| Farbe                 | Zeichen / Befehl                             | Funktion & Bedeutung an der Fräsmaschine                                                                                                          |
+|:--------------------- |:-------------------------------------------- |:------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🟢 **Grün**            | **`(UEBUNG 01...)`, `(ENTWICKLER: ...)`**    | **Kommentare *(Bediener-Hinweise)***: Alles in runden Klammern wird von der Fräsmaschine komplett ignoriert. Es dient nur dem Menschen zum Lesen. |
+| 🔵 **Blau / Cyan**    | **`O1001`**                                  | **Hauptprogramm-Nummer *(Program Number)***: Der Name der Datei im internen Speicher der Fräsmaschine.                                            |
+| 🌸 **Pink / Magenta** | **`G90`, `G21`, `G17`, `G40`, `G80`, `G00`** | **G-Codes *(Geometrie- und Bewegungsbefehle)***: Sagt der Maschine, *WIE* sie sich verhalten soll *(Absolutmaß, Millimeter, Eilgang usw.)*.       |
+| 🟢 **Türkis / Cyan**   | **`G53`**                                    | **Nullpunkt-Umschaltung *(Maschinenkoordinatensystem)***: Schaltet die Werkstück-Kompensation ab und wechselt auf die echte Maschinenschiene.     |
+| 🔴 **Rot / Orange**   | **`Z0.0` *(sowie spätere `X...`, `Y...`)***  | **Achsen & Zielkoordinaten *(Axis Targets)***: Die genauen millimetergenauen Zielpunkte, die die Motoren anfahren sollen.                         |
+| 🟡 **Gelb**            | **`M30`**                                    | **M-Codes *(Maschinen-Schaltfunktionen)***: Schaltbefehle für die Hardware *(Kühlwasser, Spindelmotor, Programmende)*.                            |
+| ⚪ **Gelb / Weiß**     | **`%`**                                      | **Übertragungs-Start/Stopp *(Tape Boundary)***: Kennzeichnet Anfang und Ende der Datenübertragung über das Netzwerk.                              |
 
 #### Welchen großen Vorteil bringt diese Farbgebung?
+
 1. **Fehler-Erkennung in einer Sekunde:**  
    Wenn Sie z. B. die schließende Klammer bei einem Kommentar vergessen: `(ENTWICKLER : MEIN NAME`, wird der gesamte restliche G-Code plötzlich grün eingefärbt! Sie sehen sofort auf einen Blick: *„Achtung, Syntaxfehler – hier fehlt eine Klammer!“*
 2. **Schnelle Orientierung:**  
@@ -1081,7 +1187,9 @@ Wenn Sie die Datei [`uebungen/uebung_01_entwickler_header.nc`](file:///c:/Projek
 Dafür gibt es **zwei ganz einfache, logische Gründe**:
 
 #### 1. Es gibt in Übung 1 noch gar keine Fahrbewegung im Raum!
+
 * Schauen Sie sich den Code von Übung 1 an:
+
   ```gcode
   G90 G21 G17 G40 G80
   G53 G00 Z0.0
@@ -1094,12 +1202,15 @@ Dafür gibt es **zwei ganz einfache, logische Gründe**:
   Wo keine Strecke gefahren wird, kann auch kein Linienstift eine 3D-Bahn auf das Gitter zeichnen.
 
 #### 2. Warum blendet NC Viewer den Play-Button aus?
+
 * NC Viewer ist so programmiert: **Wenn eine Datei 0 Bewegungsvektoren enthält, wird die Abspielleiste *(Play / Pause / Timeline)* unten komplett ausgeblendet**, weil es schlichtweg nichts abzuspielen gibt!
 * Sobald Sie in späteren Übungen *(ab Übung 4 oder beim Kundenauftrag)* echte Konturen mit `X40.0 Y25.0` laden, taucht unten rechts in NC Viewer automatisch die Leiste mit dem grünen Play-Button auf.
 * *(Zusatz-Tipp für NC Viewer: Nach jeder Codeänderung muss man links unten auf den grünen Button **`PLOT`** klicken, damit NC Viewer den Text neu einliest).*
 
 #### 3. Der Vorteil unseres lokalen 3D-Simulators:
+
 Genau deshalb haben wir für Sie unseren eigenen Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) entwickelt:
+
 * Unser Simulator stürzt nicht ab und blendet nichts aus: Er zeigt auch bei reinen Header-Dateien die Werkstückplatte, die Werkzeugspindel, die Zeilen-Schaltung mit `⏮ Vorheriger` und `⏭ Nächster Schritt` und den Z-Rückzug `G53 Z0.0` auf die Deckenhöhe von $35\,\text{mm}$ an!
 
 ### 📸 Fotovergleich: Der 3D-Simulator vs. Die echte Realität an der Fräsmaschine
@@ -1110,13 +1221,13 @@ Um den Drahtgitter-Simulator mit der echten Werkstatt zu verknüpfen, sehen Sie 
 
 #### Der direkte 1:1-Vergleich zwischen Simulator und Realität:
 
-| Was Sie im 3D-Simulator sehen | Wie das in der echten Werkstatt in Wirklichkeit aussieht |
-| :--- | :--- |
-| **Das weiße Drahtgitter-Rechteck unten** | Der silberne **Aluminiumblock *(unsere Flanschplatte 85 × 55 mm)***. In der Mitte ist die runde gefräste Kreistasche *(Ø 30 mm)* und an den Ecken die 4 Befestigungsbohrungen zu sehen. |
-| **Die Position auf dem Tisch** | Das Aluminium liegt in der Realität nicht frei in der Luft, sondern ist fest in einem schweren **Präzisions-Maschinenschraubstock aus Stahl** auf dem T-Nuten-Tisch der Fräsmaschine eingespannt. |
+| Was Sie im 3D-Simulator sehen                    | Wie das in der echten Werkstatt in Wirklichkeit aussieht                                                                                                                                                                     |
+|:------------------------------------------------ |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Das weiße Drahtgitter-Rechteck unten**         | Der silberne **Aluminiumblock *(unsere Flanschplatte 85 × 55 mm)***. In der Mitte ist die runde gefräste Kreistasche *(Ø 30 mm)* und an den Ecken die 4 Befestigungsbohrungen zu sehen.                                      |
+| **Die Position auf dem Tisch**                   | Das Aluminium liegt in der Realität nicht frei in der Luft, sondern ist fest in einem schweren **Präzisions-Maschinenschraubstock aus Stahl** auf dem T-Nuten-Tisch der Fräsmaschine eingespannt.                            |
 | **Der rote Zylinder ganz oben (`T01 [Z=35.0]`)** | Der schwere **Spindelkasten *(Fräskopf)***. Er ist auf den senkrechten Führungsschienen an der Rückwand mit den schwarzen Schutzbälgen *(Faltenbälgen)* **ganz nach oben unter die Kabinendecke gefahren (`G53 G00 Z0.0`)**. |
-| **Die gelb gestrichelte Linie nach oben** | Der riesige **Freiraum von etwa 40 bis 50 Zentimetern** in der Luft zwischen Fräserspitze und Werkstück, damit beim Start oder Programmende absolut gar nichts kollidieren kann! |
-| **Die blaue Linie (Z-Achse)** | Die senkrechte Hubrichtung der Frässpindel nach oben und unten. |
+| **Die gelb gestrichelte Linie nach oben**        | Der riesige **Freiraum von etwa 40 bis 50 Zentimetern** in der Luft zwischen Fräserspitze und Werkstück, damit beim Start oder Programmende absolut gar nichts kollidieren kann!                                             |
+| **Die blaue Linie (Z-Achse)**                    | Die senkrechte Hubrichtung der Frässpindel nach oben und unten.                                                                                                                                                              |
 
 1. **Unten auf dem Maschinentisch:**
    * **Im Simulator:** Ein weißes Drahtgitter-Rechteck mit grün/roten Achsen.
@@ -1169,6 +1280,7 @@ In dieser ersten Übung bringen wir unserem **JavaScript-Übersetzer ([`src/mein
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
+
 1. **Als eigene, kompakte Übungs-Datei (Empfohlen für den Start):**  
    [`uebungen/uebung_01_entwickler_header.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_01_entwickler_header.cps) – Hier sehen Sie ausschließlich den Code von Übung 1 ohne störenden Ballast.
 2. **Im großen Gesamt-Postprozessor des Projekts:**  
@@ -1181,25 +1293,31 @@ In beiden Dateien geschieht die Magie in der Funktion **`onOpen()`** *(diese Fun
 Hier ist die genaue Anleitung, wie Sie in **Visual Studio Code (VSC)** arbeiten:
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie in VS Code auf Ihrer Tastatur die Tastenkombination `Strg + P` *(Schnellöffnung)*.
 2. Tippen Sie ein: `uebung_01_entwickler_header.cps` und drücken Sie `Enter` *(Eingabetaste)*.
 3. Die Datei öffnet sich im Editor. Ändern Sie z. B. in Zeile 16 Ihren Wunschnamen oder Text.
 4. Speichern Sie die Datei mit `Strg + S`.
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal *(Befehlszeilenfenster)* in VS Code mit der Tastenkombination ``Strg + ` `` *(Gravis-Taste oben links neben der 1)* oder klicken Sie im oberen Menü auf **Terminal -> New Terminal (Neues Terminal)**.
 2. Tippen Sie folgenden Befehl ein und drücken Sie `Enter`:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_01_entwickler_header.cps
    ```
 3. Der Simulator startet sofort! Im Terminal sehen Sie direkt das Testergebnis mit grünem Haken.
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 Der Simulator schreibt den fertigen CNC-Maschinencode in die Datei [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/uebungen/uebung_04_3d_modell_cam.nc).
+
 * Öffnen Sie die Datei mit `Strg + P` und der Eingabe: `mein_generierter_gcode.nc`.
 * Dort sehen Sie Ihren Entwickler-Header ganz oben in den Zeilen 1 bis 10!
 
 #### Schritt 4: 3D-Simulation visuell im Webbrowser prüfen
+
 1. Öffnen Sie die Datei [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/uebungen/uebung_04_3d_modell_cam.nc).
 2. Drücken Sie `Strg + A` *(alles markieren)* und `Strg + C` *(kopieren)*.
 3. Öffnen Sie in Ihrem Browser die Webseite **[https://ncviewer.com](https://ncviewer.com)**.
@@ -1258,8 +1376,8 @@ writeWords("M30");
 O1001 (CNC FERTIGUNGSPROGRAMM - MUSTERBAUTEIL)
 (==================================================)
 (AUTOMATISCH GENERIERTER CNC G-CODE - MASCHINENCODE)
-(ENTWICKLER : JAVASCRIPT CNC-ENTWICKLER)
-(BETRIEB    : PRAEZISIONS-ZERSPANUNG GMBH)
+(ENTWICKLER : DIPL.-ING. BUJANOVSKI)
+(BETRIEB    : INGENIEURBUERO DIPL.-ING. BUJANOVSKI)
 (DATUM/ZEIT : 2026-10-16 14:15)
 (EINHEITEN  : MILLIMETER - METRISCH G21)
 (==================================================)
@@ -1271,15 +1389,16 @@ M30 (M30 HAUPTPROGRAMMENDE, RESET UND RUECKSPRUNG AUF ZEILE 1)
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 1 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Entwickler-Name** | In Zeile 4 steht Ihr eigener Name oder `JAVASCRIPT CNC-ENTWICKLER` in runden Klammern. | [ ] |
-| **2. Firma & Datum** | Firmenname und aktuelles Systemdatum mit Uhrzeit werden automatisch formatiert ausgegeben. | [ ] |
-| **3. Keine Umlaute / Sonderzeichen** | Der Text ist in Großbuchstaben formatiert und enthält keine Sonderzeichen wie `ä, ö, ü, ß`, die eine alte Steuerung zum Absturz bringen würden. | [ ] |
-| **4. Konsistenzprüfung** | In [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/uebungen/uebung_04_3d_modell_cam.nc) erscheint der Header fehlerfrei und ohne Warnmeldungen. | [ ] |
+| Prüfpunkt                            | Was muss im Code / Simulator zu sehen sein?                                                                                                                                           | Bestanden? |
+|:------------------------------------ |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:----------:|
+| **1. Entwickler-Name**               | In Zeile 4 steht Ihr eigener Name oder `DIPL.-ING. BUJANOVSKI` in runden Klammern.                                                                                                | [ ]        |
+| **2. Firma & Datum**                 | Firmenname und aktuelles Systemdatum mit Uhrzeit werden automatisch formatiert ausgegeben.                                                                                            | [ ]        |
+| **3. Keine Umlaute / Sonderzeichen** | Der Text ist in Großbuchstaben formatiert und enthält keine Sonderzeichen wie `ä, ö, ü, ß`, die eine alte Steuerung zum Absturz bringen würden.                                       | [ ]        |
+| **4. Konsistenzprüfung**             | In [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/uebungen/uebung_04_3d_modell_cam.nc) erscheint der Header fehlerfrei und ohne Warnmeldungen. | [ ]        |
 
 ---
 
+<a id="uebung-02"></a>
 # Übung 2: Automatische Werkzeugliste (`Tool Table`) ganz oben im Programm ausgeben
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -1297,35 +1416,34 @@ In dieser Übung rüsten Sie Ihren Postprozessor mit einer professionellen Rüst
 
 ---
 
-
-
 ## 📩 Der reale Kundenauftrag zu Übung 2 (Rüstzeit-Optimierung für Feinmechanik)
 
 So sieht eine typische Anfrage aus, wenn ein Betrieb teure Maschinen-Stillstandszeiten beim Rüsten eliminieren will:
 
 > **Von:** Dr.-Ing. Sabine Hofmann *(Produktionsleiterin)* `<s.hofmann@bavaria-feinmechanik.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 16. Oktober 2026, 08:30 Uhr  
 > **Betreff:** Postprozessor-Optimierung: Automatische Werkzeugtabelle im Programmkopf  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
-> 
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
+>
 > in unserer Serienfertigung in Nürnberg rüsten unsere Zerspanungsmechaniker täglich bis zu 5 verschiedene Bauteile auf unseren Bearbeitungszentren.  
-> 
+>
 > Aktuell verlieren die Werker bei jedem neuen Auftrag 15 bis 20 Minuten wertvolle Maschinenzeit, weil sie das mehrere tausend Zeilen lange G-Code-Programm am Steuerungsbildschirm durchblättern müssen, um alle `T.. M06` Werkzeugwechsel herauszuschreiben.  
-> 
+>
 > **Aufgabenstellung:**  
 > Wir möchten, dass unser Fusion 360 Postprozessor über die interne Funktion `getToolTable()` ganz oben im Programmkopf eine übersichtliche Werkzeugliste ausgibt:  
+>
 > 1. Werkzeugnummer (`T01`, `T02` usw.)  
 > 2. Fräser-/Bohrerdurchmesser in mm (`D=10.000MM`)  
 > 3. Eckenradius (`ECKE R=0.000`)  
-> 4. Klartext-Bezeichnung des Werkzeugs *(z. B. SCHAFTFRAESER 10MM VHM)*  
-> 
+> 4. Klartext-Bezeichnung des Werkzeugs *(z. B. SCHAFTFRAESER 10MM VHM)*
+>
 > **Vergütung:**  
 > Für diese Programmierung in der Datei `.cps` bieten wir Ihnen ein Festhonorar von **450,00 € netto**.  
-> 
+>
 > Bei schneller Umsetzung stellen wir die Zahlung sofort nach Testlauf frei.  
-> 
+>
 > Mit besten Grüßen  
 > **Dr.-Ing. Sabine Hofmann** – Bavaria Feinmechanik GmbH, Nürnberg  
 
@@ -1333,11 +1451,11 @@ So sieht eine typische Anfrage aus, wenn ein Betrieb teure Maschinen-Stillstands
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 2
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`T01`, `T02`** | **Werkzeugnummer *(Tool Number)*** | Platznummer des Werkzeugs im Magazinkarussell der Fräsmaschine. |
-| **`D=...MM`** | **Werkzeug-Durchmesser *(Diameter)*** | Dicke $\varnothing$ des Fräsers oder Bohrers *(z. B. `10.000MM`)* für die Bahnbreite. |
-| **`ECKE R=...`** | **Eckenradius *(Corner Radius)*** | `R=0.000` = scharfkantiger Fräser, `R=1.000` = Torusfräser, `R=5.000` = Kugelfräser. |
+| Kennzeichen        | Fachbegriff & Erklärung                  | Bedeutung & Funktion in dieser Übung                                                               |
+| ------------------ | ---------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **`T01`, `T02`**   | **Werkzeugnummer *(Tool Number)***       | Platznummer des Werkzeugs im Magazinkarussell der Fräsmaschine.                                    |
+| **`D=...MM`**      | **Werkzeug-Durchmesser *(Diameter)***    | Dicke $\varnothing$ des Fräsers oder Bohrers *(z. B. `10.000MM`)* für die Bahnbreite.              |
+| **`ECKE R=...`**   | **Eckenradius *(Corner Radius)***        | `R=0.000` = scharfkantiger Fräser, `R=1.000` = Torusfräser, `R=5.000` = Kugelfräser.               |
 | **`writeComment`** | **Kommentar-Ausgabe *(Comment Output)*** | Schreibt jede Zeile der Werkzeugliste formatiert in runden Klammern `(...)` an den Programmanfang. |
 
 ### 💡 Worum geht es in einfacher Sprache?
@@ -1348,6 +1466,7 @@ Genauso ist es an der **CNC-Maschine (Werkzeugmaschine)**: Der **Maschinenbedien
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
+
 1. **Als eigene, kompakte Übungs-Datei:**  
    [`uebungen/uebung_02_werkzeugliste.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_02_werkzeugliste.cps) – Enthält übersichtlich nur den Code zur Werkzeuglisten-Generierung.
 2. **Im großen Gesamt-Postprozessor des Projekts:**  
@@ -1356,22 +1475,27 @@ Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
 ### 🖥️ Schritt-für-Schritt: So öffnen, bearbeiten, starten und simulieren Sie Übung 2 in Visual Studio Code (VSC)
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie in VS Code `Strg + P` *(Schnellöffnung)*.
 2. Tippen Sie ein: `uebung_02_werkzeugliste.cps` und drücken Sie `Enter`.
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal mit ``Strg + ` `` *(oder Menü: Terminal -> Neues Terminal)*.
 2. Führen Sie folgenden Befehl aus:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_02_werkzeugliste.cps
    ```
 3. Der Simulator liest die CAM-Werkzeuge ein und zeigt Ihnen das Testergebnis grün an.
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 * Öffnen Sie mit `Strg + P` die Datei [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/uebungen/uebung_04_3d_modell_cam.nc).
 * Dort sehen Sie die Werkzeugliste am Programmanfang (`T01 Schaftfräser`, `T02 Spiralbohrer`).
 
 #### Schritt 4: 3D-Simulation visuell prüfen
+
 * Kopieren Sie den Inhalt von `mein_generierter_gcode.nc` (`Strg + A`, `Strg + C`).
 * Öffnen Sie [https://ncviewer.com](https://ncviewer.com), fügen Sie den Code ein (`Strg + V`) und klicken Sie auf **Plot** bzw. **Play**.
 
@@ -1430,26 +1554,30 @@ Für jeden JavaScript-Entwickler, der aus Node.js oder der modernen Web-Entwickl
 Die Antwort lautet: **Autodesk CAM Postprozessoren laufen in einer eingebetteten Host-Laufzeitumgebung *(Embedded Host Environment)***!
 
 #### 1. Der Vergleich mit dem Webbrowser und Node.js
+
 Denken Sie an alltägliches JavaScript:
+
 * **Im Webbrowser:** Müssen Sie jemals `import { window, document, console }` schreiben? **Nein!** Der Browser stellt `window`, `document`, `fetch()` und `console.log()` automatisch im **globalen Namensraum *(Global Scope)*** bereit.
 * **In Node.js:** Müssen Sie jemals `import { process, Buffer }` schreiben? **Nein!** Die Node-Laufzeitumgebung injiziert `process`, `Buffer` und `__dirname` von vornherein global.
 * **In Autodesk CAM *(Fusion 360 / Inventor CAM / HSMWorks)***: Exakt genauso! Die interne C++ Postprozessor-Engine lädt Ihre `.cps`-Datei und stellt ihr ein ganzes Arsenal an **fertig injizierten globalen CAM-Funktionen** zur Verfügung.
 
 #### 2. Welche Funktionen sind in `.cps`-Dateien immer automatisch global verfügbar?
 
-| Globale Funktion | Was liefert sie? | Wofür wird sie genutzt? |
-| :--- | :--- | :--- |
-| **`getToolTable()`** | Ein `ToolTable`-Objekt aller verwendeten Werkzeuge | In [`uebung_02_werkzeugliste.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_02_werkzeugliste.cps) zum Auflisten von `T01`, `T02` etc. |
-| **`getNumberOfSections()`** | Die Gesamtzahl aller Bearbeitungsschritte *(Operations)* | Um in einer Schleife alle Operationen nach der tiefsten Frästiefe (`Z-MIN`) zu durchsuchen. |
-| **`getSection(index)`** | Die Bearbeitungsoperation an Stelle `index` | Liefert Werkzeug, Schnittdaten, Kühlmittel und Koordinaten einer bestimmten Operation. |
-| **`currentSection`** | Die aktuell laufende Fräsoperation | In [`onSection()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L257) für Werkzeugwechsel `T.. M06` und Drehzahl `S.. M03`. |
-| **`writeBlock(...)` / `writeWords(...)`** | Schreibt Befehle getrennt durch Leerzeichen | Erzeugt Zeilen wie `G00 X0 Y0 Z15` in der fertigen `.nc`-Datei. |
-| **`writeComment(text)`** | Schreibt Text in runden Klammern `(...)` | Erzeugt sichere Bediener-Kommentare ohne Maschinenabsturz. |
-| **`getProperty(name)`** | Liest einen Schalterwert aus dem CAM-Menü | Z. B. `getProperty("writeToolList")` prüft, ob der Bediener die Werkzeugliste wünscht. |
+| Globale Funktion                          | Was liefert sie?                                         | Wofür wird sie genutzt?                                                                                                                                              |
+|:----------------------------------------- |:-------------------------------------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`getToolTable()`**                      | Ein `ToolTable`-Objekt aller verwendeten Werkzeuge       | In [`uebung_02_werkzeugliste.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_02_werkzeugliste.cps) zum Auflisten von `T01`, `T02` etc. |
+| **`getNumberOfSections()`**               | Die Gesamtzahl aller Bearbeitungsschritte *(Operations)* | Um in einer Schleife alle Operationen nach der tiefsten Frästiefe (`Z-MIN`) zu durchsuchen.                                                                          |
+| **`getSection(index)`**                   | Die Bearbeitungsoperation an Stelle `index`              | Liefert Werkzeug, Schnittdaten, Kühlmittel und Koordinaten einer bestimmten Operation.                                                                               |
+| **`currentSection`**                      | Die aktuell laufende Fräsoperation                       | In [`onSection()`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L257) für Werkzeugwechsel `T.. M06` und Drehzahl `S.. M03`.                |
+| **`writeBlock(...)` / `writeWords(...)`** | Schreibt Befehle getrennt durch Leerzeichen              | Erzeugt Zeilen wie `G00 X0 Y0 Z15` in der fertigen `.nc`-Datei.                                                                                                      |
+| **`writeComment(text)`**                  | Schreibt Text in runden Klammern `(...)`                 | Erzeugt sichere Bediener-Kommentare ohne Maschinenabsturz.                                                                                                           |
+| **`getProperty(name)`**                   | Liest einen Schalterwert aus dem CAM-Menü                | Z. B. `getProperty("writeToolList")` prüft, ob der Bediener die Werkzeugliste wünscht.                                                                               |
 
 #### 3. Wie macht das unser lokaler Testrunner ([`tests/simuliere_post.js`](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/simuliere_post.js#L318-L323))?
+
 Wenn Sie `node simuliere_post.js ...` im Terminal ausführen, startet Node.js eine simulierte Sandbox *(einen virtuellen Ausführungs-Kontext)*.  
 In Zeile 318 von `tests/simuliere_post.js` steht deshalb:
+
 ```javascript
 getToolTable: function () {
   return {
@@ -1458,6 +1586,7 @@ getToolTable: function () {
   };
 }
 ```
+
 Unser Testrunner injiziert `getToolTable()` genau wie das echte Fusion 360 direkt als globale Funktion – deshalb läuft Ihre `.cps`-Datei sowohl im echten 200.000-Euro-CAM-System als auch lokal in Ihrem Terminal völlig ohne `import`!
 
 ### 🎭 Was bedeutet „mockTools“ im Testskript – und was steht in echtem Autodesk Fusion 360?
@@ -1467,19 +1596,24 @@ Sie haben in [`tests/simuliere_post.js`](file:///c:/Projekte/CNC/02_Software_und
 Vollkommen richtig! Hier ist der genaue Unterschied:
 
 #### 1. Was bedeutet „Mock“ in der Softwareentwicklung?
+
 * Das englische Wort **„to mock“** bedeutet **„nachahmen / nachstellen“**.
 * Ein **Mock-Objekt *(Test-Attrappe / Dummy)*** ist eine künstliche Nachbildung echter Daten, damit man als Software-Entwickler Programme testen kann, **ohne** jedes Mal eine 1.000-Euro-Software oder einen riesigen Cloud-Server starten zu müssen.
 * In unserem Testskript [`tests/simuliere_post.js`](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/simuliere_post.js) haben wir für Sie die Werkzeuge unseres Kundenauftrags *(T01 10mm-Schaftfräser, T02 6mm-Spiralbohrer)* als `mockTools` hinterlegt, damit der Befehl `node simuliere_post.js ...` in 50 Millisekunden blitzschnell im VS Code Terminal durchläuft.
 
 #### 2. Und was passiert in echtem Autodesk Fusion 360?
+
 In der echten Fertigung gibt es natürlich **kein `mockTools`**, sondern:
+
 * Der Fräser öffnet in Fusion 360 die **Werkzeugbibliothek *(Tool Library)***.
 * Er wählt seine echten, physikalischen Werkzeuge aus dem Regal aus *(oder lädt digitale 3D-Werkzeugdaten von Herstellern wie Hoffmann Garant, Sandvik Coromant oder Walter herunter)*.
 * Wenn der Bediener auf **„Postprozessieren“ *(Post Process)*** klickt, liest der C++ CAM-Kern von Fusion 360 diese **echten 3D-Werkzeuge aus dem Speicher der CAD/CAM-Datei** aus.
 * Fusion 360 packt diese echten Werkzeuge in das `ToolTable`-Objekt und übergibt sie an Ihre JavaScript-Funktion `getToolTable()`.
 
 #### 3. Der geniale Vorteil für Sie als Entwickler:
+
 Ihr Postprozessor ([`uebung_02_werkzeugliste.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_02_werkzeugliste.cps) und [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps)) ist universell:
+
 * Er ruft einfach nur `var tools = getToolTable();` auf.
 * **Beim Entwickeln am Laptop:** `getToolTable()` liefert die schnellen `mockTools`.
 * **In der Werkhalle an der Fräsmaschine:** `getToolTable()` liefert die echten Fräser von Herrn Müller!
@@ -1500,57 +1634,67 @@ M30 (M30 HAUPTPROGRAMMENDE, RESET UND RUECKSPRUNG AUF ZEILE 1)
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 2 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Werkzeugtabelle aktiv** | Schalter `writeToolList: true` gibt den Block `(--- BENOETIGTE WERKZEUGE ---)` aus. | [ ] |
-| **2. Werkzeugnummern formatiert** | Werkzeuge werden sauber 2-stellig als `T01` und `T02` formatiert. | [ ] |
-| **3. Durchmesser & Eckenradius** | Fräser-Durchmesser `D=10.000MM` und Eckradius `ECKE R=0.000` werden exakt ausgewiesen. | [ ] |
-| **4. Konsistenzprüfung** | In [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/uebungen/uebung_04_3d_modell_cam.nc) erscheint die Werkzeugliste direkt unter dem Programmkopf. | [ ] |
+| Prüfpunkt                         | Was muss im Code / Simulator zu sehen sein?                                                                                                                                              | Bestanden? |
+|:--------------------------------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:----------:|
+| **1. Werkzeugtabelle aktiv**      | Schalter `writeToolList: true` gibt den Block `(--- BENOETIGTE WERKZEUGE ---)` aus.                                                                                                      | [ ]        |
+| **2. Werkzeugnummern formatiert** | Werkzeuge werden sauber 2-stellig als `T01` und `T02` formatiert.                                                                                                                        | [ ]        |
+| **3. Durchmesser & Eckenradius**  | Fräser-Durchmesser `D=10.000MM` und Eckradius `ECKE R=0.000` werden exakt ausgewiesen.                                                                                                   | [ ]        |
+| **4. Konsistenzprüfung**          | In [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/uebungen/uebung_04_3d_modell_cam.nc) erscheint die Werkzeugliste direkt unter dem Programmkopf. | [ ]        |
 
 ### 💼 Praxis-Leitfaden: Was mache ich bei einem echten Kundenauftrag? (Schritt-für-Schritt)
 
 Wenn Sie den Lehrgang durchgearbeitet haben und ein echter Kunde *(z. B. Herr Müller, Inhaber einer Zerspanungsfirma)* auf Sie zukommt, läuft der Auftrag in **5 glasklaren Schritten** ab:
 
 #### Schritt 1: Der Kunde beauftragt Sie & Sie fordern 2 Dokumente an
+
 Der Kunde sagt:  
 *„Wir nutzen Autodesk Fusion 360 und haben eine Haas VF-2 Fräsmaschine. Wir brauchen einen sicheren Postprozessor mit Werkzeugliste am Anfang, automatischer Z-MIN-Prüfung gegen Schraubstock-Crashs und sicherem Tisch-Vorfahren am Ende!“*
 
 Sie verlangen vom Kunden per E-Mail einfach nur **zwei Dinge**:
+
 1. **Eine funktionierende Muster-Datei (`.nc`)**: Ein kleines Programm, das schon einmal fehlerfrei auf seiner Maschine gelaufen ist *(daran sehen Sie den Steuerungsdialekt, z. B. Fanuc oder Siemens)*.
 2. **Den genauen Maschinentyp & Steuerung**: Z. B. *Haas NGC Steuerung*.
 
 #### Schritt 2: Entwicklung & Test an Ihrem Laptop in Visual Studio Code
+
 Sie müssen nicht in die Firma des Kunden fahren! Sie arbeiten bequem an Ihrem Schreibtisch:
+
 1. **Ihre Vorlage öffnen:** Sie öffnen entweder Ihren Basis-Postprozessor [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps) oder die fertige Enddatei aus Übung 16 ([`uebungen/uebung_16_endabnahme_meister_post.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_16_endabnahme_meister_post.cps)).
    *(Warum gibt es beides? Die 16 Übungen sind einzelne, kleine Lernbausteine, damit man nicht überfordert wird. In `src/mein_erster_post.cps` bzw. Übung 16 sind alle 16 Bausteine zu einem einzigen großen, verkaufsfertigen Postprozessor zusammengesetzt).*
 2. Sie passen die Funktionen *(Header, Werkzeugliste, Z-MIN, G53 Z-Rückzug)* mit dem gelernten Wissen an.
 3. Sie testen das Skript blitzschnell im VS Code Terminal:
+
    ```powershell
    node simuliere_post.js src/mein_erster_post.cps
    ```
 4. Sie prüfen die erzeugte Maschinendatei [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/uebungen/uebung_04_3d_modell_cam.nc) und kontrollieren sie im [3D-Simulator](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html).
 
 #### Schritt 3: Sie senden dem Kunden die fertige `.cps`-Datei
+
 Sie benennen Ihre Datei sauber um, z. B. in `haas_vf2_praezision_mueller.cps`, und schicken sie Herrn Müller per E-Mail mit folgender 2-Klick-Anleitung:
 
 > **Installations-Anleitung für Herrn Müller in Autodesk Fusion 360:**
+>
 > 1. Öffnen Sie Fusion 360 und gehen Sie in den Arbeitsbereich **Fertigen *(Manufacture)***.
 > 2. Klicken Sie oben auf das Symbol **Postprozessieren *(Post Process / NC-Programm erstellen)***.
 > 3. Klicken Sie im Einstellungsfenster auf den Reiter **Post-Konfiguration *(Post Configuration)*** und wählen Sie **„Postprozessor importieren / Aus Datei auswählen“**.
 > 4. Wählen Sie die Datei `haas_vf2_praezision_mueller.cps` aus.  
-> *Fertig! Ab sofort steht Ihr neuer Postprozessor dauerhaft in Fusion 360 zur Verfügung.*
+>    *Fertig! Ab sofort steht Ihr neuer Postprozessor dauerhaft in Fusion 360 zur Verfügung.*
 
 #### Schritt 4: Der Kunde erzeugt seinen G-Code & testet an der Maschine
+
 * Herr Müller klickt in Fusion 360 auf sein eigenes 3D-Bauteil und drückt auf **„Postprozessieren“**.
 * Fusion 360 ruft **Ihre `.cps`-Datei** auf, liest seine echten Werkzeuge und Fräswege ein und erzeugt sekundenschnell den perfekten Maschinencode.
 * Der Fräser an der Maschine lädt die Datei per USB-Stick oder Netzwerk, fährt den ersten Durchlauf mit dem Handrad *(Single Block / Einzelsatz)* vorsichtig zur Probe ab und sieht: **Alles passt auf den Zehntelmillimeter!**
 
 #### Schritt 5: Rechnung schreiben & bezahlt werden
+
 * Sie schreiben Herrn Müller Ihre Rechnung *(z. B. „Erstellung & Anpassung des Postprozessors Haas VF-2 für Fusion 360 gem. Anforderung: 600,00 €“)*.
 * Herr Müller bezahlt Ihre Rechnung mit Freude, denn Ihre 50 Zeilen JavaScript schützen seine 150.000-Euro-Fräsmaschine jahrelang vor teuren Crashs!
 
 ---
 
+<a id="uebung-03"></a>
 # Übung 3: Sicherheits-Schutz gegen Maschinencrash – Tiefste Frästiefe (`Z-MIN`) berechnen
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -1573,53 +1717,56 @@ In dieser Übung lernen Sie als Postprozessor-Entwickler und Sicherheits-Ingenie
 So sieht eine typische, hochbezahlte E-Mail aus, die ein Zerspanungsbetrieb an dein freiberufliches Ingenieurbüro schickt, wenn es in der Werkstatt brennt:
 
 > **Von:** Markus Weber *(Fertigungsleiter)* `<m.weber@schmidt-praezision.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 22. Oktober 2026, 09:15 Uhr  
 > **Betreff:** EIL-ANFRAGE: Postprozessor-Anpassung & Z-MIN Sicherheitsprüfung für Haas VF-2 (Projekt: Flanschplatte 1001)  
 >
-> Sehr geehrter Herr Kollege Dipl.-Ing. Buenotte,  
-> 
+> Sehr geehrter Herr Kollege Dipl.-Ing. Bujanovski,  
+>
 > ich wende mich mit einer dringenden technischen Aufgabenstellung an Ihr Ingenieurbüro.  
-> 
+>
 > Wir haben in unserer Fertigungshalle in Kassel seit zwei Wochen ein neues 3-Achs-Bearbeitungszentrum *(Haas VF-2 mit NextGen Control)* im Einsatz. Für die CAM-Programmierung nutzen wir Autodesk Fusion 360.  
-> 
+>
 > Aktuell haben wir einen Serienauftrag über **150 Stück Flanschplatten (Aluminium EN AW-6082)** auf der Maschine. Gestern kam es beim Einrichten beinahe zu einer schweren Kollision mit den Schraubstockbacken, weil der Standard-Postprozessor von Autodesk die tiefste Frästiefe nicht im Programmkopf anzeigt und der Tisch am Programmende hinten stehen bleibt.  
-> 
+>
 > Da wir von Ihrer Spezialisierung auf maschinenspezifische Postprozessor-Entwicklung und CNC-Kollisionsschutz erfahren haben, möchten wir Sie mit folgendem Gesamtpaket beauftragen:  
-> 
+>
 > #### 📋 Technische Auftragsdaten (Projekt: Flanschplatte 1001):
+>
 > 1. **Bauteil-Geometrie (Zeichnung Teil 1001 im Anhang):**  
 >    * **Fertigmaß:** $80 \times 50 \times 12\,\text{mm}$  
 >    * **Rohteil aus der Säge:** $85 \times 55 \times 15\,\text{mm}$ *(Aufmaß: $2{,}5\,\text{mm}$ seitlich rundherum, $3\,\text{mm}$ am Boden)*  
 >    * **Bearbeitung Oberseite (OP10):**  
 >      * Außenkontur: $5\,\text{mm}$ Stufe absetzen *(Schnitttiefe $Z = -5{,}0\,\text{mm}$)*  
 >      * Kreistasche im Zentrum: $\varnothing 30\,\text{mm}$, Tiefe $3\,\text{mm}$ *(Schnitttiefe $Z = -3{,}0\,\text{mm}$)*  
->      * 4 Befestigungsbohrungen: $\varnothing 6\,\text{mm}$ komplett durchbohren *(Schnitttiefe $Z = -12{,}0\,\text{mm}$)*  
+>      * 4 Befestigungsbohrungen: $\varnothing 6\,\text{mm}$ komplett durchbohren *(Schnitttiefe $Z = -12{,}0\,\text{mm}$)*
 > 2. **Spannsituation im Maschinenschraubstock:**  
 >    * Maschinenschraubstock mit gehärteten Stahlbacken.  
 >    * Das Werkstück wird unten an den untersten $3\,\text{mm}$ gespannt *(Spannrand $Z = -12\,\text{mm}$ bis $Z = -15\,\text{mm}$)*.  
->    * **Kritische Sicherheitsgrenze:** Die Stahlbacken liegen bei $Z = -12{,}5\,\text{mm}$. Ein Eintauchen tiefer als $Z = -12{,}0\,\text{mm}$ führt zum Crash!  
+>    * **Kritische Sicherheitsgrenze:** Die Stahlbacken liegen bei $Z = -12{,}5\,\text{mm}$. Ein Eintauchen tiefer als $Z = -12{,}0\,\text{mm}$ führt zum Crash!
 > 3. **Werkzeuge im Magazin:**  
 >    * `T01`: VHM-Schaftfräser $\varnothing 10\,\text{mm}$ *(Schnittdaten: $S=8000\,\text{U/min}$, $F=1200\,\text{mm/min}$)*  
->    * `T02`: VHM-Spiralbohrer $\varnothing 6\,\text{mm}$ *(Tiefbohrzyklus G83 mit $Q=3\,\text{mm}$ Spanbruch, $S=3500\,\text{U/min}$, $F=300\,\text{mm/min}$)*  
-> 
+>    * `T02`: VHM-Spiralbohrer $\varnothing 6\,\text{mm}$ *(Tiefbohrzyklus G83 mit $Q=3\,\text{mm}$ Spanbruch, $S=3500\,\text{U/min}$, $F=300\,\text{mm/min}$)*
+>
 > #### 🎯 Unser Anforderungskatalog an Ihr Ingenieurbüro:
+>
 > 1. **Postprozessor-Anpassung (`schmidt_haas_vf2.cps`):**  
 >    * Automatische Berechnung und gut sichtbare Ausgabe der absolut tiefsten Frästiefe **`Z-MIN`** ganz oben im Programmkopf.  
 >    * Sicherheitswarnung im G-Code, falls $Z_{\text{min}}$ tiefer als $-12{,}0\,\text{mm}$ programmiert werden sollte.  
->    * Am Programmende soll der Frästisch automatisch mit `G53 G00 Y0.` ganz nach vorne an die Schiebetür fahren, damit der Werker bequem entladen kann.  
+>    * Am Programmende soll der Frästisch automatisch mit `G53 G00 Y0.` ganz nach vorne an die Schiebetür fahren, damit der Werker bequem entladen kann.
 > 2. **Crash-Prüfung & Freigabe-Video:**  
->    * Wir benötigen vorab ein kurzes **30-Sekunden-Simulationsvideo** aus dem Maschinencode, damit mein Schichtleiter sieht, dass die Werkzeugwege kollisionsfrei über den Spannbacken bleiben.  
+>    * Wir benötigen vorab ein kurzes **30-Sekunden-Simulationsvideo** aus dem Maschinencode, damit mein Schichtleiter sieht, dass die Werkzeugwege kollisionsfrei über den Spannbacken bleiben.
 > 3. **Einrichteblatt (PDF):**  
->    * Ausdruckbare Werkzeugliste für den Bediener an der Maschine mit Drehzahlen, Vorschüben und Nullpunkt `G54` (oben links).  
-> 
+>    * Ausdruckbare Werkzeugliste für den Bediener an der Maschine mit Drehzahlen, Vorschüben und Nullpunkt `G54` (oben links).
+>
 > #### 💰 Konditionen & Vergütung:
+>
 > * Für dieses Gesamtpaket bieten wir ein Festhonorar von **480,00 € netto**.  
 > * Zahlungsbedingung: **50 % Anzahlung (240,00 €) sofort** nach Erhalt Ihrer Auftragsbestätigung, restliche **50 % (240,00 €)** vor Code-Übergabe.  
-> * Lieferzeit: Innerhalb von 24 bis 48 Stunden.  
-> 
+> * Lieferzeit: Innerhalb von 24 bis 48 Stunden.
+>
 > Bitte senden Sie uns Ihre offizielle Auftragsbestätigung nach § 18 EStG zu, damit unsere Buchhaltung die Anzahlung heute noch anweisen kann.  
-> 
+>
 > Mit freundlichen Grüßen aus Kassel  
 > **Dipl.-Ing. (FH) Markus Weber**  
 > *Leiter Fertigung & Zerspanungstechnik* – Schmidt Präzisionsteile GmbH & Co. KG  
@@ -1629,12 +1776,12 @@ So sieht eine typische, hochbezahlte E-Mail aus, die ein Zerspanungsbetrieb an d
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 3
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`Z0.000`** | **Bauteil-Oberkante *(Top of Part)*** | Höhen-Nullpunkt des Werkstücks. |
-| **`Z+...`** | **Sicherheitshöhe in der Luft *(Clearance Height)*** | Positive Z-Werte *(z. B. `Z15.000`)* über dem Bauteil, in denen der Fräser kollisionsfrei verfährt. |
-| **`Z-...`** | **Frästiefe im Material *(Depth of Cut)*** | Negative Z-Werte *(z. B. `Z-5.000` Kontur, `Z-12.000` Bohrung)* tief im Metall. |
-| **`Z-MIN`** | **Tiefster Z-Punkt *(Minimum Z Depth)*** | Der absolut tiefste Punkt, den ein Werkzeug erreicht. Schützt den Schraubstock vor Kollisionen. |
+| Kennzeichen  | Fachbegriff & Erklärung                              | Bedeutung & Funktion in dieser Übung                                                                |
+| ------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| **`Z0.000`** | **Bauteil-Oberkante *(Top of Part)***                | Höhen-Nullpunkt des Werkstücks.                                                                     |
+| **`Z+...`**  | **Sicherheitshöhe in der Luft *(Clearance Height)*** | Positive Z-Werte *(z. B. `Z15.000`)* über dem Bauteil, in denen der Fräser kollisionsfrei verfährt. |
+| **`Z-...`**  | **Frästiefe im Material *(Depth of Cut)***           | Negative Z-Werte *(z. B. `Z-5.000` Kontur, `Z-12.000` Bohrung)* tief im Metall.                     |
+| **`Z-MIN`**  | **Tiefster Z-Punkt *(Minimum Z Depth)***             | Der absolut tiefste Punkt, den ein Werkzeug erreicht. Schützt den Schraubstock vor Kollisionen.     |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -1676,6 +1823,7 @@ Ein Schraubstock hat zwei massive Stahlbacken, die das Werkstück von den Seiten
 Hier gibt es zwei gegensätzliche Szenarien:
 
 #### ❌ Szenario A: Der tödliche Crash (Was passiert, wenn man Z-MIN NICHT kennt!)
+
 * Ein unvorsichtiger Fräser spannt das 15 mm hohe Rohteil tief in den Schraubstock ein.
 * Die Stahlbacken des Schraubstocks reichen bis auf **$10\,\text{mm}$ unter die Oberkante** hoch.
 * Das bedeutet: Die **Oberkante der harten Stahlbacken liegt bei $Z = -10{,}0\,\text{mm}$**!
@@ -1683,7 +1831,9 @@ Hier gibt es zwei gegensätzliche Szenarien:
 * **Das Ergebnis:** Der Bohrer knallt mit $8.000\,\text{U/min}$ ungebremst in den gehärteten Stahl der Schraubstockbacken. Bohrer bricht explosionsartig ab, Werkstück ist Schrott, Spindel ist zerstört *(30.000 € Schaden)*!
 
 #### ✅ Szenario B: Wie dein Postprozessor mit `Z-MIN` den Crash verhindert!
+
 * Dein JavaScript-Postprozessor rechnet vorab alle Werkzeugwege durch und schreibt ganz oben in den Programmkopf:
+
   ```text
   (T02 | BOHRER D=6.8MM | Z-MIN=-12.000MM)
   ```
@@ -1701,7 +1851,9 @@ Hier gibt es zwei gegensätzliche Szenarien:
 Hier ist die ganz einfache Erklärung, wie du das im Bild findest und wie es an der echten Maschine gemessen wird:
 
 #### 1. Wo siehst du $Z = -10\,\text{mm}$ auf dem Bild?
+
 Schau dir die **rote Leuchtkante *(Kollisionsbereich / Crash Danger Zone)*** am Schraubstock an:
+
 * **Ganz oben ($Z = 0.000$):** Ist die glatte, silbergraue Oberseite des Aluminiumblocks.
 * **Die rote Leuchtlinie:** Das ist die **Oberkante der vorderen Stahl-Spannbacke**!
 * **Der Abstand dazwischen:** Die senkrechte Außenwand des Aluminiumblocks, die von der Oberkante ($Z=0$) nach unten bis zur roten Stahlbacke führt, ist genau **$10\,\text{mm}$ lang**! Da es nach unten ins Minus geht, liegt diese rote Kante auf der Höhe **$Z = -10{,}0\,\text{mm}$**.
@@ -1728,6 +1880,7 @@ Hier ist die technische Schnittzeichnung, die zeigt, wie das Tunnel-Prinzip funk
 ![Das Tunnel-Prinzip in der CNC-Praxis](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_tunnel_prinzip_parallelunterlagen.jpg)
 
 #### Wie funktioniert das Tunnel-Prinzip Schritt für Schritt?
+
 1. **Zwei schmale Parallelunterlagen ganz außen:**
    * Der Fräser legt keine breite Platte unter das Werkstück, sondern **zwei schmale, präzise geschliffene Stahlleisten** *(Parallelunterlagen / Parallels)* ganz an den linken und rechten Rand.
 2. **Der offene Luft-Tunnel im Zentrum:**
@@ -1743,6 +1896,7 @@ Hier ist die technische Schnittzeichnung, die zeigt, wie das Tunnel-Prinzip funk
 ---
 
 #### 2. Wie misst der Zerspanungsmechaniker das an der echten Maschine?
+
 In der Werkstatt steht niemand mit dem Maßband da. Der Fräser nutzt eine von **drei kinderleichten Methoden**:
 
 1. **Methode 1: Mit dem Tiefenmaß des Messschiebers *(Dauert 3 Sekunden)*:**
@@ -1836,6 +1990,7 @@ Dafür nutzt die Industrie das Prinzip der **zwei Aufspannungen *(OP10 und OP20)
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
+
 1. **Als eigene, kompakte Übungs-Datei:**  
    [`uebungen/uebung_03_z_min_berechnung.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_03_z_min_berechnung.cps) – Berechnet die Z-MIN-Werte und gibt bei Crash-Gefahr eine Sicherheitswarnung aus.
 2. **Im großen Gesamt-Postprozessor des Projekts:**  
@@ -1844,22 +1999,27 @@ Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
 ### 🖥️ Schritt-für-Schritt: So öffnen, bearbeiten, starten und simulieren Sie Übung 3 in Visual Studio Code (VSC)
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie `Strg + P` in VS Code.
 2. Tippen Sie ein: `uebung_03_z_min_berechnung.cps` und drücken Sie `Enter`.
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal mit ``Strg + ` ``.
 2. Führen Sie aus:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_03_z_min_berechnung.cps
    ```
 3. Der Simulator prüft die Z-Tiefen aller CAM-Schritte und zeigt die Z-MIN-Werte im Terminal.
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 * Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
 * Achten Sie auf die Zeilen `(SICHERHEITS-INFO: OP Z-MIN=-12.000MM)`.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
+
 * Kopieren Sie den G-Code in [https://ncviewer.com](https://ncviewer.com).
 * Drehen Sie das Werkstück auf die Seitenansicht *(X/Z oder Y/Z)*: Sie sehen exakt, wie tief der Fräser und Bohrer in das Bauteil eintauchen!
 
@@ -1919,21 +2079,23 @@ Der Arbeiter an der Maschine sieht sofort: **`T02` fährt bis `Z-12.000MM`** –
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 3 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Z-MIN-Berechnung** | Im Header steht für jedes Werkzeug der korrekte tiefste Z-Wert (z. B. `Z-MIN=-5.000MM` und `Z-MIN=-12.000MM`). | [ ] |
-| **2. Operations-Z-Info** | Vor jeder einzelnen Fräsoperation wird `(SICHERHEITS-INFO: OP Z-MIN=... | OP Z-MAX=...)` ausgegeben. | [ ] |
-| **3. Kollisionsschutz** | Der Fräser fährt niemals tiefer als das Bauteil plus Mindest-Spannbackenabstand. | [ ] |
-| **4. Konsistenz im Simulator** | In [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/uebungen/uebung_04_3d_modell_cam.nc) stimmen die berechneten Werte mit der 3D-Geometrie überein. | [ ] |
+| Prüfpunkt                      | Was muss im Code / Simulator zu sehen sein?                                                                                                                                               | Bestanden?                 |
+|:------------------------------ |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:--------------------------:|
+| **1. Z-MIN-Berechnung**        | Im Header steht für jedes Werkzeug der korrekte tiefste Z-Wert (z. B. `Z-MIN=-5.000MM` und `Z-MIN=-12.000MM`).                                                                            | [ ]                        |
+| **2. Operations-Z-Info**       | Vor jeder einzelnen Fräsoperation wird `(SICHERHEITS-INFO: OP Z-MIN=...                                                                                                                   | OP Z-MAX=...)` ausgegeben. |
+| **3. Kollisionsschutz**        | Der Fräser fährt niemals tiefer als das Bauteil plus Mindest-Spannbackenabstand.                                                                                                          | [ ]                        |
+| **4. Konsistenz im Simulator** | In [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/uebungen/uebung_04_3d_modell_cam.nc) stimmen die berechneten Werte mit der 3D-Geometrie überein. | [ ]                        |
 
 ---
 
 ### 📐 Tiefen-Exkurs: Wie wird $Z = -14{,}5\,\text{mm}$ mathematisch berechnet und WANN wird es im System ermittelt?
 
 Oft liest man im Programmkopf eine Zeile wie:
+
 ```gcode
 (T02 | BOHRER D=5.0MM | Z-MIN=-14.500MM)
 ```
+
 Warum steht dort nicht einfach die Plattendicke von $-12{,}0\,\text{mm}$, sondern $-14{,}5\,\text{mm}$? Woher kommen die zusätzlichen $2{,}5\,\text{mm}$ und zu welchem exakten Zeitpunkt rechnet der Computer das aus?
 
 ---
@@ -2051,6 +2213,7 @@ In einem professionellen CNC-Programm besitzt **jedes einzelne Werkzeug** in der
      *„Ich muss die Schneide mindestens $35\,\text{mm}$ weit aus dem Futter herausschauen lassen! Spanne ich den Fräser nur $20\,\text{mm}$ kurz ein, knallt die dicke rotierende Spannmutter mit voller Wucht auf das Werkstück!“*
 
 #### Wie macht unser Postprozessor das im Code?
+
 In [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L182-L195) prüft die JavaScript-Schleife **automatisch jedes einzelne Werkzeug** in der Werkzeugtabelle `getToolTable()` ab – ganz egal, ob es sich um einen Schaftfräser, Planfräser, Radiusfräser, Fasenfräser oder Spiralbohrer handelt!
 
 ---
@@ -2058,12 +2221,14 @@ In [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/sr
 ### ❓ Wird in einer Simulation ein Crash angezeigt, wenn `Z-MIN` falsch berechnet wurde?
 
 Das ist eine der **wichtigsten Fragen für jeden CAM-Ingenieur**! Um die Antwort zu verstehen, muss man zwischen zwei völlig unterschiedlichen Dingen unterscheiden:
+
 1. **Der tatsächlichen Fahrbewegung *(die Zahlen im G-Code, z. B. `G01 Z-14.500`)***.
 2. **Der reinen Text-Ausgabe im Programmkopf *(die Zeile `(T01 | Z-MIN=-5.000MM)`)***.
 
 ---
 
 #### 1. Fall A: Der Werkzeugweg im CAM wurde versehentlich zu tief programmiert
+
 * **Was passiert?** Der Programmierer hat im CAM versehentlich $Z = -25{,}0\,\text{mm}$ eingestellt.
 * **Wird das in der Simulation als Crash angezeigt?**
   * **In einer vollwertigen CAM-Simulation *(Autodesk Fusion 360, SolidCAM, Vericut)***:  
@@ -2076,6 +2241,7 @@ Das ist eine der **wichtigsten Fragen für jeden CAM-Ingenieur**! Um die Antwort
 ---
 
 #### 2. Fall B: Der G-Code fährt richtig, aber der Postprozessor hat einen Rechenfehler im Kommentar
+
 * **Was passiert?** Der Fräser fährt tatsächlich auf $Z = -14{,}5\,\text{mm}$ herunter. Ein fehlerhafter Postprozessor schreibt aber versehentlich in den Kommentar:  
   `(T02 | BOHRER | Z-MIN=-5.000MM)` *(er behauptet also fälschlicherweise, das Werkzeug gehe nur 5 mm tief)*.
 * **Wird DAS in der Simulation als Crash angezeigt?**
@@ -2117,13 +2283,13 @@ In unserem Browser-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulat
 3. **Wie wird der Zustand live im HUD *(Heads-Up Display)* gemeldet?**:
    Der Simulator überwacht die Z-Höhe in jedem Animationsframe und schaltet die Status-Plakette oben rechts automatisch um:
 
-| Z-Höhe im Simulator | Farbe | Angezeigter Status im HUD & am Werkzeug | Bedeutung & Maschinen-Sicherheit |
-|---|---|---|---|
-| **$Z \ge +30{,}0\,\text{mm}$** | 🟣 **Lila** | `🟣 MASCHINEN-HOME: G53 Z0.0` | Spindel steht sicher am oberen Decken-Endschalter. |
-| **$Z > 0{,}0\,\text{mm}$** | 🟢 **Grün** | `🟢 SICHERHEITSZONE: Z > 0 mm` | Werkzeug schwebt frei in der Luft über dem Werkstück *(z. B. Eilgang G00)*. |
-| **$0 \ge Z \ge -12{,}0\,\text{mm}$** | 🔵 **Blau** | `🔵 ARBEITSBEREICH: Z = ... mm` | Regulärer Spanabtrag im Aluminium *(Tasche oder Kontur)*. |
-| **$-12{,}0 > Z > -15{,}0\,\text{mm}$** | 🟡 **Orange** | `⚠️ DURCHBRUCH: Z = -14.5 mm (Tunnel aktiv!)` | **Werkzeug durchdringt den Bauteilboden ins Freie!** Signalisiert: Tunnel-Unterlagen sind zwingend erforderlich. Werkzeug färbt sich warn-orange! |
-| **$Z \le -15{,}0\,\text{mm}$** | 🔴 **Signalrot** | `🚨 KOLLISION / CRASH: Z <= -15.0 mm!` | **Kollisions-Alarm!** Das Werkzeug penetriert die Ebene der gehärteten Schraubstockbacken. Das Werkzeug blinkt rot mit Warnbox! |
+| Z-Höhe im Simulator                    | Farbe            | Angezeigter Status im HUD & am Werkzeug      | Bedeutung & Maschinen-Sicherheit                                                                                                                  |
+| -------------------------------------- | ---------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **$Z \ge +30{,}0\,\text{mm}$**         | 🟣 **Lila**       | `🟣 MASCHINEN-HOME: G53 Z0.0`                 | Spindel steht sicher am oberen Decken-Endschalter.                                                                                                |
+| **$Z > 0{,}0\,\text{mm}$**             | 🟢 **Grün**       | `🟢 SICHERHEITSZONE: Z > 0 mm`                | Werkzeug schwebt frei in der Luft über dem Werkstück *(z. B. Eilgang G00)*.                                                                       |
+| **$0 \ge Z \ge -12{,}0\,\text{mm}$**   | 🔵 **Blau**      | `🔵 ARBEITSBEREICH: Z = ... mm`              | Regulärer Spanabtrag im Aluminium *(Tasche oder Kontur)*.                                                                                         |
+| **$-12{,}0 > Z > -15{,}0\,\text{mm}$** | 🟡 **Orange**     | `⚠️ DURCHBRUCH: Z = -14.5 mm (Tunnel aktiv!)` | **Werkzeug durchdringt den Bauteilboden ins Freie!** Signalisiert: Tunnel-Unterlagen sind zwingend erforderlich. Werkzeug färbt sich warn-orange! |
+| **$Z \le -15{,}0\,\text{mm}$**         | 🔴 **Signalrot** | `🚨 KOLLISION / CRASH: Z <= -15.0 mm!`        | **Kollisions-Alarm!** Das Werkzeug penetriert die Ebene der gehärteten Schraubstockbacken. Das Werkzeug blinkt rot mit Warnbox!                   |
 
 ---
 
@@ -2132,6 +2298,7 @@ In unserem Browser-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulat
 Sie haben **zwei bequeme Möglichkeiten**, um falsche Z-Werte oder Kollisionen sofort mit eigenen Augen zu testen:
 
 ##### Möglichkeit 1: Über das vorgefertigte Dropdown-Menü *(1-Klick-Test)*
+
 1. Öffnen Sie [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html) in Ihrem Webbrowser.
 2. Klicken Sie oben links auf das Dropdown-Feld **„Programm-Auswahl“**.
 3. Wählen Sie direkt unter der roten Rubrik **„🚨 Crash- & Sicherheits-Tests (Z-MIN)“**:
@@ -2141,12 +2308,15 @@ Sie haben **zwei bequeme Möglichkeiten**, um falsche Z-Werte oder Kollisionen s
      Klicken Sie auf Zeile `N80 G01 Z-18.0`. Der Fräser rammt $3\,\text{mm}$ tief in die Schraubstockbacken-Ebene! Das Werkzeug blinkt **signalrot**, das HUD schlägt Alarm: `🚨 KOLLISION / CRASH-GEFAHR: Z <= -15.0 mm!` und am Werkzeug erscheint die rote 3D-Crashbox!
 
 ##### Möglichkeit 2: Eine eigene `.nc`-Datei mit beliebigem Z-Wert auf der Festplatte testen
+
 1. Öffnen Sie in Visual Studio Code die Datei [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/uebungen/uebung_04_3d_modell_cam.nc).
 2. Suchen Sie eine Fräszeile, z. B.:
+
    ```gcode
    N100 G01 Z-5.000 F500
    ```
 3. Ändern Sie den Wert absichtlich auf einen falschen / tiefen Crash-Wert um:
+
    ```gcode
    N100 G01 Z-20.000 F500
    ```
@@ -2166,6 +2336,7 @@ Sie haben **zwei bequeme Möglichkeiten**, um falsche Z-Werte oder Kollisionen s
 In der Zerspanung und im modernen Maschinenbau gilt das eiserne Prinzip der **3-Stufen-Sicherheitskette *(Redundanz-Prinzip / Vier-Augen-Prinzip)***.
 
 ##### 1. Worauf Sie sich in der Simulation zu 100 % verlassen können:
+
 * **Mathematische Geometrie- & Vorzeichenfehler:**  
   Ein Simulator erkennt absolut fehlerfrei, ob jemand im G-Code ein Minuszeichen vergessen hat *(z. B. `Z12` statt `Z-12`)* oder aus Versehen `Z-50` statt `Z-5` getippt hat.
 * **Falsche Eilgang-Bahnen *(G00)*:**  
@@ -2174,7 +2345,9 @@ In der Zerspanung und im modernen Maschinenbau gilt das eiserne Prinzip der **3-
   Die Simulation zeigt exakt an, ob und wie weit ein Werkzeug unter die Bauteil-Unterkante ($Z = -12\,\text{mm}$) abtaucht.
 
 ##### 2. Was ein Simulator NIEMALS wissen kann *(Die physische Realität der Werkhalle)*:
+
 Ein Simulator sieht nur die virtuelle 3D-Welt. Er hat keine Kameras und keine Sensoren in der echten Werkshalle. Er weiß **nicht**:
+
 1. **Die reale Schraubstock-Höhe:**  
    Hat der Arbeiter heute Stufenbacken mit $35\,\text{mm}$ Höhe oder Standardbacken mit $50\,\text{mm}$ Höhe montiert? Hat er $5\,\text{mm}$ oder $15\,\text{mm}$ dicke Parallelunterlagen untergelegt?
 2. **Die reale Werkzeug-Auskraglänge *(Einspanntiefe im Futter)***:  
@@ -2249,15 +2422,18 @@ Dieser Satz klingt für Einsteiger wie eine fremde Geheimsprache. In Wirklichkei
 ---
 
 ##### 1. Was ist das „Erstteil“ *(First Part / Musterteil)*?
+
 * Wenn ein Kunde z. B. **500 Stück** unserer Flanschplatte bestellt, legt man nicht einfach 500 Metallklötze in die Halle und drückt mit Vollgas auf Start.
 * Man nimmt den **allerersten rohen Metallklotz** aus der Kiste. Das ist das **Erstteil**.
 * Dieses erste Teil wird mit maximaler Vorsicht gefräst, danach ausgespannt, mit dem Messschieber und Mikrometer komplett vermessen und geprüft. Erst wenn dieses Erstteil zu 100 % perfekt ist, darf die Maschine die restlichen 499 Teile automatisch in Serie produzieren.
 
 ##### 2. Was bedeutet „Einfahren“ *(Prove-Out / Run-In)*?
+
 * „Einfahren“ nennt man den Übergang von der Theorie am Computer *(CAD/CAM & Postprozessor)* in die harte physische Realität der Werkshalle.
 * Es bedeutet: Ein neues CNC-Programm zum allerersten Mal auf der Maschine abspielen, um zu prüfen, ob die Drehrichtung stimmt, die Späne sauber fliegen, das Werkzeug nirgends aneckt und kein Maß falsch ist.
 
 ##### 3. Was ist der „Einzelsatz“ *(Single Block)*?
+
 * Normalerweise arbeitet ein CNC-Computer vollautomatisch: Wenn Sie auf Start drücken, rast das Programm von Zeile 1 bis Zeile 2.000 ohne Pause im Sekundentakt durch.
 * Auf dem Bedienpult der Fräsmaschine *(egal ob Haas, Siemens, Heidenhain oder Fanuc)* gibt es eine Taste mit der Aufschrift:  
   👉 **`SINGLE BLOCK` *(Einzelsatz)***.
@@ -2267,6 +2443,7 @@ Dieser Satz klingt für Einsteiger wie eine fremde Geheimsprache. In Wirklichkei
   *(Genau das macht in unserem Browser-Simulator der Knopf **„⏭ Nächster Schritt“**!)*
 
 ##### 4. Was ist das „Vorschub-Poti“ *(Feedrate Override Potentiometer)*?
+
 * An jedem CNC-Bedienpult gibt es einen großen, geriffelten Drehknopf mit einer Prozent-Skala von **`0 %` bis `150 %`**. Das ist ein Potentiometer *(elektrischer Drehregler)*.
 * Das ist das **Gaspedal und die Notbremse** des Fräsers:
   * Dreht man den Knopf auf **`0 %`**: Die Bewegung friert augenblicklich in der Luft ein *(0 mm/min Vorschub)*.
@@ -2276,6 +2453,7 @@ Dieser Satz klingt für Einsteiger wie eine fremde Geheimsprache. In Wirklichkei
   *(In unserem Browser-Simulator ist das der Schieberegler **„Geschwindigkeit: 0.05x bis 1.5x“**!)*
 
 ##### 5. Was ist die „Restweganzeige“ *(Distance-to-Go)*?
+
 * Auf dem Computer-Bildschirm der CNC-Steuerung gibt es neben den absoluten Koordinaten ein großes Zahlenfeld mit der Überschrift **`RESTWEG` *(Distance-to-go / Verbleibender Weg)***.
 * Es beantwortet die Frage: *„Wie viele Millimeter will das Werkzeug in diesem Satz noch fahren, bis es am Zielpunkt ankommt?“*
 * **Das lebensrettende Werkstatt-Szenario:**
@@ -2322,9 +2500,11 @@ Hier ist die maßstabsgetreue CAD-Zeichnung mit 2D-Draufsicht und Schritt-für-S
 1. Der Eilgang **`G00`** *(Rapid Move)* fährt mit Höchstgeschwindigkeit: üblicherweise **$30.000\,\text{mm/min}$** *(30 Meter in der Minute bzw. 1.800 km/h im Zerspanungsmaßstab)*!
 2. Im Eilgang ist die Frässpindel **nicht** darauf ausgelegt, Material zu berühren. Es ist eine reine Eilfahrt durch die freie Luft.
 3. Wenn der Programmierer befehlen würde:
+
    ```gcode
    N50 G00 X0.0 Y0.0 Z-5.0  (LEBENSGEFÄHRLICHER CRASH-BEFEHL!)
    ```
+
    dann rast der $\varnothing 10\,\text{mm}$ Fräser mit $30\,\text{m/min}$ in voller Fahrt **mitten in das $2{,}5\,\text{mm}$ dicke Rohteil-Aluminium hinein**!
 4. **Das verheerende Ergebnis:**
    * Ein Fräser kann bei $30\,\text{m/min}$ keine Späne abführen.
@@ -2373,6 +2553,7 @@ Hinter dem Begriff **„Sicherheits-Anschnitt im Arbeitsvorschub“ *(Lead-In / 
 > **Definition Lead-In *(Sicherheits-Anschnitt / Anfahrbewegung)*:**  
 > Der Lead-In ist eine gezielt programmierte Verfahrbewegung vor dem eigentlichen Fräsen der Kontur. Er führt das Werkzeug von einem berührungsfreien Startpunkt in der freien Luft mit geregeltem **Arbeitsvorschub (`G01`, `G02` oder `G03`)** sanft in das Material hinein.  
 > **Die zwei Hauptaufgaben:**
+>
 > 1. **Kollisionsschutz:** Gefahrloses Durchschneiden des überstehenden Rohteilaufmaßes ohne Eilgang-Crash.
 > 2. **Oberflächengüte:** Vermeidung von Stoßstellen, Rattermarken *(Vibrationen)* oder Werkzeugabdrücken auf der fertigen Werkstückkante.
 
@@ -2405,6 +2586,7 @@ Wenn Sie im CAM-System eine 2D- oder 3D-Fräsoperation anlegen *(z. B. 2D-Kontur
 Wie kommt das System auf die konkreten Koordinaten `X -10.0 Y -10.0`?
 
 Hier sind die realen Werte unseres Kundenbauteils:
+
 * **Soll-Kontur *(Fertigteil)***: $80 \times 50\,\text{mm}$ mit Nullpunkt `G54` auf der Ecke:
   $$\text{Fertigteilecke} = (X_0, Y_0) = (0{,}0\,\text{mm}, 0{,}0\,\text{mm})$$
 * **Rohteil-Aufmaß *(Stock Allowance $a_{\text{stock}}$)***:
@@ -2416,6 +2598,7 @@ Hier sind die realen Werte unseres Kundenbauteils:
   Mindestens $2{,}0\,\text{mm}$ bis $3{,}0\,\text{mm}$ freie Luft zwischen Fräserschneide und Rohteilkante.
 
 ###### Die Formel für den linearen Mindestabstand in einer Achse:
+
 $$X_{\text{Offset}} = a_{\text{stock}} + R_{\text{fr}} + d_{\text{luft}}$$
 Setzen wir unsere Werte ein:
 $$X_{\text{Offset}} = 2{,}5\,\text{mm} + 5{,}0\,\text{mm} + 2{,}5\,\text{mm} = \mathbf{10{,}0\,\text{mm}}$$
@@ -2425,6 +2608,7 @@ $$X_{\text{start}} = X_0 - X_{\text{Offset}} = 0 - 10{,}0\,\text{mm} = \mathbf{-
 $$Y_{\text{start}} = Y_0 - Y_{\text{Offset}} = 0 - 10{,}0\,\text{mm} = \mathbf{-10{,}000\,\text{mm}}$$
 
 ###### Der mathematische Sicherheits-Check *(Abstand Fräserkante zu Rohteil)*:
+
 * Abstand des Fräser-Mittelpunkts $(-10, -10)$ zur Rohteil-Außenecke $(-2{,}5, -2{,}5)$:
   $$\Delta X = |-10 - (-2{,}5)| = 7{,}5\,\text{mm}$$
   $$\Delta Y = |-10 - (-2{,}5)| = 7{,}5\,\text{mm}$$
@@ -2440,9 +2624,9 @@ Erst beim anschließenden horizontalen Verfahren entlang der blauen Linie `G01 X
 
 ##### 4. Die zwei gängigen Lead-In-Formen in der Zerspanung:
 
-| Lead-In-Typ | G-Code-Befehle | Form der Anfahrbahn | Wann wird es verwendet? |
-|---|---|---|---|
-| **1. Linearer Lead-In *(Geradlinig)*** | `G01 X... Y... F...` | Gerade Schräglinie *(wie bei unserer Übung 3)* | Sehr einfach, ideal zum Start an offenen Ecken oder Rohteilrändern. |
+| Lead-In-Typ                                     | G-Code-Befehle                       | Form der Anfahrbahn                                   | Wann wird es verwendet?                                                                                                                              |
+| ----------------------------------------------- | ------------------------------------ | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Linearer Lead-In *(Geradlinig)***          | `G01 X... Y... F...`                 | Gerade Schräglinie *(wie bei unserer Übung 3)*        | Sehr einfach, ideal zum Start an offenen Ecken oder Rohteilrändern.                                                                                  |
 | **2. Tangentialer Kreisbogen *(Circular Arc)*** | `G03 X... Y... R... F...` oder `G02` | Sanfter $90^\circ$- oder $45^\circ$-Viertelkreisbogen | Standard bei Passungen und Sichtkanten: Das Werkzeug schmiegt sich tangential an, sodass auf der Bauteilwand kein minimaler Ansatzstreifen entsteht. |
 
 ---
@@ -2473,19 +2657,21 @@ Um als Entwickler die Software-Architektur zu verstehen, muss man die klare **Au
 
 1. **Die CAM-Ereignisse in [`tests/simuliere_post.js`](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/simuliere_post.js#L95-L107):**
    In unserer Node.js-Testumgebung simuliert `simuliere_post.js` das Verhalten von Autodesk Fusion 360. In Zeilen 95–107 wird genau dieser Ablauf aufgerufen:
+
    ```javascript
    // 1. Eilgang in die sichere Luft (10 mm vor das Werkstück):
    sandbox.onRapid(-10.0, -10.0, 2.0);
-
+   
    // 2. Senkrecht auf Frästiefe abtauchen (außerhalb des Rohteils):
    sandbox.onLinear(-10.0, -10.0, -5.0, 500);
-
+   
    // 3. HIER IST DER LEAD-IN: Mit Vorschub ins Rohteil einfahren:
    sandbox.onLinear(0.0, 0.0, -5.0, 1200);
    ```
 
 2. **Die Übersetzung im Postprozessor in [`uebungen/uebung_03_z_min_berechnung.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_03_z_min_berechnung.cps#L141-L147):**
    Der Postprozessor (`.cps`) rechnet die Fräsbahn nicht selbst aus – er ist ein **Compiler *(Code-Übersetzer)***. Er nimmt die fertigen Raumpunkte entgegen und formatiert sie:
+
    ```javascript
    function onLinear(x, y, z, feed) {
      var xStr = xOutput.format(x);
@@ -2495,12 +2681,15 @@ Um als Entwickler die Software-Architektur zu verstehen, muss man die klare **Au
      writeWords("G01", xStr, yStr, zStr, fStr);
    }
    ```
+
    Daraus entsteht im fertigen NC-Programm die Zeile:
+
    ```gcode
    N55 G01 X0.000 Y0.000 Z-5.000 F1200
    ```
 
 ##### 2. Wie läuft es in der Industrie-Praxis (mit Autodesk Fusion 360)?
+
 * **WANN?** Genau in der Sekunde, in der Sie im CAM-Programm mit der rechten Maustaste auf die Operation klicken und **„Werkzeugweg generieren *(Generate)*“** wählen.
 * **WO?** Im mathematischen Geometriekern von Autodesk. Dort werden 3D-Modell, Rohteilaufmaß und Fräsergeometrie verrechnet.
 * Wenn Sie anschließend auf **„Postprozessieren *(Post Process)*“** klicken, übergibt Fusion 360 diese fertig berechneten Punkte als Ereignisse an unsere Datei [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps).
@@ -2522,6 +2711,7 @@ stellt sich sofort die Frage: *„Warum tippen wir hier feste Zahlen wie `-10.0`
 Die Antwort liegt im Unterschied zwischen **zwei völlig verschiedenen Werkzeugen**:
 
 ##### 1. Was ist `tests/simuliere_post.js`? *(Ein Test-Dummy / Mock-Prüfstand)*
+
 * **Der Zweck von `simuliere_post.js`:**  
   Sie möchten Ihren Postprozessor (`.cps`) in Visual Studio Code in 0,1 Sekunden testen, **ohne** jedes Mal das riesige, 2-Gigabyte schwere CAD-Programm *Autodesk Fusion 360* starten zu müssen.
 * In der professionellen Softwareentwicklung nennt man das ein **Mock-Objekt *(Test-Dummy / synthetischer Prüfstand)***:
@@ -2548,6 +2738,7 @@ function onLinear(x, y, z, feed) {
 ```
 
 👉 **Im Postprozessor steht KEINE EINZIGE feste Zahl!**  
+
 * Hier stehen **ausschließlich Variablen**: `x`, `y`, `z` und `feed`.
 * Unser Postprozessor funktioniert daher für **JEDES Bauteil der Welt**:
   * Egal ob eine $2.000\,\text{mm}$ lange Flugzeug-Tragfläche,
@@ -2559,19 +2750,23 @@ function onLinear(x, y, z, feed) {
 ##### 3. Wer berechnet die Zahlen in der echten Realität dynamisch? *(Autodesk Fusion 360)*
 
 Wenn Sie Ihren Postprozessor später in Autodesk Fusion 360 einbinden:
+
 1. Sie öffnen eine beliebige 3D-CAD-Datei *(z. B. ein Kundenteil mit $123{,}4\,\text{mm} \times 67{,}8\,\text{mm}$)*.
 2. Fusion 360 liest die 3D-Kanten ein, berechnet den Fräserradius und den Lead-In vollautomatisch.
 3. Fusion ruft Ihren Postprozessor auf:
+
    ```javascript
    // Fusion übergibt live die echten Maße des neuen Kundenteils:
    onLinear(123.4, 67.8, -10.0, 1500);
    ```
 4. Ihr Postprozessor nimmt die Variablen entgegen und druckt den perfekten G-Code:
+
    ```gcode
    N120 G01 X123.400 Y67.800 Z-10.000 F1500
    ```
 
 ##### 💡 Zusammenfassung:
+
 * **In `tests/simuliere_post.js`:** Feste Zahlen als **fester Prüfstein *(Benchmark-Referenzbauteil Flanschplatte 80x50 mm)***, um den Code ohne CAD-Software blitzschnell testen zu können.
 * **In `.cps` *(Postprozessor)*:** Reiner dynamischer Code mit Variablen `(x, y, z, feed)`, universell für jedes Kundenbauteil der Welt.
 * **In Autodesk Fusion 360:** Der mathematische Geometriekern, der die Variablen live aus dem 3D-Modell berechnet und an den Postprozessor weiterreicht.
@@ -2583,11 +2778,13 @@ Wenn Sie Ihren Postprozessor später in Autodesk Fusion 360 einbinden:
 Um Kunden vor dem ersten Span die absolute Crash-Freiheit zu beweisen und die **50 % Restzahlung vor der G-Code-Lieferung abzusichern**, haben wir zwei neue Werkzeuge integriert:
 
 1. **Das fertige HD-Simulations-Video zu Übung 3 *(MP4-Datei)***:
+
    * **Pfad:** [`docs/videos/uebung_03_simulation_video.mp4`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/videos/uebung_03_simulation_video.mp4)
    * Zeigt die komplette 3D-Zerspanung: Außenkontur mit Lead-In-Anschnitt *(Schaftfräser Ø10 mm)*, Kreistasche Mitte und Tiefbohren der 4 Bohrungen *(G83 mit Spanbruch auf Z-12.0 mm)* samt Live-HUD, Werkzeug-Spuren und Z-MIN Schraubstock-Prüfung!
    * Sie können diese Datei mit jedem Mediaplayer *(VLC, Windows Media Player)* abspielen oder direkt an Kunden versenden.
 
 2. **Das interaktive Web-Video-Aufnahme-Portal (`cnc_video_generator_web.html`)**:
+
    * **Pfad:** [`cnc_video_generator_web.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/cnc_video_generator_web.html) *(per Doppelklick im Browser öffnen!)*
    * **Was Sie dort tun können:**
      * Beliebige `.nc`-Dateien per Drag & Drop oder Datei-Upload laden.
@@ -2597,6 +2794,7 @@ Um Kunden vor dem ersten Span die absolute Crash-Freiheit zu beweisen und die **
 
 ---
 
+<a id="uebung-04"></a>
 # Übung 4: Ein 3D-Modell als Kundenauftrag bearbeiten (Vom 3D-Bauteil zum G-Code)
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -2607,6 +2805,7 @@ In dieser Übung lernen Sie als angehender Postprozessor-Entwickler und CAM-Inge
    Verstehen, wie aus einem dreidimensionalen CAD-Modell *(3D-Bauteil im `.step`- oder `.stl`-Format)* über die CAM-Operationen *(Planfräsen, 2D-Kontur, Kreistasche und Bohren)* durch Ihren JavaScript-Postprozessor ([`uebung_04_3d_modell_cam.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.cps)) ein vollständiges, sicheres und kollisionsfreies Maschinendatei-Programm ([`uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.nc)) entsteht.
 
 2. **Die 3 technischen Teilziele dieser Übung:**
+
    * **Teilziel 1 (CAM-Ereignisse verstehen):** Begreifen, wie Autodesk Fusion die Fräsoperationen an den Postprozessor übergibt und warum die JavaScript-Funktion `onSection()` vor jedem Werkzeugwechsel automatisch aufgerufen wird.
    * **Teilziel 2 (Postprozessor-Ausführung im Terminal):** Den Übungs-Postprozessor mit dem Simulator-Befehl `node simuliere_post.js uebungen/uebung_04_3d_modell_cam.cps` ausführen und die Maschinendatei `uebung_04_3d_modell_cam.nc` direkt im Übungsordner generieren.
    * **Teilziel 3 (Kundenauftrags-Abwicklung nach § 18 EStG):** Nachvollziehen, wie ein echter B2B-Kundenauftrag *(am Beispiel der Lagerplatte von Franken Präzisionsteile GmbH)* von der 3D-Datei über das Einrichteblatt bis zur Honorarrechnung rechtssicher und fehlerfrei abgewickelt wird.
@@ -2621,27 +2820,29 @@ In dieser Übung lernen Sie als angehender Postprozessor-Entwickler und CAM-Inge
 So sieht ein typischer vollständiger Programmierauftrag aus, den ein Fertigungsbetrieb mit Engpässen an dein Ingenieurbüro vergibt:
 
 > **Von:** Michael Brandner *(Fertigungsleiter)* `<m.brandner@franken-praezision.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 18. Oktober 2026, 10:15 Uhr  
 > **Betreff:** Eilauftrag CAM-Programmierung: Lagerplatte Alu (50 Stück) – 3D-STEP anbei  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
-> 
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
+>
 > wir haben in unserer Fräserei einen kurzfristigen Programmier-Engpass. Anbei senden wir Ihnen das 3D-CAD-Modell `bauteil_1001.step` für eine Lagerplatte aus Aluminium EN AW-6082 (Stückzahl: 50).  
-> 
+>
 > **Maschine & Spannsituation:**  
+>
 > * Maschine: Haas VF-2 *(3-Achs-Fräszentrum)*  
 > * Fertigmaß: $80 \times 50 \times 12\,\text{mm}$ *(mit Kreistasche $\varnothing 30\,\text{mm}$, Tiefe $3\,\text{mm}$ und 4 Eckbohrungen $\varnothing 6\,\text{mm}$)*  
 > * Rohteil: $85 \times 55 \times 15\,\text{mm}$ im Maschinenschraubstock auf $3\,\text{mm}$ Spannrand gespannt.  
-> * Nullpunkt `G54`: Vorne links oben auf dem Fertigteil.  
-> 
+> * Nullpunkt `G54`: Vorne links oben auf dem Fertigteil.
+>
 > **Lieferumfang:**  
+>
 > 1. Fertige, kollisionsgeprüfte `.nc`-Maschinendatei für Haas NGC.  
-> 2. Werkzeugzuordnung: `T01` Schaftfräser $\varnothing 10\,\text{mm}$, `T02` Spiralbohrer $\varnothing 6\,\text{mm}$.  
-> 
+> 2. Werkzeugzuordnung: `T01` Schaftfräser $\varnothing 10\,\text{mm}$, `T02` Spiralbohrer $\varnothing 6\,\text{mm}$.
+>
 > **Honorar:**  
 > Festpreis **380,00 € netto** *(Zahlung: 50 % Anzahlung sofort, 50 % nach Vorlage des Freigabevideos)*.  
-> 
+>
 > Mit besten Grüßen  
 > **Michael Brandner** – Franken Präzisionsteile GmbH, Schweinfurt  
 
@@ -2649,24 +2850,24 @@ So sieht ein typischer vollständiger Programmierauftrag aus, den ein Fertigungs
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 4
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`T01`, `T02`** | **Werkzeugnummer *(Tool Number)*** | `T01` = Schaftfräser $\varnothing 10\,\text{mm}$ \| `T02` = Spiralbohrer $\varnothing 6\,\text{mm}$. |
-| **`M06`** | **Werkzeugwechsel *(Tool Change)*** | Befiehlt der Fräsmaschine, das Werkzeug mechanisch in die Spindel einzuwechseln. |
-| **`S8000`, `S3500`** | **Spindeldrehzahl *(Spindle Speed)*** | Drehzahl in $\text{U/min}$ *(Umdrehungen pro Minute)* passend zum Werkzeugdurchmesser und Aluminium. |
-| **`M03`** | **Spindel Rechtslauf EIN *(Spindle Clockwise)*** | Startet die Frässpindel im Uhrzeigersinn. |
-| **`G54`** | **Werkstück-Nullpunkt 1 *(Work Coordinate System)*** | Nullpunkt-Lage an der vorderen linken oberen Bauteilecke `(X0, Y0, Z0)`. |
-| **`G00`** | **Eilgang *(Rapid Move)*** | Schnelle Positionierbewegung im Vollgas ohne Werkstoffkontakt. |
-| **`G01`** | **Linearer Arbeitsvorschub *(Linear Feed)*** | Fräsbewegung im Metall mit definierter Vorschubgeschwindigkeit $F$. |
-| **`G03`** | **Kreisbogen gegen Uhrzeigersinn *(Circular Interpolation CCW)*** | Fräst die runde Kreistasche $\varnothing 30\,\text{mm}$ mit Kreisradius-Parametern $I$ und $J$. |
-| **`G83`** | **Tiefbohrzyklus mit Spanbruch *(Deep Hole Peck Drilling)*** | Bohrt stufenweise mit Zustelltiefe $Q$, zieht periodisch zum Spanbrechen ab. |
-| **`Q3.0`** | **Zustelltiefe pro Spanbruch *(Peck Depth)*** | Bohrer taucht jeweils $3\,\text{mm}$ tiefer ein, bevor er kurz entlastet. |
-| **`G43 H...`** | **Werkzeuglängenkorrektur EIN *(Tool Length Compensation)*** | Aktiviert die im Werkzeugspeicher hinterlegte Längenmessung der Werkzeugspitze. |
-| **`M08`** | **Kühlmittel EIN *(Coolant On)*** | Schaltet die Kühlmittelpumpe für Sprüh- oder Flutkühlung an. |
-| **`M09`** | **Kühlmittel AUS *(Coolant Off)*** | Schaltet das Kühlmittel am Operations- oder Programmende ab. |
-| **`M05`** | **Spindel-Stopp *(Spindle Stop)*** | Hält die Spindeldrehung sicher an. |
-| **`G53`** | **Maschinen-Koordinatensystem *(Machine Coordinate System)*** | Fährt bezogen auf den absoluten Maschinen-Nullpunkt *(z. B. Spindel ganz nach oben `Z0`)*. |
-| **`M30`** | **Hauptprogramm-Ende *(Program End and Rewind)*** | Beendet das CNC-Programm und setzt den Programmzeiger auf Zeile 1 zurück. |
+| Kennzeichen          | Fachbegriff & Erklärung                                           | Bedeutung & Funktion in dieser Übung                                                                 |
+| -------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| **`T01`, `T02`**     | **Werkzeugnummer *(Tool Number)***                                | `T01` = Schaftfräser $\varnothing 10\,\text{mm}$ \| `T02` = Spiralbohrer $\varnothing 6\,\text{mm}$. |
+| **`M06`**            | **Werkzeugwechsel *(Tool Change)***                               | Befiehlt der Fräsmaschine, das Werkzeug mechanisch in die Spindel einzuwechseln.                     |
+| **`S8000`, `S3500`** | **Spindeldrehzahl *(Spindle Speed)***                             | Drehzahl in $\text{U/min}$ *(Umdrehungen pro Minute)* passend zum Werkzeugdurchmesser und Aluminium. |
+| **`M03`**            | **Spindel Rechtslauf EIN *(Spindle Clockwise)***                  | Startet die Frässpindel im Uhrzeigersinn.                                                            |
+| **`G54`**            | **Werkstück-Nullpunkt 1 *(Work Coordinate System)***              | Nullpunkt-Lage an der vorderen linken oberen Bauteilecke `(X0, Y0, Z0)`.                             |
+| **`G00`**            | **Eilgang *(Rapid Move)***                                        | Schnelle Positionierbewegung im Vollgas ohne Werkstoffkontakt.                                       |
+| **`G01`**            | **Linearer Arbeitsvorschub *(Linear Feed)***                      | Fräsbewegung im Metall mit definierter Vorschubgeschwindigkeit $F$.                                  |
+| **`G03`**            | **Kreisbogen gegen Uhrzeigersinn *(Circular Interpolation CCW)*** | Fräst die runde Kreistasche $\varnothing 30\,\text{mm}$ mit Kreisradius-Parametern $I$ und $J$.      |
+| **`G83`**            | **Tiefbohrzyklus mit Spanbruch *(Deep Hole Peck Drilling)***      | Bohrt stufenweise mit Zustelltiefe $Q$, zieht periodisch zum Spanbrechen ab.                         |
+| **`Q3.0`**           | **Zustelltiefe pro Spanbruch *(Peck Depth)***                     | Bohrer taucht jeweils $3\,\text{mm}$ tiefer ein, bevor er kurz entlastet.                            |
+| **`G43 H...`**       | **Werkzeuglängenkorrektur EIN *(Tool Length Compensation)***      | Aktiviert die im Werkzeugspeicher hinterlegte Längenmessung der Werkzeugspitze.                      |
+| **`M08`**            | **Kühlmittel EIN *(Coolant On)***                                 | Schaltet die Kühlmittelpumpe für Sprüh- oder Flutkühlung an.                                         |
+| **`M09`**            | **Kühlmittel AUS *(Coolant Off)***                                | Schaltet das Kühlmittel am Operations- oder Programmende ab.                                         |
+| **`M05`**            | **Spindel-Stopp *(Spindle Stop)***                                | Hält die Spindeldrehung sicher an.                                                                   |
+| **`G53`**            | **Maschinen-Koordinatensystem *(Machine Coordinate System)***     | Fährt bezogen auf den absoluten Maschinen-Nullpunkt *(z. B. Spindel ganz nach oben `Z0`)*.           |
+| **`M30`**            | **Hauptprogramm-Ende *(Program End and Rewind)***                 | Beendet das CNC-Programm und setzt den Programmzeiger auf Zeile 1 zurück.                            |
 
 ### 🧭 Häufige Frage: Warum sieht `G54 (X0 Y0 Z0)` im 3D-Simulator wie die „hintere linke Ecke“ aus und nicht wie vorne?
 
@@ -2675,6 +2876,7 @@ Auf dem 3D-Screenshot fällt sofort auf: Die Ecke mit dem Schild `G54 (X0 Y0 Z0)
 Hier treffen **zwei Dinge** aufeinander: Eine **optische 3D-Perspektive** und die **physische DIN-Norm der Fräsmaschine**:
 
 #### 1. Die optische Täuschung durch den 3D-Kamerawinkel
+
 * Im [3D-Simulator](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) blickt die virtuelle Kamera von schräg links oben auf das Werkstück.
 * In diesem Blickwinkel läuft die grüne Linie *(die Y-Achse)* schräg nach vorne unten auf Ihren Bildschirm zu.
 * Weil die grüne Linie nach vorne wächst *(von `Y = 0` bis `Y = +50 mm`)*, erscheint die Ecke bei `Y = +50` optisch im Vordergrund – und der Nullpunkt `Y = 0` wirkt, als läge er „hinten“.
@@ -2700,7 +2902,9 @@ Hier ist das reale Werkstatt-Foto genau dieser Situation – der Blickwinkel des
   * 👉 **G54 Nullpunkt-Lage:** Die **vordere linke obere Ecke** ist dem Menschen körperlich am nächsten *(links vorne)* und lässt sich mit dem 3D-Messtaster durch die geöffnete Tür am einfachsten ankratzen!
 
 #### 3. Kann man den Nullpunkt auch auf eine andere Ecke legen?
+
 **JA!** Im CAM-System *(Autodesk Fusion 360)* kann der Programmierer im Menü **Setup *(Aufspannung)*** völlig frei wählen:
+
 * Vordere linke Ecke *(Standard)*
 * Vordere rechte Ecke
 * Bauteil-Mitte *(besonders beliebt bei runden Flanschen oder Gussrohteilen)*
@@ -2755,10 +2959,10 @@ Das ist eines der häufigsten Missverständnisse für Einsteiger in die CNC-Prog
 
 Es gibt im Markt genau **zwei völlig unterschiedliche Dienstleistungen**, die Sie anbieten können:
 
-| Dienstleistung | Was schickt der Kunde? | Was erstellen & verkaufen Sie? | Typischer Preis |
-|:---|:---|:---|:---:|
-| **Auftragstyp A:<br>CNC-Lohnprogrammierung** *(90 % aller Aufträge)* | Kunde schickt 3D-Modell (`.step` / `.stl`) und nennt den Maschinentyp *(z. B. „Haas VF-2“)*. | Sie nutzen Ihre fertige `.cps`-Datei und verkaufen ihm die fertige **`.nc`-Datei** + **Einrichteblatt**. | **80 € bis 350 €** pro Bauteil |
-| **Auftragstyp B:<br>Postprozessor-Entwicklung** *(Spezialauftrag)* | Kunde hat eine neue Maschine gekauft, besitzt selbst Fusion 360, hat aber keinen passenden Postprozessor. | Sie programmieren ihm eine maßgeschneiderte **`.cps`-Datei** für seinen Maschinenpark. | **1.500 € bis 4.000 €** einmalig |
+| Dienstleistung                                                       | Was schickt der Kunde?                                                                                    | Was erstellen & verkaufen Sie?                                                                           | Typischer Preis                  |
+|:-------------------------------------------------------------------- |:--------------------------------------------------------------------------------------------------------- |:-------------------------------------------------------------------------------------------------------- |:--------------------------------:|
+| **Auftragstyp A:<br>CNC-Lohnprogrammierung** *(90 % aller Aufträge)* | Kunde schickt 3D-Modell (`.step` / `.stl`) und nennt den Maschinentyp *(z. B. „Haas VF-2“)*.              | Sie nutzen Ihre fertige `.cps`-Datei und verkaufen ihm die fertige **`.nc`-Datei** + **Einrichteblatt**. | **80 € bis 350 €** pro Bauteil   |
+| **Auftragstyp B:<br>Postprozessor-Entwicklung** *(Spezialauftrag)*   | Kunde hat eine neue Maschine gekauft, besitzt selbst Fusion 360, hat aber keinen passenden Postprozessor. | Sie programmieren ihm eine maßgeschneiderte **`.cps`-Datei** für seinen Maschinenpark.                   | **1.500 € bis 4.000 €** einmalig |
 
 ---
 
@@ -2783,6 +2987,7 @@ In dieser Übung lernen Sie die **6 einfachen Schritte**, wie Sie aus einem **3D
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
+
 1. **Als CAM-Postprozessor-Quelldatei:**  
    [`uebungen/uebung_04_3d_modell_cam.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.cps)
 2. **Als 3D-CAD-Bauteil:**  
@@ -2793,21 +2998,26 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 ### 🖥️ Schritt-für-Schritt: So öffnen, starten und simulieren Sie Übung 4 in Visual Studio Code (VSC)
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie in VS Code `Strg + P`.
 2. Tippen Sie ein: `uebung_04_3d_modell_cam.cps` und drücken Sie `Enter`.
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal mit ``Strg + ` ``.
 2. Geben Sie ein:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_04_3d_modell_cam.cps
    ```
 3. Der Simulator erzeugt den kompletten Maschinencode für die Flanschplatte.
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 * Öffnen Sie mit `Strg + P` direkt die für Sie im Übungsordner generierte Maschinendatei [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.nc) oder die Standard-Ausgabedatei [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/uebungen/uebung_04_3d_modell_cam.nc).
 
 #### Schritt 4: 3D-Simulation visuell prüfen
+
 * Öffnen Sie per Doppelklick die Datei [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) direkt im Webbrowser oder nutzen Sie [https://ncviewer.com](https://ncviewer.com).
 
 ---
@@ -2971,6 +3181,7 @@ function onClose() {
 ### ⚙️ Deep Dive: Wann ruft Autodesk Fusion `onCircular()`, `onCycle()` und `onCyclePoint()` auf?
 
 Ein zentrales Geheimnis des Postprozessor-Entwicklers ist das Verständnis der **ereignisgesteuerten Architektur *(Event-Driven Architecture)***:
+
 * **Sie als Programmierer rufen diese Funktionen NIEMALS selbst auf!**
 * Der **CAM-Kernel *(der geometrische Rechenkern von Autodesk Fusion 360 / Inventor CAM)*** liest die berechneten Werkzeugbahnen *(CL-Data / Cutter Location Data)* von oben nach unten durch. Für jedes geometrische Element feuert der Kernel vollautomatisch das passende Ereignis und befüllt die Argumente mit echten Zahlenwerten aus dem 3D-Modell:
 
@@ -2986,6 +3197,7 @@ Ein zentrales Geheimnis des Postprozessor-Entwicklers ist das Verständnis der *
 ```
 
 #### 1. `onCircular(clockwise, cx, cy, cz, x, y, z, feed)`
+
 * **Wann wird sie aufgerufen?**  
   Immer dann, wenn das Werkzeug einen **Kreisbogen oder Vollkreis** fräst *(z. B. beim 2D-Kreistaschenfräsen der Tasche Ø 30 mm oder bei verrundeten Ecken)*.
 * **Woher kommen die Argumente?**  
@@ -2995,6 +3207,7 @@ Ein zentrales Geheimnis des Postprozessor-Entwicklers ist das Verständnis der *
   - `x, y, z` *(Dezimalzahlen in mm)*: Der **Endpunkt** des Kreisbogens *(wo der Fräser nach dem Kreis ankommt)*.
   - `feed` *(Dezimalzahl in mm/min)*: Der im CAM eingestellte Fräsvorschub *(z. B. 1000 mm/min)*.
 * **Dynamische Profi-Implementierung durch Agent 2:**
+
 ```javascript
 function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
   var directionCode = clockwise ? "G02" : "G03";
@@ -3016,6 +3229,7 @@ function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
 ```
 
 #### 2. `onCycle()`
+
 * **Wann wird sie aufgerufen?**  
   Genau **ein einziges Mal am Beginn einer Bohr-Operation** *(z. B. vor den 4 Eckbohrungen)*, **bevor** das erste Loch angefahren wird.
 * **Was übergibt der Kernel hier?**  
@@ -3027,6 +3241,7 @@ function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
   - `cycleType`: Typ des Zyklus *(z. B. "deep-drilling" für Tieflochbohren G83, "drilling" für Zentrieren/Bohren G81, "tapping" für Gewindebohren G84)*.
 
 #### 3. `onCyclePoint(x, y, z)`
+
 * **Wann wird sie aufgerufen?**  
   Für **jede einzelne Bohrungs-Position**, die im CAM ausgewählt wurde! Bei 4 Bohrungen ruft der CAM-Kernel diese Funktion 4 Mal nacheinander mit den jeweiligen (X, Y, Z)-Punkten auf:
   1. Aufruf 1: `(X = 10, Y = 10, Z = 0)`
@@ -3035,6 +3250,7 @@ function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
   4. Aufruf 4: `(X = 10, Y = 40, Z = 0)`
 * **Wie wird sie im Postprozessor programmiert? (Die modale Zyklus-Steuerung):**  
   Beim **ersten Loch** (`drillCounter == 0`) wird der vollständige Bohrzyklus *(z. B. `G83`)* mit allen Parametern *(Z, R, Q, F)* ausgegeben. Bei allen **folgenden Löchern** (`drillCounter > 0`) müssen nur noch die neuen X- und Y-Koordinaten ausgegeben werden, da der Bohrzyklus auf CNC-Steuerungen **modal *(selbsthaltend)*** aktiv bleibt:
+
 ```javascript
 var drillCounter = 0; // Merker für gebohrte Löcher
 
@@ -3083,9 +3299,10 @@ node simuliere_post.js uebungen/uebung_04_3d_modell_cam.cps
 ```
 
 **Was passiert bei diesem Befehl unter der Haube *(Automatischer Ablauf)*:**
-1. **Parser & Simulator-Lauf:** Der Simulator liest die `.cps`-Datei ein und übergibt alle 3D-CAM-Operationen *(Außenkontur mit `onLinear`, Kreistasche mit `onCircular` und die 4 Eckbohrungen mit `onCyclePoint`)* an die passenden JavaScript-Funktionen.
-2. **Automatische NC-Dateierzeugung:** Der Simulator schreibt das fertige Fräsprogramm sauber und direkt an seinen festen Platz im Übungsordner: [`03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.nc)
 
+1. **Parser & Simulator-Lauf:** Der Simulator liest die `.cps`-Datei ein und übergibt alle 3D-CAM-Operationen *(Außenkontur mit `onLinear`, Kreistasche mit `onCircular` und die 4 Eckbohrungen mit `onCyclePoint`)* an die passenden JavaScript-Funktionen.
+
+2. **Automatische NC-Dateierzeugung:** Der Simulator schreibt das fertige Fräsprogramm sauber und direkt an seinen festen Platz im Übungsordner: [`03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.nc)
 
 3. **Erfolgsmeldung im Terminal:** Sie sehen auf dem Bildschirm die Bestätigung mit dem Pfad zur neu geschriebenen Maschinendatei.
 
@@ -3119,9 +3336,11 @@ node simuliere_post.js uebungen/uebung_04_3d_modell_cam.cps
 Ein erstaunlicher Effekt bei der Postprozessor-Entwicklung ist: **Aus nur ca. 140 Zeilen JavaScript-Logik in `uebung_04_3d_modell_cam.cps` erzeugt das System exakt 56 Zeilen fertigen CNC-Maschinencode in `uebung_04_3d_modell_cam.nc`!**
 
 #### 1. Woher kommen die `N`-Befehle (`N10`, `N20`, `N30` ...)?
+
 Die `N`-Nummern sind genormte **Satznummern *(Block Numbers / Zeilennummern nach DIN 66025)***. Sie dienen dem CNC-Bediener an der Werkzeugmaschine als Orientierung und ermöglichen den gezielten Einstieg mitten im Programm *(Satzvorlauf / Mid-Program Restart)*.
 
 In `uebung_04_3d_modell_cam.cps` werden diese Nummern durch die Hilfsfunktion `nextN()` erzeugt:
+
 ```javascript
 var sequenceNumber = 10; // Startwert bei N10
 
@@ -3131,10 +3350,13 @@ function nextN() {
   return n;
 }
 ```
+
 Jedes Mal, wenn eine Ausgabezeile mit `writeln(nextN() + " G01 ...")` generiert wird, gibt `nextN()` die aktuelle Satznummer zurück und schaltet automatisch auf die nächste Zehnernummer weiter.
 
 #### 2. Die exakte Aufschlüsselung der 56 Zeilen in der `.nc`-Datei:
+
 Dass die höchste Satznummer `N380` lautet, bedeutet nicht, dass es 38 Zeilen sind. Die Datei besteht aus **exakt 56 Zeilen**:
+
 * **37 Sätze mit N-Satznummern:** Von `N10` bis `N380` (Bohrung 2 wird modal ohne eigenes N aufgerufen).
 * **12 reine Kommentar- und Infozeilen in Klammern `(...)`:** Programmkopf `O1001`, Tool Table (4 Zeilen), Trennstriche und Operations-Trennköpfe (`OPERATION 1`, `SICHERHEITS-INFO`, etc.).
 * **5 Leerzeilen:** Zur optischen Trennung der 3 Fertigungsoperationen für den Bediener an der Maschinensteuerung.
@@ -3143,17 +3365,18 @@ Dass die höchste Satznummer `N380` lautet, bedeutet nicht, dass es 38 Zeilen si
 $\mathbf{37\text{ (N-Befehle)}} + \mathbf{12\text{ (Kommentarzeilen)}} + \mathbf{5\text{ (Leerzeilen)}} + \mathbf{2\text{ (%-Zeichen)}} = \mathbf{56\text{ Gesamtzeilen}}$
 
 #### 3. Die CAM-Multiplikator-Tabelle:
+
 Dass aus wenig JavaScript so viel Maschinencode wird, liegt an den wiederholten Aufrufen des CAM-Kernels:
 
-| CAM-Ereignis | Wie oft aufgerufen? | Was die `.cps`-Datei daraus macht | Zeilen im G-Code |
-|:---|:---:|:---|:---:|
-| `onOpen()` | **1x** | Start-%, Programmkopf `O1001`, Tool Table & Sicherheitszeile | `N10` (5 Zeilen) |
-| `onSection()` | **3x** *(für jede der 3 Operationen 1x)* | Werkzeugwechsel (`T01`/`T02`), Drehzahl (`S8000`), Kühlung (`M08`) | `N20-N50`, `N150`, `N220-N250` |
-| `onRapid()` | **5x** | Eilgang auf Vorposition (`Z2.0`) und Freifahrhöhe (`Z15.0`) | `N70`, `N140`, `N160`, `N210`, `N330` |
-| `onLinear()` | **8x** | 4 Kanten der Kontur + Eintauchbewegungen | `N80-N130`, `N170-N180`, `N200` |
-| `onCircular()` | **1x** | Vollkreisbahn der Kreistasche gegen Uhrzeigersinn (`G03`) | `N190` |
-| `onCyclePoint()`| **4x** *(für jedes der 4 Ecklöcher 1x)* | 1x `G83`-Tiefbohrzyklus + 3x Folge-Bohrpositionen | `N280-N310` |
-| `onClose()` | **1x** | Kühlung aus, Spindelstopp, `G53 Z0`, Tisch zur Tür `G53 Y0`, `M30`, End-% | `N340-N380` |
+| CAM-Ereignis     | Wie oft aufgerufen?                      | Was die `.cps`-Datei daraus macht                                         | Zeilen im G-Code                      |
+|:---------------- |:----------------------------------------:|:------------------------------------------------------------------------- |:-------------------------------------:|
+| `onOpen()`       | **1x**                                   | Start-%, Programmkopf `O1001`, Tool Table & Sicherheitszeile              | `N10` (5 Zeilen)                      |
+| `onSection()`    | **3x** *(für jede der 3 Operationen 1x)* | Werkzeugwechsel (`T01`/`T02`), Drehzahl (`S8000`), Kühlung (`M08`)        | `N20-N50`, `N150`, `N220-N250`        |
+| `onRapid()`      | **5x**                                   | Eilgang auf Vorposition (`Z2.0`) und Freifahrhöhe (`Z15.0`)               | `N70`, `N140`, `N160`, `N210`, `N330` |
+| `onLinear()`     | **8x**                                   | 4 Kanten der Kontur + Eintauchbewegungen                                  | `N80-N130`, `N170-N180`, `N200`       |
+| `onCircular()`   | **1x**                                   | Vollkreisbahn der Kreistasche gegen Uhrzeigersinn (`G03`)                 | `N190`                                |
+| `onCyclePoint()` | **4x** *(für jedes der 4 Ecklöcher 1x)*  | 1x `G83`-Tiefbohrzyklus + 3x Folge-Bohrpositionen                         | `N280-N310`                           |
+| `onClose()`      | **1x**                                   | Kühlung aus, Spindelstopp, `G53 Z0`, Tisch zur Tür `G53 Y0`, `M30`, End-% | `N340-N380`                           |
 
 ---
 
@@ -3190,7 +3413,9 @@ Um als CAM-Spezialist und Postprozessor-Entwickler absolute Souveränität zu be
 ```
 
 #### 0. Die fundamentale Rolle des CAM-Kernels: Wer erzeugt die .nc-Datei aus der .cps-Datei?
+
 Ein weit verbreiteter Irrtum bei Einsteigern ist der Glaube, dass die `.cps`-Datei die `.nc`-Datei ganz alleine erzeugt. **Das ist technisch falsch!**
+
 * Die `.cps`-Datei ist **nur reiner Programmcode (ein Skript / eine Funktionsbibliothek in JavaScript)**. Sie kann von sich aus überhaupt nichts tun und erzeugt keine Datei.
 * Der eigentliche **Motor und Dateierzeuger ist der CAM-Kernel *(die interne Postprozessor-Engine des CAM-Systems)***!
 
@@ -3212,11 +3437,13 @@ Ein weit verbreiteter Irrtum bei Einsteigern ist der Glaube, dass die `.cps`-Dat
 ```
 
 **Der Vergleich aus der Computerwelt (Wie ein Drucker):**
+
 * **Das Dokument (Word-Datei):** Das sind die berechneten Werkzeugbahnen im CAM.
 * **Der Druckertreiber:** Das ist Ihre `.cps`-Datei *(sie übersetzt: „Mein Gerät versteht Haas NGC oder Siemens 840D“)*.
 * **Das Betriebssystem / Druckprogramm:** Das ist der **CAM-Kernel**. Er schickt die Daten durch den Treiber und erzeugt das fertige Druckergebnis *(die `.nc`-Datei)*.
 
 **Woher stammt diese Definition? (Offizielle Quellen):**
+
 1. **Autodesk HSM Post Processor Training Guide & Reference Manual:** Offizieller Standard von Autodesk (Entwickler von Fusion 360 und Inventor CAM).
 2. **Autodesk Open-Source Post Processor Library (GitHub):** Standardisierte Schnittstelle für Hunderte CNC-Maschinensteuerungen weltweit.
 3. **Unser lokaler Simulator (`simuliere_post.js`):** In unserem Projekt fungiert das Node.js-Skript `simuliere_post.js` als leichtgewichtiger CAM-Kernel. Es lädt die `.cps`-Datei in eine V8-JavaScript-Sandbox, führt alle Sektionen aus und schreibt die fertige `.nc`-Datei direkt neben die Übung!
@@ -3224,11 +3451,14 @@ Ein weit verbreiteter Irrtum bei Einsteigern ist der Glaube, dass die `.cps`-Dat
 ---
 
 #### 1. Wie aus dem Kundenauftrag die .cps-Datei entsteht:
+
 * **Eingangsdaten:** Der Kunde liefert das 3D-Modell (`bauteil_1001.stl`) und das Briefing: Haas VF-2, Haas NGC-Steuerung, Schaftfräser T01 D10, Bohrer T02 D6.
 * **Erstellung durch Agent 2:** Agent 2 deklariert im Postprozessor die Maschineneigenschaften (`vendor = "Haas"`, `extension = "nc"`), richtet die Satznummern-Zählfunktion `nextN()` ein und implementiert die standardisierten Event-Funktionen (`onOpen`, `onSection`, `onLinear`, `onCircular`, `onCyclePoint`, `onClose`).
 
 #### 2. Wer legt die Reihenfolge der N-Operationen im Maschinencode fest?
+
 Die Reihenfolge entsteht **NICHT** zufällig, sondern durch ein Zusammenspiel aus Ingenieur-Logik und CAM-Kernel:
+
 * **Technologische Zerspanungs-Logik (Agent 2):**
   1. *Werkzeugwechsel minimieren:* Alle Operationen mit Fräser T01 (Außenkontur + Kreistasche) werden direkt hintereinander ausgeführt. Erst danach wird auf Bohrer T02 gewechselt. Dadurch gibt es im gesamten Programm nur einen einzigen Werkzeugwechsel (`M06`).
   2. *Fräsen vor Bohren:* Das Fräsen der Vollflächen erfolgt zwingend vor dem Bohren. Würde man zuerst bohren, schlagen die Fräserschneiden bei nachfolgenden Schnitten an den Bohrungskanten ins Leere (unterbrochener Schnitt, Werkzeugschwingungen und Gratbildung).
@@ -3236,18 +3466,19 @@ Die Reihenfolge entsteht **NICHT** zufällig, sondern durch ein Zusammenspiel au
   Im CAM-Operationsbaum liegen die Sektionen untereinander: 1. Kontur -> 2. Kreistasche -> 3. Bohrungen. Der CAM-Kernel arbeitet diesen Baum streng von oben nach unten ab und ruft für jede Sektion nacheinander `onSection()` auf.
 
 #### 3. Wann passiert welcher Funktionsaufruf in der .cps und was erzeugt er in der .nc?
+
 Hier ist die lückenlose Zuordnung aller Funktionsaufrufe zum generierten G-Code:
 
-| Phase im Ablauf | Aufgerufene CPS-Funktion | Wann feuert der CAM-Kernel? | Erzeugte Zeilen im G-Code (.nc) |
-| :--- | :--- | :--- | :--- |
-| **Programm-Start** | `onOpen()` | Genau 1x ganz zu Beginn vor der ersten Fräsbahn. | Start-%, Programmkopf `O1001`, Tool Table für T01/T02 und Sicherheitszeile `N10 G90 G17 G40 G49 G80 G21`. |
-| **Start OP 1 (Kontur)** | `onSection()` *(section 1)* | Beim Betreten der ersten CAM-Operation. | `N20 T01 M06` (Werkzeugwechsel), `N30 G54`, `N40 S8000 M03`, `N50 G43 H01 Z15. M08`, `N60 G00 X-10. Y-10.`. |
-| **Bahnen OP 1** | `onRapid()`, `onLinear()` | Beim Eintauchen und Abfahren der 4 Außenkanten. | `N70` Eilgang Z2, `N80` Eintauchen Z-5 F500, `N90-N130` Kontur abfahren F1200, `N140` Freifahren Z15. |
-| **Start OP 2 (Tasche)** | `onSection()` *(section 2)* | Beim Wechsel auf die Kreistasche (Werkzeug T01 bleibt aktiv). | `N150 G00 X40. Y25.` (Eilgang zur Taschenmitte). |
-| **Kreisbahn OP 2** | `onCircular()` | Beim Fräsen des Vollkreises der Tasche. | `N160-N180` Anfahren Rand, **`N190 G17 G03 X55. Y25. I-15. J0. F1000`**, `N200-N210` Freifahren & M09. |
-| **Start OP 3 (Bohren)** | `onSection()` *(section 3)* | Beim Wechsel auf die Bohroperation (neues Werkzeug T02). | `N220 T02 M06`, `N230 G54`, `N240 S3500 M03`, `N250 G43 H02 Z15. M08`, `N260 G00 X10. Y10.`. |
-| **Bohrzyklus OP 3** | `onCycle()`, `onCyclePoint()` | Für jedes der 4 Löcher nacheinander (modale Abarbeitung). | `N270 G00 Z2.`, **`N280 G98 G83 X10. Y10. Z-12. R2. Q3. F300`** (Loch 1), `N290-N310` (Löcher 2-4), **`N320 G80`** (Zyklus-Aus). |
-| **Programm-Ende** | `onClose()` | Genau 1x ganz am Ende, wenn alle Operationen fertig sind. | `N340 M09`, **`N350 G53 G00 Z0.`** (Spindel hoch), `N360 M05`, **`N370 G53 G00 Y0.`** (Tisch zur Tür), `N380 M30`, End-%. |
+| Phase im Ablauf         | Aufgerufene CPS-Funktion      | Wann feuert der CAM-Kernel?                                   | Erzeugte Zeilen im G-Code (.nc)                                                                                                  |
+|:----------------------- |:----------------------------- |:------------------------------------------------------------- |:-------------------------------------------------------------------------------------------------------------------------------- |
+| **Programm-Start**      | `onOpen()`                    | Genau 1x ganz zu Beginn vor der ersten Fräsbahn.              | Start-%, Programmkopf `O1001`, Tool Table für T01/T02 und Sicherheitszeile `N10 G90 G17 G40 G49 G80 G21`.                        |
+| **Start OP 1 (Kontur)** | `onSection()` *(section 1)*   | Beim Betreten der ersten CAM-Operation.                       | `N20 T01 M06` (Werkzeugwechsel), `N30 G54`, `N40 S8000 M03`, `N50 G43 H01 Z15. M08`, `N60 G00 X-10. Y-10.`.                      |
+| **Bahnen OP 1**         | `onRapid()`, `onLinear()`     | Beim Eintauchen und Abfahren der 4 Außenkanten.               | `N70` Eilgang Z2, `N80` Eintauchen Z-5 F500, `N90-N130` Kontur abfahren F1200, `N140` Freifahren Z15.                            |
+| **Start OP 2 (Tasche)** | `onSection()` *(section 2)*   | Beim Wechsel auf die Kreistasche (Werkzeug T01 bleibt aktiv). | `N150 G00 X40. Y25.` (Eilgang zur Taschenmitte).                                                                                 |
+| **Kreisbahn OP 2**      | `onCircular()`                | Beim Fräsen des Vollkreises der Tasche.                       | `N160-N180` Anfahren Rand, **`N190 G17 G03 X55. Y25. I-15. J0. F1000`**, `N200-N210` Freifahren & M09.                           |
+| **Start OP 3 (Bohren)** | `onSection()` *(section 3)*   | Beim Wechsel auf die Bohroperation (neues Werkzeug T02).      | `N220 T02 M06`, `N230 G54`, `N240 S3500 M03`, `N250 G43 H02 Z15. M08`, `N260 G00 X10. Y10.`.                                     |
+| **Bohrzyklus OP 3**     | `onCycle()`, `onCyclePoint()` | Für jedes der 4 Löcher nacheinander (modale Abarbeitung).     | `N270 G00 Z2.`, **`N280 G98 G83 X10. Y10. Z-12. R2. Q3. F300`** (Loch 1), `N290-N310` (Löcher 2-4), **`N320 G80`** (Zyklus-Aus). |
+| **Programm-Ende**       | `onClose()`                   | Genau 1x ganz am Ende, wenn alle Operationen fertig sind.     | `N340 M09`, **`N350 G53 G00 Z0.`** (Spindel hoch), `N360 M05`, **`N370 G53 G00 Y0.`** (Tisch zur Tür), `N380 M30`, End-%.        |
 
 ---
 
@@ -3314,15 +3545,16 @@ N380 M30 (M30 HAUPTPROGRAMMENDE, RESET UND SPEICHER AUF ZEILE 1 ZURUECKSETZEN)
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 4 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Außenkontur vollständig** | Vier lineare Verfahrsätze `G01` umschließen das Rechteck $80 \times 50\,\text{mm}$ auf Tiefe `Z-5.000`. | [ ] |
-| **2. Kreistasche zentriert** | Befehl `G03` fräst Kreis $\varnothing 30\,\text{mm}$ bei `X40 Y25` auf Tiefe `Z-3.000` mit `I-15.000`. | [ ] |
-| **3. Tiefbohrzyklus G83 aktiv** | Alle 4 Löcher werden mit Spanbruch `Q3.0` bis auf `Z-12.000` gebohrt und mit `G80` abgewählt. | [ ] |
-| **4. Sicheres Programmende** | Spindel fährt mit `G53 G00 Z0.` hoch, Kühlung stoppt mit `M09`, Tisch verfährt mit `G53 G00 Y0.` zur Tür, `M30` schließt ab. | [ ] |
+| Prüfpunkt                       | Was muss im Code / Simulator zu sehen sein?                                                                                  | Bestanden? |
+|:------------------------------- |:---------------------------------------------------------------------------------------------------------------------------- |:----------:|
+| **1. Außenkontur vollständig**  | Vier lineare Verfahrsätze `G01` umschließen das Rechteck $80 \times 50\,\text{mm}$ auf Tiefe `Z-5.000`.                      | [ ]        |
+| **2. Kreistasche zentriert**    | Befehl `G03` fräst Kreis $\varnothing 30\,\text{mm}$ bei `X40 Y25` auf Tiefe `Z-3.000` mit `I-15.000`.                       | [ ]        |
+| **3. Tiefbohrzyklus G83 aktiv** | Alle 4 Löcher werden mit Spanbruch `Q3.0` bis auf `Z-12.000` gebohrt und mit `G80` abgewählt.                                | [ ]        |
+| **4. Sicheres Programmende**    | Spindel fährt mit `G53 G00 Z0.` hoch, Kühlung stoppt mit `M09`, Tisch verfährt mit `G53 G00 Y0.` zur Tür, `M30` schließt ab. | [ ]        |
 
 ---
 
+<a id="uebung-05"></a>
 # Übung 5: 3D-Simulation im Browser & Einrichteblatt (`Setup Sheet`) für den Kunden erstellen
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -3340,29 +3572,28 @@ In dieser Übung verbinden Sie die Software-Bahnplanung mit der physischen Werks
 
 ---
 
-
-
 ## 📩 Der reale Kundenauftrag zu Übung 5 (Einrichtedokumentation & Simulationsprüfung)
 
 So sieht eine typische Anfrage aus, wenn ein Kunde das CAM-Programm bereits hat, aber ein rechtssicheres Einrichteblatt und einen Simulationscheck für seine Werkstattmitarbeiter braucht:
 
 > **Von:** Thomas Kuhn *(Inhaber & Werkstattleiter)* `<t.kuhn@kuhn-medizintechnik.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 19. Oktober 2026, 16:05 Uhr  
 > **Betreff:** Erstellung Einrichteblatt (PDF) & 3D-Simulationsbericht für Lagerplatte  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
-> 
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
+>
 > wir bilden in unserer Werkstatt aktuell zwei neue Zerspanungsmechaniker-Auszubildende aus. Um Rüstfehler an der CNC-Maschine auszuschließen, dürfen Programme nur noch gerüstet werden, wenn ein vollständiges, bebildertes Einrichteblatt (`Setup Sheet`) und eine freigegebene 3D-Simulation vorliegen.  
-> 
+>
 > **Aufgabenstellung:**  
+>
 > 1. Analysieren Sie das beiliegende G-Code-Programm `output_expected.nc`.  
 > 2. Führen Sie eine vollständige 3D-Simulation zur visuellen Kollisionskontrolle durch.  
-> 3. Erstellen Sie ein druckfertiges **Einrichteblatt (PDF)** mit Nullpunktdaten `G54`, exakten Werkzeugnummern (`T01`/`T02`), Auskraglängen $L_{\text{min}}$ und Rohteilabmessungen ($85 \times 55 \times 15\,\text{mm}$).  
-> 
+> 3. Erstellen Sie ein druckfertiges **Einrichteblatt (PDF)** mit Nullpunktdaten `G54`, exakten Werkzeugnummern (`T01`/`T02`), Auskraglängen $L_{\text{min}}$ und Rohteilabmessungen ($85 \times 55 \times 15\,\text{mm}$).
+>
 > **Vergütung:**  
 > Pauschal **280,00 € netto** gegen Rechnung.  
-> 
+>
 > Mit freundlichen Grüßen  
 > **Thomas Kuhn** – Kuhn Medizintechnik & Feinmechanik, Tuttlingen  
 
@@ -3370,13 +3601,13 @@ So sieht eine typische Anfrage aus, wenn ein Kunde das CAM-Programm bereits hat,
 
 ### 📌 Spickzettel dieser Übung: Alle Einrichte- & Simulations-Kennzeichen in Übung 5
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`Setup Sheet`** | **Einrichteblatt *(Maschineneinrichte-Dokument)*** | Verbindliches Datenblatt für den Bediener an der Fräse *(Nullpunkt, Werkzeuge, Rohmaße, Spannmittel)*. |
-| **`G54 (X0, Y0, Z0)`** | **Nullpunkt-Lage *(WCS Origin)*** | Exakte physische Position des Werkstück-Nullpunkts *(z. B. linke vordere Oberkante Fertigteil)*. |
-| **`Stock / Rohteil`** | **Rohteilabmessungen *(Billet / Raw Stock Dimensions)*** | Mindestmaße des Sägezuschnitts *(hier: $85 \times 55 \times 15\,\text{mm}$)* inklusive Aufmaß. |
-| **`Z-MIN & L_min`** | **Tiefster Punkt & Mindest-Auskraglänge *(Minimum Tool Extension)*** | Erforderliche freie Werkzeuglänge aus der Spannzange: $L_{\text{min}} > \lvert Z_{\text{min}}\rvert + 5\,\text{mm}$. |
-| **`Kollisionsprüfung`** | **Spannbacken-Sicherheitsabstand *(Clamping Clearance)*** | Garantiert mindestens $2\,\text{mm}$ Luft zwischen Fräser und Schraubstockbacken. |
+| Kennzeichen             | Fachbegriff & Erklärung                                              | Bedeutung & Funktion in dieser Übung                                                                                 |
+| ----------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **`Setup Sheet`**       | **Einrichteblatt *(Maschineneinrichte-Dokument)***                   | Verbindliches Datenblatt für den Bediener an der Fräse *(Nullpunkt, Werkzeuge, Rohmaße, Spannmittel)*.               |
+| **`G54 (X0, Y0, Z0)`**  | **Nullpunkt-Lage *(WCS Origin)***                                    | Exakte physische Position des Werkstück-Nullpunkts *(z. B. linke vordere Oberkante Fertigteil)*.                     |
+| **`Stock / Rohteil`**   | **Rohteilabmessungen *(Billet / Raw Stock Dimensions)***             | Mindestmaße des Sägezuschnitts *(hier: $85 \times 55 \times 15\,\text{mm}$)* inklusive Aufmaß.                       |
+| **`Z-MIN & L_min`**     | **Tiefster Punkt & Mindest-Auskraglänge *(Minimum Tool Extension)*** | Erforderliche freie Werkzeuglänge aus der Spannzange: $L_{\text{min}} > \lvert Z_{\text{min}}\rvert + 5\,\text{mm}$. |
+| **`Kollisionsprüfung`** | **Spannbacken-Sicherheitsabstand *(Clamping Clearance)***            | Garantiert mindestens $2\,\text{mm}$ Luft zwischen Fräser und Schraubstockbacken.                                    |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -3413,15 +3644,16 @@ Bevor Sie den fertigen **G-Code (Maschinencode)** an Ihren Kunden schicken und G
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 5 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. 3D-Simulation fehlerfrei** | Das Werkzeug fährt im Browser in [`3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) kollisionsfrei alle Fräsbahnen und Bohrungen ab. | [ ] |
-| **2. Nullpunkt eindeutig definiert** | Das Einrichteblatt weist `G54` mit `X0 Y0 Z0` an der vorderen linken Bauteil-Oberkante aus. | [ ] |
-| **3. Werkzeugliste & Mindestlänge** | Alle Fräser/Bohrer sind mit Nummer, Durchmesser und Mindestauskraglänge $L_{\text{min}}$ dokumentiert. | [ ] |
-| **4. Rohteil- und Spannmaße** | Rohteilmaß $85 \times 55 \times 15\,\text{mm}$ und Einspanntiefe von $3\,\text{mm}$ sind für den Maschinenbediener verbindlich vorgegeben. | [ ] |
+| Prüfpunkt                            | Was muss im Code / Simulator zu sehen sein?                                                                                                                                                        | Bestanden? |
+|:------------------------------------ |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:----------:|
+| **1. 3D-Simulation fehlerfrei**      | Das Werkzeug fährt im Browser in [`3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) kollisionsfrei alle Fräsbahnen und Bohrungen ab. | [ ]        |
+| **2. Nullpunkt eindeutig definiert** | Das Einrichteblatt weist `G54` mit `X0 Y0 Z0` an der vorderen linken Bauteil-Oberkante aus.                                                                                                        | [ ]        |
+| **3. Werkzeugliste & Mindestlänge**  | Alle Fräser/Bohrer sind mit Nummer, Durchmesser und Mindestauskraglänge $L_{\text{min}}$ dokumentiert.                                                                                             | [ ]        |
+| **4. Rohteil- und Spannmaße**        | Rohteilmaß $85 \times 55 \times 15\,\text{mm}$ und Einspanntiefe von $3\,\text{mm}$ sind für den Maschinenbediener verbindlich vorgegeben.                                                         | [ ]        |
 
 ---
 
+<a id="uebung-06"></a>
 # Übung 6: Sicherer Rückzug (`Safe Retract`) & Tisch am Programmende zur Tür fahren (`onClose`)
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -3439,34 +3671,33 @@ In dieser Übung sichern Sie das Programmende gegen die gefährlichste Unfallque
 
 ---
 
-
-
 ## 📩 Der reale Kundenauftrag zu Übung 6 (Arbeitssicherheit & Ergonomie am Programmende)
 
 So sieht eine typische Anfrage aus, wenn ein Betrieb die Sicherheit und Ergonomie an der Fräsmaschine verbessern will:
 
 > **Von:** Andreas Eder *(Betriebsleiter)* `<a.eder@sued-zerspanung.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 20. Oktober 2026, 13:10 Uhr  
 > **Betreff:** Postprozessor-Änderung onClose: Tischrückzug zur Schiebetür & Spindel hoch  
 >
-> Sehr geehrter Herr Kollege Buenotte,  
-> 
+> Sehr geehrter Herr Kollege Bujanovski,  
+>
 > unsere Zerspanungsmechaniker beschweren sich seit Wochen über den Standard-Postprozessor unserer neuen Haas-Fräse.  
-> 
+>
 > Nach Programmende bleibt der schwere Maschinentisch hinten in der Kabine stehen und der Fräser bleibt auf Werkstückhöhe stehen. Die Werker müssen sich tief in die nasse Maschine beugen, um das Teil zu entnehmen *(Rückenschmerzen & Verletzungsgefahr an der scharfen Fräserspitze!)*.  
-> 
+>
 > **Aufgabenstellung:**  
 > Programmieren Sie in der Funktion `onClose()` unseres Postprozessors einen zwingenden Sicherheitsablauf:  
+>
 > 1. Kühlmittel mit `M09` sofort abschalten.  
 > 2. Frässpindel mit `G53 G00 Z0.` im Eilgang senkrecht an die Kabinendecke fahren *(Crash-Schutz)*.  
 > 3. Spindel mit `M05` abschalten.  
 > 4. Maschinentisch mit `G53 G00 Y0.` vollautomatisch ganz nach vorne an die geöffnete Schiebetür fahren.  
-> 5. Erst dann mit `M30` beenden.  
-> 
+> 5. Erst dann mit `M30` beenden.
+>
 > **Honorar:**  
 > Festpreis **420,00 € netto** bei sofortiger Freigabe.  
-> 
+>
 > Mit besten Grüßen  
 > **Andreas Eder** – Zerspanungstechnik Süd GmbH, Augsburg  
 
@@ -3474,17 +3705,17 @@ So sieht eine typische Anfrage aus, wenn ein Betrieb die Sicherheit und Ergonomi
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 6
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`M09`** | **Kühlmittel AUS *(Coolant Off)*** | Stoppt den Kühlmittelfluss vor dem Rückzug, damit die Kabine nicht vollgespritzt wird. |
-| **`G53`** | **Maschinen-Koordinatensystem *(Machine Coordinate System)*** | Fährt bezogen auf den festen Maschinen-Nullpunkt *(unabhängig vom Werkstück-Nullpunkt `G54`)*. |
-| **`G00`** | **Eilgang *(Rapid Move)*** | Schnelle Verfahrbewegung ohne Schnitt. |
-| **`Z0.000` (bei `G53`)** | **Oberer Z-Endpunkt *(Spindle Home / Top of Z-Axis)*** | Fährt die Spindel senkrecht ganz nach oben an die Maschinendecke *(Crash-Schutz)*. |
-| **`M05`** | **Spindel-Stopp *(Spindle Stop)*** | Schaltet den Spindeldrehantrieb nach Verlassen des Bauteils aus. |
-| **`Y0.000` (bei `G53`)** | **Tisch vor zur Kabinentür *(Table to Front Door)*** | Fährt den Maschinentisch ganz nach vorne zum bequemen Werkstückwechsel. |
-| **`G28 G91 Z0.`** | **Inkrementelle Referenzpunktfahrt Z *(Incremental Return to Reference)*** | Haas/Fanuc-Alternative zu `G53 Z0`: Fährt Z um `0 mm` inkrementell zum Maschinenreferenzpunkt. |
-| **`G90`** | **Absolutmaß *(Absolute Distance Mode)*** | Stellt das System nach `G91` sofort wieder auf absolute Koordinaten zurück. |
-| **`M30`** | **Programmende und Rücklauf *(Program End and Rewind)*** | Beendet den Programmlauf und springt zurück auf die allererste Programmzeile. |
+| Kennzeichen              | Fachbegriff & Erklärung                                                    | Bedeutung & Funktion in dieser Übung                                                           |
+| ------------------------ | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **`M09`**                | **Kühlmittel AUS *(Coolant Off)***                                         | Stoppt den Kühlmittelfluss vor dem Rückzug, damit die Kabine nicht vollgespritzt wird.         |
+| **`G53`**                | **Maschinen-Koordinatensystem *(Machine Coordinate System)***              | Fährt bezogen auf den festen Maschinen-Nullpunkt *(unabhängig vom Werkstück-Nullpunkt `G54`)*. |
+| **`G00`**                | **Eilgang *(Rapid Move)***                                                 | Schnelle Verfahrbewegung ohne Schnitt.                                                         |
+| **`Z0.000` (bei `G53`)** | **Oberer Z-Endpunkt *(Spindle Home / Top of Z-Axis)***                     | Fährt die Spindel senkrecht ganz nach oben an die Maschinendecke *(Crash-Schutz)*.             |
+| **`M05`**                | **Spindel-Stopp *(Spindle Stop)***                                         | Schaltet den Spindeldrehantrieb nach Verlassen des Bauteils aus.                               |
+| **`Y0.000` (bei `G53`)** | **Tisch vor zur Kabinentür *(Table to Front Door)***                       | Fährt den Maschinentisch ganz nach vorne zum bequemen Werkstückwechsel.                        |
+| **`G28 G91 Z0.`**        | **Inkrementelle Referenzpunktfahrt Z *(Incremental Return to Reference)*** | Haas/Fanuc-Alternative zu `G53 Z0`: Fährt Z um `0 mm` inkrementell zum Maschinenreferenzpunkt. |
+| **`G90`**                | **Absolutmaß *(Absolute Distance Mode)***                                  | Stellt das System nach `G91` sofort wieder auf absolute Koordinaten zurück.                    |
+| **`M30`**                | **Programmende und Rücklauf *(Program End and Rewind)***                   | Beendet den Programmlauf und springt zurück auf die allererste Programmzeile.                  |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -3504,6 +3735,7 @@ Außerdem wünscht sich fast jeder Kunde am Ende des Programms (`onClose`), dass
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
+
 1. **Als eigene, kompakte Übungs-Datei:**  
    [`uebungen/uebung_06_sicherer_rueckzug.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.cps) – Zeigt isoliert die sichere 2-Stufen-Rückzugslogik in `onClose()`.
 2. **Im großen Gesamt-Postprozessor des Projekts:**  
@@ -3512,22 +3744,27 @@ Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
 ### 🖥️ Schritt-für-Schritt: So öffnen, bearbeiten, starten und simulieren Sie Übung 6 in Visual Studio Code (VSC)
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie `Strg + P` in VS Code.
 2. Tippen Sie ein: `uebung_06_sicherer_rueckzug.cps` und drücken Sie `Enter`.
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal mit ``Strg + ` ``.
 2. Geben Sie ein:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_06_sicherer_rueckzug.cps
    ```
 3. Der Simulator führt den Postprozessor aus und bestätigt den sicheren Rückzug.
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 * Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
 * Scrollen Sie ganz nach unten: Sie sehen `G28 G91 Z0.` gefolgt von `G28 Y0.` und `M30`.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
+
 * Kopieren Sie den G-Code in [https://ncviewer.com](https://ncviewer.com).
 * Am Ende der Simulation sehen Sie, wie das Werkzeug senkrecht nach oben fährt, bevor der Tisch verfährt!
 
@@ -3583,15 +3820,16 @@ N410 M30 (M30 HAUPTPROGRAMMENDE, RESET UND SPEICHER AUF ZEILE 1 ZURUECKSETZEN)
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 6 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Zuerst Z-Rückzug** | Die Z-Achse fährt in Zeile N380 mit `G53 G00 Z0.` ganz nach oben, BEVOR sich die Y-Achse bewegt. | [ ] |
-| **2. Spindel-Stopp** | Der Spindelmotor wird mit `M05` erst ausgeschaltet, nachdem das Werkzeug das Bauteil verlassen hat. | [ ] |
-| **3. Bedienerkomfort** | Der Tisch fährt in Zeile N400 mit `Y0.` vor zur Kabinentür. | [ ] |
-| **4. Konsistenz im Simulator** | Im 3D-Simulator hebt das Werkzeug senkrecht ab und parkt kollisionsfrei. | [ ] |
+| Prüfpunkt                      | Was muss im Code / Simulator zu sehen sein?                                                         | Bestanden? |
+|:------------------------------ |:--------------------------------------------------------------------------------------------------- |:----------:|
+| **1. Zuerst Z-Rückzug**        | Die Z-Achse fährt in Zeile N380 mit `G53 G00 Z0.` ganz nach oben, BEVOR sich die Y-Achse bewegt.    | [ ]        |
+| **2. Spindel-Stopp**           | Der Spindelmotor wird mit `M05` erst ausgeschaltet, nachdem das Werkzeug das Bauteil verlassen hat. | [ ]        |
+| **3. Bedienerkomfort**         | Der Tisch fährt in Zeile N400 mit `Y0.` vor zur Kabinentür.                                         | [ ]        |
+| **4. Konsistenz im Simulator** | Im 3D-Simulator hebt das Werkzeug senkrecht ab und parkt kollisionsfrei.                            | [ ]        |
 
 ---
 
+<a id="uebung-07"></a>
 # Übung 7: Eigenen Schalter (`Property`) für Zusatzfunktionen wie Blasluft (`M07`) oder Späneförderer bauen
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -3609,33 +3847,33 @@ In dieser Übung machen Sie Ihren Postprozessor flexibel konfigurierbar:
 
 ---
 
-
-
 ## 📩 Der reale Kundenauftrag zu Übung 7 (Konfigurierbare Schalter für verschiedene Materialien)
 
 So sieht eine typische Anfrage aus, wenn ein Betrieb verschiedene Werkstoffe zerspant und dafür benutzerdefinierte Schalter im CAM-Dialog braucht:
 
 > **Von:** Karsten Wolf *(Technischer Leiter)* `<k.wolf@vogtland-zerspanung.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 21. Oktober 2026, 09:45 Uhr  
 > **Betreff:** Postprozessor-Erweiterung: Konfigurierbare Schalter (Properties) im Fusion-Dialog  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
-> 
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
+>
 > wir fertigen auf derselben CNC-Maschine sowohl Aluminiumteile als auch POM- und PEEK-Kunststoffe.  
+>
 > * Bei Aluminium brauchen wir Flutkühlung (`M08`).  
-> * Bei Kunststoff dürfen wir jedoch kein Wasser nutzen, sondern benötigen trockene Druckluft (`M07` Blasluft), weil der Kunststoff sonst quillt.  
-> 
+> * Bei Kunststoff dürfen wir jedoch kein Wasser nutzen, sondern benötigen trockene Druckluft (`M07` Blasluft), weil der Kunststoff sonst quillt.
+>
 > Bisher müssen unsere Programmierer den G-Code nach dem Postprozessieren mühsam im Texteditor öffnen und `M08` von Hand durch `M07` ersetzen – das führt immer wieder zu Fehlern!  
-> 
+>
 > **Aufgabenstellung:**  
 > Bauen Sie in den Einstellungs-Bereich `properties` unseres Postprozessors zwei neue Schalter ein, die direkt im Fusion 360 Exportfenster als Checkbox erscheinen:  
+>
 > 1. Schalter 1: `useAirBlow` *(Blasluft M07 statt Flutkühlung M08 aktivieren)*.  
-> 2. Schalter 2: `chipConveyor` *(Späneförderer automatisch mit M31 beim Start einschalten und bei M33 am Ende stoppen)*.  
-> 
+> 2. Schalter 2: `chipConveyor` *(Späneförderer automatisch mit M31 beim Start einschalten und bei M33 am Ende stoppen)*.
+>
 > **Vergütung:**  
 > Festpreis **390,00 € netto** gegen Rechnung.  
-> 
+>
 > Mit freundlichen Grüßen  
 > **Karsten Wolf** – Vogtland Zerspanungs-GmbH, Plauen  
 
@@ -3643,14 +3881,14 @@ So sieht eine typische Anfrage aus, wenn ein Betrieb verschiedene Werkstoffe zer
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 7
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`useChipConveyor`**| **Benutzer-Einstellung *(Postprocessor Property)*** | Ein/Aus-Schalter (`boolean`), der in CAM-Dialogen als Häkchen erscheint. |
-| **`M31`** | **Späneförderer EIN Vorwärts *(Chip Conveyor Forward On)*** | Startet das Späne-Kratzband oder die Förderschnecke am Programmanfang. |
-| **`M33`** | **Späneförderer AUS *(Chip Conveyor Stop)*** | Stoppt den Fördermotor am Programmende vor dem Hauptspindel-Reset. |
-| **`M07`** | **Minimalmengenschmierung / Blasluft *(Air Blast / Mist Coolant)*** | Schaltet Druckluft oder Mikrosprühen ein *(Trockenfräsen)*. |
-| **`M08`** | **Flutkühlung EIN *(Flood Coolant On)*** | Standard-Kühlmittel mit hoher Fördermenge. |
-| **`M30`** | **Programmende *(Program End)*** | Schließt die Programmausführung ab. |
+| Kennzeichen           | Fachbegriff & Erklärung                                             | Bedeutung & Funktion in dieser Übung                                     |
+| --------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| **`useChipConveyor`** | **Benutzer-Einstellung *(Postprocessor Property)***                 | Ein/Aus-Schalter (`boolean`), der in CAM-Dialogen als Häkchen erscheint. |
+| **`M31`**             | **Späneförderer EIN Vorwärts *(Chip Conveyor Forward On)***         | Startet das Späne-Kratzband oder die Förderschnecke am Programmanfang.   |
+| **`M33`**             | **Späneförderer AUS *(Chip Conveyor Stop)***                        | Stoppt den Fördermotor am Programmende vor dem Hauptspindel-Reset.       |
+| **`M07`**             | **Minimalmengenschmierung / Blasluft *(Air Blast / Mist Coolant)*** | Schaltet Druckluft oder Mikrosprühen ein *(Trockenfräsen)*.              |
+| **`M08`**             | **Flutkühlung EIN *(Flood Coolant On)***                            | Standard-Kühlmittel mit hoher Fördermenge.                               |
+| **`M30`**             | **Programmende *(Program End)***                                    | Schließt die Programmausführung ab.                                      |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -3662,6 +3900,7 @@ Für solche kleinen Anpassungen berechnen Postprozessor-Entwickler oft pauschal 
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
+
 1. **Als eigene, kompakte Übungs-Datei:**  
    [`uebungen/uebung_07_spaenefoerderer_schalter.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_07_spaenefoerderer_schalter.cps) – Enthält den einsatzbereiten Schalter für den Späneförderer.
 2. **Im großen Gesamt-Postprozessor des Projekts:**  
@@ -3670,23 +3909,28 @@ Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
 ### 🖥️ Schritt-für-Schritt: So öffnen, bearbeiten, starten und simulieren Sie Übung 7 in Visual Studio Code (VSC)
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie in VS Code `Strg + P`.
 2. Tippen Sie ein: `uebung_07_spaenefoerderer_schalter.cps` und drücken Sie `Enter`.
 3. Ändern Sie z. B. in Zeile 16 `enableChipConveyor: true` auf `false` und wieder zurück.
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal mit ``Strg + ` ``.
 2. Führen Sie aus:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_07_spaenefoerderer_schalter.cps
    ```
 3. Der Simulator schaltet den Späneförderer automatisch ein und wieder aus.
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 * Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
 * Suchen Sie nach dem Befehl `M31` am Anfang und `M33` am Ende.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
+
 * Kopieren Sie den G-Code in [https://ncviewer.com](https://ncviewer.com).
 
 ---
@@ -3751,15 +3995,16 @@ N410 M30 (M30 HAUPTPROGRAMMENDE, RESET UND RUECKSPRUNG)
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 7 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Schalter in Properties** | Die Eigenschaft `useChipConveyor` ist als Ja/Nein-Schalter (`boolean`) definiert. | [ ] |
-| **2. Einschalten bei Start** | Wenn `true`, steht oben im G-Code: `M31` *(Späneförderer AN)*. | [ ] |
-| **3. Ausschalten bei Ende** | Wenn `true`, steht am Programmende vor `M30`: `M33` *(Späneförderer AUS)*. | [ ] |
-| **4. Deaktivierungstest** | Wenn `false`, taucht weder `M31` noch `M33` im Maschinencode auf. | [ ] |
+| Prüfpunkt                     | Was muss im Code / Simulator zu sehen sein?                                       | Bestanden? |
+|:----------------------------- |:--------------------------------------------------------------------------------- |:----------:|
+| **1. Schalter in Properties** | Die Eigenschaft `useChipConveyor` ist als Ja/Nein-Schalter (`boolean`) definiert. | [ ]        |
+| **2. Einschalten bei Start**  | Wenn `true`, steht oben im G-Code: `M31` *(Späneförderer AN)*.                    | [ ]        |
+| **3. Ausschalten bei Ende**   | Wenn `true`, steht am Programmende vor `M30`: `M33` *(Späneförderer AUS)*.        | [ ]        |
+| **4. Deaktivierungstest**     | Wenn `false`, taucht weder `M31` noch `M33` im Maschinencode auf.                 | [ ]        |
 
 ---
 
+<a id="uebung-08"></a>
 # Übung 8: Zwei Steuerungs-Sprachen vergleichen (Haas/Fanuc vs. Siemens Sinumerik)
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -3777,32 +4022,31 @@ In dieser Übung erweitern Sie Ihre Marktchancen auf zwei völlig unterschiedlic
 
 ---
 
-
-
 ## 📩 Der reale Kundenauftrag zu Übung 8 (Migration von Haas auf Siemens Sinumerik)
 
 So sieht eine typische Anfrage aus, wenn ein Betrieb eine neue Maschine mit einer völlig anderen Steuerungs-Sprache kauft:
 
 > **Von:** Jürgen Meier *(Fertigungsleiter)* `<j.meier@franken-zerspanung.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 22. Oktober 2026, 11:00 Uhr  
 > **Betreff:** Postprozessor-Umstellung: Haas NGC Code auf Siemens Sinumerik 840D sl  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
-> 
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
+>
 > wir haben in unserer Werkhalle in Erlangen bisher ausschließlich auf Haas-Maschinen mit ISO/Fanuc-G-Code gefräst. Letzte Woche haben wir ein gebrauchtes 5-Achs-Bearbeitungszentrum von DMG MORI mit **Siemens Sinumerik 840D sl** Steuerung übernommen.  
-> 
+>
 > Als unser Fräser ein gewohntes Haas-Programm auf die Siemens-Maschine geladen hat, blieb die Steuerung mit Fehlermeldungen stehen:  
+>
 > * Siemens kennt `G53 Z0` nicht so wie Haas, sondern verlangt `SUPA G0 Z0 D0`.  
 > * Bei Tiefbohren verlangt Siemens den parametrischen Zyklus `CYCLE83(...)` statt `G83`.  
-> * Statt `G43 H01` erwartet Siemens den Schneidenaufruf `D1`.  
-> 
+> * Statt `G43 H01` erwartet Siemens den Schneidenaufruf `D1`.
+>
 > **Aufgabenstellung:**  
 > Passen Sie unseren Postprozessor so an, dass er sauberen, nativen Siemens Sinumerik Code erzeugt, der auf unserer neuen DMG MORI fehlerfrei startet.  
-> 
+>
 > **Honorar:**  
 > Festpreis **650,00 € netto** bei erfolgreicher Abnahme auf unserer Maschine.  
-> 
+>
 > Mit besten Grüßen  
 > **Jürgen Meier** – Lohnfertigung Franken GmbH, Erlangen  
 
@@ -3810,13 +4054,13 @@ So sieht eine typische Anfrage aus, wenn ein Betrieb eine neue Maschine mit eine
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten Steuerungs-Kennzeichen in Übung 8
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`controllerDialect`** | **Steuerungs-Auswahl *(Post Dialect Property)*** | Wählt im Postprozessor zwischen `FANUC` *(ISO)* und `SIEMENS` *(Sinumerik)*. |
-| **`(...)` vs. `;`** | **Kommentar-Syntax *(Comment Syntax)*** | Fanuc/Haas verlangt runde Klammern `(...)`, Siemens ein Semikolon `;`. |
-| **`G21` vs. `G71`** | **Metrisches Einheitensystem *(Metric Mode)*** | Fanuc nutzt `G21` für Millimeter, Siemens Sinumerik nutzt `G71`. |
-| **`G83` vs. `CYCLE83`** | **Tiefbohr-Befehl *(Deep Hole Drilling Cycle)*** | Fanuc nutzt modalen Zyklus `G83 Q3.0`, Siemens den Hochsprachenzyklus `CYCLE83(...)`. |
-| **`G53` vs. `SUPA`** | **Maschinenkoordinaten-Rückzug *(Machine Coordinate Retract)*** | Fanuc nutzt `G53 G00 Z0.`, Siemens `SUPA G00 Z0.` *(Satzweise Unterdrückung programmierbarer Nullpunktverschiebungen)*. |
+| Kennzeichen             | Fachbegriff & Erklärung                                         | Bedeutung & Funktion in dieser Übung                                                                                    |
+| ----------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| **`controllerDialect`** | **Steuerungs-Auswahl *(Post Dialect Property)***                | Wählt im Postprozessor zwischen `FANUC` *(ISO)* und `SIEMENS` *(Sinumerik)*.                                            |
+| **`(...)` vs. `;`**     | **Kommentar-Syntax *(Comment Syntax)***                         | Fanuc/Haas verlangt runde Klammern `(...)`, Siemens ein Semikolon `;`.                                                  |
+| **`G21` vs. `G71`**     | **Metrisches Einheitensystem *(Metric Mode)***                  | Fanuc nutzt `G21` für Millimeter, Siemens Sinumerik nutzt `G71`.                                                        |
+| **`G83` vs. `CYCLE83`** | **Tiefbohr-Befehl *(Deep Hole Drilling Cycle)***                | Fanuc nutzt modalen Zyklus `G83 Q3.0`, Siemens den Hochsprachenzyklus `CYCLE83(...)`.                                   |
+| **`G53` vs. `SUPA`**    | **Maschinenkoordinaten-Rückzug *(Machine Coordinate Retract)*** | Fanuc nutzt `G53 G00 Z0.`, Siemens `SUPA G00 Z0.` *(Satzweise Unterdrückung programmierbarer Nullpunktverschiebungen)*. |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -3826,6 +4070,7 @@ In dieser Übung schauen wir uns direkt nebeneinander an, wie **haargenau diesel
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
+
 1. **Als eigene, kompakte Übungs-Datei:**  
    [`uebungen/uebung_08_fanuc_siemens_dialekt.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_08_fanuc_siemens_dialekt.cps) – Enthält den Dialekt-Umschalter zwischen Fanuc und Siemens Sinumerik.
 2. **Im großen Gesamt-Postprozessor des Projekts:**  
@@ -3834,23 +4079,28 @@ Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
 ### 🖥️ Schritt-für-Schritt: So öffnen, bearbeiten, starten und simulieren Sie Übung 8 in Visual Studio Code (VSC)
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie in VS Code `Strg + P`.
 2. Tippen Sie ein: `uebung_08_fanuc_siemens_dialekt.cps` und drücken Sie `Enter`.
 3. In Zeile 16 können Sie `dialect: "FANUC"` auf `dialect: "SIEMENS"` ändern und speichern (`Strg + S`).
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal mit ``Strg + ` ``.
 2. Führen Sie aus:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_08_fanuc_siemens_dialekt.cps
    ```
 3. Der Simulator gibt je nach gewählter Einstellung Fanuc- oder Siemens-Code aus.
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 * Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
 * Vergleichen Sie: Bei Siemens sehen Sie `;` als Kommentar und `CYCLE83`, bei Fanuc `(...)` und `G83`.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
+
 * Kopieren Sie den G-Code in [https://ncviewer.com](https://ncviewer.com).
 
 ---
@@ -3907,12 +4157,12 @@ Genau deshalb ist **JavaScript** für diesen Beruf so mächtig: Das **3D-Modell*
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 8 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Dialekt-Auswahl** | Das Dropdown/Property erlaubt die Wahl zwischen `Haas/Fanuc` und `Siemens Sinumerik`. | [ ] |
-| **2. Kommentar-Syntax** | Bei Fanuc stehen runde Klammern `(...)`, bei Siemens steht ein Semikolon `;` am Zeilenanfang. | [ ] |
-| **3. Metrik-Befehl** | Bei Fanuc wird `G21` ausgegeben, bei Siemens korrekt `G71`. | [ ] |
-| **4. Rückzugsbefehl** | Bei Fanuc steht `G53 G00 Z0.`, bei Siemens steht der herstellerspezifische Befehl `SUPA G00 Z0.`. | [ ] |
+| Prüfpunkt               | Was muss im Code / Simulator zu sehen sein?                                                       | Bestanden? |
+|:----------------------- |:------------------------------------------------------------------------------------------------- |:----------:|
+| **1. Dialekt-Auswahl**  | Das Dropdown/Property erlaubt die Wahl zwischen `Haas/Fanuc` und `Siemens Sinumerik`.             | [ ]        |
+| **2. Kommentar-Syntax** | Bei Fanuc stehen runde Klammern `(...)`, bei Siemens steht ein Semikolon `;` am Zeilenanfang.     | [ ]        |
+| **3. Metrik-Befehl**    | Bei Fanuc wird `G21` ausgegeben, bei Siemens korrekt `G71`.                                       | [ ]        |
+| **4. Rückzugsbefehl**   | Bei Fanuc steht `G53 G00 Z0.`, bei Siemens steht der herstellerspezifische Befehl `SUPA G00 Z0.`. | [ ]        |
 
 ---
 
@@ -3928,29 +4178,30 @@ Genau deshalb ist **JavaScript** für diesen Beruf so mächtig: Das **3D-Modell*
 
 ## 📊 Übersichtstabelle: Alle 16 Übungen (+ 2 Basis-Übungen) sortiert nach Schwierigkeit (Stufe 1 bis Stufe 18)
 
-| Lern-Reihenfolge     | Schwierigkeit           | Welche Übung machen Sie?                                                                                                                                         | Was lernen Sie dabei? (Konzept)                                                                                                                                                |
-|:-------------------- |:----------------------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Stufe 1 (Start)**  | ⭐☆☆☆☆ (Sehr leicht)     | **[Übung 5](#übung-5-3d-simulation-im-browser--einrichteblatt-setup-sheet-für-den-kunden-erstellen)** *(3D-Simulator im Browser öffnen)*                         | Erst einmal mit den eigenen Augen sehen: Wie sieht das 3D-Bauteil aus, wie fährt der Fräser und was macht der **G-Code (Maschinencode)**? (Noch gar kein Programmieren nötig!) |
-| **Stufe 2**          | ⭐☆☆☆☆ (Sehr leicht)     | **[Basis-Übung A (Unten)](#stufe-2--basis-übung-a-die-5-wichtigsten-g-code-zeilen-lesen-lernen)** *(G-Code lesen wie ein Buch)*                                  | Verstehen, was `G00` (Eilgang), `G01` (Fräsen), `M03` (Spindel an), `M08` (Wasser an) und `M30` (Ende) bedeuten.                                                               |
-| **Stufe 3**          | ⭐⭐☆☆☆ (Leicht)          | **[Basis-Übung B (Unten)](#stufe-3--basis-übung-b-eine-einzige-zeile-text-im-code-ändern)** *(Erste Zeile in JavaScript ändern)*                                 | Einen einzigen festen Satz mit `writeComment("MEIN ERSTER TEST")` in [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps) schreiben.                 |
-| **Stufe 4**          | ⭐⭐☆☆☆ (Leicht)          | **[Übung 1](#übung-1-der-erste-eigene-text-im-g-code-entwickler-infoblock-in-onopen)** *(Entwickler-Infoblock mit Datum in `onOpen`)*                            | Variablen (`var`) nutzen, das aktuelle Datum (`new Date()`) auslesen und mit `getProperty()` Ihren Namen einfügen.                                                             |
-| **Stufe 5**          | ⭐⭐☆☆☆ (Leicht–Mittel)   | **[Übung 6](#übung-6-sicherer-rückzug-safe-retract--tisch-am-programmende-zur-tür-fahren-onclose)** *(Programmende `onClose` verstehen & anpassen)*              | Einfache Maschinenbefehle (`M09`, `M05`, `M30`) und den sicheren Rückzug nach oben (`G53 G00 Z0`) verstehen.                                                                   |
-| **Stufe 6**          | ⭐⭐⭐☆☆ (Mittel)          | **[Übung 7](#übung-7-eigenen-schalter-property-für-zusatzfunktionen-wie-blasluft-m07-oder-späneförderer-bauen)** *(Eigenen Ja/Nein-Schalter `Property` bauen)*   | Eine `if`-Bedingung (Wenn-Dann-Abfrage) schreiben: *„Wenn der Kunde das Häkchen setzt, schalte den Späneförderer `M31` ein.“*                                                  |
-| **Stufe 7**          | ⭐⭐⭐☆☆ (Mittel)          | **[Übung 4](#übung-4-ein-3d-modell-als-kundenauftrag-bearbeiten-vom-3d-bauteil-zum-g-code)** *(3D-Modell im CAM-Programm bearbeiten)*                            | Das 3D-Bauteil (`bauteil_1001.stl`) nehmen, Nullpunkt `G54` setzen, Fräsbahnen anklicken und mit dem Postprozessor exportieren.                                                |
-| **Stufe 8**          | ⭐⭐⭐⭐☆ (Fortgeschritten) | **[Übung 2](#übung-2-automatische-werkzeugliste-tool-table-ganz-oben-im-programm-ausgeben)** *(Werkzeugliste `Tool Table` mit `for`-Schleife)*                   | Eine `for`-Schleife (Wiederholungsschleife) nutzen, um alle Werkzeuge aus `getToolTable()` automatisch aufzulisten.                                                            |
-| **Stufe 9**          | ⭐⭐⭐⭐☆ (Fortgeschritten) | **[Übung 3](#übung-3-sicherheits-schutz-gegen-maschinencrash--tiefste-frästiefe-z-min-berechnen)** *(Tiefste Frästiefe `Z-MIN` über alle Operationen berechnen)* | Eine eigene Hilfsfunktion `getToolMinimumZ(tool)` schreiben, die alle Arbeitsschritte durchsucht und den kleinsten Z-Wert findet.                                              |
-| **Stufe 10 (Profi)** | ⭐⭐⭐⭐⭐ (Experte)         | **[Übung 8](#übung-8-zwei-steuerungs-sprachen-vergleichen-haasfanuc-vs-siemens-sinumerik)** *(Mehrsprachiger Postprozessor: Haas/Fanuc vs. Siemens)*             | Komplexe Steuerungs-Unterschiede (`CYCLE83` vs. `G83` und `;` vs. `(...)`) im selben Postprozessor umschaltbar machen.                                                         |
-| **Stufe 11**         | ⭐⭐⭐☆☆ (Mittel)          | **[Übung 9](#übung-9-schnittdaten-s-drehzahl--f-vorschub-berechnen--warum-aluminium-baustahl-und-edelstahl-völlig-andere-werte-brauchen)** *(Schnittdaten `S` & `F` berechnen)* | Drehzahl $n$ und Vorschub $v_f$ für Aluminium, Stahl und Edelstahl formelgerecht auslegen und im Postprozessor prüfen.                                                         |
-| **Stufe 12**         | ⭐⭐⭐☆☆ (Mittel)          | **[Übung 15](#übung-15-kanten-entgraten-am-3d-modell-2d-fase--chamfer-milling-mit-einem-45-fasenfräser-t04)** *(Kanten entgraten / `2D-Fase`)*                   | Mit einem $90^\circ$-Fasenfräser und Spitzen-Versatz (`Tip Offset`) alle Bauteilkanten automatisch auf der Maschine entgraten.                                                |
-| **Stufe 13**         | ⭐⭐⭐⭐☆ (Fortgeschritten) | **[Übung 10](#übung-10-die-2-aufspannung-g55--op20--wie-das-3d-bauteil-umgedreht-und-der-restboden-auf-der-rückseite-plangefräst-wird)** *(2. Aufspannung `G55` / `OP20`)* | Werkstück nach Programmstopp (`M00`) umdrehen, zweiten Nullpunkt `G55` aktivieren und den Spannrand auf Fertigmaß abfräsen.                                                    |
-| **Stufe 14**         | ⭐⭐⭐⭐☆ (Fortgeschritten) | **[Übung 11](#übung-11-gewindebohren-g84-rigid-tapping--m6--und-m8-schraubengewinde-ohne-werkzeugbruch-programmieren-f--s--steigung)** *(Gewindebohren `G84`)*   | Synchron-Vorschub $F = S \times P$ exakt berechnen und im Zyklus `G84` programmieren, damit kein Gewindebohrer abreißt.                                                        |
-| **Stufe 15**         | ⭐⭐⭐⭐☆ (Fortgeschritten) | **[Übung 12](#übung-12-werkzeugradiuskorrektur-g41--g42--g40--wie-der-kunde-an-der-maschine-001-mm-genauigkeit-für-passungen-einstellt)** *(Radiuskorrektur `G41`/`G42`)* | Passungen ($\text{H7}$) mit `G41` / `G40` programmieren, damit der Bediener an der Maschine Hundertstel-Millimeter nachstellen kann.                                           |
-| **Stufe 16**         | ⭐⭐⭐⭐⭐ (Experte)         | **[Übung 13](#übung-13-echte-3d-freiformflächen--3d-adaptive-clearing-wirbelfräsen--3d-schlichten-mit-kugelfräser-ball-end-mill)** *(3D-Freiformflächen & Kugelfräser)* | 3D-Schruppen (`Adaptive Clearing`) und 3D-Feinschlichten gekrümmter Oberflächen mit einem Kugelfräser (`Ball End Mill`).                                                       |
-| **Stufe 17**         | ⭐⭐⭐⭐⭐ (Experte)         | **[Übung 14](#übung-14-heidenhain-klartext-steuerung-tool-call-l--fmax--4-drehachse-a-achse-für-aufträge-im-deutschsprachigen-raum)** *(Heidenhain Klartext & 4. Achse)* | Den wichtigsten deutschen Steuerungs-Standard (`BEGIN PGM`, `TOOL CALL`, `L ... FMAX`) und Drehachsen (`A-Achse`) verstehen.                                                   |
-| **Stufe 18 (Meister)**| ⭐⭐⭐⭐⭐ (Meister-Prüfung) | **[Übung 16](#übung-16-die-komplette-5-punkte-endabnahme-im-simulator-vor-der-auslieferung-an-den-online-kunden-meister-prüfung)** *(5-Punkte-Endabnahme im Simulator)* | Kompletter Qualitäts- und Sicherheitscheck jedes Kundenprogramms vor der Online-Auslieferung.                                                                                   |
+| Lern-Reihenfolge       | Schwierigkeit           | Welche Übung machen Sie?                                                                                                                                                        | Was lernen Sie dabei? (Konzept)                                                                                                                                                      |
+|:---------------------- |:----------------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Stufe 1 (Start)**    | ⭐☆☆☆☆ (Sehr leicht)     | **[Übung 5](#übung-5-3d-simulation-im-browser--einrichteblatt-setup-sheet-für-den-kunden-erstellen)** *(3D-Simulator im Browser öffnen)*                                        | Erst einmal mit den eigenen Augen sehen: Wie sieht das 3D-Bauteil aus, wie fährt der Fräser und was macht der **G-Code (Maschinencode)**? (Noch gar kein Programmieren nötig!)       |
+| **Stufe 2**            | ⭐☆☆☆☆ (Sehr leicht)     | **[Basis-Übung A (Unten)](#stufe-2--basis-übung-a-die-5-wichtigsten-g-code-zeilen-lesen-lernen)** *(G-Code lesen wie ein Buch)*                                                 | Verstehen, was `G00` (Eilgang), `G01` (Fräsen), `M03` (Spindel an), `M08` (Wasser an) und `M30` (Ende) bedeuten.                                                                     |
+| **Stufe 3**            | ⭐⭐☆☆☆ (Leicht)          | **[Basis-Übung B (Unten)](#stufe-3--basis-übung-b-eine-einzige-zeile-text-im-code-ändern)** *(Erste Zeile in JavaScript ändern)*                                                | Einen einzigen festen Satz mit `writeComment("MEIN ERSTER TEST")` in [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps) schreiben. |
+| **Stufe 4**            | ⭐⭐☆☆☆ (Leicht)          | **[Übung 1](#übung-1-der-erste-eigene-text-im-g-code-entwickler-infoblock-in-onopen)** *(Entwickler-Infoblock mit Datum in `onOpen`)*                                           | Variablen (`var`) nutzen, das aktuelle Datum (`new Date()`) auslesen und mit `getProperty()` Ihren Namen einfügen.                                                                   |
+| **Stufe 5**            | ⭐⭐☆☆☆ (Leicht–Mittel)   | **[Übung 6](#übung-6-sicherer-rückzug-safe-retract--tisch-am-programmende-zur-tür-fahren-onclose)** *(Programmende `onClose` verstehen & anpassen)*                             | Einfache Maschinenbefehle (`M09`, `M05`, `M30`) und den sicheren Rückzug nach oben (`G53 G00 Z0`) verstehen.                                                                         |
+| **Stufe 6**            | ⭐⭐⭐☆☆ (Mittel)          | **[Übung 7](#übung-7-eigenen-schalter-property-für-zusatzfunktionen-wie-blasluft-m07-oder-späneförderer-bauen)** *(Eigenen Ja/Nein-Schalter `Property` bauen)*                  | Eine `if`-Bedingung (Wenn-Dann-Abfrage) schreiben: *„Wenn der Kunde das Häkchen setzt, schalte den Späneförderer `M31` ein.“*                                                        |
+| **Stufe 7**            | ⭐⭐⭐☆☆ (Mittel)          | **[Übung 4](#übung-4-ein-3d-modell-als-kundenauftrag-bearbeiten-vom-3d-bauteil-zum-g-code)** *(3D-Modell im CAM-Programm bearbeiten)*                                           | Das 3D-Bauteil (`bauteil_1001.stl`) nehmen, Nullpunkt `G54` setzen, Fräsbahnen anklicken und mit dem Postprozessor exportieren.                                                      |
+| **Stufe 8**            | ⭐⭐⭐⭐☆ (Fortgeschritten) | **[Übung 2](#übung-2-automatische-werkzeugliste-tool-table-ganz-oben-im-programm-ausgeben)** *(Werkzeugliste `Tool Table` mit `for`-Schleife)*                                  | Eine `for`-Schleife (Wiederholungsschleife) nutzen, um alle Werkzeuge aus `getToolTable()` automatisch aufzulisten.                                                                  |
+| **Stufe 9**            | ⭐⭐⭐⭐☆ (Fortgeschritten) | **[Übung 3](#übung-3-sicherheits-schutz-gegen-maschinencrash--tiefste-frästiefe-z-min-berechnen)** *(Tiefste Frästiefe `Z-MIN` über alle Operationen berechnen)*                | Eine eigene Hilfsfunktion `getToolMinimumZ(tool)` schreiben, die alle Arbeitsschritte durchsucht und den kleinsten Z-Wert findet.                                                    |
+| **Stufe 10 (Profi)**   | ⭐⭐⭐⭐⭐ (Experte)         | **[Übung 8](#übung-8-zwei-steuerungs-sprachen-vergleichen-haasfanuc-vs-siemens-sinumerik)** *(Mehrsprachiger Postprozessor: Haas/Fanuc vs. Siemens)*                            | Komplexe Steuerungs-Unterschiede (`CYCLE83` vs. `G83` und `;` vs. `(...)`) im selben Postprozessor umschaltbar machen.                                                               |
+| **Stufe 11**           | ⭐⭐⭐☆☆ (Mittel)          | **[Übung 9](#übung-9-schnittdaten-s-drehzahl--f-vorschub-berechnen--warum-aluminium-baustahl-und-edelstahl-völlig-andere-werte-brauchen)** *(Schnittdaten `S` & `F` berechnen)* | Drehzahl $n$ und Vorschub $v_f$ für Aluminium, Stahl und Edelstahl formelgerecht auslegen und im Postprozessor prüfen.                                                               |
+| **Stufe 12**           | ⭐⭐⭐☆☆ (Mittel)          | **[Übung 15](#übung-15-kanten-entgraten-am-3d-modell-2d-fase--chamfer-milling-mit-einem-45-fasenfräser-t04)** *(Kanten entgraten / `2D-Fase`)*                                  | Mit einem $90^\circ$-Fasenfräser und Spitzen-Versatz (`Tip Offset`) alle Bauteilkanten automatisch auf der Maschine entgraten.                                                       |
+| **Stufe 13**           | ⭐⭐⭐⭐☆ (Fortgeschritten) | **[Übung 10](#übung-10-die-2-aufspannung-g55--op20--wie-das-3d-bauteil-umgedreht-und-der-restboden-auf-der-rückseite-plangefräst-wird)** *(2. Aufspannung `G55` / `OP20`)*      | Werkstück nach Programmstopp (`M00`) umdrehen, zweiten Nullpunkt `G55` aktivieren und den Spannrand auf Fertigmaß abfräsen.                                                          |
+| **Stufe 14**           | ⭐⭐⭐⭐☆ (Fortgeschritten) | **[Übung 11](#übung-11-gewindebohren-g84-rigid-tapping--m6--und-m8-schraubengewinde-ohne-werkzeugbruch-programmieren-f--s--steigung)** *(Gewindebohren `G84`)*                  | Synchron-Vorschub $F = S \times P$ exakt berechnen und im Zyklus `G84` programmieren, damit kein Gewindebohrer abreißt.                                                              |
+| **Stufe 15**           | ⭐⭐⭐⭐☆ (Fortgeschritten) | **[Übung 12](#übung-12-werkzeugradiuskorrektur-g41--g42--g40--wie-der-kunde-an-der-maschine-001-mm-genauigkeit-für-passungen-einstellt)** *(Radiuskorrektur `G41`/`G42`)*       | Passungen ($\text{H7}$) mit `G41` / `G40` programmieren, damit der Bediener an der Maschine Hundertstel-Millimeter nachstellen kann.                                                 |
+| **Stufe 16**           | ⭐⭐⭐⭐⭐ (Experte)         | **[Übung 13](#übung-13-echte-3d-freiformflächen--3d-adaptive-clearing-wirbelfräsen--3d-schlichten-mit-kugelfräser-ball-end-mill)** *(3D-Freiformflächen & Kugelfräser)*         | 3D-Schruppen (`Adaptive Clearing`) und 3D-Feinschlichten gekrümmter Oberflächen mit einem Kugelfräser (`Ball End Mill`).                                                             |
+| **Stufe 17**           | ⭐⭐⭐⭐⭐ (Experte)         | **[Übung 14](#übung-14-heidenhain-klartext-steuerung-tool-call-l--fmax--4-drehachse-a-achse-für-aufträge-im-deutschsprachigen-raum)** *(Heidenhain Klartext & 4. Achse)*        | Den wichtigsten deutschen Steuerungs-Standard (`BEGIN PGM`, `TOOL CALL`, `L ... FMAX`) und Drehachsen (`A-Achse`) verstehen.                                                         |
+| **Stufe 18 (Meister)** | ⭐⭐⭐⭐⭐ (Meister-Prüfung) | **[Übung 16](#übung-16-die-komplette-5-punkte-endabnahme-im-simulator-vor-der-auslieferung-an-den-online-kunden-meister-prüfung)** *(5-Punkte-Endabnahme im Simulator)*         | Kompletter Qualitäts- und Sicherheitscheck jedes Kundenprogramms vor der Online-Auslieferung.                                                                                        |
 
 ---
 
+<a id="basis-uebung-a"></a>
 ## 🟢 Stufe 2 – Basis-Übung A: Die 5 wichtigsten G-Code-Zeilen lesen lernen (Schwierigkeit: ⭐☆☆☆☆)
 
 Bevor Sie irgendeinen **JavaScript-Code (Programmcode)** ändern, schauen wir uns in [tests/output_expected.nc](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/output_expected.nc) nur **5 Zeilen** an. Wenn Sie diese 5 Zeilen verstehen, verstehen Sie bereits 80 % jedes CNC-Programms!
@@ -3990,44 +4241,48 @@ N100 G01 Z-5.000 F500
 
 ---
 
+<a id="basis-uebung-b"></a>
 ## 🟢 Stufe 3 – Basis-Übung B: Eine einzige Zeile Text im Code ändern (Schwierigkeit: ⭐⭐☆☆☆)
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 00b
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`(...)`** | **Kommentar *(Bediener-Notiz)*** | Schreibt reine Notizen wie `writeComment("HALLO WELT...")`, die von der Fräse ignoriert werden. |
-| **`G90`** | **Absolutmaß *(Absolute Coordinates)*** | Alle Maße beziehen sich auf den Werkstück-Nullpunkt `G54`. |
-| **`G17`** | **XY-Bearbeitungsebene *(Plane Selection)*** | Standard-Fräsebene von oben *(Werkzeugachse ist die Z-Achse)*. |
-| **`G21`** | **Metrisches Einheitensystem *(Metric Mode)*** | Alle Maßangaben sind in Millimetern. |
-| **`G94`** | **Vorschub-Einheit *(Feed per Minute)*** | Vorschubgeschwindigkeit $F$ wird in $\text{mm/min}$ gerechnet. |
-| **`G28 G91 Z0.`** | **Referenzpunktfahrt Z *(Return to Home Z)*** | Z-Achse fährt senkrecht nach oben an den oberen Maschinen-Endschalter *(Crash-Schutz)*. |
-| **`T1` / `T2`** | **Werkzeugnummer *(Tool Number)*** | `T1` = Schaftfräser $\varnothing 10\,\text{mm}$ \| `T2` = Spiralbohrer $\varnothing 6\,\text{mm}$. |
-| **`M06`** | **Werkzeugwechsel *(Tool Change)*** | Mechanischer Greifarm holt das Werkzeug $T$ physisch in die Spindel. |
-| **`S8000` / `S3500`**| **Spindeldrehzahl *(Spindle Speed)*** | Drehzahl des Fräsers in $\text{U/min}$ *(Umdrehungen pro Minute)*. |
-| **`M03`** | **Spindel Rechtslauf EIN *(Spindle Clockwise)*** | Schaltet den Frässpindelmotor im Uhrzeigersinn ein. |
-| **`G54`** | **Werkstück-Nullpunkt 1 *(Work Coordinate System)*** | Nullpunkt-Lage an der vorderen linken Bauteilecke. |
-| **`M05`** | **Spindel-Stopp *(Spindle Stop)*** | Schaltet den Spindelmotor am Programmende aus. |
-| **`M09`** | **Kühlmittel AUS *(Coolant Off)*** | Schaltet die Kühlwasserpumpe aus. |
-| **`G28 Y0.`** | **Tisch zur Schutztür *(Table to Door)*** | Fährt den Tisch nach vorne zum bequemen Entnehmen des Bauteils. |
-| **`M30`** | **Programmende *(Program End)*** | Schließt die Abarbeitung ab und setzt den Programmzeiger auf Zeile 1 zurück. |
+| Kennzeichen           | Fachbegriff & Erklärung                              | Bedeutung & Funktion in dieser Übung                                                               |
+| --------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **`(...)`**           | **Kommentar *(Bediener-Notiz)***                     | Schreibt reine Notizen wie `writeComment("HALLO WELT...")`, die von der Fräse ignoriert werden.    |
+| **`G90`**             | **Absolutmaß *(Absolute Coordinates)***              | Alle Maße beziehen sich auf den Werkstück-Nullpunkt `G54`.                                         |
+| **`G17`**             | **XY-Bearbeitungsebene *(Plane Selection)***         | Standard-Fräsebene von oben *(Werkzeugachse ist die Z-Achse)*.                                     |
+| **`G21`**             | **Metrisches Einheitensystem *(Metric Mode)***       | Alle Maßangaben sind in Millimetern.                                                               |
+| **`G94`**             | **Vorschub-Einheit *(Feed per Minute)***             | Vorschubgeschwindigkeit $F$ wird in $\text{mm/min}$ gerechnet.                                     |
+| **`G28 G91 Z0.`**     | **Referenzpunktfahrt Z *(Return to Home Z)***        | Z-Achse fährt senkrecht nach oben an den oberen Maschinen-Endschalter *(Crash-Schutz)*.            |
+| **`T1` / `T2`**       | **Werkzeugnummer *(Tool Number)***                   | `T1` = Schaftfräser $\varnothing 10\,\text{mm}$ \| `T2` = Spiralbohrer $\varnothing 6\,\text{mm}$. |
+| **`M06`**             | **Werkzeugwechsel *(Tool Change)***                  | Mechanischer Greifarm holt das Werkzeug $T$ physisch in die Spindel.                               |
+| **`S8000` / `S3500`** | **Spindeldrehzahl *(Spindle Speed)***                | Drehzahl des Fräsers in $\text{U/min}$ *(Umdrehungen pro Minute)*.                                 |
+| **`M03`**             | **Spindel Rechtslauf EIN *(Spindle Clockwise)***     | Schaltet den Frässpindelmotor im Uhrzeigersinn ein.                                                |
+| **`G54`**             | **Werkstück-Nullpunkt 1 *(Work Coordinate System)*** | Nullpunkt-Lage an der vorderen linken Bauteilecke.                                                 |
+| **`M05`**             | **Spindel-Stopp *(Spindle Stop)***                   | Schaltet den Spindelmotor am Programmende aus.                                                     |
+| **`M09`**             | **Kühlmittel AUS *(Coolant Off)***                   | Schaltet die Kühlwasserpumpe aus.                                                                  |
+| **`G28 Y0.`**         | **Tisch zur Schutztür *(Table to Door)***            | Fährt den Tisch nach vorne zum bequemen Entnehmen des Bauteils.                                    |
+| **`M30`**             | **Programmende *(Program End)***                     | Schließt die Abarbeitung ab und setzt den Programmzeiger auf Zeile 1 zurück.                       |
 
 Bevor Sie mit Variablen oder Schleifen arbeiten, machen wir die **einfachste Programmier-Übung überhaupt**: Wir fügen eine einzige eigene Textzeile in den Postprozessor ein.
 
 ### 🛠️ Schritt-für-Schritt-Anleitung:
 
 1. Öffnen Sie die Datei [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L213-L222).
+
 2. Suchen Sie um Zeile 219 nach dieser Stelle in `onOpen()`:
 
    ```javascript
    writeComment("EINHEITEN  : " + (unit == MM ? "MILLIMETER (METRISCH G21)" : "INCH / ZOLL (G20)"));
    writeComment("==================================================");
    ```
+
 3. Schreiben Sie direkt darunter eine eigene Zeile mit `writeComment(...)`:
 
    ```javascript
    writeComment("HALLO WELT - DIES IST MEIN ERSTER EIGENER CNC-BEFEHL");
    ```
+
 4. **Was passiert beim Export?**  
    Der Postprozessor schreibt genau an dieser Stelle im **G-Code (Maschinencode)** die Zeile:  
    `(HALLO WELT - DIES IST MEIN ERSTER EIGENER CNC-BEFEHL)`  
@@ -4083,12 +4338,15 @@ Ich habe Ihnen im Ordner `tests/` das Programm **[`tests/simuliere_post.js`](fil
 ### So führen Sie es nach jeder Übung aus:
 
 1. Öffnen Sie in Ihrer **Antigravity IDE (Entwicklungsumgebung)** unten das **Terminal (Eingabeaufforderung / PowerShell)** mit der Tastenkombination `` Strg + Ö `` (oder über das Menü `Terminal` $\rightarrow$ `New Terminal`).
+
 2. Tippen Sie diesen kurzen Befehl ein und drücken Sie `Enter`:
 
    ```powershell
    node simuliere_post.js
    ```
+
 3. **Was sofort passiert:**
+
    * Im Terminal erscheint sofort Ihr frisch erzeugter **G-Code (Maschinencode)**!
    * Gleichzeitig wird die Datei **`C:\Projekte\CNC\tests\mein_generierter_gcode.nc`** neu geschrieben.
    * Jede Änderung, die Sie in [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps) gespeichert haben (`Strg + S`), sehen Sie sofort in dieser Datei!
@@ -4142,18 +4400,22 @@ Hier steht für **jede Übung aus diesem Handbuch** ganz genau, worauf Sie im Si
 ### 🔹 Test für Stufe 3 / Basis-Übung B („Hallo Welt“ Kommentar) & Stufe 4 / Übung 1 (Entwickler-Infoblock):
 
 1. Ändern Sie in [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L44) Ihren Namen (oder fügen Sie in `onOpen()` Ihre `writeComment("HALLO WELT...")`-Zeile ein) und speichern Sie die Datei mit `Strg + S`.
+
 2. Starten Sie im Terminal:
 
    ```powershell
    node simuliere_post.js
    ```
+
 3. **Was Sie prüfen:**
+
    - Schauen Sie in die ersten 10 Zeilen der Ausgabe im Terminal (oder in `uebungen/uebung_04_3d_modell_cam.nc`): Steht Ihr neuer Text in runden Klammern `(...)`?
    - Kopieren Sie den kompletten Text in **`https://ncviewer.com`** und klicken Sie auf **`Plot`**: Läuft die 3D-Simulation trotz Ihres neuen Textes ohne Fehlermeldung durch? *(Wenn Sie aus Versehen Klammern innerhalb von Klammern geschrieben hätten, würde ein echter CNC-Simulator sofort stoppen – unsere Funktion `writeComment()` schützt Sie davor!).*
 
 ### 🔹 Test für Stufe 5 / Übung 6 (Sicherer Rückzug `G53 Z0` & Tisch zur Tür `G53 Y0` am Programmende):
 
 1. Öffnen Sie [tests/output_expected.nc](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/output_expected.nc) in **`https://ncviewer.com`** oder in [3d_auftrag_simulator.html](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html).
+
 2. Scrollen Sie im G-Code ganz nach unten zu den Zeilen `N360` bis `N410`:
 
    ```gcode
@@ -4165,7 +4427,9 @@ Hier steht für **jede Übung aus diesem Handbuch** ganz genau, worauf Sie im Si
    N400 G53 G00 Y0.000
    N410 M30
    ```
+
 3. **Was Sie im 3D-Simulator prüfen:**
+
    - Klicken Sie erst auf Zeile `N340 X10.000 Y40.000` (der Bohrer steckt noch im letzten Bohrloch hinten links).
    - Klicken Sie dann auf `N360 G00 Z15.000` und `N380 G53 G00 Z0.000`: Sie sehen im 3D-Fenster, wie der Bohrer **senkrecht nach oben aus dem Loch herausgezogen wird**, BEVOR er in Zeile `N400` in Richtung `Y0.000` (nach vorne zur Tür) fährt!
    - **Bonus-Experiment:** Ändern Sie in [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L92) bei `useG28SafeRetract` den Wert von `false` auf `true`, speichern Sie (`Strg + S`) und führen Sie `node simuliere_post.js` aus. Jetzt steht am Ende statt `G53 G00 Z0.000` plötzlich `G28 G91 Z0.000`!
@@ -4195,7 +4459,6 @@ Hier steht für **jede Übung aus diesem Handbuch** ganz genau, worauf Sie im Si
      - Die 4 Bohrlöcher von Werkzeug `T02` ragen am tiefsten nach unten bis auf `-12.000 mm`!
    - Damit haben Sie visuell im Simulator bewiesen, dass Ihre JavaScript-Funktion [`getToolMinimumZ(tool)`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L181-L195) auf den tausendstel Millimeter genau rechnet!
 
-
 ---
 
 # 🟣 Teil 4: Fortgeschrittene Profi-Übungen für echte Online-Aufträge (Übung 9 bis Übung 16)
@@ -4204,6 +4467,7 @@ In diesem vierten Teil findest du die **Übungen 9 bis 16**, die dich vom Einste
 
 ---
 
+<a id="uebung-09"></a>
 # Übung 9: Schnittdaten (`S` Drehzahl & `F` Vorschub) berechnen – Warum Aluminium, Baustahl und Edelstahl völlig andere Werte brauchen
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -4221,33 +4485,32 @@ In dieser Übung schützen Sie teure Werkzeuge durch physikalisch fundierte Schn
 
 ---
 
-
-
 ## 📩 Der reale Kundenauftrag zu Übung 9 (Werkzeugbruch-Verhütung bei Edelstahl-Umstellung)
 
 So sieht eine typische Anfrage aus, wenn ein Kunde beim Wechsel von Aluminium auf zähen Edelstahl teuren Werkzeugbruch erleidet:
 
 > **Von:** Frank Lehmann *(Produktionsleiter)* `<f.lehmann@krupp-maschinenteile.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 23. Oktober 2026, 08:45 Uhr  
 > **Betreff:** EILIGE ANFRAGE: Schnittdaten-Optimierung Edelstahl V4A 1.4571 – Fräser brennen ab  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
-> 
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
+>
 > wir haben ein massives Fertigungsproblem in Duisburg: Wir fertigen seit Jahren ein Gehäuse aus Aluminium mit $8.000\,\text{U/min}$ und $1.200\,\text{mm/min}$ Vorschub. Jetzt hat unser Großkunde das Material auf hochlegierten Edelstahl V4A *(Werkstoff 1.4571 / X6CrNiMoTi17-12-2)* umgestellt.  
-> 
+>
 > Unser CAM-Programmierer hat die bisherigen Schnittdaten übernommen – gestern sind innerhalb von zwei Stunden drei brandneue VHM-Schaftfräser $\varnothing 10\,\text{mm}$ (Stückpreis: 85 €) rotglühend abgebrannt und zersplittert!  
-> 
+>
 > **Aufgabenstellung:**  
 > Berechnen Sie die physikalisch korrekten, standzeit-optimierten Schnittdaten für:  
+>
 > 1. Werkstoff Aluminium EN AW-6082 ($v_c = 300\,\text{m/min}$, $f_z = 0{,}06\,\text{mm}$)  
 > 2. Werkstoff Baustahl S235JR ($v_c = 160\,\text{m/min}$, $f_z = 0{,}05\,\text{mm}$)  
 > 3. Werkstoff Edelstahl V4A 1.4571 ($v_c = 80\,\text{m/min}$, $f_z = 0{,}035\,\text{mm}$)  
-> Passen Sie das NC-Programm an und dokumentieren Sie die Formeln für Spindeldrehzahl $S$ und Vorschub $F$.  
-> 
+>    Passen Sie das NC-Programm an und dokumentieren Sie die Formeln für Spindeldrehzahl $S$ und Vorschub $F$.
+>
 > **Honorar:**  
 > Festpreis **480,00 € netto** gegen Rechnung.  
-> 
+>
 > Mit besten Grüßen  
 > **Frank Lehmann** – Krupp Maschinenteile GmbH, Duisburg  
 
@@ -4255,20 +4518,21 @@ So sieht eine typische Anfrage aus, wenn ein Kunde beim Wechsel von Aluminium au
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten Schnittdaten- & Technologie-Kennzeichen in Übung 9
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`v_c`** | **Schnittgeschwindigkeit *(Cutting Speed in $\text{m/min}$)*** | Umfangsgeschwindigkeit der Schneide am Werkstück *(Alu $300\,\text{m/min}$, Baustahl $160\,\text{m/min}$, Edelstahl $80\,\text{m/min}$)*. |
-| **`S` / $n$** | **Spindeldrehzahl *(Spindle Speed in $\text{U/min}$)*** | Drehzahl der Spindel: $n = (v_c \times 1000) / (\pi \times D)$. Im G-Code: `S8000`. |
-| **`F` / $v_f$**| **Vorschubgeschwindigkeit *(Feedrate in $\text{mm/min}$)*** | Verfahrgeschwindigkeit des Fräsers im Schnitt: $v_f = n \times z \times f_z$. Im G-Code: `F1200`. |
-| **$f_z$** | **Zahnvorschub *(Feed per Tooth in $\text{mm}$)*** | Materialabtrag pro Schneidzahn und Umdrehung *(Alu $0{,}06\,\text{mm}$, Stahl $0{,}05\,\text{mm}$)*. |
-| **$z$** | **Zähnezahl *(Number of Flutes)*** | Anzahl der wirksamen Schneiden am Fräser *(Alu meist 3 Zähne, Stahl meist 4–5 Zähne)*. |
-| **`M03`** | **Spindel Rechtslauf EIN *(Spindle Clockwise)*** | Schaltet den Spindelmotor im Uhrzeigersinn ein. |
-| **`M08`** | **Kühlmittel EIN *(Flood Coolant On)*** | Verhindert Überhitzung der Schneide und spült Späne fort. |
+| Kennzeichen     | Fachbegriff & Erklärung                                        | Bedeutung & Funktion in dieser Übung                                                                                                      |
+| --------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **`v_c`**       | **Schnittgeschwindigkeit *(Cutting Speed in $\text{m/min}$)*** | Umfangsgeschwindigkeit der Schneide am Werkstück *(Alu $300\,\text{m/min}$, Baustahl $160\,\text{m/min}$, Edelstahl $80\,\text{m/min}$)*. |
+| **`S` / $n$**   | **Spindeldrehzahl *(Spindle Speed in $\text{U/min}$)***        | Drehzahl der Spindel: $n = (v_c \times 1000) / (\pi \times D)$. Im G-Code: `S8000`.                                                       |
+| **`F` / $v_f$** | **Vorschubgeschwindigkeit *(Feedrate in $\text{mm/min}$)***    | Verfahrgeschwindigkeit des Fräsers im Schnitt: $v_f = n \times z \times f_z$. Im G-Code: `F1200`.                                         |
+| **$f_z$**       | **Zahnvorschub *(Feed per Tooth in $\text{mm}$)***             | Materialabtrag pro Schneidzahn und Umdrehung *(Alu $0{,}06\,\text{mm}$, Stahl $0{,}05\,\text{mm}$)*.                                      |
+| **$z$**         | **Zähnezahl *(Number of Flutes)***                             | Anzahl der wirksamen Schneiden am Fräser *(Alu meist 3 Zähne, Stahl meist 4–5 Zähne)*.                                                    |
+| **`M03`**       | **Spindel Rechtslauf EIN *(Spindle Clockwise)***               | Schaltet den Spindelmotor im Uhrzeigersinn ein.                                                                                           |
+| **`M08`**       | **Kühlmittel EIN *(Flood Coolant On)***                        | Verhindert Überhitzung der Schneide und spült Späne fort.                                                                                 |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
 Wenn dir ein Online-Kunde ein 3D-Modell schickt, steht auf der Zeichnung immer der **Werkstoff *(das Material, z. B. Aluminium, Baustahl oder Edelstahl)***.
 Der häufigste Anfängerfehler im CAM ist es, für Stahl dieselbe **Spindeldrehzahl (`S` – Umdrehungen pro Minute)** und denselben **Vorschub (`F` – Fahrgeschwindigkeit in Millimetern pro Minute)** wie für weiches Aluminium zu lassen:
+
 * Fräst du **Edelstahl** mit Aluminium-Drehzahl (`S10000`), glüht der Fräser innerhalb von **2 Sekunden** rot auf und bricht sofort ab!
 * Fräst du **Aluminium** mit langsamer Edelstahl-Drehzahl (`S1500`), klebt das weiche Aluminium an den Schneiden fest (**Aufbauschneide *(Materialverschweißung am Fräser)***).
 
@@ -4276,12 +4540,14 @@ Der häufigste Anfängerfehler im CAM ist es, für Stahl dieselbe **Spindeldrehz
 
 1. **Formel für die Spindeldrehzahl $n$ (`S` im G-Code):**
    $$n = \frac{v_c \cdot 1000}{\pi \cdot D}$$
+
    * $v_c$: **Schnittgeschwindigkeit *(Cutting Speed in $\text{m/min}$ – steht auf der Verpackung des Fräsers oder im Katalog)***.
    * $D$: **Durchmesser des Fräsers *(in $\text{mm}$, z. B. $10\,\text{mm}$)***.
    * $\pi$: Kreiszahl ($\approx 3{,}1416$).
 
 2. **Formel für den Vorschub $v_f$ (`F` im G-Code):**
    $$v_f = n \cdot z \cdot f_z$$
+
    * $n$: Die eben berechnete **Drehzahl (`S`)**.
    * $z$: **Anzahl der Schneiden (Zähne)** am Fräser *(für Alu meist $z=3$, für Stahl meist $z=4$ oder $z=5$)*.
    * $f_z$: **Zahnvorschub *(Feed per Tooth in $\text{mm/Zahn}$ – wie viel Millimeter Metall jede einzelne Schneide pro Umdrehung abnimmt)***.
@@ -4297,6 +4563,7 @@ Der häufigste Anfängerfehler im CAM ist es, für Stahl dieselbe **Spindeldrehz
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
+
 1. **Als eigene, kompakte Übungs-Datei:**  
    [`uebungen/uebung_09_schnittdaten_check.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_09_schnittdaten_check.cps) – Prüft die Schnittdaten (vc, Drehzahl, Vorschub) und gibt Sicherheits-Warnungen aus.
 2. **Im Haupt-Postprozessor:**  
@@ -4305,27 +4572,33 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 ### 🖥️ Schritt-für-Schritt: So öffnen, starten und simulieren Sie Übung 9 in Visual Studio Code (VSC)
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie in VS Code `Strg + P`.
 2. Tippen Sie ein: `uebung_09_schnittdaten_check.cps` und drücken Sie `Enter`.
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal mit ``Strg + ` ``.
 2. Führen Sie aus:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_09_schnittdaten_check.cps
    ```
 3. Der Simulator berechnet die Schnittgeschwindigkeiten für die Werkzeuge.
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 * Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
 * Achten Sie auf den Kommentar: `(TECHNOLOGIE-CHECK: SCHNITTGESCHWINDIGKEIT VC = ...)`.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
+
 * Kopieren Sie den G-Code in [https://ncviewer.com](https://ncviewer.com).
 
 ---
 
 ### 🛠️ Automatische Sicherheitsprüfung im JavaScript-Postprozessor:
+
 Du kannst in deinem Postprozessor (`onSection()`) eine automatische Schnittdaten-Berechnung und Sicherheitswarnung einbauen, falls im CAM eine zu hohe Schnittgeschwindigkeit eingegeben wurde:
 
 ```javascript
@@ -4358,15 +4631,16 @@ N90 G01 X0.000 Y0.000 F1200 (G01 FRAESVORSCHUB 1200 MM/MIN ENTSPRICHT FZ = 0.05 
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 9 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. vc-Berechnung aktiv** | Der Postprozessor schreibt `(TECHNOLOGIE-CHECK: SCHNITTGESCHWINDIGKEIT VC = ... M/MIN)` vor die Operation. | [ ] |
-| **2. Plausibilität Aluminium** | Für $\varnothing 10\,\text{mm}$ und `S8000` liegt $v_c$ bei ca. $251\,\text{m/min}$ *(voll im grünen Bereich für Alu)*. | [ ] |
-| **3. Vorschub passend zu Zähnen** | Der Vorschub `F1200` ergibt bei 3 Zähnen $f_z = 0{,}05\,\text{mm/Zahn}$, was für Schaftfräser optimal ist. | [ ] |
-| **4. Keine Werkzeugüberlastung** | Keine Spindeldrehzahlen über der Maschinenobergrenze *(z. B. max. $12.000\,\text{U/min}$)*. | [ ] |
+| Prüfpunkt                         | Was muss im Code / Simulator zu sehen sein?                                                                             | Bestanden? |
+|:--------------------------------- |:----------------------------------------------------------------------------------------------------------------------- |:----------:|
+| **1. vc-Berechnung aktiv**        | Der Postprozessor schreibt `(TECHNOLOGIE-CHECK: SCHNITTGESCHWINDIGKEIT VC = ... M/MIN)` vor die Operation.              | [ ]        |
+| **2. Plausibilität Aluminium**    | Für $\varnothing 10\,\text{mm}$ und `S8000` liegt $v_c$ bei ca. $251\,\text{m/min}$ *(voll im grünen Bereich für Alu)*. | [ ]        |
+| **3. Vorschub passend zu Zähnen** | Der Vorschub `F1200` ergibt bei 3 Zähnen $f_z = 0{,}05\,\text{mm/Zahn}$, was für Schaftfräser optimal ist.              | [ ]        |
+| **4. Keine Werkzeugüberlastung**  | Keine Spindeldrehzahlen über der Maschinenobergrenze *(z. B. max. $12.000\,\text{U/min}$)*.                             | [ ]        |
 
 ---
 
+<a id="uebung-10"></a>
 # Übung 10: Die 2. Aufspannung (`G55` / `OP20`) – Wie das 3D-Bauteil umgedreht und der Restboden auf der Rückseite plangefräst wird
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -4384,33 +4658,32 @@ In dieser Übung lernen Sie die professionelle 6-Seiten-Komplettbearbeitung eine
 
 ---
 
-
-
 ## 📩 Der reale Kundenauftrag zu Übung 10 (Restboden-Planfräsen in der 2. Aufspannung)
 
 So sieht eine typische Anfrage aus, wenn ein Bauteil nach der ersten Aufspannung noch den Spannrand am Boden hat und komplett auf Fertigmaß gebracht werden muss:
 
 > **Von:** Robert Schneider *(Fertigungsleiter)* `<r.schneider@alutech-gehaeuse.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 24. Oktober 2026, 10:30 Uhr  
 > **Betreff:** CAM-Programmierung OP20: Umdrehen & Planfräsen auf Fertigdicke 12.0 mm  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
-> 
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
+>
 > wir fertigen in unserem Werk in Friedrichshafen 200 Elektronik-Gehäuse. Die 1. Aufspannung *(OP10: Kontur, Taschen und Bohrungen)* läuft bereits.  
-> 
+>
 > Das Bauteil hat jetzt am Boden jedoch noch die überstehenden $3\,\text{mm}$ Rohmaterial *(den ursprünglichen Spannrand aus $15\,\text{mm}$ Rohteil auf $12\,\text{mm}$ Fertigmaß)*.  
-> 
+>
 > **Aufgabenstellung:**  
 > Programmieren Sie die 2. Aufspannung (`OP20`):  
+>
 > 1. Programmierter Bediener-Stopp (`M00`) nach OP10 mit Kommentar: `(TEIL UMDREHEN UND AUF PARALLELUNTERLAGEN SPANNEN)`.  
 > 2. Umschalten auf den zweiten Werkstück-Nullpunkt `G55` *(liegt auf der neu gewendeten Oberseite)*.  
 > 3. Planfräsen der Rückseite mit Messerkopf `T03` ($\varnothing 50\,\text{mm}$) auf Fertigdicke exakt $12{,}0\,\text{mm}$.  
-> 4. Sauberes Entgraten der Unterkanten.  
-> 
+> 4. Sauberes Entgraten der Unterkanten.
+>
 > **Honorar:**  
 > Festpreis **520,00 € netto** gegen Rechnung.  
-> 
+>
 > Mit besten Grüßen  
 > **Robert Schneider** – AluTech Gehäusebau GmbH, Friedrichshafen  
 
@@ -4418,21 +4691,22 @@ So sieht eine typische Anfrage aus, wenn ein Bauteil nach der ersten Aufspannung
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten G-Code- & M-Code-Kennzeichen in Übung 10
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`G54`** | **1. Werkstück-Nullpunkt *(Work Coordinate System OP10)*** | Nullpunkt für die erste Seite *(Oberseite, Kontur, Bohrungen)*. |
-| **`G55`** | **2. Werkstück-Nullpunkt *(Work Coordinate System OP20)*** | Zweiter Nullpunkt für die Rückseite nach dem Umspannen *(im zweiten Schraubstock)*. |
-| **`M00`** | **Programmstopp Zwingend *(Mandatory Program Stop)*** | Hält die CNC-Maschine an, Spindel stoppt, wartet auf Bediener-Quittierung *(Bauteil wenden)*. |
-| **`T01 M06`** | **Werkzeugwechsel *(Tool Change)*** | Wechselt das Planfräswerkzeug ein. |
-| **`S8000 M03`** | **Spindelstart *(Spindle On Clockwise)*** | Drehzahl $8.000\,\text{U/min}$ im Uhrzeigersinn. |
-| **`G43 H01`** | **Längenkorrektur *(Length Offset 1)*** | Verrechnet die Werkzeuglänge aus Speicher 1. |
-| **`M08`** | **Kühlmittel EIN *(Coolant On)*** | Spült Späne weg und kühlt beim Planfräsen. |
-| **`G01 Z0.0`** | **Arbeitsvorschub auf Fertigmaß *(Linear Feed to Z0)*** | Fräst den $3\,\text{mm}$ dicken Spannrand exakt auf Endmaß $12{,}0\,\text{mm}$ ab. |
+| Kennzeichen     | Fachbegriff & Erklärung                                    | Bedeutung & Funktion in dieser Übung                                                          |
+| --------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| **`G54`**       | **1. Werkstück-Nullpunkt *(Work Coordinate System OP10)*** | Nullpunkt für die erste Seite *(Oberseite, Kontur, Bohrungen)*.                               |
+| **`G55`**       | **2. Werkstück-Nullpunkt *(Work Coordinate System OP20)*** | Zweiter Nullpunkt für die Rückseite nach dem Umspannen *(im zweiten Schraubstock)*.           |
+| **`M00`**       | **Programmstopp Zwingend *(Mandatory Program Stop)***      | Hält die CNC-Maschine an, Spindel stoppt, wartet auf Bediener-Quittierung *(Bauteil wenden)*. |
+| **`T01 M06`**   | **Werkzeugwechsel *(Tool Change)***                        | Wechselt das Planfräswerkzeug ein.                                                            |
+| **`S8000 M03`** | **Spindelstart *(Spindle On Clockwise)***                  | Drehzahl $8.000\,\text{U/min}$ im Uhrzeigersinn.                                              |
+| **`G43 H01`**   | **Längenkorrektur *(Length Offset 1)***                    | Verrechnet die Werkzeuglänge aus Speicher 1.                                                  |
+| **`M08`**       | **Kühlmittel EIN *(Coolant On)***                          | Spült Späne weg und kühlt beim Planfräsen.                                                    |
+| **`G01 Z0.0`**  | **Arbeitsvorschub auf Fertigmaß *(Linear Feed to Z0)***    | Fräst den $3\,\text{mm}$ dicken Spannrand exakt auf Endmaß $12{,}0\,\text{mm}$ ab.            |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
 In **Übung 4** haben wir unsere Flanschplatte (`12 mm` dick) aus einem `15 mm` dicken Aluminium-Rohblock gefräst.
 Warum mussten wir einen `15 mm` dicken Block nehmen, wenn das fertige Teil nur `12 mm` hoch ist?
+
 * Weil der **Maschinenschraubstock *(Spannmittel)*** das Bauteil ganz unten an den letzten **`3 Millimetern` (`Spannrand`)** festhalten muss! Würde der Fräser in der ersten Aufspannung (**`OP10`**) bis ganz nach unten fräsen, würde er in die Stahlbacken des Schraubstocks fräsen.
 * Deshalb läuft fast jedes CNC-Bauteil in der Industrie in **2 Aufspannungen**:
   1. **1. Aufspannung (`OP10` mit Nullpunkt `G54`):** Oberseite planfräsen, Außenkontur bis `12,5 mm` Tiefe umfräsen, Taschen und Löcher fertigen. Unten bleibt ein `3 mm` dicker „Hutrand“ stehen.
@@ -4447,6 +4721,7 @@ Hier siehst du den Ablauf des zweistufigen Fertigungsprozesses mit allen deutsch
 ![1. und 2. Aufspannung OP10 und OP20 mit G54 und G55](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_op10_op20_setup.jpg)
 
 #### Zweisprachige Begriffserklärung zum Bild *(Bilingual Terminology)*:
+
 * **Links – 1. Aufspannung / Setup 1 (`OP10` mit `G54`):**
   * `Werkstücknullpunkt G54 / Work Coordinate System G54 (WCS 1)`: Bezugspunkt auf der Bauteil-Oberkante vorne links *(direkt an der dem Bediener zugewandten Kante)*.
   * `Rohteil-Spannrand / Raw Stock Clamping Margin (3 mm)`: Der untere Bereich des Aluminiumblocks, der fest im Maschinenschraubstock *(Machine Vise)* eingespannt ist.
@@ -4461,6 +4736,7 @@ Hier siehst du den Ablauf des zweistufigen Fertigungsprozesses mit allen deutsch
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
+
 1. **Als eigene, kompakte Übungs-Datei:**  
    [`uebungen/uebung_10_zweite_aufspannung_g55.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_10_zweite_aufspannung_g55.cps) – Erzeugt den automatischen Programmstopp `M00` und schaltet auf `G55` um.
 2. **Im Haupt-Postprozessor:**  
@@ -4469,22 +4745,27 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 ### 🖥️ Schritt-für-Schritt: So öffnen, bearbeiten, starten und simulieren Sie Übung 10 in Visual Studio Code (VSC)
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie `Strg + P` in VS Code.
 2. Tippen Sie ein: `uebung_10_zweite_aufspannung_g55.cps` und drücken Sie `Enter`.
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal mit ``Strg + ` ``.
 2. Führen Sie aus:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_10_zweite_aufspannung_g55.cps
    ```
 3. Der Simulator gibt die 1. Aufspannung (`G54`), den Stopp `M00` und die 2. Aufspannung (`G55`) aus.
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 * Öffnen Sie [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/uebungen/uebung_04_3d_modell_cam.nc).
 * Suchen Sie nach dem Befehl `M00` und dem nachfolgenden Aufruf `G55`.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
+
 * Kopieren Sie den Code in [https://ncviewer.com](https://ncviewer.com) und beobachten Sie die Fräsbahn der Planbearbeitung.
 
 ---
@@ -4532,15 +4813,16 @@ N570 G01 X90.000 F1200 (G01 PLANFRAESEN UEBER DAS BAUTEIL BIS X90 MIT VORSCHUB 1
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 10 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Programmstopp M00** | Vor Beginn der Operation `OP20` steht `M00`, damit die Maschine beim Umspannen sicher stoppt. | [ ] |
-| **2. Nullpunkt G55 aktiviert** | Vor der ersten Verfahrbewegung der Rückseite wird `G55` im Maschinencode aufgerufen. | [ ] |
-| **3. Sichere Freifahrhöhe** | Vor und nach `M00` befindet sich das Werkzeug auf sicherer Höhe `Z15.000` oder `G53 Z0.`. | [ ] |
-| **4. Planfräsen auf Z0** | Die Fräsbahn schneidet auf Höhe `Z0.000` den $3\,\text{mm}$ Restspannrand sauber ab. | [ ] |
+| Prüfpunkt                      | Was muss im Code / Simulator zu sehen sein?                                                   | Bestanden? |
+|:------------------------------ |:--------------------------------------------------------------------------------------------- |:----------:|
+| **1. Programmstopp M00**       | Vor Beginn der Operation `OP20` steht `M00`, damit die Maschine beim Umspannen sicher stoppt. | [ ]        |
+| **2. Nullpunkt G55 aktiviert** | Vor der ersten Verfahrbewegung der Rückseite wird `G55` im Maschinencode aufgerufen.          | [ ]        |
+| **3. Sichere Freifahrhöhe**    | Vor und nach `M00` befindet sich das Werkzeug auf sicherer Höhe `Z15.000` oder `G53 Z0.`.     | [ ]        |
+| **4. Planfräsen auf Z0**       | Die Fräsbahn schneidet auf Höhe `Z0.000` den $3\,\text{mm}$ Restspannrand sauber ab.          | [ ]        |
 
 ---
 
+<a id="uebung-11"></a>
 # Übung 11: Gewindebohren (`G84` Rigid Tapping) – `M6`- und `M8`-Schraubengewinde ohne Werkzeugbruch programmieren (`F = S × Steigung`)
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -4558,33 +4840,32 @@ In dieser Übung meistern Sie eine der anspruchsvollsten Operationen im Maschine
 
 ---
 
-
-
 ## 📩 Der reale Kundenauftrag zu Übung 11 (Gewindebohrerbruch bei M8-Serienfertigung)
 
 So sieht eine typische Anfrage aus, wenn in der Fertigung ständig Gewindebohrer abbrechen und die Synchronisation zwischen Spindel und Z-Achse nicht stimmt:
 
 > **Von:** Christian Meyer *(Fertigungsleiter)* `<c.meyer@meyer-hydraulik.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 25. Oktober 2026, 09:10 Uhr  
 > **Betreff:** DRINGEND: Postprozessor-Korrektur G84 Rigid Tapping – Gewindebohrer brechen ab  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
-> 
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
+>
 > wir fertigen in Hannover Hydraulikblöcke mit jeweils 8 M8-Gewindebohrungen. Seit gestern haben wir auf unserer CNC-Fräse bereits vier hochwertige Maschinengewindebohrer zerstört:  
 > Die Werkzeuge brechen unten im Sackloch beim Reversieren *(Umschalten von Rechtslauf auf Linkslauf)* explosionsartig ab und zerstören das teure Bauteil!  
-> 
+>
 > Unser CAM-System gibt fälschlicherweise einen willkürlichen Vorschub `F500` aus, anstatt die Steigung exakt mit der Drehzahl zu koppeln.  
-> 
+>
 > **Aufgabenstellung:**  
 > Passen Sie den Zyklusaufruf im Postprozessor so an, dass:  
+>
 > 1. Starres Gewindebohren *(Rigid Tapping)* mit `M29 S...` aktiviert wird.  
 > 2. Der Vorschub $F$ für jedes Gewinde zwingend nach der Formel $F = S \times \text{Steigung}$ berechnet wird *(bei M8 mit Steigung $P=1{,}25\,\text{mm}$ und $S=600\,\text{U/min}$ muss exakt $F=750\,\text{mm/min}$ ausgegeben werden!)*.  
-> 3. Am Zyklusende mit `G80` sicher entkoppelt wird.  
-> 
+> 3. Am Zyklusende mit `G80` sicher entkoppelt wird.
+>
 > **Vergütung:**  
 > Festpreis **460,00 € netto** gegen Rechnung.  
-> 
+>
 > Mit besten Grüßen  
 > **Christian Meyer** – Meyer Hydraulik KG, Hannover  
 
@@ -4592,15 +4873,15 @@ So sieht eine typische Anfrage aus, wenn in der Fertigung ständig Gewindebohrer
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten Gewindebohr- & Synchron-Kennzeichen in Übung 11
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`M29 S...`** | **Starres Gewindebohren EIN *(Rigid Tapping Mode)*** | Schaltet Fanuc/Haas in den Synchronmodus: Spindel-Drehwinkel und Z-Achsenantrieb werden elektronisch starr gekoppelt. |
-| **`G84`** | **Gewindebohrzyklus *(Right-Hand Tapping Cycle)*** | Fährt mit Rechtslauf bis Endtiefe $Z$, stoppt, schaltet automatisch auf Linkslauf `M04` um und fährt auf Rückzugsebene heraus. |
-| **`G98`** | **Rückzug auf Ausgangsebene *(Return to Initial Level)*** | Zieht nach dem Gewindebohren ganz nach oben auf die sichere Ausgangshöhe *(z. B. `Z15.000`)* zurück. |
-| **`P` / Steigung**| **Gewindesteigung *(Thread Pitch in $\text{mm}$)*** | Steigung des Gewindes *(M6 = $1{,}0\,\text{mm}$, M8 = $1{,}25\,\text{mm}$, M10 = $1{,}5\,\text{mm}$)*. |
-| **`F = S × P`** | **Synchroner Gewindevorschub *(Synchronous Feedrate)*** | Verfahrgeschwindigkeit der Z-Achse in $\text{mm/min}$. Bei $S=600\,\text{U/min}$ und $P=1{,}25\,\text{mm}$ zwingend $F=750\,\text{mm/min}$. |
-| **`R...`** | **Rückzugsebene *(Reference Return Plane)*** | Höhenposition kurz vor dem Bauteil *(z. B. `R2.000`)*, ab der der Arbeitsvorschub synchron einsetzt. |
-| **`G80`** | **Bohrzyklus abwählen *(Cancel Modal Canned Cycle)*** | Beendet den Zyklus `G84` nach dem letzten Gewindeloch sicher. |
+| Kennzeichen        | Fachbegriff & Erklärung                                   | Bedeutung & Funktion in dieser Übung                                                                                                        |
+| ------------------ | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`M29 S...`**     | **Starres Gewindebohren EIN *(Rigid Tapping Mode)***      | Schaltet Fanuc/Haas in den Synchronmodus: Spindel-Drehwinkel und Z-Achsenantrieb werden elektronisch starr gekoppelt.                       |
+| **`G84`**          | **Gewindebohrzyklus *(Right-Hand Tapping Cycle)***        | Fährt mit Rechtslauf bis Endtiefe $Z$, stoppt, schaltet automatisch auf Linkslauf `M04` um und fährt auf Rückzugsebene heraus.              |
+| **`G98`**          | **Rückzug auf Ausgangsebene *(Return to Initial Level)*** | Zieht nach dem Gewindebohren ganz nach oben auf die sichere Ausgangshöhe *(z. B. `Z15.000`)* zurück.                                        |
+| **`P` / Steigung** | **Gewindesteigung *(Thread Pitch in $\text{mm}$)***       | Steigung des Gewindes *(M6 = $1{,}0\,\text{mm}$, M8 = $1{,}25\,\text{mm}$, M10 = $1{,}5\,\text{mm}$)*.                                      |
+| **`F = S × P`**    | **Synchroner Gewindevorschub *(Synchronous Feedrate)***   | Verfahrgeschwindigkeit der Z-Achse in $\text{mm/min}$. Bei $S=600\,\text{U/min}$ und $P=1{,}25\,\text{mm}$ zwingend $F=750\,\text{mm/min}$. |
+| **`R...`**         | **Rückzugsebene *(Reference Return Plane)***              | Höhenposition kurz vor dem Bauteil *(z. B. `R2.000`)*, ab der der Arbeitsvorschub synchron einsetzt.                                        |
+| **`G80`**          | **Bohrzyklus abwählen *(Cancel Modal Canned Cycle)***     | Beendet den Zyklus `G84` nach dem letzten Gewindeloch sicher.                                                                               |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -4616,16 +4897,17 @@ Beim **Gewindebohren (`G84` – Synchron-Gewindebohren / Rigid Tapping)** fährt
 ### 📊 Die wichtigsten Metrischen Regelgewinde (ISO-Standard) zum Nachschlagen:
 
 | Gewinde-Größe | Kernloch-Bohrer $\varnothing$ *(Vorbohr-Durchmesser!)* | Gewindesteigung $P$ [mm] | Beispiel-Drehzahl `S` [U/min] | Zwingend exakter Vorschub `F` ($S \times P$) |
-| :--- | :---: | :---: | :---: | :---: |
-| **`M5`** | $\varnothing\,4{,}2\,\text{mm}$ | $0{,}80\,\text{mm}$ | `S800` | **`F640`** ($800 \times 0{,}8$) |
-| **`M6`** | $\varnothing\,5{,}0\,\text{mm}$ | $1{,}00\,\text{mm}$ | `S800` | **`F800`** ($800 \times 1{,}0$) |
-| **`M8`** | $\varnothing\,6{,}8\,\text{mm}$ | $1{,}25\,\text{mm}$ | `S600` | **`F750`** ($600 \times 1{,}25$) |
-| **`M10`** | $\varnothing\,8{,}5\,\text{mm}$ | $1{,}50\,\text{mm}$ | `S500` | **`F750`** ($500 \times 1{,}5$) |
-| **`M12`** | $\varnothing\,10{,}2\,\text{mm}$ | $1{,}75\,\text{mm}$ | `S400` | **`F700`** ($400 \times 1{,}75$) |
+|:------------- |:------------------------------------------------------:|:------------------------:|:-----------------------------:|:--------------------------------------------:|
+| **`M5`**      | $\varnothing\,4{,}2\,\text{mm}$                        | $0{,}80\,\text{mm}$      | `S800`                        | **`F640`** ($800 \times 0{,}8$)              |
+| **`M6`**      | $\varnothing\,5{,}0\,\text{mm}$                        | $1{,}00\,\text{mm}$      | `S800`                        | **`F800`** ($800 \times 1{,}0$)              |
+| **`M8`**      | $\varnothing\,6{,}8\,\text{mm}$                        | $1{,}25\,\text{mm}$      | `S600`                        | **`F750`** ($600 \times 1{,}25$)             |
+| **`M10`**     | $\varnothing\,8{,}5\,\text{mm}$                        | $1{,}50\,\text{mm}$      | `S500`                        | **`F750`** ($500 \times 1{,}5$)              |
+| **`M12`**     | $\varnothing\,10{,}2\,\text{mm}$                       | $1{,}75\,\text{mm}$      | `S400`                        | **`F700`** ($400 \times 1{,}75$)             |
 
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
+
 1. **Als eigene, kompakte Übungs-Datei:**  
    [`uebungen/uebung_11_gewindebohren_g84.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_11_gewindebohren_g84.cps) – Berechnet den Synchron-Vorschub $F = S \times P$ und erzeugt den Zyklus `G84` mit Spindel-Rückzug `M29`.
 2. **Im Haupt-Postprozessor:**  
@@ -4634,22 +4916,27 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 ### 🖥️ Schritt-für-Schritt: So öffnen, starten und simulieren Sie Übung 11 in Visual Studio Code (VSC)
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie in VS Code `Strg + P`.
 2. Tippen Sie ein: `uebung_11_gewindebohren_g84.cps` und drücken Sie `Enter`.
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal mit ``Strg + ` ``.
 2. Führen Sie aus:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_11_gewindebohren_g84.cps
    ```
 3. Der Simulator berechnet exakt den Vorschub für Gewinde.
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 * Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
 * Kontrollieren Sie den Gewindebohrzyklus `G84` und den Vorschub `F`.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
+
 * Kopieren Sie den G-Code in [https://ncviewer.com](https://ncviewer.com).
 
 ---
@@ -4698,15 +4985,16 @@ N340 G00 Z15.000 M09 (G00 EILGANG AUF SICHERHEITSHOEHE | M09 KUEHLMITTEL AUS)
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 11 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Synchronformel F = S × P** | Der Vorschub `F` entspricht exakt $\text{Drehzahl } S \times \text{Steigung } P$ *(z. B. $600 \times 1{,}25 = 750$)*. | [ ] |
-| **2. Rigid Tapping M29 aktiv** | Vor dem Zyklus `G84` wird `M29 S...` ausgegeben, damit die Steuerung Z-Achse und Spindel elektronisch koppelt. | [ ] |
-| **3. Rückzugsebene R** | `R2.000` liegt mindestens $2\,\text{mm}$ über dem Bauteil in der Luft vor Beginn des Gewindeschnitts. | [ ] |
-| **4. Zyklus-Abwahl G80** | Nach dem letzten Gewindeloch wird der Zyklus mit `G80` sicher deaktiviert, bevor freigefahren wird. | [ ] |
+| Prüfpunkt                       | Was muss im Code / Simulator zu sehen sein?                                                                           | Bestanden? |
+|:------------------------------- |:--------------------------------------------------------------------------------------------------------------------- |:----------:|
+| **1. Synchronformel F = S × P** | Der Vorschub `F` entspricht exakt $\text{Drehzahl } S \times \text{Steigung } P$ *(z. B. $600 \times 1{,}25 = 750$)*. | [ ]        |
+| **2. Rigid Tapping M29 aktiv**  | Vor dem Zyklus `G84` wird `M29 S...` ausgegeben, damit die Steuerung Z-Achse und Spindel elektronisch koppelt.        | [ ]        |
+| **3. Rückzugsebene R**          | `R2.000` liegt mindestens $2\,\text{mm}$ über dem Bauteil in der Luft vor Beginn des Gewindeschnitts.                 | [ ]        |
+| **4. Zyklus-Abwahl G80**        | Nach dem letzten Gewindeloch wird der Zyklus mit `G80` sicher deaktiviert, bevor freigefahren wird.                   | [ ]        |
 
 ---
 
+<a id="uebung-12"></a>
 # Übung 12: Werkzeugradiuskorrektur (`G41` / `G42` / `G40`) – Wie der Kunde an der Maschine `0,01 mm` Genauigkeit für Passungen einstellt
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -4724,34 +5012,33 @@ In dieser Übung ermöglichen Sie dem Kunden Toleranzen im Hundertstel-Millimete
 
 ---
 
-
-
 ## 📩 Der reale Kundenauftrag zu Übung 12 (H7-Passungstoleranz über Steuerungskorrektur)
 
 So sieht eine typische Anfrage aus, wenn ein Kunde Passungen fertigen muss und Maßkorrekturen direkt am Steuerungsdisplay vornehmen will:
 
 > **Von:** Alexander Wagner *(Werkstattleiter)* `<a.wagner@wagner-getriebe.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 26. Oktober 2026, 14:15 Uhr  
 > **Betreff:** Postprozessor-Anforderung: G41 Radiuskorrektur für Kugellager-Passung Ø 30 H7  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
-> 
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
+>
 > wir fertigen Getriebegehäuse mit einer Kugellagersitz-Passung $\varnothing 30\,\text{H7}$ *(Toleranz: $+0{,}021 / 0\,\text{mm}$)*.  
-> 
+>
 > Aktuell gibt unser Postprozessor nur fest berechnete Fräsermittelpunktsbahnen ohne Radiuskorrektur aus (`G40`). Wenn unsere Schaftfräser nach 30 Teilen um nur $0{,}015\,\text{mm}$ verschleißen, wird die Bohrung sofort zu klein und das Gehäuse ist unbrauchbarer Ausschuss!  
-> 
+>
 > Unsere Bediener müssen in der Lage sein, den Verschleiß am Bedienpult im Werkzeugkorrekturspeicher *(Register `D01`)* um z. B. `-0.01 mm` nachzustellen, ohne dass wir jedes Mal das CAM-Modell neu berechnen müssen!  
-> 
+>
 > **Aufgabenstellung:**  
 > Passen Sie den Postprozessor für Schlichtkonturen an:  
+>
 > 1. Saubere Ausgabe von `G41 D..` *(Gleichlaufkorrektur links der Kontur)* mit linearem Anfahrweg.  
 > 2. Fräsen des Vollkreises mit `G03`.  
-> 3. Sicheres Aufheben der Korrektur mit `G40` bei der linearen Abfahrbewegung.  
-> 
+> 3. Sicheres Aufheben der Korrektur mit `G40` bei der linearen Abfahrbewegung.
+>
 > **Honorar:**  
 > Festpreis **580,00 € netto** gegen Rechnung.  
-> 
+>
 > Mit freundlichen Grüßen  
 > **Alexander Wagner** – Präzisions-Getriebebau Wagner GmbH, Schweinfurt  
 
@@ -4759,14 +5046,14 @@ So sieht eine typische Anfrage aus, wenn ein Kunde Passungen fertigen muss und M
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten Radiuskorrektur-Kennzeichen in Übung 12
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`G41`** | **Fräserradiuskorrektur LINKS *(Cutter Compensation Left)*** | Verschiebt die Fräsermitte um den Werkzeugradius nach links von der programmierten Kontur *(Gleichlauffräsen)*. |
-| **`G42`** | **Fräserradiuskorrektur RECHTS *(Cutter Compensation Right)*** | Verschiebt die Fräsermitte nach rechts von der Kontur *(Gegenlauffräsen)*. |
-| **`G40`** | **Radiuskorrektur ABWÄHLEN *(Cancel Cutter Compensation)*** | Schaltet jede aktive Bahnkorrektur sicher aus *(muss bei linearer Abfahrbewegung erfolgen!)*. |
-| **`D...` / `D01`**| **Korrekturspeicher-Register *(Diameter Compensation Offset)*** | Gibt an, aus welchem Speicher an der Steuerung das Verschleißmaß gelesen wird *(z. B. `D01` zu `T01`)*. |
-| **`G03`** | **Kreisinterpolation *(Circular Move CCW)*** | Fräst die Passungs-Kreistasche $\varnothing 30\,\text{H7}$ gegen den Uhrzeigersinn. |
-| **`I-15.000`** | **Kreismittelpunkts-Vektor in X *(Incremental Arc Center X)*** | Relativer Abstand vom Startpunkt zum Kreismittelpunkt $(15\,\text{mm}$ nach links in der X-Achse$)$. |
+| Kennzeichen        | Fachbegriff & Erklärung                                         | Bedeutung & Funktion in dieser Übung                                                                            |
+| ------------------ | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **`G41`**          | **Fräserradiuskorrektur LINKS *(Cutter Compensation Left)***    | Verschiebt die Fräsermitte um den Werkzeugradius nach links von der programmierten Kontur *(Gleichlauffräsen)*. |
+| **`G42`**          | **Fräserradiuskorrektur RECHTS *(Cutter Compensation Right)***  | Verschiebt die Fräsermitte nach rechts von der Kontur *(Gegenlauffräsen)*.                                      |
+| **`G40`**          | **Radiuskorrektur ABWÄHLEN *(Cancel Cutter Compensation)***     | Schaltet jede aktive Bahnkorrektur sicher aus *(muss bei linearer Abfahrbewegung erfolgen!)*.                   |
+| **`D...` / `D01`** | **Korrekturspeicher-Register *(Diameter Compensation Offset)*** | Gibt an, aus welchem Speicher an der Steuerung das Verschleißmaß gelesen wird *(z. B. `D01` zu `T01`)*.         |
+| **`G03`**          | **Kreisinterpolation *(Circular Move CCW)***                    | Fräst die Passungs-Kreistasche $\varnothing 30\,\text{H7}$ gegen den Uhrzeigersinn.                             |
+| **`I-15.000`**     | **Kreismittelpunkts-Vektor in X *(Incremental Arc Center X)***  | Relativer Abstand vom Startpunkt zum Kreismittelpunkt $(15\,\text{mm}$ nach links in der X-Achse$)$.            |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -4774,6 +5061,7 @@ Ein neuer $\varnothing\,10{,}00\,\text{mm}$ Fräser nutzt sich beim Fräsen von 
 Wenn der Kunde auf der Zeichnung eine hochpräzise **Passung *(z. B. $\varnothing\,30\,\text{H7}$, die auf $0{,}02\,\text{mm}$ genau sein muss)*** hat, will er nicht wegen $0{,}04\,\text{mm}$ Verschleiß bei dir anrufen, damit du ein neues CAM-Programm schickst!
 
 **Die Lösung heißt Werkzeugradiuskorrektur (`G41` / `G42` bei Fanuc/Siemens bzw. `RL` / `RR` bei Heidenhain):**
+
 * **`G41` *(Cutter Compensation Left)***: Schaltet die Korrektur **links** von der Fahrtrichtung ein (Standard beim **Gleichlauffräsen *(Climb Milling)***).
 * **`G42` *(Cutter Compensation Right)***: Schaltet die Korrektur **rechts** von der Fahrtrichtung ein.
 * **`G40` *(Cancel Cutter Compensation)***: Schaltet die Korrektur nach dem Schlichtschnitt wieder **aus**.
@@ -4787,6 +5075,7 @@ Hier siehst du, wie die Werkzeugradiuskorrektur zwischen programmierter Fertigte
 ![Werkzeugradiuskorrektur G41 G42 und G40](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_cutter_radius_compensation_g41_g42.jpg)
 
 #### Zweisprachige Begriffserklärung zum Bild *(Bilingual Terminology)*:
+
 * `Fertigteil-Kontur / Finished Part Contour (Sollmaß)`: Die im G-Code programmierte Soll-Geometrie des Werkstücks (entspricht exakt der bemaßten Konstruktionszeichnung).
 * `Werkzeugmittelpunktsbahn / Tool Centerline Path (G40)`: Der Verfahrweg der Spindelmitte, der um den Radius $R$ parallel versetzt verläuft.
 * `Werkzeugradius R / Tool Radius R`: Der reale Fräserradius (z. B. $5{,}00\,\text{mm}$ bei einem $\varnothing\,10\,\text{mm}$ Schaftfräser).
@@ -4800,6 +5089,7 @@ Hier siehst du, wie die Werkzeugradiuskorrektur zwischen programmierter Fertigte
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
+
 1. **Als eigene, kompakte Übungs-Datei:**  
    [`uebungen/uebung_12_radiuskorrektur_g41.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_12_radiuskorrektur_g41.cps) – Enthält die korrekte An- und Abfahrlogik für `G41` und `G40`.
 2. **Im Haupt-Postprozessor:**  
@@ -4808,22 +5098,27 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 ### 🖥️ Schritt-für-Schritt: So öffnen, bearbeiten, starten und simulieren Sie Übung 12 in Visual Studio Code (VSC)
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie in VS Code `Strg + P`.
 2. Tippen Sie ein: `uebung_12_radiuskorrektur_g41.cps` und drücken Sie `Enter`.
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal mit ``Strg + ` ``.
 2. Führen Sie aus:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_12_radiuskorrektur_g41.cps
    ```
 3. Der Simulator erzeugt die Schlichtkontur mit Radiuskorrektur.
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 * Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
 * Achten Sie auf `G41 D...` bei der Anfahrbewegung und `G40` beim Verlassen des Bauteils.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
+
 * Kopieren Sie den G-Code in [https://ncviewer.com](https://ncviewer.com) und prüfen Sie die Kreisbahnen.
 
 ---
@@ -4869,15 +5164,16 @@ Jetzt kann der Maschinenbediener direkt an seinem Bildschirm in der Werkzeughalt
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 12 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Anfahrbewegung mit G41** | `G41 D01` wird auf einer linearen Anfahrbewegung vor Konturkontakt aktiviert. | [ ] |
-| **2. Korrekturspeicher D** | Das Register `D01` stimmt mit der aktuellen Werkzeugnummer `T01` überein. | [ ] |
-| **3. Vollkreisbahn G03** | Die Passung $\varnothing 30\,\text{mm}$ wird kreisförmig mit Mittelpunkts-Vektor `I-15.000` abgefahren. | [ ] |
-| **4. Sichere Abwahl G40** | Beim Verlassen der Wandung wird die Korrektur mit `G40` auf linearer Bahn wieder ausgeschaltet. | [ ] |
+| Prüfpunkt                     | Was muss im Code / Simulator zu sehen sein?                                                             | Bestanden? |
+|:----------------------------- |:------------------------------------------------------------------------------------------------------- |:----------:|
+| **1. Anfahrbewegung mit G41** | `G41 D01` wird auf einer linearen Anfahrbewegung vor Konturkontakt aktiviert.                           | [ ]        |
+| **2. Korrekturspeicher D**    | Das Register `D01` stimmt mit der aktuellen Werkzeugnummer `T01` überein.                               | [ ]        |
+| **3. Vollkreisbahn G03**      | Die Passung $\varnothing 30\,\text{mm}$ wird kreisförmig mit Mittelpunkts-Vektor `I-15.000` abgefahren. | [ ]        |
+| **4. Sichere Abwahl G40**     | Beim Verlassen der Wandung wird die Korrektur mit `G40` auf linearer Bahn wieder ausgeschaltet.         | [ ]        |
 
 ---
 
+<a id="uebung-13"></a>
 # Übung 13: Echte 3D-Freiformflächen – `3D Adaptive Clearing` (Wirbelfräsen) & `3D-Schlichten` mit Kugelfräser (`Ball End Mill`)
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -4895,31 +5191,30 @@ In dieser Übung steigen Sie in die Königsklasse der 3D-Zerspanung ein:
 
 ---
 
-
-
 ## 📩 Der reale Kundenauftrag zu Übung 13 (3D-Freiformflächen & Kugelfräser-Schlichten)
 
 So sieht eine typische hochdotierte Anfrage aus, wenn ein Formen- oder Prototypenbauer komplexe 3D-Geometrien ohne sichtbare Facetten fräsen muss:
 
 > **Von:** Dr. Elena Rost *(Leiterin Prototypenbau)* `<e.rost@aerotech-bremen.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 27. Oktober 2026, 11:30 Uhr  
 > **Betreff:** Postprozessor-Optimierung für 3D-Freiformflächen & Hochgeschwindigkeits-Schlichten  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
-> 
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
+>
 > wir fertigen in Bremen aerodynamische Strömungskanäle und Windkanalmodelle aus hochfestem Aluminium.  
-> 
+>
 > Bisherige NC-Programme, die unser Postprozessor erzeugt, ruckeln auf der Maschine bei Freiformflächen extrem: Die Steuerung bremst an jeder Zwischenkoordinate ab *(stotternde Fräsbewegung)*, und auf den geschwungenen Oberflächen entstehen hässliche Rattermarken und sichtbare Facetten.  
-> 
+>
 > **Aufgabenstellung:**  
+>
 > 1. Optimieren Sie den Postprozessor für High-Speed-Machining (HSM) von 3D-Freiformflächen: Unterstützung von feinsten Sehnen-Toleranzen ($0{,}005\,\text{mm}$) mit simultanen $X/Y/Z$-Bahnen.  
 > 2. Korrekte Werkzeugidentifikation für Kugelfräser *(Ball End Mill `TOOL_MILLING_END_BALL`)* mit Halbkugel-Mittelpunktsausgabe im Header.  
-> 3. Aktivierung der Glättungsfunktion *(Look-Ahead)* der Maschinensteuerung.  
-> 
+> 3. Aktivierung der Glättungsfunktion *(Look-Ahead)* der Maschinensteuerung.
+>
 > **Honorar:**  
 > Festpreis **750,00 € netto** gegen Rechnung.  
-> 
+>
 > Mit besten Grüßen  
 > **Dr. Elena Rost** – AeroTech Turbinen- & Modellbau GmbH, Bremen  
 
@@ -4927,13 +5222,13 @@ So sieht eine typische hochdotierte Anfrage aus, wenn ein Formen- oder Prototype
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten 3D-Freiform- & Kugelfräser-Kennzeichen in Übung 13
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`TOOL_MILLING_END_BALL`**| **Werkzeugtyp Kugelfräser *(Ball End Mill)*** | Vollradiusfräser mit halbkugelförmiger Spitze $(R = D/2)$, verhindert Treppenstufen auf Freiformflächen. |
-| **`G01 X... Y... Z...`** | **Simultane 3-Achs-Linearbewegung *(3D Linear Move)*** | Alle 3 Raumachsen verfahren gleichzeitig mit Vorschub $F$, um gekrümmte Hügel und Mulden abzufahren. |
-| **`3D Adaptive Clearing`** | **Trochoidales Schruppen *(High Speed Roughing)*** | Räumt das Rohteil volumenoptimiert mit konstanter Werkzeugumschlingung aus. |
-| **`Scallop / Parallel`** | **3D-Zeilenschlichten *(3D Finishing Strategy)*** | Fährt feine Zeilen *(z. B. $0{,}15\,\text{mm}$ Abstand)* mit Kugelfräser für spiegelglatte Oberflächen ab. |
-| **`Toleranz (0.005 mm)`** | **Sehnen-Toleranz *(Chordal Tolerance / Chord Error)*** | Maximale Abweichung der G-Code-Geraden von der perfekten CAD-Freiformkurve. |
+| Kennzeichen                 | Fachbegriff & Erklärung                                 | Bedeutung & Funktion in dieser Übung                                                                       |
+| --------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **`TOOL_MILLING_END_BALL`** | **Werkzeugtyp Kugelfräser *(Ball End Mill)***           | Vollradiusfräser mit halbkugelförmiger Spitze $(R = D/2)$, verhindert Treppenstufen auf Freiformflächen.   |
+| **`G01 X... Y... Z...`**    | **Simultane 3-Achs-Linearbewegung *(3D Linear Move)***  | Alle 3 Raumachsen verfahren gleichzeitig mit Vorschub $F$, um gekrümmte Hügel und Mulden abzufahren.       |
+| **`3D Adaptive Clearing`**  | **Trochoidales Schruppen *(High Speed Roughing)***      | Räumt das Rohteil volumenoptimiert mit konstanter Werkzeugumschlingung aus.                                |
+| **`Scallop / Parallel`**    | **3D-Zeilenschlichten *(3D Finishing Strategy)***       | Fährt feine Zeilen *(z. B. $0{,}15\,\text{mm}$ Abstand)* mit Kugelfräser für spiegelglatte Oberflächen ab. |
+| **`Toleranz (0.005 mm)`**   | **Sehnen-Toleranz *(Chordal Tolerance / Chord Error)*** | Maximale Abweichung der G-Code-Geraden von der perfekten CAD-Freiformkurve.                                |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -4951,6 +5246,7 @@ Das erledigst du im CAM-System immer in **2 Schritten**:
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
+
 1. **Als eigene, kompakte Übungs-Datei:**  
    [`uebungen/uebung_13_3d_freiformflaechen.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_13_3d_freiformflaechen.cps) – Unterstützt hochauflösende 3D-Linearbewegungen und erkennt Kugelfräser.
 2. **Im Haupt-Postprozessor:**  
@@ -4959,22 +5255,27 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 ### 🖥️ Schritt-für-Schritt: So öffnen, starten und simulieren Sie Übung 13 in Visual Studio Code (VSC)
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie in VS Code `Strg + P`.
 2. Tippen Sie ein: `uebung_13_3d_freiformflaechen.cps` und drücken Sie `Enter`.
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal mit ``Strg + ` ``.
 2. Führen Sie aus:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_13_3d_freiformflaechen.cps
    ```
 3. Der Simulator erzeugt 3D-Schlichtbahnen mit Kugelfräser.
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 * Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
 * Beobachten Sie die simultanen 3-Achs-Verfahrbefehle `X... Y... Z...`.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
+
 * Kopieren Sie den G-Code in [https://ncviewer.com](https://ncviewer.com).
 
 ---
@@ -5013,15 +5314,16 @@ N310 G00 Z15.000 M09 (G00 EILGANG FREIFAHREN AUF SICHERHEITSHOEHE | M09 KUEHLUNG
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 13 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Kugelfräser-Erkennung** | Der Postprozessor identifiziert `TOOL_MILLING_END_BALL` und weist Radius $R = D/2$ aus. | [ ] |
-| **2. Simultaner 3D-Satz** | In den Sätzen `N280` bis `N300` verfahren $X$, $Y$ und $Z$ gleichzeitig in einem einzigen `G01`-Satz. | [ ] |
-| **3. Vorschub & Drehzahl** | Ausreichend hohe Drehzahl `S10000`, da die Umfangsgeschwindigkeit der Kugelspitze bei $Z$-Mitte gegen Null geht. | [ ] |
-| **4. Kollisionsfreier Rückzug** | Nach dem Schlichten hebt die $Z$-Achse mit `G00 Z15.000` kollisionsfrei von der gewölbten Freiformfläche ab. | [ ] |
+| Prüfpunkt                       | Was muss im Code / Simulator zu sehen sein?                                                                      | Bestanden? |
+|:------------------------------- |:---------------------------------------------------------------------------------------------------------------- |:----------:|
+| **1. Kugelfräser-Erkennung**    | Der Postprozessor identifiziert `TOOL_MILLING_END_BALL` und weist Radius $R = D/2$ aus.                          | [ ]        |
+| **2. Simultaner 3D-Satz**       | In den Sätzen `N280` bis `N300` verfahren $X$, $Y$ und $Z$ gleichzeitig in einem einzigen `G01`-Satz.            | [ ]        |
+| **3. Vorschub & Drehzahl**      | Ausreichend hohe Drehzahl `S10000`, da die Umfangsgeschwindigkeit der Kugelspitze bei $Z$-Mitte gegen Null geht. | [ ]        |
+| **4. Kollisionsfreier Rückzug** | Nach dem Schlichten hebt die $Z$-Achse mit `G00 Z15.000` kollisionsfrei von der gewölbten Freiformfläche ab.     | [ ]        |
 
 ---
 
+<a id="uebung-14"></a>
 # Übung 14: Heidenhain Klartext-Steuerung (`TOOL CALL`, `L ... FMAX`) & 4. Drehachse (`A-Achse`) für Aufträge im deutschsprachigen Raum
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -5039,34 +5341,33 @@ In dieser Übung erschließen Sie High-End-Maschinen mit Heidenhain-Steuerung un
 
 ---
 
-
-
 ## 📩 Der reale Kundenauftrag zu Übung 14 (Heidenhain TNC 640 & 4-Achs-Teilapparat)
 
 So sieht der lukrativste Auftragstyp aus der Schweiz oder Süddeutschland aus, wo Werkstätten strikt Heidenhain Klartext verlangen:
 
 > **Von:** Urs Hodel *(Produktionsleiter)* `<u.hodel@alps-precision.ch>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 28. Oktober 2026, 09:20 Uhr  
 > **Betreff:** Postprozessor-Entwicklung: Nativer Heidenhain Klartext mit A-Achsen-Teilapparat  
 >
-> Sehr geehrter Herr Kollege Buenotte,  
-> 
+> Sehr geehrter Herr Kollege Bujanovski,  
+>
 > wir betreiben in St. Gallen (Schweiz) drei Hermle C400 Bearbeitungszentren mit Heidenhain TNC 640 Steuerung. Zusätzlich haben wir einen CNC-Teilapparat (4. Drehachse / A-Achse) montiert, um Bauteile von vier Seiten in einer einzigen Aufspannung zu bearbeiten.  
-> 
+>
 > Unsere Schweizer Zerspaner lehnen ISO-G-Code (`G01`, `G00`, `M06`) kategorisch ab – wir programmieren und optimieren ausschließlich in gewohntem **Heidenhain Klartext (`.H`-Dateien)**!  
-> 
+>
 > **Aufgabenstellung:**  
 > Entwickeln Sie für uns einen maßgeschneiderten Fusion 360 Postprozessor für Heidenhain Klartext:  
+>
 > 1. Korrekter Header mit `BEGIN PGM ... MM` und `BLK FORM 0.1 / 0.2` Rohteilgitter.  
 > 2. Nativer Werkzeugaufruf: `TOOL CALL <T> Z S...` *(ohne separates M06!)*.  
 > 3. Fahrbefehle im Klartext: `L X.. Y.. Z.. R0 F...` und Eilgang mit `FMAX`.  
 > 4. Ansteuerung der 4. Achse: Automatisches Lösen der Klemmung mit `M11`, Schwenken auf `L A+90.000 FMAX`, erneutes Klemmen mit `M10` vor dem Schnitt.  
-> 5. Sicherer Z-Rückzug am Programmende mit `M91` (`L Z+250 R0 FMAX M91`).  
-> 
+> 5. Sicherer Z-Rückzug am Programmende mit `M91` (`L Z+250 R0 FMAX M91`).
+>
 > **Vergütung:**  
 > Festpreis **850,00 € netto** *(entspricht ca. 820 CHF)* gegen offizielle Rechnung.  
-> 
+>
 > Mit freundlichen Grüßen aus der Schweiz  
 > **Urs Hodel** – Alps Precision CNC AG, St. Gallen  
 
@@ -5074,17 +5375,17 @@ So sieht der lukrativste Auftragstyp aus der Schweiz oder Süddeutschland aus, w
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten Heidenhain-Klartext- & Achsen-Kennzeichen in Übung 14
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`BEGIN PGM ... MM`** | **Programmanfang *(Program Header)*** | Startet das Klartext-Programm mit Programmnummer/-name in metrischer Maßeinheit *(Millimeter)*. |
-| **`BLK FORM 0.1 / 0.2`** | **Rohteil-Definition *(Blank Form Min/Max)*** | Definiert die Minimal- und Maximalkoordinaten des unzerspanten Rohteilblocks für die Maschinen-Grafik. |
-| **`TOOL CALL <T> Z S...`**| **Werkzeugaufruf *(Tool Call)*** | Wechselt Werkzeug $T$ ein, definiert Spindelachse $Z$ und startet Spindeldrehzahl $S$ *(ohne `M06`!)*. |
-| **`L ... R0 FMAX`** | **Linearer Eilgangsatz *(Linear Rapid)*** | Verfahrbewegung mit Maximalgeschwindigkeit `FMAX` ohne Fräserradiuskorrektur `R0`. |
-| **`L ... R0 F...`** | **Linearer Arbeitsvorschubsatz *(Linear Feed)*** | Geradliniger Schnitt im Material mit Vorschub $F$ in $\text{mm/min}$. |
-| **`M11 / M10`** | **Klemmung der 4. Drehachse *(Rotary Axis Unclamp / Clamp)*** | `M11` löst die hydraulische Klemmung vor dem Drehen, `M10` klemmt die Achse für steifes Fräsen wieder fest. |
-| **`L A+90.000`** | **4. Drehachse drehen *(4th Axis Rotary Move)*** | Dreht den Teilapparat oder Rundtisch um $90^\circ$ für mehrseitige Bearbeitung. |
-| **`M91`** | **Maschinen-Nullpunkt-Bezug *(Machine Datum System)*** | Entspricht ISO `G53`: Verfährt bezogen auf den festen Maschinen-Nullpunkt *(z. B. `L Z+250 R0 FMAX M91`)*. |
-| **`END PGM ... MM`** | **Programmende *(Program End)*** | Schließt das Heidenhain-Programm ab. |
+| Kennzeichen                | Fachbegriff & Erklärung                                       | Bedeutung & Funktion in dieser Übung                                                                        |
+| -------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **`BEGIN PGM ... MM`**     | **Programmanfang *(Program Header)***                         | Startet das Klartext-Programm mit Programmnummer/-name in metrischer Maßeinheit *(Millimeter)*.             |
+| **`BLK FORM 0.1 / 0.2`**   | **Rohteil-Definition *(Blank Form Min/Max)***                 | Definiert die Minimal- und Maximalkoordinaten des unzerspanten Rohteilblocks für die Maschinen-Grafik.      |
+| **`TOOL CALL <T> Z S...`** | **Werkzeugaufruf *(Tool Call)***                              | Wechselt Werkzeug $T$ ein, definiert Spindelachse $Z$ und startet Spindeldrehzahl $S$ *(ohne `M06`!)*.      |
+| **`L ... R0 FMAX`**        | **Linearer Eilgangsatz *(Linear Rapid)***                     | Verfahrbewegung mit Maximalgeschwindigkeit `FMAX` ohne Fräserradiuskorrektur `R0`.                          |
+| **`L ... R0 F...`**        | **Linearer Arbeitsvorschubsatz *(Linear Feed)***              | Geradliniger Schnitt im Material mit Vorschub $F$ in $\text{mm/min}$.                                       |
+| **`M11 / M10`**            | **Klemmung der 4. Drehachse *(Rotary Axis Unclamp / Clamp)*** | `M11` löst die hydraulische Klemmung vor dem Drehen, `M10` klemmt die Achse für steifes Fräsen wieder fest. |
+| **`L A+90.000`**           | **4. Drehachse drehen *(4th Axis Rotary Move)***              | Dreht den Teilapparat oder Rundtisch um $90^\circ$ für mehrseitige Bearbeitung.                             |
+| **`M91`**                  | **Maschinen-Nullpunkt-Bezug *(Machine Datum System)***        | Entspricht ISO `G53`: Verfährt bezogen auf den festen Maschinen-Nullpunkt *(z. B. `L Z+250 R0 FMAX M91`)*.  |
+| **`END PGM ... MM`**       | **Programmende *(Program End)***                              | Schließt das Heidenhain-Programm ab.                                                                        |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -5095,6 +5396,7 @@ Heidenhain nutzt keine `G00`/`G01`-Nummern, sondern lesbare Klartext-Wörter:
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
+
 1. **Als eigene, kompakte Übungs-Datei:**  
    [`uebungen/uebung_14_heidenhain_klartext_4achse.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_14_heidenhain_klartext_4achse.cps) – Schreibt Heidenhain-Klartextsätze (`TOOL CALL`, `L X... Y... FMAX`, `L A...`).
 2. **Im Haupt-Postprozessor:**  
@@ -5103,36 +5405,41 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 ### 🖥️ Schritt-für-Schritt: So öffnen, starten und simulieren Sie Übung 14 in Visual Studio Code (VSC)
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie `Strg + P`.
 2. Tippen Sie ein: `uebung_14_heidenhain_klartext_4achse.cps` und drücken Sie `Enter`.
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal mit ``Strg + ` ``.
 2. Führen Sie aus:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_14_heidenhain_klartext_4achse.cps
    ```
 3. Der Simulator erzeugt Heidenhain-Klartextcode (`.h`).
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 * Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
 * Achten Sie auf `BEGIN PGM`, `TOOL CALL 1 Z S8000` und `L A+90.000 R0 FMAX`.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
+
 * Kopieren Sie den Code in [https://ncviewer.com](https://ncviewer.com).
 
 ---
 
 ### 📊 Die 6 wichtigsten Heidenhain-Klartext-Befehle im direkten Vergleich zu Fanuc/Haas:
 
-| Funktion | Haas / Fanuc (ISO G-Code) | Heidenhain Klartext (`.H`-Datei) |
-| :--- | :--- | :--- |
-| **Programmanfang** | `O1001` | `0 BEGIN PGM BAUTEIL_1001 MM` |
-| **Werkzeug 1 mit `S8000` aufrufen** | `T01 M06`<br>`S8000 M03` | `TOOL CALL 1 Z S8000` *(wechselt automatisch ein!)* |
-| **Eilgang in der Luft (`G00`)** | `G00 X10.000 Y20.000` | `L X+10.000 Y+20.000 R0 FMAX` *(`L` = Gerade, `FMAX` = Vollgas)* |
-| **Fräsen im Metall mit Vorschub `F1200`** | `G01 X80.000 Y20.000 F1200` | `L X+80.000 Y+20.000 R0 F1200` |
-| **4. Drehachse (`A-Achse`) auf $90^\circ$ drehen** | `G00 A90.000` | `L A+90.000 R0 FMAX` |
-| **Programmende** | `M30` | `END PGM BAUTEIL_1001 MM` |
+| Funktion                                           | Haas / Fanuc (ISO G-Code)   | Heidenhain Klartext (`.H`-Datei)                                 |
+|:-------------------------------------------------- |:--------------------------- |:---------------------------------------------------------------- |
+| **Programmanfang**                                 | `O1001`                     | `0 BEGIN PGM BAUTEIL_1001 MM`                                    |
+| **Werkzeug 1 mit `S8000` aufrufen**                | `T01 M06`<br>`S8000 M03`    | `TOOL CALL 1 Z S8000` *(wechselt automatisch ein!)*              |
+| **Eilgang in der Luft (`G00`)**                    | `G00 X10.000 Y20.000`       | `L X+10.000 Y+20.000 R0 FMAX` *(`L` = Gerade, `FMAX` = Vollgas)* |
+| **Fräsen im Metall mit Vorschub `F1200`**          | `G01 X80.000 Y20.000 F1200` | `L X+80.000 Y+20.000 R0 F1200`                                   |
+| **4. Drehachse (`A-Achse`) auf $90^\circ$ drehen** | `G00 A90.000`               | `L A+90.000 R0 FMAX`                                             |
+| **Programmende**                                   | `M30`                       | `END PGM BAUTEIL_1001 MM`                                        |
 
 *(Praxis-Beispiele für vollständige Heidenhain-Programme findest du bereits in deinen 4 Referenzprojekten im Ordner `c:\Projekte\CNC\04_Recht_Steuern_und_Backoffice\Portfolio\`!)*
 
@@ -5179,15 +5486,16 @@ writeWords("L " + xOutput.format(x) + " " + yOutput.format(y) + " R0 F" + feedOu
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 14 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Heidenhain Syntax** | Programm beginnt mit `0 BEGIN PGM ... MM` und endet mit `END PGM ... MM`. | [ ] |
-| **2. TOOL CALL Format** | Werkzeugwechsel erfolgt in einem Satz: `TOOL CALL <T> Z S<Drehzahl>` ohne getrenntes `M06`. | [ ] |
-| **3. 4. Achse geklemmt** | Vor der Drehung wird mit `M11` entklemmt, nach Erreichen von `A+90.` wird mit `M10` geklemmt. | [ ] |
-| **4. Sicherer Rückzug M91** | Der Z-Rückzug erfolgt maschinenbezogen mit `M91` (`L Z+250 R0 FMAX M91`), bevor der Bediener entnimmt. | [ ] |
+| Prüfpunkt                   | Was muss im Code / Simulator zu sehen sein?                                                            | Bestanden? |
+|:--------------------------- |:------------------------------------------------------------------------------------------------------ |:----------:|
+| **1. Heidenhain Syntax**    | Programm beginnt mit `0 BEGIN PGM ... MM` und endet mit `END PGM ... MM`.                              | [ ]        |
+| **2. TOOL CALL Format**     | Werkzeugwechsel erfolgt in einem Satz: `TOOL CALL <T> Z S<Drehzahl>` ohne getrenntes `M06`.            | [ ]        |
+| **3. 4. Achse geklemmt**    | Vor der Drehung wird mit `M11` entklemmt, nach Erreichen von `A+90.` wird mit `M10` geklemmt.          | [ ]        |
+| **4. Sicherer Rückzug M91** | Der Z-Rückzug erfolgt maschinenbezogen mit `M91` (`L Z+250 R0 FMAX M91`), bevor der Bediener entnimmt. | [ ]        |
 
 ---
 
+<a id="uebung-15"></a>
 # Übung 15: Kanten entgraten am 3D-Modell (`2D-Fase / Chamfer Milling`) mit einem 45°-Fasenfräser (`T04`)
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -5205,32 +5513,31 @@ In dieser Übung verleihen Sie dem Werkstück das perfekte industrielle Finish:
 
 ---
 
-
-
 ## 📩 Der reale Kundenauftrag zu Übung 15 (Automatisiertes Entgraten & Spitzenversatz)
 
 So sieht eine typische Anfrage aus, wenn ein Kunde Bauteile nicht mehr mühsam von Hand entgraten will und saubere $0{,}5 \times 45^\circ$ Fasen auf der CNC-Maschine verlangt:
 
 > **Von:** Matthias Kunz *(Geschäftsführer)* `<m.kunz@kunz-feinwerktechnik.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 29. Oktober 2026, 13:40 Uhr  
 > **Betreff:** CAM-Optimierung: Kanten entgraten mit 45°-Fasenfräser & Spitzenversatz  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
-> 
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
+>
 > in unserer Fertigung in Villingen-Schwenningen müssen unsere Mitarbeiter nach dem Fräsen jedes Bauteil mit Dreikantschaber und Schleifvlies von Hand entgraten. Das kostet uns pro Schicht über 2 Stunden teure Handarbeit!  
-> 
+>
 > Wenn unser Programmierer die Fase im CAM anlegt, fräst die Maschine mit der äußersten Werkzeugspitze. Weil an der Spitze die Schnittgeschwindigkeit $v_c = 0\,\text{m/min}$ ist, schneidet das Werkzeug nicht, sondern drückt das Aluminium nur platt und erzeugt einen noch größeren Grat!  
-> 
+>
 > **Aufgabenstellung:**  
 > Binden Sie in das Fertigungsprogramm eine automatisierte Entgrat-Operation ein:  
+>
 > 1. Werkzeug `T04`: $90^\circ$-Fasenfräser $\varnothing 12\,\text{mm}$ *(45°-Flanken)*.  
 > 2. Saubere $0{,}5 \times 45^\circ$ Fase an allen Außenkanten und an der Kreistasche.  
-> 3. Zwingende Berücksichtigung eines **Spitzenversatzes *(Tip Offset)*** von $2{,}0\,\text{mm}$, damit die Schneide im optimalen Schnittgeschwindigkeitsbereich arbeitet.  
-> 
+> 3. Zwingende Berücksichtigung eines **Spitzenversatzes *(Tip Offset)*** von $2{,}0\,\text{mm}$, damit die Schneide im optimalen Schnittgeschwindigkeitsbereich arbeitet.
+>
 > **Honorar:**  
 > Festpreis **380,00 € netto** gegen Rechnung.  
-> 
+>
 > Mit besten Grüßen  
 > **Matthias Kunz** – Kunz Feinwerktechnik, Villingen-Schwenningen  
 
@@ -5238,13 +5545,13 @@ So sieht eine typische Anfrage aus, wenn ein Kunde Bauteile nicht mehr mühsam v
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten Fasenfräs- & Entgrat-Kennzeichen in Übung 15
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`T04`** | **Fasenfräser *(Chamfer Mill / NC-Spot Drill)*** | $90^\circ$-Spitzkegelfräser mit $45^\circ$-Fasenwinkel an den Schneidflanken. |
-| **`Tip Offset`** | **Spitzenversatz *(Tip Offset in $\text{mm}$)*** | Taucht die theoretische Fräserspitze um $1{,}5$ bis $2{,}0\,\text{mm}$ unter die Bauteilkante, damit eine schneidende Flankengeschwindigkeit vorliegt. |
-| **`Z-2.300`** | **Effektive Fasentiefe *(Chamfer Z Depth)*** | Berechnet sich aus: $\text{Fasenbreite } (0{,}3\,\text{mm}) + \text{Spitzenversatz } (2{,}0\,\text{mm}) = 2{,}3\,\text{mm}$ Frästiefe im $Z$-Minus. |
-| **`G41`** | **Radiuskorrektur LINKS *(Cutter Compensation)*** | Hält den Kegel auf exaktem Schneidenabstand zur scharfen Werkstückkante. |
-| **`M08`** | **Kühlmittel EIN *(Flood Coolant On)*** | Verhindert Gratbildung und Aufschweißen von Aluminium an der empfindlichen Fasenschneide. |
+| Kennzeichen      | Fachbegriff & Erklärung                           | Bedeutung & Funktion in dieser Übung                                                                                                                   |
+| ---------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **`T04`**        | **Fasenfräser *(Chamfer Mill / NC-Spot Drill)***  | $90^\circ$-Spitzkegelfräser mit $45^\circ$-Fasenwinkel an den Schneidflanken.                                                                          |
+| **`Tip Offset`** | **Spitzenversatz *(Tip Offset in $\text{mm}$)***  | Taucht die theoretische Fräserspitze um $1{,}5$ bis $2{,}0\,\text{mm}$ unter die Bauteilkante, damit eine schneidende Flankengeschwindigkeit vorliegt. |
+| **`Z-2.300`**    | **Effektive Fasentiefe *(Chamfer Z Depth)***      | Berechnet sich aus: $\text{Fasenbreite } (0{,}3\,\text{mm}) + \text{Spitzenversatz } (2{,}0\,\text{mm}) = 2{,}3\,\text{mm}$ Frästiefe im $Z$-Minus.    |
+| **`G41`**        | **Radiuskorrektur LINKS *(Cutter Compensation)*** | Hält den Kegel auf exaktem Schneidenabstand zur scharfen Werkstückkante.                                                                               |
+| **`M08`**        | **Kühlmittel EIN *(Flood Coolant On)***           | Verhindert Gratbildung und Aufschweißen von Aluminium an der empfindlichen Fasenschneide.                                                              |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -5263,6 +5570,7 @@ Hier siehst du im Detail, warum ein Fasenfräser mit einem sogenannten **Spitzen
 ![Fasenfräsen Außenkante 2D Schnitt](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_chamfer_outer_edge_diagram.jpg)
 
 #### Zweisprachige Begriffserklärung zum Bild *(Bilingual Terminology)*:
+
 * `Fasenfräser / Chamfer Mill (45° / 90°)`: Kegelförmiges Werkzeug zum Entgraten scharfer Werkstückkanten.
 * `Fasenbreite / Chamfer Width (0.5 mm x 45°)`: Die gewünschte Schräge an der Kante zur Beseitigung von Schärfe und Grat.
 * `Spitzen-Versatz / Tip Offset (1.5 - 2.0 mm)`: Das gezielte Absenken der Werkzeugspitze unter die Werkstückkante in die Luft.
@@ -5275,6 +5583,7 @@ Hier siehst du im Detail, warum ein Fasenfräser mit einem sogenannten **Spitzen
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
+
 1. **Als eigene, kompakte Übungs-Datei:**  
    [`uebungen/uebung_15_fasenfraesen_entgraten.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_15_fasenfraesen_entgraten.cps) – Berechnet die Fasentiefe inklusive Spitzenversatz (`Tip Offset`).
 2. **Im Haupt-Postprozessor:**  
@@ -5283,27 +5592,33 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 ### 🖥️ Schritt-für-Schritt: So öffnen, starten und simulieren Sie Übung 15 in Visual Studio Code (VSC)
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie in VS Code `Strg + P`.
 2. Tippen Sie ein: `uebung_15_fasenfraesen_entgraten.cps` und drücken Sie `Enter`.
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal mit ``Strg + ` ``.
 2. Führen Sie aus:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_15_fasenfraesen_entgraten.cps
    ```
 3. Der Simulator berechnet die $45^\circ$-Fasenbahn mit `G41` Radiuskorrektur.
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 * Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
 * Prüfen Sie die effektive Fasentiefe `Z-2.300` (Fase + Spitzenversatz).
 
 #### Schritt 4: 3D-Simulation visuell prüfen
+
 * Kopieren Sie den G-Code in [https://ncviewer.com](https://ncviewer.com).
 
 ---
 
 ### 🛠️ Die goldene Regel beim Fasenfräsen:
+
 * Fahre niemals mit der **exakten Spitze (`D = 0 mm`)** des $90^\circ$-Kegels an der Kante entlang (dort ist die Schnittgeschwindigkeit gleich null, das gibt eine hässliche Kante!).
 * Stelle im CAM den **Spitzen-Versatz (`Tip Offset`)** immer auf **`1,5 mm` bis `2,0 mm`** ein: Dann taucht die Spitze des Kegelfräsers `2 mm` tiefer neben der Wand ein und schneidet die $45^\circ$-Fase sauber mit der seitlichen Schneidenflanke!
 
@@ -5341,15 +5656,16 @@ N450 G00 Z15.000 M09 (G00 EILGANG SENKRECHT AUF FREIFAHRHOEHE 15MM | M09 KUEHLMI
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 15 zu 100 % bestanden?
 
-| Prüfpunkt | Was muss im Code / Simulator zu sehen sein? | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Spitzenversatz aktiv** | Die $Z$-Frästiefe liegt bei `Z-2.300`, so dass der Schnitt auf der aktiven Schneidflanke des $90^\circ$-Fräsers erfolgt. | [ ] |
-| **2. Kantenverlauf lückenlos** | Alle 4 Außenkanten des Rechtecks $80 \times 50\,\text{mm}$ werden im geschlossenen Umlauf entgratet. | [ ] |
-| **3. Kühlung aktiv** | `M08` kühlt die feine Fräserspitze, um Riefenbildung und Materialaufschweißen zu verhindern. | [ ] |
-| **4. Sauberer Rückzug** | In Satz `N450` zieht die Z-Achse mit `G00 Z15.000` senkrecht nach oben ab, bevor das Werkzeug geparkt wird. | [ ] |
+| Prüfpunkt                      | Was muss im Code / Simulator zu sehen sein?                                                                              | Bestanden? |
+|:------------------------------ |:------------------------------------------------------------------------------------------------------------------------ |:----------:|
+| **1. Spitzenversatz aktiv**    | Die $Z$-Frästiefe liegt bei `Z-2.300`, so dass der Schnitt auf der aktiven Schneidflanke des $90^\circ$-Fräsers erfolgt. | [ ]        |
+| **2. Kantenverlauf lückenlos** | Alle 4 Außenkanten des Rechtecks $80 \times 50\,\text{mm}$ werden im geschlossenen Umlauf entgratet.                     | [ ]        |
+| **3. Kühlung aktiv**           | `M08` kühlt die feine Fräserspitze, um Riefenbildung und Materialaufschweißen zu verhindern.                             | [ ]        |
+| **4. Sauberer Rückzug**        | In Satz `N450` zieht die Z-Achse mit `G00 Z15.000` senkrecht nach oben ab, bevor das Werkzeug geparkt wird.              | [ ]        |
 
 ---
 
+<a id="uebung-16"></a>
 # Übung 16: Die komplette 5-Punkte-Endabnahme im Simulator vor der Auslieferung an den Online-Kunden (Meister-Prüfung)
 
 ## 🎯 Das konkrete Ziel dieser Übung
@@ -5369,35 +5685,34 @@ In dieser finalen Meisterprüfung führen Sie die lückenlose Qualitätskontroll
 
 ---
 
-
-
 ## 📩 Der reale Kundenauftrag zu Übung 16 (Unabhängiges Sicherheits-Audit & G-Code-Zertifizierung)
 
 So sieht eine typische hochbezahlte Anfrage aus, wenn ein Automobilzulieferer oder Maschinenbauer ein externes Sicherheits-Audit vor dem Serienanlauf verlangt:
 
 > **Von:** Dipl.-Ing. Bernd Schäfer *(Leiter Qualitätssicherung)* `<b.schaefer@hessen-automotive.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 30. Oktober 2026, 15:00 Uhr  
 > **Betreff:** Externes Sicherheits-Audit & Crash-Prüfprotokoll für 5 Serienprogramme  
 >
-> Sehr geehrter Herr Kollege Dipl.-Ing. Buenotte,  
-> 
+> Sehr geehrter Herr Kollege Dipl.-Ing. Bujanovski,  
+>
 > als Tier-1-Zulieferer der Automobilindustrie in Frankfurt am Main dürfen wir neue Fräsprogramme erst auf unseren 500.000-Euro-5-Achs-Zentren freigeben, wenn ein unabhängiges, ingenieurmäßiges Sicherheits-Audit durchgeführt wurde *(Vier-Augen-Prinzip nach IATF 16949)*.  
-> 
+>
 > **Aufgabenstellung:**  
 > Unterziehen Sie unser CNC-Programm der vollständigen **5-Stufen-Meisterprüfung**:  
+>
 > 1. Verifikation von Werkstück-Nullpunkt `G54` und Rohteilabmessungen am 3D-Simulator.  
 > 2. Mathematische Z-MIN-Prüfung gegen Schraubstock-Crash und Ermittlung der Mindest-Werkzeugauskraglänge $L_{\text{min}}$.  
 > 3. Vollständiger Scan auf Eilgangfehler *(keine `G00`-Bewegungen unterhalb $Z \le 0$!)*.  
 > 4. Schnittdaten-Plausibilität: Rechtslauf `M03`, Drehzahl $S > 0$, Vorschub $F > 0$ vor erstem Materialeintauchen, Kühlmittel `M08`.  
 > 5. Sicherer 2-Stufen-Rückzug `G53 Z0.` vor Tischfahrt `G53 Y0.`.  
-> 6. Generierung des zertifizierten Prüfprotokolls und Einrichteblatts (PDF) mit Haftungsfreigabeklausel.  
-> 
+> 6. Generierung des zertifizierten Prüfprotokolls und Einrichteblatts (PDF) mit Haftungsfreigabeklausel.
+>
 > **Vergütung:**  
 > Pauschal **490,00 € netto** pro auditierter Baugruppe.  
-> 
+>
 > Wir freuen uns auf Ihren detaillierten Prüfbericht!  
-> 
+>
 > Mit besten Grüßen  
 > **Dipl.-Ing. Bernd Schäfer** – Automotive Zerspanungs-Cluster Hessen GmbH, Frankfurt am Main  
 
@@ -5405,13 +5720,13 @@ So sieht eine typische hochbezahlte Anfrage aus, wenn ein Automobilzulieferer od
 
 ### 📌 Spickzettel dieser Übung: Alle verwendeten Meister-Endabnahme-Kennzeichen in Übung 16
 
-| Kennzeichen | Fachbegriff & Erklärung | Bedeutung & Funktion in dieser Übung |
-|---|---|---|
-| **`G54 (X0, Y0, Z0)`** | **Nullpunkt-Prüfung *(WCS Origin Audit)*** | Verifiziert die Lage des Nullpunkts am 3D-Modell und Einrichteblatt. |
-| **`Z-MIN & L_min`** | **Kollisions- & Spannprüfmaß *(Minimum Depth & Stickout)*** | Schützt Schraubstockbacken vor Crash und verhindert Werkzeugauszug aus der Spannzange. |
-| **`G00 (Z > 0)`** | **Eilgang-Sicherheitskontrolle *(Rapid Move Clearance)*** | Stellt sicher, dass Eilgänge niemals bei $Z \le 0$ im Metall stattfinden. |
-| **`S, F, M03, M08`** | **Technologie-Vierklang *(Machining Parameters Audit)*** | Prüft Drehzahl, Vorschub, Spindeldrehrichtung und Kühlmittelversorgung. |
-| **`Safe Footer G53`** | **Sicherer 2-Stufen-Rückzug *(Two-Stage Safe Footer)*** | Garantiert: Zuerst Z-Achse hoch, Spindelstopp, erst danach Tisch nach vorne zur Tür. |
+| Kennzeichen            | Fachbegriff & Erklärung                                     | Bedeutung & Funktion in dieser Übung                                                   |
+| ---------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| **`G54 (X0, Y0, Z0)`** | **Nullpunkt-Prüfung *(WCS Origin Audit)***                  | Verifiziert die Lage des Nullpunkts am 3D-Modell und Einrichteblatt.                   |
+| **`Z-MIN & L_min`**    | **Kollisions- & Spannprüfmaß *(Minimum Depth & Stickout)*** | Schützt Schraubstockbacken vor Crash und verhindert Werkzeugauszug aus der Spannzange. |
+| **`G00 (Z > 0)`**      | **Eilgang-Sicherheitskontrolle *(Rapid Move Clearance)***   | Stellt sicher, dass Eilgänge niemals bei $Z \le 0$ im Metall stattfinden.              |
+| **`S, F, M03, M08`**   | **Technologie-Vierklang *(Machining Parameters Audit)***    | Prüft Drehzahl, Vorschub, Spindeldrehrichtung und Kühlmittelversorgung.                |
+| **`Safe Footer G53`**  | **Sicherer 2-Stufen-Rückzug *(Two-Stage Safe Footer)***     | Garantiert: Zuerst Z-Achse hoch, Spindelstopp, erst danach Tisch nach vorne zur Tür.   |
 
 ### 💡 Worum geht es in einfacher Sprache?
 
@@ -5420,6 +5735,7 @@ Bevor du einem Online-Kunden auf **Upwork**, **Fiverr**, **Malt** oder per **E-M
 ### 🛠️ Wo im Code wird das gemacht?
 
 Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
+
 1. **Als Meister-Postprozessor-Quelldatei:**  
    [`uebungen/uebung_16_endabnahme_meister_post.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_16_endabnahme_meister_post.cps) – Kombiniert alle 16 Sicherheits- und Steuerungsfeatures in einem geprüften Meister-Postprozessor.
 2. **Im Haupt-Postprozessor:**  
@@ -5428,22 +5744,27 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 ### 🖥️ Schritt-für-Schritt: So öffnen, starten und simulieren Sie Übung 16 in Visual Studio Code (VSC)
 
 #### Schritt 1: Datei in Visual Studio Code öffnen
+
 1. Drücken Sie in VS Code `Strg + P`.
 2. Tippen Sie ein: `uebung_16_endabnahme_meister_post.cps` und drücken Sie `Enter`.
 
 #### Schritt 2: Programm im Terminal ausführen & testen
+
 1. Öffnen Sie das Terminal mit ``Strg + ` ``.
 2. Führen Sie aus:
+
    ```powershell
    node simuliere_post.js uebungen/uebung_16_endabnahme_meister_post.cps
    ```
 3. Der Meister-Postprozessor führt alle Sicherheitschecks (Drehzahl, Z-Kollision, Späneförderer) durch und erzeugt den perfekten Produktions-Code.
 
 #### Schritt 3: Den erzeugten G-Code ansehen
+
 * Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
 * Kontrollieren Sie alle 5 Punkte der Meisterprüfung in den Zeilen des G-Codes.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
+
 * Kopieren Sie den G-Code in [https://ncviewer.com](https://ncviewer.com) und lassen Sie die gesamte Fertigung vom Schruppen bis zum Entgraten und sicheren Rückzug durchlaufen.
 
 ---
@@ -5505,20 +5826,19 @@ N150 M30 (M30 HAUPTPROGRAMMENDE, RESET UND SPEICHER AUF ZEILE 1 ZURUECKSETZEN)
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist die Meisterprüfung (Übung 16) zu 100 % bestanden?
 
-| Prüfpunkt | Was du im Simulator & Code kontrollierst | Bestanden? |
-| :--- | :--- | :---: |
-| **1. Nullpunkt-Check (`G54`)** | Liegt der Koordinatenursprung `(X0, Y0, Z0)` im Simulator exakt an der Stelle, die du auf dem Einrichteblatt für den Kunden eingezeichnet hast? | [ ] |
-| **2. Tiefen- & Schraubstock-Check (`Z-MIN`)** | Schau im Header auf den berechneten `Z-MIN`-Wert jedes Werkzeugs: Ist genug Platz zu den Schraubstockbacken UND ist das Werkzeug lang genug eingespannt ($L_{\text{min}} > |Z_{\text{min}}| + 5\,\text{mm}$)? | [ ] |
-| **3. Eilgang-Check (`G00` / `FMAX`)** | Findet jede schnelle `G00`-Bewegung in $X$ und $Y$ garantiert **oberhalb des Bauteils ($Z > 0$)** in der Luft statt? | [ ] |
-| **4. Technologie-Check (`S`, `F`, `M03`, `M08`)** | Dreht sich die Spindel (`M03`) mit plausibler Drehzahl (`S`) für das Material (Alu vs. Stahl) und ist beim Gewindebohren `F = S × Steigung` eingehalten? | [ ] |
-| **5. Sicheres Programmende (`Safe Footer`)** | Zieht das Programm am Ende **zuerst** die $Z$-Achse ganz nach oben (`G53 G00 Z0` bzw. `L Z+250 R0 FMAX M91`), bevor der Tisch zur Tür fährt und `M30` stoppt? | [ ] |
+| Prüfpunkt                                         | Was du im Simulator & Code kontrollierst                                                                                                                                   | Bestanden?     |
+|:------------------------------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:--------------:|
+| **1. Nullpunkt-Check (`G54`)**                    | Liegt der Koordinatenursprung `(X0, Y0, Z0)` im Simulator exakt an der Stelle, die du auf dem Einrichteblatt für den Kunden eingezeichnet hast?                            | [ ]            |
+| **2. Tiefen- & Schraubstock-Check (`Z-MIN`)**     | Schau im Header auf den berechneten `Z-MIN`-Wert jedes Werkzeugs: Ist genug Platz zu den Schraubstockbacken UND ist das Werkzeug lang genug eingespannt ($L_{\text{min}} > | Z_{\text{min}} |
+| **3. Eilgang-Check (`G00` / `FMAX`)**             | Findet jede schnelle `G00`-Bewegung in $X$ und $Y$ garantiert **oberhalb des Bauteils ($Z > 0$)** in der Luft statt?                                                       | [ ]            |
+| **4. Technologie-Check (`S`, `F`, `M03`, `M08`)** | Dreht sich die Spindel (`M03`) mit plausibler Drehzahl (`S`) für das Material (Alu vs. Stahl) und ist beim Gewindebohren `F = S × Steigung` eingehalten?                   | [ ]            |
+| **5. Sicheres Programmende (`Safe Footer`)**      | Zieht das Programm am Ende **zuerst** die $Z$-Achse ganz nach oben (`G53 G00 Z0` bzw. `L Z+250 R0 FMAX M91`), bevor der Tisch zur Tür fährt und `M30` stoppt?              | [ ]            |
 
 Wenn du alle 5 Haken setzen kannst, speicherst du das Programm zusammen mit dem **Einrichteblatt** und einem kurzen **Simulationsvideo** ab – und dein Online-Auftrag ist abgabebereit!
 
 > [!TIP]
 > **Offizielle Kundenabgabe & Haftungsschutz:**  
 > Für die finale Freigabe beim Kunden nutzt du an dieser Stelle die druckbare Abnahme-Checkliste mit Unterschriftenfeldern aus **[`SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md)**. Damit überreichst du dem Kunden ein lückenloses Qualitätszertifikat!
-
 
 ---
 
@@ -5527,37 +5847,44 @@ Wenn du alle 5 Haken setzen kannst, speicherst du das Programm zusammen mit dem 
 Damit du auch die fortgeschrittenen **Profi-Übungen 9 bis 16** sofort praktisch auf deinem Laptop testen und im Simulator überprüfen kannst, findest du hier die genauen Testschritte:
 
 ### 🔹 Test für Übung 9 (Schnittdaten-Kontrolle $v_c$, `S` & `F` im Postprozessor):
+
 1. Füge die `vc`-Berechnung aus Übung 9 in [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps) in die Funktion `onSection()` ein und speichere (`Strg + S`).
 2. Führe im Terminal `node simuliere_post.js` aus.
 3. **Prüfung:** Im erzeugten G-Code steht jetzt vor jeder Operation automatisch die berechnete Schnittgeschwindigkeit `(TECHNOLOGIE-CHECK: SCHNITTGESCHWINDIGKEIT VC = 251 M/MIN)`.
 
 ### 🔹 Test für Übung 10 (2. Aufspannung `G55` / `OP20` im Online-Simulator `NCViewer.com` testen):
+
 1. Kopiere den Beispiel-G-Code aus **Übung 10** (`N500 M00` bis `N570 G01 X90.000`) ans Ende deiner Datei `uebungen/uebung_04_3d_modell_cam.nc` (direkt vor den Safe Footer `N370 M09`).
 2. Füge den Code in **`https://ncviewer.com`** ein und klicke auf **`Plot`**.
 3. **Prüfung:** Klicke auf Zeile `N560 G01 Z0.000 F1500` und `N570 G01 X90.000`: Du siehst im 3D-Fenster, wie der Fräser einmal sauber plan über die Oberseite (`Z0`) fährt!
 
 ### 🔹 Test für Übung 11 (Gewindebohren `G84` mit `F = S × Steigung`):
+
 1. Prüfe im G-Code oder mit unserem Analyse-Tool `python GitHub_Projekte/cnc_setup_sheet_extractor.py Portfolio/Projekt_01_25D_Praezisionsfraesteil/Fertigungspaket_Projekt_01.md`:
    Bei einem `M8`-Gewinde (Steigung $1{,}25\,\text{mm}$) und `S600` muss im `G84`-Satz zwingend `F750` stehen.
 
 ### 🔹 Test für Übung 12 (Werkzeugradiuskorrektur `G41` / `G40` im Simulator prüfen):
+
 1. Kopiere den `G41`-Codeblock aus **Übung 12** (`N200` bis `N250`) in **`https://ncviewer.com`**.
 2. **Prüfung:** Klicke im NCViewer nacheinander auf `N200` (Start in der Kreismitte `X40 Y25`), `N220` (Anfahren an den Kreisrand `X55 Y25` mit aktivem `G41`), `N230` (Vollkreis `G03`) und `N240` (Zurückfahren zur Mitte mit `G40`).
 
 ### 🔹 Test für Übung 13 & 14 (3D-Freiformflächen & Heidenhain Klartext `.H` mit unserem Python-Extractor testen!):
+
 1. Öffne das Terminal (`Strg + Ö`) in `C:\Projekte\CNC` und führe unser neues Python-Tool direkt auf dein Heidenhain-Referenzprojekt aus:
+
    ```powershell
    python GitHub_Projekte/cnc_setup_sheet_extractor.py Portfolio/Projekt_01_25D_Praezisionsfraesteil/Fertigungspaket_Projekt_01.md
    ```
 2. **Prüfung:** Das Skript erkennt sofort automatisch `Heidenhain Klartext (TNC)`, liest das Rohteil (`BLK FORM`) von `150.0 x 100.0 x 45.0 mm` aus und listet die Heidenhain-Werkzeuge (`TOOL CALL 3`, `TOOL CALL 6`) inklusive Mindest-Auskraglänge ($L_{\text{min}}$) in einer fertigen Tabelle auf!
 
 ### 🔹 Test für Übung 15 (Kanten entgraten `2D-Fase` im 3D-Simulator):
+
 1. Kopiere den Entgrat-Codeblock (`N350` bis `N450`) aus **Übung 15** in **`https://ncviewer.com`**.
 2. **Prüfung:** Du siehst, wie der $90^\circ$-Fasenfräser (`T04`) exakt auf Tiefe `Z-2.300 mm` einmal sauber um das gesamte `80 x 50 mm` Rechteck herumfährt, um alle 4 Außenkanten zu brechen.
 
 ### 🔹 Test für Übung 16 (5-Punkte-Meisterprüfung):
-Nimm dir die Checkliste aus **Übung 16** und prüfe damit die Datei [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.nc) in [3d_auftrag_simulator.html](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) – alle 5 Prüfpunkte werden dort zu 100 % erfüllt!
 
+Nimm dir die Checkliste aus **Übung 16** und prüfe damit die Datei [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.nc) in [3d_auftrag_simulator.html](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) – alle 5 Prüfpunkte werden dort zu 100 % erfüllt!
 
 ---
 
@@ -5582,22 +5909,22 @@ Hier ist die klare Regel und die genaue Anleitung, **wann** und **wie** jeder Ag
 
 Jeder deiner 4 KI-Agenten übernimmt später genau die Aufgaben, die du in diesen 16 Übungen von Hand gelernt hast:
 
-| Welcher KI-Agent? | Welche Übungen aus diesem Handbuch übernimmt er später automatisch für dich? | WIE rufst du ihn auf? (Dein Befehl im Chat) |
-| :--- | :--- | :--- |
-| **🕵️‍♂️ Agent 1:<br>`Lead-Scout-Agent`**<br>*(Kunden-Sucher)* | **Nach Übung 16:**<br>Sucht dir im Internet passende **100 % Online-Aufträge** für genau die Themen aus Übung 1–16 *(Postprozessoren & 3D-CAM)* und schreibt das Bewerbungsanschreiben. | Du schreibst im Chat:<br>*„Starte **Agent 1 (`Lead-Scout-Agent`)** aus `KI_Agenten_System_und_Bauplan.md` und schreibe ein kurzes Angebotsschreiben für diese Kunden-Anfrage: [Text der Anzeige einfügen]“* |
-| **💻 Agent 2:<br>`Postprocessor-Coder-Agent`**<br>*(Programmier-Roboter)* | **Übernimmt die Arbeit aus Übung 1, 2, 3, 6, 7, 8, 9 & 14:**<br>Schreibt für dich den JavaScript- (`.cps`), Python- oder Tcl-Code für Header (`onOpen`), Werkzeuglisten, `Z-MIN`-Schutz, `Safe Retract`, Schalter (`Properties`), Sinumerik und Heidenhain Klartext. | Du schreibst im Chat:<br>*„Starte **Agent 2 (`Postprocessor-Coder-Agent`)**. Hier ist der Postprozessor des Kunden und sein Wunsch-NC-Code. Programmiere mir die Funktion für [z. B. Heidenhain Werkzeugliste & sicheren Z-Rückzug].“* |
-| **🛡️ Agent 3:<br>`NC-Safety- & Setup-Agent`**<br>*(Crash-Prüfer & Einrichteblatt-Schreiber)* | **Übernimmt die Arbeit aus Übung 4, 5, 10, 11, 12, 13, 15 & 16:**<br>Prüft deinen fertigen G-Code auf alle **5 Punkte der Meisterprüfung (Übung 16)** *(Kühlmittel `M08`, Gewindevorschub `G84`, Radiuskorrektur `G41`, Rückzug)* und füllt mit **[cnc_setup_sheet_extractor.py](file:///c:/Projekte/CNC/02_Software_und_Tools/GitHub_Projekte/cnc_setup_sheet_extractor.py)** automatisch die Vorlage **[Vorlage_Einrichteblatt_und_Werkzeugliste.md](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/Portfolio/Vorlage_Einrichteblatt_und_Werkzeugliste.md)** aus! | Du schreibst im Chat:<br>*„Starte **Agent 3 (`NC-Safety- & Setup-Agent`)** für die Datei `[Dateiname.nc / .H]`. Prüfe alle 5 Sicherheitspunkte aus Übung 16 und erstelle das fertige Einrichteblatt.“* |
-| **💶 Agent 4:<br>`Backoffice-Ingenieur-Agent`**<br>*(Büro- & Finanzamts-Sekretär)* | **Vor und nach jedem Auftrag:**<br>Füllt dir in 5 Sekunden deine **[Vorlage_Angebot_und_Rechnung_Ingenieurbuero.md](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/Vorlagen_Vertraege_Rechnungen/Vorlage_Angebot_und_Rechnung_Ingenieurbuero.md)** aus – inklusive **§ 18 EStG Ingenieur-Formulierung (für das Finanzamt Hanau)**, **50 % Anzahlung & Video-Vorabfreigabe** sowie den **4 Haftungsschutz-Klauseln**. | Du schreibst im Chat:<br>*„Starte **Agent 4 (`Backoffice-Ingenieur-Agent`)** und erstelle ein Angebot / eine Rechnung für Kunde [Name, Ort], Projekt [Name], Preis [Betrag €].“* |
+| Welcher KI-Agent?                                                                           | Welche Übungen aus diesem Handbuch übernimmt er später automatisch für dich?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | WIE rufst du ihn auf? (Dein Befehl im Chat)                                                                                                                                                                                            |
+|:------------------------------------------------------------------------------------------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **🕵️‍♂️ Agent 1:<br>`Lead-Scout-Agent`**<br>*(Kunden-Sucher)*                                 | **Nach Übung 16:**<br>Sucht dir im Internet passende **100 % Online-Aufträge** für genau die Themen aus Übung 1–16 *(Postprozessoren & 3D-CAM)* und schreibt das Bewerbungsanschreiben.                                                                                                                                                                                                                                                                                                                                                                                      | Du schreibst im Chat:<br>*„Starte **Agent 1 (`Lead-Scout-Agent`)** aus `KI_Agenten_System_und_Bauplan.md` und schreibe ein kurzes Angebotsschreiben für diese Kunden-Anfrage: [Text der Anzeige einfügen]“*                            |
+| **💻 Agent 2:<br>`Postprocessor-Coder-Agent`**<br>*(Programmier-Roboter)*                   | **Übernimmt die Arbeit aus Übung 1, 2, 3, 6, 7, 8, 9 & 14:**<br>Schreibt für dich den JavaScript- (`.cps`), Python- oder Tcl-Code für Header (`onOpen`), Werkzeuglisten, `Z-MIN`-Schutz, `Safe Retract`, Schalter (`Properties`), Sinumerik und Heidenhain Klartext.                                                                                                                                                                                                                                                                                                         | Du schreibst im Chat:<br>*„Starte **Agent 2 (`Postprocessor-Coder-Agent`)**. Hier ist der Postprozessor des Kunden und sein Wunsch-NC-Code. Programmiere mir die Funktion für [z. B. Heidenhain Werkzeugliste & sicheren Z-Rückzug].“* |
+| **🛡️ Agent 3:<br>`NC-Safety- & Setup-Agent`**<br>*(Crash-Prüfer & Einrichteblatt-Schreiber)* | **Übernimmt die Arbeit aus Übung 4, 5, 10, 11, 12, 13, 15 & 16:**<br>Prüft deinen fertigen G-Code auf alle **5 Punkte der Meisterprüfung (Übung 16)** *(Kühlmittel `M08`, Gewindevorschub `G84`, Radiuskorrektur `G41`, Rückzug)* und füllt mit **[cnc_setup_sheet_extractor.py](file:///c:/Projekte/CNC/02_Software_und_Tools/GitHub_Projekte/cnc_setup_sheet_extractor.py)** automatisch die Vorlage **[Vorlage_Einrichteblatt_und_Werkzeugliste.md](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/Portfolio/Vorlage_Einrichteblatt_und_Werkzeugliste.md)** aus! | Du schreibst im Chat:<br>*„Starte **Agent 3 (`NC-Safety- & Setup-Agent`)** für die Datei `[Dateiname.nc / .H]`. Prüfe alle 5 Sicherheitspunkte aus Übung 16 und erstelle das fertige Einrichteblatt.“*                                 |
+| **💶 Agent 4:<br>`Backoffice-Ingenieur-Agent`**<br>*(Büro- & Finanzamts-Sekretär)*          | **Vor und nach jedem Auftrag:**<br>Füllt dir in 5 Sekunden deine **[Vorlage_Angebot_und_Rechnung_Ingenieurbuero.md](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/Vorlagen_Vertraege_Rechnungen/Vorlage_Angebot_und_Rechnung_Ingenieurbuero.md)** aus – inklusive **§ 18 EStG Ingenieur-Formulierung (für das Finanzamt Hanau)**, **50 % Anzahlung & Video-Vorabfreigabe** sowie den **4 Haftungsschutz-Klauseln**.                                                                                                                                                | Du schreibst im Chat:<br>*„Starte **Agent 4 (`Backoffice-Ingenieur-Agent`)** und erstelle ein Angebot / eine Rechnung für Kunde [Name, Ort], Projekt [Name], Preis [Betrag €].“*                                                       |
 
 ---
 
 ### 3. Wo findest du alle Details zu den 4 KI-Agenten in deinen anderen Dokumenten?
 
 Damit du jederzeit sofort nachschlagen kannst, stehen die Beschreibungen an diesen **3 Orten**:
+
 1. **Hier im Übungshandbuch ([ALLE_UEBUNGEN_HANDBUCH.md](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md#L935-L975)):** Direkt in diesem Abschnitt am Ende von Übung 16 *(wann während/nach den Übungen nutzen + Zuordnungstabelle zu Übung 1–16)*.
 2. **Im Hauptdokument ([CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md – Abschnitt 15, Zeilen 815–900](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md#L815-L900)):** Kompletter Ablaufplan für dein 5–8-Stunden-Wochenende *(wie du 80 % der Zeit sparst)* sowie oben auf Seite 1 in der **Lese- & Umschalt-Anleitung (Phase 5)**.
 3. **Im technischen Bauplan ([KI_Agenten_System_und_Bauplan.md](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/KI_Agenten_System_und_Bauplan.md)):** Alle 4 fertigen **System-Prompts (Programmier-Befehle)** in grauen Kopier-Boxen sowie die Stundensatz- und Festpreis-Tabelle (`65 € bis 135 € / Std.`).
-
 
 ---
 
@@ -5606,21 +5933,25 @@ Damit du jederzeit sofort nachschlagen kannst, stehen die Beschreibungen an dies
 Damit du dir genau vorstellen kannst, wie die Zusammenarbeit zwischen dir und den Agenten hier am Computer abläuft, ist hier der genaue technische Ablauf:
 
 #### 💻 Wie Agent 2 (`Postprocessor-Coder-Agent`) deine JavaScript-Arbeit (Übung 1, 2, 3, 6, 7, 8, 9, 14) übernimmt:
+
 * **In den Übungen (Lernphase):** Du öffnest selbst die Datei [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps) und tippst den JavaScript-Code Zeile für Zeile selbst ein.
 * **Später beim echten Kundenauftrag (mit Agent 2):**
   1. Der Kunde schickt dir per E-Mail seine Postprozessor-Datei *(z. B. `kunde_maschine.cps`)* und sagt: *„Ich brauche oben eine automatische Werkzeugliste mit `Z-MIN` (wie in Übung 2 & 3), Heidenhain-Formatierung (wie in Übung 14) und am Ende den sicheren Rückzug (wie in Übung 6).“*
   2. Du speicherst die Datei `kunde_maschine.cps` einfach in deinem Ordner `c:\Projekte\CNC\02_Software_und_Tools\src\` ab.
   3. Du tippst hier im Chat **nur einen einzigen Satz**:
+
      > *„Agent 2: Öffne `src/kunde_maschine.cps` und programmiere dort die Werkzeugliste, `Z-MIN` und den sicheren Rückzug am Programmende hinein!“*
   4. **Was passiert dann automatisch?** Ich (als dein Agent 2) habe direkten Lese- und Schreibzugriff auf deinen Ordner `c:\Projekte\CNC\`. Ich öffne die Datei `kunde_maschine.cps` selbstständig, suche die richtigen Funktionen (`onOpen`, `onSection`, `onClose`), schreibe den kompletten JavaScript-Code direkt in die Datei hinein, speichere sie ab und teste sie sofort mit `node simuliere_post.js`!
 
 #### 🛡️ Wie Agent 3 (`NC-Safety- & Setup-Agent`) deine Prüf- und Dokumentationsarbeit (Übung 4, 5, 10, 11, 12, 13, 15, 16) übernimmt:
+
 * **Wichtige Aufteilung (20 % Du / 80 % Agent 3):**
   * **Deine 20 % als Software-Ingenieur (Weg A – Dein Hauptfokus: 0 % CAD-Mausklicks!):** Du schaust dir kurz die vom Postprozessor erzeugten NC-Codesätze an, gleichst sie mit dem Referenz-NC-Programm des Kunden ab und erteilst die Freigabe. Du musst **kein einziges 3D-Modell in Fusion 360 mit der Maus anklicken!**
   * *(Optionaler Nebenweg B – falls ein Kunde explizit ein Einzelteil gefräst haben will):* Bauteil nach der Klick-Anleitung abarbeiten.
   * **Die 80 % von Agent 3 (Übung 5, 11, 12, 16 – vollautomatisch!):**
     1. Du speicherst die erzeugte G-Code-Datei im Ordner `c:\Projekte\CNC\`.
     2. Du tippst hier im Chat **nur einen einzigen Satz**:
+
        > *„Agent 3: Prüfe die Datei `Kunde_Ventilblock.nc` nach allen Regeln aus Übung 16 und erstelle mir das fertige Einrichteblatt!“*
     3. **Was macht Agent 3 dann vollautomatisch auf deiner Festplatte?**
        * Er startet im Hintergrund unser Python-Werkzeug **[cnc_setup_sheet_extractor.py](file:///c:/Projekte/CNC/02_Software_und_Tools/GitHub_Projekte/cnc_setup_sheet_extractor.py)** und liest alle tausend Zeilen deines G-Codes in 1 Sekunde durch.

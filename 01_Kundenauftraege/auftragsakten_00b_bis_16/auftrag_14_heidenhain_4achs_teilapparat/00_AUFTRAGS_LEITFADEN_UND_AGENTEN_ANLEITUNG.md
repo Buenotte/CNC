@@ -3,7 +3,7 @@
 **Projekt / Übung:** Übung 14: Heidenhain Klartext & 4. Achse (A-Achse)  
 **Auftraggeber:** Urs Hodel (Produktionsleiter, Alps Precision AG, Schweiz)  
 **Vereinbartes Budget:** **850,00 € netto**  
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik (§ 18 EStG)  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik (§ 18 EStG)  
 **Status:** In Bearbeitung / Systematische Abwicklung
 
 ---
@@ -21,7 +21,7 @@ Damit dieser Auftrag zu 100 % erledigt ist, müssen **alle folgenden Artefakte d
 | :--- | :---: | :---: | :--- |
 | **`00_AUFTRAGS_LEITFADEN_UND_AGENTEN_ANLEITUNG.md`** | Doku | *System* | Diese verbindliche Schritt-für-Schritt-Anleitung. |
 | **`KUNDENAUFTRAG_BRIEFING.md`** | Briefing | `Agent 1` / Kunde | Original-Auftrag mit Maschinenpark, Werkzeugen und Vorgaben. |
-| **`ANGEBOT_DIPL_ING_BUENOTTE.md`** | Vertrag | **`Agent 4`** | Rechtssicheres B2B-Angebot nach § 18 EStG inkl. Haftungsausschluss. |
+| **`ANGEBOT_DIPL_ING_BUJANOVSKI.md`** | Vertrag | **`Agent 4`** | Rechtssicheres B2B-Angebot nach § 18 EStG inkl. Haftungsausschluss. |
 | **`uebung_14_heidenhain_klartext_4achse.cps`** | JavaScript | **`Agent 2`** | Maschinenspezifischer Postprozessor-Quellcode. |
 | **`uebung_14_heidenhain_klartext_4achse.nc`** | G-Code / Klartext | **`Agent 2`** | Fertig generiertes NC-Maschinenprogramm für die Kundenmaschine. |
 | **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | Prüfbericht | **`Agent 3`** | 5-Stufen-Sicherheitsbericht (Crash-Check & Z-MIN Verifikation). |
@@ -37,7 +37,7 @@ Du musst die Arbeit nicht selbst programmieren. Nutze einfach die 4 spezialisier
 ### Schritt 1: Angebot erstellen & kalkulieren (Agent 4)
 * **Aufgabe:** Prüft die Kundenanfrage in `KUNDENAUFTRAG_BRIEFING.md`, kalkuliert den Festpreis von **850,00 € netto** und erstellt das B2B-Angebot.
 * **Befehl im Chat:**
-  > *„Starte bitte **Agent 4**: Überprüfe das Briefing im Ordner `auftrag_14_heidenhain_4achs_teilapparat` und erstelle das formelle Angebot `ANGEBOT_DIPL_ING_BUENOTTE.md` inklusive der Klausel zum Einfahren des ersten Bauteils im Einzelsatz.“*
+  > *„Starte bitte **Agent 4**: Überprüfe das Briefing im Ordner `auftrag_14_heidenhain_4achs_teilapparat` und erstelle das formelle Angebot `ANGEBOT_DIPL_ING_BUJANOVSKI.md` inklusive der Klausel zum Einfahren des ersten Bauteils im Einzelsatz.“*
 
 ### Schritt 2: Code & Postprozessor umsetzen (Agent 2)
 * **Aufgabe:** Erstelle die Klartext-Schnittstelle mit automatischer Klemmung/Entklemmung der Rundachse (M10/M11).

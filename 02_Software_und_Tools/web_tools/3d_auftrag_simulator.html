@@ -305,8 +305,8 @@
       "O1001 (CNC FERTIGUNGSPROGRAMM - MUSTERBAUTEIL)",
       "(==================================================)",
       "(AUTOMATISCH GENERIERTER CNC G-CODE - MASCHINENCODE)",
-      "(ENTWICKLER : JAVASCRIPT CNC-ENTWICKLER)",
-      "(BETRIEB    : PRAEZISIONS-ZERSPANUNG GMBH)",
+      "(ENTWICKLER : DIPL.-ING. BUJANOVSKI)",
+      "(BETRIEB    : INGENIEURBUERO DIPL.-ING. BUJANOVSKI)",
       "(EINHEITEN  : MILLIMETER - METRISCH G21)",
       "(==================================================)",
       "(--- BENOETIGTE WERKZEUGE - TOOL TABLE ---)",
@@ -491,8 +491,8 @@
         "O1001 (UEBUNG 01 - ENTWICKLER HEADER IN ONOPEN)",
         "(==================================================)",
         "(AUTOMATISCH GENERIERTER CNC G-CODE - MASCHINENCODE)",
-        "(ENTWICKLER : JAVASCRIPT CNC-ENTWICKLER)",
-        "(BETRIEB    : PRAEZISIONS-ZERSPANUNG GMBH)",
+        "(ENTWICKLER : DIPL.-ING. BUJANOVSKI)",
+        "(BETRIEB    : INGENIEURBUERO DIPL.-ING. BUJANOVSKI)",
         "(DATUM/ZEIT : " + new Date().toISOString().slice(0, 10) + ")",
         "(EINHEITEN  : MILLIMETER - METRISCH G21)",
         "(==================================================)",
@@ -921,7 +921,7 @@
 
     const canvas = document.getElementById("canvas3d");
     const ctx = canvas.getContext("2d");
-    let rotX = 0.85, rotZ = -0.65, zoom = 4.2;
+    let rotX = 0.85, rotZ = -0.35, zoom = 4.2;
     let dragging = false, lastX = 0, lastY = 0;
     let showStock = true;
 
@@ -1030,7 +1030,7 @@
 
     function resetCamera() {
       rotX = 0.85;
-      rotZ = -0.65;
+      rotZ = -0.35;
       zoom = 4.2;
     }
 
@@ -1067,8 +1067,8 @@
     };
 
     function project(x, y, z) {
-      // Dynamische Zentrierung um Bauteilmitte
-      const cx = x - centerOffset.x, cy = y - centerOffset.y, cz = z - centerOffset.z;
+      // Dynamische Zentrierung um Bauteilmitte (Y invertiert für korrekte Ausrichtung: G54 vorne links)
+      const cx = x - centerOffset.x, cy = -(y - centerOffset.y), cz = z - centerOffset.z;
       const cosZ = Math.cos(rotZ), sinZ = Math.sin(rotZ);
       const x1 = cx * cosZ - cy * sinZ;
       const y1 = cx * sinZ + cy * cosZ;

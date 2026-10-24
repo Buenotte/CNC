@@ -1,17 +1,17 @@
 # 📄 Freiberufliches Ingenieur-Angebot
-**Ingenieurbüro Dipl.-Ing. Buenotte**  
+**Ingenieurbüro Dipl.-Ing. Bujanovski**  
 Softwaretechnik & CAD/CAM-Fertigungsprozesse  
-63526 Erlensee | E-Mail: kontakt@ingenieurbuero-buenotte.de  
+63526 Erlensee | E-Mail: kontakt@ingenieurbuero-bujanovski.de  
 Steuerliche Einordnung: Freiberufliche Tätigkeit nach § 18 Abs. 1 Nr. 1 EStG (Finanzamt Hanau)
 
 ---
 
 **An:**  
-Matthias Kunz *(Geschäftsführer)* `<m.kunz@kunz-feinwerktechnik.de>`  
+Dipl.-Ing. Bernd Schäfer *(Leiter Qualitätssicherung)* `<b.schaefer@hessen-automotive.de>`  
 
 **Datum:** 22. Oktober 2026  
-**Angebots-Nummer:** ANG-2026-15-01  
-**Projekt / Betreff:** CAM-Optimierung: Kanten entgraten mit 45°-Fasenfräser & Spitzenversatz  
+**Angebots-Nummer:** ANG-2026-16-01  
+**Projekt / Betreff:** Externes Sicherheits-Audit & Crash-Prüfprotokoll für 5 Serienprogramme  
 
 Sehr geehrte Damen und Herren,
 
@@ -24,7 +24,7 @@ vielen Dank für Ihre Anfrage. Gerne biete ich Ihnen die ingenieurtechnische Bea
 * **Erstellung der Dokumentation:** Bereitstellung des kommentierten Quellcodes (.cps / NC) sowie des Einrichtedatenblatts für das Fertigungspersonal.
 
 ### 2. Honorar & Abrechnung
-* **Vergütung:** **380,00 € netto** (zzgl. gesetzl. MwSt. gem. § 14 UStG).
+* **Vergütung:** **490,00 € netto** (zzgl. gesetzl. MwSt. gem. § 14 UStG).
 * **Zahlungsbedingungen:** 14 Tage netto nach Abnahme und Datenübergabe.
 * **Lieferform:** 100 % digital per verschlüsseltem Datentransfer (E-Mail / Cloud / GitHub).
 
@@ -32,5 +32,5 @@ vielen Dank für Ihre Anfrage. Gerne biete ich Ihnen die ingenieurtechnische Bea
 Gemäß den ingenieurrechtlichen Sorgfaltspflichten obliegt die finale Prüfung der Werkzeugdaten, der Spannmittel sowie das überwachte Einfahren des ersten Bauteils im Einzelsatzbetrieb mit reduzierter Vorschubübersteuerung dem qualifizierten Bedienpersonal des Auftraggebers an der realen Maschine.
 
 Mit freundlichen Grüßen  
-**Dipl.-Ing. Buenotte**  
+**Dipl.-Ing. Bujanovski**  
 *(Freiberuflicher Ingenieur)*

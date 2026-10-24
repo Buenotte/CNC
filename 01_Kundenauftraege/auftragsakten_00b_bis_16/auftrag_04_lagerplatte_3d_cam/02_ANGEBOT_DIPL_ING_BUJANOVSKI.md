@@ -1,7 +1,7 @@
 # 📄 Freiberufliches Ingenieur-Angebot (Agent 4: Backoffice-Agent)
-**Ingenieurbüro Dipl.-Ing. Buenotte**  
+**Ingenieurbüro Dipl.-Ing. Bujanovski**  
 Softwaretechnik & CAD/CAM-Fertigungsprozesse  
-63526 Erlensee | E-Mail: kontakt@ingenieurbuero-buenotte.de  
+63526 Erlensee | E-Mail: kontakt@ingenieurbuero-bujanovski.de  
 Steuerliche Einordnung: Freiberufliche Tätigkeit nach § 18 Abs. 1 Nr. 1 EStG *(Finanzamt Hanau)*
 
 ---
@@ -40,5 +40,5 @@ vielen Dank für Ihre Eil-Anfrage und die Bereitstellung des 3D-CAD-Modells für
 Gemäß den ingenieurrechtlichen Sorgfaltspflichten obliegt die finale Kontrolle der realen Werkzeugabmessungen, des Spannmitteldrucks sowie das überwachte Einfahren des ersten Werkstücks im Einzelsatzbetrieb *(Single Block)* mit reduzierter Vorschubübersteuerung *(Feed Override maximal 25 %)* dem qualifizierten Bedienpersonal des Auftraggebers direkt an der Fräsmaschine Haas VF-2.
 
 Mit freundlichen Grüßen  
-**Dipl.-Ing. Buenotte**  
+**Dipl.-Ing. Bujanovski**  
 *(Freiberuflicher Ingenieur nach § 18 EStG)*

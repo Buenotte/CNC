@@ -1,6 +1,6 @@
 # 📩 Kundenauftrag: Übung 1: Der erste eigene Text im G-Code (Entwickler-Infoblock in `onOpen()`)
 **Auftrags-Kategorie:** 1 (Qualitäts-Rückverfolgbarkeit für Werkzeugbau)
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
 
 ---
@@ -10,11 +10,11 @@
 So sieht eine typische Anfrage aus, wenn ein Fertigungsbetrieb Qualitätsprobleme bei Schichtwechseln hat und Programme lückenlos nachvollziehbar machen muss:
 
 > **Von:** Stefan Klausner *(Geschäftsführer)* `<s.klausner@klausner-formenbau.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 14. Oktober 2026, 14:40 Uhr  
 > **Betreff:** Anpassung Programmkopf Fusion 360 Postprozessor – ISO 9001 Dokumentation  
 >
-> Sehr geehrter Herr Kollege Buenotte,  
+> Sehr geehrter Herr Kollege Bujanovski,  
 > 
 > in unserem Formenbau in Stuttgart fertigen wir mit 8 CNC-Fräszentren im 3-Schicht-Betrieb. Bei unserer letzten ISO 9001 Qualitäts-Audits wurde bemängelt, dass auf den Steuerungsmonitoren unserer Maschinen nicht sofort ersichtlich ist, wann ein G-Code-Programm erzeugt wurde und wer dafür die Verantwortung trägt.  
 > 
@@ -22,7 +22,7 @@ So sieht eine typische Anfrage aus, wenn ein Fertigungsbetrieb Qualitätsproblem
 > 
 > **Aufgabenstellung:**  
 > Passen Sie unseren Postprozessor in der Funktion `onOpen()` so an, dass ganz oben vor dem ersten Frässatz automatisch folgende Daten in genormter Kommentarsyntax ausgegeben werden:  
-> 1. Entwickler-Name *(Dipl.-Ing. Buenotte / CAM-Büro)*  
+> 1. Entwickler-Name *(Dipl.-Ing. Bujanovski / CAM-Büro)*  
 > 2. Firmenname des Kunden *(Klausner Formenbau & CNC-Technik GmbH)*  
 > 3. Generierungsdatum und exakte Uhrzeit  
 > 4. Programm-Kommentar mit Bauteilbezeichnung  
@@ -36,6 +36,6 @@ So sieht eine typische Anfrage aus, wenn ein Fertigungsbetrieb Qualitätsproblem
 ---
 
 ## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUENOTTE.md` in diesem Ordner.
+* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
 * **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
 * **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

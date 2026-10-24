@@ -1,6 +1,6 @@
 # 📩 Kundenauftrag: Übung 12: Werkzeugradiuskorrektur (`G41` / `G42` / `G40`) – Wie der Kunde an der Maschine `0,01 mm` Genauigkeit für Passungen einstellt
 **Auftrags-Kategorie:** 12 (H7-Passungstoleranz über Steuerungskorrektur)
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
 
 ---
@@ -10,11 +10,11 @@
 So sieht eine typische Anfrage aus, wenn ein Kunde Passungen fertigen muss und Maßkorrekturen direkt am Steuerungsdisplay vornehmen will:
 
 > **Von:** Alexander Wagner *(Werkstattleiter)* `<a.wagner@wagner-getriebe.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 26. Oktober 2026, 14:15 Uhr  
 > **Betreff:** Postprozessor-Anforderung: G41 Radiuskorrektur für Kugellager-Passung Ø 30 H7  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
 > 
 > wir fertigen Getriebegehäuse mit einer Kugellagersitz-Passung $\varnothing 30\,\text{H7}$ *(Toleranz: $+0{,}021 / 0\,\text{mm}$)*.  
 > 
@@ -37,6 +37,6 @@ So sieht eine typische Anfrage aus, wenn ein Kunde Passungen fertigen muss und M
 ---
 
 ## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUENOTTE.md` in diesem Ordner.
+* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
 * **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
 * **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

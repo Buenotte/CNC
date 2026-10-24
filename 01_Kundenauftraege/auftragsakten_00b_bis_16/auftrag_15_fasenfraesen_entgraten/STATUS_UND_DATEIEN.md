@@ -5,7 +5,7 @@
 
 ## In diesem Ordner enthaltene Dateien:
 1. `KUNDENAUFTRAG_BRIEFING.md` – Vollständiger Kundenbriefing-Text mit Maschinen- und Bauteildaten.
-2. `ANGEBOT_DIPL_ING_BUENOTTE.md` – Offizielles Angebot von Dipl.-Ing. Buenotte (Agent 4) nach § 18 EStG.
+2. `ANGEBOT_DIPL_ING_BUJANOVSKI.md` – Offizielles Angebot von Dipl.-Ing. Bujanovski (Agent 4) nach § 18 EStG.
 * `uebung_15_fasenfraesen_entgraten.cps` – Projektspezifische Quellcode-/Modelldatei.
 
 ## Nächste Schritte:

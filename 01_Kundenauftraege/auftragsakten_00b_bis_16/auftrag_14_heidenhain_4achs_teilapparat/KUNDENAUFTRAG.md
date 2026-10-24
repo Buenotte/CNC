@@ -2,7 +2,7 @@
 
 **Auftraggeber:** Urs Hodel (Produktionsleiter)  
 **Unternehmen:** Alps Precision AG (Schweiz)  
-**Empfänger:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 **Zielmaschine:** **Mikron HPM 600 HD (Heidenhain TNC 640)**  
 **Vereinbartes Budget:** **850,00 € netto** (1.011,50 € brutto)  
 
@@ -12,7 +12,7 @@
 
 # 📩 Kundenauftrag: Übung 14: Heidenhain Klartext-Steuerung (`TOOL CALL`, `L ... FMAX`) & 4. Drehachse (`A-Achse`) für Aufträge im deutschsprachigen Raum
 **Auftrags-Kategorie:** 14 (Heidenhain TNC 640 & 4-Achs-Teilapparat)
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
 
 ---
@@ -22,11 +22,11 @@
 So sieht der lukrativste Auftragstyp aus der Schweiz oder Süddeutschland aus, wo Werkstätten strikt Heidenhain Klartext verlangen:
 
 > **Von:** Urs Hodel *(Produktionsleiter)* `<u.hodel@alps-precision.ch>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 28. Oktober 2026, 09:20 Uhr  
 > **Betreff:** Postprozessor-Entwicklung: Nativer Heidenhain Klartext mit A-Achsen-Teilapparat  
 >
-> Sehr geehrter Herr Kollege Buenotte,  
+> Sehr geehrter Herr Kollege Bujanovski,  
 > 
 > wir betreiben in St. Gallen (Schweiz) drei Hermle C400 Bearbeitungszentren mit Heidenhain TNC 640 Steuerung. Zusätzlich haben wir einen CNC-Teilapparat (4. Drehachse / A-Achse) montiert, um Bauteile von vier Seiten in einer einzigen Aufspannung zu bearbeiten.  
 > 
@@ -49,7 +49,7 @@ So sieht der lukrativste Auftragstyp aus der Schweiz oder Süddeutschland aus, w
 ---
 
 ## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUENOTTE.md` in diesem Ordner.
+* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
 * **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
 * **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.
 

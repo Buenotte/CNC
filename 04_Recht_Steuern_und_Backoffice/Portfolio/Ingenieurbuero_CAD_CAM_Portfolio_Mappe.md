@@ -1,8 +1,8 @@
 # Ingenieurbüro für CAD/CAM-Fertigungstechnik, CNC-Prozessauslegung & Postprozessor-Entwicklung
 
-**Inhaber:** [Dein Vor- und Nachname], Diplom-Ingenieur *(in Deutschland offiziell anerkannter Hochschulabschluss)* & Senior Software Engineer  
+**Inhaber:** Dipl.-Ing. Bujanovski, Diplom-Ingenieur *(in Deutschland offiziell anerkannter Hochschulabschluss)* & Senior Software Engineer  
 **Standort & Arbeitsweise:** 63526 Erlensee / Deutschland • **100 % Remote-Engineering & Digitale Zusammenarbeit** *(Einsatzgebiet: Deutschland, Österreich, Schweiz [DACH] – ortsunabhängige Betreuung per Cloud-Datenaustausch, Video-Simulation und Remote-Workstation)*  
-**Kontakt:** [Deine E-Mail-Adresse] | [Deine Telefonnummer]
+**Kontakt:** kontakt@ingenieurbuero-bujanovski.de | [Deine Telefonnummer]
 
 ---
 

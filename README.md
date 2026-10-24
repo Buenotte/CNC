@@ -1,6 +1,6 @@
-# 🚀 CNC-Ingenieurbüro Dipl.-Ing. Buenotte – Zentrale Projekt-Steuerung & Dashboard
+# 🚀 CNC-Ingenieurbüro Dipl.-Ing. Bujanovski – Zentrale Projekt-Steuerung & Dashboard
 
-Willkommen in der organisierten Entwicklungsumgebung und dem digitalen Ingenieurbüro von **Dipl.-Ing. Buenotte** unter `C:\Projekte\CNC`. 
+Willkommen in der organisierten Entwicklungsumgebung und dem digitalen Ingenieurbüro von **Dipl.-Ing. Bujanovski** unter `C:\Projekte\CNC`. 
 
 Dieses Projekt vereint die **Software-Entwicklung von CNC-Postprozessoren *(JavaScript-basierte `.cps`-Übersetzungsskripte für Autodesk Fusion, Python/Tcl für Siemens NX und Heidenhain)*, automatisierte G-Code-Sicherheitsprüfungen** sowie die **vollständig digitale Abwicklung von B2B-Kundenaufträgen *(100 % Remote-Engineering nach § 18 EStG)***.
 
@@ -85,4 +85,4 @@ Schreibe mir hier im Chat einfach einen kurzen Satz, um einen der 4 registrierte
 
 ---
 
-*Inhaber: Dipl.-Ing. Buenotte | Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik | 63526 Erlensee*
+*Inhaber: Dipl.-Ing. Bujanovski | Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik | 63526 Erlensee*

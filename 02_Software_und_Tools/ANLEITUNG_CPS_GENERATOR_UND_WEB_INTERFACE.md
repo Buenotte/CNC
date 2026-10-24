@@ -46,7 +46,7 @@ Das Web-Interface ist der **bequemste Weg**. Sie bedienen das Programm wie einen
 
 #### 1. Kunden- & Entwicklerdaten:
 * **Kundenname / Firma:** Tragen Sie den Namen Ihres Kunden ein *(z. B. `Zerspanungstechnik Schmidt GmbH`)*. Dieser Name erscheint automatisch in allen Kopfzeilen des fertigen G-Codes!
-* **Ihr Entwickler-Name:** Ihr Name oder der Name Ihres Ingenieurbüros *(z. B. `Dipl.-Ing. CNC-Büro`)*. Das beweist Ihre Urheberschaft und schützt Sie rechtlich.
+* **Ihr Entwickler-Name:** Ihr Name oder der Name Ihres Ingenieurbüros *(z. B. `Dipl.-Ing. Bujanovski`)*. Das beweist Ihre Urheberschaft und schützt Sie rechtlich.
 * **Programmnummer & Kommentar:** z. B. `1001` und `KUNDENAUFTRAG FLANSCHPLATTE OP10`.
 
 #### 2. Maschinen-Steuerung *(Die 4 großen Industriestandards auf Knopfdruck)*:
@@ -111,7 +111,7 @@ Sie können die Kundenwünsche in einer kleinen Textdatei speichern, z. B. [`kun
 ```json
 {
   "kundenName": "Mueller Praezisionsteile GmbH",
-  "entwicklerName": "Dipl.-Ing. CNC-Büro",
+  "entwicklerName": "Dipl.-Ing. Bujanovski",
   "steuerungsTyp": "siemens",
   "programmNummer": 2002,
   "programmKommentar": "VENTILBLOCK OP10",

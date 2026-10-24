@@ -247,8 +247,8 @@ vielen Dank für Ihre Anfrage! Damit ich Ihr Bauteil / Ihren Postprozessor zu 10
 Sie erhalten von mir im Anschluss das komplett geprüfte NC-Programm, ein Video der 3D-Maschinensimulation sowie das fertige Einrichteblatt als PDF zurück.
 
 Mit freundlichen Grüßen
-Dipl.-Ing. Buenotte
-kontakt@ingenieurbuero-buenotte.de
+Dipl.-Ing. Bujanovski
+kontakt@ingenieurbuero-bujanovski.de
 ```
 
 
@@ -293,8 +293,94 @@ Damit in deinem Büro nichts verloren geht, hat jede Information ihren festen Ab
 | Informationsart | Speicherort im Projektverzeichnis | Zweck & Inhalt |
 | :--- | :--- | :--- |
 | **System-Bauplan & Workflow** *(diese Anleitung)* | [`c:\Projekte\CNC\04_Recht_Steuern_und_Backoffice\KI_Agenten_System_und_Bauplan.md`](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/KI_Agenten_System_und_Bauplan.md) | Zentrale Dokumentation aller Agenten-Rollen, Prompts und Workflows. |
-| **Kundenaufträge der Übungen** | [`c:\Projekte\CNC\03_Fachdokumentation_und_Wissen\ALLE_UEBUNGEN_HANDBUCH.md`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md) | Jede Übung (Übung 00b bis 16) beginnt mit einem vollständigen Kundenauftrag an Dipl.-Ing. Buenotte. |
+| **Kundenaufträge der Übungen** | [`c:\Projekte\CNC\03_Fachdokumentation_und_Wissen\ALLE_UEBUNGEN_HANDBUCH.md`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md) | Jede Übung (Übung 00b bis 16) beginnt mit einem vollständigen Kundenauftrag an Dipl.-Ing. Bujanovski. |
 | **Erstellte Angebote & Rechnungen** | `c:\Projekte\CNC\04_Recht_Steuern_und_Backoffice\Portfolio\Angebote_und_Rechnungen\` | Von Agent 4 generierte Angebote und Rechnungen nach § 18 EStG. |
 | **Geprüfte NC-Programme** | `c:\Projekte\CNC\nc_programme\` | Fertige Maschinencode-Dateien (`.nc`, `.H`, `.MPF`). |
 | **Fertige Einrichteblätter** | `c:\Projekte\CNC\04_Recht_Steuern_und_Backoffice\Portfolio\Einrichteblaetter\` | Von Agent 3 erzeugte Rüst- und Werkzeugdatenblätter für den Bediener. |
 | **Gesetzliche Grundlagen & Leitfaden** | [`c:\Projekte\CNC\04_Recht_Steuern_und_Backoffice\CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md`](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md) | Steuerliche und rechtliche Einordnung (§ 18 EStG, Nebentätigkeitsgenehmigung). |
+
+---
+
+## 9. Technische System-Architektur, Steuerung & Regelwerk (Hintergrundwissen: Wie das System funktioniert)
+
+Dieses Kapitel beantwortet die zentralen organisatorischen und technischen Fragen zur Funktionsweise, Steuerung und Reglementierung der KI-Agenten im CNC-Ingenieurbüro:
+
+### 9.1 Aus welchem Rahmenprogramm werden die Agenten aufgerufen?
+
+* **Die Entwicklungsumgebung (IDE – Integrated Development Environment):**
+  Das Basissystem ist **Google Antigravity** *(eine spezialisierte agentische KI-Entwicklungsumgebung, die auf großen Sprachmodellen [LLMs – Large Language Models aus der Gemini-Familie] und einem modularen Werkzeug-Framework basiert)*.
+* **Keine eigenständigen Windows-Installationsprogramme (`.exe`):**
+  Die vier Agenten *(Agent 1 bis Agent 4)* sind **keine separat installierten Desktop-Programme**, sondern **spezialisierte Rollen-Personas *(vordefinierte System-Profile mit fest zugewiesenen Aufgaben, Prompts und Kompetenzgrenzen)*** innerhalb dieser Antigravity-Umgebung.
+* **Direkter Zugriff auf Systemwerkzeuge (Tools & Laufzeitumgebungen):**
+  Wenn ein Agent aktiviert wird, nutzt Antigravity direkte Programmierschnittstellen zu deinen lokalen Rechnerressourcen:
+  1. **PowerShell-Terminal *(Windows-Befehlszeile)*:** Zur Ausführung automatisierter Tests, Dateisuche und Projektnavigation.
+  2. **Node.js-Laufzeitumgebung *(JavaScript-Engine)*:** Zur blitzschnellen Ausführung des Postprozessor-Simulators [`simuliere_post.js`](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/simuliere_post.js) ohne die schwere Desktop-Software Autodesk Fusion.
+  3. **Python-Interpreter *(Programmiersprache für Engineering-Skripte)*:** Zur G-Code-Analyse über [`cnc_setup_sheet_extractor.py`](file:///c:/Projekte/CNC/02_Software_und_Tools/GitHub_Projekte/cnc_setup_sheet_extractor.py) und zum Rendern von 3D-Werkzeugbahn-Videos.
+  4. **Dateisystem-Zugriff *(Lesen & Schreiben)***: Zum Erstellen und Bearbeiten von Maschinencode (`.nc`), Markdown-Dokumenten (`.md`) und Konfigurationsdateien.
+  5. **Subagenten-Steuerung *(Hintergrund-Agenten via `invoke_subagent`)*:** Möglichkeit, rechenintensive oder parallele Recherchen im Hintergrund auszuführen, ohne den Haupt-Chat zu blockieren.
+
+---
+
+### 9.2 Wer steuert die Agenten und wie funktioniert die Befehlskette?
+
+* **Der alleinige Entscheider & Auftraggeber bist DU *(Dipl.-Ing. Bujanovski)*:**
+  Die KI-Agenten agieren niemals autonom ohne deine Anweisung oder gegen deinen Willen. Sie warten auf deine Initiierung. Du steuerst das System, indem du im Chat eine Aufgabe formulierst *(z. B. „Starte Agent 2: Generiere den NC-Code für Übung 04“)* oder die fertigen Prompts aus der Datei [`WORKFLOW_UND_PROMPTS.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/WORKFLOW_UND_PROMPTS.md) kopierst.
+* **Die Vermittlungs- und Kontrollinstanz ist der Antigravity-Assistent:**
+  Er analysiert deine Eingabe, erkennt anhand der Schlüsselwörter, welcher Spezialist benötigt wird, setzt zu Beginn der Nachricht den transparenten Agenten-Banner *(z. B. `💻 [Aktivierter Agent: Agent 2 – Postprocessor-Coder-Agent]`)* und führt die Befehle strikt nach den vorgegebenen Qualitätsregeln aus.
+
+---
+
+### 9.3 Woher weiß die KI über dieses System und die Agenten? (Das 2-Säulen-Regelwerk)
+
+Die künstliche Intelligenz „errät“ diese Abläufe nicht, sondern liest bei jedem Programmstart und bei jeder Interaktion ein fest definiertes **2-Säulen-Wissenssystem** aus:
+
+#### Säule 1: Globale und lokale System-Regeln *(Rules / Instruction Files)*
+Diese Regeln sind als Markdown-Dateien im Konfigurationsverzeichnis deines Benutzerprofils sowie im Projektverzeichnis hinterlegt und werden vom System automatisch als oberste Handlungsrichtlinie injiziert:
+1. **Globale Verhaltensregel:** [`C:\Users\Administrador\.gemini\config\rules\no_shorten_delete.md`](file:///C:/Users/Administrador/.gemini/config/rules/no_shorten_delete.md)
+   - *Regel 9:* Verbindliche transparente Nennung des aktiven KI-Agenten zu Beginn jeder Antwort *(z. B. `🛡️ [Aktivierter Agent: Agent 3...]`)*.
+   - *Regel 1 & 2:* Absolutes Kürzungs- und Löschverbot für bestehende Dokumente (Append & Expand Only).
+   - *Regel 3:* Pflicht zur Erklärung aller Fachbegriffe in Klammern `(...)`.
+   - *Regel 4 & 5:* Verbot eigenmächtiger Git-Commits und Verbot unaufgeforderter Testläufe.
+2. **Globale Auftragsregel:** [`C:\Users\Administrador\.gemini\config\rules\cnc_kundenauftrag_standard.md`](file:///C:/Users/Administrador/.gemini/config/rules/cnc_kundenauftrag_standard.md)
+   - Verbindliche Definition der 6 Pflicht-Artefakte für jeden Kundenauftrag und des standardisierten 4-Stufen-Workflows.
+3. **Projekt-Regel:** [`c:\Projekte\CNC\.agents\rules\kundenauftrag_standard.md`](file:///c:/Projekte/CNC/.agents/rules/kundenauftrag_standard.md)
+   - Festlegung isolierter Auftragsordner unter `01_Kundenauftraege/` zur Vermeidung von Datenvermischung.
+
+#### Säule 2: Projekt-Dokumentation & Quellcode *(Workspace-Wissen)*
+Die fachliche Tiefe und die genaue Aufgabenverteilung liest das System direkt aus den Dokumenten deines Projektordners:
+* [`04_Recht_Steuern_und_Backoffice/KI_Agenten_System_und_Bauplan.md`](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/KI_Agenten_System_und_Bauplan.md) *(dieses Dokument: Exakte System-Prompts, Stundensätze, Aufgaben und Rollenverteilung)*.
+* [`README.md`](file:///c:/Projekte/CNC/README.md) *(Haupt-Dashboard mit Verzeichnisstruktur und Beispielsätzen zur Agentenaktivierung)*.
+* [`03_Fachdokumentation_und_Wissen/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md) *(5-Stufen-Prüfkette für Agent 3)*.
+
+---
+
+### 9.4 Trigger-Matrix: Wann genau wird welcher Agent aufgerufen? (Konkrete Auslöser)
+
+Die folgende Übersicht fasst präzise zusammen, bei welchen Ereignissen und in welchen Phasen welcher Agent zuständig ist:
+
+| KI-Agent | Fachliche Rolle | Wann wird er aufgerufen? *(Konkreter Auslöser & Phase)* | Zu erzeugende Ergebnis-Dateien *(Artefakte)* |
+| :--- | :--- | :--- | :--- |
+| **Agent 1** *(Lead-Scout)* | Kunden- & Systemhaus-Recherche | • **Akquise-Phase (Vor Projektstart):** Wenn neue B2B-Kunden, Fräsereien oder CAM-Systemhäuser für 100 % Remote-Zusammenarbeit gesucht werden. | `Kunden_und_Systemhaeuser_Liste.md` *(Tabelle mit Ansprechpartnern, Maschinenpark und maßgeschneiderten E-Mails)* |
+| **Agent 4** *(Backoffice)* | Kaufmännische Auslegung & Abrechnung | • **Schritt 1 (Auftragsbeginn):** Sobald die Datei [`KUNDENAUFTRAG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/KUNDENAUFTRAG.md) oder eine Kundenzeichnung vorliegt.<br>• **Schritt 4 (Projektabschluss):** Sobald der Code geprüft und vom Kunden/Simulator freigegeben ist. | • **Schritt 1:** `02_ANGEBOT_DIPL_ING_BUJANOVSKI.md` *(Rechtssicheres Angebot nach § 18 EStG mit Haftungsausschluss)*<br>• **Schritt 4:** `07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md` *(Steuerkonforme Rechnung nach § 14 UStG für das Finanzamt Hanau)* |
+| **Agent 2** *(Postprocessor-Coder)* | Software-Entwicklung & NC-Generierung | • **Schritt 2 (Technische Umsetzung):** Wenn das Angebot angenommen wurde und der Maschinencode berechnet werden muss.<br>• **Postprozessor-Auftrag:** Wenn ein Kunde oder Systemhaus Skriptanpassungen (`.cps` / `.tcl`) für Steuerungen *(Heidenhain, Siemens, Haas, Fanuc)* wünscht. | `[auftragsname].nc` *(Fertig postprozessierter Maschinencode mit Sicherheitszeile und Z-MIN Header)* sowie modifizierte Postprozessoren (`.cps`) |
+| **Agent 3** *(NC-Safety & Setup)* | Qualitäts-Controller & Rüstdaten-Ersteller | • **Schritt 3 (Sicherheitsaudit & Rüstvorbereitung):** Unmittelbar nachdem Agent 2 den Maschinencode erzeugt hat *(Vier-Augen-Prinzip: Programmierer gibt eigenen Code niemals frei)*. | 1. `05_SICHERHEITS_CRASH_PRUEFBERICHT.md` *(5-Stufen-Prüfbericht)*<br>2. `06_EINRICHTEBLATT_SETUP_SHEET.md` *(Rüstblatt für den Werker)*<br>3. `[auftragsname]_simulation_video.mp4` *(Gerendertes 3D-Simulationsvideo)* |
+
+---
+
+### 9.5 Die 4 verbindlichen Fundstellen im Workspace (Wo ist was geregelt?)
+
+Falls du nachschlagen möchtest, wo diese Vorgaben exakt festgeschrieben sind:
+
+1. **In den Workflow-Dateien jedes einzelnen Auftrags:**
+   [`01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/WORKFLOW_UND_PROMPTS.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_03/WORKFLOW_UND_PROMPTS.md)
+   *(Enthält die vollständige Artefakte-Tabelle, das Diagramm der 4 Phasen und die fertigen Prompts zum Kopieren).*
+2. **Im zentralen Bauplan der Agenten (dieses Dokument):**
+   [`04_Recht_Steuern_und_Backoffice/KI_Agenten_System_und_Bauplan.md`](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/KI_Agenten_System_und_Bauplan.md)
+   *(Enthält alle System-Prompts, Stundensätze, Rollenprofile und Architektur-Diagramme).*
+3. **In den verbindlichen Standard-Regeln:**
+   - Projektbezogen: [`.agents/rules/kundenauftrag_standard.md`](file:///c:/Projekte/CNC/.agents/rules/kundenauftrag_standard.md)
+   - Benutzerweit / Global: [`C:\Users\Administrador\.gemini\config\rules\cnc_kundenauftrag_standard.md`](file:///C:/Users/Administrador/.gemini/config/rules/cnc_kundenauftrag_standard.md) und [`C:\Users\Administrador\.gemini\config\rules\no_shorten_delete.md`](file:///C:/Users/Administrador/.gemini/config/rules/no_shorten_delete.md)
+   *(Regeln für isolierte Ordner, Kennzeichnungspflicht und Null-Toleranz-Kürzungsverbot).*
+4. **Auf dem Haupt-Dashboard:**
+   [`README.md`](file:///c:/Projekte/CNC/README.md#L78-L86)
+   *(Zentrale Übersicht mit Beispielsätzen zum Starten der 4 Agenten im Chat).*

@@ -20,7 +20,7 @@ const readline = require("readline");
  */
 const standardAuftrag = {
   kundenName: "Zerspanungstechnik Schmidt & Partner GmbH",
-  entwicklerName: "Dipl.-Ing. CAD/CAM Entwickler",
+  entwicklerName: "Dipl.-Ing. Bujanovski",
   steuerungsTyp: "haas", // 'haas', 'fanuc', 'siemens', 'heidenhain'
   programmNummer: 1001,
   programmKommentar: "KUNDENAUFTRAG FLANSCHPLATTE",
@@ -59,7 +59,7 @@ function generiereCPS(auftrag) {
 
 description = "${auftrag.kundenName} - ${auftrag.steuerungsTyp.toUpperCase()} Postprozessor";
 vendor = "${auftrag.kundenName}";
-vendorUrl = "https://github.com/Buenotte/CNC";
+vendorUrl = "https://github.com/Bujanovski/CNC";
 legal = "Erstellt durch CAD/CAM Ingenieurbuero. Alle Rechte vorbehalten.";
 certificationLevel = 2;
 minimumRevision = 45700;

@@ -2,7 +2,7 @@
 **Projekt / Auftrag:** Auftrag 03 – Flanschplatte Z-MIN & Kollisionsschutz  
 **Kunde:** Schmidt Präzisionstechnik GmbH (Markus Weber, Fertigungsleiter)  
 **Prüfdatum:** 22. Oktober 2026  
-**Prüfender Ingenieur:** Dipl.-Ing. Buenotte  
+**Prüfender Ingenieur:** Dipl.-Ing. Bujanovski  
 **Geprüfte NC-Datei:** `uebung_03_z_min_berechnung.nc` (Haas VF-2 / NGC Steuerung)  
 **Status:** **BESTANDEN (GRÜN) – Freigabe zum Einfahren erteilt**
 
@@ -39,4 +39,4 @@
 Das NC-Programm ist syntaktisch und kinematisch fehlerfrei. Gemäß ingenieurrechtlicher Sorgfaltspflicht muss das erste Werkstück vom qualifizierten Bediener an der Haas VF-2 im Einzelsatz *(Single Block)* bei 25 % Eilgangübersteuerung eingefahren werden.
 
 **Freigegeben am:** 22. Oktober 2026  
-**Freigabevermerk:** Dipl.-Ing. Buenotte
+**Freigabevermerk:** Dipl.-Ing. Bujanovski

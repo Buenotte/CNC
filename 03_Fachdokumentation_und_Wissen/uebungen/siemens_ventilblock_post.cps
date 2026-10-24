@@ -3,7 +3,7 @@
  * MAßGESCHNEIDERTER KUNDEN-POSTPROZESSOR (.CPS)
  * ==============================================================================
  * KUNDE       : Mueller Praezisionsteile GmbH
- * ENTWICKLER  : Dipl.-Ing. CNC-Büro
+ * ENTWICKLER  : Dipl.-Ing. Bujanovski
  * STEUERUNG   : SIEMENS
  * GENERIERT AM: 2026-10-21 16:43
  * BESCHREIBUNG: VENTILBLOCK OP10
@@ -12,7 +12,7 @@
 
 description = "Mueller Praezisionsteile GmbH - SIEMENS Postprozessor";
 vendor = "Mueller Praezisionsteile GmbH";
-vendorUrl = "https://github.com/Buenotte/CNC";
+vendorUrl = "https://github.com/Bujanovski/CNC";
 legal = "Erstellt durch CAD/CAM Ingenieurbuero. Alle Rechte vorbehalten.";
 certificationLevel = 2;
 minimumRevision = 45700;
@@ -91,7 +91,7 @@ function onOpen() {
   writeComment("KUNDE      : " + "Mueller Praezisionsteile GmbH");
   writeComment("PROGRAMM   : O" + 2002 + " (" + "VENTILBLOCK OP10" + ")");
   writeComment("STEUERUNG  : " + "SIEMENS");
-  writeComment("ENTWICKLER : " + "Dipl.-Ing. CNC-Büro");
+  writeComment("ENTWICKLER : " + "Dipl.-Ing. Bujanovski");
   writeComment("DATUM/ZEIT : " + "2026-10-21 16:43");
   writeComment("EINHEITEN  : " + "METRISCH (MM)");
   writeComment("==================================================");

@@ -3,7 +3,7 @@
 Erstellt für jeden der 17 Kundenaufträge einen eigenen, perfekt organisierten Ordner
 unter c:\\Projekte\\CNC\\kundenauftraege\\ mit:
 1. KUNDENAUFTRAG_BRIEFING.md (Original-Anfrage des Kunden)
-2. ANGEBOT_DIPL_ING_BUENOTTE.md (Von Agent 4 erstelltes, rechtssicheres Angebot nach § 18 EStG)
+2. ANGEBOT_DIPL_ING_BUJANOVSKI.md (Von Agent 4 erstelltes, rechtssicheres Angebot nach § 18 EStG)
 3. Vorhandene Quellcode-Dateien (.cps / .nc) aus uebungen/ kopiert
 4. STATUS_UND_CHECKLISTE.md (Übersicht der Dateien & Bearbeitungsstatus)
 """
@@ -60,7 +60,7 @@ for idx, (ueb_id, folder_name, source_files) in enumerate(folder_mapping):
     briefing_path = os.path.join(order_dir, "KUNDENAUFTRAG_BRIEFING.md")
     briefing_content = f"""# 📩 Kundenauftrag: {uebung_title}
 **Auftrags-Kategorie:** {order_subtitle}
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
 
 ---
@@ -72,7 +72,7 @@ for idx, (ueb_id, folder_name, source_files) in enumerate(folder_mapping):
 ---
 
 ## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUENOTTE.md` in diesem Ordner.
+* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
 * **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
 * **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.
 """
@@ -90,11 +90,11 @@ for idx, (ueb_id, folder_name, source_files) in enumerate(folder_mapping):
     budget_str = budget_match.group(1) if budget_match else "Nach Aufwand (Stundensatz 85,00 €)"
     
     # Generate formal engineering proposal from Agent 4
-    angebot_path = os.path.join(order_dir, "ANGEBOT_DIPL_ING_BUENOTTE.md")
+    angebot_path = os.path.join(order_dir, "ANGEBOT_DIPL_ING_BUJANOVSKI.md")
     angebot_content = f"""# 📄 Freiberufliches Ingenieur-Angebot
-**Ingenieurbüro Dipl.-Ing. Buenotte**  
+**Ingenieurbüro Dipl.-Ing. Bujanovski**  
 Softwaretechnik & CAD/CAM-Fertigungsprozesse  
-63526 Erlensee | E-Mail: kontakt@ingenieurbuero-buenotte.de  
+63526 Erlensee | E-Mail: kontakt@ingenieurbuero-bujanovski.de  
 Steuerliche Einordnung: Freiberufliche Tätigkeit nach § 18 Abs. 1 Nr. 1 EStG (Finanzamt Hanau)
 
 ---
@@ -125,7 +125,7 @@ vielen Dank für Ihre Anfrage. Gerne biete ich Ihnen die ingenieurtechnische Bea
 Gemäß den ingenieurrechtlichen Sorgfaltspflichten obliegt die finale Prüfung der Werkzeugdaten, der Spannmittel sowie das überwachte Einfahren des ersten Bauteils im Einzelsatzbetrieb mit reduzierter Vorschubübersteuerung dem qualifizierten Bedienpersonal des Auftraggebers an der realen Maschine.
 
 Mit freundlichen Grüßen  
-**Dipl.-Ing. Buenotte**  
+**Dipl.-Ing. Bujanovski**  
 *(Freiberuflicher Ingenieur)*
 """
     with open(angebot_path, "w", encoding="utf-8") as f:
@@ -156,7 +156,7 @@ Mit freundlichen Grüßen
 
 ## In diesem Ordner enthaltene Dateien:
 1. `KUNDENAUFTRAG_BRIEFING.md` – Vollständiger Kundenbriefing-Text mit Maschinen- und Bauteildaten.
-2. `ANGEBOT_DIPL_ING_BUENOTTE.md` – Offizielles Angebot von Dipl.-Ing. Buenotte (Agent 4) nach § 18 EStG.
+2. `ANGEBOT_DIPL_ING_BUJANOVSKI.md` – Offizielles Angebot von Dipl.-Ing. Bujanovski (Agent 4) nach § 18 EStG.
 """
     for cf in copied_files:
         status_content += f"* `{cf}` – Projektspezifische Quellcode-/Modelldatei.\n"
@@ -177,7 +177,7 @@ master_content = """# 🗂️ Zentrale Übersicht: Alle 17 Kundenauftrags-Ordner
 
 Hier findest du für **jeden einzelnen Kundenauftrag einen eigenständigen Ordner** mit allen zugehörigen Dokumenten:
 * Das **Kundenbriefing** (`KUNDENAUFTRAG_BRIEFING.md`)
-* Das offizielle **Angebot von Dipl.-Ing. Buenotte** (`ANGEBOT_DIPL_ING_BUENOTTE.md` nach § 18 EStG)
+* Das offizielle **Angebot von Dipl.-Ing. Bujanovski** (`ANGEBOT_DIPL_ING_BUJANOVSKI.md` nach § 18 EStG)
 * Die zugehörigen **Quellcode-Dateien** (`.cps`, `.nc`, 3D-Modelle)
 * Die **Statusübersicht** (`STATUS_UND_DATEIEN.md`)
 

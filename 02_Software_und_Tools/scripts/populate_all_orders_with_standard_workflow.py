@@ -32,8 +32,8 @@ order_configs = {
         "machine": "3-Achs-Bearbeitungszentrum Hermle C400",
         "nc_file": "uebung_01_entwickler_header.nc",
         "cps_file": "uebung_01_entwickler_header.cps",
-        "tech_req": "ISO-zertifizierter Entwickler-Infoblock in onOpen() mit Bauteilname, Kunde, Programmierer (Dipl.-Ing. Buenotte), Datum/Uhrzeit, WCS G54 und Hermle-Sicherheitszeile.",
-        "test_step2": "Textprüfung des Programmkopfs: Steht 'ENTWICKLER: DIPL.-ING. BUENOTTE' und 'KUNDE: KLAUSNER FORMENBAU' in den Klammern (...) drin?",
+        "tech_req": "ISO-zertifizierter Entwickler-Infoblock in onOpen() mit Bauteilname, Kunde, Programmierer (Dipl.-Ing. Bujanovski), Datum/Uhrzeit, WCS G54 und Hermle-Sicherheitszeile.",
+        "test_step2": "Textprüfung des Programmkopfs: Steht 'ENTWICKLER: DIPL.-ING. BUJANOVSKI' und 'KUNDE: KLAUSNER FORMENBAU' in den Klammern (...) drin?",
         "test_step3": "Verifikation gegen ISO-9001 Dokumentationsstandards: Lückenlose Rückverfolgbarkeit für die Qualitätssicherung."
     },
     "auftrag_02_werkzeugliste_feinmechanik": {
@@ -258,7 +258,7 @@ for folder_name, cfg in order_configs.items():
 
 **Auftraggeber:** {cfg['kunde']}  
 **Unternehmen:** {cfg['firma']}  
-**Empfänger:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 **Zielmaschine:** **{cfg['machine']}**  
 **Vereinbartes Budget:** **{cfg['budget']}** ({cfg['brutto']})  
 
@@ -283,7 +283,7 @@ Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten er
 
 | Artefakt-Dateiname | Was ist das? | Wo steht die Datei? *(Speicherort)* | Wer erzeugt sie? |
 | :--- | :--- | :--- | :---: |
-| **`02_ANGEBOT_DIPL_ING_BUENOTTE.md`** | Rechtssicheres B2B-Angebot ({cfg['budget']}) | [`02_ANGEBOT_DIPL_ING_BUENOTTE.md`](file:///{folder_path.replace(chr(92), '/')}/02_ANGEBOT_DIPL_ING_BUENOTTE.md) | **Agent 4** *(Backoffice)* |
+| **`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`** | Rechtssicheres B2B-Angebot ({cfg['budget']}) | [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///{folder_path.replace(chr(92), '/')}/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | **Agent 4** *(Backoffice)* |
 | **`{cfg['nc_file']}`** | Fertiger Maschinencode für {cfg['machine']} | [`{cfg['nc_file']}`](file:///{folder_path.replace(chr(92), '/')}/{cfg['nc_file']}) | **Agent 2** *(Post-Coder)* |
 | **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | 5-Stufen-Sicherheitsprüfbericht *(Null-Kollisions-Garantie)* | [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///{folder_path.replace(chr(92), '/')}/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | **Agent 3** *(NC-Safety)* |
 | **`06_EINRICHTEBLATT_SETUP_SHEET.md`** | Rüstdatenblatt für den Maschinenbediener vor Ort | [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///{folder_path.replace(chr(92), '/')}/06_EINRICHTEBLATT_SETUP_SHEET.md) | **Agent 3** *(NC-Safety)* |
@@ -299,7 +299,7 @@ Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten er
                              ▼
  ┌────────────────────────────────────────────────────────────────────────┐
  │ SCHRITT 1: ANGEBOT ERSTELLEN (Agent 4: Backoffice-Agent)              │
- │ Prompt 1 ausführen ──► Erzeugt: 02_ANGEBOT_DIPL_ING_BUENOTTE.md        │
+ │ Prompt 1 ausführen ──► Erzeugt: 02_ANGEBOT_DIPL_ING_BUJANOVSKI.md        │
  └───────────────────────────┬────────────────────────────────────────────┘
                              │
                              ▼
@@ -331,7 +331,7 @@ Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten er
 ```text
 Starte bitte Agent 4 (Backoffice-Agent):
 Lies die Kundenanfrage in {folder_path}\\KUNDENAUFTRAG.md.
-Erstelle direkt im Ordner {folder_path}\\ das formelle B2B-Angebot "02_ANGEBOT_DIPL_ING_BUENOTTE.md" für {cfg['kunde']} ({cfg['firma']}) über {cfg['budget']}. Verwende ausschließlich ingenieurmäßige Leistungsbeschreibungen nach § 18 EStG und binde die verbindliche Haftungsausschluss-Klausel für das Einfahren des ersten Werkstücks im Einzelsatz ein.
+Erstelle direkt im Ordner {folder_path}\\ das formelle B2B-Angebot "02_ANGEBOT_DIPL_ING_BUJANOVSKI.md" für {cfg['kunde']} ({cfg['firma']}) über {cfg['budget']}. Verwende ausschließlich ingenieurmäßige Leistungsbeschreibungen nach § 18 EStG und binde die verbindliche Haftungsausschluss-Klausel für das Einfahren des ersten Werkstücks im Einzelsatz ein.
 ```
 
 #### 🔍 Wie wird das Angebot getestet und geprüft?
@@ -387,7 +387,7 @@ Erstelle jetzt im selben Ordner die steuersichere Honorarrechnung "07_RECHNUNG_N
 ---
 
 ## 🛡️ 4. Abnahme-Kriterien (Checkliste für 100 % Erledigung)
-* [ ] [`02_ANGEBOT_DIPL_ING_BUENOTTE.md`](file:///{folder_path.replace(chr(92), '/')}/02_ANGEBOT_DIPL_ING_BUENOTTE.md) existiert und wurde geprüft.
+* [ ] [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///{folder_path.replace(chr(92), '/')}/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) existiert und wurde geprüft.
 * [ ] [`{cfg['nc_file']}`](file:///{folder_path.replace(chr(92), '/')}/{cfg['nc_file']}) existiert und lief fehlerfrei im Simulator.
 * [ ] [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///{folder_path.replace(chr(92), '/')}/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) bescheinigt Status **BESTANDEN (GRÜN)**.
 * [ ] [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///{folder_path.replace(chr(92), '/')}/06_EINRICHTEBLATT_SETUP_SHEET.md) liegt vor.

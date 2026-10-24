@@ -7,7 +7,7 @@
 ## In diesem Ordner enthaltene Dateien:
 1. `KUNDENAUFTRAG.md` – Vollständiger Kundenauftrag und Briefing.
 2. `WORKFLOW_UND_PROMPTS.md` – Der 4-Stufen-Workflow mit fertigen Prompts für alle Agenten.
-3. `02_ANGEBOT_DIPL_ING_BUENOTTE.md` – Offizielles B2B-Angebot von Dipl.-Ing. Buenotte (Agent 4) nach § 18 EStG.
+3. `02_ANGEBOT_DIPL_ING_BUJANOVSKI.md` – Offizielles B2B-Angebot von Dipl.-Ing. Bujanovski (Agent 4) nach § 18 EStG.
 4. `uebung_04_3d_modell_cam.nc` – Vollständiges NC-Programm für Haas VF-2 (Haas NGC Steuerung).
 5. `05_SICHERHEITS_CRASH_PRUEFBERICHT.md` – 5-Stufen-Sicherheitsprüfbericht mit Freigabestatus BESTANDEN (GRÜN).
 6. `06_EINRICHTEBLATT_SETUP_SHEET.md` – Druckfertiges Rüstblatt für den Maschinenbediener.
@@ -16,7 +16,7 @@
 9. `uebung_04_3d_modell_cam.cps` – Angepasster Postprozessor-Quellcode.
 10. `00_AUFTRAGS_LEITFADEN_UND_AGENTEN_ANLEITUNG.md` – Schritt-für-Schritt-Anleitung.
 11. `KUNDENAUFTRAG_BRIEFING.md` – Briefing-Kopie.
-12. `ANGEBOT_DIPL_ING_BUENOTTE.md` – Synchronisiertes Angebot.
+12. `ANGEBOT_DIPL_ING_BUJANOVSKI.md` – Synchronisiertes Angebot.
 
 ## Aktueller Erledigungsstatus:
 * **Status:** 100 % abgeschlossen und konsistent synchronisiert mit Handbuch Übung 4 und Kundenauftrag.

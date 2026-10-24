@@ -1,6 +1,6 @@
 # 📩 Kundenauftrag: Übung 3: Sicherheits-Schutz gegen Maschinencrash – Tiefste Frästiefe (`Z-MIN`) berechnen
 **Auftrags-Kategorie:** 3 (Original-Anfrage an dein Ingenieurbüro)
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
 
 ---
@@ -10,11 +10,11 @@
 So sieht eine typische, hochbezahlte E-Mail aus, die ein Zerspanungsbetrieb an dein freiberufliches Ingenieurbüro schickt, wenn es in der Werkstatt brennt:
 
 > **Von:** Markus Weber *(Fertigungsleiter)* `<m.weber@schmidt-praezision.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 22. Oktober 2026, 09:15 Uhr  
 > **Betreff:** EIL-ANFRAGE: Postprozessor-Anpassung & Z-MIN Sicherheitsprüfung für Haas VF-2 (Projekt: Flanschplatte 1001)  
 >
-> Sehr geehrter Herr Kollege Dipl.-Ing. Buenotte,  
+> Sehr geehrter Herr Kollege Dipl.-Ing. Bujanovski,  
 > 
 > ich wende mich mit einer dringenden technischen Aufgabenstellung an Ihr Ingenieurbüro.  
 > 
@@ -65,6 +65,6 @@ So sieht eine typische, hochbezahlte E-Mail aus, die ein Zerspanungsbetrieb an d
 ---
 
 ## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUENOTTE.md` in diesem Ordner.
+* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
 * **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
 * **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

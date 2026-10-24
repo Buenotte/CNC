@@ -3,13 +3,13 @@
 **Projekt / Übung:** Übung 01: Qualitäts-Rückverfolgbarkeit & Entwickler-Header  
 **Auftraggeber:** Stefan Klausner (Geschäftsführer, Klausner Formenbau & Zerspanung)  
 **Vereinbartes Budget:** **350,00 € netto**  
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik (§ 18 EStG)  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik (§ 18 EStG)  
 **Status:** In Bearbeitung / Systematische Abwicklung
 
 ---
 
 ## 🎯 1. Technisches Ziel dieses Auftrags
-Erweiterter Infoblock in onOpen() mit Bauteilname, Kunde, Programmierer (Dipl.-Ing. Buenotte), Datum, WCS G54 und Maschinentyp.
+Erweiterter Infoblock in onOpen() mit Bauteilname, Kunde, Programmierer (Dipl.-Ing. Bujanovski), Datum, WCS G54 und Maschinentyp.
 
 ---
 
@@ -21,7 +21,7 @@ Damit dieser Auftrag zu 100 % erledigt ist, müssen **alle folgenden Artefakte d
 | :--- | :---: | :---: | :--- |
 | **`00_AUFTRAGS_LEITFADEN_UND_AGENTEN_ANLEITUNG.md`** | Doku | *System* | Diese verbindliche Schritt-für-Schritt-Anleitung. |
 | **`KUNDENAUFTRAG_BRIEFING.md`** | Briefing | `Agent 1` / Kunde | Original-Auftrag mit Maschinenpark, Werkzeugen und Vorgaben. |
-| **`ANGEBOT_DIPL_ING_BUENOTTE.md`** | Vertrag | **`Agent 4`** | Rechtssicheres B2B-Angebot nach § 18 EStG inkl. Haftungsausschluss. |
+| **`ANGEBOT_DIPL_ING_BUJANOVSKI.md`** | Vertrag | **`Agent 4`** | Rechtssicheres B2B-Angebot nach § 18 EStG inkl. Haftungsausschluss. |
 | **`uebung_01_entwickler_header.cps`** | JavaScript | **`Agent 2`** | Maschinenspezifischer Postprozessor-Quellcode. |
 | **`uebung_01_entwickler_header.nc`** | G-Code / Klartext | **`Agent 2`** | Fertig generiertes NC-Maschinenprogramm für die Kundenmaschine. |
 | **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | Prüfbericht | **`Agent 3`** | 5-Stufen-Sicherheitsbericht (Crash-Check & Z-MIN Verifikation). |
@@ -37,12 +37,12 @@ Du musst die Arbeit nicht selbst programmieren. Nutze einfach die 4 spezialisier
 ### Schritt 1: Angebot erstellen & kalkulieren (Agent 4)
 * **Aufgabe:** Prüft die Kundenanfrage in `KUNDENAUFTRAG_BRIEFING.md`, kalkuliert den Festpreis von **350,00 € netto** und erstellt das B2B-Angebot.
 * **Befehl im Chat:**
-  > *„Starte bitte **Agent 4**: Überprüfe das Briefing im Ordner `auftrag_01_header_werkzeugbau` und erstelle das formelle Angebot `ANGEBOT_DIPL_ING_BUENOTTE.md` inklusive der Klausel zum Einfahren des ersten Bauteils im Einzelsatz.“*
+  > *„Starte bitte **Agent 4**: Überprüfe das Briefing im Ordner `auftrag_01_header_werkzeugbau` und erstelle das formelle Angebot `ANGEBOT_DIPL_ING_BUJANOVSKI.md` inklusive der Klausel zum Einfahren des ersten Bauteils im Einzelsatz.“*
 
 ### Schritt 2: Code & Postprozessor umsetzen (Agent 2)
 * **Aufgabe:** Passe onOpen() in uebung_01_entwickler_header.cps an, um alle ISO-zertifizierten Rückverfolgbarkeitsdaten im Header auszugeben.
 * **Befehl im Chat:**
-  > *„Starte bitte **Agent 2**: Bearbeite den Postprozessor `uebung_01_entwickler_header.cps` im Ordner `auftrag_01_header_werkzeugbau`. Erweiterter Infoblock in onOpen() mit Bauteilname, Kunde, Programmierer (Dipl.-Ing. Buenotte), Datum, WCS G54 und Maschinentyp. Generiere im Anschluss das NC-Programm `uebung_01_entwickler_header.nc`.“*
+  > *„Starte bitte **Agent 2**: Bearbeite den Postprozessor `uebung_01_entwickler_header.cps` im Ordner `auftrag_01_header_werkzeugbau`. Erweiterter Infoblock in onOpen() mit Bauteilname, Kunde, Programmierer (Dipl.-Ing. Bujanovski), Datum, WCS G54 und Maschinentyp. Generiere im Anschluss das NC-Programm `uebung_01_entwickler_header.nc`.“*
 
 ### Schritt 3: Crash-Prüfung & Einrichteblatt (Agent 3)
 * **Aufgabe:** Verifiziere den Programmkopf in uebung_01_entwickler_header.nc gegen die ISO-9001 Prüfkriterien.

@@ -1,6 +1,6 @@
 # 📩 Kundenauftrag: Übung 15: Kanten entgraten am 3D-Modell (`2D-Fase / Chamfer Milling`) mit einem 45°-Fasenfräser (`T04`)
 **Auftrags-Kategorie:** 15 (Automatisiertes Entgraten & Spitzenversatz)
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
 
 ---
@@ -10,11 +10,11 @@
 So sieht eine typische Anfrage aus, wenn ein Kunde Bauteile nicht mehr mühsam von Hand entgraten will und saubere $0{,}5 \times 45^\circ$ Fasen auf der CNC-Maschine verlangt:
 
 > **Von:** Matthias Kunz *(Geschäftsführer)* `<m.kunz@kunz-feinwerktechnik.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 29. Oktober 2026, 13:40 Uhr  
 > **Betreff:** CAM-Optimierung: Kanten entgraten mit 45°-Fasenfräser & Spitzenversatz  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
 > 
 > in unserer Fertigung in Villingen-Schwenningen müssen unsere Mitarbeiter nach dem Fräsen jedes Bauteil mit Dreikantschaber und Schleifvlies von Hand entgraten. Das kostet uns pro Schicht über 2 Stunden teure Handarbeit!  
 > 
@@ -35,6 +35,6 @@ So sieht eine typische Anfrage aus, wenn ein Kunde Bauteile nicht mehr mühsam v
 ---
 
 ## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUENOTTE.md` in diesem Ordner.
+* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
 * **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
 * **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

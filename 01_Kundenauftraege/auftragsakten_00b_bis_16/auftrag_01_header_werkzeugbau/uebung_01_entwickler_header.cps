@@ -24,14 +24,14 @@ properties = {
     title: "Entwickler-Name (Developer Name)",   // Beschriftung im Einstellungsdialog
     description: "Name des Postprozessor-Entwicklers", // Hilfetext für den Bediener
     type: "string",                             // Datentyp: Textzeichenkette (String)
-    value: "Mein Name",                         // Standardwert: Ihr Name als Entwickler
+    value: "Dipl.-Ing. Bujanovski",                         // Standardwert: Ihr Name als Entwickler
     scope: "post"                               // Gültigkeit: Gilt für den gesamten Postprozesslauf
   },
   companyName: {
     title: "Firmenname (Company Name)",         // Beschriftung für den Kundenbetrieb
     description: "Name der Zerspanungsfirma",   // Hilfetext
     type: "string",                             // Datentyp: Textzeichenkette
-    value: "Zerspanungstechnik GmbH",           // Standardwert des Betriebs
+    value: "Ingenieurbüro Dipl.-Ing. Bujanovski",           // Standardwert des Betriebs
     scope: "post"                               // Gilt für den Postprozessor
   }
 };

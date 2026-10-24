@@ -1,7 +1,7 @@
 # 💼 Ingenieur-Angebot: CAM-Programmierung & Prozessauslegung
-**Ingenieurbüro Dipl.-Ing. Buenotte**  
+**Ingenieurbüro Dipl.-Ing. Bujanovski**  
 Freiberuflicher Ingenieur für CAM-Systemtechnik & Softwareentwicklung  
-Am Limes 14, 63526 Erlensee | E-Mail: kontakt@ingenieurbuero-buenotte.de  
+Am Limes 14, 63526 Erlensee | E-Mail: kontakt@ingenieurbuero-bujanovski.de  
 Steuernummer: Beantragt beim Finanzamt Hanau (ELSTER-Verfahren)
 
 ---
@@ -50,5 +50,5 @@ Die CAM-Programmierung und NC-Code-Erstellung erfolgt nach bestem ingenieurwisse
 Wir freuen uns auf die Zusammenarbeit.
 
 Mit freundlichen Grüßen  
-**Dipl.-Ing. Buenotte**  
+**Dipl.-Ing. Bujanovski**  
 *(Freiberuflicher Ingenieur)*

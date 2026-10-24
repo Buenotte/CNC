@@ -2,7 +2,7 @@
 
 **Auftraggeber:** Michael Brandner *(Fertigungsleiter)* `<m.brandner@franken-praezision.de>`  
 **Unternehmen:** Franken Präzisionsteile GmbH, Schweinfurt  
-**Empfänger:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 **Datum:** 18. Oktober 2026, 10:15 Uhr  
 **Betreff:** Eilauftrag CAM-Programmierung: Lagerplatte Alu (50 Stück) – 3D-STEP anbei  
 
@@ -10,7 +10,7 @@
 
 ## Die Kunden-E-Mail (Das Briefing):
 
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
 > 
 > wir haben in unserer Fräserei einen kurzfristigen Programmier-Engpass. Anbei senden wir Ihnen das 3D-CAD-Modell `bauteil_1001.step` *(bzw. `bauteil_1001.stl`)* für eine Lagerplatte aus Aluminium EN AW-6082 (Stückzahl: 50).  
 > 

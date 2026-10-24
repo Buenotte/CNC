@@ -2,7 +2,7 @@
 **Bauteil-Name:** Flanschplatte / Lagerdeckel OP10  
 **Zeichnungs- / Auftragsnummer:** 2026-FL-1001  
 **Kunde:** Schmidt Präzisionstechnik GmbH  
-**Erstellt von:** Dipl.-Ing. Buenotte (CAD/CAM-Ingenieurbüro)  
+**Erstellt von:** Dipl.-Ing. Bujanovski (CAD/CAM-Ingenieurbüro)  
 **Zielmaschine:** Haas VF-2 (3-Achs Bearbeitungszentrum mit Haas NGC Steuerung)  
 **NC-Programm:** `uebung_03_z_min_berechnung.nc`
 

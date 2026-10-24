@@ -1,7 +1,7 @@
 # 📐 CNC-Projektregel: Verbindlicher Standard für Kundenaufträge & Workflow-Dateien
 
 ## Geltungsbereich:
-Gilt für alle CNC-Kundenaufträge, Übungen und Anfragen im Ingenieurbüro von **Dipl.-Ing. Buenotte** unter `c:\Projekte\CNC`.
+Gilt für alle CNC-Kundenaufträge, Übungen und Anfragen im Ingenieurbüro von **Dipl.-Ing. Bujanovski** unter `c:\Projekte\CNC`.
 
 ---
 
@@ -22,7 +22,7 @@ Jede `WORKFLOW_UND_PROMPTS.md` muss exakt dem Standard aus `test_auftrag_ubung_0
 
 ### Abschnitt 1: Tabelle der zu erzeugenden Artefakte & deren exakte Speicherorte
 Eine übersichtliche Markdown-Tabelle aller **6 Pflicht-Artefakte**:
-1. `02_ANGEBOT_DIPL_ING_BUENOTTE.md` *(B2B-Angebot nach § 18 EStG)*
+1. `02_ANGEBOT_DIPL_ING_BUJANOVSKI.md` *(B2B-Angebot nach § 18 EStG)*
 2. `[auftragsname].nc` *(Fertig generierter Maschinencode)*
 3. `05_SICHERHEITS_CRASH_PRUEFBERICHT.md` *(5-Stufen-Prüfbericht mit Freigabestatus)*
 4. `06_EINRICHTEBLATT_SETUP_SHEET.md` *(Rüstdatenblatt für den Maschinenbediener)*

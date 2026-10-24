@@ -1,6 +1,6 @@
 # 📩 Kundenauftrag: Übung 11: Gewindebohren (`G84` Rigid Tapping) – `M6`- und `M8`-Schraubengewinde ohne Werkzeugbruch programmieren (`F = S × Steigung`)
 **Auftrags-Kategorie:** 11 (Gewindebohrerbruch bei M8-Serienfertigung)
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
 
 ---
@@ -10,11 +10,11 @@
 So sieht eine typische Anfrage aus, wenn in der Fertigung ständig Gewindebohrer abbrechen und die Synchronisation zwischen Spindel und Z-Achse nicht stimmt:
 
 > **Von:** Christian Meyer *(Fertigungsleiter)* `<c.meyer@meyer-hydraulik.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 25. Oktober 2026, 09:10 Uhr  
 > **Betreff:** DRINGEND: Postprozessor-Korrektur G84 Rigid Tapping – Gewindebohrer brechen ab  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
 > 
 > wir fertigen in Hannover Hydraulikblöcke mit jeweils 8 M8-Gewindebohrungen. Seit gestern haben wir auf unserer CNC-Fräse bereits vier hochwertige Maschinengewindebohrer zerstört:  
 > Die Werkzeuge brechen unten im Sackloch beim Reversieren *(Umschalten von Rechtslauf auf Linkslauf)* explosionsartig ab und zerstören das teure Bauteil!  
@@ -36,6 +36,6 @@ So sieht eine typische Anfrage aus, wenn in der Fertigung ständig Gewindebohrer
 ---
 
 ## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUENOTTE.md` in diesem Ordner.
+* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
 * **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
 * **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

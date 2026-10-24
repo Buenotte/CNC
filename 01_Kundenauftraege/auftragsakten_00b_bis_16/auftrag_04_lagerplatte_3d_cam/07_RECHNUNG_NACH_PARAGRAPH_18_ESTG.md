@@ -1,7 +1,7 @@
 # 📄 Honorarrechnung (Agent 4: Backoffice-Agent)
-**Ingenieurbüro Dipl.-Ing. Buenotte**  
+**Ingenieurbüro Dipl.-Ing. Bujanovski**  
 Softwaretechnik & CAD/CAM-Fertigungsprozesse  
-63526 Erlensee | E-Mail: kontakt@ingenieurbuero-buenotte.de  
+63526 Erlensee | E-Mail: kontakt@ingenieurbuero-bujanovski.de  
 Steuer-Nummer: [Wird nach Erteilung durch FA Hanau eingesetzt]  
 Zuständiges Finanzamt: **Finanzamt Hanau**  
 Rechtsform: **Freiberufliche Ingenieurtätigkeit nach § 18 Abs. 1 Nr. 1 EStG**
@@ -54,5 +54,5 @@ Bitte überweisen Sie den fälligen Restbetrag von **226,10 €** innerhalb von 
 Vielen Dank für die angenehme und erfolgreiche Zusammenarbeit!
 
 Mit freundlichen Grüßen  
-**Dipl.-Ing. Buenotte**  
+**Dipl.-Ing. Bujanovski**  
 *(Freiberuflicher Ingenieur)*

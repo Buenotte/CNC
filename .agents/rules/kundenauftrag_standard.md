@@ -22,7 +22,7 @@ Jede `WORKFLOW_UND_PROMPTS.md` muss exakt dem Standard aus `test_auftrag_ubung_0
 
 ### Abschnitt 1: Tabelle der zu erzeugenden Artefakte & deren exakte Speicherorte
 Eine übersichtliche Markdown-Tabelle aller **6 Pflicht-Artefakte**:
-1. `02_ANGEBOT_DIPL_ING_BUENOTTE.md` *(B2B-Angebot nach § 18 EStG)*
+1. `02_ANGEBOT_DIPL_ING_BUJANOVSKI.md` *(B2B-Angebot nach § 18 EStG)*
 2. `[auftragsname].nc` *(Fertig generierter Maschinencode)*
 3. `05_SICHERHEITS_CRASH_PRUEFBERICHT.md` *(5-Stufen-Prüfbericht mit Freigabestatus)*
 4. `06_EINRICHTEBLATT_SETUP_SHEET.md` *(Rüstdatenblatt für den Maschinenbediener)*
@@ -86,17 +86,17 @@ Um Inkonsistenzen zwischen Kundenanfrage, Workflow-Prompts und Handbuchkapiteln 
    * Es ist streng verboten, in Vorlagen oder Kopfzeilen andere Maschinenmodelle stehenzulassen *(Verbot von Template-Drift durch unvollständiges Copy-Paste)*.
 
 2. **Kaufmännische Synchronität & Zahlungskonditionen:**
-   * Zahlungsbedingungen aus dem Kundenbriefing *(z. B. 50 % Anzahlung sofort, 50 % nach Vorlage des Freigabevideos)* müssen exakt so in das Angebot `02_ANGEBOT_DIPL_ING_BUENOTTE.md` und in die spätere Abrechnung übernommen werden.
+   * Zahlungsbedingungen aus dem Kundenbriefing *(z. B. 50 % Anzahlung sofort, 50 % nach Vorlage des Freigabevideos)* müssen exakt so in das Angebot `02_ANGEBOT_DIPL_ING_BUJANOVSKI.md` und in die spätere Abrechnung übernommen werden.
 
 3. **Einheitliche Dateinamen-Konvention (Präfix-Standard):**
    * Alle Artefakte müssen ausnahmslos der definierten Nomenklatur folgen:
-     - `02_ANGEBOT_DIPL_ING_BUENOTTE.md` *(immer mit führendem `02_`)*
+     - `02_ANGEBOT_DIPL_ING_BUJANOVSKI.md` *(immer mit führendem `02_`)*
      - `[auftragsname].nc`
      - `05_SICHERHEITS_CRASH_PRUEFBERICHT.md`
      - `06_EINRICHTEBLATT_SETUP_SHEET.md`
      - `[auftragsname]_simulation_video.mp4`
      - `07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`
-   * Veraltete Bezeichnungen ohne Präfix *(wie `ANGEBOT_DIPL_ING_BUENOTTE.md`)* sind sofort auf den Standard `02_...` zu vereinheitlichen.
+   * Veraltete Bezeichnungen ohne Präfix *(wie `ANGEBOT_DIPL_ING_BUJANOVSKI.md`)* sind sofort auf den Standard `02_...` zu vereinheitlichen.
 
 4. **Bereinigung redundanter Alt-Dateien (No Duplicate Briefings):**
    * Es darf im Auftragsordner nur **eine einzige, maßgebliche `KUNDENAUFTRAG.md`** geben. Veraltete Dubletten wie `KUNDENAUFTRAG_BRIEFING.md`, `00_AUFTRAGS_LEITFADEN...` oder `STATUS_UND_DATEIEN.md` dürfen bei Neuaufträgen nicht mehr angelegt werden; in Bestandsordnern sind diese Dokumente auf den aktuellen Stand von `KUNDENAUFTRAG.md` zu synchronisieren.

@@ -3,7 +3,7 @@
 **Projekt / Übung:** Übung 16: Meisterprüfung – 5-Punkte-Endabnahme & Zertifikat  
 **Auftraggeber:** Dipl.-Ing. Bernd Schäfer (Leiter Qualitätssicherung, Hessen Automotive GmbH)  
 **Vereinbartes Budget:** **490,00 € netto**  
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik (§ 18 EStG)  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik (§ 18 EStG)  
 **Status:** In Bearbeitung / Systematische Abwicklung
 
 ---
@@ -21,7 +21,7 @@ Damit dieser Auftrag zu 100 % erledigt ist, müssen **alle folgenden Artefakte d
 | :--- | :---: | :---: | :--- |
 | **`00_AUFTRAGS_LEITFADEN_UND_AGENTEN_ANLEITUNG.md`** | Doku | *System* | Diese verbindliche Schritt-für-Schritt-Anleitung. |
 | **`KUNDENAUFTRAG_BRIEFING.md`** | Briefing | `Agent 1` / Kunde | Original-Auftrag mit Maschinenpark, Werkzeugen und Vorgaben. |
-| **`ANGEBOT_DIPL_ING_BUENOTTE.md`** | Vertrag | **`Agent 4`** | Rechtssicheres B2B-Angebot nach § 18 EStG inkl. Haftungsausschluss. |
+| **`ANGEBOT_DIPL_ING_BUJANOVSKI.md`** | Vertrag | **`Agent 4`** | Rechtssicheres B2B-Angebot nach § 18 EStG inkl. Haftungsausschluss. |
 | **`uebung_16_endabnahme_meister_post.cps`** | JavaScript | **`Agent 2`** | Maschinenspezifischer Postprozessor-Quellcode. |
 | **`kunden_post_generiert.nc`** | G-Code / Klartext | **`Agent 2`** | Fertig generiertes NC-Maschinenprogramm für die Kundenmaschine. |
 | **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | Prüfbericht | **`Agent 3`** | 5-Stufen-Sicherheitsbericht (Crash-Check & Z-MIN Verifikation). |
@@ -37,7 +37,7 @@ Du musst die Arbeit nicht selbst programmieren. Nutze einfach die 4 spezialisier
 ### Schritt 1: Angebot erstellen & kalkulieren (Agent 4)
 * **Aufgabe:** Prüft die Kundenanfrage in `KUNDENAUFTRAG_BRIEFING.md`, kalkuliert den Festpreis von **490,00 € netto** und erstellt das B2B-Angebot.
 * **Befehl im Chat:**
-  > *„Starte bitte **Agent 4**: Überprüfe das Briefing im Ordner `auftrag_16_meister_endabnahme_audit` und erstelle das formelle Angebot `ANGEBOT_DIPL_ING_BUENOTTE.md` inklusive der Klausel zum Einfahren des ersten Bauteils im Einzelsatz.“*
+  > *„Starte bitte **Agent 4**: Überprüfe das Briefing im Ordner `auftrag_16_meister_endabnahme_audit` und erstelle das formelle Angebot `ANGEBOT_DIPL_ING_BUJANOVSKI.md` inklusive der Klausel zum Einfahren des ersten Bauteils im Einzelsatz.“*
 
 ### Schritt 2: Code & Postprozessor umsetzen (Agent 2)
 * **Aufgabe:** Führe die finale Code-Synthese aller Module (Header, Werkzeugliste, Z-MIN, Rückzug, M30) durch.

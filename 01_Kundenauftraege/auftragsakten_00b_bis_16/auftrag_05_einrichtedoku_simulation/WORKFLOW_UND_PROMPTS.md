@@ -10,8 +10,8 @@ Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten er
 
 | Artefakt-Dateiname | Was ist das? | Wo steht die Datei? *(Speicherort)* | Wer erzeugt sie? |
 | :--- | :--- | :--- | :---: |
-| **`02_ANGEBOT_DIPL_ING_BUENOTTE.md`** | Rechtssicheres B2B-Angebot (280,00 € netto) | [`02_ANGEBOT_DIPL_ING_BUENOTTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/02_ANGEBOT_DIPL_ING_BUENOTTE.md) | **Agent 4** *(Backoffice)* |
-| **`uebung_03_z_min_berechnung.nc`** | Fertiger Maschinencode für Hermle C22 5-Achs (Heidenhain TNC 640) | [`uebung_03_z_min_berechnung.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/uebung_03_z_min_berechnung.nc) | **Agent 2** *(Post-Coder)* |
+| **`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`** | Rechtssicheres B2B-Angebot (280,00 € netto) | [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | **Agent 4** *(Backoffice)* |
+| **`output_expected.nc`** | Beigestellter Maschinencode des Kunden (zu prüfen & simulieren) | [`output_expected.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/output_expected.nc) | **Kunde / Agent 3** *(Prüfung)* |
 | **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | 5-Stufen-Sicherheitsprüfbericht *(Null-Kollisions-Garantie)* | [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | **Agent 3** *(NC-Safety)* |
 | **`06_EINRICHTEBLATT_SETUP_SHEET.md`** | Rüstdatenblatt für den Maschinenbediener vor Ort | [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/06_EINRICHTEBLATT_SETUP_SHEET.md) | **Agent 3** *(NC-Safety)* |
 | **`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`** | Revisionssichere Honorarrechnung (333,20 € brutto) | [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) | **Agent 4** *(Backoffice)* |
@@ -26,7 +26,7 @@ Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten er
                              ▼
  ┌────────────────────────────────────────────────────────────────────────┐
  │ SCHRITT 1: ANGEBOT ERSTELLEN (Agent 4: Backoffice-Agent)              │
- │ Prompt 1 ausführen ──► Erzeugt: 02_ANGEBOT_DIPL_ING_BUENOTTE.md        │
+ │ Prompt 1 ausführen ──► Erzeugt: 02_ANGEBOT_DIPL_ING_BUJANOVSKI.md        │
  └───────────────────────────┬────────────────────────────────────────────┘
                              │
                              ▼
@@ -58,7 +58,7 @@ Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten er
 ```text
 Starte bitte Agent 4 (Backoffice-Agent):
 Lies die Kundenanfrage in c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_05_einrichtedoku_simulation\KUNDENAUFTRAG.md.
-Erstelle direkt im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_05_einrichtedoku_simulation\ das formelle B2B-Angebot "02_ANGEBOT_DIPL_ING_BUENOTTE.md" für Thomas Kuhn (Inhaber & Werkstattleiter) (Kuhn Medizintechnik & CNC-Fräszentrum) über 280,00 € netto. Verwende ausschließlich ingenieurmäßige Leistungsbeschreibungen nach § 18 EStG und binde die verbindliche Haftungsausschluss-Klausel für das Einfahren des ersten Werkstücks im Einzelsatz ein.
+Erstelle direkt im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_05_einrichtedoku_simulation\ das formelle B2B-Angebot "02_ANGEBOT_DIPL_ING_BUJANOVSKI.md" für Thomas Kuhn (Inhaber & Werkstattleiter) (Kuhn Medizintechnik & CNC-Fräszentrum) über 280,00 € netto. Verwende ausschließlich ingenieurmäßige Leistungsbeschreibungen nach § 18 EStG und binde die verbindliche Haftungsausschluss-Klausel für das Einfahren des ersten Werkstücks im Einzelsatz ein.
 ```
 
 #### 🔍 Wie wird das Angebot getestet und geprüft?
@@ -68,13 +68,13 @@ Erstelle direkt im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_b
 
 ---
 
-### 🔵 SCHRITT 2: NC-Maschinencode generieren (Agent 2)
+### 🔵 SCHRITT 2: 3D-Kollisionssimulation & Code-Analyse (Agent 3 / Safety-Check)
 #### Prompt zum Kopieren in den Chat:
 ```text
-Starte bitte Agent 2 (Postprocessor-Coder-Agent):
-Generiere für die Hermle C22 5-Achs (Heidenhain TNC 640) im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_05_einrichtedoku_simulation\ das fertige NC-Programm "uebung_03_z_min_berechnung.nc".
-Anforderung: Automatisierte Generierung normgerechter Rüstunterlagen via cnc_setup_sheet_extractor.py und visuelle Prüfung im 3D-Simulator.
-Stelle sicher, dass alle Werkzeugaufrufe, Sicherheitszeilen und Programmabschlüsse fehlerfrei implementiert sind.
+Starte bitte Agent 3 (NC-Safety- & Setup-Agent):
+Lade und analysiere das vom Kunden beigestellte NC-Programm "output_expected.nc" im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_05_einrichtedoku_simulation\.
+Führe die vollständige 3D-Simulation zur visuellen Kollisionskontrolle durch (Prüfung von Eilgangbewegungen G00, Fräsbahnen G01/G02/G03 und Z-Tiefen gegen Schraubstockbacken).
+(Hinweis: Nur falls du im gelieferten Kunden-G-Code Syntax- oder Verfahrfehler detektierst, wird Agent 2 zur Code-Korrektur alarmiert).
 ```
 
 #### 🔍 Wie wird der generierte NC-Code getestet und geprüft?
@@ -87,7 +87,7 @@ Stelle sicher, dass alle Werkzeugaufrufe, Sicherheitszeilen und Programmabschlü
 #### Prompt zum Kopieren in den Chat:
 ```text
 Starte bitte Agent 3 (NC-Safety- & Setup-Agent):
-Führe für die Datei "uebung_03_z_min_berechnung.nc" im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_05_einrichtedoku_simulation\ die 5-Stufen-Sicherheitsprüfung nach SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md durch.
+Führe für die beigestellte Datei "output_expected.nc" im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_05_einrichtedoku_simulation\ die 5-Stufen-Sicherheitsprüfung nach SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md durch.
 Erstelle im selben Ordner:
 1. "05_SICHERHEITS_CRASH_PRUEFBERICHT.md" mit Freigabestatus BESTANDEN.
 2. "06_EINRICHTEBLATT_SETUP_SHEET.md" als druckfertiges Rüstblatt für den Bediener an der Hermle C22 5-Achs (Heidenhain TNC 640) inklusive Werkzeugliste.
@@ -114,7 +114,7 @@ Erstelle jetzt im selben Ordner die steuersichere Honorarrechnung "07_RECHNUNG_N
 ---
 
 ## 🛡️ 4. Abnahme-Kriterien (Checkliste für 100 % Erledigung)
-* [ ] [`02_ANGEBOT_DIPL_ING_BUENOTTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/02_ANGEBOT_DIPL_ING_BUENOTTE.md) existiert und wurde geprüft.
+* [ ] [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) existiert und wurde geprüft.
 * [ ] [`uebung_03_z_min_berechnung.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/uebung_03_z_min_berechnung.nc) existiert und lief fehlerfrei im Simulator.
 * [ ] [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) bescheinigt Status **BESTANDEN (GRÜN)**.
 * [ ] [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/06_EINRICHTEBLATT_SETUP_SHEET.md) liegt vor.

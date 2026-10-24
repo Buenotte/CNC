@@ -2,7 +2,7 @@
 
 **Auftraggeber:** Thomas Kuhn (Inhaber & Werkstattleiter)  
 **Unternehmen:** Kuhn Medizintechnik & CNC-Fräszentrum  
-**Empfänger:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 **Zielmaschine:** **Hermle C22 5-Achs (Heidenhain TNC 640)**  
 **Vereinbartes Budget:** **280,00 € netto** (333,20 € brutto)  
 
@@ -12,7 +12,7 @@
 
 # 📩 Kundenauftrag: Übung 5: 3D-Simulation im Browser & Einrichteblatt (`Setup Sheet`) für den Kunden erstellen
 **Auftrags-Kategorie:** 5 (Einrichtedokumentation & Simulationsprüfung)
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
 
 ---
@@ -22,11 +22,11 @@
 So sieht eine typische Anfrage aus, wenn ein Kunde das CAM-Programm bereits hat, aber ein rechtssicheres Einrichteblatt und einen Simulationscheck für seine Werkstattmitarbeiter braucht:
 
 > **Von:** Thomas Kuhn *(Inhaber & Werkstattleiter)* `<t.kuhn@kuhn-medizintechnik.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 19. Oktober 2026, 16:05 Uhr  
 > **Betreff:** Erstellung Einrichteblatt (PDF) & 3D-Simulationsbericht für Lagerplatte  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
 > 
 > wir bilden in unserer Werkstatt aktuell zwei neue Zerspanungsmechaniker-Auszubildende aus. Um Rüstfehler an der CNC-Maschine auszuschließen, dürfen Programme nur noch gerüstet werden, wenn ein vollständiges, bebildertes Einrichteblatt (`Setup Sheet`) und eine freigegebene 3D-Simulation vorliegen.  
 > 
@@ -44,7 +44,8 @@ So sieht eine typische Anfrage aus, wenn ein Kunde das CAM-Programm bereits hat,
 ---
 
 ## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUENOTTE.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.
+* **Zuständiger Agent für Angebot & Honorar:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
+* **Zuständiger Haupt-Agent für die Auftragsabwicklung:** `Agent 3` (NC-Safety- & Setup-Agent) – führt die 3D-Kollisionssimulation im Browser durch und extrahiert das normgerechte Werkstatt-Einrichteblatt (`06_EINRICHTEBLATT_SETUP_SHEET.md`) aus dem beigestellten Kunden-G-Code `output_expected.nc`.
+* **Rolle von Agent 2 (Postprocessor-Coder-Agent):** Bereitschafts-Agent für Code-Korrekturen (wird in diesem Auftrag nur aufgerufen, falls Agent 3 bei der Analyse des beigestellten Kunden-G-Codes Syntaxfehler, fehlende Sicherheitszeilen oder Kollisionen detektiert; es wird keine neue `.cps`-Datei programmiert).
+* **Zuständiger Agent für Endabrechnung:** `Agent 4` (Backoffice-Agent) – Erstellung der Honorarrechnung nach § 18 EStG.
 

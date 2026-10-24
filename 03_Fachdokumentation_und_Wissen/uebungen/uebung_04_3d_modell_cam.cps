@@ -6,7 +6,7 @@
  */
 
 description = "Haas VF-2 Postprozessor - Auftrag 04 Lagerplatte";
-vendor = "Dipl.-Ing. Buenotte CAD/CAM Freiberufler";
+vendor = "Dipl.-Ing. Bujanovski CAD/CAM Freiberufler";
 legal = "Copyright (C) 2026 - Alle Rechte vorbehalten";
 certificationLevel = 2;
 extension = "nc";

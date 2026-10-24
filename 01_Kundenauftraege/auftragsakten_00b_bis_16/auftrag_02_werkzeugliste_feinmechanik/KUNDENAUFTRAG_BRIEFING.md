@@ -1,6 +1,6 @@
 # 📩 Kundenauftrag: Übung 2: Automatische Werkzeugliste (`Tool Table`) ganz oben im Programm ausgeben
 **Auftrags-Kategorie:** 2 (Rüstzeit-Optimierung für Feinmechanik)
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
 
 ---
@@ -10,11 +10,11 @@
 So sieht eine typische Anfrage aus, wenn ein Betrieb teure Maschinen-Stillstandszeiten beim Rüsten eliminieren will:
 
 > **Von:** Dr.-Ing. Sabine Hofmann *(Produktionsleiterin)* `<s.hofmann@bavaria-feinmechanik.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 16. Oktober 2026, 08:30 Uhr  
 > **Betreff:** Postprozessor-Optimierung: Automatische Werkzeugtabelle im Programmkopf  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
 > 
 > in unserer Serienfertigung in Nürnberg rüsten unsere Zerspanungsmechaniker täglich bis zu 5 verschiedene Bauteile auf unseren Bearbeitungszentren.  
 > 
@@ -38,6 +38,6 @@ So sieht eine typische Anfrage aus, wenn ein Betrieb teure Maschinen-Stillstands
 ---
 
 ## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUENOTTE.md` in diesem Ordner.
+* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
 * **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
 * **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

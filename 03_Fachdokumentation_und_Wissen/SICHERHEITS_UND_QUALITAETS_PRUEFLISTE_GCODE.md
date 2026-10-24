@@ -196,10 +196,55 @@ Selbst wenn der G-Code fehlerfrei geschrieben ist: Wenn an der realen Maschine e
 * **Kugeldurchmesser abziehen:** Haben Sie daran gedacht, bei X und Y den Kugelradius *(meist 5,00 mm bei einer Ø 10 mm Kugel)* zu verrechnen? Wenn man das vergisst, sitzt das ganze Bauteil 5 mm versetzt!
 * **Z-Achse abnullen:** Liegt `Z0` haargenau auf der Werkstück-Oberseite?
 
-### 3. Mechanischer Sitz im Schraubstock:
+### 3. Mechanischer Sitz im Schraubstock, Parallelunterlagen & die Spänefalle (Parallelspan):
 * **Späne entfernen:** Liegen unter den Parallelunterlagen winzige Aluspäne? Schon ein 0,1 mm dicker Span sorgt dafür, dass das Werkstück schief eingespannt wird und am Ende unbrauchbarer Ausschuss entsteht.
 * **Schonhammer benutzen:** Nach dem Festziehen mit dem Kunststoff- oder Kupferhammer kräftig von oben auf das Bauteil schlagen, damit es satt und spielfrei auf den Parallelunterlagen aufliegt.
 * **Drehmomentschlüssel:** Wurde der Schraubstock mit der vorgeschriebenen Spannkraft angezogen *(z. B. 60 bis 80 Newtonmeter [Nm])*, damit das Teil beim Fräsen nicht herausgerissen wird?
+* **Fachbegriff „Parallelspan“ & die Spänefalle im Detail:**
+  * Im Werkstattalltag bezeichnet man damit zwei Phänomene: Einerseits die **Parallelunterlagen *(Parallelleisten / gehärtete, paarweise auf Maß geschliffene Stahlleisten zur Höhenausrichtung des Werkstücks im Schraubstock)*** und andererseits den gefürchteten **„Span unter der Parallelleiste“ *(Schmutzfalle durch Zerspanungsspäne)***.
+  * Klemmt sich beim Einlegen auch nur ein winziger Span *(z. B. $0{,}05$ bis $0{,}1\,\text{mm}$)* zwischen Schraubstockboden, Parallelleiste oder Rohteil, entsteht ein **Schiefstand**. Die Folge: Planflächen werden schief gefräst, Passungen verlaufen konisch, Taschen erreichen ungleichmäßige Tiefen und Werkzeuge neigen zu starkem Rattern und Zahnbruch.
+* **Mathematische Berechnungsformel für die Parallelleisten-Höhe ($h$):**
+  Damit der Fräser am tiefsten Punkt ($Z_{\text{min}}$) niemals in die gehärteten Schraubstockbacken fährt, berechnet der CAM-Ingenieur die erforderliche Leistenhöhe nach folgender Formel:
+  $$h_{\text{Parallelleiste}} = h_{\text{Backen}} - \text{Spannrand}$$
+  $$\text{Kollisionsreserve} = \text{Bauteilüberstand} - |Z_{\text{min}}|$$
+  * *Rechenbeispiel aus der Praxis:*
+    - Schraubstockbacken-Höhe = $35{,}0\,\text{mm}$
+    - Rohteildicke = $15{,}0\,\text{mm}$
+    - Tiefste Fräsbearbeitung ($Z_{\text{min}}$) = $-5{,}0\,\text{mm}$
+    - Gewünschter Spannrand = $3{,}0\,\text{mm}$ *(vollkommen ausreichend für Aluminium im Schraubstock)*
+    - **Erforderliche Parallelleistenhöhe:** $35{,}0\,\text{mm} - 3{,}0\,\text{mm} = \mathbf{32{,}0\,\text{mm}}$
+    - **Resultierender Bauteilüberstand:** $15{,}0\,\text{mm} - 3{,}0\,\text{mm} = 12{,}0\,\text{mm}$
+    - **Sicherheitsabstand / Kollisionsreserve:** $12{,}0\,\text{mm} - 5{,}0\,\text{mm} = \mathbf{+7{,}0\,\text{mm}}$ Sicherheitsabstand zu den Backen.
+* **Wo stehen diese Einstellwerte im CNC-Projekt?**
+  * Alle diese Vorgaben sind für jedes Bauteil verbindlich im auftragsspezifischen **Kunden-Einrichteblatt** hinterlegt, z. B. in [`01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_03_flanschplatte_z_min/06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_03_flanschplatte_z_min/06_EINRICHTEBLATT_SETUP_SHEET.md#L11-L23):
+    - **Abschnitt 1:** Unterlagen *(Höhe $h = 32\,\text{mm}$)*, Einspanntiefe/Spannrand *($3{,}0\,\text{mm}$)* und Werkstücknullpunkt `G54`.
+    - **Abschnitt 3:** Sicherheitsrelevante Tiefenmaße mit $Z_{\text{min}}$, Backenoberkante und rechnerischer Kollisionsreserve.
+* **Der 3-Schritte-Check des Mechanikers an der Maschine:**
+  1. **Ausblasen & Abwischen:** Schraubstockgrund, Backen und Parallelleisten gründlich mit Druckluft ausblasen und mit einem sauberen Tuch metallisch blank wischen.
+  2. **Schonhammer-Setzschlag:** Nach leichtem Vorspannen kräftig mit dem Kupfer- oder Schonhammer von oben mittig auf das Bauteil schlagen, damit es sich formschlüssig auf beide Leisten setzt.
+  3. **Die Wackel-Probe *(Fingerprobe)*:** Mit Daumen und Zeigefinger versuchen, die beiden Parallelleisten unter dem gespannten Teil seitlich zu verschieben.
+     - *Ergebnis fest:* Beide Leisten klemmen spielfrei $\rightarrow$ Teil liegt vollflächig plan auf.
+     - *Ergebnis lose:* Eine Leiste lässt sich bewegen $\rightarrow$ Teil liegt hohl oder Span klemmt darunter. Schraubstock sofort öffnen, säubern und neu spannen!
+
+---
+
+### 4. Das 4-Stufen-Sicherheitssystem für Remote-CAM-Aufträge (Wie stellt der Ingenieur sicher, dass Rohteil & Nullpunkt stimmen?)
+
+Da der externe CAM-Ingenieur *(Dipl.-Ing. Bujanovski)* ortsunabhängig per Remote-Engineering arbeitet und nicht physisch neben der Maschine steht, garantiert ein **4-Stufen-Sicherheitsnetzwerk** die fehlerfreie Ausführung durch den Kunden-Mechaniker:
+
+1. **Stufe 1: Unmissverständliche Nullpunkt- & Rüstvorgaben im Einrichteblatt:**
+   * Keine vagen Angaben wie „oben links“, sondern exakte Anschlagdefinitionen: *(z. B. `X0/Y0 an der festen Backe des Schraubstocks links hinten; Z0 auf der Fertigteil-Oberseite`)*.
+   * Deutlicher Hinweis auf die **Kugelradius-Kompensation des 3D-Kantentasters** *(z. B. $+5{,}00\,\text{mm}$ Radius bei Ø 10 mm Tastkugel)*, um den typischen 5-mm-Versatzfehler auszuschließen.
+2. **Stufe 2: Visuelle Freigabe über das 3D-Simulationsvideo (`.mp4`):**
+   * Vor dem ersten Span betrachtet der Zerspanungsmechaniker das gerenderte Maschinensimulationsvideo `[auftragsname]_simulation_video.mp4` auf Werkstatt-Tablet oder Smartphone.
+   * Erkennt sofort die Ausrichtung der langen Seite, die Position der Spannbacken und den ersten Anfahrpunkt des Fräsers. Unstimmigkeiten fallen auf, bevor die Spindel anläuft.
+   * **🎬 Spezial-Lehrvideo für das Rüst- und Spannverfahren:** Zur Schulung und visuellen Einweisung des Maschinenbedieners steht das Video [`zerspanungsmechaniker_ruest_und_spann_anleitung.mp4`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/videos/zerspanungsmechaniker_ruest_und_spann_anleitung.mp4) zur Verfügung, das alle 6 Rüstschritte (Reinigung, Parallelunterlagen h=32 mm, Rohteileinlegen, 80 Nm Drehmoment + Schonhammer-Setzschlag, Wackel-Probe und G54-Antastung mit 3D-Taster) anschaulich in 3D visualisiert.
+3. **Stufe 3: Verbindlicher 2-Schritt-Prüfpfad an der Maschine:**
+   * **Schritt A (Luftschnitt in Z +50 mm):** Z-Nullpunkt temporär um +50 mm anheben und Werkzeugbahn kollisionsfrei in der Luft prüfen.
+   * **Schritt B (Einzelsatz mit Restweg-Blick):** Ersten Schnitt im `Single Block` mit gedrosseltem Vorschub (10–20 % Override) abfahren und Display-Restweg *(Distance-to-go)* gegen den realen Abstand abgleichen.
+4. **Stufe 4: Rechtliche Verantwortungsteilung nach § 18 EStG & B2B-Klausel:**
+   * Der externe Ingenieur haftet für den Code und die mathematische Bahnplanung gemäß CAD-Modell.
+   * Die physische Rüstung, das korrekte Antasten des Nullpunkts und das überwachte Einfahren obliegen der Sorgfaltspflicht der Fachkraft vor Ort. In Angebot (`02_ANGEBOT...`) und Rechnung (`07_RECHNUNG...`) ist die Haftungsbegrenzungsklausel fest verankert.
 
 ---
 

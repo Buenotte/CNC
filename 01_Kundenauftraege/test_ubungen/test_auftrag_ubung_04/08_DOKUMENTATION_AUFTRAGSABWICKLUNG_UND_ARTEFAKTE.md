@@ -2,7 +2,7 @@
 **Auftrags-Ordner:** [`test_auftrag_ubung_04`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/)  
 **Projekt / Bauteil:** Lagerplatte 1001 ($80 \times 50 \times 12\,\text{mm}$)  
 **Auftraggeber:** Franken Präzisionsteile GmbH, Schweinfurt *(Michael Brandner, Fertigungsleiter)*  
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik (§ 18 EStG)  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik (§ 18 EStG)  
 **Zielmaschine:** Haas VF-2 *(3-Achs-Vertikal-Fräszentrum mit NextGen Control)*  
 **Vereinbartes Honorar:** **380,00 € netto** *(452,20 € brutto inkl. 19 % MwSt.)*  
 **Status:** **Erfolgreich abgeschlossen & vollständig abgenommen**
@@ -13,7 +13,7 @@
 
 Im Rahmen dieses Kundenauftrags wurde für die **Franken Präzisionsteile GmbH** ein akuter Fertigungsengpass bei der CAM-Programmierung *(Computer-Aided Manufacturing / rechnerunterstützte Fertigung)* einer Serie von **50 Stück Lagerplatten** aus hochfestem Aluminium *(EN AW-6082)* gelöst.
 
-Das Ingenieurbüro Dipl.-Ing. Buenotte erbrachte hierbei die vollständige **geistig-schöpferische Ingenieurdienstleistung gemäß § 18 EStG *(Einkommensteuergesetz für Freiberufler)***:
+Das Ingenieurbüro Dipl.-Ing. Bujanovski erbrachte hierbei die vollständige **geistig-schöpferische Ingenieurdienstleistung gemäß § 18 EStG *(Einkommensteuergesetz für Freiberufler)***:
 * Es erfolgte **keine gewerbliche Fräsbearbeitung** und **kein Verkauf physischer Werkstücke**.
 * Die Leistung bestand ausnahmslos in der **technischen Prozessauslegung, Spannmittel-Kollisionsanalyse, CAM-Werkzeugbahnplanung und Postprozessor-Softwareentwicklung** *(JavaScript-Programmierung für die CNC-Maschinensteuerung Haas NGC)*.
 * Alle erforderlichen Artefakte wurden durch das koordinierte 4-Agenten-System generiert, qualitätsgesichert und in dieser Auftragsakte revisionssicher abgelegt.
@@ -29,7 +29,7 @@ Die folgende Tabelle dokumentiert alle in diesem Auftragsordner erzeugten Dateie
 | [`KUNDENAUFTRAG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/KUNDENAUFTRAG.md) | Markdown | **Agent 1** *(Kunde)* | Reales Original-Briefing mit Maschinenpark, Bauteilabmessungen, Werkzeugen und Festpreisangebot. |
 | [`WORKFLOW_UND_PROMPTS.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/WORKFLOW_UND_PROMPTS.md) | Leitfaden | **System** | Verbindlicher 4-Phasen-Workflow inklusive fertiger Prompts für alle 4 Agenten. |
 | [`bauteil_1001.stl`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/bauteil_1001.stl) | 3D-CAD | Kunde / CAD | Dreidimensionales CAD-Modell *(Triangulierte Oberfläche)* der Lagerplatte $80 \times 50 \times 12\,\text{mm}$. |
-| [`02_ANGEBOT_DIPL_ING_BUENOTTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/02_ANGEBOT_DIPL_ING_BUENOTTE.md) | B2B-Vertrag | **Agent 4** *(Backoffice)* | Rechtssicheres Ingenieurangebot über 380,00 € netto mit Haftungsklausel für Einzelsatzeinfahren. |
+| [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | B2B-Vertrag | **Agent 4** *(Backoffice)* | Rechtssicheres Ingenieurangebot über 380,00 € netto mit Haftungsklausel für Einzelsatzeinfahren. |
 | [`kunden_auftrag_04.cps`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/kunden_auftrag_04.cps) | JavaScript | **Agent 2** *(Coder)* | Vollständiger, maßgeschneiderter Postprozessor für Haas VF-2 mit allen Zyklen und Satznummern. |
 | [`kunden_auftrag_04.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/kunden_auftrag_04.nc) | G-Code | **Agent 2** *(Coder)* | 56-zeiliges, kollisionsgeprüftes Produktionsprogramm nach DIN 66025 für die Haas VF-2 Fräsmaschine. |
 | [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | Prüfbericht | **Agent 3** *(Safety)* | 5-Stufen-Sicherheitsbericht mit Bestätigung: Status BESTANDEN (GRÜN) und Tunnel-Prinzip-Freigabe. |
@@ -53,7 +53,7 @@ Die Abwicklung erfolgte strikt nach der im Projekt definierten **4-Phasen-Archit
                                              ▼
                   ┌─────────────────────────────────────────────────────────┐
                   │    PHASE 2: Agent 4 (Vertragsgestaltung & Angebot)      │
-                  │    • B2B-Angebot 02_ANGEBOT_DIPL_ING_BUENOTTE.md        │
+                  │    • B2B-Angebot 02_ANGEBOT_DIPL_ING_BUJANOVSKI.md        │
                   │    • Festpreis: 380,00 € netto nach § 18 EStG           │
                   │    • Klausel: Einzelsatz-Einfahren (Single Block)       │
                   └──────────────────────────┬──────────────────────────────┘
@@ -90,7 +90,7 @@ Die Abwicklung erfolgte strikt nach der im Projekt definierten **4-Phasen-Archit
 ---
 
 ### Phase 2: Kaufmännische Vertragslegung & B2B-Angebot *(Agent 4)*
-* **Erstelltes Dokument:** [`02_ANGEBOT_DIPL_ING_BUENOTTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/02_ANGEBOT_DIPL_ING_BUENOTTE.md)
+* **Erstelltes Dokument:** [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md)
 * **Kaufmännische Details:**
   * Nettohonorar: **380,00 €**
   * Umsatzsteuer (19 %): **72,20 €**
@@ -171,4 +171,4 @@ Die Abwicklung erfolgte strikt nach der im Projekt definierten **4-Phasen-Archit
    Alle 9 geforderten Primär-Artefakte liegen vollständig, geprüft und synchronisiert im Ordner vor. Der Auftrag ist damit zu **100 % fertiggestellt**.
 
 ---
-*Dokumentation erstellt am 23. Oktober 2026 durch das automatisierte Agentensystem für Dipl.-Ing. Buenotte.*
+*Dokumentation erstellt am 23. Oktober 2026 durch das automatisierte Agentensystem für Dipl.-Ing. Bujanovski.*

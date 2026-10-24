@@ -2,7 +2,7 @@
 
 **Auftraggeber:** Dipl.-Ing. (FH) Markus Weber *(Leiter Fertigung & Zerspanungstechnik)* `<m.weber@schmidt-praezision.de>`  
 **Unternehmen:** Schmidt Präzisionsteile GmbH & Co. KG, Industriestraße 14, 34123 Kassel  
-**Empfänger:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 **Datum:** 22. Oktober 2026, 09:15 Uhr  
 **Betreff:** EIL-ANFRAGE: Postprozessor-Anpassung & Z-MIN Sicherheitsprüfung für Haas VF-2 (Projekt: Flanschplatte 1001)  
 
@@ -10,7 +10,7 @@
 
 ## Die Kunden-E-Mail (Das Briefing):
 
-> Sehr geehrter Herr Kollege Dipl.-Ing. Buenotte,  
+> Sehr geehrter Herr Kollege Dipl.-Ing. Bujanovski,  
 > 
 > ich wende mich mit einer dringenden technischen Aufgabenstellung an Ihr Ingenieurbüro.  
 > 

@@ -11,7 +11,7 @@ Wenn dir ein Industriekunde oder ein CAM-Systemhaus zum ersten Mal **geheime 3D-
 ```text
 ================================================================================
 INGENIEURBÜRO FÜR CAD/CAM-FERTIGUNGSTECHNIK & CNC-SYSTEMPROGRAMMIERUNG
-Dipl.-Ing. [Dein Vor- und Nachname]
+Dipl.-Ing. Bujanovski
 [Deine Straße und Hausnummer] • 63526 Erlensee
 ================================================================================
 
@@ -24,7 +24,7 @@ Zwischen dem Auftraggeber:
 – nachfolgend „Auftraggeber“ genannt –
 
 und dem Auftragnehmer:
-Ingenieurbüro für CAD/CAM-Fertigungstechnik, Dipl.-Ing. [Dein Vor- und Nachname],
+Ingenieurbüro für CAD/CAM-Fertigungstechnik, Dipl.-Ing. Bujanovski,
 [Deine Straße], 63526 Erlensee
 – nachfolgend „Auftragnehmer“ genannt –
 
@@ -48,6 +48,6 @@ Erlensee, den [Datum]
 
 
 ____________________________________
-Dipl.-Ing. [Dein Vor- und Nachname]
+Dipl.-Ing. Bujanovski
 Ingenieurbüro für CAD/CAM-Fertigungstechnik
 ```

@@ -2,7 +2,7 @@
 
 Hier findest du für **jeden einzelnen Kundenauftrag einen eigenständigen Ordner** mit allen zugehörigen Dokumenten:
 * Das **Kundenbriefing** (`KUNDENAUFTRAG_BRIEFING.md`)
-* Das offizielle **Angebot von Dipl.-Ing. Buenotte** (`ANGEBOT_DIPL_ING_BUENOTTE.md` nach § 18 EStG)
+* Das offizielle **Angebot von Dipl.-Ing. Bujanovski** (`ANGEBOT_DIPL_ING_BUJANOVSKI.md` nach § 18 EStG)
 * Die zugehörigen **Quellcode-Dateien** (`.cps`, `.nc`, 3D-Modelle)
 * Die **Statusübersicht** (`STATUS_UND_DATEIEN.md`)
 

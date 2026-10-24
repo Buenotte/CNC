@@ -2,7 +2,7 @@
 
 **Auftraggeber:** Dr. Elena Rost (Leiterin Prototypenbau)  
 **Unternehmen:** AeroTech Prototypenbau Bremen  
-**Empfänger:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 **Zielmaschine:** **Hermle C32 U 5-Achs (Heidenhain TNC 640)**  
 **Vereinbartes Budget:** **750,00 € netto** (892,50 € brutto)  
 
@@ -12,7 +12,7 @@
 
 # 📩 Kundenauftrag: Übung 13: Echte 3D-Freiformflächen – `3D Adaptive Clearing` (Wirbelfräsen) & `3D-Schlichten` mit Kugelfräser (`Ball End Mill`)
 **Auftrags-Kategorie:** 13 (3D-Freiformflächen & Kugelfräser-Schlichten)
-**Auftragnehmer:** Dipl.-Ing. Buenotte – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
+**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
 
 ---
@@ -22,11 +22,11 @@
 So sieht eine typische hochdotierte Anfrage aus, wenn ein Formen- oder Prototypenbauer komplexe 3D-Geometrien ohne sichtbare Facetten fräsen muss:
 
 > **Von:** Dr. Elena Rost *(Leiterin Prototypenbau)* `<e.rost@aerotech-bremen.de>`  
-> **An:** Dipl.-Ing. Buenotte `<kontakt@ingenieurbuero-buenotte.de>`  
+> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
 > **Datum:** 27. Oktober 2026, 11:30 Uhr  
 > **Betreff:** Postprozessor-Optimierung für 3D-Freiformflächen & Hochgeschwindigkeits-Schlichten  
 >
-> Sehr geehrter Herr Dipl.-Ing. Buenotte,  
+> Sehr geehrter Herr Dipl.-Ing. Bujanovski,  
 > 
 > wir fertigen in Bremen aerodynamische Strömungskanäle und Windkanalmodelle aus hochfestem Aluminium.  
 > 
@@ -46,7 +46,7 @@ So sieht eine typische hochdotierte Anfrage aus, wenn ein Formen- oder Prototype
 ---
 
 ## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUENOTTE.md` in diesem Ordner.
+* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
 * **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
 * **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.
 

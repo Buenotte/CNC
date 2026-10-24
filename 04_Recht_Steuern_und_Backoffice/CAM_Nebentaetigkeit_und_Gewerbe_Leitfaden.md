@@ -187,7 +187,7 @@ Ich versichere ausdrücklich, dass:
 Mit freundlichen Grüßen
 
 [Deine Unterschrift]
-Dipl.-Ing. Buenotte
+Dipl.-Ing. Bujanovski
 ```
 
 ---
@@ -896,9 +896,9 @@ So sieht jeder Kunde schon in der Betreffzeile seines Postfachs deinen akademisc
 Für den reibungslosen Datenaustausch mit Kunden über GitHub, Cloud-Speicher und ein separates Ingenieur-Postfach beachte die konkreten Praxisschritte in:
 👉 **[PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md (Kapitel 7: Digitale Kommunikations-Zentrale)](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md#L329)**  
 Dort findest du:
-* Die empfohlene Namensgebung für dein separates Google-Konto *(z. B. `buenotte.engineering@gmail.com`)*.
+* Die empfohlene Namensgebung für dein separates Google-Konto *(z. B. `bujanovski.engineering@gmail.com`)*.
 * Die Einrichtung der 15 GB kostenlosen Google Drive Cloud für große 3D-STEP- und MP4-Simulationsdateien.
-* Den verbindlichen professionellen Absendernamen: **`Dipl.-Ing. Buenotte | CAD/CAM Engineering`**.
+* Den verbindlichen professionellen Absendernamen: **`Dipl.-Ing. Bujanovski | CAD/CAM Engineering`**.
 
 
 ---
