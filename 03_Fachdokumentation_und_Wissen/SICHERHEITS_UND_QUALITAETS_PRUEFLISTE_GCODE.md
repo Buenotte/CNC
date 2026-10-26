@@ -458,3 +458,22 @@ Halten Sie beim Einfahren immer eine Hand in der Nähe des **roten Not-Aus-Schla
 
 ---
 *Dokumenten-Referenz:* Zentrales Sicherheits- und Qualitätsprotokoll des CNC-Entwicklungsbereichs ([`C:\Projekte\CNC`](file:///c:/Projekte/CNC)). Verknüpft mit dem Praxis-Kundenauftrag ([`01_Kundenauftraege/referenz_auftrag_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md)) und dem Simulator ([`3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html)).
+
+
+---
+
+## 🛡️ 11. Automatisierter 30-Sekunden-Endcheck vor dem Kundenversand *(Auftrags-Audit mit `Argon 4` + `/goal`)*
+
+Um technisch zu 100 % auszuschließen, dass eine `.nc`-Datei mit fehlendem **`G80` *(Bohrzyklus-Aufhebung — Gefahr von unbeabsichtigten Bohrhüben bei nachfolgenden Positionierbewegungen)*** oder mit unvollständigen **360°-Vollkreis-Parametern (`G02`/`G03` ohne `X`, `Y`, `I`, `J` — Gefahr von `ALARM 304: INVALID I, J OR K`)** an den Kunden versendet wird, wird vor jedem Versand dieser kopierfertige **Auftrags-Audit-Befehl** ausgeführt:
+
+```text
+/goal Starte AGENT 3 (NC-Safety- & Setup-Agent) – Endkontrolle vor Kundenversand für Ordner 01_Kundenauftraege/[ORDNERNAME]:
+1. Prüfe technisch mit Node.js (node 02_Software_und_Tools/scripts/simuliere_post.js), ob die .cps-Datei fehlerfrei kompiliert.
+2. Prüfe die .nc-Datei Zeile für Zeile auf die 5 kritischen CNC-Sicherheitskriterien:
+   - Sicherheitszeile (G90 G17 G21 G40 G80) am Programmstart vorhanden?
+   - Werkzeuglängenkompensation (G43 H == T) und Spindelstart (M03) vor dem ersten Z-Schnitt aktiv?
+   - Alle Kreisbögen (G02/G03) mit vollständigem X, Y, I und J (360°-Vollkreis-Check via xOutput.reset / yOutput.reset)?
+   - Jeder Bohrzyklus (G81/G83/G84) sauber mit G80 aufgehoben?
+   - Z-MIN über der Schraubstock-Grenze und sicherer Rückzug (G53 G00 Z0) vor jedem Werkzeugwechsel und am Programmende?
+3. Prüfe, ob alle 6+1 Pflicht-Artefakte (02_..., .cps, .nc, 05_..., 06_..., .mp4, 07_..., 08_...) vollständig im Ordner liegen.
+```

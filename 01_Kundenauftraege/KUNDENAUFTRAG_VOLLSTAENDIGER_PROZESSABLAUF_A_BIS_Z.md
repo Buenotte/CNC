@@ -869,3 +869,36 @@ Bei einem **echten Neukunden** möchtest du natürlich erst dann Zeit in den Pos
   2. Agent 3: Crash-Prüfbericht (05_...), Einrichteblatt (06_...) und 3D-Simulationsvideo (.mp4) erstellen.
   3. Agent 4: Honorarrechnung nach § 18 EStG (07_...) und Abschlussdokumentation (08_...) erstellen und alle 6+1 Artefakte auf Vollständigkeit prüfen.
   ```
+
+
+---
+
+## 🔍 12. Das 2-Stufen-Audit-Konzept: Kleines „Auftrags-Audit“ vs. großes „System-Audit“
+
+Damit vor dem Versand einer `.nc`- oder `.cps`-Datei an den Kunden niemals ein Fehler wie ein unvollständiger **360°-Vollkreis (`G02`/`G03` ohne `I`/`J`)** oder ein fehlendes **`G80` *(Bohrzyklus aufheben)*** durchrutscht, gilt folgendes **2-Stufen-Prüfkonzept**:
+
+### ✅ Stufe 1: Das kleine „Auftrags-Audit“ *(30-Sekunden-Check bei JEDEM Kundenauftrag vor dem Versand)*
+Du musst im Alltag **nicht** das gesamte Projekt (`C:\Projekte\CNC`) prüfen, sondern kontrollierst vor dem E-Mail-Versand **nur den jeweiligen neuen Auftragsordner** mit diesem kurzen Befehl (`Argon 4` + `/goal`):
+
+```text
+/goal Starte AGENT 3 (NC-Safety- & Setup-Agent) – Endkontrolle vor Kundenversand für Ordner 01_Kundenauftraege/[ORDNERNAME]:
+1. Prüfe technisch mit Node.js (node 02_Software_und_Tools/scripts/simuliere_post.js), ob die .cps-Datei fehlerfrei kompiliert.
+2. Prüfe die .nc-Datei Zeile für Zeile auf die 5 kritischen CNC-Sicherheitskriterien:
+   - Sicherheitszeile (G90 G17 G21 G40 G80) am Programmstart vorhanden?
+   - Werkzeuglängenkompensation (G43 H == T) und Spindelstart (M03) vor dem ersten Z-Schnitt aktiv?
+   - Alle Kreisbögen (G02/G03) mit vollständigem X, Y, I und J (360°-Vollkreis-Check)?
+   - Jeder Bohrzyklus (G81/G83/G84) sauber mit G80 aufgehoben?
+   - Z-MIN über der Schraubstock-Grenze und sicherer Rückzug (G53 G00 Z0) vor jedem Werkzeugwechsel und am Programmende?
+3. Prüfe, ob alle 6+1 Pflicht-Artefakte (02_..., .cps, .nc, 05_..., 06_..., .mp4, 07_..., 08_...) vollständig im Ordner liegen.
+```
+
+### 🔧 Stufe 2: Das große „System-Audit“ *(Nur 1× bis 2× im Jahr oder nach Umbauten an Basis-Tools)*
+Das große Audit über alle 441 Dateien des Gesamtprojekts führst du **nur dann** durch, wenn du Ordner umbaust, Basis-Skripte unter `02_Software_und_Tools/` änderst oder zum Jahreswechsel Steuergrenzen aktualisierst:
+
+```text
+/goal Führe ein vollständiges technisches und inhaltliches End-to-End-Audit über das gesamte Projekt C:\Projekte\CNC durch:
+1. Prüfe alle Postprozessoren (.cps), JavaScript-Dateien (.js), Python-Skripte (.py) und Web-Tools (.html) per Compiler/Parser auf Syntax- und Laufzeitfehler.
+2. Prüfe alle 900+ internen Dateilinks in sämtlichen Markdown-Dokumenten (.md) auf gebrochene Pfade.
+3. Prüfe alle Kundenauftrags-Ordner auf Vollständigkeit der 6+1 Pflicht-Artefakte.
+4. Aktualisiere den Bericht 03_Fachdokumentation_und_Wissen/PROJEKT_AUDIT_UND_QUALITAETSBERICHT.md.
+```
