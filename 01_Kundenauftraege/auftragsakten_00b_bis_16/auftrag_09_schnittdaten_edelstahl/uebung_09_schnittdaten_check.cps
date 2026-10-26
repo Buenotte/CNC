@@ -24,7 +24,7 @@ properties = {
       {id: "stainless", title: "3. Edelstahl (1.4301 / V2A) - Vc max 90 m/min"},
       {id: "plastic",   title: "4. Kunststoff (POM / PEEK) - Vc max 500 m/min"}
     ],
-    value      : "stainless",
+    value      : "alu",
     scope      : "post"
   },
   autoSpeedClamp: {
@@ -133,6 +133,61 @@ function onSection() {
 
   // G43 H.. Z.. M08 = Werkzeuglaengenkorrektur und Kuehlmittel EIN
   writeWords("G43", "H" + ("0" + currentTool.number).slice(-2), "Z15.000", "M08");
+  xOutput.reset();
+  yOutput.reset();
+  zOutput.reset();
+  feedOutput.reset();
+}
+
+var xyzFormat = createFormat({decimals: 3, forceDecimal: true});
+var feedFormat = createFormat({decimals: 0});
+var xOutput = createVariable({prefix: "X"}, xyzFormat);
+var yOutput = createVariable({prefix: "Y"}, xyzFormat);
+var zOutput = createVariable({prefix: "Z"}, xyzFormat);
+var iOutput = createReferenceVariable({prefix: "I"}, xyzFormat);
+var jOutput = createReferenceVariable({prefix: "J"}, xyzFormat);
+var feedOutput = createVariable({prefix: "F"}, feedFormat);
+
+function onRapid(x, y, z) {
+  writeWords("G00", xOutput.format(x), yOutput.format(y), zOutput.format(z));
+}
+
+function onLinear(x, y, z, feed) {
+  writeWords("G01", xOutput.format(x), yOutput.format(y), zOutput.format(z), feedOutput.format(feed));
+}
+
+function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
+  var start = getCurrentPosition();
+  xOutput.reset();
+  yOutput.reset();
+  writeWords(
+    clockwise ? "G02" : "G03",
+    xOutput.format(x),
+    yOutput.format(y),
+    zOutput.format(z),
+    iOutput.format(cx - start.x),
+    jOutput.format(cy - start.y),
+    feedOutput.format(feed)
+  );
+}
+
+function onCyclePoint(x, y, z) {
+  xOutput.reset();
+  yOutput.reset();
+  zOutput.reset();
+  writeWords(
+    "G83",
+    xOutput.format(x),
+    yOutput.format(y),
+    zOutput.format(z),
+    "R" + xyzFormat.format(cycle.retract),
+    "Q" + xyzFormat.format(cycle.incrementalDepth || 3.0),
+    feedOutput.format(cycle.feedrate)
+  );
+}
+
+function onCycleEnd() {
+  writeWords("G80");
 }
 
 function onClose() {

@@ -1,34 +1,14 @@
-# 🛠️ CNC-Einrichteblatt (Setup Sheet): Auftrag 07: Konfigurierbare Postprozessor-Properties (Späneförderer M31/M33)
+# Automatisch generiertes CNC-Einrichteblatt: `O1007 (UEBUNG 07 - SPAENEFOERDERER SCHALTER)`
 
-* **Erstellt durch:** 🛡️ **Agent 3 – NC-Safety- & Setup-Agent** *(Ingenieurbüro Dipl.-Ing. (FH) Alexander Bujanovski)*
-* **Kunde / Werk:** **Vogtland Zerspanungstechnik GmbH**
-* **Bauteil:** Hochvolumen-Aluminiumgehäuse (90 % Zerspanungsvolumen)
-* **Werkstoff:** Aluminium EN AW-6060 (AlMgSi0,5)
-* **Maschine & Steuerung:** **Alzmetall CS 1200 (ISO G-Code-Modus)** (ISO G-Code (mit M31/M33 Späneförderer-Ansteuerung))
-* **NC-Programmdatei:** [`uebung_07_spaenefoerderer_schalter.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_07_spaenefoerderer_schalter/uebung_07_spaenefoerderer_schalter.nc)
+* **Steuerungssystem:** Fanuc / Haas NGC (ISO G-Code DIN 66025)
+* **Bezugspunkt / Nullpunkt:** Standard (G54 / Preset 1)
 
----
+## Extrahierte Werkzeug- und Operationsliste
 
-## 1. Aufspannung & Werkstücknullpunkt *(WCS — Work Coordinate System)*
+| Schritt | Werkzeug | Beschreibung / Kommentar | Drehzahl $n$ [U/min] | Vorschub $v_f$ [mm/min] | Tiefste Zustellung $Z_{\text{min}}$ [mm] | Empf. Auskraglänge $L_{\text{min}}$ (+5 mm Sicherheit) | Kühlung |
+| :---: | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
+| **10** | `T01` | ISO Standardwerkzeug (DIN 66025) | 8000 | 500 | -5.00 | **10.0 mm** | Außenkühlung (M08) |
+| **20** | `T01` | ISO Standardwerkzeug (DIN 66025) | 8000 | 400 | -3.00 | **8.0 mm** | Außenkühlung (M08) |
+| **30** | `T02` | SPAENEFOERDERER STOPPEN | 3500 | 300 | -12.00 | **17.0 mm** | Außenkühlung (M08) |
 
-* **Aktiver Nullpunkt im Programm:** **G54 (Werkstücknullpunkt: Vorne links oben, Z = 0,0 mm)**
-* **Z-Nullpunktlage ($Z = 0,000\,\text{mm}$):** Auf der fertig geplanten **Bauteil-Oberkante**.
-* **Tiefste Programmzustellung ($Z_{\text{min}}$):** **`-5.000 mm`**
-* **Maximal zulässige Spannbackenhöhe:** **`-15.000 mm`** *(Das Bauteil muss frei über den Spannbacken stehen, sodass unterhalb von $Z = 0$ mindestens $15.0\,\text{mm}$ Freiraum zur Backenoberkante verbleiben!)*
-
----
-
-## 2. Verbindliche Werkzeug- und Rüstliste *(Tool Setup Table)*
-
-| Folge | Platz (`T`) | Korrektur (`H`/`D`) | Werkzeugtyp & Abmessung | Drehzahl ($S$) | Vorschub ($F$) | Tiefstes $Z$ ($Z_{\text{min}}$) | Auskraglänge ($L_{\text{min}}$) | Kühlung |
-| :---: | :---: | :---: | :--- | :---: | :---: | :---: | :---: | :--- |
-| **OP 10** | `T01` | `H01` | VHM-Schruppfräser Ø 10,0 mm (inkl. M31/M33 Späneförderer-Automatik) | `8000 U/min` | `1200 mm/min` | `-5.000 mm` | **min. `15.0 mm`** | M08 (Flutkühlung) |
-
----
-
-## 3. Pflicht-Checkliste für den Maschinenbediener vor dem Zyklusstart
-
-1. [ ] **Nullpunkt prüfen:** `G54 (Werkstücknullpunkt: Vorne links oben, Z = 0,0 mm)` mit 3D-Messtaster angetastet und Werte im Offset-Speicher kontrolliert?
-2. [ ] **Überstand messen:** Bauteil-Überstand aus dem Schraubstock mit Tiefenmaß geprüft (Spannbacken liegen bei oder tiefer als $Z = -15.000\,\text{mm}$)?
-3. [ ] **Werkzeuglängen prüfen:** Alle Werkzeuge am Voreinstellgerät oder Werkzeugtaster vermessen und Auskraglänge $L_{\text{min}}$ eingehalten?
-4. [ ] **Sicherheits-Einfahren *(Dry Run)*:** Erstes Bauteil im **Einzelsatzbetrieb *(Single Block)*** mit Vorschub-Potentiometer auf **max. 25 %** und Blick auf die **Restweganzeige *(Distance-to-Go)*** bei $Z = +20,0\,\text{mm}$ über dem Teil einfahren!
+> **Sicherheitshinweis:** Automatisch durch `cnc_setup_sheet_extractor.py` erzeugte Dokumentation. Alle Mindest-Auskraglängen ($L_{\text{min}}$) vor dem Programmstart am Voreinstellgerät prüfen!

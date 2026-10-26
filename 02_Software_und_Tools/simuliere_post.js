@@ -105,6 +105,21 @@ const mockTools = [
   }
 ];
 
+if (exerciseName.indexOf("uebung_10") !== -1) {
+  mockTools.push({
+    number: 3,
+    diameter: 50.0,
+    cornerRadius: 0.0,
+    lengthOffset: 3,
+    diameterOffset: 3,
+    description: "PLANMESSERKOPF 50MM (OP20 RUECKSEITE)",
+    comment: "PLANMESSERKOPF 50MM (OP20 RUECKSEITE)",
+    spindleRPM: 4000,
+    clockwise: true,
+    coolant: 1
+  });
+}
+
 const mockSections = [
   {
     comment: "1. AUSSENKONTUR FRAESEN - 2D KONTUR",
@@ -173,6 +188,57 @@ const mockSections = [
     }
   }
 ];
+
+// Für Übung 10 (2. Aufspannung G55 / OP20 - Bauteil umdrehen) fügen wir die 2. Aufspannung mit workOffset = 2 (G55) hinzu:
+if (exerciseName.indexOf("uebung_10") !== -1) {
+  mockSections.push(
+    {
+      comment: "4. OP20 (2. AUFSPANNUNG G55): BAUTEIL 180 GRAD UMGEDREHT - 3MM RESTBODEN PLANFRAESEN AUF 12MM",
+      tool: mockTools[2],
+      spindleSpeed: 4000,
+      workOffset: 2, // 2 -> G55 (2. Aufspannung nach Bauteil-Umdrehen)
+      initialPos: { x: -20.0, y: 12.0, z: 15.0 },
+      zMin: 0.0,
+      zMax: 15.0,
+      runMoves: function (sandbox) {
+        if (typeof sandbox.onRapid === "function") sandbox.onRapid(-20.0, 12.0, 5.0);
+        if (typeof sandbox.onLinear === "function") {
+          // 1. Zustellung Z+1.5 mm (erste 1.5 mm vom 3mm Spannrand abtragen)
+          sandbox.onLinear(-20.0, 12.0, 1.5, 600);
+          sandbox.onLinear(100.0, 12.0, 1.5, 1500);
+          sandbox.onLinear(100.0, 38.0, 1.5, 1500);
+          sandbox.onLinear(-20.0, 38.0, 1.5, 1500);
+          // 2. Schlicht-Zustellung Z0.0 mm (Fertigmaß 12.0 mm Dicke herstellen)
+          sandbox.onLinear(-20.0, 12.0, 0.0, 600);
+          sandbox.onLinear(100.0, 12.0, 0.0, 1200);
+          sandbox.onLinear(100.0, 38.0, 0.0, 1200);
+          sandbox.onLinear(-20.0, 38.0, 0.0, 1200);
+        }
+        if (typeof sandbox.onRapid === "function") sandbox.onRapid(-20.0, 38.0, 15.0);
+      }
+    },
+    {
+      comment: "5. OP20 (2. AUFSPANNUNG G55): RUECKSEITEN-AUSSENKONTUR ENTGRATEN",
+      tool: mockTools[0],
+      spindleSpeed: 8000,
+      workOffset: 2, // 2 -> G55
+      initialPos: { x: 0.0, y: 0.0, z: 15.0 },
+      zMin: -1.0,
+      zMax: 15.0,
+      runMoves: function (sandbox) {
+        if (typeof sandbox.onRapid === "function") sandbox.onRapid(0.0, 0.0, 2.0);
+        if (typeof sandbox.onLinear === "function") {
+          sandbox.onLinear(0.0, 0.0, -1.0, 500);
+          sandbox.onLinear(80.0, 0.0, -1.0, 1200);
+          sandbox.onLinear(80.0, 50.0, -1.0, 1200);
+          sandbox.onLinear(0.0, 50.0, -1.0, 1200);
+          sandbox.onLinear(0.0, 0.0, -1.0, 1200);
+        }
+        if (typeof sandbox.onRapid === "function") sandbox.onRapid(0.0, 0.0, 15.0);
+      }
+    }
+  );
+}
 
 function wrapSection(sec) {
   return {

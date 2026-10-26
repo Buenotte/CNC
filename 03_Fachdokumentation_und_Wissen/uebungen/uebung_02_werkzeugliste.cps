@@ -105,3 +105,70 @@ function onClose() {
   writeWords("M30");
   writeln("%"); // Endezeichen der Übertragung
 }
+
+
+// =========================================================================================
+// ERGÄNZTE BEWEGUNGS- UND ZYKLUSFUNKTIONEN (VOLLSTÄNDIGE FRÄS- & BOHRBAHNEN)
+// =========================================================================================
+var xyzFormat = (typeof xyzFormat !== "undefined") ? xyzFormat : createFormat({decimals: 3, forceDecimal: true});
+var feedFormat = (typeof feedFormat !== "undefined") ? feedFormat : createFormat({decimals: 0});
+var xOutput = createVariable({prefix: "X"}, xyzFormat);
+var yOutput = createVariable({prefix: "Y"}, xyzFormat);
+var zOutput = createVariable({prefix: "Z"}, xyzFormat);
+var iOutput = createReferenceVariable({prefix: "I"}, xyzFormat);
+var jOutput = createReferenceVariable({prefix: "J"}, xyzFormat);
+var feedOutput = createVariable({prefix: "F"}, feedFormat);
+
+function onSection() {
+  writeWords("G53", "G00", "Z0.0");
+  writeWords("T" + ("0" + tool.number).slice(-2), "M06");
+  writeWords("S" + spindleSpeed, tool.clockwise ? "M03" : "M04");
+  writeWords("G54");
+  writeWords("G43", "H" + ("0" + tool.number).slice(-2), "Z15.000", "M08");
+  xOutput.reset();
+  yOutput.reset();
+  zOutput.reset();
+  feedOutput.reset();
+}
+
+function onRapid(x, y, z) {
+  writeWords("G00", xOutput.format(x), yOutput.format(y), zOutput.format(z));
+}
+
+function onLinear(x, y, z, feed) {
+  writeWords("G01", xOutput.format(x), yOutput.format(y), zOutput.format(z), feedOutput.format(feed));
+}
+
+function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
+  var start = getCurrentPosition();
+  xOutput.reset();
+  yOutput.reset();
+  writeWords(
+    clockwise ? "G02" : "G03",
+    xOutput.format(x),
+    yOutput.format(y),
+    zOutput.format(z),
+    iOutput.format(cx - start.x),
+    jOutput.format(cy - start.y),
+    feedOutput.format(feed)
+  );
+}
+
+function onCyclePoint(x, y, z) {
+  xOutput.reset();
+  yOutput.reset();
+  zOutput.reset();
+  writeWords(
+    "G83",
+    xOutput.format(x),
+    yOutput.format(y),
+    zOutput.format(z),
+    "R" + xyzFormat.format(cycle.retract || 2.0),
+    "Q" + xyzFormat.format(cycle.incrementalDepth || 3.0),
+    feedOutput.format(cycle.feedrate || 300)
+  );
+}
+
+function onCycleEnd() {
+  writeWords("G80");
+}

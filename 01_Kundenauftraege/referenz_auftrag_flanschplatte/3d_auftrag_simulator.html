@@ -222,10 +222,10 @@
       </select>
 
       <div style="margin-top:10px;">
-        <input type="file" id="ncFileInput" accept=".nc,.gcode,.tap,.txt" style="display:none;" />
-        <button id="btnChooseFile" style="width:100%; padding:10px 14px; background:#10b981; color:#ffffff; border:none; border-radius:6px; font-weight:bold; font-size:12.5px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 2px 4px rgba(0,0,0,0.3); transition:background 0.2s;">
-          📂 Eigene .nc Datei von Festplatte auswählen & laden
-        </button>
+        <input type="file" id="ncFileInput" accept=".nc,.mpf,.h,.gcode,.tap,.txt,*/*" style="display:none;" />
+        <label for="ncFileInput" id="btnChooseFile" style="width:100%; box-sizing:border-box; padding:10px 14px; background:#10b981; color:#ffffff; border:none; border-radius:6px; font-weight:bold; font-size:12.5px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 2px 4px rgba(0,0,0,0.3); transition:background 0.2s;">
+          📂 Eigene .nc / .mpf / .h Datei von Festplatte auswählen & laden
+        </label>
         <div id="fileLoadedBadge" style="display:none; margin-top:6px; font-size:11.5px; color:#34d399; background:rgba(16,185,129,0.15); border:1px solid #059669; padding:5px 8px; border-radius:4px;">
           ✅ Geladene Datei: <span id="fileLoadedName" style="font-weight:bold;"></span> (<span id="fileLoadedLines"></span> Zeilen)
         </div>
@@ -733,8 +733,16 @@
         'S2865 M03',
         'G54',
         'G43 H01 Z15.000 M08',
+        'G00 X-10.000 Y-10.000 Z2.000',
+        'G01 Z-5.000 F300',
+        'G01 X0.000 Y0.000 F450',
+        'G01 X80.000',
+        'G01 Y50.000',
+        'G01 X0.000',
+        'G01 Y0.000',
+        'G00 Z15.000',
         '(--------------------------------------------------)',
-        '(OPERATION : FRAESOPERATION)',
+        '(OPERATION : 2. KREISTASCHE IN EDELSTAHL 1.4301)',
         '(TECHNOLOGIE-CHECK : MATERIAL=STAINLESS | D=10.0MM | S=8000 U/MIN)',
         '(SCHNITTGESCHWINDIGKEIT : VC = 251 M/MIN | ZULAESSIG MAX: 90 M/MIN)',
         '(!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)',
@@ -753,14 +761,26 @@
         'S2865 M03',
         'G54',
         'G43 H01 Z15.000 M08',
+        'G00 X40.000 Y25.000 Z2.000',
+        'G01 Z-3.000 F250',
+        'G01 X55.000 F400',
+        'G03 X55.000 Y25.000 I-15.000 J0.000 F400',
+        'G01 X40.000',
+        'G00 Z15.000',
         '(--------------------------------------------------)',
-        '(OPERATION : FRAESOPERATION)',
+        '(OPERATION : 3. VIER BOHRUNGEN G83 IN EDELSTAHL)',
         '(TECHNOLOGIE-CHECK : MATERIAL=STAINLESS | D=6.0MM | S=3500 U/MIN)',
         '(SCHNITTGESCHWINDIGKEIT : VC = 66 M/MIN | ZULAESSIG MAX: 90 M/MIN)',
         'T02 M06',
         'S3500 M03',
         'G54',
         'G43 H02 Z15.000 M08',
+        'G83 X10.000 Y10.000 Z-12.000 R2.000 Q3.000 F200',
+        'G83 X70.000 Y10.000 Z-12.000 R2.000 Q3.000 F200',
+        'G83 X70.000 Y40.000 Z-12.000 R2.000 Q3.000 F200',
+        'G83 X10.000 Y40.000 Z-12.000 R2.000 Q3.000 F200',
+        'G80',
+        'G00 Z15.000',
         'M09',
         'G53 G00 Z0.0',
         'M05',
@@ -770,23 +790,88 @@
       ].join("\n"),
       "uebung_10": [
         '%',
-        'O1010 (UEBUNG 10 - MULTI WCS G54 UND G55)',
+        'O1010 (UEBUNG 10 - MULTI WCS G54 UND G55 / BAUTEIL UMDREHEN)',
         'G90 G21 G17 G40 G80',
         'G53 G00 Z0.0',
-        '(=== NEUE AUFSPANNUNG: NULLPUNKT G54 ===)',
+        '(=== 1. AUFSPANNUNG OP10: NULLPUNKT G54 ===)',
+        '(OPERATION: 1. AUSSENKONTUR FRAESEN - 2D KONTUR)',
         'T01 M06',
         'S8000 M03',
         'G54',
+        'G43 H01 Z15.000 M08',
+        'G00 X-10.000 Y-10.000 Z2.000',
+        'G01 Z-5.000 F500',
+        'G01 X0.000 Y0.000 F1200',
+        'G01 X80.000',
+        'G01 Y50.000',
+        'G01 X0.000',
+        'G01 Y0.000',
+        'G00 Z15.000',
         'G53 G00 Z0.0',
-        '(=== NEUE AUFSPANNUNG: NULLPUNKT G54 ===)',
+        '(=== 1. AUFSPANNUNG OP10: NULLPUNKT G54 ===)',
+        '(OPERATION: 2. KREISTASCHE IN DER MITTE - G02/G03 KREISINTERPOLATION)',
         'T01 M06',
         'S8000 M03',
         'G54',
+        'G43 H01 Z15.000 M08',
+        'G00 X40.000 Y25.000 Z2.000',
+        'G01 Z-3.000 F400',
+        'G01 X55.000 F1000',
+        'G03 X55.000 Y25.000 I-15.000 J0.000',
+        'G01 X40.000',
+        'G00 Z15.000',
         'G53 G00 Z0.0',
-        '(=== NEUE AUFSPANNUNG: NULLPUNKT G54 ===)',
+        '(=== 1. AUFSPANNUNG OP10: NULLPUNKT G54 ===)',
+        '(OPERATION: 3. VIER BEFESTIGUNGSBOHRUNGEN - G83 TIEFBOHRZYKLUS)',
         'T02 M06',
         'S3500 M03',
         'G54',
+        'G43 H02 Z15.000 M08',
+        'G83 X10.000 Y10.000 Z-12.000 R2.000 Q3.000 F300',
+        'G83 X70.000 Y10.000 Z-12.000 R2.000 Q3.000',
+        'G83 X70.000 Y40.000 Z-12.000 R2.000 Q3.000',
+        'G83 X10.000 Y40.000 Z-12.000 R2.000 Q3.000',
+        'G80',
+        'G00 Z15.000',
+        'G53 G00 Z0.0',
+        'M09',
+        'M05',
+        'G53 G00 Y0.0',
+        '(==========================================================)',
+        '(UMSPANN-STOPP OP10 -> OP20: BAUTEIL UM 180 GRAD UMDREHEN!)',
+        '(TEIL UMDREHEN UND AUF PARALLELUNTERLAGEN IN G55 SPANNEN)',
+        '(==========================================================)',
+        'M00',
+        '(=== 2. AUFSPANNUNG OP20: NULLPUNKT G55 - BAUTEIL UMGEDREHT ===)',
+        '(OPERATION: 4. OP20 (G55): BAUTEIL 180 GRAD UMGEDREHT - 3MM RESTBODEN PLANFRAESEN)',
+        'T03 M06',
+        'S4000 M03',
+        'G55',
+        'G43 H03 Z15.000 M08',
+        'G00 X-20.000 Y12.000 Z5.000',
+        'G01 Z1.500 F600',
+        'G01 X100.000 F1500',
+        'G01 Y38.000',
+        'G01 X-20.000',
+        'G01 Y12.000 Z0.000 F600',
+        'G01 X100.000 F1200',
+        'G01 Y38.000',
+        'G01 X-20.000',
+        'G00 Z15.000',
+        'G53 G00 Z0.0',
+        '(=== 2. AUFSPANNUNG OP20: NULLPUNKT G55 - BAUTEIL UMGEDREHT ===)',
+        '(OPERATION: 5. OP20 (G55): RUECKSEITEN-AUSSENKONTUR ENTGRATEN)',
+        'T01 M06',
+        'S8000 M03',
+        'G55',
+        'G43 H01 Z15.000 M08',
+        'G00 X0.000 Y0.000 Z2.000',
+        'G01 Z-1.000 F500',
+        'G01 X80.000 F1200',
+        'G01 Y50.000',
+        'G01 X0.000',
+        'G01 Y0.000',
+        'G00 Z15.000',
         'M09',
         'G53 G00 Z0.0',
         'M05',
@@ -1015,6 +1100,8 @@
       let heidenhainCC = { x: 40, y: 25 };
       let curTool = "T01 (Werkzeug)";
       let curOp = sourceTitle || "CNC-Bearbeitung";
+      let curWCS = "G54";
+      let isFlipped = false;
       let minX = Infinity, maxX = -Infinity;
       let minY = Infinity, maxY = -Infinity;
       let minZ = Infinity, maxZ = -Infinity;
@@ -1027,16 +1114,39 @@
         const commentMatch = line.match(/\((.*?)\)/) || line.match(/;\s*(.+)$/);
         if (commentMatch) {
           const c = commentMatch[1].trim();
-          if (/OPERATION|OP\d+|KONTUR|TASCHE|BOHR|GEWINDE|FREIFORM|FASE|HEADER|WERKZEUG|ENDE|START|UEBUNG/i.test(c)) {
+          if (/OPERATION|OP\d+|KONTUR|TASCHE|BOHR|GEWINDE|FREIFORM|FASE|HEADER|WERKZEUG|ENDE|START|UEBUNG|UMSPANN|UMDREHEN/i.test(c)) {
             curOp = c;
           }
+          if (/UMDREHEN|G55|OP20/i.test(c) && /UMSPANN|2\. AUFSPANNUNG|OP20/i.test(c)) {
+            isFlipped = true;
+            curWCS = "G55";
+          }
+        }
+
+        if (/\bG54\b/i.test(line)) {
+          curWCS = "G54";
+          isFlipped = false;
+        } else if (/\bG55\b/i.test(line)) {
+          curWCS = "G55";
+          isFlipped = true;
+        }
+        if (/^M0?0\b/i.test(line)) {
+          isFlipped = true;
+          curWCS = "G55";
+          curOp = "🔄 M00 UMSPANN-STOPP: BAUTEIL UM 180° UMDREHEN (OP10 -> OP20 / G55)";
+          // Füge mehrere Zwischen-Waypoints für eine flüssige 180°-Wende-Animation im 3D-Raum ein
+          for (let f = 1; f <= 8; f++) {
+            wpList.push({ x: curX, y: curY, z: curZ, rapid: true, line: idx, tool: curTool, op: curOp, wcs: "G55", flipped: true, flipStep: f / 8 });
+          }
+          return;
         }
 
         // 2. Werkzeugaufruf (T01 M06, T="...", TOOL CALL 1)
         const tMatch = line.match(/\bT0?(\d+)\b/i) || line.match(/\bTOOL\s+CALL\s+(\d+)\b/i);
         if (tMatch) {
           const tNum = parseInt(tMatch[1], 10);
-          curTool = `T${tNum < 10 ? '0' + tNum : tNum}` + (tNum === 1 ? " (Ø10mm Fräser)" : (tNum === 2 ? " (Ø6mm Bohrer)" : (tNum === 3 ? " (M6 Gewindebohrer / Fase)" : ` (Wkz ${tNum})`)));
+          const t3Label = (curWCS === "G55" || isFlipped || /OP20|G55/i.test(rawText)) ? " (Ø50mm Planmesserkopf OP20)" : " (M6 Gewindebohrer / Fase)";
+          curTool = `T${tNum < 10 ? '0' + tNum : tNum}` + (tNum === 1 ? " (Ø10mm Fräser)" : (tNum === 2 ? " (Ø6mm Bohrer)" : (tNum === 3 ? t3Label : ` (Wkz ${tNum})`)));
         } else if (/T="([^"]+)"/i.test(line)) {
           curTool = "T01 (" + line.match(/T="([^"]+)"/i)[1] + ")";
         }
@@ -1046,21 +1156,21 @@
           curZ = 35;
           isRapid = true;
           drillMode = false;
-          wpList.push({ x: curX, y: curY, z: curZ, rapid: true, line: idx, tool: curTool, op: "SICHERHEITS-RUECKZUG Z (HOME)" });
+          wpList.push({ x: curX, y: curY, z: curZ, rapid: true, line: idx, tool: curTool, op: "SICHERHEITS-RUECKZUG Z (HOME)", wcs: curWCS, flipped: isFlipped });
           return;
         }
         if (/G28\s+Y0|G53\s+G00?\s+Y0|SUPA\s+G00?\s+Y0|L\s+Y\+0(?:\.0*)?\s+R0\s+FMAX\s+M91/i.test(line)) {
           curY = -25;
           isRapid = true;
           drillMode = false;
-          wpList.push({ x: curX, y: curY, z: curZ, rapid: true, line: idx, tool: curTool, op: "TISCH ZUR TUER (ENTLADEN)" });
+          wpList.push({ x: curX, y: curY, z: curZ, rapid: true, line: idx, tool: curTool, op: "TISCH ZUR TUER (ENTLADEN)", wcs: curWCS, flipped: isFlipped });
           return;
         }
 
         // 4. Kommentare für Koordinaten-Parsing entfernen
         const cleanLine = line.replace(/\(.*?\)/g, "").replace(/;.*$/, "").trim();
         if (!cleanLine) {
-          wpList.push({ x: curX, y: curY, z: curZ, rapid: isRapid, line: idx, tool: curTool, op: curOp });
+          wpList.push({ x: curX, y: curY, z: curZ, rapid: isRapid, line: idx, tool: curTool, op: curOp, wcs: curWCS, flipped: isFlipped });
           return;
         }
 
@@ -1085,7 +1195,7 @@
           const ccY = cleanLine.match(/\bY\s*([+-]?\d+(?:\.\d+)?)/i);
           if (ccX) heidenhainCC.x = parseFloat(ccX[1]);
           if (ccY) heidenhainCC.y = parseFloat(ccY[1]);
-          wpList.push({ x: curX, y: curY, z: curZ, rapid: isRapid, line: idx, tool: curTool, op: curOp });
+          wpList.push({ x: curX, y: curY, z: curZ, rapid: isRapid, line: idx, tool: curTool, op: curOp, wcs: curWCS, flipped: isFlipped });
           return;
         }
 
@@ -1137,10 +1247,10 @@
           if (zMatch) drillZ = targetZ;
           if (rMatch && !/\bR0\b/i.test(cleanLine)) drillR = parseFloat(rMatch[1]);
           minZ = Math.min(minZ, drillZ);
-          wpList.push({ x: targetX, y: targetY, z: curZ, rapid: true, line: idx, tool: curTool, op: curOp });
-          wpList.push({ x: targetX, y: targetY, z: drillR, rapid: true, line: idx, tool: curTool, op: curOp });
-          wpList.push({ x: targetX, y: targetY, z: drillZ, rapid: false, line: idx, tool: curTool, op: curOp });
-          wpList.push({ x: targetX, y: targetY, z: drillR, rapid: true, line: idx, tool: curTool, op: curOp });
+          wpList.push({ x: targetX, y: targetY, z: curZ, rapid: true, line: idx, tool: curTool, op: curOp, wcs: curWCS, flipped: isFlipped });
+          wpList.push({ x: targetX, y: targetY, z: drillR, rapid: true, line: idx, tool: curTool, op: curOp, wcs: curWCS, flipped: isFlipped });
+          wpList.push({ x: targetX, y: targetY, z: drillZ, rapid: false, line: idx, tool: curTool, op: curOp, wcs: curWCS, flipped: isFlipped });
+          wpList.push({ x: targetX, y: targetY, z: drillR, rapid: true, line: idx, tool: curTool, op: curOp, wcs: curWCS, flipped: isFlipped });
           curX = targetX; curY = targetY; curZ = drillR;
           return;
         }
@@ -1162,7 +1272,7 @@
             const arcX = centerX + radius * Math.cos(theta);
             const arcY = centerY + radius * Math.sin(theta);
             const arcZ = curZ + (targetZ - curZ) * (s / steps);
-            wpList.push({ x: arcX, y: arcY, z: arcZ, rapid: false, line: idx, tool: curTool, op: curOp });
+            wpList.push({ x: arcX, y: arcY, z: arcZ, rapid: false, line: idx, tool: curTool, op: curOp, wcs: curWCS, flipped: isFlipped });
           }
           curX = targetX; curY = targetY; curZ = targetZ;
           return;
@@ -1171,9 +1281,9 @@
         // 11. Normale Bewegung oder Block ohne Koordinaten
         if (xMatch || yMatch || zMatch) {
           curX = targetX; curY = targetY; curZ = targetZ;
-          wpList.push({ x: curX, y: curY, z: curZ, rapid: isRapid, line: idx, tool: curTool, op: curOp });
+          wpList.push({ x: curX, y: curY, z: curZ, rapid: isRapid, line: idx, tool: curTool, op: curOp, wcs: curWCS, flipped: isFlipped });
         } else {
-          wpList.push({ x: curX, y: curY, z: curZ, rapid: isRapid, line: idx, tool: curTool, op: curOp });
+          wpList.push({ x: curX, y: curY, z: curZ, rapid: isRapid, line: idx, tool: curTool, op: curOp, wcs: curWCS, flipped: isFlipped });
         }
       });
 
@@ -1246,8 +1356,9 @@
         }
 
         progress = 0;
+        partFlipAngle = 0;
         lastHighlight = -1;
-        playing = false;
+        playing = true; // Startet die 3D-Simulation nach dem Laden sofort automatisch
 
         const badge = document.getElementById("fileLoadedBadge");
         const optCustom = document.getElementById("optCustom");
@@ -1290,11 +1401,10 @@
       loadGCodeText(code, title, false);
     };
 
-    // Dateiauswahl über Button
+    // Dateiauswahl über natives Label + File-Input
     const fileInput = document.getElementById("ncFileInput");
-    document.getElementById("btnChooseFile").onclick = () => {
+    fileInput.onclick = () => {
       fileInput.value = "";
-      fileInput.click();
     };
 
     fileInput.onchange = (e) => {
@@ -1648,6 +1758,50 @@
     }
 
     let lastHighlight = -1;
+    let partFlipAngle = 0; // 0 = OP10 (G54 normal), Math.PI = OP20 (G55 um 180° gewendet)
+
+    function transformPartPt(pt, angle) {
+      if (!angle || Math.abs(angle) < 1e-4) return pt;
+      const dy = pt.y - 25.0;
+      const dz = pt.z - (-6.0);
+      const c = Math.cos(angle), s = Math.sin(angle);
+      return {
+        x: pt.x,
+        y: 25.0 + dy * c - dz * s,
+        z: -6.0 + dy * s + dz * c
+      };
+    }
+
+    function drawPartLine3D(p1, p2, color, width = 1.5, dash = []) {
+      drawLine3D(transformPartPt(p1, partFlipAngle), transformPartPt(p2, partFlipAngle), color, width, dash);
+    }
+
+    function drawPartBox(xmin, ymin, zmin, xmax, ymax, zmax, color, width, dash = []) {
+      const c = [
+        {x:xmin, y:ymin, z:zmin}, {x:xmax, y:ymin, z:zmin}, {x:xmax, y:ymax, z:zmin}, {x:xmin, y:ymax, z:zmin},
+        {x:xmin, y:ymin, z:zmax}, {x:xmax, y:ymin, z:zmax}, {x:xmax, y:ymax, z:zmax}, {x:xmin, y:ymax, z:zmax}
+      ];
+      for (let i=0; i<4; i++) {
+        drawPartLine3D(c[i], c[(i+1)%4], color, width, dash);
+        drawPartLine3D(c[i+4], c[((i+1)%4)+4], color, width, dash);
+        drawPartLine3D(c[i], c[i+4], color, width, dash);
+      }
+    }
+
+    function drawPartCircle3D(cx, cy, cz, r, color, width = 1.5) {
+      ctx.beginPath();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width * window.devicePixelRatio;
+      for (let i = 0; i <= 36; i++) {
+        const ang = (i / 36) * Math.PI * 2;
+        const pRot = transformPartPt({ x: cx + r * Math.cos(ang), y: cy + r * Math.sin(ang), z: cz }, partFlipAngle);
+        const pt = project(pRot.x, pRot.y, pRot.z);
+        if (i === 0) ctx.moveTo(pt.px, pt.py);
+        else ctx.lineTo(pt.px, pt.py);
+      }
+      ctx.stroke();
+    }
+
     function render() {
       if (!waypoints || waypoints.length === 0) {
         waypoints = [{ x: 0, y: 0, z: 15, rapid: true, line: 0, tool: "T01 (Werkzeug)", op: "Bereit" }];
@@ -1657,69 +1811,6 @@
         resize();
       }
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // 1. Rohteil (Stock 85x55x15mm)
-      if (showStock) {
-        drawBox(-2.5, -2.5, -15, 82.5, 52.5, 0, "rgba(148, 163, 184, 0.35)", 1, [4, 4]);
-      }
-
-      // 2. Fertigteil (3D-Modell 80x50x12mm)
-      drawBox(0, 0, -12, 80, 50, 0, "#94a3b8", 2.2);
-
-      // 3. Kreistasche Ø30mm (R=15) bei X40, Y25, Tiefe Z=0 bis Z=-3
-      drawCircle3D(40, 25, 0, 15, "#64748b", 1.8);
-      drawCircle3D(40, 25, -3, 15, "#64748b", 1.8);
-
-      // 4. 4× Durchgangsbohrung Ø6mm (R=3) bei (10,10), (70,10), (70,40), (10,40)
-      [[10,10], [70,10], [70,40], [10,40]].forEach(([hx, hy]) => {
-        drawCircle3D(hx, hy, 0, 3, "#64748b", 1.5);
-        drawCircle3D(hx, hy, -12, 3, "#64748b", 1.2);
-      });
-
-      // 4b. Technische Bemaßung am 3D-Modell einblenden (CAD-Maße)
-      if (showDimensions) {
-        // Länge 80 mm (X-Richtung unten)
-        drawLine3D({x:0, y:-8, z:0}, {x:80, y:-8, z:0}, "#38bdf8", 1.5);
-        drawLine3D({x:0, y:-12, z:0}, {x:0, y:-4, z:0}, "#38bdf8", 1.5);
-        drawLine3D({x:80, y:-12, z:0}, {x:80, y:-4, z:0}, "#38bdf8", 1.5);
-        drawText3D("80 mm Länge", 40, -10, 0, "#38bdf8", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
-
-        // Breite 50 mm (Y-Richtung rechts)
-        drawLine3D({x:88, y:0, z:0}, {x:88, y:50, z:0}, "#22c55e", 1.5);
-        drawLine3D({x:84, y:0, z:0}, {x:92, y:0, z:0}, "#22c55e", 1.5);
-        drawLine3D({x:84, y:50, z:0}, {x:92, y:50, z:0}, "#22c55e", 1.5);
-        drawText3D("50 mm Breite", 90, 25, 0, "#22c55e", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
-
-        // Dicke 12 mm (Z-Richtung links senkrecht)
-        drawLine3D({x:-8, y:0, z:0}, {x:-8, y:0, z:-12}, "#fbbf24", 1.5);
-        drawLine3D({x:-12, y:0, z:0}, {x:-4, y:0, z:0}, "#fbbf24", 1.5);
-        drawLine3D({x:-12, y:0, z:-12}, {x:-4, y:0, z:-12}, "#fbbf24", 1.5);
-        drawText3D("12 mm Dicke", -10, 0, -6, "#fbbf24", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
-
-        // Kreistasche Ø30 mm
-        drawText3D("Kreistasche Ø 30 mm (Z-3)", 40, 25, 2, "#93c5fd", "bold 10.5px sans-serif", "rgba(15,23,42,0.85)");
-
-        // Bohrungen Ø6 mm
-        drawText3D("4× Bohrung Ø 6 mm (Z-12)", 70, 40, 2, "#93c5fd", "bold 10px sans-serif", "rgba(15,23,42,0.85)");
-
-        // Rohteil-Maße (Stock)
-        if (showStock) {
-          drawText3D("Rohteil (Stock): 85 × 55 × 15 mm", -2.5, 54, 0, "#94a3b8", "10px sans-serif", "rgba(15,23,42,0.85)");
-        }
-      }
-
-      // 5. Werkstück-Nullpunkt G54 (X=Rot, Y=Grün, Z=Blau bei 0,0,0)
-      drawLine3D({x:0,y:0,z:0}, {x:24,y:0,z:0}, "#ef4444", 3);
-      drawLine3D({x:0,y:0,z:0}, {x:0,y:24,z:0}, "#22c55e", 3);
-      drawLine3D({x:0,y:0,z:0}, {x:0,y:0,z:24}, "#3b82f6", 3);
-
-      drawText3D("X-Achse (Länge)", 26, 0, 0, "#ef4444", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
-      drawText3D("Y-Achse (Breite)", 0, 26, 0, "#22c55e", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
-      drawText3D("Z-Achse (Höhe)", 0, 0, 26, "#38bdf8", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
-      drawText3D("G54 (X0 Y0 Z0)", 0, 0, -2, "#f8fafc", "bold 10px sans-serif", "rgba(15,23,42,0.85)");
-
-      // 6. Fräsbahnen bis zum aktuellen Animationsfortschritt zeichnen
       if (playing) {
         progress += 0.05 * speed;
         if (progress >= waypoints.length - 1) {
@@ -1730,21 +1821,124 @@
       }
       const idx = Math.floor(progress);
       const frac = progress - idx;
-
-      for (let i = 0; i < idx; i++) {
-        drawLine3D(
-          waypoints[i],
-          waypoints[i+1],
-          waypoints[i+1].rapid ? "#facc15" : "#38bdf8",
-          waypoints[i+1].rapid ? 1.3 : 2.5,
-          waypoints[i+1].rapid ? [5, 4] : []
-        );
-      }
-
       const safeIdx = Math.max(0, Math.min(idx, waypoints.length - 1));
       const nextIdx = Math.max(0, Math.min(safeIdx + 1, waypoints.length - 1));
       const w1 = waypoints[safeIdx] || waypoints[0];
       const w2 = waypoints[nextIdx] || w1;
+      const isFlippedNow = !!(w2 && w2.flipped);
+      const targetFlipAngle = isFlippedNow ? Math.PI : 0;
+      if (w2 && typeof w2.flipStep === "number") {
+        partFlipAngle = w2.flipStep * Math.PI;
+      } else {
+        partFlipAngle += (targetFlipAngle - partFlipAngle) * 0.14;
+      }
+      const flipDeg = Math.round((partFlipAngle / Math.PI) * 180);
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 1. Rohteil (Stock 85x55x15mm) - dreht sich bei OP20 (G55) um 180° mit!
+      if (showStock) {
+        drawPartBox(-2.5, -2.5, -15, 82.5, 52.5, 0, "rgba(148, 163, 184, 0.35)", 1, [4, 4]);
+      }
+      // In OP20 (Bauteil umgedreht) liegt der 3 mm Restboden (Z=-12..-15 aus OP10) nun OBEN (Z=0..+3 mm)!
+      if (partFlipAngle > 0.2) {
+        drawPartBox(-2.5, -2.5, -15, 82.5, 52.5, -12, "rgba(245, 158, 11, 0.75)", 1.8, [6, 4]);
+      }
+
+      // 2. Fertigteil (3D-Modell 80x50x12mm) - rotiert bei OP20 um 180°
+      drawPartBox(0, 0, -12, 80, 50, 0, isFlippedNow ? "#38bdf8" : "#94a3b8", 2.2);
+
+      // 3. Kreistasche Ø30mm (R=15) bei X40, Y25 (wandert beim 180°-Wenden auf die Unterseite Z=-12..-9!)
+      drawPartCircle3D(40, 25, 0, 15, isFlippedNow ? "#f59e0b" : "#64748b", 1.8);
+      drawPartCircle3D(40, 25, -3, 15, isFlippedNow ? "#f59e0b" : "#64748b", 1.8);
+
+      // 4. 4× Durchgangsbohrung Ø6mm (R=3) bei (10,10), (70,10), (70,40), (10,40)
+      [[10,10], [70,10], [70,40], [10,40]].forEach(([hx, hy]) => {
+        drawPartCircle3D(hx, hy, 0, 3, "#64748b", 1.5);
+        drawPartCircle3D(hx, hy, -12, 3, "#64748b", 1.2);
+      });
+
+      // 4b. Technische Bemaßung am 3D-Modell einblenden (CAD-Maße)
+      if (showDimensions) {
+        drawLine3D({x:0, y:-8, z:0}, {x:80, y:-8, z:0}, "#38bdf8", 1.5);
+        drawLine3D({x:0, y:-12, z:0}, {x:0, y:-4, z:0}, "#38bdf8", 1.5);
+        drawLine3D({x:80, y:-12, z:0}, {x:80, y:-4, z:0}, "#38bdf8", 1.5);
+        drawText3D("80 mm Länge", 40, -10, 0, "#38bdf8", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+
+        drawLine3D({x:88, y:0, z:0}, {x:88, y:50, z:0}, "#22c55e", 1.5);
+        drawLine3D({x:84, y:0, z:0}, {x:92, y:0, z:0}, "#22c55e", 1.5);
+        drawLine3D({x:84, y:50, z:0}, {x:92, y:50, z:0}, "#22c55e", 1.5);
+        drawText3D("50 mm Breite", 90, 25, 0, "#22c55e", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+
+        drawLine3D({x:-8, y:0, z:0}, {x:-8, y:0, z:-12}, "#fbbf24", 1.5);
+        drawLine3D({x:-12, y:0, z:0}, {x:-4, y:0, z:0}, "#fbbf24", 1.5);
+        drawLine3D({x:-12, y:0, z:-12}, {x:-4, y:0, z:-12}, "#fbbf24", 1.5);
+        drawText3D("12 mm Dicke", -10, 0, -6, "#fbbf24", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+
+        if (isFlippedNow || flipDeg > 90) {
+          drawText3D("🔄 OP20 (G55): BAUTEIL " + flipDeg + "° UMGEDREHT! (3 mm Restboden oben Z+3 -> Z0)", 8, 25, 6, "#fbbf24", "bold 11.5px sans-serif", "rgba(120,53,15,0.92)");
+          drawText3D("Kreistasche Ø 30 mm (jetzt UNTEN bei Z-12)", 40, 25, -13, "#f59e0b", "bold 10.5px sans-serif", "rgba(15,23,42,0.9)");
+        } else {
+          drawText3D("Kreistasche Ø 30 mm (Z-3)", 40, 25, 2, "#93c5fd", "bold 10.5px sans-serif", "rgba(15,23,42,0.85)");
+          drawText3D("4× Bohrung Ø 6 mm (Z-12)", 70, 40, 2, "#93c5fd", "bold 10px sans-serif", "rgba(15,23,42,0.85)");
+        }
+
+        if (showStock) {
+          drawText3D("Rohteil (Stock): 85 × 55 × 15 mm", -2.5, 54, 0, "#94a3b8", "10px sans-serif", "rgba(15,23,42,0.85)");
+        }
+      }
+
+      // 5. Werkstück-Nullpunkt G54 vs. G55 (X=Rot, Y=Grün, Z=Blau bei 0,0,0)
+      drawLine3D({x:0,y:0,z:0}, {x:24,y:0,z:0}, "#ef4444", 3);
+      drawLine3D({x:0,y:0,z:0}, {x:0,y:24,z:0}, "#22c55e", 3);
+      drawLine3D({x:0,y:0,z:0}, {x:0,y:0,z:24}, "#3b82f6", 3);
+
+      drawText3D("X-Achse (Länge)", 26, 0, 0, "#ef4444", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+      drawText3D("Y-Achse (Breite)", 0, 26, 0, "#22c55e", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+      drawText3D("Z-Achse (Höhe)", 0, 0, 26, "#38bdf8", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+      if (isFlippedNow) {
+        drawText3D("🔄 G55 (OP20 - BAUTEIL 180° UMGEDREHT)", 0, 0, -2, "#fbbf24", "bold 11px sans-serif", "rgba(120,53,15,0.95)");
+      } else {
+        drawText3D("G54 (X0 Y0 Z0 - OP10)", 0, 0, -2, "#f8fafc", "bold 10px sans-serif", "rgba(15,23,42,0.85)");
+      }
+
+      // 6a. Vorschau des gesamten geladenen NC-Programms (dezent im Hintergrund, damit man sofort nach dem Laden alle Fräsbahnen sieht)
+      for (let i = idx; i < waypoints.length - 1; i++) {
+        const segFlipped = !!(waypoints[i+1] && waypoints[i+1].flipped);
+        if (segFlipped === isFlippedNow) {
+          drawLine3D(
+            waypoints[i],
+            waypoints[i+1],
+            waypoints[i+1].rapid ? "rgba(250, 204, 21, 0.18)" : "rgba(56, 189, 248, 0.25)",
+            1.1,
+            waypoints[i+1].rapid ? [4, 4] : []
+          );
+        }
+      }
+
+      // 6. Fräsbahnen bis zum aktuellen Animationsfortschritt zeichnen
+      for (let i = 0; i < idx; i++) {
+        const segFlipped = !!(waypoints[i+1] && waypoints[i+1].flipped);
+        if (!segFlipped && partFlipAngle > 0.05) {
+          // OP10-Bahnen drehen sich beim Wenden des Bauteils physisch mit auf die Unterseite!
+          drawPartLine3D(
+            waypoints[i],
+            waypoints[i+1],
+            waypoints[i+1].rapid ? "rgba(250, 204, 21, 0.25)" : "rgba(56, 189, 248, 0.45)",
+            waypoints[i+1].rapid ? 1.0 : 1.8,
+            waypoints[i+1].rapid ? [5, 4] : []
+          );
+        } else {
+          drawLine3D(
+            waypoints[i],
+            waypoints[i+1],
+            waypoints[i+1].rapid ? "#facc15" : (segFlipped ? "#22d3ee" : "#38bdf8"),
+            waypoints[i+1].rapid ? 1.3 : 2.6,
+            waypoints[i+1].rapid ? [5, 4] : []
+          );
+        }
+      }
+
       const curX = w1.x + (w2.x - w1.x) * frac;
       const curY = w1.y + (w2.y - w1.y) * frac;
       const curZ = w1.z + (w2.z - w1.z) * frac;
@@ -1798,7 +1992,25 @@
         hudStatusEl.textContent = statusText;
       }
 
-      const toolRadius = curToolName.includes("T01") ? 5 : 3;
+      if (isFlippedNow && curOpName.includes("UMSPANN-STOPP")) {
+        statusBg = "rgba(245, 158, 11, 0.3)";
+        statusBorder = "#f59e0b";
+        statusColor = "#fbbf24";
+        statusText = "🔄 M00 UMSPANN-STOPP: Bauteil wird um 180° gedreht (" + flipDeg + "°) -> Spannen in G55 (OP20)";
+      } else if (isFlippedNow && curZ <= 3.0) {
+        statusBg = "rgba(6, 182, 212, 0.25)";
+        statusBorder = "#06b6d4";
+        statusColor = "#22d3ee";
+        statusText = "🔄 2. AUFSPANNUNG (G55 / OP20): Planfräsen Rückseite Z = " + curZ.toFixed(2) + " mm (Bauteil 180° gewendet)";
+      }
+      if (hudStatusEl) {
+        hudStatusEl.style.background = statusBg;
+        hudStatusEl.style.border = "1px solid " + statusBorder;
+        hudStatusEl.style.color = statusColor;
+        hudStatusEl.textContent = statusText;
+      }
+
+      const toolRadius = curToolName.includes("50mm") ? 18 : (curToolName.includes("T01") ? 5 : 3);
       drawCircle3D(curX, curY, curZ, toolRadius, toolColor, 2.4);
       drawCircle3D(curX, curY, curZ + 22, toolRadius, toolColor, 2.2);
       drawLine3D({x:curX, y:curY, z:curZ}, {x:curX, y:curY, z:curZ+28}, toolColor, 3);
@@ -1824,7 +2036,7 @@
       const hudPosEl = document.getElementById("hud-pos");
       if (hudPosEl) {
         hudPosEl.textContent =
-          `POS (G54): X ${curX.toFixed(3).padStart(7)} | Y ${curY.toFixed(3).padStart(7)} | Z ${curZ.toFixed(3).padStart(7)}`;
+          `POS (${isFlippedNow ? "G55 OP20" : "G54 OP10"}): X ${curX.toFixed(3).padStart(7)} | Y ${curY.toFixed(3).padStart(7)} | Z ${curZ.toFixed(3).padStart(7)}`;
       }
 
       const activeLineIdx = (w2 && typeof w2.line === "number") ? w2.line : -1;

@@ -95,3 +95,37 @@ function onClose() {
   writeWords("M30");
   writeln("%");
 }
+
+
+// =========================================================================================
+// ERGÄNZTE FRÄS- UND POSITIONIERFUNKTIONEN (VORBEREITUNG VOR GEWINDEBOHREN G84)
+// =========================================================================================
+var xOutput = createVariable({prefix: "X"}, xyzFormat);
+var yOutput = createVariable({prefix: "Y"}, xyzFormat);
+var zOutput = createVariable({prefix: "Z"}, xyzFormat);
+var iOutput = createReferenceVariable({prefix: "I"}, xyzFormat);
+var jOutput = createReferenceVariable({prefix: "J"}, xyzFormat);
+var feedOutput = createVariable({prefix: "F"}, feedFormat);
+
+function onRapid(x, y, z) {
+  writeWords("G00", xOutput.format(x), yOutput.format(y), zOutput.format(z));
+}
+
+function onLinear(x, y, z, feed) {
+  writeWords("G01", xOutput.format(x), yOutput.format(y), zOutput.format(z), feedOutput.format(feed));
+}
+
+function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
+  var start = getCurrentPosition();
+  xOutput.reset();
+  yOutput.reset();
+  writeWords(
+    clockwise ? "G02" : "G03",
+    xOutput.format(x),
+    yOutput.format(y),
+    zOutput.format(z),
+    iOutput.format(cx - start.x),
+    jOutput.format(cy - start.y),
+    feedOutput.format(feed)
+  );
+}
