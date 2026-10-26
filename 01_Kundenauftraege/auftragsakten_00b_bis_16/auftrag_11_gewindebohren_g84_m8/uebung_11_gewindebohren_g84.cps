@@ -14,6 +14,13 @@ tolerance = spatial(0.002, MM);
 var xyzFormat = createFormat({decimals:(unit == MM ? 3 : 4), forceDecimal:true});
 var feedFormat = createFormat({decimals:(unit == MM ? 0 : 1), forceDecimal:false});
 
+var xOutput = createVariable({prefix: "X"}, xyzFormat);
+var yOutput = createVariable({prefix: "Y"}, xyzFormat);
+var zOutput = createVariable({prefix: "Z"}, xyzFormat);
+var iOutput = createReferenceVariable({prefix: "I"}, xyzFormat);
+var jOutput = createReferenceVariable({prefix: "J"}, xyzFormat);
+var feedOutput = createVariable({prefix: "F"}, feedFormat);
+
 function onOpen() {
   writeln("%");
   writeln("O1011 (UEBUNG 11 - GEWINDEBOHREN G84)");
@@ -28,6 +35,11 @@ function onOpen() {
 }
 
 function onSection() {
+  xOutput.reset();
+  yOutput.reset();
+  zOutput.reset();
+  feedOutput.reset();
+
   // G53 G00 Z0.0 = Spindel senkrecht ganz nach oben fahren
   writeWords("G53", "G00", "Z0.0");
 
@@ -79,6 +91,7 @@ function onCyclePoint(x, y, z) {
 function onCycleEnd() {
   // G80 = Bohrzyklus abbrechen und löschen
   writeWords("G80");
+  zOutput.reset();
 }
 
 function onClose() {
@@ -100,12 +113,7 @@ function onClose() {
 // =========================================================================================
 // ERGÄNZTE FRÄS- UND POSITIONIERFUNKTIONEN (VORBEREITUNG VOR GEWINDEBOHREN G84)
 // =========================================================================================
-var xOutput = createVariable({prefix: "X"}, xyzFormat);
-var yOutput = createVariable({prefix: "Y"}, xyzFormat);
-var zOutput = createVariable({prefix: "Z"}, xyzFormat);
-var iOutput = createReferenceVariable({prefix: "I"}, xyzFormat);
-var jOutput = createReferenceVariable({prefix: "J"}, xyzFormat);
-var feedOutput = createVariable({prefix: "F"}, feedFormat);
+
 
 function onRapid(x, y, z) {
   writeWords("G00", xOutput.format(x), yOutput.format(y), zOutput.format(z));

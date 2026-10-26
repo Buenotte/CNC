@@ -120,6 +120,22 @@ if (exerciseName.indexOf("uebung_10") !== -1) {
   });
 }
 
+if (exerciseName.indexOf("uebung_11") !== -1) {
+  mockTools.push({
+    number: 3,
+    diameter: 8.0,
+    cornerRadius: 0.0,
+    lengthOffset: 3,
+    diameterOffset: 3,
+    threadPitch: 1.25,
+    description: "GEWINDEBOHRER M8 (P=1.25MM)",
+    comment: "GEWINDEBOHRER M8 (P=1.25MM)",
+    spindleRPM: 600,
+    clockwise: true,
+    coolant: 1
+  });
+}
+
 const mockSections = [
   {
     comment: "1. AUSSENKONTUR FRAESEN - 2D KONTUR",
@@ -238,6 +254,49 @@ if (exerciseName.indexOf("uebung_10") !== -1) {
       }
     }
   );
+}
+
+// Für Übung 11 (Gewindebohren G84 / Rigid Tapping M8x1.25) fügen wir die Gewindebohr-Operation mit T03 hinzu:
+if (exerciseName.indexOf("uebung_11") !== -1) {
+  var tapTool = mockTools.find(function (t) { return t.number === 3; }) || {
+    number: 3,
+    diameter: 8.0,
+    cornerRadius: 0.0,
+    lengthOffset: 3,
+    diameterOffset: 3,
+    threadPitch: 1.25,
+    description: "GEWINDEBOHRER M8 (P=1.25MM)",
+    comment: "GEWINDEBOHRER M8 (P=1.25MM)",
+    spindleRPM: 600,
+    clockwise: true,
+    coolant: 1
+  };
+
+  mockSections.push({
+    comment: "4. GEWINDEBOHREN 4X M8 - G84 SYNCHRONES GEWINDEBOHREN (RIGID TAPPING)",
+    tool: tapTool,
+    spindleSpeed: 600,
+    workOffset: 1,
+    initialPos: { x: 10.0, y: 10.0, z: 15.0 },
+    zMin: -10.0,
+    zMax: 15.0,
+    runMoves: function (sandbox) {
+      sandbox.cycleType = "tapping";
+      sandbox.cycle = { feedrate: 750, retract: 2.0, clearance: 15.0 };
+      sandbox.cycleExpanded = false;
+      sandbox._firstCycle = true;
+      if (typeof sandbox.onCycle === "function") sandbox.onCycle();
+      if (typeof sandbox.onCyclePoint === "function") {
+        sandbox.onCyclePoint(10.0, 10.0, -10.0);
+        sandbox._firstCycle = false;
+        sandbox.onCyclePoint(70.0, 10.0, -10.0);
+        sandbox.onCyclePoint(70.0, 40.0, -10.0);
+        sandbox.onCyclePoint(10.0, 40.0, -10.0);
+      }
+      if (typeof sandbox.onCycleEnd === "function") sandbox.onCycleEnd();
+      if (typeof sandbox.onRapid === "function") sandbox.onRapid(10.0, 40.0, 15.0);
+    }
+  });
 }
 
 function wrapSection(sec) {

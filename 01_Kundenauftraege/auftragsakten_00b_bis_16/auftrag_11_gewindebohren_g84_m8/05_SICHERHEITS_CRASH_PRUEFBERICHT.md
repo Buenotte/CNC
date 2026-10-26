@@ -35,7 +35,8 @@ $$\Delta Z_{\text{Reserve}} = |Z_{\text{Spannbacke}} - Z_{\text{min, Programm}}|
 | Werkzeug (`Korrektur`) | Werkzeugbeschreibung & Operation | Drehzahl ($n$) | Vorschub ($v_f$) | $Z_{\text{min}}$ | Kühlung *(KSS)* | Status |
 | :---: | :--- | :---: | :---: | :---: | :--- | :---: |
 | `T01` (`H01`) | VHM-Schaftfräser Ø 10,0 mm (Kontur & Tasche) | $S = 8000\,\text{U/min}$ | $F = 1200\,\text{mm/min}$ | $-5.000\,\text{mm}$ | M08 (Flutkühlung) | ✅ **FREIGEGEBEN** |
-| `T02` (`H02`) | HSS-E-Maschinengewindebohrer M8 x 1,25 (Synchronlauf M29 S500, F = 500 * 1,25 = 625 mm/min) | $S = 500\,\text{U/min}$ | $F = 625\,\text{mm/min}$ | $-12.000\,\text{mm}$ | M08 (Gewindeschneidemulsion) | ✅ **FREIGEGEBEN** |
+| `T02` (`H02`) | VHM-Spiralbohrer Ø 6,8 mm (Kernlochbohrung für M8) | $S = 3500\,\text{U/min}$ | $F = 300\,\text{mm/min}$ | $-12.000\,\text{mm}$ | M08 (Flutkühlung) | ✅ **FREIGEGEBEN** |
+| `T03` (`H03`) | HSS-E-Maschinengewindebohrer M8 x 1,25 (Rigid Tapping M29 S600 + G84 F750) | $S = 600\,\text{U/min}$ | $F = 750\,\text{mm/min}$ | $-10.000\,\text{mm}$ | M08 (Gewindeschneidemulsion) | ✅ **FREIGEGEBEN** |
 
 ---
 

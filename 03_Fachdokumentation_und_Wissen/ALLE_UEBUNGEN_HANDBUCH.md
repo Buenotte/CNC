@@ -5261,6 +5261,14 @@ In dieser Übung meistern Sie eine der anspruchsvollsten Operationen im Maschine
 3. **Das greifbare Endergebnis:**
    Die Datei [`uebung_11_gewindebohren_g84.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_11_gewindebohren_g84_m8/uebung_11_gewindebohren_g84.nc) garantiert normgerechte Innengewinde mit höchster Prozesssicherheit.
 
+---  
+
+### 🖼️ Technische Zeichnung: Synchrongewindebohren G84 (Rigid Tapping) im Detail
+
+![Synchrongewindebohren G84 Rigid Tapping](docs/bilder/cnc_gewindebohren_g84_rigid_tapping.png)
+
+*Abbildung: Schnittansicht des Synchrongewindebohrzyklus G84 (Rigid Tapping) mit Spindelsynchronisation, Reversierpunkt am Bohrungsgrund, Freifahr-Ebenen (G98 / R / Z) und ISO-Berechnungstabelle F = S × P.*
+
 ---
 
 ## 📩 Der reale Kundenauftrag zu Übung 11 (Gewindebohrerbruch bei M8-Serienfertigung)
@@ -5355,7 +5363,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 
 #### Schritt 3: Den erzeugten G-Code ansehen
 
-* Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
+* Öffnen Sie [`uebungen/uebung_11_gewindebohren_g84.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_11_gewindebohren_g84.nc) mit `Strg + P`.
 * Kontrollieren Sie den Gewindebohrzyklus `G84` und den Vorschub `F`.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
@@ -5432,6 +5440,14 @@ In dieser Übung ermöglichen Sie dem Kunden Toleranzen im Hundertstel-Millimete
    * **Teilziel 3 (Sichere Deaktivierung mit G40):** Vollständiges Abwählen der Korrektur mit `G40` bei einer geraden Wegfahrbewegung ins Freie.
 3. **Das greifbare Endergebnis:**
    Die Maschinendatei [`uebung_12_radiuskorrektur_g41.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_12_radiuskorrektur_g41_h7/uebung_12_radiuskorrektur_g41.nc) ermöglicht der Fertigung das Fräsen von hochpräzisen Lagersitzen und H7-Passungen.
+
+---  
+
+### 🖼️ Technische Fachzeichnung: Werkzeugradiuskorrektur G41 / G42 & Passung Ø 30 H7 im Detail
+
+![Werkzeugradiuskorrektur G41 G42 und G40](docs/bilder/cnc_werkzeugradiuskorrektur_g41_g42_h7.png)
+
+*Abbildung: Draufsicht der Kugellager-Passung Ø 30 H7 mit linearer G41-Anfahrt (Lead-In), Vollkreis G03 (360°), linearer G40-Abwahl (Lead-Out) und 0,01 mm Wear Offset Steuerungskorrektur am Bedienpult.*
 
 ---
 
@@ -5538,7 +5554,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 
 #### Schritt 3: Den erzeugten G-Code ansehen
 
-* Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
+* Öffnen Sie [`uebungen/uebung_12_radiuskorrektur_g41.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_12_radiuskorrektur_g41.nc) mit `Strg + P`.
 * Achten Sie auf `G41 D...` bei der Anfahrbewegung und `G40` beim Verlassen des Bauteils.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
@@ -5612,6 +5628,14 @@ In dieser Übung steigen Sie in die Königsklasse der 3D-Zerspanung ein:
    * **Teilziel 3 (Zeilenabstand & Rautiefe berechnen):** Den theoretischen Mittenrauwert $R_z$ in Abhängigkeit vom Kugelfräserdurchmesser und der seitlichen Zustellung *(Stepover)* optimieren.
 3. **Das greifbare Endergebnis:**
    Die Maschinendatei [`uebung_13_3d_freiformflaechen.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_13_3d_freiformflaeche_alu/uebung_13_3d_freiformflaechen.nc) erzeugt spiegelglatte 3D-Oberflächen für den anspruchsvollen Formen- und Werkzeugbau.
+
+---  
+
+### 🖼️ Technische Fachzeichnung: 3D-Freiformflächen, Kugelfräser & Raukamm-Berechnung im Detail
+
+![3D Freiformflächen und Kugelfräser Schlichten](docs/bilder/cnc_3d_freiformflaeche_kugelfraeser.png)
+
+*Abbildung: Schnittdarstellung des 2-Stufen-Prozesses (3D Adaptive Schruppen vs. 3D Scallop Schlichten mit Kugelfräser T04), Mikroskop-Zoom auf die Raukamm-Geometrie (Cusp Height h ≈ ae² / 8R) und High-Speed-Machining Glättung (G05.1 Q1).*
 
 ---
 
@@ -5695,7 +5719,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 
 #### Schritt 3: Den erzeugten G-Code ansehen
 
-* Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
+* Öffnen Sie [`uebungen/uebung_13_3d_freiformflaechen.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_13_3d_freiformflaechen.nc) mit `Strg + P`.
 * Beobachten Sie die simultanen 3-Achs-Verfahrbefehle `X... Y... Z...`.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
@@ -5762,6 +5786,14 @@ In dieser Übung erschließen Sie High-End-Maschinen mit Heidenhain-Steuerung un
    * **Teilziel 3 (Räumliche Nullpunkt-Transformation):** Nullpunktverschiebungen im Raum mit Heidenhain-Standardzyklen (`CYCL DEF 7` / `CYCL DEF 19`) absichern.
 3. **Das greifbare Endergebnis:**
    Die Datei [`uebung_14_heidenhain_klartext_4achse.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/uebung_14_heidenhain_klartext_4achse.nc) steuert moderne 4-Achs-Bearbeitungszentren der europäischen Spitzenklasse an.
+
+---  
+
+### 🖼️ Technische Fachzeichnung: Heidenhain Klartext (.H) & 4-Achs-Teilapparat (A-Achse) im Detail
+
+![Heidenhain Klartext und 4. Achse A-Achse](docs/bilder/cnc_heidenhain_klartext_4achse_a.png)
+
+*Abbildung: Maschinenaufbau mit CNC-Teilapparat (A-Achse dreht um X) und Reitstock auf dem T-Nuten-Tisch, Mehrseitenbearbeitung in einer Aufspannung (0° / 90° / 180° / 270°) und vollständige Übersetzungstabelle ISO-G-Code zu Heidenhain-Klartextsätzen (TOOL CALL, L ... FMAX, RL/RR).*
 
 ---
 
@@ -5845,7 +5877,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 
 #### Schritt 3: Den erzeugten G-Code ansehen
 
-* Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
+* Öffnen Sie [`uebungen/uebung_14_heidenhain_klartext_4achse.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_14_heidenhain_klartext_4achse.nc) mit `Strg + P`.
 * Achten Sie auf `BEGIN PGM`, `TOOL CALL 1 Z S8000` und `L A+90.000 R0 FMAX`.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
@@ -5934,6 +5966,14 @@ In dieser Übung verleihen Sie dem Werkstück das perfekte industrielle Finish:
    * **Teilziel 3 (Gleichmäßiges Fasenbild an Innen- und Außenecken):** Konturgerechte Bahnführung mit sanftem Kreisbogen-Anschnitt *(Circular Lead-In)* ohne Rattermarken.
 3. **Das greifbare Endergebnis:**
    Die Datei [`uebung_15_fasenfraesen_entgraten.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_15_fasenfraesen_entgraten/uebung_15_fasenfraesen_entgraten.nc) liefert ein griffreundliches, sauberes Bauteil in industrieller Serienqualität.
+
+---  
+
+### 🖼️ Technische Fachzeichnung: Kanten entgraten & Spitzenversatz (Tip Offset = 2.0 mm) im Detail
+
+![Fasenfräsen und Spitzenversatz Tip Offset](docs/bilder/cnc_fasenfraesen_tip_offset_entgraten.png)
+
+*Abbildung: Detail-Schnitt an der Bauteilkante mit 90°-Fasenfräser T04, Gegenüberstellung Null-Geschwindigkeits-Spitze (vc = 0 m/min) vs. optimale Schneidzone (vc ≈ 200 m/min) und mathematische Z-Tiefenberechnung Z = -(c + Tip Offset) = -2.300 mm.*
 
 ---
 
@@ -6034,7 +6074,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 
 #### Schritt 3: Den erzeugten G-Code ansehen
 
-* Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
+* Öffnen Sie [`uebungen/uebung_15_fasenfraesen_entgraten.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_15_fasenfraesen_entgraten.nc) mit `Strg + P`.
 * Prüfen Sie die effektive Fasentiefe `Z-2.300` (Fase + Spitzenversatz).
 
 #### Schritt 4: 3D-Simulation visuell prüfen
@@ -6108,6 +6148,14 @@ In dieser finalen Meisterprüfung führen Sie die lückenlose Qualitätskontroll
    * **Punkt 5 (Rechtssicheres Prüfprotokoll):** Ausstellung und Unterzeichnung des Sicherheits- und Qualitätsprüfberichts für die Kundenrechnung.
 3. **Das greifbare Endergebnis:**
    Mit [`uebung_16_endabnahme_meister_post.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_16_endabnahme_meister_post.cps) besitzen Sie das geprüfte Gesamtkunstwerk des Projekts – fertig für die Auslieferung an anspruchsvolle Industriekunden!
+
+---  
+
+### 🖼️ Technische Fachzeichnung: Das 5-Punkte-Sicherheits-Audit & Meisterprüfung im Detail
+
+![5-Punkte-Meisterprüfung und G-Code-Endabnahme](docs/bilder/cnc_meister_endabnahme_audit_5punkte.png)
+
+*Abbildung: Visuelle Darstellung der 5 Meister-Prüfpunkte am 3D-Werkstück (Nullpunkt G54, Z-MIN Kollisionsschutz vs. Schraubstockbacken, Eilgang-Scan G00, Technologie-Vierklang S/F/M03/M08, 2-Stufen-Safe-Footer G53 Z0 vor Y0) und Übersicht des 6+1 Kunden-Artefakt-Lieferpakets nach AGENTS.md.*
 
 ---
 
@@ -6186,7 +6234,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 
 #### Schritt 3: Den erzeugten G-Code ansehen
 
-* Öffnen Sie [`uebungen/uebung_06_sicherer_rueckzug.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.nc) mit `Strg + P`.
+* Öffnen Sie [`uebungen/uebung_16_endabnahme_meister_post.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_16_endabnahme_meister_post.nc) mit `Strg + P`.
 * Kontrollieren Sie alle 5 Punkte der Meisterprüfung in den Zeilen des G-Codes.
 
 #### Schritt 4: 3D-Simulation visuell prüfen
