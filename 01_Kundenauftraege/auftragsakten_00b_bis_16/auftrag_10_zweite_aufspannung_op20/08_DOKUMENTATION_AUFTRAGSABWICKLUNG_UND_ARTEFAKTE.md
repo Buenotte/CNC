@@ -64,3 +64,19 @@
 Hiermit wird bestätigt, dass sämtliche in diesem Auftrag erbrachten Leistungen ausschließlich geistig-schöpferische Ingenieurarbeiten *(algorithmische Postprozessor-Entwicklung, CAM-Bahnplanung und mathematische Sicherheitsverifikation)* gemäß **§ 18 Abs. 1 Nr. 1 EStG** darstellen.
 
 **Freigegeben am:** 26.10.2026 — **Dipl.-Ing. (FH) Alexander Bujanovski**
+
+---
+
+### 🔧 Technische Schnittzeichnung: Warum die `3 mm` Spannrand im Maschinenschraubstock überlebenswichtig sind (`OP10` vs. `Crash` vs. `OP20`)
+
+Hier siehst du im direkten technischen Querschnitt *(Schnittzeichnung durch Maschinenschraubstock, Parallelunterlagen, gehärtete Stahlbacken und Bauteil)*, warum der Fräser in **`OP10 (G54)`** bei **`Z = -12,0 mm`** stoppen muss, was passiert, wenn er fälschlicherweise bis **`Z = -15,0 mm`** durchfräst (**Crash in die Stahlbacken!**), und wie der **`3 mm` Restboden („Hut-Rand“)** nach dem **180°-Umdrehen in `OP20 (G55)`** oben abgefräst wird:
+
+![Technische Schnittzeichnung: Warum 3 mm Spannrand im Maschinenschraubstock Pflicht sind](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/op10_op20_spannrand_schraubstock.png)
+
+| Phase im Schnittbild | Z-Tiefe *(Zustellung in $\text{mm}$)* | Was passiert im Maschinenschraubstock *(Spannmittel)*? | Technisches Ergebnis an der Maschine |
+| :--- | :--- | :--- | :--- |
+| **1. `OP10 (G54)` — Richtig & Sicher** | **`Z-MIN = -12,0 mm`** | Die gehärteten Stahlbacken *(Feste & Bewegliche Backe)* halten das `15 mm` dicke Rohteil an den untersten **`3 mm` (`Z = -12,0 mm` bis `Z = -15,0 mm`)** auf Parallelunterlagen *(Auflageleisten)*. Der Schaftfräser `T01` ($\varnothing 10\,\text{mm}$) stoppt exakt bei `Z = -12,0 mm`. | ✅ **0,0 mm Kontakt mit den Stahlbacken!** Unten bleibt ein `3 mm` dicker Halte-Rand *(der sogenannte „Hut-Rand“)* stehen. |
+| **2. `OP10` — Fehler bei `Z = -15,0 mm`** | **`Z = -15,0 mm` (CRASH!)** | Würde der Fräser in `OP10` bis zur Rohteil-Unterkante (`Z = -15,0 mm`) durchfräsen, taucht er **`3,0 mm` tief mitten in die gehärteten Stahlbacken** des Schraubstocks ein und fräst gleichzeitig den Halte-Rand weg. | 🚨 **Schwerer Maschinen-Crash!** Der Vollhartmetall-Fräser *(VHM)* bricht bei $8.000\,\text{U/min}$ explosionsartig ab, die Stahlbacken werden zerstört und das lose Bauteil fliegt aus der Spannung! |
+| **3. `OP20 (G55)` — Bauteil 180° umgedreht** | **`Z = +3,0 mm` ➔ `Z = 0,0 mm`** | Nach dem Programmstopp `M00` *(Mandatory Stop)* wird das Bauteil um **180° gewendet** (`Tasche Ø 30 mm` zeigt nach unten). Die Stahlbacken spannen nun die bereits fertigen `80 mm`-Seitenflächen, und der `3 mm` Restboden liegt frei zugänglich **ganz oben**, wo ihn der Planmesserkopf `T03` ($\varnothing 50\,\text{mm}$) sauber auf `Z = 0,0 mm` abfräst. | ✅ **Fertigteil exakt $80 \times 50 \times 12{,}0\,\text{mm}$** – auf allen 6 Seiten bearbeitet, maßhaltig und 100 % kollisionsfrei! |
+
+---
