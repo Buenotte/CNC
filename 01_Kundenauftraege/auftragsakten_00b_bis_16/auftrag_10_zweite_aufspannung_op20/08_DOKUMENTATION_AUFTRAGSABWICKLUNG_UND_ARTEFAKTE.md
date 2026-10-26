@@ -71,7 +71,8 @@ Hiermit wird bestätigt, dass sämtliche in diesem Auftrag erbrachten Leistungen
 
 Hier siehst du im direkten technischen Querschnitt *(Schnittzeichnung durch Maschinenschraubstock, Parallelunterlagen, gehärtete Stahlbacken und Bauteil)*, warum der Fräser in **`OP10 (G54)`** bei **`Z = -12,0 mm`** stoppen muss, was passiert, wenn er fälschlicherweise bis **`Z = -15,0 mm`** durchfräst (**Crash in die Stahlbacken!**), und wie der **`3 mm` Restboden („Hut-Rand“)** nach dem **180°-Umdrehen in `OP20 (G55)`** oben abgefräst wird:
 
-![Technische Schnittzeichnung: Warum 3 mm Spannrand im Maschinenschraubstock Pflicht sind](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/op10_op20_spannrand_schraubstock.png)
+![Technische Schnittzeichnung: Warum 3 mm Spannrand im Maschinenschraubstock Pflicht sind](..\..\..\03_Fachdokumentation_und_Wissen\docs/bilder/op10_op20_spannrand_schraubstock.png)
+> 🔗 **Direktlink zum Bild:** [op10_op20_spannrand_schraubstock.png](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/op10_op20_spannrand_schraubstock.png) *(oder [..\..\..\03_Fachdokumentation_und_Wissen\docs/bilder/op10_op20_spannrand_schraubstock.png](..\..\..\03_Fachdokumentation_und_Wissen\docs/bilder/op10_op20_spannrand_schraubstock.png))*
 
 | Phase im Schnittbild | Z-Tiefe *(Zustellung in $\text{mm}$)* | Was passiert im Maschinenschraubstock *(Spannmittel)*? | Technisches Ergebnis an der Maschine |
 | :--- | :--- | :--- | :--- |

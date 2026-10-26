@@ -1801,7 +1801,8 @@ Deshalb lassen wir unser JavaScript-Programm automatisch ausrechnen, wie tief je
 
 Hier siehst du auf einen Blick genau das physikalische Problem, das du in Übung 3 mit deinem Postprozessor löst:
 
-![Z-MIN Berechnung und Maschinencrash-Vermeidung mit Z = -10 mm Beschriftung](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_z_min_mit_10mm_beschriftung.jpg)
+![Z-MIN Berechnung und Maschinencrash-Vermeidung mit Z = -10 mm Beschriftung](docs/bilder/cnc_z_min_mit_10mm_beschriftung.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_z_min_mit_10mm_beschriftung.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_z_min_mit_10mm_beschriftung.jpg) *(oder [docs/bilder/cnc_z_min_mit_10mm_beschriftung.jpg](docs/bilder/cnc_z_min_mit_10mm_beschriftung.jpg))*
 
 #### Was bedeuten die Zahlen und warum entsteht hier der Crash? (Schritt für Schritt erklärt):
 
@@ -1864,7 +1865,8 @@ Schau dir die **rote Leuchtkante *(Kollisionsbereich / Crash Danger Zone)*** am 
 
 Hier ist die neue technische Schnittansicht (Querschnitt von der Seite), die dir auf den Millimeter genau zeigt, wie der Fräser bei $Z = -10\,\text{mm}$ auf die Stahlbacke trifft:
 
-![Schnittansicht: Warum der Fräser bei Z = -10 mm in den Schraubstock knallt](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_crash_schnitt_erklaerung.jpg)
+![Schnittansicht: Warum der Fräser bei Z = -10 mm in den Schraubstock knallt](docs/bilder/cnc_crash_schnitt_erklaerung.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_crash_schnitt_erklaerung.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_crash_schnitt_erklaerung.jpg) *(oder [docs/bilder/cnc_crash_schnitt_erklaerung.jpg](docs/bilder/cnc_crash_schnitt_erklaerung.jpg))*
 
 ---
 
@@ -1877,7 +1879,8 @@ Viele fragen sich völlig zu Recht:
 
 Hier ist die technische Schnittzeichnung, die zeigt, wie das Tunnel-Prinzip funktioniert:
 
-![Das Tunnel-Prinzip in der CNC-Praxis](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_tunnel_prinzip_parallelunterlagen.jpg)
+![Das Tunnel-Prinzip in der CNC-Praxis](docs/bilder/cnc_tunnel_prinzip_parallelunterlagen.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_tunnel_prinzip_parallelunterlagen.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_tunnel_prinzip_parallelunterlagen.jpg) *(oder [docs/bilder/cnc_tunnel_prinzip_parallelunterlagen.jpg](docs/bilder/cnc_tunnel_prinzip_parallelunterlagen.jpg))*
 
 #### Wie funktioniert das Tunnel-Prinzip Schritt für Schritt?
 
@@ -1921,7 +1924,8 @@ In der Werkstatt steht niemand mit dem Maßband da. Der Fräser nutzt eine von *
 
 Hier ist die genaue zeichnerische Darstellung des realen Fertigungsablaufs unserer Flanschplatte *(Fertigmaß $80 \times 50 \times 12\,\text{mm}$ aus $85 \times 55 \times 15\,\text{mm}$ Rohteil)* im Schraubstock:
 
-![Technische CAD-Zeichnung: Frästiefen und Werkzeugwege Flanschplatte](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/flanschplatte_cnc_depth_levels.jpg)
+![Technische CAD-Zeichnung: Frästiefen und Werkzeugwege Flanschplatte](docs/bilder/flanschplatte_cnc_depth_levels.jpg)
+> 🔗 **Direktlink zum Bild:** [flanschplatte_cnc_depth_levels.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/flanschplatte_cnc_depth_levels.jpg) *(oder [docs/bilder/flanschplatte_cnc_depth_levels.jpg](docs/bilder/flanschplatte_cnc_depth_levels.jpg))*
 
 #### 1. Die vier Z-Tiefenstufen auf der Zeichnung im Detail:
 
@@ -1977,7 +1981,8 @@ Hier ist die genaue zeichnerische Darstellung des realen Fertigungsablaufs unser
 
 Dafür nutzt die Industrie das Prinzip der **zwei Aufspannungen *(OP10 und OP20)***:
 
-![Das 2-Aufspannungs-Prinzip OP10 vs OP20](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_op10_op20_setup.jpg)
+![Das 2-Aufspannungs-Prinzip OP10 vs OP20](docs/bilder/cnc_op10_op20_setup.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_op10_op20_setup.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_op10_op20_setup.jpg) *(oder [docs/bilder/cnc_op10_op20_setup.jpg](docs/bilder/cnc_op10_op20_setup.jpg))*
 
 * **1. Aufspannung (OP10 – Links):**  
   Das Rohteil wird am $3\,\text{mm}$ Spannrand unten im Maschinenschraubstock gespannt. Von oben werden Außenkontur ($Z=-5$), Kreistasche ($Z=-3$) und die 4 Bohrungen ($Z=-12$) gefertigt.
@@ -2104,7 +2109,8 @@ Warum steht dort nicht einfach die Plattendicke von $-12{,}0\,\text{mm}$, sonder
 
 Hier sehen Sie die exakte Schnittansicht durch die Aluminiumplatte mit dem Spiralbohrer, allen Ebenen, Bemaßungspfeilen und der Berechnungsformel:
 
-![Exakte Berechnung der Durchgangsbohrung Z-MIN = -14.500 mm](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_bohrung_z_min_14_5mm_berechnung.jpg)
+![Exakte Berechnung der Durchgangsbohrung Z-MIN = -14.500 mm](docs/bilder/cnc_bohrung_z_min_14_5mm_berechnung.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_bohrung_z_min_14_5mm_berechnung.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_bohrung_z_min_14_5mm_berechnung.jpg) *(oder [docs/bilder/cnc_bohrung_z_min_14_5mm_berechnung.jpg](docs/bilder/cnc_bohrung_z_min_14_5mm_berechnung.jpg))*
 
 ---
 
@@ -2481,7 +2487,8 @@ Warum ist das so? Warum fährt die Maschine diesen Weg nicht im schnellen Eilgan
 
 Hier ist die maßstabsgetreue CAD-Zeichnung mit 2D-Draufsicht und Schritt-für-Schritt-G-Code-Analyse, die genau erklärt, warum hier zwingend mit Vorschub `G01` geschnitten werden muss:
 
-![Physikalische Erklärung der Anfahrbewegung Lead-In und Kollisionsschutz bei Rohteil-Übermaß](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_anfahrbewegung_lead_in_erklaerung.jpg)
+![Physikalische Erklärung der Anfahrbewegung Lead-In und Kollisionsschutz bei Rohteil-Übermaß](docs/bilder/cnc_anfahrbewegung_lead_in_erklaerung.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_anfahrbewegung_lead_in_erklaerung.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_anfahrbewegung_lead_in_erklaerung.jpg) *(oder [docs/bilder/cnc_anfahrbewegung_lead_in_erklaerung.jpg](docs/bilder/cnc_anfahrbewegung_lead_in_erklaerung.jpg))*
 
 ---
 
@@ -2887,11 +2894,13 @@ Hier treffen **zwei Dinge** aufeinander: Eine **optische 3D-Perspektive** und di
 
 Hier ist die neue technische 3D-Gesamtübersicht, die genau zeigt, **wo der Mensch steht**, **wohin er blickt** und wie die Achsen zu seinem Körper ausgerichtet sind:
 
-![Bediener-Standort, Blickrichtung und Achsen an der CNC-Maschine](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_operator_standort_koordinaten.jpg)
+![Bediener-Standort, Blickrichtung und Achsen an der CNC-Maschine](docs/bilder/cnc_operator_standort_koordinaten.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_operator_standort_koordinaten.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_operator_standort_koordinaten.jpg) *(oder [docs/bilder/cnc_operator_standort_koordinaten.jpg](docs/bilder/cnc_operator_standort_koordinaten.jpg))*
 
 Hier ist das reale Werkstatt-Foto genau dieser Situation – der Blickwinkel des Zerspanungsmechanikers von vorne durch die geöffnete Maschinentür:
 
-![Echte Fräsmaschine: 3D-Messtaster tastet G54 Nullpunkt an der vorderen linken oberen Ecke ab](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_g54_nullpunkt_ecke.jpg)
+![Echte Fräsmaschine: 3D-Messtaster tastet G54 Nullpunkt an der vorderen linken oberen Ecke ab](docs/bilder/cnc_g54_nullpunkt_ecke.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_g54_nullpunkt_ecke.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_g54_nullpunkt_ecke.jpg) *(oder [docs/bilder/cnc_g54_nullpunkt_ecke.jpg](docs/bilder/cnc_g54_nullpunkt_ecke.jpg))*
 
 * **Was Sie auf diesen Darstellungen glasklar erkennen:**
   * **Standort des Menschen:** Der Zerspanungsmechaniker steht direkt **vor der geöffneten Kabinentür** am Bedienpult.
@@ -5116,7 +5125,8 @@ Warum mussten wir einen `15 mm` dicken Block nehmen, wenn das fertige Teil nur `
 
 Hier siehst du im direkten technischen Querschnitt *(Schnittzeichnung durch Maschinenschraubstock, Parallelunterlagen, gehärtete Stahlbacken und Bauteil)*, warum der Fräser in **`OP10 (G54)`** bei **`Z = -12,0 mm`** stoppen muss, was passiert, wenn er fälschlicherweise bis **`Z = -15,0 mm`** durchfräst (**Crash in die Stahlbacken!**), und wie der **`3 mm` Restboden („Hut-Rand“)** nach dem **180°-Umdrehen in `OP20 (G55)`** oben abgefräst wird:
 
-![Technische Schnittzeichnung: Warum 3 mm Spannrand im Maschinenschraubstock Pflicht sind](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/op10_op20_spannrand_schraubstock.png)
+![Technische Schnittzeichnung: Warum 3 mm Spannrand im Maschinenschraubstock Pflicht sind](docs/bilder/op10_op20_spannrand_schraubstock.png)
+> 🔗 **Direktlink zum Bild:** [op10_op20_spannrand_schraubstock.png](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/op10_op20_spannrand_schraubstock.png) *(oder [docs/bilder/op10_op20_spannrand_schraubstock.png](docs/bilder/op10_op20_spannrand_schraubstock.png))*
 
 | Phase im Schnittbild | Z-Tiefe *(Zustellung in $\text{mm}$)* | Was passiert im Maschinenschraubstock *(Spannmittel)*? | Technisches Ergebnis an der Maschine |
 | :--- | :--- | :--- | :--- |
@@ -5130,7 +5140,8 @@ Hier siehst du im direkten technischen Querschnitt *(Schnittzeichnung durch Masc
 
 Hier siehst du den Ablauf des zweistufigen Fertigungsprozesses mit allen deutschen und englischen Fachbegriffen im Überblick:
 
-![1. und 2. Aufspannung OP10 und OP20 mit G54 und G55](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_op10_op20_setup.jpg)
+![1. und 2. Aufspannung OP10 und OP20 mit G54 und G55](docs/bilder/cnc_op10_op20_setup.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_op10_op20_setup.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_op10_op20_setup.jpg) *(oder [docs/bilder/cnc_op10_op20_setup.jpg](docs/bilder/cnc_op10_op20_setup.jpg))*
 
 #### Zweisprachige Begriffserklärung zum Bild *(Bilingual Terminology)*:
 
@@ -5484,7 +5495,8 @@ Wenn der Kunde auf der Zeichnung eine hochpräzise **Passung *(z. B. $\varnothin
 
 Hier siehst du, wie die Werkzeugradiuskorrektur zwischen programmierter Fertigteil-Kontur und der tatsächlichen Spindel-Mittelpunktsbahn unterscheidet:
 
-![Werkzeugradiuskorrektur G41 G42 und G40](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_cutter_radius_compensation_g41_g42.jpg)
+![Werkzeugradiuskorrektur G41 G42 und G40](docs/bilder/cnc_cutter_radius_compensation_g41_g42.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_cutter_radius_compensation_g41_g42.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_cutter_radius_compensation_g41_g42.jpg) *(oder [docs/bilder/cnc_cutter_radius_compensation_g41_g42.jpg](docs/bilder/cnc_cutter_radius_compensation_g41_g42.jpg))*
 
 #### Zweisprachige Begriffserklärung zum Bild *(Bilingual Terminology)*:
 
@@ -5977,9 +5989,11 @@ Heute erwartet jeder gute Kunde von dir als **CAM-Spezialist**, dass dein Progra
 
 Hier siehst du im Detail, warum ein Fasenfräser mit einem sogenannten **Spitzen-Versatz *(Tip Offset)*** tiefer eingetaucht werden muss:
 
-![Fasenfräsen und Spitzen-Versatz Tip Offset 3D Schnitt](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_chamfer_tip_offset_diagram.jpg)
+![Fasenfräsen und Spitzen-Versatz Tip Offset 3D Schnitt](docs/bilder/cnc_chamfer_tip_offset_diagram.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_chamfer_tip_offset_diagram.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_chamfer_tip_offset_diagram.jpg) *(oder [docs/bilder/cnc_chamfer_tip_offset_diagram.jpg](docs/bilder/cnc_chamfer_tip_offset_diagram.jpg))*
 
-![Fasenfräsen Außenkante 2D Schnitt](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_chamfer_outer_edge_diagram.jpg)
+![Fasenfräsen Außenkante 2D Schnitt](docs/bilder/cnc_chamfer_outer_edge_diagram.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_chamfer_outer_edge_diagram.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_chamfer_outer_edge_diagram.jpg) *(oder [docs/bilder/cnc_chamfer_outer_edge_diagram.jpg](docs/bilder/cnc_chamfer_outer_edge_diagram.jpg))*
 
 #### Zweisprachige Begriffserklärung zum Bild *(Bilingual Terminology)*:
 

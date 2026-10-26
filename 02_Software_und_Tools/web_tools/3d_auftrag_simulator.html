@@ -243,6 +243,13 @@
         <button id="btnToggleStock" class="secondary">Rohteil Ein/Aus</button>
         <button id="btnToggleDim" style="background:#0284c7;" title="Maße und Pfeile direkt am 3D-Modell ein-/ausblenden">📐 Maße Ein/Aus</button>
       </div>
+      <div style="margin-top:6px; display:flex; align-items:center; flex-wrap:wrap; gap:6px; font-size:12px; background:#020617; padding:7px 10px; border-radius:6px; border:1px solid #334155;">
+        <span style="white-space:nowrap; font-weight:700; color:#38bdf8;">Linien-Filter:</span>
+        <button id="btnPathMode1" type="button" style="background:#10b981; padding:5px 9px; font-size:11.5px; font-weight:bold; cursor:pointer;" title="Ein-/Ausschalten: Alte OP10-Linien nach dem 180°-Bauteil-Umdrehen (OP20) ausblenden">🧹 Nach Wenden: Alte AUS ✓</button>
+        <button id="btnPathMode2" type="button" style="background:#8b5cf6; padding:5px 9px; font-size:11.5px; font-weight:bold; cursor:pointer;" title="Ein-/Ausschalten: Blendet alle anderen Bearbeitungsschritte sofort aus und zeigt nur die aktuell laufende Operation">🎯 Nur aktuelle OP: AUS</button>
+        <button id="btnPathMode0" type="button" style="background:#dc2626; padding:5px 9px; font-size:11.5px; font-weight:bold; cursor:pointer;" title="Löscht sofort alle bisherigen Linien vom 3D-Bauteil, sodass ab diesem Punkt nur noch neue Linien gezeichnet werden">🗑️ Bisherige Linien jetzt ausblenden</button>
+        <button id="btnJumpFlip" type="button" style="background:#d97706; padding:5px 9px; font-size:11.5px; font-weight:bold; cursor:pointer;" title="Springt in Übung 10 direkt zum Umspann-Stopp M00 (180°-Bauteil-Umdrehen / Start von OP20 G55)">🔄 Zu M00 (180° Wenden) springen</button>
+      </div>
       <div style="margin-top:8px; display:flex; align-items:center; gap:8px; font-size:12px; background:#020617; padding:6px 10px; border-radius:6px; border:1px solid #334155;">
         <span style="white-space:nowrap; font-weight:600;">Geschwindigkeit:</span>
         <input type="range" id="speedSlider" min="0.05" max="1.5" step="0.05" value="0.25" style="flex:1; cursor:pointer;" />
@@ -1111,7 +1118,7 @@
         const line = rawLine.trim();
 
         // 1. Kommentar / Operations-Name (ISO Klammer oder Semikolon)
-        const commentMatch = line.match(/\((.*?)\)/) || line.match(/;\s*(.+)$/);
+        const commentMatch = line.match(/^\((.*)\)\s*$/) || line.match(/\((.*?)\)/) || line.match(/;\s*(.+)$/);
         if (commentMatch) {
           const c = commentMatch[1].trim();
           if (/OPERATION|OP\d+|KONTUR|TASCHE|BOHR|GEWINDE|FREIFORM|FASE|HEADER|WERKZEUG|ENDE|START|UEBUNG|UMSPANN|UMDREHEN/i.test(c)) {
@@ -1153,22 +1160,22 @@
 
         // 3. Sicherheits-Rückzüge (Fanuc/Haas G53/G28, Siemens SUPA, Heidenhain M91)
         if (/G53\s+G00?\s+Z0|G28\s+G91\s+Z0|SUPA\s+G00?\s+Z0|L\s+Z\+0(?:\.0*)?\s+R0\s+FMAX\s+M91/i.test(line)) {
-          curZ = 35;
+          curZ = 70; // Anzeigehöhe für Maschinen-Home (G53 Z0): bewusst hoch, damit der Abstand beim 180°-Wenden klar sichtbar ist
           isRapid = true;
           drillMode = false;
-          wpList.push({ x: curX, y: curY, z: curZ, rapid: true, line: idx, tool: curTool, op: "SICHERHEITS-RUECKZUG Z (HOME)", wcs: curWCS, flipped: isFlipped });
+          wpList.push({ x: curX, y: curY, z: curZ, rapid: true, line: idx, tool: curTool, op: curOp, wcs: curWCS, flipped: isFlipped });
           return;
         }
         if (/G28\s+Y0|G53\s+G00?\s+Y0|SUPA\s+G00?\s+Y0|L\s+Y\+0(?:\.0*)?\s+R0\s+FMAX\s+M91/i.test(line)) {
           curY = -25;
           isRapid = true;
           drillMode = false;
-          wpList.push({ x: curX, y: curY, z: curZ, rapid: true, line: idx, tool: curTool, op: "TISCH ZUR TUER (ENTLADEN)", wcs: curWCS, flipped: isFlipped });
+          wpList.push({ x: curX, y: curY, z: curZ, rapid: true, line: idx, tool: curTool, op: curOp, wcs: curWCS, flipped: isFlipped });
           return;
         }
 
         // 4. Kommentare für Koordinaten-Parsing entfernen
-        const cleanLine = line.replace(/\(.*?\)/g, "").replace(/;.*$/, "").trim();
+        const cleanLine = (/^\(.*\)\s*$/.test(line) ? "" : line.replace(/\(.*?\)/g, "")).replace(/;.*$/, "").trim();
         if (!cleanLine) {
           wpList.push({ x: curX, y: curY, z: curZ, rapid: isRapid, line: idx, tool: curTool, op: curOp, wcs: curWCS, flipped: isFlipped });
           return;
@@ -1552,8 +1559,14 @@
       progress = 0;
       playing = false;
       lastHighlight = -1;
+      partFlipAngle = 0;          // Bauteil sofort wieder in OP10-Lage (nicht erst langsam zurückdrehen)
+      hideBeforeIdx = 0;          // Zuvor "ausgeblendete" Linien wieder freigeben
+      showPreviewBg = !onlyCurrentOp;
       resetCamera();
       updatePlayButton();
+      updatePathFilterButtons();
+      const gb = document.getElementById("gcode-box");
+      if (gb) gb.scrollTop = 0;   // G-Code-Fenster wieder an den Programmanfang
     };
 
     document.getElementById("btnResetCamera").onclick = resetCamera;
@@ -1571,6 +1584,115 @@
         btnToggleDim.style.background = showDimensions ? "#0284c7" : "#334155";
       };
     }
+
+    // Sofort wirksame Schalter für die Linien-Anzeige im 3D-Fenster:
+    let hideBeforeFlip = true;   // Alte OP10-Linien & Taschen-Kreise nach dem 180°-Wenden (OP20) ausblenden
+    let onlyCurrentOp  = false;  // Optional: Nur die gerade aktive Operation zeigen
+    let hideBeforeIdx  = 0;      // Manuelles Leeren aller bisherigen Linien bis zum aktuellen Punkt
+    let showPreviewBg  = true;   // Dezente Vorschau der noch kommenden Bahnen (zeigt nach Laden/Reset sofort den Werkzeugweg; alte Linien bleiben unberührt)
+
+    const btnPathMode1 = document.getElementById("btnPathMode1");
+    const btnPathMode2 = document.getElementById("btnPathMode2");
+    const btnPathMode0 = document.getElementById("btnPathMode0");
+    const btnJumpFlip  = document.getElementById("btnJumpFlip");
+
+    function updatePathFilterButtons() {
+      if (btnPathMode1) {
+        btnPathMode1.textContent = hideBeforeFlip ? "🧹 Nach Wenden: Alte AUS ✓" : "👁️ Nach Wenden: Alte EIN";
+        btnPathMode1.style.background = hideBeforeFlip ? "#10b981" : "#334155";
+      }
+      if (btnPathMode2) {
+        btnPathMode2.textContent = onlyCurrentOp ? "🎯 Nur aktuelle OP: EIN ✓" : "🎯 Nur aktuelle OP: AUS";
+        btnPathMode2.style.background = onlyCurrentOp ? "#8b5cf6" : "#334155";
+      }
+      if (btnPathMode0) {
+        const isCleared = (hideBeforeIdx > 0);
+        btnPathMode0.textContent = isCleared ? "👁️ Alle Linien wieder zeigen" : "🗑️ Bisherige Linien jetzt ausblenden";
+        btnPathMode0.style.background = isCleared ? "#0284c7" : "#dc2626";
+      }
+    }
+
+    // 1. Button: 🧹 Nach Wenden: Alte AUS ✓ ⇄ 👁️ Nach Wenden: Alte EIN
+    if (btnPathMode1) {
+      btnPathMode1.onclick = () => {
+        const curWp = waypoints[Math.min(Math.floor(progress), waypoints.length - 1)] || waypoints[0];
+        const currentlyFlipped = !!(curWp && curWp.flipped);
+        if (!currentlyFlipped) {
+          let flipWpIdx = waypoints.findIndex(w => w && w.flipped);
+          if (flipWpIdx < 0) {
+            const sel = document.getElementById("programSelect");
+            if (sel) {
+              sel.value = "uebung_10";
+              loadGCodeText(PRESET_GCODES["uebung_10"], "Übung 10: 2. Aufspannung (G55 / OP20)", false);
+              flipWpIdx = waypoints.findIndex(w => w && w.flipped);
+            }
+          }
+          hideBeforeFlip = true;
+          if (flipWpIdx >= 0) {
+            progress = Math.min(waypoints.length - 1, flipWpIdx + 12);
+            playing = true;
+            updatePlayButton();
+          }
+        } else {
+          hideBeforeFlip = !hideBeforeFlip;
+          if (!hideBeforeFlip) hideBeforeIdx = 0;
+        }
+        updatePathFilterButtons();
+      };
+    }
+
+    // 2. Button: 🟣 🎯 Nur aktuelle OP: AUS ⇄ 🎯 Nur aktuelle OP: EIN ✓
+    if (btnPathMode2) {
+      btnPathMode2.onclick = () => {
+        onlyCurrentOp = !onlyCurrentOp;
+        showPreviewBg = !onlyCurrentOp;
+        updatePathFilterButtons();
+      };
+    }
+
+    // 3. Button: 🔴 🗑️ Bisherige Linien jetzt ausblenden ⇄ 👁️ Alle Linien wieder zeigen
+    if (btnPathMode0) {
+      btnPathMode0.onclick = () => {
+        if (hideBeforeIdx > 0) {
+          hideBeforeIdx = 0;
+          showPreviewBg = true;
+        } else {
+          hideBeforeIdx = Math.max(1, Math.floor(progress));
+          showPreviewBg = false;
+        }
+        updatePathFilterButtons();
+      };
+    }
+
+    // 4. Button: 🟠 🔄 Zu M00 (180° Wenden) springen
+    if (btnJumpFlip) {
+      btnJumpFlip.onclick = () => {
+        let flipWpIdx = waypoints.findIndex(w => w && w.flipped);
+        if (flipWpIdx < 0) {
+          const sel = document.getElementById("programSelect");
+          if (sel) {
+            sel.value = "uebung_10";
+            loadGCodeText(PRESET_GCODES["uebung_10"], "Übung 10: 2. Aufspannung (G55 / OP20)", false);
+            flipWpIdx = waypoints.findIndex(w => w && w.flipped);
+          }
+        }
+        if (flipWpIdx >= 0) {
+          progress = Math.max(0, flipWpIdx - 1);
+          playing = true;
+          updatePlayButton();
+        }
+      };
+    }
+    updatePathFilterButtons();
+
+    // Falls Browser beim F5-Neuladen eine andere Übung im Dropdown behalten hat, sofort synchronisieren:
+    window.addEventListener("load", () => {
+      const sel = document.getElementById("programSelect");
+      if (sel && sel.value && sel.value !== "kundenauftrag" && sel.value !== "custom" && PRESET_GCODES[sel.value]) {
+        const title = sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : sel.value;
+        loadGCodeText(PRESET_GCODES[sel.value], title, false);
+      }
+    });
 
     const speedSlider = document.getElementById("speedSlider");
     const speedVal = document.getElementById("speedVal");
@@ -1717,8 +1839,14 @@
       let closestDist = Infinity;
       let closestWp = null;
 
-      for (let i = 0; i < currentIdx; i++) {
+      const curHoverWp = waypoints[Math.min(currentIdx, waypoints.length - 1)] || waypoints[0];
+      const curHoverFlipped = !!(curHoverWp && curHoverWp.flipped);
+      const curHoverOp = (curHoverWp && curHoverWp.op) ? curHoverWp.op : "";
+      for (let i = hideBeforeIdx; i < currentIdx; i++) {
         if (!waypoints[i] || !waypoints[i+1]) continue;
+        const segFlipped = !!waypoints[i+1].flipped;
+        if (hideBeforeFlip && curHoverFlipped && !segFlipped) continue;
+        if (onlyCurrentOp && (waypoints[i+1].op !== curHoverOp || segFlipped !== curHoverFlipped)) continue;
         const p1 = project(waypoints[i].x, waypoints[i].y, waypoints[i].z);
         const p2 = project(waypoints[i+1].x, waypoints[i+1].y, waypoints[i+1].z);
         const d = distToSegment(mx, my, p1.px, p1.py, p2.px, p2.py);
@@ -1802,6 +1930,22 @@
       ctx.stroke();
     }
 
+    // Index, ab dem der 3 mm Restboden (Spannrand) in OP20 abgefraest ist (Ende des ersten Z0-Planfraes-Durchgangs nach dem Wenden)
+    let capCacheWp = null, capGoneIdx = Infinity;
+    function getCapGoneIdx() {
+      if (capCacheWp === waypoints) return capGoneIdx;
+      capCacheWp = waypoints;
+      capGoneIdx = Infinity;
+      const isZ0Cut = (w) => w && w.flipped && !w.rapid && typeof w.flipStep !== "number" && w.z <= 0.01 && w.z > -0.5;
+      let i = waypoints.findIndex(isZ0Cut);
+      if (i >= 0) {
+        let j = i;
+        while (j + 1 < waypoints.length && isZ0Cut(waypoints[j + 1])) j++;
+        capGoneIdx = j;
+      }
+      return capGoneIdx;
+    }
+
     function render() {
       if (!waypoints || waypoints.length === 0) {
         waypoints = [{ x: 0, y: 0, z: 15, rapid: true, line: 0, tool: "T01 (Werkzeug)", op: "Bereit" }];
@@ -1841,18 +1985,18 @@
         drawPartBox(-2.5, -2.5, -15, 82.5, 52.5, 0, "rgba(148, 163, 184, 0.35)", 1, [4, 4]);
       }
       // In OP20 (Bauteil umgedreht) liegt der 3 mm Restboden (Z=-12..-15 aus OP10) nun OBEN (Z=0..+3 mm)!
-      if (partFlipAngle > 0.2) {
+      // Sobald der Planmesserkopf den Restboden auf Z0 abgefraest hat, verschwindet er (Fertigmass 12,0 mm erreicht).
+      if (partFlipAngle > 0.2 && idx < getCapGoneIdx()) {
         drawPartBox(-2.5, -2.5, -15, 82.5, 52.5, -12, "rgba(245, 158, 11, 0.75)", 1.8, [6, 4]);
       }
 
       // 2. Fertigteil (3D-Modell 80x50x12mm) - rotiert bei OP20 um 180°
       drawPartBox(0, 0, -12, 80, 50, 0, isFlippedNow ? "#38bdf8" : "#94a3b8", 2.2);
 
-      // 3. Kreistasche Ø30mm (R=15) bei X40, Y25 (wandert beim 180°-Wenden auf die Unterseite Z=-12..-9!)
+      // 3. Kreistasche Ø30mm & 4× Bohrung sind Bauteil-Geometrie: sie drehen beim 180°-Wenden mit (Tasche wandert nach unten) und bleiben immer sichtbar.
       drawPartCircle3D(40, 25, 0, 15, isFlippedNow ? "#f59e0b" : "#64748b", 1.8);
       drawPartCircle3D(40, 25, -3, 15, isFlippedNow ? "#f59e0b" : "#64748b", 1.8);
 
-      // 4. 4× Durchgangsbohrung Ø6mm (R=3) bei (10,10), (70,10), (70,40), (10,40)
       [[10,10], [70,10], [70,40], [10,40]].forEach(([hx, hy]) => {
         drawPartCircle3D(hx, hy, 0, 3, "#64748b", 1.5);
         drawPartCircle3D(hx, hy, -12, 3, "#64748b", 1.2);
@@ -1902,10 +2046,15 @@
         drawText3D("G54 (X0 Y0 Z0 - OP10)", 0, 0, -2, "#f8fafc", "bold 10px sans-serif", "rgba(15,23,42,0.85)");
       }
 
-      // 6a. Vorschau des gesamten geladenen NC-Programms (dezent im Hintergrund, damit man sofort nach dem Laden alle Fräsbahnen sieht)
-      for (let i = idx; i < waypoints.length - 1; i++) {
-        const segFlipped = !!(waypoints[i+1] && waypoints[i+1].flipped);
-        if (segFlipped === isFlippedNow) {
+      const activeOpForFilter = (w2 && w2.op) ? String(w2.op) : "";
+      if (idx < hideBeforeIdx) hideBeforeIdx = 0;
+
+      // 6a. Vorschau des geladenen NC-Programms (dezent im Hintergrund)
+      if (showPreviewBg) {
+        for (let i = idx; i < waypoints.length - 1; i++) {
+          const segFlipped = !!(waypoints[i+1] && waypoints[i+1].flipped);
+          if (segFlipped !== isFlippedNow) continue;
+          if (onlyCurrentOp && waypoints[i+1].op !== activeOpForFilter) continue;
           drawLine3D(
             waypoints[i],
             waypoints[i+1],
@@ -1917,10 +2066,18 @@
       }
 
       // 6. Fräsbahnen bis zum aktuellen Animationsfortschritt zeichnen
-      for (let i = 0; i < idx; i++) {
+      for (let i = hideBeforeIdx; i < idx; i++) {
         const segFlipped = !!(waypoints[i+1] && waypoints[i+1].flipped);
+        // Schalter 1 (hideBeforeFlip): Sobald das Bauteil in OP20 gewendet ist, alte OP10-Linien komplett ausblenden!
+        if (hideBeforeFlip && (isFlippedNow || partFlipAngle > 0.2) && !segFlipped) {
+          continue;
+        }
+        // Schalter 2 (onlyCurrentOp): Nur Linien der aktuell laufenden Operation anzeigen!
+        if (onlyCurrentOp && (waypoints[i+1].op !== activeOpForFilter || segFlipped !== isFlippedNow)) {
+          continue;
+        }
         if (!segFlipped && partFlipAngle > 0.05) {
-          // OP10-Bahnen drehen sich beim Wenden des Bauteils physisch mit auf die Unterseite!
+          // Nur in Modus 0 (Alle Bahnen immer EIN): OP10-Bahnen drehen sich beim Wenden mit auf die Unterseite
           drawPartLine3D(
             waypoints[i],
             waypoints[i+1],
@@ -2030,7 +2187,7 @@
 
       // HUD & G-Code Zeile aktualisieren
       const hudOpEl = document.getElementById("hud-op");
-      if (hudOpEl) hudOpEl.textContent = "OPERATION: " + curOpName;
+      if (hudOpEl) hudOpEl.textContent = "OPERATION: " + String(curOpName).replace(/^OPERATION:\s*/i, "");
       const hudToolEl = document.getElementById("hud-tool");
       if (hudToolEl) hudToolEl.textContent = "WERKZEUG : " + curToolName;
       const hudPosEl = document.getElementById("hud-pos");

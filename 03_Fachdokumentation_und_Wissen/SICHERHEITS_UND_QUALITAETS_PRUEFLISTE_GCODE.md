@@ -149,7 +149,8 @@ $$\text{Reale Spindelposition} = \underbrace{\text{Werkstück-Nullpunkt (G54)}}_
   * Wurde der Schraubstock im CAM als **Schutzkörper *(Kollisionszone)*** hinterlegt?
   * **Sicherheitsabstand einhalten:** Die tiefste Konturfräsung muss mindestens **3 bis 5 mm Luft** über den Oberkanten der Stahlbacken bleiben.
 
-![Z-MIN und Kollisionsschutz am Maschinenschraubstock](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_z_min_mit_10mm_beschriftung.jpg)
+![Z-MIN und Kollisionsschutz am Maschinenschraubstock](docs/bilder/cnc_z_min_mit_10mm_beschriftung.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_z_min_mit_10mm_beschriftung.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_z_min_mit_10mm_beschriftung.jpg) *(oder [docs/bilder/cnc_z_min_mit_10mm_beschriftung.jpg](docs/bilder/cnc_z_min_mit_10mm_beschriftung.jpg))*
 
 ### 4. Werkzeug-Auskraglänge und Halterkollision (Tool Gauge Length):
 * **Was bedeutet das einfach erklärt?**  

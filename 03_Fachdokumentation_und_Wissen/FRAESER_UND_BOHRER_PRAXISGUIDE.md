@@ -47,7 +47,8 @@ Viele Einsteiger befürchten, man müsse jahrelang eine Werkzeugmacherlehre abso
 
 Im modernen Maschinenbau gibt es zwar tausende Sonderwerkzeuge, aber **95 % aller Bauteile** werden mit nur **5 geometrischen Grundtypen** gefertigt:
 
-![Die 5 wichtigsten Fräswerkzeuge und Bohrer im technischen Direktvergleich](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/fraeser_und_bohrer_uebersicht.jpg)
+![Die 5 wichtigsten Fräswerkzeuge und Bohrer im technischen Direktvergleich](docs/bilder/fraeser_und_bohrer_uebersicht.jpg)
+> 🔗 **Direktlink zum Bild:** [fraeser_und_bohrer_uebersicht.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/fraeser_und_bohrer_uebersicht.jpg) *(oder [docs/bilder/fraeser_und_bohrer_uebersicht.jpg](docs/bilder/fraeser_und_bohrer_uebersicht.jpg))*
 *Abbildung 1: Die 5 wichtigsten Werkzeuge nebeneinander – 1. Schaftfräser (flacher Boden), 2. Torusfräser (mit Eckenradius), 3. Vollkugelfräser (3D-Halbkugel), 4. Fasenfräser (45°-Kegel) und 5. Bohr- & Gewindewerkzeug.*
 
 ```mermaid
@@ -109,7 +110,8 @@ flowchart TD
   * Ohne Entgraten schneidet sich der Werker beim Ausspannen sofort die Finger auf.
   * Früher feilten Arbeiter das von Hand mit der Feile ab. Heute fährt im CAM am Schluss ein **Fasenfräser mit einer Tiefe von $0,5\,\text{mm}$** einmal um alle Außenkanten und Taschen herum. Das Bauteil kommt gratfrei und mit edlen, gleichmäßigen 45°-Kanten aus der Maschine!
 
-![Fasenfräsen und Spitzen-Versatz Tip Offset](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_chamfer_tip_offset_diagram.jpg)
+![Fasenfräsen und Spitzen-Versatz Tip Offset](docs/bilder/cnc_chamfer_tip_offset_diagram.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_chamfer_tip_offset_diagram.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_chamfer_tip_offset_diagram.jpg) *(oder [docs/bilder/cnc_chamfer_tip_offset_diagram.jpg](docs/bilder/cnc_chamfer_tip_offset_diagram.jpg))*
 *Abbildung 2a: Technischer Schnitt durch den Fasenfräser mit Spitzen-Versatz (Tip Offset). Die Spitze mit Schnittgeschwindigkeit $v_c = 0\,\text{m/min}$ wird nach unten in die Luft abgesenkt, damit die messerscharfen Außenflanken gratfrei schneiden.*
 
 ---
@@ -121,7 +123,8 @@ flowchart TD
   * **Planfräsen *(Facing)***: Das Rohteil ist vom Sägewerk oft uneben und rostig. In der ersten Bearbeitungsoperation (`OP10`) fährt der Messerkopf einmal über die gesamte Oberseite und fräst in 5 Sekunden eine spiegelblanke, exakt plane Bezugsfläche.
   * **In der 2. Aufspannung (`OP20`):** Nach dem Umdrehen des Werkstücks fräst der Planfräser den verbliebenen Rohboden *(Spannrand)* exakt auf Fertigmaß ab.
 
-![1. und 2. Aufspannung OP10 und OP20 mit G54 und G55](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_op10_op20_setup.jpg)
+![1. und 2. Aufspannung OP10 und OP20 mit G54 und G55](docs/bilder/cnc_op10_op20_setup.jpg)
+> 🔗 **Direktlink zum Bild:** [cnc_op10_op20_setup.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_op10_op20_setup.jpg) *(oder [docs/bilder/cnc_op10_op20_setup.jpg](docs/bilder/cnc_op10_op20_setup.jpg))*
 *Abbildung 2b: Das zweistufige Fertigungsverfahren: 1. Aufspannung (OP10 / G54) mit Spannrand im Schraubstock und 2. Aufspannung (OP20 / G55) nach 180°-Wendung zum Planfräsen auf Fertighöhe.*
 
 ---
@@ -130,7 +133,8 @@ flowchart TD
 
 Jedes runde Loch und jedes Gewinde auf einer CNC-Maschine durchläuft in der Regel eine feste **3-stufige Werkzeug-Reihenfolge**:
 
-![Vergleich von Fräswerkzeugen und VHM-Spiralbohrer](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/fraeser_und_spiralbohrer_vergleich.jpg)
+![Vergleich von Fräswerkzeugen und VHM-Spiralbohrer](docs/bilder/fraeser_und_spiralbohrer_vergleich.jpg)
+> 🔗 **Direktlink zum Bild:** [fraeser_und_spiralbohrer_vergleich.jpg](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/fraeser_und_spiralbohrer_vergleich.jpg) *(oder [docs/bilder/fraeser_und_spiralbohrer_vergleich.jpg](docs/bilder/fraeser_und_spiralbohrer_vergleich.jpg))*
 *Abbildung 2: Technischer Direktvergleich von Fräswerkzeugen und Hochleistungs-VHM-Spiralbohrer mit Spiralnuten zur Spanabfuhr.*
 
 ```mermaid

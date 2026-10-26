@@ -163,3 +163,9 @@ Ein systemweites **End-to-End-Audit *(Gesamtprüfung über alle 4 Projektsäulen
   3. Prüfe alle Kundenauftrags-Ordner auf Vollständigkeit der 6+1 Pflicht-Artefakte.
   4. Aktualisiere den Bericht 03_Fachdokumentation_und_Wissen/PROJEKT_AUDIT_UND_QUALITAETSBERICHT.md.
   ```
+
+---
+
+## Nachtrag 26.10.2026: Simulator nur noch an einer Stelle gepflegt
+
+Die 4 früheren Kopien von `3d_auftrag_simulator.html` (`docs/`, `auftrag_03_flanschplatte_z_min/`, `referenz_auftrag_flanschplatte/`, `test_auftrag_ubung_03/`) sind jetzt kleine **Weiterleitungs-Dateien** *(Redirect-Stubs, ca. 1,3 KB)*, die automatisch auf die Haupt-Datei [`02_Software_und_Tools/web_tools/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) zeigen. Alle bisherigen Links in den Dokumenten funktionieren weiter. **Wichtig:** Wird ein Auftragsordner allein an einen Kunden verschickt, funktioniert die Weiterleitung nicht, dann muss die Haupt-Datei mitgeschickt werden.
