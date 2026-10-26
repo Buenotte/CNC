@@ -1,4 +1,15 @@
-# 📩 Kundenauftrag: Übung 13: Echte 3D-Freiformflächen – `3D Adaptive Clearing` (Wirbelfräsen) & `3D-Schlichten` mit Kugelfräser (`Ball End Mill`)
+# 📩 Auftrag 13: 3D-Freiformflächen-Schlichten & High-Speed-Glättung (G187 / G64) — AeroTech Prototypenbau Bremen
+
+**Auftraggeber:** Dr. Elena Rost (Leiterin Prototypenbau)  
+**Unternehmen:** AeroTech Prototypenbau Bremen  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
+**Zielmaschine:** **Hermle C32 U 5-Achs (ISO/Haas-Highspeed-Modus)**  
+**Vereinbartes Budget:** **750,00 € netto** (892,50 € brutto)  
+
+---
+
+## Auftrags-Briefing des Kunden:
+
 **Auftrags-Kategorie:** 13 (3D-Freiformflächen & Kugelfräser-Schlichten)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -32,8 +43,3 @@ So sieht eine typische hochdotierte Anfrage aus, wenn ein Formen- oder Prototype
 > **Dr. Elena Rost** – AeroTech Turbinen- & Modellbau GmbH, Bremen
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

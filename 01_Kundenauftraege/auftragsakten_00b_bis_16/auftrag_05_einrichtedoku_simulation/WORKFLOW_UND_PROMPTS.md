@@ -1,121 +1,141 @@
-# 📋 Workflow-Beschreibung & Prompts: Auftrag 05: Einrichteblatt-Extraktion & Simulationsprüfung
+# 📋 Standard-Workflow & Fertige KI-Prompts: Auftrag 05: Einrichtedokumentation, G-Code-Verifikation & 3D-Simulation
 
-Mit dieser Anleitung wickelst du den Kundenauftrag aus [`KUNDENAUFTRAG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/KUNDENAUFTRAG.md) Schritt für Schritt mit deinen 4 KI-Agenten ab.
-
-Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten erzeugen dann alle geforderten Artefakte direkt in diesem Ordner [`auftrag_05_einrichtedoku_simulation`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation).
-
----
-
-## 🗂️ 1. Welche Artefakte werden erzeugt und wo genau stehen sie?
-
-| Artefakt-Dateiname | Was ist das? | Wo steht die Datei? *(Speicherort)* | Wer erzeugt sie? |
-| :--- | :--- | :--- | :---: |
-| **`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`** | Rechtssicheres B2B-Angebot (280,00 € netto) | [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | **Agent 4** *(Backoffice)* |
-| **`output_expected.nc`** | Beigestellter Maschinencode des Kunden (zu prüfen & simulieren) | [`output_expected.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/output_expected.nc) | **Kunde / Agent 3** *(Prüfung)* |
-| **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | 5-Stufen-Sicherheitsprüfbericht *(Null-Kollisions-Garantie)* | [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | **Agent 3** *(NC-Safety)* |
-| **`06_EINRICHTEBLATT_SETUP_SHEET.md`** | Rüstdatenblatt für den Maschinenbediener vor Ort | [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/06_EINRICHTEBLATT_SETUP_SHEET.md) | **Agent 3** *(NC-Safety)* |
-| **`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`** | Revisionssichere Honorarrechnung (333,20 € brutto) | [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) | **Agent 4** *(Backoffice)* |
+> **Auftragsordner:** `01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/`  
+> **Kunde:** **Kuhn Medizintechnik & CNC-Fräszentrum** (Thomas Kuhn (Inhaber & Werkstattleiter))  
+> **Maschine & Steuerung:** **Haas VF-2 (Haas NGC Steuerung)** — Haas NGC (Next Generation Control / ISO G-Code)  
+> **Honorar-Budget:** **280,00 € netto** (333,20 € brutto nach § 18 EStG *(Einkommensteuergesetz)*)
 
 ---
 
-## 🧭 2. Der 4-Stufen-Workflow im Überblick:
+## 1. Übersicht der 6 Pflicht-Artefakte & Abschlussdokumentation (Speicherorte & KI-Agenten)
 
-```
-                  1. KUNDENAUFTRAG.md (Liegt bereits im Ordner)
-                             │
-                             ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │ SCHRITT 1: ANGEBOT ERSTELLEN (Agent 4: Backoffice-Agent)              │
- │ Prompt 1 ausführen ──► Erzeugt: 02_ANGEBOT_DIPL_ING_BUJANOVSKI.md        │
- └───────────────────────────┬────────────────────────────────────────────┘
-                             │
-                             ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │ SCHRITT 2: NC-MASCHINENCODE GENERIEREN (Agent 2: Postprocessor-Coder)  │
- │ Prompt 2 ausführen ──► Erzeugt: uebung_03_z_min_berechnung.nc
- └───────────────────────────┬────────────────────────────────────────────┘
-                             │
-                             ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │ SCHRITT 3: SICHERHEIT & EINRICHTEBLATT (Agent 3: NC-Safety-Agent)      │
- │ Prompt 3 ausführen ──► Erzeugt: 05_SICHERHEITS_CRASH_PRUEFBERICHT.md   │
- │                    ──► Erzeugt: 06_EINRICHTEBLATT_SETUP_SHEET.md       │
- └───────────────────────────┬────────────────────────────────────────────┘
-                             │
-                             ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │ SCHRITT 4: RECHNUNG STELLEN (Agent 4: Backoffice-Agent)                │
- │ Prompt 4 ausführen ──► Erzeugt: 07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md  │
- └────────────────────────────────────────────────────────────────────────┘
-```
+| Nr. | Pflicht-Artefakt *(Dateiname & Klick-Link)* | Zuständiger KI-Agent | Technischer & Kaufmännischer Zweck |
+| :---: | :--- | :--- | :--- |
+| **Eingang** | [`KUNDENAUFTRAG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/KUNDENAUFTRAG.md) | 🔍 **Agent 1: Lead-Scout-Agent** | Unverfälschtes Original-Kundenbriefing mit Geometrie-, Maschinen- und Budgetvorgaben |
+| **1** | [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | 💰 **Agent 4: Backoffice-Ingenieur-Agent** | Verbindliches B2B-Festpreisangebot *(Business-to-Business)* nach § 18 EStG inkl. Single-Block-Haftungsklausel |
+| **2** | [`output_expected.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/output_expected.nc) (Direktverifikation) | 💻 **Agent 2: Postprocessor-Coder-Agent** | Fertig generierter, absturzsicherer CNC-Maschinencode *(Computerized Numerical Control)* inkl. Z-MIN-Header |
+| **3** | [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | 🛡️ **Agent 3: NC-Safety- & Setup-Agent** | 5-Stufen-Sicherheits-Audit mit mathematischem Kollisionsnachweis ($Z_{\text{min}} = -12.000\,\text{mm}$ vs. Backe $-15.000\,\text{mm}$) |
+| **4** | [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/06_EINRICHTEBLATT_SETUP_SHEET.md) | 🛡️ **Agent 3: NC-Safety- & Setup-Agent** | Druckfertiges Rüstdatenblatt für den Maschinenbediener mit Nullpunkt (`G54 (Werkstücknullpunkt: Vorne links oben, Z = 0,0 mm)`) und Auskraglängen |
+| **5** | [`output_expected_simulation_video.mp4`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/output_expected_simulation_video.mp4) | 🛡️ **Agent 3: NC-Safety- & Setup-Agent** | Gerendertes 3D-Simulationsvideo (MP4) zur visuellen Vorabkontrolle aller Werkzeugbahnen |
+| **6** | [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) | 💰 **Agent 4: Backoffice-Ingenieur-Agent** | Steuerkonforme Ingenieur-Honorarrechnung nach § 14 UStG *(Umsatzsteuergesetz)* & § 18 EStG für das Finanzamt Hanau |
+| **Abschluss** | [`08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md) | 🤖 **Gesamtsystem (Agent 1–4)** | Lückenlose Abschlussdokumentation aller Phasen, Berechnungen und Freigaben |
 
 ---
 
-## 💬 3. Die 4 fertigen Prompts & wie du jedes Artefakt testest:
+## 2. Das 4-Stufen-Workflow-Diagramm
 
-### 🟢 SCHRITT 1: Angebot erstellen (Agent 4)
-#### Prompt zum Kopieren in den Chat:
 ```text
-Starte bitte Agent 4 (Backoffice-Agent):
-Lies die Kundenanfrage in c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_05_einrichtedoku_simulation\KUNDENAUFTRAG.md.
-Erstelle direkt im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_05_einrichtedoku_simulation\ das formelle B2B-Angebot "02_ANGEBOT_DIPL_ING_BUJANOVSKI.md" für Thomas Kuhn (Inhaber & Werkstattleiter) (Kuhn Medizintechnik & CNC-Fräszentrum) über 280,00 € netto. Verwende ausschließlich ingenieurmäßige Leistungsbeschreibungen nach § 18 EStG und binde die verbindliche Haftungsausschluss-Klausel für das Einfahren des ersten Werkstücks im Einzelsatz ein.
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ EINGANG: KUNDENAUFTRAG.md (Kuhn Medizintechnik & CNC-Fräszentrum)                        │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+                                       ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SCHRITT 1 (Agent 4 - Backoffice):                                            │
+│ Erstellt 02_ANGEBOT_DIPL_ING_BUJANOVSKI.md (280,00 € netto, § 18 EStG)       │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+                                       ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SCHRITT 2 (Agent 2 - Postprocessor-Coder):                                   │
+│ Entwickelt Postprozessor & generiert output_expected.nc (Haas VF-2 (Haas NGC Steuerung)) │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+                                       ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SCHRITT 3 (Agent 3 - NC-Safety & Setup):                                     │
+│ • Prüft Z-MIN (-12.000 mm) -> 05_SICHERHEITS_CRASH_PRUEFBERICHT.md          │
+│ • Erstellt Rüstblatt        -> 06_EINRICHTEBLATT_SETUP_SHEET.md              │
+│ • Rendert 3D-Video          -> output_expected_simulation_video.mp4      │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+                                       ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SCHRITT 4 (Agent 4 - Backoffice):                                            │
+│ Stellt 07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md & 08_DOKUMENTATION...md         │
+└──────────────────────────────────────────────────────────────────────────────┘
 ```
-
-#### 🔍 Wie wird das Angebot getestet und geprüft?
-1. **Honorar:** Steht exakt der Festpreis von **280,00 € netto** drin?
-2. **Freiberufler-Status:** Enthält die Leistungsbeschreibung ingenieurmäßige Begriffe nach § 18 EStG *(keine Einstufung als Gewerbe durch das Finanzamt Hanau)*?
-3. **Haftungsausschluss:** Verpflichtung des Kunden zum Einfahren des ersten Werkstücks im Einzelsatz *(Single Block)* an der Hermle C22 5-Achs (Heidenhain TNC 640) enthalten?
 
 ---
 
-### 🔵 SCHRITT 2: 3D-Kollisionssimulation & Code-Analyse (Agent 3 / Safety-Check)
-#### Prompt zum Kopieren in den Chat:
+## 3. Fertige, maßgeschneiderte Prompts zum direkten Kopieren
+
+### 💰 Schritt 1: Prompt für das Ingenieur-Angebot *(Agent 4)*
+
 ```text
-Starte bitte Agent 3 (NC-Safety- & Setup-Agent):
-Lade und analysiere das vom Kunden beigestellte NC-Programm "output_expected.nc" im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_05_einrichtedoku_simulation\.
-Führe die vollständige 3D-Simulation zur visuellen Kollisionskontrolle durch (Prüfung von Eilgangbewegungen G00, Fräsbahnen G01/G02/G03 und Z-Tiefen gegen Schraubstockbacken).
-(Hinweis: Nur falls du im gelieferten Kunden-G-Code Syntax- oder Verfahrfehler detektierst, wird Agent 2 zur Code-Korrektur alarmiert).
+Starte Agent 4 (Backoffice-Ingenieur-Agent):
+Lies die Datei c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/KUNDENAUFTRAG.md.
+Erstelle für den Kunden Kuhn Medizintechnik & CNC-Fräszentrum (Ansprechpartner: Thomas Kuhn (Inhaber & Werkstattleiter), Adresse: Medizinalring 11, 78532 Tuttlingen) ein rechtssicheres Ingenieur-Festpreisangebot nach § 18 EStG über exakt 280,00 € netto (333,20 € brutto) für das Bauteil "Referenz-Trägerplatte O1001 (80 x 50 x 12 mm)" auf der Maschine "Haas VF-2 (Haas NGC Steuerung)" (Haas NGC (Next Generation Control / ISO G-Code)).
+Integriere zwingend den Haftungsausschluss zum Einfahren im Einzelsatzbetrieb (Single Block) und speichere das Dokument unter:
+c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md
 ```
 
-#### 🔍 Wie wird der generierte NC-Code getestet und geprüft?
-1. **Syntax-Check:** Ausführung des Python-Extractors und Prüfung, ob alle Spindeldrehzahlen und Schnitttiefen fehlerfrei erkannt werden.
-2. **Simulation:** Lade den Code in [NCViewer.com](https://ncviewer.com) oder führe ihn lokal aus. Fahren alle Achsen kollisionsfrei ab?
+#### 🔍 Wie wird dieses Artefakt getestet und geprüft?
+1. **Honorar- und Adressabgleich:** Stimmen `280,00 € netto` (`333,20 € brutto`), Firmenname `Kuhn Medizintechnik & CNC-Fräszentrum` und Maschine `Haas VF-2 (Haas NGC Steuerung)` exakt mit `KUNDENAUFTRAG.md` überein?
+2. **Steuer-Check (§ 18 EStG):** Wird die Leistung als *„Ingenieurtechnische Entwicklung und mathematische Verifikation"* deklariert (keine gewerblichen Begriffe)?
+3. **Haftungsklausel:** Ist die Verpflichtung zum Einfahren im Einzelsatzbetrieb *(Single Block)* enthalten?
 
 ---
 
-### 🛡️ SCHRITT 3: Sicherheitsbericht & Einrichteblatt erstellen (Agent 3)
-#### Prompt zum Kopieren in den Chat:
+### 💻 Schritt 2: Prompt für Postprozessor & NC-Maschinencode *(Agent 2)*
+
 ```text
-Starte bitte Agent 3 (NC-Safety- & Setup-Agent):
-Führe für die beigestellte Datei "output_expected.nc" im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_05_einrichtedoku_simulation\ die 5-Stufen-Sicherheitsprüfung nach SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md durch.
-Erstelle im selben Ordner:
-1. "05_SICHERHEITS_CRASH_PRUEFBERICHT.md" mit Freigabestatus BESTANDEN.
-2. "06_EINRICHTEBLATT_SETUP_SHEET.md" als druckfertiges Rüstblatt für den Bediener an der Hermle C22 5-Achs (Heidenhain TNC 640) inklusive Werkzeugliste.
+Starte Agent 2 (Postprocessor-Coder-Agent):
+Entwickle und verifiziere auf Basis von c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/KUNDENAUFTRAG.md den CNC-Maschinencode für den Kunden Kuhn Medizintechnik & CNC-Fräszentrum:
+- Bauteil: Referenz-Trägerplatte O1001 (80 x 50 x 12 mm) (Aluminium EN AW-6082 T6)
+- Maschine & Steuerung: Haas VF-2 (Haas NGC Steuerung) (Haas NGC (Next Generation Control / ISO G-Code))
+- Werkstücknullpunkt: G54 (Werkstücknullpunkt: Vorne links oben, Z = 0,0 mm)
+- Werkzeuge & Schnittdaten: T01 (VHM-Schaftfräser Ø 10,0 mm (Außenkontur Z-5.0 & Kreistasche Z-3.0), S=8000 U/min, F=1200 mm/min, Z_min=-5.000 mm); T02 (VHM-Spiralbohrer Ø 6,0 mm (4x Tiefbohrzyklus G83 Z-12.0), S=3500 U/min, F=300 mm/min, Z_min=-12.000 mm)
+- Tiefste Zustellung: Z_min = -12.000 mm (Spannbacken-Oberkante bei Z = -15.000 mm)
+Speichere den fertigen, fehlerfreien Maschinencode unter:
+c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/output_expected.nc
 ```
 
-#### 🔍 Wie werden Sicherheitsbericht und Einrichteblatt getestet und geprüft?
-1. **Sicherheitsbericht:** Prüfung des generierten Einrichteblatts auf Werkstück-Nullpunktlage G54 und Drehmoment-Angaben. Status muss **BESTANDEN (GRÜN)** sein.
-2. **Einrichteblatt:** Sind alle Werkzeuge mit Mindest-Auskraglängen $L_{min}$, Drehzahlen und Nullpunktlagen vollständig gelistet?
+#### 🔍 Wie wird dieses Artefakt getestet und geprüft?
+1. **Textprüfung Header & Sicherheitszeile:** Enthält `output_expected.nc` den Z-MIN-Sicherheitsheader sowie den Safe-Start-Block (`G90 G21 G17 G40 G49 G80` bzw. Steuerungs-Äquivalent)?
+2. **Web-Backplot-Test:** Lade `output_expected.nc` in [NCViewer.com](https://ncviewer.com/) oder den lokalen 3D-Simulator [`index.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/index.html) und prüfe die Werkzeugbahnen.
+3. **Lokaler Simulator-Lauf:** Prüfe den Postprozessor mit `node 02_Software_und_Tools/simuliere_post.js`.
 
 ---
 
-### 💰 SCHRITT 4: Rechnungsstellung nach § 18 EStG (Agent 4)
-#### Prompt zum Kopieren in den Chat:
+### 🛡️ Schritt 3: Prompt für Sicherheitsbericht, Einrichteblatt & 3D-Simulationsvideo *(Agent 3)*
+
 ```text
-Starte bitte Agent 4 (Backoffice-Agent):
-Der Auftrag im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_05_einrichtedoku_simulation\ ist technisch erfolgreich abgeschlossen und freigegeben.
-Erstelle jetzt im selben Ordner die steuersichere Honorarrechnung "07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md" über 280,00 € netto (333,20 € brutto) an Kuhn Medizintechnik & CNC-Fräszentrum mit allen Pflichtangaben nach § 14 UStG und freiberuflicher Leistungsabgrenzung für das Finanzamt Hanau.
+Starte Agent 3 (NC-Safety- & Setup-Agent):
+Führe für die Datei c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/output_expected.nc des Kunden Kuhn Medizintechnik & CNC-Fräszentrum (Haas VF-2 (Haas NGC Steuerung)) das vollständige 5-Stufen-Sicherheitsaudit durch:
+1. Berechne die Kollisionsreserve zwischen Z_min = -12.000 mm und den Schraubstockbacken bei Z = -15.000 mm und speichere den Prüfbericht unter:
+   c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/05_SICHERHEITS_CRASH_PRUEFBERICHT.md
+2. Erstelle das druckfertige Werkstatteinrichteblatt (Setup Sheet) mit allen Werkzeugen (T01 (VHM-Schaftfräser Ø 10,0 mm (Außenkontur Z-5.0 & Kreistasche Z-3.0), S=8000 U/min, F=1200 mm/min, Z_min=-5.000 mm); T02 (VHM-Spiralbohrer Ø 6,0 mm (4x Tiefbohrzyklus G83 Z-12.0), S=3500 U/min, F=300 mm/min, Z_min=-12.000 mm)) und Mindest-Auskraglängen unter:
+   c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/06_EINRICHTEBLATT_SETUP_SHEET.md
+3. Rendere das 3D-Maschinensimulationsvideo über render_simulation_video.py:
+   python 02_Software_und_Tools/scripts/render_simulation_video.py --gcode c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/output_expected.nc --output c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/output_expected_simulation_video.mp4
 ```
 
-#### 🔍 Wie wird die Rechnung getestet und geprüft?
-1. **Betrag:** Netto-Honorar 280,00 € netto zzgl. 19 % USt. = **333,20 € brutto**.
-2. **Steuerliche Pflichtangaben:** Eindeutige Rechnungsnummer, Leistungszeitraum, USt-Ausweis nach § 14 UStG und § 18 EStG Vermerk.
+#### 🔍 Wie wird dieses Artefakt getestet und geprüft?
+1. **Prüfbericht-Status:** Bescheinigt `05_SICHERHEITS_CRASH_PRUEFBERICHT.md` den Status **BESTANDEN (GRÜN)** und die exakte Reserve von `3.000 mm`?
+2. **Einrichteblatt-Check:** Stimmen alle Drehzahlen ($S$), Vorschübe ($F$) und Auskraglängen ($L_{\text{min}}$) in `06_EINRICHTEBLATT_SETUP_SHEET.md` zu 100 % mit `output_expected.nc` überein?
+3. **🎬 3D-Simulationsvideo-Check:** Öffne `output_expected_simulation_video.mp4` und kontrolliere visuell die sichere Anfahrhöhe, das Eintauchen im Vorschub und den Sicherheitsabstand zu den Schraubstockbacken.
 
 ---
 
-## 🛡️ 4. Abnahme-Kriterien (Checkliste für 100 % Erledigung)
-* [ ] [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) existiert und wurde geprüft.
-* [ ] [`uebung_03_z_min_berechnung.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/uebung_03_z_min_berechnung.nc) existiert und lief fehlerfrei im Simulator.
-* [ ] [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) bescheinigt Status **BESTANDEN (GRÜN)**.
-* [ ] [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/06_EINRICHTEBLATT_SETUP_SHEET.md) liegt vor.
-* [ ] [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) ist für das Finanzamt Hanau abgelegt.
+### 💰 Schritt 4: Prompt für Honorarrechnung & Abschlussdokumentation *(Agent 4)*
+
+```text
+Starte Agent 4 (Backoffice-Ingenieur-Agent):
+Erstelle nach erfolgreicher technischer Freigabe für den Kunden Kuhn Medizintechnik & CNC-Fräszentrum (Medizinalring 11, 78532 Tuttlingen) die steuerkonforme Honorarrechnung nach § 14 UStG und § 18 EStG über 280,00 € netto (zzgl. 19 % USt. = 333,20 € brutto) für das Finanzamt Hanau unter:
+c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md
+Erstelle zudem die vollständige Abschlussdokumentation aller Projektartefakte unter:
+c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md
+```
+
+#### 🔍 Wie wird dieses Artefakt getestet und geprüft?
+1. **Rechnungsprüfung (§ 14 UStG):** Sind Rechnungsnummer `RE-2026-05`, Leistungszeitraum, Nettobetrag (`280,00 €`), 19 % USt. und Bruttobetrag (`333,20 €`) korrekt ausgewiesen?
+2. **Finanzamt-Konformität (§ 18 EStG):** Ist die Position eindeutig als freiberufliche Ingenieurleistung formuliert?
+
+---
+
+## 4. Abnahme-Kriterien (Checkliste für 100 % Erledigung)
+
+- [x] **Artefakt 1:** [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) existiert und wurde geprüft.
+- [x] **Artefakt 2:** [`output_expected.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/output_expected.nc) existiert mit Z-MIN-Header und lief fehlerfrei im Simulator.
+- [x] **Artefakt 3:** [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) bescheinigt Status **BESTANDEN (GRÜN)**.
+- [x] **Artefakt 4:** [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/06_EINRICHTEBLATT_SETUP_SHEET.md) liegt druckfertig für die Werkstatt vor.
+- [x] **Artefakt 5:** [`output_expected_simulation_video.mp4`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/output_expected_simulation_video.mp4) wurde gerendert und zeigt kollisionsfreie Fräsbahnen.
+- [x] **Artefakt 6:** [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) ist für das Finanzamt Hanau abgelegt.
+- [x] **Abschluss-Doku:** [`08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_05_einrichtedoku_simulation/08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md) dokumentiert alle 5 Phasen lückenlos.

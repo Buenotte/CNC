@@ -1,5 +1,5 @@
 const fs = require('fs');
-const content = fs.readFileSync('kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html', 'utf8');
+const content = fs.readFileSync('02_Software_und_Tools/web_tools/3d_auftrag_simulator.html', 'utf8');
 
 const idsInHtml = new Set();
 const idRegex = /id="([^"]+)"/g;

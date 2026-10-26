@@ -1,5 +1,5 @@
 const fs = require('fs');
-const content = fs.readFileSync('kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html', 'utf8');
+const content = fs.readFileSync('02_Software_und_Tools/web_tools/3d_auftrag_simulator.html', 'utf8');
 
 const scriptMatch = content.match(/<script>([\s\S]*?)<\/script>/)[1];
 
@@ -73,8 +73,8 @@ try {
   console.log('Simulator script executed without error!');
   console.log('Default waypoints length:', waypoints.length);
   
-  // Jetzt parse uebungen/uebung_03_z_min_berechnung.nc
-  const nc = fs.readFileSync('uebungen/uebung_03_z_min_berechnung.nc', 'utf8');
+  // Jetzt parse 03_Fachdokumentation_und_Wissen/uebungen/uebung_03_z_min_berechnung.nc
+  const nc = fs.readFileSync('03_Fachdokumentation_und_Wissen/uebungen/uebung_03_z_min_berechnung.nc', 'utf8');
   const res = parseGCodeToSimulation(nc, 'Uebung 03');
   console.log('Parsed uebung 03 lines:', res.lines.length);
   console.log('Parsed uebung 03 waypoints:', res.waypoints.length);

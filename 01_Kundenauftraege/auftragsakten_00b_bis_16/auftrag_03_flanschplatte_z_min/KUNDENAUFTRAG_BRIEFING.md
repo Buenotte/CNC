@@ -1,19 +1,15 @@
-# 📩 Kundenauftrag: Übung 3: Sicherheits-Schutz gegen Maschinencrash – Tiefste Frästiefe (`Z-MIN`) berechnen
-**Auftrags-Kategorie:** 3 (Original-Anfrage an dein Ingenieurbüro)
-**Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
-**Status:** Aktiv / Bereit zur Bearbeitung
+# 📩 Auftrag 03: Automatischer Z-MIN-Kollisionsschutz (Flanschplatte) — Schmidt Präzisionsteile GmbH & Co. KG
+
+**Auftraggeber:** Dipl.-Ing. (FH) Markus Weber *(Leiter Fertigung & Zerspanungstechnik)* `<m.weber@schmidt-praezision.de>`  
+**Unternehmen:** Schmidt Präzisionsteile GmbH & Co. KG, Industriestraße 14, 34123 Kassel  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
+**Datum:** 22. Oktober 2026, 09:15 Uhr  
+**Betreff:** EIL-ANFRAGE: Postprozessor-Anpassung & Z-MIN Sicherheitsprüfung für Haas VF-2 (Projekt: Flanschplatte 1001)  
 
 ---
 
-## 1. Das Original-Auftragsbriefing des Kunden
+## Die Kunden-E-Mail (Das Briefing):
 
-So sieht eine typische, hochbezahlte E-Mail aus, die ein Zerspanungsbetrieb an dein freiberufliches Ingenieurbüro schickt, wenn es in der Werkstatt brennt:
-
-> **Von:** Markus Weber *(Fertigungsleiter)* `<m.weber@schmidt-praezision.de>`  
-> **An:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
-> **Datum:** 22. Oktober 2026, 09:15 Uhr  
-> **Betreff:** EIL-ANFRAGE: Postprozessor-Anpassung & Z-MIN Sicherheitsprüfung für Haas VF-2 (Projekt: Flanschplatte 1001)  
->
 > Sehr geehrter Herr Kollege Dipl.-Ing. Bujanovski,  
 > 
 > ich wende mich mit einer dringenden technischen Aufgabenstellung an Ihr Ingenieurbüro.  
@@ -61,10 +57,3 @@ So sieht eine typische, hochbezahlte E-Mail aus, die ein Zerspanungsbetrieb an d
 > **Dipl.-Ing. (FH) Markus Weber**  
 > *Leiter Fertigung & Zerspanungstechnik* – Schmidt Präzisionsteile GmbH & Co. KG  
 > Industriestraße 14, 34123 Kassel
-
----
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

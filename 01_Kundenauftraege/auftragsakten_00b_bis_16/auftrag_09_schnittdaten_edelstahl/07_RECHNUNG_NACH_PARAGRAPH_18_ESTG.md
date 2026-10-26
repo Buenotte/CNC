@@ -1,56 +1,39 @@
-# 📄 Honorarrechnung (Agent 4: Backoffice-Agent)
-**Ingenieurbüro Dipl.-Ing. Bujanovski**  
-Softwaretechnik & CAD/CAM-Fertigungsprozesse  
-63526 Erlensee | E-Mail: kontakt@ingenieurbuero-bujanovski.de  
-Steuer-Nummer: [Wird nach Erteilung durch FA Hanau eingesetzt]  
-Zuständiges Finanzamt: **Finanzamt Hanau**  
-Rechtsform: **Freiberufliche Ingenieurtätigkeit nach § 18 Abs. 1 Nr. 1 EStG**
+# 🧾 Honorarrechnung nach § 18 EStG & § 14 UStG: Auftrag 09: Automatische Schnittdaten-Wächter-Logik für Edelstahl 1.4301 (V2A)
+
+**Absender *(Leistungserbringer)*:**  
+**Ingenieurbüro Dipl.-Ing. (FH) Alexander Bujanovski**  
+Beratender Ingenieur für CAD/CAM-Technik & Postprozessor-Entwicklung *(Freier Beruf nach § 18 Abs. 1 Nr. 1 EStG [Einkommensteuergesetz])*  
+zuständiges Finanzamt: **Finanzamt Hanau**  
+
+**Rechnungsempfänger *(Leistungsempfänger)*:**  
+**Krupp & Partner Maschinenteile**  
+z. Hd. Frank Lehmann (Produktionsleiter)  
+Kruppstraße 31, 45128 Essen  
 
 ---
 
-**Rechnungsempfänger:**  
-Krupp Maschinenteile GmbH  
-z. Hd. Herrn Frank Lehmann (Produktionsleiter)  
-Hüttenstraße 45  
-47053 Duisburg  
-
-**Rechnungsdatum:** 24. Oktober 2026  
-**Rechnungs-Nummer:** RE-2026-09-001  
-**Leistungszeitraum:** 22. Oktober – 24. Oktober 2026  
-**Projekt / Auftrag:** Auftrag 09 – Schnittdaten-Optimierung & Drehzahlschutz (Auto-Speed-Clamp) bei Werkstoffumstellung auf Edelstahl V4A 1.4571  
+* **Rechnungsnummer:** `RE-2026-09`
+* **Rechnungsdatum:** 26.10.2026
+* **Leistungszeitraum:** Oktober 2026 *(Abnahme erfolgt)*
+* **Referenz / Angebot:** [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_09_schnittdaten_edelstahl/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) (`ANG-2026-09`)
 
 ---
 
-### Aufstellung der erbrachten freiberuflichen Ingenieurleistungen:
+## 1. Abrechnung der Ingenieurleistungen *(§ 18 EStG — Katalogberuf Ingenieur)*
 
-| Pos. | Leistungsbeschreibung (gemäß § 18 EStG) | Menge | Einheit | Einzelpreis | Gesamtpreis |
-| :---: | :--- | :---: | :---: | :---: | :---: |
-| **1** | **Ingenieurtechnische Zerspanungsanalyse & Werkstoffuntersuchung**<br>Thermisch-kinematische Auswertung des Werkzeugbruchs bei Umstellung von Aluminium auf Edelstahl V4A *(1.4571)*. Berechnung der materialspezifischen Grenzwerte ($v_c^{\text{max}} = 90\,\text{m/min}$, $f_z = 0{,}035\,\text{mm/Zahn}$). | 1 | Pauschal | 180,00 € | 180,00 € |
-| **2** | **Algorithmen-Entwicklung: Aktiver Drehzahlschutz (Auto-Speed-Clamp)**<br>Implementierung der physikalischen Umkehrformel $n_{\text{safe}} = \frac{v_c^{\text{max}} \cdot 1000}{\pi \cdot D}$ in den JavaScript-Postprozessor `uebung_09_schnittdaten_check.cps`. Automatische Drosselung von $S8000$ auf $S2865$ im Maschinencode. | 1 | Pauschal | 200,00 € | 200,00 € |
-| **3** | **Qualitäts-Audit & Erstellung der Werkstattdokumentation**<br>Durchführung des 5-Stufen-Sicherheits-Cockpit-Checks durch Agent 3 (`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`) und Erstellung des druckfertigen Einrichteblatts mit Rüstvorgaben (`06_EINRICHTEBLATT_SETUP_SHEET.md`). | 1 | Pauschal | 100,00 € | 100,00 € |
-
----
-
-### Rechnungsbetrag:
-
-| Rechnungszeile | Betrag |
-| :--- | :---: |
-| **Netto-Honorar:** | **480,00 €** |
-| Zzgl. 19 % Umsatzsteuer (USt.): | 91,20 € |
-| **Gesamt-Zahlbetrag (Brutto):** | **571,20 €** |
+| Pos. | Bezeichnung der freiberuflichen Ingenieurleistung | Menge | Einzelpreis (Netto) | Gesamtpreis (Netto) |
+| :---: | :--- | :---: | :---: | :---: |
+| **1** | **Ingenieurtechnische Prozessauslegung, Postprozessor-/NC-Entwicklung & statische Sicherheitsverifikation**<br>Bauteil: *Lebensmittel-Pumpenflansch 80 x 50 x 12 mm (Edelstahl V2A)*<br>Zielsystem: *Haas VF-2 (Haas NGC Steuerung) (Haas NGC (mit automatischer Drehzahl-Deckelung maxRPM = 4500 U/min))*<br>Gelieferte Artefakte: `uebung_09_schnittdaten_check.nc`, Sicherheitsprüfbericht (`05_...`), Einrichteblatt (`06_...`) & 3D-Simulationsvideo (`uebung_09_schnittdaten_check_simulation_video.mp4`) | 5,00 Std. | 96,00 € | **480,00 €** |
+| | **Zwischensumme (Netto-Honorar)** | | | **480,00 €** |
+| | **zzgl. 19,0 % Umsatzsteuer *(gemäß § 14 Abs. 4 UStG [Umsatzsteuergesetz])*** | | | **91,20 €** |
+| | **Rechnungsbetrag (Brutto)** | | | **571,20 €** |
 
 ---
 
-### Zahlungsbedingungen:
-Bitte überweisen Sie den Gesamtbetrag von **571,20 €** innerhalb von **14 Tagen ohne Abzug** auf das folgende Geschäftskonto:
+## 2. Steuerrechtlicher Hinweis & Zahlungsbedingungen
 
-* **Bank:** [Geschäftskonto Ingenieurbüro]  
-* **IBAN:** [Wird nach Kontoeröffnung eingesetzt]  
-* **BIC:** [Wird eingesetzt]  
-* **Verwendungszweck:** RE-2026-09-001 / Krupp Maschinenteile  
+* **Steuerliche Einordnung:** Es handelt sich ausschließlich um eine geistig-schöpferische **Ingenieurdienstleistung nach § 18 Abs. 1 Nr. 1 EStG** *(technische Software- und Prozessentwicklung ohne gewerbliche Fertigung oder Lizenzhandel)*.
+* **Zahlungsziel:** Bitte überweisen Sie den Bruttobetrag von **571,20 €** innerhalb von **14 Tagen** unter Angabe der Rechnungsnummer `RE-2026-09` auf das bekannte Geschäftskonto.
 
-Vielen Dank für Ihren geschätzten Auftrag und das Vertrauen in unser Ingenieurbüro!
-
-Mit freundlichen Grüßen  
-**Dipl.-Ing. Bujanovski**  
-*(Freiberuflicher Ingenieur)*
+Vielen Dank für die angenehme Zusammenarbeit!  
+**Dipl.-Ing. (FH) Alexander Bujanovski**

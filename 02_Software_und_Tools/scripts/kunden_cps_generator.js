@@ -86,6 +86,8 @@ var toolFormat = createFormat({decimals: 0});
 var xOutput = createVariable({prefix: "X"}, xyzFormat);
 var yOutput = createVariable({prefix: "Y"}, xyzFormat);
 var zOutput = createVariable({prefix: "Z"}, xyzFormat);
+var iOutput = createReferenceVariable({prefix: "I"}, xyzFormat);
+var jOutput = createReferenceVariable({prefix: "J"}, xyzFormat);
 var feedOutput = createVariable({prefix: "F"}, feedFormat);
 
 // Benutzer-Optionen (Properties in Autodesk Fusion)
@@ -218,19 +220,31 @@ function onLinear(x, y, z, feed) {
 }
 
 function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
+  var start = getCurrentPosition();
+  xOutput.reset();
+  yOutput.reset();
   var xStr = xOutput.format(x);
   var yStr = yOutput.format(y);
   var zStr = zOutput.format(z);
+  var iStr = iOutput.format(cx - start.x);
+  var jStr = jOutput.format(cy - start.y);
   var fStr = feedOutput.format(feed);
   var cmd = clockwise ? "G02" : "G03";
-  writeWords(cmd, xStr, yStr, zStr, fStr);
+  writeWords(cmd, xStr, yStr, zStr, iStr, jStr, fStr);
 }
 
 function onCyclePoint(x, y, z) {
+  xOutput.reset();
+  yOutput.reset();
+  zOutput.reset();
   var xStr = xOutput.format(x);
   var yStr = yOutput.format(y);
   var zStr = zOutput.format(z);
   writeWords("G83", xStr, yStr, zStr, "R2.000", "Q3.000", "F300");
+}
+
+function onCycleEnd() {
+  writeWords("G80");
 }
 
 /**
@@ -290,7 +304,8 @@ async function main() {
   }
 
   const cpsInhalt = generiereCPS(auftrag);
-  const zielPfad = path.resolve(__dirname, "..", "uebungen", auftrag.ausgabeDatei || "kunden_post_generiert.cps");
+  const zielPfad = path.resolve(__dirname, "..", "..", "03_Fachdokumentation_und_Wissen", "uebungen", auftrag.ausgabeDatei || "kunden_post_generiert.cps");
+  fs.mkdirSync(path.dirname(zielPfad), { recursive: true });
 
   fs.writeFileSync(zielPfad, cpsInhalt, "utf8");
   console.log("------------------------------------------------------------------");
@@ -300,7 +315,9 @@ async function main() {
 
   // Automatische Test-Ausführung mit simuliere_post.js
   console.log("🧪 Starte automatische Funktionsprüfung mit simuliere_post.js...");
-  const simulierePfad = path.resolve(__dirname, "..", "tests", "simuliere_post.js");
+  const simK1 = path.resolve(__dirname, "..", "simuliere_post.js");
+  const simK2 = path.resolve(__dirname, "..", "tests", "simuliere_post.js");
+  const simulierePfad = fs.existsSync(simK1) ? simK1 : simK2;
   
   if (fs.existsSync(simulierePfad)) {
     const { execSync } = require("child_process");

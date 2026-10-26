@@ -80,10 +80,10 @@ C:\Projekte\CNC\
 1. **Postprozessor-Vorlage holen:**
    - Öffnen Sie im Webbrowser die offizielle **Autodesk Post Library (Bibliothek für Postprozessoren)**: `https://cam.autodesk.com/hsmposts`
    - Suchen Sie nach `Haas Next Generation` (oder `Fanuc`).
-   - Laden Sie die Datei `.cps` (**CAM Post Script – JavaScript-basierte Postprozessordatei**) herunter und speichern Sie sie unter `C:\Projekte\CNC\src\mein_erster_post.cps`.
+   - Laden Sie die Datei `.cps` (**CAM Post Script – JavaScript-basierte Postprozessordatei**) herunter und speichern Sie sie unter `C:\Projekte\CNC\02_Software_und_Tools\src\mein_erster_post.cps`.
 2. **Offizielles API-Handbuch (Dokumentation der Programmierschnittstelle) holen:**
    - Laden Sie das offizielle **Autodesk Post Processor Training Guide (PDF-Handbuch)** herunter (direkt bei Autodesk verfügbar unter `https://cam.autodesk.com/posts/posts/guides/Post%20Processor%20Training%20Guide.pdf`).
-   - Speichern Sie die **PDF-Datei (Portable Document Format – plattformübergreifendes Dokumentenformat)** im Ordner `C:\Projekte\CNC\docs\autodesk_post_guide.pdf`.
+   - Speichern Sie die **PDF-Datei (Portable Document Format – plattformübergreifendes Dokumentenformat)** im Ordner `C:\Projekte\CNC\03_Fachdokumentation_und_Wissen\docs\autodesk_post_guide.pdf`.
 
 ### Schritt 4: Die erste Code-Änderung (`onOpen()`-Funktion) durchführen und testen
 
@@ -170,7 +170,7 @@ Hier ist der konkrete, sofort ausführbare **Implementierungsplan (Phasenplan zu
 ### Phase 2: Tooling (Werkzeuge) & Dokumentation einbinden (Heute – 15 Minuten)
 
 - [ ] **Aufgabe 2.1:** Installation der Erweiterung **Autodesk Fusion Post Processor Utility** in der **Antigravity IDE (Entwicklungsumgebung)**.
-- [ ] **Aufgabe 2.2:** Ablegen des offiziellen **Autodesk Post Processor Training Guide (PDF-Handbuch)** unter `C:\Projekte\CNC\docs\autodesk_post_guide.pdf`.
+- [ ] **Aufgabe 2.2:** Ablegen des offiziellen **Autodesk Post Processor Training Guide (PDF-Handbuch)** unter `C:\Projekte\CNC\03_Fachdokumentation_und_Wissen\docs\autodesk_post_guide.pdf`.
 
 ### Phase 3: Erstes Entwicklungs-Feature – `onOpen()` modifizieren (Heute – 20 Minuten)
 
@@ -244,7 +244,7 @@ Jetzt weisen Sie dem 3D-Modell Schritt für Schritt die Bearbeitungen zu:
 **Und genau HIER verbinden sich das 3D-Modell und das, was wir heute in `C:\Projekte\CNC` gebaut haben:**
 
 * Wenn die Fräsbahnen am 3D-Modell fertig sind, klicken Sie in Autodesk Fusion auf **`NC-Programm erstellen (Post Process)`**.
-* Jetzt wählt Fusion Ihren **Postprozessor (`mein_erster_post.cps` aus `C:\Projekte\CNC\src\`)** aus!
+* Jetzt wählt Fusion Ihren **Postprozessor (`mein_erster_post.cps` aus `C:\Projekte\CNC\02_Software_und_Tools\src\`)** aus!
 * Ihr **JavaScript-Postprozessor** übersetzt die 3D-Fräsbahnen aus Fusion in den exakt passenden **G-Code (`.nc`-Datei)** für die Maschine des Kunden – inklusive Ihres **Entwickler-Headers** und der **Sicherheits-Info (`Z-MIN`)**, die wir vorhin programmiert haben!
 
 #### Schritt 6: Auslieferung an den Kunden
@@ -270,7 +270,7 @@ Alle 16 Übungen (sowie die 2 Basis-Vorübungen A und B) sind vollständig mit C
 ### 🟢 Block 1: Einsteiger & Grundlagen (Vom ersten Blick bis zur ersten Code-Zeile)
 
 * **[Basis-Übung A](file:///C:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md#L502-L547):** Die 5 wichtigsten **G-Code-Zeilen (Maschinenbefehle)** lesen lernen (`T01 M06`, `S8000 M03`, `M08`, `G00`, `G01`) und im Simulator anklicken.
-* **[Basis-Übung B](file:///C:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md#L551-L578):** Eine einzige eigene Textzeile (`writeComment("HALLO WELT...")`) in [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps) einfügen und mit `node simuliere_post.js` testen.
+* **[Basis-Übung B](file:///C:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md#L551-L578):** Eine einzige eigene Textzeile (`writeComment("HALLO WELT...")`) in [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps) einfügen und mit `node 02_Software_und_Tools/scripts/simuliere_post.js` testen.
 * **[Übung 1](file:///C:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md#L30-L88):** Der erste eigene Entwickler-Infoblock in `onOpen()` (Name, Betrieb und automatisches Datum im G-Code ausgeben).
 * **[Übung 2](file:///C:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md#L92-L144):** Automatische **Werkzeugliste (`Tool Table`)** mit einer `for`-Schleife ganz oben im G-Code ausgeben.
 * **[Übung 3](file:///C:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md#L148-L214):** Sicherheits-Schutz gegen **Maschinencrash (Kollision mit dem Schraubstock)** – Tiefste Frästiefe (`Z-MIN`) für jedes Werkzeug und jede Operation berechnen.
@@ -310,11 +310,11 @@ Das Programm, in dem Sie gerade arbeiten (**Antigravity IDE**), basiert technisc
 | Was möchten Sie tun?                                            | Wo machen Sie das?                                                     | Wie genau starten Sie es? (Klick-für-Klick)                                                                                                                                                                                                                                                                                                                                                                        |
 |:--------------------------------------------------------------- |:---------------------------------------------------------------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **1. JavaScript-Code ändern** (`mein_erster_post.cps`)          | **Direkt hier in VSC / Antigravity IDE** *(im oberen Editor-Fenster)*  | Links im Datei-Baum auf [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps) klicken $\rightarrow$ Code ändern $\rightarrow$ mit **`Strg + S`** speichern.                                                                                                                                                                                                                               |
-| **2. Programm starten & G-Code erzeugen** (`simuliere_post.js`) | **Direkt hier in VSC / Antigravity IDE** *(unten im Terminal-Fenster)* | 1. Oben im Menü auf **`Terminal` $\rightarrow$ `New Terminal`** klicken (oder Tastenkombination **`Strg + Ö`** drücken).<br>2. Unten im Terminal-Fenster eintippen:<br>`node simuliere_post.js`<br>3. **`Enter`-Taste** drücken $\rightarrow$ Sofort läuft Ihr Programm durch und schreibt den neuen G-Code in [`tests/mein_generierter_gcode.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/mein_generierter_gcode.nc)! |
-| **3. Den G-Code in 3D als bewegte Fräse sehen**                 | **Im Internet-Browser** *(Chrome, Edge oder Firefox)*                  | **Weg A:** Doppelklick im Windows-Explorer auf [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html).<br>**Weg B:** In VSC die Datei `tests/mein_generierter_gcode.nc` öffnen, alles kopieren (`Strg+A`, `Strg+C`), im Browser **`https://ncviewer.com`** öffnen, links einfügen (`Strg+V`) und auf **`Plot`** klicken!   |
+| **2. Programm starten & G-Code erzeugen** (`simuliere_post.js`) | **Direkt hier in VSC / Antigravity IDE** *(unten im Terminal-Fenster)* | 1. Oben im Menü auf **`Terminal` $\rightarrow$ `New Terminal`** klicken (oder Tastenkombination **`Strg + Ö`** drücken).<br>2. Unten im Terminal-Fenster eintippen:<br>`node 02_Software_und_Tools/scripts/simuliere_post.js`<br>3. **`Enter`-Taste** drücken $\rightarrow$ Sofort läuft Ihr Programm durch und schreibt den neuen G-Code in [`tests/mein_generierter_gcode.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/mein_generierter_gcode.nc)! |
+| **3. Den G-Code in 3D als bewegte Fräse sehen**                 | **Im Internet-Browser** *(Chrome, Edge oder Firefox)*                  | **Weg A:** Doppelklick im Windows-Explorer auf [`02_Software_und_Tools/web_tools/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html).<br>**Weg B:** In VSC die Datei `tests/mein_generierter_gcode.nc` öffnen, alles kopieren (`Strg+A`, `Strg+C`), im Browser **`https://ncviewer.com`** öffnen, links einfügen (`Strg+V`) und auf **`Plot`** klicken!   |
 
 ### 3. Autodesk Fusion 360: Größe, Kosten & Gratis-Lizenz (`Personal Use License`)
 
 * **Größe auf der Festplatte:** Ca. **4,5 GB bis 6 GB (Gigabyte)** (läuft flüssig auf jedem ThinkPad ab 8 GB RAM / Arbeitsspeicher).
 * **Kosten zum Lernen & Üben:** **0,00 € (Dauerhaft kostenlos!)** über die Lizenz **„Autodesk Fusion für Privatanwender“ (`Autodesk Fusion for personal use`)**.
-* **Wann installieren?** Für Stufe 1 bis 6 können Sie sofort ohne Download mit `node simuliere_post.js` und `3d_auftrag_simulator.html` starten; ab Stufe 7 ([Übung 4](file:///C:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md#L198-L258)) installieren Sie die kostenlose Privatanwender-Version von Fusion 360, um das 3D-Modell ([`bauteil_1001.stl`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl)) selbst anzuklicken.
+* **Wann installieren?** Für Stufe 1 bis 6 können Sie sofort ohne Download mit `node 02_Software_und_Tools/scripts/simuliere_post.js` und `3d_auftrag_simulator.html` starten; ab Stufe 7 ([Übung 4](file:///C:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md#L198-L258)) installieren Sie die kostenlose Privatanwender-Version von Fusion 360, um das 3D-Modell ([`bauteil_1001.stl`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl)) selbst anzuklicken.

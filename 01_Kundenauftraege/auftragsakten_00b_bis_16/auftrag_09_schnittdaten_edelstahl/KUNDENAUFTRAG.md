@@ -1,16 +1,15 @@
-# 📩 Kundenauftrag: Krupp & Partner Maschinenteile (Auftrag 09: Schnittdaten-Validierung bei Edelstahl)
+# 📩 Auftrag 09: Automatische Schnittdaten-Wächter-Logik für Edelstahl 1.4301 (V2A) — Krupp & Partner Maschinenteile
 
 **Auftraggeber:** Frank Lehmann (Produktionsleiter)  
 **Unternehmen:** Krupp & Partner Maschinenteile  
 **Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
-**Zielmaschine:** **Gildemeister CTX beta 800**  
-**Vereinbartes Budget:** **85,00 € / Std. (ca. 340 € netto)** (404,60 € brutto)  
+**Zielmaschine:** **Haas VF-2 (Haas NGC Steuerung)**  
+**Vereinbartes Budget:** **480,00 € netto** (571,20 € brutto)  
 
 ---
 
 ## Auftrags-Briefing des Kunden:
 
-# 📩 Kundenauftrag: Übung 9: Schnittdaten (`S` Drehzahl & `F` Vorschub) berechnen – Warum Aluminium, Baustahl und Edelstahl völlig andere Werte brauchen
 **Auftrags-Kategorie:** 9 (Werkzeugbruch-Verhütung bei Edelstahl-Umstellung)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -46,9 +45,3 @@ So sieht eine typische Anfrage aus, wenn ein Kunde beim Wechsel von Aluminium au
 > **Frank Lehmann** – Krupp Maschinenteile GmbH, Duisburg
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.
-

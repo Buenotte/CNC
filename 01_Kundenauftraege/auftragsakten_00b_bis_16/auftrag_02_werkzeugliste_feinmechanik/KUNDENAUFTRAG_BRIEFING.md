@@ -1,4 +1,15 @@
-# 📩 Kundenauftrag: Übung 2: Automatische Werkzeugliste (`Tool Table`) ganz oben im Programm ausgeben
+# 📩 Auftrag 02: Automatische Werkzeugliste (Tool Table) im G-Code-Kopf — Bavaria Feinmechanik GmbH
+
+**Auftraggeber:** Dr.-Ing. Sabine Hofmann (Produktionsleiterin)  
+**Unternehmen:** Bavaria Feinmechanik GmbH  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
+**Zielmaschine:** **Chiron FZ 15W High-Speed Fräszentrum (Fanuc 31i)**  
+**Vereinbartes Budget:** **450,00 € netto** (535,50 € brutto)  
+
+---
+
+## Auftrags-Briefing des Kunden:
+
 **Auftrags-Kategorie:** 2 (Rüstzeit-Optimierung für Feinmechanik)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -36,8 +47,3 @@ So sieht eine typische Anfrage aus, wenn ein Betrieb teure Maschinen-Stillstands
 > **Dr.-Ing. Sabine Hofmann** – Bavaria Feinmechanik GmbH, Nürnberg
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

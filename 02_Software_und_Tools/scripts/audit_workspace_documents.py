@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
+r"""
 Umfassendes Audit- und Prüfskript für alle Dokumente im Projekt C:\Projekte\CNC:
 1. Prüft auf leere oder beschädigte Markdown-Dateien
 2. Prüft auf verbotene Alt-Namen ('Konstantin') oder offene Platzhalter ('[Dein Name]', etc.)

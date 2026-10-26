@@ -382,9 +382,15 @@
       <span class="badge">AUTODESK FUSION</span>
       <h1>Postprozessor-Generator & Konfigurator</h1>
     </div>
-    <div class="header-links">
-      <a href="kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html" target="_blank">
+    <div class="header-links" style="display:flex; gap:10px; align-items:center;">
+      <a href="3d_auftrag_simulator.html" target="_blank">
         <span>🎥 Zum 3D-Simulator</span>
+      </a>
+      <a href="cnc_video_generator_web.html" target="_blank">
+        <span>🎬 Zum Video-Studio</span>
+      </a>
+      <a href="universal_3d_viewer.html" target="_blank">
+        <span>📐 3D CAD/STL Viewer</span>
       </a>
     </div>
   </header>
@@ -515,6 +521,7 @@
         </div>
         <div class="actions">
           <button class="btn-secondary" onclick="copyCode()">📋 In Zwischenablage kopieren</button>
+          <button class="btn-secondary" onclick="downloadGcode()">📥 G-Code (.nc) herunterladen</button>
           <button class="btn-primary" onclick="downloadCps()">📥 .cps-Datei herunterladen</button>
         </div>
       </div>
@@ -614,6 +621,8 @@ var toolFormat = createFormat({decimals: 0});
 var xOutput = createVariable({prefix: "X"}, xyzFormat);
 var yOutput = createVariable({prefix: "Y"}, xyzFormat);
 var zOutput = createVariable({prefix: "Z"}, xyzFormat);
+var iOutput = createVariable({prefix: "I", force: true}, xyzFormat);
+var jOutput = createVariable({prefix: "J", force: true}, xyzFormat);
 var feedOutput = createVariable({prefix: "F"}, feedFormat);
 
 // Benutzer-Optionen (Properties in Autodesk Fusion)
@@ -717,6 +726,12 @@ ${featOpInfo ? `  if (getProperty("showZMinInfo")) {
   ${isSiemens ? `writeWords("D1", "Z15.0", "${coolant}");` :
     isHeidenhain ? `writeWords("L Z+15.0 R0 FMAX", "M08");` :
     `writeWords("G43", "H" + tool.number, "Z15.000", "${coolant}");`}
+
+  // Modale Koordinaten- und Vorschubausgabe nach Werkzeugwechsel zuruecksetzen
+  xOutput.reset();
+  yOutput.reset();
+  zOutput.reset();
+  feedOutput.reset();
 }
 
 /**
@@ -740,12 +755,31 @@ function onLinear(x, y, z, feed) {
 }
 
 function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
-  var cmd = clockwise ? "G02" : "G03";
-  writeWords(cmd, xOutput.format(x), yOutput.format(y), zOutput.format(z), feedOutput.format(feed));
+  var start = getCurrentPosition();
+  xOutput.reset();
+  yOutput.reset();
+  ${isHeidenhain ? `writeWords("CC", "X" + xyzFormat.format(cx), "Y" + xyzFormat.format(cy));
+  writeWords("C", xOutput.format(x), yOutput.format(y), clockwise ? "DR-" : "DR+", "R0", feedOutput.format(feed));` :
+  `var cmd = clockwise ? "G02" : "G03";
+  var iStr = iOutput.format(cx - start.x);
+  var jStr = jOutput.format(cy - start.y);
+  writeWords(cmd, xOutput.format(x), yOutput.format(y), zOutput.format(z), iStr, jStr, feedOutput.format(feed));`}
 }
 
 function onCyclePoint(x, y, z) {
-  writeWords("G83", xOutput.format(x), yOutput.format(y), zOutput.format(z), "R2.000", "Q3.000", "F300");
+  xOutput.reset();
+  yOutput.reset();
+  zOutput.reset();
+  ${isSiemens ? `writeWords(xOutput.format(x), yOutput.format(y));
+  writeln("CYCLE83(15.0, 0.0, 2.0, " + xyzFormat.format(z) + ", 0.0, -3.0, 0.5, 1.0, 0.0, 0.0, 1.0, 0, 1, 3.0, 1.0, 0.0, 0.0)");` :
+    isHeidenhain ? `writeWords("L", xOutput.format(x), yOutput.format(y), "R0", "FMAX", "M99");` :
+    `writeWords("G83", xOutput.format(x), yOutput.format(y), zOutput.format(z), "R2.000", "Q3.000", "F300");`}
+}
+
+function onCycleEnd() {
+  if (!isExpanded) {
+    ${isHeidenhain || isSiemens ? `// Zyklusende automatisch pro Punkt` : `writeWords("G80");`}
+  }
 }
 
 /**
@@ -773,8 +807,13 @@ ${featDoorRetract ? `  if (getProperty("retractTableToDoor")) {
 
     function generateGcodeSimulation() {
       const kundenName = document.getElementById('kundenName').value.toUpperCase();
+      const entwicklerName = document.getElementById('entwicklerName').value.toUpperCase();
       const progNummer = document.getElementById('programmNummer').value;
       const progKommentar = document.getElementById('programmKommentar').value.toUpperCase();
+      const featZMin = document.getElementById('featZMin').checked;
+      const featToolTable = document.getElementById('featToolTable').checked;
+      const featOpInfo = document.getElementById('featOpInfo').checked;
+      const featDoorRetract = document.getElementById('featDoorRetract').checked;
       const coolant = document.getElementById('coolantType').value;
       const isSiemens = currentMachine === 'siemens';
       const isHeidenhain = currentMachine === 'heidenhain';
@@ -783,55 +822,97 @@ ${featDoorRetract ? `  if (getProperty("retractTableToDoor")) {
         return `0  BEGIN PGM ${progNummer} MM
 1  ; ==================================================
 2  ; KUNDE      : ${kundenName}
-3  ; PROGRAMM   : ${progKommentar}
-4  ; ==================================================
-5  ; T01 | D=10.000MM | Z-MIN=-5.000MM | SCHAFTFRAESER 10MM
-6  ; T02 | D=6.000MM  | Z-MIN=-12.000MM | SPIRALBOHRER 6MM
-7  ; ==================================================
-8  TOOL CALL 1 Z S8000
-9  L Z+15.000 R0 FMAX M08
-10 L X-10.000 Y-10.000 R0 FMAX
-11 L Z+2.000 R0 FMAX
-12 L Z-5.000 R0 F500
-13 L X+0.000 Y+0.000 R0 F1200  ; LEAD-IN ANSCHNITT
-14 L X+80.000 R0 F1200
-15 L Y+50.000 R0 F1200
-16 L X+0.000 R0 F1200
-17 L Y+0.000 R0 F1200
-18 L Z+15.000 R0 FMAX
-19 L Z+0.000 R0 FMAX M91       ; FREIFAHREN Z HOME
-20 L Y+0.000 R0 FMAX M91       ; TISCH ZUR TUER
-21 M30
-22 END PGM ${progNummer} MM`;
+3  ; ENTWICKLER : ${entwicklerName}
+4  ; PROGRAMM   : ${progKommentar}
+5  ; ==================================================
+${featToolTable ? `6  ; --- BENOETIGTE WERKZEUGE (TOOL TABLE) ---
+7  ; T01 | D=10.000MM | ${featZMin ? 'Z-MIN=-5.000MM | ' : ''}SCHAFTFRAESER 10MM VHM
+8  ; T02 | D=6.000MM  | ${featZMin ? 'Z-MIN=-12.000MM | ' : ''}SPIRALBOHRER 6MM VHM
+9  ; ==================================================
+` : ''}10 ; OPERATION: 1. AUSSENKONTUR FRAESEN (2D KONTUR)
+${featOpInfo ? '11 ; SICHERHEITS-INFO: OP Z-MIN=-5.000MM | OP Z-MAX=15.000MM\n' : ''}12 TOOL CALL 1 Z S8000
+13 L Z+15.000 R0 FMAX M08
+14 L X-10.000 Y-10.000 R0 FMAX
+15 L Z+2.000 R0 FMAX
+16 L Z-5.000 R0 F500
+17 L X+0.000 Y+0.000 R0 F1200  ; LEAD-IN ANSCHNITT
+18 L X+80.000 Y+0.000 R0 F1200
+19 L X+80.000 Y+50.000 R0 F1200
+20 L X+0.000 Y+50.000 R0 F1200
+21 L X+0.000 Y+0.000 R0 F1200
+22 L Z+15.000 R0 FMAX
+23 ; OPERATION: 2. KREISTASCHE IN DER MITTE (CC / C DR+)
+${featOpInfo ? '24 ; SICHERHEITS-INFO: OP Z-MIN=-3.000MM | OP Z-MAX=15.000MM\n' : ''}25 L X+40.000 Y+25.000 R0 FMAX
+26 L Z+2.000 R0 FMAX
+27 L Z-3.000 R0 F400
+28 L X+55.000 Y+25.000 R0 F1000
+29 CC X+40.000 Y+25.000
+30 C X+55.000 Y+25.000 DR+ R0 F1000
+31 L X+40.000 Y+25.000 R0 F1000
+32 L Z+15.000 R0 FMAX
+33 ; OPERATION: 3. VIER BEFESTIGUNGSBOHRUNGEN (CYCL DEF 200)
+${featOpInfo ? '34 ; SICHERHEITS-INFO: OP Z-MIN=-12.000MM | OP Z-MAX=15.000MM\n' : ''}35 TOOL CALL 2 Z S3500
+36 L Z+15.000 R0 FMAX M08
+37 L X+10.000 Y+10.000 R0 FMAX M99
+38 L X+70.000 Y+10.000 R0 FMAX M99
+39 L X+70.000 Y+40.000 R0 FMAX M99
+40 L X+10.000 Y+40.000 R0 FMAX M99
+41 L Z+15.000 R0 FMAX M09
+42 L Z+0.000 R0 FMAX M91       ; FREIFAHREN Z HOME
+${featDoorRetract ? '43 L Y+0.000 R0 FMAX M91       ; TISCH ZUR TUER\n' : ''}44 M30
+45 END PGM ${progNummer} MM`;
       }
 
       if (isSiemens) {
         return `%_N_O${progNummer}_MPF
 ; ==================================================
 ; KUNDE      : ${kundenName}
+; ENTWICKLER : ${entwicklerName}
 ; PROGRAMM   : ${progKommentar}
 ; STEUERUNG  : SIEMENS SINUMERIK 840D
 ; ==================================================
-; (T1 | D=10.000MM | Z-MIN=-5.000MM | SCHAFTFRAESER 10MM VHM)
-; (T2 | D=6.000MM  | Z-MIN=-12.000MM | SPIRALBOHRER 6MM VHM)
-N10 G90 G71 G17 G40 G64
-; OPERATION: 1. AUSSENKONTUR FRAESEN
-N20 T="SCHAFTFRAESER_10MM" M06
+${featToolTable ? `; (--- BENOETIGTE WERKZEUGE / TOOL TABLE ---)
+; (T1 | D=10.000MM | ${featZMin ? 'Z-MIN=-5.000MM | ' : ''}SCHAFTFRAESER 10MM VHM)
+; (T2 | D=6.000MM  | ${featZMin ? 'Z-MIN=-12.000MM | ' : ''}SPIRALBOHRER 6MM VHM)
+; (-----------------------------------------)
+` : ''}N10 G90 G71 G17 G40 G64
+; OPERATION: 1. AUSSENKONTUR FRAESEN (2D KONTUR)
+${featOpInfo ? '; SICHERHEITS-INFO: OP Z-MIN=-5.000MM | OP Z-MAX=15.000MM\n' : ''}N20 T="SCHAFTFRAESER_10MM" M06
 N30 D1 S8000 M03 ${coolant}
 N40 G54
 N50 G00 X-10.000 Y-10.000 Z2.000
 N60 G01 Z-5.000 F500
 N70 G01 X0.000 Y0.000 F1200  ; LEAD-IN ANSCHNITT
-N80 X80.000
-N90 Y50.000
-N100 X0.000
-N110 Y0.000
+N80 G01 X80.000 Y0.000
+N90 G01 X80.000 Y50.000
+N100 G01 X0.000 Y50.000
+N110 G01 X0.000 Y0.000
 N120 G00 Z15.000
-N130 M09
-N140 M05
-N150 SUPA G00 Z0.0 D0        ; Z-ACHSE GANZ NACH OBEN
-N160 SUPA G00 Y0.0 D0        ; TISCH ZUR TUER
-N170 M30
+; OPERATION: 2. KREISTASCHE IN DER MITTE (G02/G03)
+${featOpInfo ? '; SICHERHEITS-INFO: OP Z-MIN=-3.000MM | OP Z-MAX=15.000MM\n' : ''}N130 G00 X40.000 Y25.000
+N140 G00 Z2.000
+N150 G01 Z-3.000 F400
+N160 G01 X55.000 Y25.000 F1000
+N170 G03 X55.000 Y25.000 Z-3.000 I-15.000 J0.000 F1000
+N180 G01 X40.000 Y25.000
+N190 G00 Z15.000
+; OPERATION: 3. VIER BEFESTIGUNGSBOHRUNGEN (CYCLE83)
+${featOpInfo ? '; SICHERHEITS-INFO: OP Z-MIN=-12.000MM | OP Z-MAX=15.000MM\n' : ''}N200 T="SPIRALBOHRER_6MM" M06
+N210 D1 S3500 M03 ${coolant}
+N220 G54
+N230 G00 X10.000 Y10.000 Z15.000
+N240 CYCLE83(15.0, 0.0, 2.0, -12.000, 0.0, -3.0, 0.5, 1.0, 0.0, 0.0, 1.0, 0, 1, 3.0, 1.0, 0.0, 0.0)
+N250 G00 X70.000 Y10.000
+N260 CYCLE83(15.0, 0.0, 2.0, -12.000, 0.0, -3.0, 0.5, 1.0, 0.0, 0.0, 1.0, 0, 1, 3.0, 1.0, 0.0, 0.0)
+N270 G00 X70.000 Y40.000
+N280 CYCLE83(15.0, 0.0, 2.0, -12.000, 0.0, -3.0, 0.5, 1.0, 0.0, 0.0, 1.0, 0, 1, 3.0, 1.0, 0.0, 0.0)
+N290 G00 X10.000 Y40.000
+N300 CYCLE83(15.0, 0.0, 2.0, -12.000, 0.0, -3.0, 0.5, 1.0, 0.0, 0.0, 1.0, 0, 1, 3.0, 1.0, 0.0, 0.0)
+N310 G00 Z15.000
+N320 M09
+N330 M05
+N340 SUPA G00 Z0.0 D0        ; Z-ACHSE GANZ NACH OBEN
+${featDoorRetract ? 'N350 SUPA G00 Y0.0 D0        ; TISCH ZUR TUER\n' : ''}N360 M30
 %`;
       }
 
@@ -839,32 +920,50 @@ N170 M30
 O${progNummer} (${progKommentar})
 (==================================================)
 (KUNDE      : ${kundenName})
+(ENTWICKLER : ${entwicklerName})
 (STEUERUNG  : ${currentMachine.toUpperCase()})
 (==================================================)
-(--- BENOETIGTE WERKZEUGE - TOOL TABLE ---)
-(T1 | D=10.000MM | Z-MIN=-5.000MM | SCHAFTFRAESER 10MM VHM)
-(T2 | D=6.000MM  | Z-MIN=-12.000MM | SPIRALBOHRER 6MM VHM)
+${featToolTable ? `(--- BENOETIGTE WERKZEUGE - TOOL TABLE ---)
+(T1 | D=10.000MM | ${featZMin ? 'Z-MIN=-5.000MM | ' : ''}SCHAFTFRAESER 10MM VHM)
+(T2 | D=6.000MM  | ${featZMin ? 'Z-MIN=-12.000MM | ' : ''}SPIRALBOHRER 6MM VHM)
 (-----------------------------------------)
-N10 G90 G21 G17 G40 G49 G80
-(OPERATION: 1. AUSSENKONTUR FRAESEN)
-(SICHERHEITS-INFO: OP Z-MIN=-5.000MM | OP Z-MAX=15.000MM)
-N20 T1 M06
+` : ''}N10 G90 G21 G17 G40 G49 G80
+(OPERATION: 1. AUSSENKONTUR FRAESEN - 2D KONTUR)
+${featOpInfo ? '(SICHERHEITS-INFO: OP Z-MIN=-5.000MM | OP Z-MAX=15.000MM)\n' : ''}N20 T1 M06
 N30 G54
 N40 S8000 M03
 N50 G43 H1 Z15.000 ${coolant}
 N60 G00 X-10.000 Y-10.000 Z2.000
 N70 G01 Z-5.000 F500
 N80 G01 X0.000 Y0.000 F1200  (LEAD-IN ANSCHNITT)
-N90 G01 X80.000
-N100 G01 Y50.000
-N110 G01 X0.000
-N120 G01 Y0.000
+N90 G01 X80.000 Y0.000
+N100 G01 X80.000 Y50.000
+N110 G01 X0.000 Y50.000
+N120 G01 X0.000 Y0.000
 N130 G00 Z15.000
-N140 M09
-N150 M05
-N160 G53 G00 Z0.000          (Z-ACHSE GANZ NACH OBEN)
-N170 G53 G00 Y0.000          (TISCH ZUR TUER ZUM ENTLADEN)
-N180 M30
+(OPERATION: 2. KREISTASCHE IN DER MITTE - G02/G03)
+${featOpInfo ? '(SICHERHEITS-INFO: OP Z-MIN=-3.000MM | OP Z-MAX=15.000MM)\n' : ''}N140 G00 X40.000 Y25.000
+N150 G00 Z2.000
+N160 G01 Z-3.000 F400
+N170 G01 X55.000 Y25.000 F1000
+N180 G03 X55.000 Y25.000 Z-3.000 I-15.000 J0.000 F1000
+N190 G01 X40.000 Y25.000
+N200 G00 Z15.000
+(OPERATION: 3. VIER BEFESTIGUNGSBOHRUNGEN - G83)
+${featOpInfo ? '(SICHERHEITS-INFO: OP Z-MIN=-12.000MM | OP Z-MAX=15.000MM)\n' : ''}N210 T2 M06
+N220 G54
+N230 S3500 M03
+N240 G43 H2 Z15.000 ${coolant}
+N250 G83 X10.000 Y10.000 Z-12.000 R2.000 Q3.000 F300
+N260 G83 X70.000 Y10.000 Z-12.000 R2.000 Q3.000 F300
+N270 G83 X70.000 Y40.000 Z-12.000 R2.000 Q3.000 F300
+N280 G83 X10.000 Y40.000 Z-12.000 R2.000 Q3.000 F300
+N290 G80
+N300 G00 Z15.000
+N310 M09
+N320 M05
+N330 G53 G00 Z0.000          (Z-ACHSE GANZ NACH OBEN)
+${featDoorRetract ? 'N340 G53 G00 Y0.000          (TISCH ZUR TUER ZUM ENTLADEN)\n' : ''}N350 M30
 %`;
     }
 
@@ -888,6 +987,23 @@ N180 M30
       const code = generateCpsCode();
       const kundenName = document.getElementById('kundenName').value.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
       const fileName = `${kundenName}_${currentMachine}.cps`;
+      const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`📥 ${fileName} heruntergeladen!`);
+    }
+
+    function downloadGcode() {
+      const code = generateGcodeSimulation();
+      const progNummer = document.getElementById('programmNummer').value || '1001';
+      const ext = currentMachine === 'heidenhain' ? 'h' : (currentMachine === 'siemens' ? 'mpf' : 'nc');
+      const fileName = `O${progNummer}_${currentMachine}.${ext}`;
       const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');

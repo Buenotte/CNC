@@ -2,7 +2,7 @@
 
 Hier findest du für **jeden einzelnen Kundenauftrag einen eigenständigen Ordner** mit allen zugehörigen Dokumenten:
 * Das **Kundenbriefing** (`KUNDENAUFTRAG_BRIEFING.md`)
-* Das offizielle **Angebot von Dipl.-Ing. Bujanovski** (`ANGEBOT_DIPL_ING_BUJANOVSKI.md` nach § 18 EStG)
+* Das offizielle **Angebot von Dipl.-Ing. Bujanovski** (`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md` nach § 18 EStG)
 * Die zugehörigen **Quellcode-Dateien** (`.cps`, `.nc`, 3D-Modelle)
 * Die **Statusübersicht** (`STATUS_UND_DATEIEN.md`)
 
@@ -21,7 +21,7 @@ Hier findest du für **jeden einzelnen Kundenauftrag einen eigenständigen Ordne
 | **06** | `auftrag_06_sicherer_rueckzug_arbeitsschutz` | Andreas Eder *(Betriebsleiter)* `<a.eder@sued-zerspanung.de>` | **420,00 €** | [auftrag_06_sicherer_rueckzug_arbeitsschutz](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_06_sicherer_rueckzug_arbeitsschutz) |
 | **07** | `auftrag_07_spaenefoerderer_schalter` | Karsten Wolf *(Technischer Leiter)* `<k.wolf@vogtland-zerspanung.de>` | **390,00 €** | [auftrag_07_spaenefoerderer_schalter](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_07_spaenefoerderer_schalter) |
 | **08** | `auftrag_08_migration_siemens_ventilblock` | Jürgen Meier *(Fertigungsleiter)* `<j.meier@franken-zerspanung.de>` | **650,00 €** | [auftrag_08_migration_siemens_ventilblock](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_08_migration_siemens_ventilblock) |
-| **09** | `auftrag_09_schnittdaten_edelstahl` | Frank Lehmann *(Produktionsleiter)* `<f.lehmann@krupp-maschinenteile.de>` | **85 €** | [auftrag_09_schnittdaten_edelstahl](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_09_schnittdaten_edelstahl) |
+| **09** | `auftrag_09_schnittdaten_edelstahl` | Frank Lehmann *(Produktionsleiter)* `<f.lehmann@krupp-maschinenteile.de>` | **480,00 €** | [auftrag_09_schnittdaten_edelstahl](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_09_schnittdaten_edelstahl) |
 | **10** | `auftrag_10_zweite_aufspannung_op20` | Robert Schneider *(Fertigungsleiter)* `<r.schneider@alutech-gehaeuse.de>` | **520,00 €** | [auftrag_10_zweite_aufspannung_op20](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_10_zweite_aufspannung_op20) |
 | **11** | `auftrag_11_gewindebohren_g84_m8` | Christian Meyer *(Fertigungsleiter)* `<c.meyer@meyer-hydraulik.de>` | **460,00 €** | [auftrag_11_gewindebohren_g84_m8](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_11_gewindebohren_g84_m8) |
 | **12** | `auftrag_12_radiuskorrektur_g41_h7` | Alexander Wagner *(Werkstattleiter)* `<a.wagner@wagner-getriebe.de>` | **580,00 €** | [auftrag_12_radiuskorrektur_g41_h7](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_12_radiuskorrektur_g41_h7) |

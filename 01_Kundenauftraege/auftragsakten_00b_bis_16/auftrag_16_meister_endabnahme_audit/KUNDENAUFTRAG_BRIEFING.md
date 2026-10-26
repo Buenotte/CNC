@@ -1,4 +1,15 @@
-# 📩 Kundenauftrag: Übung 16: Die komplette 5-Punkte-Endabnahme im Simulator vor der Auslieferung an den Online-Kunden (Meister-Prüfung)
+# 📩 Auftrag 16: Meister-Endabnahme & Komplett-Postprozessor-Zertifizierung — Hessen Automotive GmbH
+
+**Auftraggeber:** Dipl.-Ing. Bernd Schäfer (Leiter Qualitätssicherung)  
+**Unternehmen:** Hessen Automotive GmbH  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
+**Zielmaschine:** **Haas VF-2 / Grob G550 (Komplett-Zertifizierung ISO G-Code)**  
+**Vereinbartes Budget:** **490,00 € netto** (583,10 € brutto)  
+
+---
+
+## Auftrags-Briefing des Kunden:
+
 **Auftrags-Kategorie:** 16 (Unabhängiges Sicherheits-Audit & G-Code-Zertifizierung)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -36,8 +47,3 @@ So sieht eine typische hochbezahlte Anfrage aus, wenn ein Automobilzulieferer od
 > **Dipl.-Ing. Bernd Schäfer** – Automotive Zerspanungs-Cluster Hessen GmbH, Frankfurt am Main
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

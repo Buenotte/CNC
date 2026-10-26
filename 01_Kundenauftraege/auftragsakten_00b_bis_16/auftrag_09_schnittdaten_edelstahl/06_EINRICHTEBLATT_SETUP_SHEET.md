@@ -1,49 +1,35 @@
-# 📋 CNC-Einrichteblatt & Werkzeug-Rüstplan (Agent 3: Setup-Sheet)
-**Auftrag:** Auftrag 09 – Schnittdaten-Optimierung Edelstahl V4A *(1.4571)*  
-**Kunde:** Krupp Maschinenteile GmbH, Duisburg *(Frank Lehmann, Produktionsleiter)*  
-**Erstellt von:** Dipl.-Ing. Bujanovski *(Agent 3: NC-Safety- & Setup-Agent)*  
-**Datum:** 24. Oktober 2026  
-**Zielmaschine:** Haas VF-2 *(NGC-Steuerung, ISO-G-Code)*  
-**NC-Programm:** `uebung_09_schnittdaten_check.nc` *(O1009)*  
+# 🛠️ CNC-Einrichteblatt (Setup Sheet): Auftrag 09: Automatische Schnittdaten-Wächter-Logik für Edelstahl 1.4301 (V2A)
+
+* **Erstellt durch:** 🛡️ **Agent 3 – NC-Safety- & Setup-Agent** *(Ingenieurbüro Dipl.-Ing. (FH) Alexander Bujanovski)*
+* **Kunde / Werk:** **Krupp & Partner Maschinenteile**
+* **Bauteil:** Lebensmittel-Pumpenflansch 80 x 50 x 12 mm (Edelstahl V2A)
+* **Werkstoff:** Edelstahl X5CrNi18-10 / 1.4301 (V2A — Kaltverfestigungsgefahr!)
+* **Maschine & Steuerung:** **Haas VF-2 (Haas NGC Steuerung)** (Haas NGC (mit automatischer Drehzahl-Deckelung maxRPM = 4500 U/min))
+* **NC-Programmdatei:** [`uebung_09_schnittdaten_check.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_09_schnittdaten_edelstahl/uebung_09_schnittdaten_check.nc)
 
 ---
 
-## 1. Werkstück- & Spannmittel-Setup
+## 1. Aufspannung & Werkstücknullpunkt *(WCS — Work Coordinate System)*
 
-| Parameter | Einstellwert | Erläuterung & Sicherheitshinweis |
-| :--- | :--- | :--- |
-| **Werkstoff** | **Edelstahl V4A (1.4571 / X6CrNiMoTi17-12-2)** | Hochzäher, austenitischer Edelstahl; neigt zu starker Kaltverfestigung. |
-| **Rohteilmaße** | $85{,}0 \times 55{,}0 \times 15{,}0\,\text{mm}$ | Sägezuschnitt mit $2{,}5\,\text{mm}$ Aufmaß rundum. |
-| **Fertigteilmaße** | $80{,}0 \times 50{,}0 \times 12{,}0\,\text{mm}$ | Planfräsen der Oberseite auf Fertigmaß $Z = 0{,}000\,\text{mm}$. |
-| **Spannmittel** | Maschinenschraubstock mit gehärteten Stahlbacken | Backenbreite $125\,\text{mm}$, Spannkraft $70\,\text{Nm}$ Drehmoment. |
-| **Parallelunterlagen ($h$)** | **Höhe $h = 32{,}0\,\text{mm}$** | Garantiert $3{,}0\,\text{mm}$ Spannrand und $+7{,}0\,\text{mm}$ Kollisionsreserve zu den Backen. |
-| **Wackel-Probe (Fingerprobe)** | Zwingend durchführen | Nach Niederklopfen mit Schonhammer prüfen, ob beide Leisten spielfrei klemmen! |
-| **Nullpunkt ($W / G54$)** | **$X0, Y0, Z0$ an fester Backe links hinten** | $Z0$ auf Fertigteil-Oberseite abnullen; Kantentaster-Kugelradius $+5{,}00\,\text{mm}$ verrechnen! |
+* **Aktiver Nullpunkt im Programm:** **G54 (Werkstücknullpunkt: Vorne links oben, Z = 0,0 mm)**
+* **Z-Nullpunktlage ($Z = 0,000\,\text{mm}$):** Auf der fertig geplanten **Bauteil-Oberkante**.
+* **Tiefste Programmzustellung ($Z_{\text{min}}$):** **`-12.000 mm`**
+* **Maximal zulässige Spannbackenhöhe:** **`-15.000 mm`** *(Das Bauteil muss frei über den Spannbacken stehen, sodass unterhalb von $Z = 0$ mindestens $15.0\,\text{mm}$ Freiraum zur Backenoberkante verbleiben!)*
 
 ---
 
-## 2. Werkzeug- & Schnittdatenliste (Gedrosselte Sicherheitswerte)
+## 2. Verbindliche Werkzeug- und Rüstliste *(Tool Setup Table)*
 
-> [!IMPORTANT]
-> **Achtung Werkstatt:** Die Spindeldrehzahlen wurden vom Postprozessor via Auto-Speed-Clamp automatisch auf werkstoffgerechte Werte für Edelstahl gedrosselt! Keinesfalls an der Steuerung manuell auf $8.000\,\text{U/min}$ hochdrehen!
-
-| Platz (T) | Werkzeug-Beschreibung | Durchmesser | Schneiden ($z$) | Schnittgeschw. ($v_c$) | Drehzahl ($S$) | Vorschub ($F$) | Kühlung |
-| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **`T01`** | **VHM-Schaftfräser Ø 10 mm** *(AlTiN-Beschichtung)* | $10{,}0\,\text{mm}$ | 4 | **$90\,\text{m/min}$** *(Maximalwert)* | **`S2865`** *(Auto-Speed-Clamp)* | **`F400`** *(Gedrosselt)* | **`M08`** *(Flutkühlung)* |
-| **`T02`** | **VHM-Spiralbohrer Ø 6 mm** *(mit Innenkühlung)* | $6{,}0\,\text{mm}$ | 2 | **$66\,\text{m/min}$** *(Sicherheitswert)* | **`S3500`** | **`F280`** | **`M08`** *(Flutkühlung)* |
+| Folge | Platz (`T`) | Korrektur (`H`/`D`) | Werkzeugtyp & Abmessung | Drehzahl ($S$) | Vorschub ($F$) | Tiefstes $Z$ ($Z_{\text{min}}$) | Auskraglänge ($L_{\text{min}}$) | Kühlung |
+| :---: | :---: | :---: | :--- | :---: | :---: | :---: | :---: | :--- |
+| **OP 10** | `T01` | `H01` | VHM-Edelstahlfräser Ø 10,0 mm (automatisch begrenzt auf S4500 statt S8000!) | `4500 U/min` | `1200 mm/min` | `-5.000 mm` | **min. `15.0 mm`** | M08 (Emulsionsflutkühlung) |
+| **OP 20** | `T02` | `H02` | VHM-Spiralbohrer Ø 6,0 mm (TiAlN, 4x G83 bis Z-12.0) | `3500 U/min` | `300 mm/min` | `-12.000 mm` | **min. `22.0 mm`** | M08 (Emulsionsflutkühlung) |
 
 ---
 
-## 3. Schritt-für-Schritt-Einfahrprotokoll an der Maschine
+## 3. Pflicht-Checkliste für den Maschinenbediener vor dem Zyklusstart
 
-1. **Schritt 1 (Luftschnitt in $Z +50\,\text{mm}$):**  
-   Im G54-Nullpunktspeicher temporär $+50{,}0\,\text{mm}$ auf Z aufschlagen. Programm starten und Verfahrwege in der freien Luft visuell abgleichen.
-2. **Schritt 2 (Einzelsatz `Single Block` mit 10 % Vorschub-Override):**  
-   Z-Nullpunkt wieder auf $0{,}00\,\text{mm}$ zurücksetzen. Mit Einzelsatz-Taste jeden Befehl einzeln bestätigen und Restweganzeige *(Distance-to-go)* vor jedem Spanabtrag prüfen.
-3. **Schritt 3 (Schnittbeobachtung & KSS-Druck):**  
-   Auf silbrig-braune, lockere Kommaspäne achten. Bei Rauchentwicklung oder blauglühenden Spänen sofort Vorschub-Halt betätigen!
-
----
-
-**Freigegeben zur Rüstung:** Dipl.-Ing. Bujanovski *(Agent 3: NC-Safety- & Setup-Agent)*  
-**Datum:** 24. Oktober 2026
+1. [ ] **Nullpunkt prüfen:** `G54 (Werkstücknullpunkt: Vorne links oben, Z = 0,0 mm)` mit 3D-Messtaster angetastet und Werte im Offset-Speicher kontrolliert?
+2. [ ] **Überstand messen:** Bauteil-Überstand aus dem Schraubstock mit Tiefenmaß geprüft (Spannbacken liegen bei oder tiefer als $Z = -15.000\,\text{mm}$)?
+3. [ ] **Werkzeuglängen prüfen:** Alle Werkzeuge am Voreinstellgerät oder Werkzeugtaster vermessen und Auskraglänge $L_{\text{min}}$ eingehalten?
+4. [ ] **Sicherheits-Einfahren *(Dry Run)*:** Erstes Bauteil im **Einzelsatzbetrieb *(Single Block)*** mit Vorschub-Potentiometer auf **max. 25 %** und Blick auf die **Restweganzeige *(Distance-to-Go)*** bei $Z = +20,0\,\text{mm}$ über dem Teil einfahren!

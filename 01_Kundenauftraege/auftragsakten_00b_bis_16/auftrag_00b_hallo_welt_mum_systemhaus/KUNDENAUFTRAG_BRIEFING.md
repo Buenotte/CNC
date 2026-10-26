@@ -1,4 +1,15 @@
-# 📩 Kundenauftrag: Übung 00b: Hallo Welt (Erste eigene Zeile im Postprozessor)
+# 📩 Auftrag 00b: Hallo-Welt & Systemhaus-Eignungstest — Mensch und Maschine Systemhaus GmbH
+
+**Auftraggeber:** Jens Becker (Leiter CAM-Postprozessor-Services)  
+**Unternehmen:** Mensch und Maschine Systemhaus GmbH  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
+**Zielmaschine:** **Standard 3-Achs-Fräsmaschine (Haas/Fanuc-kompatibel)**  
+**Vereinbartes Budget:** **250,00 € netto** (297,50 € brutto)  
+
+---
+
+## Auftrags-Briefing des Kunden:
+
 **Auftrags-Kategorie:** 00b (Kennenlern-Auftrag vom CAM-Systemhaus)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -35,8 +46,3 @@ So sieht eine typische Anfrage von einem großen CAM-Systemhaus aus, das einen f
 > **Dipl.-Ing. Jens Becker** – Mensch und Maschine Systemhaus GmbH
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

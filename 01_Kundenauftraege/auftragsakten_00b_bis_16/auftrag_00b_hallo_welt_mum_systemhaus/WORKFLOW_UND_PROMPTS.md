@@ -1,121 +1,141 @@
-# 📋 Workflow-Beschreibung & Prompts: Auftrag 00b: Hallo Welt Postprozessor
+# 📋 Standard-Workflow & Fertige KI-Prompts: Auftrag 00b: Hallo-Welt & Systemhaus-Eignungstest
 
-Mit dieser Anleitung wickelst du den Kundenauftrag aus [`KUNDENAUFTRAG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/KUNDENAUFTRAG.md) Schritt für Schritt mit deinen 4 KI-Agenten ab.
-
-Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten erzeugen dann alle geforderten Artefakte direkt in diesem Ordner [`auftrag_00b_hallo_welt_mum_systemhaus`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus).
-
----
-
-## 🗂️ 1. Welche Artefakte werden erzeugt und wo genau stehen sie?
-
-| Artefakt-Dateiname | Was ist das? | Wo steht die Datei? *(Speicherort)* | Wer erzeugt sie? |
-| :--- | :--- | :--- | :---: |
-| **`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`** | Rechtssicheres B2B-Angebot (250,00 € netto) | [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | **Agent 4** *(Backoffice)* |
-| **`uebung_00b_hallo_welt.nc`** | Fertiger Maschinencode für Standard 3-Achs-Fräsmaschine (Haas/Fanuc-kompatibel) | [`uebung_00b_hallo_welt.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/uebung_00b_hallo_welt.nc) | **Agent 2** *(Post-Coder)* |
-| **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | 5-Stufen-Sicherheitsprüfbericht *(Null-Kollisions-Garantie)* | [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | **Agent 3** *(NC-Safety)* |
-| **`06_EINRICHTEBLATT_SETUP_SHEET.md`** | Rüstdatenblatt für den Maschinenbediener vor Ort | [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/06_EINRICHTEBLATT_SETUP_SHEET.md) | **Agent 3** *(NC-Safety)* |
-| **`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`** | Revisionssichere Honorarrechnung (297,50 € brutto) | [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) | **Agent 4** *(Backoffice)* |
+> **Auftragsordner:** `01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/`  
+> **Kunde:** **Mensch und Maschine Systemhaus GmbH** (Jens Becker (Leiter CAM-Postprozessor-Services))  
+> **Maschine & Steuerung:** **Standard 3-Achs-Fräsmaschine (Haas/Fanuc-kompatibel)** — Haas NGC / Fanuc ISO G-Code (DIN 66025)  
+> **Honorar-Budget:** **250,00 € netto** (297,50 € brutto nach § 18 EStG *(Einkommensteuergesetz)*)
 
 ---
 
-## 🧭 2. Der 4-Stufen-Workflow im Überblick:
+## 1. Übersicht der 6 Pflicht-Artefakte & Abschlussdokumentation (Speicherorte & KI-Agenten)
 
-```
-                  1. KUNDENAUFTRAG.md (Liegt bereits im Ordner)
-                             │
-                             ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │ SCHRITT 1: ANGEBOT ERSTELLEN (Agent 4: Backoffice-Agent)              │
- │ Prompt 1 ausführen ──► Erzeugt: 02_ANGEBOT_DIPL_ING_BUJANOVSKI.md        │
- └───────────────────────────┬────────────────────────────────────────────┘
-                             │
-                             ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │ SCHRITT 2: NC-MASCHINENCODE GENERIEREN (Agent 2: Postprocessor-Coder)  │
- │ Prompt 2 ausführen ──► Erzeugt: uebung_00b_hallo_welt.nc
- └───────────────────────────┬────────────────────────────────────────────┘
-                             │
-                             ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │ SCHRITT 3: SICHERHEIT & EINRICHTEBLATT (Agent 3: NC-Safety-Agent)      │
- │ Prompt 3 ausführen ──► Erzeugt: 05_SICHERHEITS_CRASH_PRUEFBERICHT.md   │
- │                    ──► Erzeugt: 06_EINRICHTEBLATT_SETUP_SHEET.md       │
- └───────────────────────────┬────────────────────────────────────────────┘
-                             │
-                             ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │ SCHRITT 4: RECHNUNG STELLEN (Agent 4: Backoffice-Agent)                │
- │ Prompt 4 ausführen ──► Erzeugt: 07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md  │
- └────────────────────────────────────────────────────────────────────────┘
-```
+| Nr. | Pflicht-Artefakt *(Dateiname & Klick-Link)* | Zuständiger KI-Agent | Technischer & Kaufmännischer Zweck |
+| :---: | :--- | :--- | :--- |
+| **Eingang** | [`KUNDENAUFTRAG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/KUNDENAUFTRAG.md) | 🔍 **Agent 1: Lead-Scout-Agent** | Unverfälschtes Original-Kundenbriefing mit Geometrie-, Maschinen- und Budgetvorgaben |
+| **1** | [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | 💰 **Agent 4: Backoffice-Ingenieur-Agent** | Verbindliches B2B-Festpreisangebot *(Business-to-Business)* nach § 18 EStG inkl. Single-Block-Haftungsklausel |
+| **2** | [`uebung_00b_hallo_welt.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/uebung_00b_hallo_welt.nc) und Postprozessor [`uebung_00b_hallo_welt.cps`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/uebung_00b_hallo_welt.cps) | 💻 **Agent 2: Postprocessor-Coder-Agent** | Fertig generierter, absturzsicherer CNC-Maschinencode *(Computerized Numerical Control)* inkl. Z-MIN-Header |
+| **3** | [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | 🛡️ **Agent 3: NC-Safety- & Setup-Agent** | 5-Stufen-Sicherheits-Audit mit mathematischem Kollisionsnachweis ($Z_{\text{min}} = -5.000\,\text{mm}$ vs. Backe $-12.000\,\text{mm}$) |
+| **4** | [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/06_EINRICHTEBLATT_SETUP_SHEET.md) | 🛡️ **Agent 3: NC-Safety- & Setup-Agent** | Druckfertiges Rüstdatenblatt für den Maschinenbediener mit Nullpunkt (`G54 (Werkstücknullpunkt: Vorne links oben, Z = 0,0 mm)`) und Auskraglängen |
+| **5** | [`uebung_00b_hallo_welt_simulation_video.mp4`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/uebung_00b_hallo_welt_simulation_video.mp4) | 🛡️ **Agent 3: NC-Safety- & Setup-Agent** | Gerendertes 3D-Simulationsvideo (MP4) zur visuellen Vorabkontrolle aller Werkzeugbahnen |
+| **6** | [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) | 💰 **Agent 4: Backoffice-Ingenieur-Agent** | Steuerkonforme Ingenieur-Honorarrechnung nach § 14 UStG *(Umsatzsteuergesetz)* & § 18 EStG für das Finanzamt Hanau |
+| **Abschluss** | [`08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md) | 🤖 **Gesamtsystem (Agent 1–4)** | Lückenlose Abschlussdokumentation aller Phasen, Berechnungen und Freigaben |
 
 ---
 
-## 💬 3. Die 4 fertigen Prompts & wie du jedes Artefakt testest:
+## 2. Das 4-Stufen-Workflow-Diagramm
 
-### 🟢 SCHRITT 1: Angebot erstellen (Agent 4)
-#### Prompt zum Kopieren in den Chat:
 ```text
-Starte bitte Agent 4 (Backoffice-Agent):
-Lies die Kundenanfrage in c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_00b_hallo_welt_mum_systemhaus\KUNDENAUFTRAG.md.
-Erstelle direkt im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_00b_hallo_welt_mum_systemhaus\ das formelle B2B-Angebot "02_ANGEBOT_DIPL_ING_BUJANOVSKI.md" für Jens Becker (Leiter CAM-Postprozessor-Services) (Mensch und Maschine Systemhaus GmbH) über 250,00 € netto. Verwende ausschließlich ingenieurmäßige Leistungsbeschreibungen nach § 18 EStG und binde die verbindliche Haftungsausschluss-Klausel für das Einfahren des ersten Werkstücks im Einzelsatz ein.
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ EINGANG: KUNDENAUFTRAG.md (Mensch und Maschine Systemhaus GmbH)                        │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+                                       ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SCHRITT 1 (Agent 4 - Backoffice):                                            │
+│ Erstellt 02_ANGEBOT_DIPL_ING_BUJANOVSKI.md (250,00 € netto, § 18 EStG)       │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+                                       ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SCHRITT 2 (Agent 2 - Postprocessor-Coder):                                   │
+│ Entwickelt Postprozessor & generiert uebung_00b_hallo_welt.nc (Standard 3-Achs-Fräsmaschine (Haas/Fanuc-kompatibel)) │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+                                       ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SCHRITT 3 (Agent 3 - NC-Safety & Setup):                                     │
+│ • Prüft Z-MIN (-5.000 mm) -> 05_SICHERHEITS_CRASH_PRUEFBERICHT.md          │
+│ • Erstellt Rüstblatt        -> 06_EINRICHTEBLATT_SETUP_SHEET.md              │
+│ • Rendert 3D-Video          -> uebung_00b_hallo_welt_simulation_video.mp4      │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+                                       ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SCHRITT 4 (Agent 4 - Backoffice):                                            │
+│ Stellt 07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md & 08_DOKUMENTATION...md         │
+└──────────────────────────────────────────────────────────────────────────────┘
 ```
-
-#### 🔍 Wie wird das Angebot getestet und geprüft?
-1. **Honorar:** Steht exakt der Festpreis von **250,00 € netto** drin?
-2. **Freiberufler-Status:** Enthält die Leistungsbeschreibung ingenieurmäßige Begriffe nach § 18 EStG *(keine Einstufung als Gewerbe durch das Finanzamt Hanau)*?
-3. **Haftungsausschluss:** Verpflichtung des Kunden zum Einfahren des ersten Werkstücks im Einzelsatz *(Single Block)* an der Standard 3-Achs-Fräsmaschine (Haas/Fanuc-kompatibel) enthalten?
 
 ---
 
-### 🔵 SCHRITT 2: NC-Maschinencode generieren (Agent 2)
-#### Prompt zum Kopieren in den Chat:
+## 3. Fertige, maßgeschneiderte Prompts zum direkten Kopieren
+
+### 💰 Schritt 1: Prompt für das Ingenieur-Angebot *(Agent 4)*
+
 ```text
-Starte bitte Agent 2 (Postprocessor-Coder-Agent):
-Generiere für die Standard 3-Achs-Fräsmaschine (Haas/Fanuc-kompatibel) im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_00b_hallo_welt_mum_systemhaus\ das fertige NC-Programm "uebung_00b_hallo_welt.nc".
-Anforderung: Basis-Postprozessor in JavaScript (.cps) mit ISO-Sicherheitszeile (G90 G17 G21 G94 G40 G80), writeComment() Begrüßung im Header und M30-Ende.
-Stelle sicher, dass alle Werkzeugaufrufe, Sicherheitszeilen und Programmabschlüsse fehlerfrei implementiert sind.
+Starte Agent 4 (Backoffice-Ingenieur-Agent):
+Lies die Datei c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/KUNDENAUFTRAG.md.
+Erstelle für den Kunden Mensch und Maschine Systemhaus GmbH (Ansprechpartner: Jens Becker (Leiter CAM-Postprozessor-Services), Adresse: Argelsrieder Feld 5, 82234 Weßling) ein rechtssicheres Ingenieur-Festpreisangebot nach § 18 EStG über exakt 250,00 € netto (297,50 € brutto) für das Bauteil "Kalibrier-Prüfkörper 80 x 50 x 12 mm (Systemhaus-Eignungstest)" auf der Maschine "Standard 3-Achs-Fräsmaschine (Haas/Fanuc-kompatibel)" (Haas NGC / Fanuc ISO G-Code (DIN 66025)).
+Integriere zwingend den Haftungsausschluss zum Einfahren im Einzelsatzbetrieb (Single Block) und speichere das Dokument unter:
+c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md
 ```
 
-#### 🔍 Wie wird der generierte NC-Code getestet und geprüft?
-1. **Syntax-Check:** Textprüfung auf ISO-Sicherheitszeile N10 G90 G17 G21 G94 G40 G80 und Spindelstopp M05, M09, M30 am Ende.
-2. **Simulation:** Lade den Code in [NCViewer.com](https://ncviewer.com) oder führe ihn lokal aus. Fahren alle Achsen kollisionsfrei ab?
+#### 🔍 Wie wird dieses Artefakt getestet und geprüft?
+1. **Honorar- und Adressabgleich:** Stimmen `250,00 € netto` (`297,50 € brutto`), Firmenname `Mensch und Maschine Systemhaus GmbH` und Maschine `Standard 3-Achs-Fräsmaschine (Haas/Fanuc-kompatibel)` exakt mit `KUNDENAUFTRAG.md` überein?
+2. **Steuer-Check (§ 18 EStG):** Wird die Leistung als *„Ingenieurtechnische Entwicklung und mathematische Verifikation"* deklariert (keine gewerblichen Begriffe)?
+3. **Haftungsklausel:** Ist die Verpflichtung zum Einfahren im Einzelsatzbetrieb *(Single Block)* enthalten?
 
 ---
 
-### 🛡️ SCHRITT 3: Sicherheitsbericht & Einrichteblatt erstellen (Agent 3)
-#### Prompt zum Kopieren in den Chat:
+### 💻 Schritt 2: Prompt für Postprozessor & NC-Maschinencode *(Agent 2)*
+
 ```text
-Starte bitte Agent 3 (NC-Safety- & Setup-Agent):
-Führe für die Datei "uebung_00b_hallo_welt.nc" im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_00b_hallo_welt_mum_systemhaus\ die 5-Stufen-Sicherheitsprüfung nach SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md durch.
-Erstelle im selben Ordner:
-1. "05_SICHERHEITS_CRASH_PRUEFBERICHT.md" mit Freigabestatus BESTANDEN.
-2. "06_EINRICHTEBLATT_SETUP_SHEET.md" als druckfertiges Rüstblatt für den Bediener an der Standard 3-Achs-Fräsmaschine (Haas/Fanuc-kompatibel) inklusive Werkzeugliste.
+Starte Agent 2 (Postprocessor-Coder-Agent):
+Entwickle und verifiziere auf Basis von c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/KUNDENAUFTRAG.md den CNC-Maschinencode für den Kunden Mensch und Maschine Systemhaus GmbH:
+- Bauteil: Kalibrier-Prüfkörper 80 x 50 x 12 mm (Systemhaus-Eignungstest) (Aluminium EN AW-6082 (AlSi1MgMn))
+- Maschine & Steuerung: Standard 3-Achs-Fräsmaschine (Haas/Fanuc-kompatibel) (Haas NGC / Fanuc ISO G-Code (DIN 66025))
+- Werkstücknullpunkt: G54 (Werkstücknullpunkt: Vorne links oben, Z = 0,0 mm)
+- Werkzeuge & Schnittdaten: T01 (VHM-Schaftfräser Ø 10,0 mm (3Z, Alu-Geometrie), S=8000 U/min, F=1200 mm/min, Z_min=-5.000 mm)
+- Tiefste Zustellung: Z_min = -5.000 mm (Spannbacken-Oberkante bei Z = -12.000 mm)
+Speichere den fertigen, fehlerfreien Maschinencode unter:
+c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/uebung_00b_hallo_welt.nc
 ```
 
-#### 🔍 Wie werden Sicherheitsbericht und Einrichteblatt getestet und geprüft?
-1. **Sicherheitsbericht:** Überprüfung, dass keine undefinierten Zeichen im Kommentar stehen und die Datei in NCViewer geladen werden kann. Status muss **BESTANDEN (GRÜN)** sein.
-2. **Einrichteblatt:** Sind alle Werkzeuge mit Mindest-Auskraglängen $L_{min}$, Drehzahlen und Nullpunktlagen vollständig gelistet?
+#### 🔍 Wie wird dieses Artefakt getestet und geprüft?
+1. **Textprüfung Header & Sicherheitszeile:** Enthält `uebung_00b_hallo_welt.nc` den Z-MIN-Sicherheitsheader sowie den Safe-Start-Block (`G90 G21 G17 G40 G49 G80` bzw. Steuerungs-Äquivalent)?
+2. **Web-Backplot-Test:** Lade `uebung_00b_hallo_welt.nc` in [NCViewer.com](https://ncviewer.com/) oder den lokalen 3D-Simulator [`index.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/index.html) und prüfe die Werkzeugbahnen.
+3. **Lokaler Simulator-Lauf:** Prüfe den Postprozessor mit `node 02_Software_und_Tools/simuliere_post.js`.
 
 ---
 
-### 💰 SCHRITT 4: Rechnungsstellung nach § 18 EStG (Agent 4)
-#### Prompt zum Kopieren in den Chat:
+### 🛡️ Schritt 3: Prompt für Sicherheitsbericht, Einrichteblatt & 3D-Simulationsvideo *(Agent 3)*
+
 ```text
-Starte bitte Agent 4 (Backoffice-Agent):
-Der Auftrag im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_00b_hallo_welt_mum_systemhaus\ ist technisch erfolgreich abgeschlossen und freigegeben.
-Erstelle jetzt im selben Ordner die steuersichere Honorarrechnung "07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md" über 250,00 € netto (297,50 € brutto) an Mensch und Maschine Systemhaus GmbH mit allen Pflichtangaben nach § 14 UStG und freiberuflicher Leistungsabgrenzung für das Finanzamt Hanau.
+Starte Agent 3 (NC-Safety- & Setup-Agent):
+Führe für die Datei c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/uebung_00b_hallo_welt.nc des Kunden Mensch und Maschine Systemhaus GmbH (Standard 3-Achs-Fräsmaschine (Haas/Fanuc-kompatibel)) das vollständige 5-Stufen-Sicherheitsaudit durch:
+1. Berechne die Kollisionsreserve zwischen Z_min = -5.000 mm und den Schraubstockbacken bei Z = -12.000 mm und speichere den Prüfbericht unter:
+   c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/05_SICHERHEITS_CRASH_PRUEFBERICHT.md
+2. Erstelle das druckfertige Werkstatteinrichteblatt (Setup Sheet) mit allen Werkzeugen (T01 (VHM-Schaftfräser Ø 10,0 mm (3Z, Alu-Geometrie), S=8000 U/min, F=1200 mm/min, Z_min=-5.000 mm)) und Mindest-Auskraglängen unter:
+   c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/06_EINRICHTEBLATT_SETUP_SHEET.md
+3. Rendere das 3D-Maschinensimulationsvideo über render_simulation_video.py:
+   python 02_Software_und_Tools/scripts/render_simulation_video.py --gcode c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/uebung_00b_hallo_welt.nc --output c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/uebung_00b_hallo_welt_simulation_video.mp4
 ```
 
-#### 🔍 Wie wird die Rechnung getestet und geprüft?
-1. **Betrag:** Netto-Honorar 250,00 € netto zzgl. 19 % USt. = **297,50 € brutto**.
-2. **Steuerliche Pflichtangaben:** Eindeutige Rechnungsnummer, Leistungszeitraum, USt-Ausweis nach § 14 UStG und § 18 EStG Vermerk.
+#### 🔍 Wie wird dieses Artefakt getestet und geprüft?
+1. **Prüfbericht-Status:** Bescheinigt `05_SICHERHEITS_CRASH_PRUEFBERICHT.md` den Status **BESTANDEN (GRÜN)** und die exakte Reserve von `7.000 mm`?
+2. **Einrichteblatt-Check:** Stimmen alle Drehzahlen ($S$), Vorschübe ($F$) und Auskraglängen ($L_{\text{min}}$) in `06_EINRICHTEBLATT_SETUP_SHEET.md` zu 100 % mit `uebung_00b_hallo_welt.nc` überein?
+3. **🎬 3D-Simulationsvideo-Check:** Öffne `uebung_00b_hallo_welt_simulation_video.mp4` und kontrolliere visuell die sichere Anfahrhöhe, das Eintauchen im Vorschub und den Sicherheitsabstand zu den Schraubstockbacken.
 
 ---
 
-## 🛡️ 4. Abnahme-Kriterien (Checkliste für 100 % Erledigung)
-* [ ] [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) existiert und wurde geprüft.
-* [ ] [`uebung_00b_hallo_welt.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/uebung_00b_hallo_welt.nc) existiert und lief fehlerfrei im Simulator.
-* [ ] [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) bescheinigt Status **BESTANDEN (GRÜN)**.
-* [ ] [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/06_EINRICHTEBLATT_SETUP_SHEET.md) liegt vor.
-* [ ] [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) ist für das Finanzamt Hanau abgelegt.
+### 💰 Schritt 4: Prompt für Honorarrechnung & Abschlussdokumentation *(Agent 4)*
+
+```text
+Starte Agent 4 (Backoffice-Ingenieur-Agent):
+Erstelle nach erfolgreicher technischer Freigabe für den Kunden Mensch und Maschine Systemhaus GmbH (Argelsrieder Feld 5, 82234 Weßling) die steuerkonforme Honorarrechnung nach § 14 UStG und § 18 EStG über 250,00 € netto (zzgl. 19 % USt. = 297,50 € brutto) für das Finanzamt Hanau unter:
+c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md
+Erstelle zudem die vollständige Abschlussdokumentation aller Projektartefakte unter:
+c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md
+```
+
+#### 🔍 Wie wird dieses Artefakt getestet und geprüft?
+1. **Rechnungsprüfung (§ 14 UStG):** Sind Rechnungsnummer `RE-2026-00B`, Leistungszeitraum, Nettobetrag (`250,00 €`), 19 % USt. und Bruttobetrag (`297,50 €`) korrekt ausgewiesen?
+2. **Finanzamt-Konformität (§ 18 EStG):** Ist die Position eindeutig als freiberufliche Ingenieurleistung formuliert?
+
+---
+
+## 4. Abnahme-Kriterien (Checkliste für 100 % Erledigung)
+
+- [x] **Artefakt 1:** [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) existiert und wurde geprüft.
+- [x] **Artefakt 2:** [`uebung_00b_hallo_welt.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/uebung_00b_hallo_welt.nc) existiert mit Z-MIN-Header und lief fehlerfrei im Simulator.
+- [x] **Artefakt 3:** [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) bescheinigt Status **BESTANDEN (GRÜN)**.
+- [x] **Artefakt 4:** [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/06_EINRICHTEBLATT_SETUP_SHEET.md) liegt druckfertig für die Werkstatt vor.
+- [x] **Artefakt 5:** [`uebung_00b_hallo_welt_simulation_video.mp4`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/uebung_00b_hallo_welt_simulation_video.mp4) wurde gerendert und zeigt kollisionsfreie Fräsbahnen.
+- [x] **Artefakt 6:** [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) ist für das Finanzamt Hanau abgelegt.
+- [x] **Abschluss-Doku:** [`08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_00b_hallo_welt_mum_systemhaus/08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md) dokumentiert alle 5 Phasen lückenlos.

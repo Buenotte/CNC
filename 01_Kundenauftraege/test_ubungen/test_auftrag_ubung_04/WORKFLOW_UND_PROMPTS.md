@@ -1,8 +1,8 @@
 # 📋 Workflow-Beschreibung & Prompts: Auftrag 04: 3D-CAD-Modellbearbeitung (Lagerplatte)
 
-Mit dieser Anleitung wickelst du den Kundenauftrag aus [`KUNDENAUFTRAG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/KUNDENAUFTRAG.md) Schritt für Schritt mit deinen 4 KI-Agenten ab.
+Mit dieser Anleitung wickelst du den Kundenauftrag aus [`KUNDENAUFTRAG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/KUNDENAUFTRAG.md) Schritt für Schritt mit deinen 4 KI-Agenten ab.
 
-Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten erzeugen dann alle geforderten Artefakte direkt in diesem Ordner [`test_auftrag_ubung_04`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04).
+Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten erzeugen dann alle geforderten Artefakte direkt in diesem Ordner [`test_auftrag_ubung_04`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04).
 
 ---
 
@@ -10,11 +10,11 @@ Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten er
 
 | Artefakt-Dateiname | Was ist das? | Wo steht die Datei? *(Speicherort)* | Wer erzeugt sie? |
 | :--- | :--- | :--- | :---: |
-| **`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`** | Rechtssicheres B2B-Angebot (380,00 € netto) | [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | **Agent 4** *(Backoffice)* |
-| **`kunden_auftrag_04.nc`** | Fertiger Maschinencode für Haas VF-2 (Haas NGC Steuerung) | [`kunden_auftrag_04.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/kunden_auftrag_04.nc) | **Agent 2** *(Post-Coder)* |
-| **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | 5-Stufen-Sicherheitsprüfbericht *(Null-Kollisions-Garantie)* | [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | **Agent 3** *(NC-Safety)* |
-| **`06_EINRICHTEBLATT_SETUP_SHEET.md`** | Rüstdatenblatt für den Maschinenbediener vor Ort | [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/06_EINRICHTEBLATT_SETUP_SHEET.md) | **Agent 3** *(NC-Safety)* |
-| **`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`** | Revisionssichere Honorarrechnung (452,20 € brutto) | [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) | **Agent 4** *(Backoffice)* |
+| **`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`** | Rechtssicheres B2B-Angebot (380,00 € netto) | [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | **Agent 4** *(Backoffice)* |
+| **`kunden_auftrag_04.nc`** | Fertiger Maschinencode für Haas VF-2 (Haas NGC Steuerung) | [`kunden_auftrag_04.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/kunden_auftrag_04.nc) | **Agent 2** *(Post-Coder)* |
+| **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | 5-Stufen-Sicherheitsprüfbericht *(Null-Kollisions-Garantie)* | [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | **Agent 3** *(NC-Safety)* |
+| **`06_EINRICHTEBLATT_SETUP_SHEET.md`** | Rüstdatenblatt für den Maschinenbediener vor Ort | [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/06_EINRICHTEBLATT_SETUP_SHEET.md) | **Agent 3** *(NC-Safety)* |
+| **`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`** | Revisionssichere Honorarrechnung (452,20 € brutto) | [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) | **Agent 4** *(Backoffice)* |
 
 ---
 
@@ -114,8 +114,8 @@ Erstelle jetzt im selben Ordner die steuersichere Honorarrechnung "07_RECHNUNG_N
 ---
 
 ## 🛡️ 4. Abnahme-Kriterien (Checkliste für 100 % Erledigung)
-* [ ] [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) existiert und wurde geprüft.
-* [ ] [`kunden_auftrag_04.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/kunden_auftrag_04.nc) existiert und lief fehlerfrei im Simulator.
-* [ ] [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) bescheinigt Status **BESTANDEN (GRÜN)**.
-* [ ] [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/06_EINRICHTEBLATT_SETUP_SHEET.md) liegt vor.
-* [ ] [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) ist für das Finanzamt Hanau abgelegt.
+* [ ] [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) existiert und wurde geprüft.
+* [ ] [`kunden_auftrag_04.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/kunden_auftrag_04.nc) existiert und lief fehlerfrei im Simulator.
+* [ ] [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) bescheinigt Status **BESTANDEN (GRÜN)**.
+* [ ] [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/06_EINRICHTEBLATT_SETUP_SHEET.md) liegt vor.
+* [ ] [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) ist für das Finanzamt Hanau abgelegt.

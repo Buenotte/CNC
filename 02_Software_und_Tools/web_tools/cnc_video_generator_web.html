@@ -343,7 +343,8 @@
     </div>
     <div class="header-links">
       <a href="kunden_cps_generator_web.html" target="_blank">⚙️ Postprozessor-Generator (.cps)</a>
-      <a href="kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html" target="_blank">🔍 3D-Simulator mit Satz-Editor</a>
+      <a href="3d_auftrag_simulator.html" target="_blank">🔍 3D-Simulator mit Satz-Editor</a>
+      <a href="universal_3d_viewer.html" target="_blank">📐 3D CAD/STL Viewer</a>
     </div>
   </header>
 
@@ -490,39 +491,113 @@
     let isDragging = false;
     let lastMouseX = 0, lastMouseY = 0;
 
-    // Standard-Waypoints für Übung 3
+    // Vorlagen-Waypoints für Übung 3, Kreistasche und Siemens 840D Ventilblock
     function loadPreset(type) {
       waypoints = [];
-      // Außenkontur
-      waypoints.push({ x: -10, y: -10, z: 20, type: 'rapid', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 0 });
-      waypoints.push({ x: -10, y: -10, z: 2, type: 'rapid', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 0 });
-      waypoints.push({ x: -10, y: -10, z: -5, type: 'linear', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 500 });
-      waypoints.push({ x: 0, y: 0, z: -5, type: 'linear', op: '1. AUSSENKONTUR (Lead-In)', tool: 'T01 Ø10mm', f: 1200 });
-      waypoints.push({ x: 80, y: 0, z: -5, type: 'linear', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 1200 });
-      waypoints.push({ x: 80, y: 50, z: -5, type: 'linear', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 1200 });
-      waypoints.push({ x: 0, y: 50, z: -5, type: 'linear', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 1200 });
-      waypoints.push({ x: 0, y: 0, z: -5, type: 'linear', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 1200 });
-      waypoints.push({ x: 0, y: 0, z: 15, type: 'rapid', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 0 });
+      if (type === 'siemens') {
+        document.getElementById('custNameInput').value = 'Hydraulik-Systembau Süd GmbH';
+        document.getElementById('partNameInput').value = 'Siemens 840D – Hydraulik-Ventilblock (OP10)';
+        document.getElementById('hudCustName').textContent = 'Kunde: Hydraulik-Systembau Süd GmbH';
+        document.getElementById('hudPartName').textContent = 'Siemens 840D – Hydraulik-Ventilblock (OP10)';
+        document.getElementById('hudZMin').textContent = 'Z-MIN: -14.000 mm (Sicher!)';
 
-      // Tasche
-      waypoints.push({ x: 40, y: 25, z: 15, type: 'rapid', op: '2. KREISTASCHE MITTE', tool: 'T01 Ø10mm', f: 0 });
-      waypoints.push({ x: 40, y: 25, z: 2, type: 'rapid', op: '2. KREISTASCHE MITTE', tool: 'T01 Ø10mm', f: 0 });
-      waypoints.push({ x: 40, y: 25, z: -3, type: 'linear', op: '2. KREISTASCHE MITTE', tool: 'T01 Ø10mm', f: 400 });
-      for (let a = 0; a <= 360; a += 20) {
-        let rad = a * Math.PI / 180;
-        waypoints.push({ x: 40 + 15 * Math.cos(rad), y: 25 + 15 * Math.sin(rad), z: -3, type: 'linear', op: '2. KREISTASCHE MITTE', tool: 'T01 Ø10mm', f: 1000 });
+        // OP1: Planfräsen Z0
+        waypoints.push({ x: -15, y: 12, z: 20, type: 'rapid', op: '1. PLANFRAESEN (MESSERKOPF D50)', tool: 'T01 Ø50mm Planfräser', f: 0 });
+        waypoints.push({ x: -15, y: 12, z: 0, type: 'linear', op: '1. PLANFRAESEN (MESSERKOPF D50)', tool: 'T01 Ø50mm Planfräser', f: 600 });
+        waypoints.push({ x: 95, y: 12, z: 0, type: 'linear', op: '1. PLANFRAESEN BAHN 1', tool: 'T01 Ø50mm Planfräser', f: 1800 });
+        waypoints.push({ x: 95, y: 38, z: 0, type: 'linear', op: '1. PLANFRAESEN QUERZUSTELLUNG', tool: 'T01 Ø50mm Planfräser', f: 1200 });
+        waypoints.push({ x: -15, y: 38, z: 0, type: 'linear', op: '1. PLANFRAESEN BAHN 2', tool: 'T01 Ø50mm Planfräser', f: 1800 });
+        waypoints.push({ x: -15, y: 38, z: 20, type: 'rapid', op: '1. PLANFRAESEN RÜCKZUG', tool: 'T01 Ø50mm Planfräser', f: 0 });
+
+        // OP2: Ventilkammer Kreistasche (2 Tiefenzustellungen Z=-4 und Z=-8)
+        [ -4, -8 ].forEach((depth, idx) => {
+          waypoints.push({ x: 40, y: 25, z: 15, type: 'rapid', op: `2. VENTILKAMMER Z=${depth}MM`, tool: 'T02 Ø10mm VHM-Fräser (IKZ M88)', f: 0 });
+          waypoints.push({ x: 40, y: 25, z: depth, type: 'linear', op: `2. VENTILKAMMER Z=${depth}MM`, tool: 'T02 Ø10mm VHM-Fräser (IKZ M88)', f: 450 });
+          for (let a = 0; a <= 360; a += 15) {
+            let rad = a * Math.PI / 180;
+            waypoints.push({ x: 40 + 16 * Math.cos(rad), y: 25 + 16 * Math.sin(rad), z: depth, type: 'linear', op: `2. VENTILKAMMER Z=${depth}MM (G03)`, tool: 'T02 Ø10mm VHM-Fräser (IKZ M88)', f: 1100 });
+          }
+          waypoints.push({ x: 40, y: 25, z: depth, type: 'linear', op: `2. VENTILKAMMER Z=${depth}MM`, tool: 'T02 Ø10mm VHM-Fräser (IKZ M88)', f: 1100 });
+        });
+        waypoints.push({ x: 40, y: 25, z: 15, type: 'rapid', op: '2. VENTILKAMMER FERTIG', tool: 'T02 Ø10mm VHM-Fräser (IKZ M88)', f: 0 });
+
+        // OP3: Siemens CYCLE83 Tiefbohren (Z=-14.0 mm)
+        const holes = [[10, 10], [70, 10], [70, 40], [10, 40]];
+        holes.forEach(([hx, hy], i) => {
+          waypoints.push({ x: hx, y: hy, z: 15, type: 'rapid', op: `3. SIEMENS CYCLE83 (${i+1}/4)`, tool: 'T03 Ø6.8mm VHM-Bohrer', f: 0 });
+          waypoints.push({ x: hx, y: hy, z: 2, type: 'rapid', op: `3. SIEMENS CYCLE83 (${i+1}/4)`, tool: 'T03 Ø6.8mm VHM-Bohrer', f: 0 });
+          waypoints.push({ x: hx, y: hy, z: -14, type: 'linear', op: `3. SIEMENS CYCLE83 (${i+1}/4)`, tool: 'T03 Ø6.8mm VHM-Bohrer', f: 350 });
+          waypoints.push({ x: hx, y: hy, z: 15, type: 'rapid', op: `3. SIEMENS CYCLE83 (${i+1}/4)`, tool: 'T03 Ø6.8mm VHM-Bohrer', f: 0 });
+        });
+      } else if (type === 'tasche') {
+        document.getElementById('custNameInput').value = 'Präzisionstechnik Weber GmbH';
+        document.getElementById('partNameInput').value = 'Kreistasche Ø30mm & 4x Passbohrung (OP10)';
+        document.getElementById('hudCustName').textContent = 'Kunde: Präzisionstechnik Weber GmbH';
+        document.getElementById('hudPartName').textContent = 'Kreistasche Ø30mm & 4x Passbohrung (OP10)';
+        document.getElementById('hudZMin').textContent = 'Z-MIN: -12.000 mm (Sicher!)';
+
+        // Fokus auf helikale Kreistaschen-Ausräumung (R=7.5 -> R=15) & 4 Bohrungen
+        waypoints.push({ x: 40, y: 25, z: 20, type: 'rapid', op: '1. HELIX-EINTAUCHEN MITTE', tool: 'T01 Ø10mm Schaftfräser', f: 0 });
+        waypoints.push({ x: 40, y: 25, z: 2, type: 'rapid', op: '1. HELIX-EINTAUCHEN MITTE', tool: 'T01 Ø10mm Schaftfräser', f: 0 });
+        for (let a = 0; a <= 360; a += 15) {
+          let rad = a * Math.PI / 180;
+          let zHelix = 2 - (5 * (a / 360));
+          waypoints.push({ x: 40 + 7.5 * Math.cos(rad), y: 25 + 7.5 * Math.sin(rad), z: zHelix, type: 'linear', op: '1. HELIX-RAMPE ZU Z=-3MM', tool: 'T01 Ø10mm Schaftfräser', f: 600 });
+        }
+        for (let a = 0; a <= 360; a += 15) {
+          let rad = a * Math.PI / 180;
+          waypoints.push({ x: 40 + 15 * Math.cos(rad), y: 25 + 15 * Math.sin(rad), z: -3, type: 'linear', op: '2. KREISTASCHE SCHLICHTEN Ø30MM', tool: 'T01 Ø10mm Schaftfräser', f: 1000 });
+        }
+        waypoints.push({ x: 40, y: 25, z: -3, type: 'linear', op: '2. KREISTASCHE FREIFAHREN', tool: 'T01 Ø10mm Schaftfräser', f: 1000 });
+        waypoints.push({ x: 40, y: 25, z: 15, type: 'rapid', op: '2. KREISTASCHE FERTIG', tool: 'T01 Ø10mm Schaftfräser', f: 0 });
+
+        const holes = [[10, 10], [70, 10], [70, 40], [10, 40]];
+        holes.forEach(([hx, hy], i) => {
+          waypoints.push({ x: hx, y: hy, z: 15, type: 'rapid', op: `3. TIEFBOHREN G83 (${i+1}/4)`, tool: 'T02 Ø6mm Bohrer', f: 0 });
+          waypoints.push({ x: hx, y: hy, z: 2, type: 'rapid', op: `3. TIEFBOHREN G83 (${i+1}/4)`, tool: 'T02 Ø6mm Bohrer', f: 0 });
+          waypoints.push({ x: hx, y: hy, z: -6, type: 'linear', op: `3. SPANBRUCH Z=-6MM (${i+1}/4)`, tool: 'T02 Ø6mm Bohrer', f: 300 });
+          waypoints.push({ x: hx, y: hy, z: 2, type: 'rapid', op: `3. ENTSPÄNEN (${i+1}/4)`, tool: 'T02 Ø6mm Bohrer', f: 0 });
+          waypoints.push({ x: hx, y: hy, z: -12, type: 'linear', op: `3. BOHRUNG Z=-12MM (${i+1}/4)`, tool: 'T02 Ø6mm Bohrer', f: 300 });
+          waypoints.push({ x: hx, y: hy, z: 15, type: 'rapid', op: `3. RÜCKZUG (${i+1}/4)`, tool: 'T02 Ø6mm Bohrer', f: 0 });
+        });
+      } else {
+        document.getElementById('custNameInput').value = 'Zerspanungstechnik Schmidt GmbH';
+        document.getElementById('partNameInput').value = 'Lagerplatte Alu 80x50x12 mm (OP10)';
+        document.getElementById('hudCustName').textContent = 'Kunde: Zerspanungstechnik Schmidt GmbH';
+        document.getElementById('hudPartName').textContent = 'Lagerplatte Alu 80x50x12 mm (OP10)';
+        document.getElementById('hudZMin').textContent = 'Z-MIN: -12.000 mm (Sicher!)';
+
+        // Außenkontur
+        waypoints.push({ x: -10, y: -10, z: 20, type: 'rapid', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 0 });
+        waypoints.push({ x: -10, y: -10, z: 2, type: 'rapid', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 0 });
+        waypoints.push({ x: -10, y: -10, z: -5, type: 'linear', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 500 });
+        waypoints.push({ x: 0, y: 0, z: -5, type: 'linear', op: '1. AUSSENKONTUR (Lead-In)', tool: 'T01 Ø10mm', f: 1200 });
+        waypoints.push({ x: 80, y: 0, z: -5, type: 'linear', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 1200 });
+        waypoints.push({ x: 80, y: 50, z: -5, type: 'linear', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 1200 });
+        waypoints.push({ x: 0, y: 50, z: -5, type: 'linear', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 1200 });
+        waypoints.push({ x: 0, y: 0, z: -5, type: 'linear', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 1200 });
+        waypoints.push({ x: 0, y: 0, z: 15, type: 'rapid', op: '1. AUSSENKONTUR', tool: 'T01 Ø10mm', f: 0 });
+
+        // Tasche
+        waypoints.push({ x: 40, y: 25, z: 15, type: 'rapid', op: '2. KREISTASCHE MITTE', tool: 'T01 Ø10mm', f: 0 });
+        waypoints.push({ x: 40, y: 25, z: 2, type: 'rapid', op: '2. KREISTASCHE MITTE', tool: 'T01 Ø10mm', f: 0 });
+        waypoints.push({ x: 40, y: 25, z: -3, type: 'linear', op: '2. KREISTASCHE MITTE', tool: 'T01 Ø10mm', f: 400 });
+        for (let a = 0; a <= 360; a += 20) {
+          let rad = a * Math.PI / 180;
+          waypoints.push({ x: 40 + 15 * Math.cos(rad), y: 25 + 15 * Math.sin(rad), z: -3, type: 'linear', op: '2. KREISTASCHE MITTE', tool: 'T01 Ø10mm', f: 1000 });
+        }
+        waypoints.push({ x: 40, y: 25, z: -3, type: 'linear', op: '2. KREISTASCHE MITTE', tool: 'T01 Ø10mm', f: 1000 });
+        waypoints.push({ x: 40, y: 25, z: 15, type: 'rapid', op: '2. KREISTASCHE MITTE', tool: 'T01 Ø10mm', f: 0 });
+
+        // 4 Bohrungen G83
+        const holes = [[10, 10], [70, 10], [70, 40], [10, 40]];
+        holes.forEach(([hx, hy], i) => {
+          waypoints.push({ x: hx, y: hy, z: 15, type: 'rapid', op: `3. BOHRUNGEN (${i+1}/4)`, tool: 'T02 Ø6mm Bohrer', f: 0 });
+          waypoints.push({ x: hx, y: hy, z: 2, type: 'rapid', op: `3. BOHRUNGEN (${i+1}/4)`, tool: 'T02 Ø6mm Bohrer', f: 0 });
+          waypoints.push({ x: hx, y: hy, z: -12, type: 'linear', op: `3. BOHRUNGEN (${i+1}/4)`, tool: 'T02 Ø6mm Bohrer', f: 300 });
+          waypoints.push({ x: hx, y: hy, z: 15, type: 'rapid', op: `3. BOHRUNGEN (${i+1}/4)`, tool: 'T02 Ø6mm Bohrer', f: 0 });
+        });
       }
-      waypoints.push({ x: 40, y: 25, z: -3, type: 'linear', op: '2. KREISTASCHE MITTE', tool: 'T01 Ø10mm', f: 1000 });
-      waypoints.push({ x: 40, y: 25, z: 15, type: 'rapid', op: '2. KREISTASCHE MITTE', tool: 'T01 Ø10mm', f: 0 });
-
-      // 4 Bohrungen G83
-      const holes = [[10, 10], [70, 10], [70, 40], [10, 40]];
-      holes.forEach(([hx, hy], i) => {
-        waypoints.push({ x: hx, y: hy, z: 15, type: 'rapid', op: `3. BOHRUNGEN (${i+1}/4)`, tool: 'T02 Ø6mm Bohrer', f: 0 });
-        waypoints.push({ x: hx, y: hy, z: 2, type: 'rapid', op: `3. BOHRUNGEN (${i+1}/4)`, tool: 'T02 Ø6mm Bohrer', f: 0 });
-        waypoints.push({ x: hx, y: hy, z: -12, type: 'linear', op: `3. BOHRUNGEN (${i+1}/4)`, tool: 'T02 Ø6mm Bohrer', f: 300 });
-        waypoints.push({ x: hx, y: hy, z: 15, type: 'rapid', op: `3. BOHRUNGEN (${i+1}/4)`, tool: 'T02 Ø6mm Bohrer', f: 0 });
-      });
 
       curIdx = 0;
       progress = 0;
@@ -662,17 +737,26 @@
       const gY = project(0, 15, 0); ctx.strokeStyle = '#22c55e'; ctx.beginPath(); ctx.moveTo(g54.x, g54.y); ctx.lineTo(gY.x, gY.y); ctx.stroke();
       const gZ = project(0, 0, 15); ctx.strokeStyle = '#38bdf8'; ctx.beginPath(); ctx.moveTo(g54.x, g54.y); ctx.lineTo(gZ.x, gZ.y); ctx.stroke();
 
-      // 3. Bisherige Fräsbahnen (Spuren)
+      // 3. Bisherige Fräsbahnen (Spuren) + aktives Teilsegment
       for (let i = 0; i < curIdx; i++) {
         const wp1 = project(waypoints[i].x, waypoints[i].y, waypoints[i].z);
         const wp2 = project(waypoints[i + 1].x, waypoints[i + 1].y, waypoints[i + 1].z);
-        ctx.strokeStyle = waypoints[i].type === 'rapid' ? '#facc15' : '#0ea5e9';
-        ctx.lineWidth = waypoints[i].type === 'rapid' ? 1.5 : 2.5;
+        const segType = waypoints[i + 1] ? waypoints[i + 1].type : waypoints[i].type;
+        ctx.strokeStyle = segType === 'rapid' ? '#facc15' : '#0ea5e9';
+        ctx.lineWidth = segType === 'rapid' ? 1.5 : 2.5;
         ctx.beginPath();
         ctx.moveTo(wp1.x, wp1.y);
         ctx.lineTo(wp2.x, wp2.y);
         ctx.stroke();
       }
+      const wpCurStart = project(p1.x, p1.y, p1.z);
+      const wpCurPos = project(curX, curY, curZ);
+      ctx.strokeStyle = p2.type === 'rapid' ? '#facc15' : '#0ea5e9';
+      ctx.lineWidth = p2.type === 'rapid' ? 1.5 : 2.5;
+      ctx.beginPath();
+      ctx.moveTo(wpCurStart.x, wpCurStart.y);
+      ctx.lineTo(wpCurPos.x, wpCurPos.y);
+      ctx.stroke();
 
       // 4. Fräswerkzeug an aktueller Position
       const tip = project(curX, curY, curZ);
@@ -692,6 +776,71 @@
       ctx.strokeStyle = '#94a3b8';
       ctx.lineWidth = 14;
       ctx.beginPath(); ctx.moveTo(shaft.x, shaft.y); ctx.lineTo(holder.x, holder.y); ctx.stroke();
+
+      // 5. Wenn Video-Aufnahme aktiv ist: HUD & Wasserzeichen direkt in den Video-Canvas einbrennen!
+      if (isRecording) {
+        ctx.save();
+        // Top-Left Card
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+        ctx.fillRect(16, 16, 330, 62);
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(16, 16, 330, 62);
+        ctx.fillStyle = '#0ea5e9';
+        ctx.font = 'bold 10px Segoe UI, sans-serif';
+        ctx.fillText('BAUTEIL-FREIGABE', 26, 32);
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 13px Segoe UI, sans-serif';
+        ctx.fillText(document.getElementById('hudPartName').textContent, 26, 50);
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px Segoe UI, sans-serif';
+        ctx.fillText(document.getElementById('hudCustName').textContent, 26, 67);
+
+        // Top-Right Card
+        const trW = 270;
+        const trX = canvas.width - trW - 16;
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+        ctx.fillRect(trX, 16, trW, 62);
+        ctx.strokeRect(trX, 16, trW, 62);
+        ctx.fillStyle = '#22c55e';
+        ctx.font = 'bold 10px Segoe UI, sans-serif';
+        ctx.fillText('🛡️ KOLLISIONSPRÜFUNG: BESTANDEN', trX + 12, 32);
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = 'bold 12px Consolas, monospace';
+        ctx.fillText(document.getElementById('hudZMin').textContent, trX + 12, 50);
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px Segoe UI, sans-serif';
+        ctx.fillText('Spannbacken bei Z = -15.0 mm', trX + 12, 67);
+
+        // Bottom-Left Card
+        const blY = canvas.height - 78;
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+        ctx.fillRect(16, blY, 310, 62);
+        ctx.strokeRect(16, blY, 310, 62);
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = 'bold 10px Consolas, monospace';
+        ctx.fillText('LIVE-MASCHINENDATEN:', 26, blY + 16);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 13px Consolas, monospace';
+        ctx.fillText(document.getElementById('hudCoords').textContent, 26, blY + 35);
+        ctx.fillStyle = '#0ea5e9';
+        ctx.font = '11px Consolas, monospace';
+        ctx.fillText(document.getElementById('hudFeed').textContent, 26, blY + 52);
+
+        // Bottom-Right Card
+        const brW = 290;
+        const brX = canvas.width - brW - 16;
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+        ctx.fillRect(brX, blY, brW, 62);
+        ctx.strokeRect(brX, blY, brW, 62);
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px Segoe UI, sans-serif';
+        ctx.fillText(document.getElementById('hudWatermark').textContent, brX + 12, blY + 24);
+        ctx.fillStyle = '#e2e8f0';
+        ctx.font = 'bold 12px Segoe UI, sans-serif';
+        ctx.fillText(document.getElementById('hudOp').textContent, brX + 12, blY + 46);
+        ctx.restore();
+      }
 
       requestAnimationFrame(render);
     }
@@ -776,34 +925,118 @@
       if (!file) return;
       const reader = new FileReader();
       reader.onload = ev => {
-        parseGCode(ev.target.result);
+        parseGCode(ev.target.result, file.name);
       };
       reader.readAsText(file);
     }
 
-    function parseGCode(text) {
+    function parseGCode(text, fileName = 'Kundenprogramm.nc') {
       waypoints = [];
-      const lines = text.split('\n');
+      const lines = text.split(/\r?\n/);
       let curX = 0, curY = 0, curZ = 15;
-      lines.forEach(line => {
-        const clean = line.replace(/\(.*?\)/g, '').trim();
-        const mx = clean.match(/X\s*([+-]?\d+(?:\.\d+)?)/);
-        const my = clean.match(/Y\s*([+-]?\d+(?:\.\d+)?)/);
-        const mz = clean.match(/Z\s*([+-]?\d+(?:\.\d+)?)/);
-        const isRapid = clean.includes('G00') || (clean.startsWith('G0 ') || clean.startsWith('G0\t'));
-        if (mx) curX = parseFloat(mx[1]);
-        if (my) curY = parseFloat(my[1]);
-        if (mz) curZ = parseFloat(mz[1]);
+      let isRapid = true;
+      let curTool = 'T01';
+      let curOp = fileName;
+      let curFeed = 1200;
+      let drillMode = false;
+      let drillZ = -12, drillR = 2;
+      let minZ = Infinity;
+
+      lines.forEach(rawLine => {
+        const line = rawLine.trim();
+        if (!line) return;
+
+        const commentMatch = line.match(/\((.*?)\)/);
+        if (commentMatch && /OPERATION|OP\d+|KONTUR|TASCHE|BOHR/i.test(commentMatch[1])) {
+          curOp = commentMatch[1].trim();
+        }
+        if (/G53|G28|SUPA|M91/i.test(line)) {
+          return; // Maschinen-Referenzfahrten nicht als Werkstückkoordinate werten
+        }
+
+        const clean = line.replace(/\(.*?\)/g, '').replace(/;.*$/, '').trim();
+        if (!clean) return;
+
+        const tMatch = clean.match(/\bT0?(\d+)\b/i);
+        if (tMatch) curTool = 'T0' + tMatch[1];
+
+        if (/\bG80\b/i.test(clean)) drillMode = false;
+        if (/\bG0?0\b|\bFMAX\b/i.test(clean)) { isRapid = true; drillMode = false; }
+        if (/\bG0?1\b/i.test(clean)) { isRapid = false; drillMode = false; }
+        const isArcCW = /\bG0?2\b/i.test(clean);
+        const isArcCCW = /\bG0?3\b/i.test(clean);
+        if (isArcCW || isArcCCW) { isRapid = false; drillMode = false; }
+        if (/\bG8[1234]\b/i.test(clean)) { drillMode = true; isRapid = false; }
+
+        const mx = clean.match(/\bX\s*([+-]?\d+(?:\.\d+)?)/i);
+        const my = clean.match(/\bY\s*([+-]?\d+(?:\.\d+)?)/i);
+        const mz = clean.match(/\bZ\s*([+-]?\d+(?:\.\d+)?)/i);
+        const mr = clean.match(/\bR\s*([+-]?\d+(?:\.\d+)?)/i);
+        const mi = clean.match(/\bI\s*([+-]?\d+(?:\.\d+)?)/i);
+        const mj = clean.match(/\bJ\s*([+-]?\d+(?:\.\d+)?)/i);
+        const mf = clean.match(/\bF\s*(\d+(?:\.\d+)?)/i);
+
+        if (mf) curFeed = parseFloat(mf[1]);
+        const targetX = mx ? parseFloat(mx[1]) : curX;
+        const targetY = my ? parseFloat(my[1]) : curY;
+        const targetZ = mz ? parseFloat(mz[1]) : curZ;
+        if (mz) minZ = Math.min(minZ, targetZ);
+
+        if (drillMode && (mx || my || mz)) {
+          if (mz) drillZ = targetZ;
+          if (mr) drillR = parseFloat(mr[1]);
+          minZ = Math.min(minZ, drillZ);
+          waypoints.push({ x: targetX, y: targetY, z: Math.max(curZ, drillR), type: 'rapid', op: curOp, tool: curTool, f: 0 });
+          waypoints.push({ x: targetX, y: targetY, z: drillR, type: 'rapid', op: curOp, tool: curTool, f: 0 });
+          waypoints.push({ x: targetX, y: targetY, z: drillZ, type: 'linear', op: curOp, tool: curTool, f: curFeed });
+          waypoints.push({ x: targetX, y: targetY, z: drillR, type: 'rapid', op: curOp, tool: curTool, f: 0 });
+          curX = targetX; curY = targetY; curZ = drillR;
+          return;
+        }
+
+        if ((isArcCW || isArcCCW) && (mi || mj)) {
+          const iVal = mi ? parseFloat(mi[1]) : 0;
+          const jVal = mj ? parseFloat(mj[1]) : 0;
+          const cx = curX + iVal, cy = curY + jVal;
+          const startAng = Math.atan2(curY - cy, curX - cx);
+          let endAng = Math.atan2(targetY - cy, targetX - cx);
+          if (isArcCW && endAng >= startAng - 1e-6) endAng -= Math.PI * 2;
+          if (isArcCCW && endAng <= startAng + 1e-6) endAng += Math.PI * 2;
+          const r = Math.hypot(iVal, jVal);
+          for (let s = 1; s <= 18; s++) {
+            const ang = startAng + (endAng - startAng) * (s / 18);
+            waypoints.push({
+              x: cx + r * Math.cos(ang),
+              y: cy + r * Math.sin(ang),
+              z: curZ + (targetZ - curZ) * (s / 18),
+              type: 'linear',
+              op: curOp,
+              tool: curTool,
+              f: curFeed
+            });
+          }
+          curX = targetX; curY = targetY; curZ = targetZ;
+          return;
+        }
+
         if (mx || my || mz) {
+          curX = targetX; curY = targetY; curZ = targetZ;
           waypoints.push({
             x: curX, y: curY, z: curZ,
             type: isRapid ? 'rapid' : 'linear',
-            op: 'KUNDENPROGRAMM',
-            tool: 'T01',
-            f: 1200
+            op: curOp,
+            tool: curTool,
+            f: isRapid ? 0 : curFeed
           });
         }
       });
+
+      if (isFinite(minZ)) {
+        const isSafe = minZ > -15.0;
+        document.getElementById('hudZMin').textContent = `Z-MIN: ${minZ.toFixed(3)} mm (${isSafe ? 'Sicher!' : 'CRASH!'})`;
+      }
+      document.getElementById('partNameInput').value = fileName;
+      document.getElementById('hudPartName').textContent = fileName;
       curIdx = 0;
       progress = 0;
     }

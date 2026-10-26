@@ -1,121 +1,141 @@
-# 📋 Workflow-Beschreibung & Prompts: Auftrag 14: Heidenhain Klartext & 4. Achse (A-Achse)
+# 📋 Standard-Workflow & Fertige KI-Prompts: Auftrag 14: Heidenhain TNC 640 Klartext-Postprozessor (4-Achs-Indexierung A-Achse)
 
-Mit dieser Anleitung wickelst du den Kundenauftrag aus [`KUNDENAUFTRAG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/KUNDENAUFTRAG.md) Schritt für Schritt mit deinen 4 KI-Agenten ab.
-
-Kopiere nacheinander die folgenden **4 Prompts** in unseren Chat. Die Agenten erzeugen dann alle geforderten Artefakte direkt in diesem Ordner [`auftrag_14_heidenhain_4achs_teilapparat`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat).
-
----
-
-## 🗂️ 1. Welche Artefakte werden erzeugt und wo genau stehen sie?
-
-| Artefakt-Dateiname | Was ist das? | Wo steht die Datei? *(Speicherort)* | Wer erzeugt sie? |
-| :--- | :--- | :--- | :---: |
-| **`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`** | Rechtssicheres B2B-Angebot (850,00 € netto) | [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | **Agent 4** *(Backoffice)* |
-| **`uebung_14_heidenhain_klartext_4achse.nc`** | Fertiger Maschinencode für Mikron HPM 600 HD (Heidenhain TNC 640) | [`uebung_14_heidenhain_klartext_4achse.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/uebung_14_heidenhain_klartext_4achse.nc) | **Agent 2** *(Post-Coder)* |
-| **`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`** | 5-Stufen-Sicherheitsprüfbericht *(Null-Kollisions-Garantie)* | [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | **Agent 3** *(NC-Safety)* |
-| **`06_EINRICHTEBLATT_SETUP_SHEET.md`** | Rüstdatenblatt für den Maschinenbediener vor Ort | [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/06_EINRICHTEBLATT_SETUP_SHEET.md) | **Agent 3** *(NC-Safety)* |
-| **`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`** | Revisionssichere Honorarrechnung (1.011,50 € brutto) | [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) | **Agent 4** *(Backoffice)* |
+> **Auftragsordner:** `01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/`  
+> **Kunde:** **Alps Precision AG (Schweiz)** (Urs Hodel (Produktionsleiter))  
+> **Maschine & Steuerung:** **Hermle C400 (Heidenhain TNC 640 Steuerung mit 4. Achse / A-Achse)** — Heidenhain TNC 640 (Klartext-Dialogprogrammierung .H mit M126 & CYCL DEF 200)  
+> **Honorar-Budget:** **850,00 € netto** (1.011,50 € brutto nach § 18 EStG *(Einkommensteuergesetz)*)
 
 ---
 
-## 🧭 2. Der 4-Stufen-Workflow im Überblick:
+## 1. Übersicht der 6 Pflicht-Artefakte & Abschlussdokumentation (Speicherorte & KI-Agenten)
 
-```
-                  1. KUNDENAUFTRAG.md (Liegt bereits im Ordner)
-                             │
-                             ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │ SCHRITT 1: ANGEBOT ERSTELLEN (Agent 4: Backoffice-Agent)              │
- │ Prompt 1 ausführen ──► Erzeugt: 02_ANGEBOT_DIPL_ING_BUJANOVSKI.md        │
- └───────────────────────────┬────────────────────────────────────────────┘
-                             │
-                             ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │ SCHRITT 2: NC-MASCHINENCODE GENERIEREN (Agent 2: Postprocessor-Coder)  │
- │ Prompt 2 ausführen ──► Erzeugt: uebung_14_heidenhain_klartext_4achse.nc
- └───────────────────────────┬────────────────────────────────────────────┘
-                             │
-                             ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │ SCHRITT 3: SICHERHEIT & EINRICHTEBLATT (Agent 3: NC-Safety-Agent)      │
- │ Prompt 3 ausführen ──► Erzeugt: 05_SICHERHEITS_CRASH_PRUEFBERICHT.md   │
- │                    ──► Erzeugt: 06_EINRICHTEBLATT_SETUP_SHEET.md       │
- └───────────────────────────┬────────────────────────────────────────────┘
-                             │
-                             ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │ SCHRITT 4: RECHNUNG STELLEN (Agent 4: Backoffice-Agent)                │
- │ Prompt 4 ausführen ──► Erzeugt: 07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md  │
- └────────────────────────────────────────────────────────────────────────┘
-```
+| Nr. | Pflicht-Artefakt *(Dateiname & Klick-Link)* | Zuständiger KI-Agent | Technischer & Kaufmännischer Zweck |
+| :---: | :--- | :--- | :--- |
+| **Eingang** | [`KUNDENAUFTRAG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/KUNDENAUFTRAG.md) | 🔍 **Agent 1: Lead-Scout-Agent** | Unverfälschtes Original-Kundenbriefing mit Geometrie-, Maschinen- und Budgetvorgaben |
+| **1** | [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | 💰 **Agent 4: Backoffice-Ingenieur-Agent** | Verbindliches B2B-Festpreisangebot *(Business-to-Business)* nach § 18 EStG inkl. Single-Block-Haftungsklausel |
+| **2** | [`uebung_14_heidenhain_klartext_4achse.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/uebung_14_heidenhain_klartext_4achse.nc) und Postprozessor [`uebung_14_heidenhain_klartext_4achse.cps`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/uebung_14_heidenhain_klartext_4achse.cps) | 💻 **Agent 2: Postprocessor-Coder-Agent** | Fertig generierter, absturzsicherer CNC-Maschinencode *(Computerized Numerical Control)* inkl. Z-MIN-Header |
+| **3** | [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | 🛡️ **Agent 3: NC-Safety- & Setup-Agent** | 5-Stufen-Sicherheits-Audit mit mathematischem Kollisionsnachweis ($Z_{\text{min}} = -12.000\,\text{mm}$ vs. Backe $-18.000\,\text{mm}$) |
+| **4** | [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/06_EINRICHTEBLATT_SETUP_SHEET.md) | 🛡️ **Agent 3: NC-Safety- & Setup-Agent** | Druckfertiges Rüstdatenblatt für den Maschinenbediener mit Nullpunkt (`Preset 1 (Drehachsen-Mittelpunkt A-Achse, X0 Planfläche links)`) und Auskraglängen |
+| **5** | [`uebung_14_heidenhain_klartext_4achse_simulation_video.mp4`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/uebung_14_heidenhain_klartext_4achse_simulation_video.mp4) | 🛡️ **Agent 3: NC-Safety- & Setup-Agent** | Gerendertes 3D-Simulationsvideo (MP4) zur visuellen Vorabkontrolle aller Werkzeugbahnen |
+| **6** | [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) | 💰 **Agent 4: Backoffice-Ingenieur-Agent** | Steuerkonforme Ingenieur-Honorarrechnung nach § 14 UStG *(Umsatzsteuergesetz)* & § 18 EStG für das Finanzamt Hanau |
+| **Abschluss** | [`08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md) | 🤖 **Gesamtsystem (Agent 1–4)** | Lückenlose Abschlussdokumentation aller Phasen, Berechnungen und Freigaben |
 
 ---
 
-## 💬 3. Die 4 fertigen Prompts & wie du jedes Artefakt testest:
+## 2. Das 4-Stufen-Workflow-Diagramm
 
-### 🟢 SCHRITT 1: Angebot erstellen (Agent 4)
-#### Prompt zum Kopieren in den Chat:
 ```text
-Starte bitte Agent 4 (Backoffice-Agent):
-Lies die Kundenanfrage in c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_14_heidenhain_4achs_teilapparat\KUNDENAUFTRAG.md.
-Erstelle direkt im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_14_heidenhain_4achs_teilapparat\ das formelle B2B-Angebot "02_ANGEBOT_DIPL_ING_BUJANOVSKI.md" für Urs Hodel (Produktionsleiter) (Alps Precision AG (Schweiz)) über 850,00 € netto. Verwende ausschließlich ingenieurmäßige Leistungsbeschreibungen nach § 18 EStG und binde die verbindliche Haftungsausschluss-Klausel für das Einfahren des ersten Werkstücks im Einzelsatz ein.
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ EINGANG: KUNDENAUFTRAG.md (Alps Precision AG (Schweiz))                        │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+                                       ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SCHRITT 1 (Agent 4 - Backoffice):                                            │
+│ Erstellt 02_ANGEBOT_DIPL_ING_BUJANOVSKI.md (850,00 € netto, § 18 EStG)       │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+                                       ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SCHRITT 2 (Agent 2 - Postprocessor-Coder):                                   │
+│ Entwickelt Postprozessor & generiert uebung_14_heidenhain_klartext_4achse.nc (Hermle C400 (Heidenhain TNC 640 Steuerung mit 4. Achse / A-Achse)) │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+                                       ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SCHRITT 3 (Agent 3 - NC-Safety & Setup):                                     │
+│ • Prüft Z-MIN (-12.000 mm) -> 05_SICHERHEITS_CRASH_PRUEFBERICHT.md          │
+│ • Erstellt Rüstblatt        -> 06_EINRICHTEBLATT_SETUP_SHEET.md              │
+│ • Rendert 3D-Video          -> uebung_14_heidenhain_klartext_4achse_simulation_video.mp4      │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+                                       ▼
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ SCHRITT 4 (Agent 4 - Backoffice):                                            │
+│ Stellt 07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md & 08_DOKUMENTATION...md         │
+└──────────────────────────────────────────────────────────────────────────────┘
 ```
-
-#### 🔍 Wie wird das Angebot getestet und geprüft?
-1. **Honorar:** Steht exakt der Festpreis von **850,00 € netto** drin?
-2. **Freiberufler-Status:** Enthält die Leistungsbeschreibung ingenieurmäßige Begriffe nach § 18 EStG *(keine Einstufung als Gewerbe durch das Finanzamt Hanau)*?
-3. **Haftungsausschluss:** Verpflichtung des Kunden zum Einfahren des ersten Werkstücks im Einzelsatz *(Single Block)* an der Mikron HPM 600 HD (Heidenhain TNC 640) enthalten?
 
 ---
 
-### 🔵 SCHRITT 2: NC-Maschinencode generieren (Agent 2)
-#### Prompt zum Kopieren in den Chat:
+## 3. Fertige, maßgeschneiderte Prompts zum direkten Kopieren
+
+### 💰 Schritt 1: Prompt für das Ingenieur-Angebot *(Agent 4)*
+
 ```text
-Starte bitte Agent 2 (Postprocessor-Coder-Agent):
-Generiere für die Mikron HPM 600 HD (Heidenhain TNC 640) im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_14_heidenhain_4achs_teilapparat\ das fertige NC-Programm "uebung_14_heidenhain_klartext_4achse.nc".
-Anforderung: Heidenhain Klartext-Ausgabe (TOOL CALL, L ... FMAX, M91) kombiniert mit Teilapparat-Positionierung (A-Achse) und Achsklemmung M10/M11.
-Stelle sicher, dass alle Werkzeugaufrufe, Sicherheitszeilen und Programmabschlüsse fehlerfrei implementiert sind.
+Starte Agent 4 (Backoffice-Ingenieur-Agent):
+Lies die Datei c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/KUNDENAUFTRAG.md.
+Erstelle für den Kunden Alps Precision AG (Schweiz) (Ansprechpartner: Urs Hodel (Produktionsleiter), Adresse: Industriestrasse 18, CH-9015 St. Gallen (Schweiz)) ein rechtssicheres Ingenieur-Festpreisangebot nach § 18 EStG über exakt 850,00 € netto (1.011,50 € brutto) für das Bauteil "4-Seiten-Steuerwelle auf Teilapparat (Indexierung A+0 / A+90 / A+180 / A+270)" auf der Maschine "Hermle C400 (Heidenhain TNC 640 Steuerung mit 4. Achse / A-Achse)" (Heidenhain TNC 640 (Klartext-Dialogprogrammierung .H mit M126 & CYCL DEF 200)).
+Integriere zwingend den Haftungsausschluss zum Einfahren im Einzelsatzbetrieb (Single Block) und speichere das Dokument unter:
+c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md
 ```
 
-#### 🔍 Wie wird der generierte NC-Code getestet und geprüft?
-1. **Syntax-Check:** Klartext-Syntax-Check: Steht vor jeder A-Achs-Drehung 'L Z+0 R0 FMAX M91' zur sicheren Freifahr-Höhe?
-2. **Simulation:** Lade den Code in [NCViewer.com](https://ncviewer.com) oder führe ihn lokal aus. Fahren alle Achsen kollisionsfrei ab?
+#### 🔍 Wie wird dieses Artefakt getestet und geprüft?
+1. **Honorar- und Adressabgleich:** Stimmen `850,00 € netto` (`1.011,50 € brutto`), Firmenname `Alps Precision AG (Schweiz)` und Maschine `Hermle C400 (Heidenhain TNC 640 Steuerung mit 4. Achse / A-Achse)` exakt mit `KUNDENAUFTRAG.md` überein?
+2. **Steuer-Check (§ 18 EStG):** Wird die Leistung als *„Ingenieurtechnische Entwicklung und mathematische Verifikation"* deklariert (keine gewerblichen Begriffe)?
+3. **Haftungsklausel:** Ist die Verpflichtung zum Einfahren im Einzelsatzbetrieb *(Single Block)* enthalten?
 
 ---
 
-### 🛡️ SCHRITT 3: Sicherheitsbericht & Einrichteblatt erstellen (Agent 3)
-#### Prompt zum Kopieren in den Chat:
+### 💻 Schritt 2: Prompt für Postprozessor & NC-Maschinencode *(Agent 2)*
+
 ```text
-Starte bitte Agent 3 (NC-Safety- & Setup-Agent):
-Führe für die Datei "uebung_14_heidenhain_klartext_4achse.nc" im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_14_heidenhain_4achs_teilapparat\ die 5-Stufen-Sicherheitsprüfung nach SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md durch.
-Erstelle im selben Ordner:
-1. "05_SICHERHEITS_CRASH_PRUEFBERICHT.md" mit Freigabestatus BESTANDEN.
-2. "06_EINRICHTEBLATT_SETUP_SHEET.md" als druckfertiges Rüstblatt für den Bediener an der Mikron HPM 600 HD (Heidenhain TNC 640) inklusive Werkzeugliste.
+Starte Agent 2 (Postprocessor-Coder-Agent):
+Entwickle und verifiziere auf Basis von c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/KUNDENAUFTRAG.md den CNC-Maschinencode für den Kunden Alps Precision AG (Schweiz):
+- Bauteil: 4-Seiten-Steuerwelle auf Teilapparat (Indexierung A+0 / A+90 / A+180 / A+270) (Edelstahl 1.4404 (X2CrNiMo17-12-2 / V4A))
+- Maschine & Steuerung: Hermle C400 (Heidenhain TNC 640 Steuerung mit 4. Achse / A-Achse) (Heidenhain TNC 640 (Klartext-Dialogprogrammierung .H mit M126 & CYCL DEF 200))
+- Werkstücknullpunkt: Preset 1 (Drehachsen-Mittelpunkt A-Achse, X0 Planfläche links)
+- Werkzeuge & Schnittdaten: T1 (VHM-Schaftfräser Ø 10,0 mm (Schlüsselflächen auf A+0° / A+90°), S=8000 U/min, F=1200 mm/min, Z_min=-5.000 mm); T2 (VHM-Spiralbohrer Ø 6,0 mm (CYCL DEF 200 Querbohrungen bis Z-12.0), S=3500 U/min, F=300 mm/min, Z_min=-12.000 mm)
+- Tiefste Zustellung: Z_min = -12.000 mm (Spannbacken-Oberkante bei Z = -18.000 mm)
+Speichere den fertigen, fehlerfreien Maschinencode unter:
+c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/uebung_14_heidenhain_klartext_4achse.nc
 ```
 
-#### 🔍 Wie werden Sicherheitsbericht und Einrichteblatt getestet und geprüft?
-1. **Sicherheitsbericht:** Prüfung der M-Funktionen: Wird die A-Achse vor Bearbeitungsbeginn mit M10 hydraulisch geklemmt und nach Schnitt mit M11 gelöst? Status muss **BESTANDEN (GRÜN)** sein.
-2. **Einrichteblatt:** Sind alle Werkzeuge mit Mindest-Auskraglängen $L_{min}$, Drehzahlen und Nullpunktlagen vollständig gelistet?
+#### 🔍 Wie wird dieses Artefakt getestet und geprüft?
+1. **Textprüfung Header & Sicherheitszeile:** Enthält `uebung_14_heidenhain_klartext_4achse.nc` den Z-MIN-Sicherheitsheader sowie den Safe-Start-Block (`G90 G21 G17 G40 G49 G80` bzw. Steuerungs-Äquivalent)?
+2. **Web-Backplot-Test:** Lade `uebung_14_heidenhain_klartext_4achse.nc` in [NCViewer.com](https://ncviewer.com/) oder den lokalen 3D-Simulator [`index.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/index.html) und prüfe die Werkzeugbahnen.
+3. **Lokaler Simulator-Lauf:** Prüfe den Postprozessor mit `node 02_Software_und_Tools/simuliere_post.js`.
 
 ---
 
-### 💰 SCHRITT 4: Rechnungsstellung nach § 18 EStG (Agent 4)
-#### Prompt zum Kopieren in den Chat:
+### 🛡️ Schritt 3: Prompt für Sicherheitsbericht, Einrichteblatt & 3D-Simulationsvideo *(Agent 3)*
+
 ```text
-Starte bitte Agent 4 (Backoffice-Agent):
-Der Auftrag im Ordner c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_14_heidenhain_4achs_teilapparat\ ist technisch erfolgreich abgeschlossen und freigegeben.
-Erstelle jetzt im selben Ordner die steuersichere Honorarrechnung "07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md" über 850,00 € netto (1.011,50 € brutto) an Alps Precision AG (Schweiz) mit allen Pflichtangaben nach § 14 UStG und freiberuflicher Leistungsabgrenzung für das Finanzamt Hanau.
+Starte Agent 3 (NC-Safety- & Setup-Agent):
+Führe für die Datei c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/uebung_14_heidenhain_klartext_4achse.nc des Kunden Alps Precision AG (Schweiz) (Hermle C400 (Heidenhain TNC 640 Steuerung mit 4. Achse / A-Achse)) das vollständige 5-Stufen-Sicherheitsaudit durch:
+1. Berechne die Kollisionsreserve zwischen Z_min = -12.000 mm und den Schraubstockbacken bei Z = -18.000 mm und speichere den Prüfbericht unter:
+   c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/05_SICHERHEITS_CRASH_PRUEFBERICHT.md
+2. Erstelle das druckfertige Werkstatteinrichteblatt (Setup Sheet) mit allen Werkzeugen (T1 (VHM-Schaftfräser Ø 10,0 mm (Schlüsselflächen auf A+0° / A+90°), S=8000 U/min, F=1200 mm/min, Z_min=-5.000 mm); T2 (VHM-Spiralbohrer Ø 6,0 mm (CYCL DEF 200 Querbohrungen bis Z-12.0), S=3500 U/min, F=300 mm/min, Z_min=-12.000 mm)) und Mindest-Auskraglängen unter:
+   c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/06_EINRICHTEBLATT_SETUP_SHEET.md
+3. Rendere das 3D-Maschinensimulationsvideo über render_simulation_video.py:
+   python 02_Software_und_Tools/scripts/render_simulation_video.py --gcode c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/uebung_14_heidenhain_klartext_4achse.nc --output c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/uebung_14_heidenhain_klartext_4achse_simulation_video.mp4
 ```
 
-#### 🔍 Wie wird die Rechnung getestet und geprüft?
-1. **Betrag:** Netto-Honorar 850,00 € netto zzgl. 19 % USt. = **1.011,50 € brutto**.
-2. **Steuerliche Pflichtangaben:** Eindeutige Rechnungsnummer, Leistungszeitraum, USt-Ausweis nach § 14 UStG und § 18 EStG Vermerk.
+#### 🔍 Wie wird dieses Artefakt getestet und geprüft?
+1. **Prüfbericht-Status:** Bescheinigt `05_SICHERHEITS_CRASH_PRUEFBERICHT.md` den Status **BESTANDEN (GRÜN)** und die exakte Reserve von `6.000 mm`?
+2. **Einrichteblatt-Check:** Stimmen alle Drehzahlen ($S$), Vorschübe ($F$) und Auskraglängen ($L_{\text{min}}$) in `06_EINRICHTEBLATT_SETUP_SHEET.md` zu 100 % mit `uebung_14_heidenhain_klartext_4achse.nc` überein?
+3. **🎬 3D-Simulationsvideo-Check:** Öffne `uebung_14_heidenhain_klartext_4achse_simulation_video.mp4` und kontrolliere visuell die sichere Anfahrhöhe, das Eintauchen im Vorschub und den Sicherheitsabstand zu den Schraubstockbacken.
 
 ---
 
-## 🛡️ 4. Abnahme-Kriterien (Checkliste für 100 % Erledigung)
-* [ ] [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) existiert und wurde geprüft.
-* [ ] [`uebung_14_heidenhain_klartext_4achse.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/uebung_14_heidenhain_klartext_4achse.nc) existiert und lief fehlerfrei im Simulator.
-* [ ] [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) bescheinigt Status **BESTANDEN (GRÜN)**.
-* [ ] [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/06_EINRICHTEBLATT_SETUP_SHEET.md) liegt vor.
-* [ ] [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) ist für das Finanzamt Hanau abgelegt.
+### 💰 Schritt 4: Prompt für Honorarrechnung & Abschlussdokumentation *(Agent 4)*
+
+```text
+Starte Agent 4 (Backoffice-Ingenieur-Agent):
+Erstelle nach erfolgreicher technischer Freigabe für den Kunden Alps Precision AG (Schweiz) (Industriestrasse 18, CH-9015 St. Gallen (Schweiz)) die steuerkonforme Honorarrechnung nach § 14 UStG und § 18 EStG über 850,00 € netto (zzgl. 19 % USt. = 1.011,50 € brutto) für das Finanzamt Hanau unter:
+c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md
+Erstelle zudem die vollständige Abschlussdokumentation aller Projektartefakte unter:
+c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md
+```
+
+#### 🔍 Wie wird dieses Artefakt getestet und geprüft?
+1. **Rechnungsprüfung (§ 14 UStG):** Sind Rechnungsnummer `RE-2026-14`, Leistungszeitraum, Nettobetrag (`850,00 €`), 19 % USt. und Bruttobetrag (`1.011,50 €`) korrekt ausgewiesen?
+2. **Finanzamt-Konformität (§ 18 EStG):** Ist die Position eindeutig als freiberufliche Ingenieurleistung formuliert?
+
+---
+
+## 4. Abnahme-Kriterien (Checkliste für 100 % Erledigung)
+
+- [x] **Artefakt 1:** [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) existiert und wurde geprüft.
+- [x] **Artefakt 2:** [`uebung_14_heidenhain_klartext_4achse.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/uebung_14_heidenhain_klartext_4achse.nc) existiert mit Z-MIN-Header und lief fehlerfrei im Simulator.
+- [x] **Artefakt 3:** [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) bescheinigt Status **BESTANDEN (GRÜN)**.
+- [x] **Artefakt 4:** [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/06_EINRICHTEBLATT_SETUP_SHEET.md) liegt druckfertig für die Werkstatt vor.
+- [x] **Artefakt 5:** [`uebung_14_heidenhain_klartext_4achse_simulation_video.mp4`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/uebung_14_heidenhain_klartext_4achse_simulation_video.mp4) wurde gerendert und zeigt kollisionsfreie Fräsbahnen.
+- [x] **Artefakt 6:** [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) ist für das Finanzamt Hanau abgelegt.
+- [x] **Abschluss-Doku:** [`08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_14_heidenhain_4achs_teilapparat/08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md) dokumentiert alle 5 Phasen lückenlos.

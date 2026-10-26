@@ -1,4 +1,15 @@
-# 📩 Kundenauftrag: Übung 1: Der erste eigene Text im G-Code (Entwickler-Infoblock in `onOpen()`)
+# 📩 Auftrag 01: ISO-9001 Entwickler-Header & Metadatenblock — Klausner Formenbau & Zerspanung
+
+**Auftraggeber:** Stefan Klausner (Geschäftsführer)  
+**Unternehmen:** Klausner Formenbau & Zerspanung  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
+**Zielmaschine:** **3-Achs-Bearbeitungszentrum Hermle C400 (ISO/Fanuc-Modus)**  
+**Vereinbartes Budget:** **350,00 € netto** (416,50 € brutto)  
+
+---
+
+## Auftrags-Briefing des Kunden:
+
 **Auftrags-Kategorie:** 1 (Qualitäts-Rückverfolgbarkeit für Werkzeugbau)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -34,8 +45,3 @@ So sieht eine typische Anfrage aus, wenn ein Fertigungsbetrieb Qualitätsproblem
 > **Stefan Klausner** – Klausner Formenbau GmbH, Stuttgart
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

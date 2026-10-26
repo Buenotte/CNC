@@ -7,7 +7,7 @@ import trimesh
 import json
 import os
 
-mesh = trimesh.load(r'c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\bauteil_1001.stl')
+mesh = trimesh.load(r'c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\bauteil_1001.stl')
 verts = mesh.vertices.flatten().tolist()
 faces = mesh.faces.flatten().tolist()
 
@@ -265,7 +265,7 @@ html_template = """<!DOCTYPE html>
 </body>
 </html>"""
 
-out_file = r'c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\flanschplatte_3d_viewer.html'
+out_file = r'c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\flanschplatte_3d_viewer.html'
 with open(out_file, 'w', encoding='utf-8') as f:
     f.write(html_template)
 print('Viewer mit 3D-Bemaszung aktualisiert:', out_file)

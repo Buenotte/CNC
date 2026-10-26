@@ -49,7 +49,7 @@ Wenn **Autodesk Fusion (CAD/CAM-Software)** oder das **Post Processor Utility (E
 
 ---
 
-## 3. Wichtiger Hinweis für offizielle Handbücher im Ordner `docs/`
-Legen Sie in diesem Ordner (`C:\Projekte\CNC\docs\`) folgende **PDF-Dateien (Portable Document Format)** ab, sobald Sie sie heruntergeladen haben:
+## 3. Wichtiger Hinweis für offizielle Handbücher im Ordner `03_Fachdokumentation_und_Wissen/docs/`
+Legen Sie in diesem Ordner (`C:\Projekte\CNC\03_Fachdokumentation_und_Wissen\docs\`) folgende **PDF-Dateien (Portable Document Format)** ab, sobald Sie sie heruntergeladen haben:
 1. **`autodesk_post_guide.pdf`**: Das offizielle *Autodesk Fusion Post Processor Training Guide* (`https://cam.autodesk.com/posts/posts/guides/Post%20Processor%20Training%20Guide.pdf`).
 2. **`maschinen_handbuch.pdf`**: Bei Kundenaufträgen das jeweilige Programmierhandbuch der Zielmaschine (z. B. *Haas Mill Operator's Manual*, *Siemens Sinumerik Programmierhandbuch* oder *Heidenhain TNC Klartext-Handbuch*).

@@ -1,4 +1,15 @@
-# 📩 Kundenauftrag: Übung 6: Sicherer Rückzug (`Safe Retract`) & Tisch am Programmende zur Tür fahren (`onClose`)
+# 📩 Auftrag 06: Sicherer Maschinen-Rückzug (G53 Z0 / Y0) & Arbeitsschutz — Süd-Zerspanung GmbH
+
+**Auftraggeber:** Andreas Eder (Betriebsleiter)  
+**Unternehmen:** Süd-Zerspanung GmbH  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
+**Zielmaschine:** **Haas VF-2 (Haas NGC Steuerung)**  
+**Vereinbartes Budget:** **420,00 € netto** (499,80 € brutto)  
+
+---
+
+## Auftrags-Briefing des Kunden:
+
 **Auftrags-Kategorie:** 6 (Arbeitssicherheit & Ergonomie am Programmende)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -35,8 +46,3 @@ So sieht eine typische Anfrage aus, wenn ein Betrieb die Sicherheit und Ergonomi
 > **Andreas Eder** – Zerspanungstechnik Süd GmbH, Augsburg
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

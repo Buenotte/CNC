@@ -70,6 +70,6 @@ def measure_cad_model(stl_path, density_al=2.70, density_steel=7.85):
     return report
 
 if __name__ == "__main__":
-    default_stl = r"c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\bauteil_1001.stl"
+    default_stl = r"c:\Projekte\CNC\01_Kundenauftraege\referenz_auftrag_flanschplatte\bauteil_1001.stl"
     path = sys.argv[1] if len(sys.argv) > 1 else default_stl
     measure_cad_model(path)

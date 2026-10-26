@@ -3,7 +3,7 @@
 > 💡 **Verknüpfung mit deinem Master-Fahrplan:**  
 > Dieses Dokument ist die praktische **Text- und Werkzeugkiste (Das WIE)** zu deinem Hauptleitfaden:  
 > 👉 **[CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md (Der Master-Fahrplan)](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md)**.  
-> * **Wann nutzen?** Sobald du in **Phase 4** bist (nach Unterschrift Zollcon & ELSTER-Meldung), öffnest du dieses Dokument, legst deine offizielle Geschäfts-E-Mail ujanovski.engineering@gmail.com an (Kapitel 7) und kopierst die fertigen Profiltexte aus Kapitel 3 direkt in die Freelancer-Portale!
+> * **Wann nutzen?** Sobald du in **Phase 4** bist (nach Unterschrift Zollcon & ELSTER-Meldung), öffnest du dieses Dokument, legst deine offizielle Geschäfts-E-Mail bujanovski.engineering@gmail.com an (Kapitel 7) und kopierst die fertigen Profiltexte aus Kapitel 3 direkt in die Freelancer-Portale!
 
 ---
 

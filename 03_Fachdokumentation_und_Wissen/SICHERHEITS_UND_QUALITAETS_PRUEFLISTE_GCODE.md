@@ -171,7 +171,7 @@ Als Postprozessor-Programmierer müssen Sie keine Werkzeugmaschinen einmessen. F
 ## Phase 2: Geometrie-, Werkzeug- und Kollisionsprüfung im 3D-Simulator
 
 Nachdem der Postprozessor die Maschinendatei erzeugt hat, laden Sie die `.nc`-Datei in den interaktiven Simulator:  
-👉 [**`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`**](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html)
+👉 [**`01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html`**](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html)
 
 Hier sehen Sie räumlich in 3D *(dreidimensional)*, was der Maschinencode Zeile für Zeile bewirken wird:
 
@@ -457,4 +457,4 @@ Halten Sie beim Einfahren immer eine Hand in der Nähe des **roten Not-Aus-Schla
    * **Sofortmaßnahme:** Spindel-Stop, Werkzeug und Schneidkanten prüfen.
 
 ---
-*Dokumenten-Referenz:* Zentrales Sicherheits- und Qualitätsprotokoll des CNC-Entwicklungsbereichs ([`C:\Projekte\CNC`](file:///c:/Projekte/CNC)). Verknüpft mit dem Praxis-Kundenauftrag ([`kundenauftrag_01_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md)) und dem Simulator ([`3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html)).
+*Dokumenten-Referenz:* Zentrales Sicherheits- und Qualitätsprotokoll des CNC-Entwicklungsbereichs ([`C:\Projekte\CNC`](file:///c:/Projekte/CNC)). Verknüpft mit dem Praxis-Kundenauftrag ([`01_Kundenauftraege/referenz_auftrag_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md)) und dem Simulator ([`3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html)).

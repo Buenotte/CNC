@@ -100,6 +100,10 @@ Wenn Sie lieber in der Konsole *(Terminal)* arbeiten oder die Erstellung vollaut
 
 #### Befehl 1: Schneller Demo-Lauf (1 Sekunde)
 ```powershell
+# Aus dem Hauptverzeichnis (C:\Projekte\CNC):
+node 02_Software_und_Tools/scripts/kunden_cps_generator.js --demo
+
+# Oder direkt aus dem Unterordner 02_Software_und_Tools:
 node scripts/kunden_cps_generator.js --demo
 ```
 * Erzeugt sofort eine Muster-`.cps`-Datei für eine Haas-Maschine.
@@ -128,7 +132,11 @@ Sie können die Kundenwünsche in einer kleinen Textdatei speichern, z. B. [`kun
 
 Befehl zum Erzeugen:
 ```powershell
-node scripts/kunden_cps_generator.js kundenauftrag_beispiel.json
+# Aus dem Hauptverzeichnis (C:\Projekte\CNC):
+node 02_Software_und_Tools/scripts/kunden_cps_generator.js 01_Kundenauftraege/kundenauftrag_beispiel.json
+
+# Oder direkt aus dem Unterordner 02_Software_und_Tools:
+node scripts/kunden_cps_generator.js ../01_Kundenauftraege/kundenauftrag_beispiel.json
 ```
 Das Programm liest die JSON-Datei ein, generiert [`uebungen/siemens_ventilblock_post.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/siemens_ventilblock_post.cps) und führt sofort die automatische Simulation aus!
 
@@ -158,9 +166,9 @@ Dieses Tool ist Ihr persönlicher **Produktivitäts-Turbo**:
 1. **Standard-Lohnprogrammierung (80 € bis 350 € pro Teil):**  
    Ein Kunde schickt Ihnen ein 3D-Modell und sagt: *„Ich habe eine Siemens 840D Maschine.“*  
    Sie öffnen [`kunden_cps_generator_web.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/kunden_cps_generator_web.html), klicken auf „Siemens“, laden die `.cps` herunter, lassen sie in Fusion über das 3D-Teil laufen und schicken dem Kunden in 15 Minuten das fertige CNC-Programm samt Einrichteblatt.
-2. **Verkauf maßgeschneiderter Postprozessoren (1.500 € bis 4.000 € einmalig):**  
+2. **Ingenieurtechnische Entwicklung & Adaption maßgeschneiderter Postprozessoren nach § 18 EStG *(Einkommensteuergesetz — Freie Berufe)* (1.500 € bis 4.000 € Ingenieurhonorar einmalig):**  
    Ein metallverarbeitender Betrieb kauft sich eine neue CNC-Fräsmaschine und findet bei Autodesk keinen Postprozessor, der den Maschinentisch zur Tür fährt und die Werkzeugtabelle sauber darstellt.  
-   Sie konfigurieren ihm über unser Tool die perfekte `.cps`-Datei, fügen seinen Firmennamen ein, testen sie – und stellen ihm die fertige Postprozessor-Datei in Rechnung!
+   Sie konfigurieren ihm über unser Tool die perfekte `.cps`-Datei, fügen seinen Firmennamen ein, testen sie – und stellen ihm die ingenieurtechnische Postprozessor-Entwicklung als freiberufliche Ingenieurleistung nach § 18 EStG in Rechnung!
 
 ---
 

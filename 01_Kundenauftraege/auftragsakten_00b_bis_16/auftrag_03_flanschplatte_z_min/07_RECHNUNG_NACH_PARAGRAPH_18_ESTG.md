@@ -1,56 +1,39 @@
-# 📄 Honorarrechnung (Agent 4: Backoffice-Agent)
-**Ingenieurbüro Dipl.-Ing. Bujanovski**  
-Softwaretechnik & CAD/CAM-Fertigungsprozesse  
-63526 Erlensee | E-Mail: kontakt@ingenieurbuero-bujanovski.de  
-Steuer-Nummer: [Wird nach Erteilung durch FA Hanau eingesetzt]  
-Zuständiges Finanzamt: **Finanzamt Hanau**  
-Rechtsform: **Freiberufliche Ingenieurtätigkeit nach § 18 Abs. 1 Nr. 1 EStG**
+# 🧾 Honorarrechnung nach § 18 EStG & § 14 UStG: Auftrag 03: Automatischer Z-MIN-Kollisionsschutz (Flanschplatte)
+
+**Absender *(Leistungserbringer)*:**  
+**Ingenieurbüro Dipl.-Ing. (FH) Alexander Bujanovski**  
+Beratender Ingenieur für CAD/CAM-Technik & Postprozessor-Entwicklung *(Freier Beruf nach § 18 Abs. 1 Nr. 1 EStG [Einkommensteuergesetz])*  
+zuständiges Finanzamt: **Finanzamt Hanau**  
+
+**Rechnungsempfänger *(Leistungsempfänger)*:**  
+**Schmidt Präzisionsteile GmbH & Co. KG**  
+z. Hd. Dipl.-Ing. (FH) Markus Weber (Leiter Fertigung & Zerspanungstechnik)  
+Industriestraße 14, 34123 Kassel  
 
 ---
 
-**Rechnungsempfänger:**  
-Schmidt Präzisionstechnik GmbH  
-z. Hd. Herrn Markus Weber (Fertigungsleitung)  
-Industriestraße 14  
-63450 Hanau  
-
-**Rechnungsdatum:** 22. Oktober 2026  
-**Rechnungs-Nummer:** RE-2026-03-001  
-**Leistungszeitraum:** 12. Oktober – 22. Oktober 2026  
-**Projekt / Auftrag:** Auftrag 03 – Flanschplatte Z-MIN & Kollisionsschutz (Haas VF-2)  
+* **Rechnungsnummer:** `RE-2026-03`
+* **Rechnungsdatum:** 26.10.2026
+* **Leistungszeitraum:** Oktober 2026 *(Abnahme erfolgt)*
+* **Referenz / Angebot:** [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_03_flanschplatte_z_min/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) (`ANG-2026-03`)
 
 ---
 
-### Aufstellung der erbrachten freiberuflichen Ingenieurleistungen:
+## 1. Abrechnung der Ingenieurleistungen *(§ 18 EStG — Katalogberuf Ingenieur)*
 
-| Pos. | Leistungsbeschreibung (gemäß § 18 EStG) | Menge | Einheit | Einzelpreis | Gesamtpreis |
-| :---: | :--- | :---: | :---: | :---: | :---: |
-| **1** | **Ingenieurtechnische CAD/CAM-Prozessauslegung & Bahnplanung**<br>Mathematische Kollisionsanalyse, Werkzeugbahn-Optimierung und Programmierung der 2,5D-Außenkontur und Zentrumstasche für Flanschplatte (OP10) auf 3-Achs-Bearbeitungszentrum Haas VF-2. | 1 | Pauschal | 280,00 € | 280,00 € |
-| **2** | **Entwicklung maschinenspezifischer Postprozessor-Routinen (.cps)**<br>Implementierung automatisierter Z-MIN-Tiefenprüfungs-Algorithmen und Spannmittel-Kollisionsschutzfunktionen in JavaScript. | 1 | Pauschal | 120,00 € | 120,00 € |
-| **3** | **Qualitätssicherung, 5-Stufen-G-Code-Audit & Rüstdaten-Dokumentation**<br>Durchführung des statischen Sicherheitsprüfprotokolls und Generierung des normgerechten Einrichtedatenblatts inklusive 3D-Simulationsabnahme. | 1 | Pauschal | 80,00 € | 80,00 € |
-
----
-
-### Rechnungsbetrag:
-
-| Rechnungszeile | Betrag |
-| :--- | :---: |
-| **Netto-Honorar:** | **480,00 €** |
-| Zzgl. 19 % Umsatzsteuer (USt.): | 91,20 € |
-| **Gesamt-Zahlbetrag (Brutto):** | **571,20 €** |
+| Pos. | Bezeichnung der freiberuflichen Ingenieurleistung | Menge | Einzelpreis (Netto) | Gesamtpreis (Netto) |
+| :---: | :--- | :---: | :---: | :---: |
+| **1** | **Ingenieurtechnische Prozessauslegung, Postprozessor-/NC-Entwicklung & statische Sicherheitsverifikation**<br>Bauteil: *Flanschplatte 80 x 50 x 12 mm (Serienauftrag 150 Stück, OP10)*<br>Zielsystem: *Haas VF-2 (Haas NextGen Control) (Haas NGC (Next Generation Control / Fanuc-ISO-Modus))*<br>Gelieferte Artefakte: `uebung_03_z_min_berechnung.nc`, Sicherheitsprüfbericht (`05_...`), Einrichteblatt (`06_...`) & 3D-Simulationsvideo (`uebung_03_simulation_video.mp4`) | 5,00 Std. | 96,00 € | **480,00 €** |
+| | **Zwischensumme (Netto-Honorar)** | | | **480,00 €** |
+| | **zzgl. 19,0 % Umsatzsteuer *(gemäß § 14 Abs. 4 UStG [Umsatzsteuergesetz])*** | | | **91,20 €** |
+| | **Rechnungsbetrag (Brutto)** | | | **571,20 €** |
 
 ---
 
-### Zahlungsbedingungen:
-Bitte überweisen Sie den Gesamtbetrag von **571,20 €** innerhalb von **14 Tagen ohne Abzug** auf das folgende Geschäftskonto:
+## 2. Steuerrechtlicher Hinweis & Zahlungsbedingungen
 
-* **Bank:** [Geschäftskonto]  
-* **IBAN:** [Wird eingesetzt]  
-* **BIC:** [Wird eingesetzt]  
-* **Verwendungszweck:** RE-2026-03-001 / Schmidt Präzisionstechnik  
+* **Steuerliche Einordnung:** Es handelt sich ausschließlich um eine geistig-schöpferische **Ingenieurdienstleistung nach § 18 Abs. 1 Nr. 1 EStG** *(technische Software- und Prozessentwicklung ohne gewerbliche Fertigung oder Lizenzhandel)*.
+* **Zahlungsziel:** Bitte überweisen Sie den Bruttobetrag von **571,20 €** innerhalb von **14 Tagen** unter Angabe der Rechnungsnummer `RE-2026-03` auf das bekannte Geschäftskonto.
 
-Vielen Dank für die angenehme Zusammenarbeit!
-
-Mit freundlichen Grüßen  
-**Dipl.-Ing. Bujanovski**  
-*(Freiberuflicher Ingenieur)*
+Vielen Dank für die angenehme Zusammenarbeit!  
+**Dipl.-Ing. (FH) Alexander Bujanovski**

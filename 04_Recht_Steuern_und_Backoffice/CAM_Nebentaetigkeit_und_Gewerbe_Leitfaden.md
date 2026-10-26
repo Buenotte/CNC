@@ -15,7 +15,7 @@ Da dieses Dokument im Laufe unserer Detailanalyse stetig gewachsen ist *(mit dei
 | **SCHRITT 2**<br>*(Vor dem 1. Euro Umsatz)* | **Genehmigung bei deinem Arbeitgeber (Zollcon GmbH, Fürth) einholen:**<br>• Nutze die **speziell auf dein Ingenieurstudium abgestimmte Vorlage aus Abschnitt 9.4** *(darin ist das Wort „Softwareentwicklung“ für die Nebentätigkeit bewusst weggelassen, damit es 0 % Überschneidung mit der Zoll-Software gibt!)*.<br>• Kurz mündlich ankündigen, unterschreiben lassen und abheften. | • **Abschnitt 8.1 & 8.3** *(Analyse Zollcon GmbH)*<br>• **Abschnitt 9.3 & 9.4** *(Perfekter Antrag für Zollcon GmbH)* |
 | **SCHRITT 3**<br>*(Direkt nach Zollcon-Okay)* | **Steuerliche Anmeldung als „Freiberuflicher Ingenieur“ beim Finanzamt Hanau:**<br>• **WICHTIG:** Da dein Moskauer Diplom in Deutschland bereits offiziell anerkannt ist, gilt **Abschnitt 11** *(du musst **KEIN Gewerbe** im Rathaus Erlensee anmelden!)*.<br>• Du meldest dich nur online über **ELSTER** beim **Finanzamt Hanau** als **Freiberuflicher Ingenieur nach § 18 EStG** an und hängst deine Diplom-Anerkennung als PDF an. | • **Abschnitt 11** *(Gamechanger: Anerkanntes Diplom = Freiberufler ohne Gewerbeamt & ohne Gewerbesteuer!)*<br>• **Abschnitt 5** *(Umsatzsteuer: Kleinunternehmer vs. 19 % Regelbesteuerung)* |
 | **SCHRITT 4**<br>*(Parallel zur Steuernummer)* | **Absicherung gegen Maschinencrashs & Separates Bankkonto:**<br>• Separates Giro-/Unterkonto für deine Einnahmen/Ausgaben anlegen.<br>• In jedem Angebot und Einrichteblatt das **Sicherheits- und Einfahrprotokoll** *(Pflicht zur Endkontrolle durch den Maschinenbediener)* verwenden + Berufshaftpflicht prüfen. | • **Abschnitt 6.1 & 6.2** *(Lizenzen & Haftungsschutz)*<br>• **[Vorlage Einrichteblatt](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/Portfolio/Vorlage_Einrichteblatt_und_Werkzeugliste.md)** |
-| **SCHRITT 4.5**<br>*(Fundament vor jeder Registrierung!)* | **Offizielle Geschäfts-E-Mail `bujanovski.engineering@gmail.com` anlegen:**<br>• **WICHTIGSTE REGEL:** Ohne diese E-Mail-Adresse darfst du KEIN EINZIGES Profil anlegen!<br>• Du brauchst diese Mailadresse ZWINGEND zur Registrierung auf **ELSTER**, **Upwork**, **Fiverr**, **Malt**, **Freelancermap**, **GitHub** und für dein Bankkonto.<br>• Niemals deine private Mailadresse oder die Zollcon-Firmenmail verwenden! | • **Abschnitt 13.4** *(E-Mail-Setup & Google Drive)*<br>• 👉 **[PROFIL-LEITFADEN (Kapitel 7)](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md#L328)** |
+| **SCHRITT 4.5**<br>*(Fundament vor jeder Registrierung!)* | **Offizielle Geschäfts-E-Mail `bujanovski.engineering@gmail.com` anlegen:**<br>• **WICHTIGSTE REGEL:** Ohne diese E-Mail-Adresse darfst du KEIN EINZIGES Profil anlegen!<br>• Du brauchst diese Mailadresse ZWINGEND zur Registrierung auf **ELSTER**, **Upwork**, **Fiverr**, **Malt**, **Freelancermap**, **GitHub** und für dein Bankkonto.<br>• Niemals deine private Mailadresse oder die Zollcon-Firmenmail verwenden! | • **Abschnitt 13.4** *(E-Mail-Setup & Google Drive)*<br>• 👉 **[PROFIL-LEITFADEN (Kapitel 7)](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md#L351)** |
 | **SCHRITT 5**<br>*(Start der 100 % Online-Akquise)* | **Profile für 100 % Online-/Remote-Aufträge freischalten (mit bujanovski.engineering@gmail.com):**<br>• **Fiverr.com & Upwork.com:** Die 2 fertigen Gig-Vorlagen *(Postprozessor & 3–5-Achs-CAM)* online stellen.<br>• **Malt.de & Freelancermap.de:** Remote-Profil mit den 20 Schlagworten und deinem Portfolio-PDF anlegen.<br>• **LinkedIn (optional):** Das „Kombi-Profil“ (`Software Engineer @ Zollcon GmbH | Dipl.-Ing. • CAD/CAM...`) einrichten. | • **Abschnitt 16** *(100 % Online-Arbeitsmodell)*<br>• **Abschnitt 17.1 & 17.2** *(Upwork, Fiverr, Malt, Freelancermap)*<br>• **Abschnitt 18** *(LinkedIn-Kombi-Profil)* |
 | **SCHRITT 6**<br>*(Lukrative Daueraufträge)* | **Deutsche CAM-Systemhäuser für Remote-Postprozessor-Aufträge anschreiben:**<br>• Schreibe 5 bis 10 Systemhäuser aus der Tabelle in **Abschnitt 17.3** *(z. B. JANUS Engineering, WDS GmbH Weiterstadt, Mensch und Maschine, SolidCAM)* mit der fertigen E-Mail-Vorlage an. | • **Abschnitt 14 (Kanal 1)**<br>• **Abschnitt 17.3** *(Konkrete Firmenliste & Anschreiben an Systemhäuser)* |
 | **SCHRITT 7**<br>*(Im laufenden Betrieb)* | **80 % der Arbeit durch deine 4 KI-Agenten erledigen lassen:**<br>• Nutze die 4 vorbereiteten KI-Agenten für Kundensuche (`Lead-Scout`), Postprozessor-Programmierung (`Postprocessor-Coder`), G-Code-Sicherheitscheck & Einrichteblatt (`NC-Safety & Setup`) sowie Angebote/Rechnungen nach § 18 EStG (`Backoffice-Agent`). | • **Abschnitt 15** *(Übersicht KI-Agenten)*<br>• **[KI_Agenten_System_und_Bauplan.md](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/KI_Agenten_System_und_Bauplan.md)** |
@@ -894,7 +894,7 @@ So sieht jeder Kunde schon in der Betreffzeile seines Postfachs deinen akademisc
 ### 13.4 Verknüpfung mit deinem E-Mail- & Cloud-Setup (Google Drive & professioneller Absender)
 
 Für den reibungslosen Datenaustausch mit Kunden über GitHub, Cloud-Speicher und ein separates Ingenieur-Postfach beachte die konkreten Praxisschritte in:
-👉 **[PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md (Kapitel 7: Digitale Kommunikations-Zentrale)](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md#L329)**  
+👉 **[PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md (Kapitel 7: Digitale Kommunikations-Zentrale)](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/PROFIL_POSITIONIERUNG_UND_KUNDENGESPRAECHE_LEITFADEN.md#L351)**  
 Dort findest du:
 * Die empfohlene Namensgebung für dein separates Google-Konto *(z. B. `bujanovski.engineering@gmail.com`)*.
 * Die Einrichtung der 15 GB kostenlosen Google Drive Cloud für große 3D-STEP- und MP4-Simulationsdateien.
@@ -1467,7 +1467,7 @@ Hier ist die detaillierte, beruhigende Antwort aufgeschlüsselt nach Gesetzgebun
 In Deutschland gibt es für eine **freiberufliche oder selbstständige Nebentätigkeit *(selbstständige Erwerbstätigkeit neben einer Festanstellung)*** **KEINE gesetzliche Höchstgrenze für deinen Verdienst**!
 
 * **Häufiges Missverständnis (Verwechslung mit dem Minijob):**
-  Viele verwechseln eine selbstständige Freiberuflichkeit mit einem klassischen **Minijob *(geringfügige Beschäftigung im Angestelltenverhältnis nach § 8 SGB IV)***. Beim Minijob gibt es tatsächlich eine starre Grenze von aktuell **538 € pro Monat** *(bzw. 6.456 € im Jahr)*.
+  Viele verwechseln eine selbstständige Freiberuflichkeit mit einem klassischen **Minijob *(geringfügige Beschäftigung im Angestelltenverhältnis nach § 8 SGB IV)***. Beim Minijob gibt es tatsächlich eine starre Grenze von aktuell **556 € bzw. 603 € pro Monat (Stand 2025/2026, zuvor 538 €)** *(bzw. 6.672 € / 7.236 € im Jahr)*.
 * **Für dich als Freiberuflicher Ingenieur gilt das NICHT:**
   Als freiberuflicher Ingenieur nach § 18 EStG darfst du so viel verdienen, wie du möchtest – egal ob **3.000 €**, **15.000 €**, **40.000 €** oder **100.000 € im Jahr**. Es gibt kein Gesetz, das dir verbietet, durch fleißige Arbeit hohe Honorare einzunehmen!
 
@@ -1508,7 +1508,7 @@ Die Krankenkasse prüft bei Selbstständigen im Nebenerwerb den sogenannten **so
   * Arbeitszeit Freiberuflichkeit: ca. 6–8 Std./Woche (hoher Stundensatz durch hochqualifizierte Ingenieurtätigkeit!).
   * Keine Mitarbeiter.
   * Da die 40 Wochenstunden bei der Zollcon GmbH zeitlich eindeutig dominieren, stuft dich die Krankenkasse weiterhin als **nebenberuflich selbstständig** ein – deine Krankenkassenbeiträge werden weiterhin wie gewohnt rein über das Gehalt der Zollcon GmbH abgewickelt!
-* *(Hinweis: Falls du als Software Engineer bei der Zollcon GmbH mit deinem Gehalt ohnehin bereits an oder über der **Beitragsbemessungsgrenze der GKV *(gesetzliche Obergrenze des beitragspflichtigen Einkommens, 2026 bei ca. 5.175 € / Monat bzw. 62.100 € im Jahr)*** liegst, zahlst du ohnehin bereits den gesetzlichen Höchstbeitrag – weitere Nebeneinkünfte können die Krankenkassenbeiträge dann rein rechnerisch gar nicht mehr erhöhen!)*
+* *(Hinweis: Falls du als Software Engineer bei der Zollcon GmbH mit deinem Gehalt ohnehin bereits an oder über der **Beitragsbemessungsgrenze der GKV *(gesetzliche Obergrenze des beitragspflichtigen Einkommens, 2025 bei 5.512,50 € / Monat bzw. 66.150 € im Jahr; 2026 bei 5.812,50 € / Monat bzw. 69.750 € im Jahr [zuvor 5.175 € / Monat])*** liegst, zahlst du ohnehin bereits den gesetzlichen Höchstbeitrag – weitere Nebeneinkünfte können die Krankenkassenbeiträge dann rein rechnerisch gar nicht mehr erhöhen!)*
 
 ---
 
@@ -1619,7 +1619,7 @@ Hier ist die detaillierte Prüfung dieses konkreten Szenarios für deinen Fall:
 Hier greift die Unterscheidung zwischen Zeit und Einkommen:
 * **Zeitliches Kriterium:** Mit 10 Stunden pro Woche bleibst du weit unter der 20-Stunden-Grenze der Krankenkasse.
 * **Wirtschaftliches Kriterium:** Da 120.000 € Jahresumsatz höher sind als ein durchschnittliches Angestelltengehalt, könnte die Krankenkasse prüfen, ob die Selbstständigkeit deinen wirtschaftlichen Schwerpunkt darstellt.
-* **Das Tolle daran – Die Beitragsbemessungsgrenze *(BBG – gesetzliche Obergrenze des beitragspflichtigen Einkommens in der GKV, 2026 bei ca. 5.175 € pro Monat)***:
+* **Das Tolle daran – Die Beitragsbemessungsgrenze *(BBG – gesetzliche Obergrenze des beitragspflichtigen Einkommens in der GKV, 2025 bei 5.512,50 € pro Monat bzw. 2026 bei 5.812,50 € pro Monat [zuvor 5.175 €])***:
   Selbst im „schlimmsten“ Fall, dass dich die Krankenkasse als hauptberuflich selbstständig einstufen würde, zahlst du **niemals mehr als den gesetzlichen Höchstbeitrag**. Dieser Höchstbeitrag liegt bei ca. **1.050 € bis 1.100 € pro Monat** *(inklusive Pflegeversicherung)*. Bei **10.000 € monatlichen Einnahmen** sind 1.050 € Krankenkasse gerade einmal ca. 10 % deines Einkommens – und als Software Engineer bei Zollcon hast du diese Grenze durch dein Festgehalt oft ohnehin schon fast erreicht!
 
 #### 4. Was sagt das Finanzamt Hanau und was bleibt NETTO bar übrig?
@@ -1800,7 +1800,7 @@ Dein Hauptjob als Software Engineer bei der **Zollcon GmbH** ist im Moment dein 
 
 #### Phase 2: Kurz vor deinem 1. bezahlten Auftrag (Genehmigung einholen)
 * **Was du mit der Zollcon GmbH machst:** **Die Nebentätigkeitsgenehmigung schriftlich einholen.**
-* Du druckst den speziell auf deinen Hintergrund abgestimmten Brief aus **[Abschnitt 9.4](file:///C:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md#L421-L479)** aus.
+* Du druckst den speziell auf deinen Hintergrund abgestimmten Brief aus **[Abschnitt 9.4](file:///C:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md#L473-L534)** aus.
 * Du sagst deinem Chef kurz mündlich: *„Ich habe ja früher in Moskau Ingenieurwesen studiert. Privat reizt es mich, am Wochenende für ein paar Stunden mechanische Frästeile und Postprozessoren für Werkzeugmaschinen zu berechnen. Da das 0 % Konkurrenz zu unserer Zoll-Software ist, habe ich den Standard-Zettel für die Personalakte vorbereitet.“*
 * Dein Chef setzt unten Datum, Stempel und Unterschrift drauf – fertig. Danach bist du arbeitsrechtlich zu 100 % abgesichert!
 
@@ -1856,7 +1856,7 @@ Sollte dein Ingenieurbüro so durch die Decke gehen, dass du deinen Hauptjob irg
 
 ### 23.4 Fazit in 3 Sätzen: Was du JETZT mit dem Hauptjob tust
 1. Du **behältst deinen Hauptjob bei der Zollcon GmbH ganz normal**, machst dort weiterhin gute Arbeit und freust dich über das sichere Gehalt und die bezahlte Krankenversicherung.
-2. Du trainierst in Ruhe deine CAM-Kenntnisse zu Hause in Erlensee am PC durch und holst dir vor deinem ersten Kundenauftrag die Unterschrift auf dem fertigen Brief aus **[Abschnitt 9.4](file:///C:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md#L421-L479)**.
+2. Du trainierst in Ruhe deine CAM-Kenntnisse zu Hause in Erlensee am PC durch und holst dir vor deinem ersten Kundenauftrag die Unterschrift auf dem fertigen Brief aus **[Abschnitt 9.4](file:///C:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md#L473-L534)**.
 3. Du startest deine freiberufliche Nebentätigkeit entspannt am Wochenende mit 5 bis 8 Stunden – und entscheidest erst in 1 bis 2 Jahren ganz in Ruhe, ob du auf eine 4-Tage-Woche reduzierst oder alles genau so lässt!
 
 ---

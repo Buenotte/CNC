@@ -107,3 +107,58 @@ Um Inkonsistenzen zwischen Kundenanfrage, Workflow-Prompts und Handbuchkapiteln 
 6. **Reines Kundenbriefing in `KUNDENAUFTRAG.md` (Keine internen Agenten-Hinweise):**
    * In der Datei `KUNDENAUFTRAG.md` darf **AUSSCHLIESSLICH der reale Kundenauftrag** *(die E-Mail bzw. das Original-Briefing des Kunden mit Absender, Empfänger, Bauteildaten, Maschinentyp, Spannsituation und Honorar)* stehen.
    * Interne Bearbeitungshinweise *(wie z. B. „Zuständiger Agent für Angebot: Agent 4“, „Agent 2 für Umsetzung“)*, Lösungstipps oder Lehrbuchtexte haben in `KUNDENAUFTRAG.md` **nichts verloren**. Alle agentenspezifischen Anweisungen und Arbeitsabläufe gehören ausnahmslos in die Datei `WORKFLOW_UND_PROMPTS.md`.
+
+
+---
+
+## 4. Pflicht zur strukturierten Abschluss-Dokumentation aller generierten Artefakte (`08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md`)
+
+Sobald die KI-Agenten *(Agent 1, Agent 2, Agent 3 und Agent 4)* alle für einen Kundenauftrag erforderlichen Artefakte generiert haben, muss zwingend eine zentrale, detaillierte Abschluss-Dokumentation mit dem festen Dateinamen **`08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md`** direkt im jeweiligen Auftragsordner unter `01_Kundenauftraege/auftragsakten_.../` erstellt werden.
+
+### Verbindlicher Aufbau und Pflichtinhalte dieser Dokumentation:
+
+1. **Auftrags-Stammdaten & Metadaten:**
+   * Kunde *(Unternehmen, Ansprechpartner, E-Mail)*
+   * Bauteilbezeichnung und 3D-CAD-Dateiname *(`.step` / `.stl`)*
+   * Maschinentyp und CNC-Steuerung *(z. B. Haas VF-2 mit NextGen Control)*
+   * Kaufmännisches Budget und Zahlungskonditionen
+   * Freiberuflicher Ingenieurstatus gemäß § 18 EStG *(Einkommensteuergesetz – reine Prozessauslegung und Software-Bahnplanung, keine gewerbliche Zerspanung)*.
+
+2. **Vollständige Artefakt-Matrix (Tabelle aller generierten Dateien):**
+   Eine lückenlose Übersichtstabelle aller erstellten Dateien mit:
+   * Dateiname als klickbarer Link im Format `file:///...`
+   * Zuständiger KI-Agent *(Agent 1, 2, 3 oder 4)*
+   * Dateityp und Speicherort
+   * Zweck und technischer Inhalt des Artefakts
+
+3. **Detaillierte Chronologie der Agenten-Arbeiten (Wer hat was und wie gemacht?):**
+   * **Phase 1: Agent 1 (Kundenbriefing & Anforderungsanalyse):**
+     Erfassung der geometrischen Maße, Toleranzen, Rohteilaufmaße und Prüfung der Spannsituation im Maschinenschraubstock.
+   * **Phase 2: Agent 4 (Vertragsgestaltung & B2B-Angebot):**
+     Kalkulation des Festpreises, Formulierung der Leistungsbeschreibung für die Softwareentwicklung und Einbau der Haftungsausschluss-Klausel *(Verpflichtung des Kunden zum Einfahren des ersten Bauteils im Einzelsatz / Single Block)*.
+   * **Phase 3: Agent 2 (CAM-Engineering & Postprozessor-Entwicklung):**
+     Detaillierte Beschreibung der JavaScript-Programmierung in `.cps` *(Funktionen `onOpen()`, `onSection()`, `onLinear()`, `onCircular()`, `onCyclePoint()`, `onClose()`)*, Konsistenzprüfung der Werkzeugliste *(Tool Table)* und Generierung des NC-Maschinencodes (`.nc`).
+   * **Phase 4: Agent 3 (Qualitätssicherung, Crash-Schutz & Werkstattdokumentation):**
+     5-Stufen-Sicherheitsüberprüfung, rechnerischer Nachweis des Z-MIN-Kollisionsabstands zu den Schraubstockbacken *(Tunnel-Prinzip)*, Erstellung des Werkstatt-Einrichteblatts (`Setup Sheet`) und Rendering bzw. Bereitstellung des 3D-Simulationsvideos.
+   * **Phase 5: Agent 4 (Kaufmännische Abrechnung):**
+     Erstellung der steuerkonformen Honorarrechnung nach § 14 UStG *(Umsatzsteuergesetz)* und § 18 EStG ohne Gewerbesteuer.
+
+4. **Mathematischer und technischer Verifikationsnachweis:**
+   * Exakter Z-MIN-Abgleich *(Schnitttiefe vs. Spannbackenhöhe)*
+   * Nullpunkt-Verifikation (`G54` Lage)
+   * Schnittdaten-Plausibilität *(Drehzahl $S$, Vorschub $F$, Schnittgeschwindigkeit $v_c$)*
+
+5. **Rechtliche Freigabeerklärung:**
+   * Verbindliche Bestätigung, dass die gelieferte Leistung eine reine geistig-schöpferische Ingenieurdienstleistung *(Prozessauslegung, CAM-Bahnplanung, Software-Postprozessor)* darstellt.
+
+---
+
+## 5. Verbindliche Pflicht: Transparente Nennung des aktiven KI-Agenten
+
+Der Assistent muss bei **JEDER Antwort, Prüfung, Code-Generierung und jedem Arbeitsschritt stets explizit und unübersehbar zu Beginn deklarieren, welcher KI-Agent gerade agiert**:
+* `🔍 [Aktivierter Agent: Agent 1 – Lead-Scout-Agent]` *(Kundenbriefing & Anforderungsanalyse)*
+* `💻 [Aktivierter Agent: Agent 2 – Postprocessor-Coder-Agent]` *(JavaScript .cps Postprozessor-Programmierung)*
+* `🛡️ [Aktivierter Agent: Agent 3 – NC-Safety- & Setup-Agent]` *(G-Code-Sicherheitsprüfung, Kollisions-Check & Einrichteblatt)*
+* `💰 [Aktivierter Agent: Agent 4 – Backoffice-Ingenieur-Agent]` *(Angebote, Rechnungen nach § 18 EStG & kaufmännische Dokumente)*
+
+Dies stellt sicher, dass der Benutzer jederzeit lückenlos nachvollziehen kann, welcher spezialisierte Agent welche Aufgabe ausführt.

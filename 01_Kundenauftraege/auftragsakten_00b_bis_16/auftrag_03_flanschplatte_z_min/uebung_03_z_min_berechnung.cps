@@ -35,6 +35,8 @@ var feedFormat = createFormat({decimals:0});
 var xOutput = createVariable({prefix:"X"}, xyzFormat);
 var yOutput = createVariable({prefix:"Y"}, xyzFormat);
 var zOutput = createVariable({prefix:"Z"}, xyzFormat);
+var iOutput = createReferenceVariable({prefix:"I"}, xyzFormat);
+var jOutput = createReferenceVariable({prefix:"J"}, xyzFormat);
 var feedOutput = createVariable({prefix:"F"}, feedFormat);
 var permittedCommentChars = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,=_-/:+*%@|";
 
@@ -102,14 +104,19 @@ function onOpen() {
   // G21 = Metrisches Einheitensystem in Millimeter (mm)
   // G17 = Arbeitsebene XY (Standard für Fräsen von oben)
   // G40 = Fräserradiuskorrektur ABWÄHLEN (schaltet Mittenbahnverschiebung aus)
+  // G49 = Werkzeuglängenkorrektur ABWÄHLEN (verhindert unkontrollierte Rest-Offsets)
   // G80 = Bohrzyklen ABBRECHEN (löscht aktive Zyklen wie G81/G83)
-  writeWords("G90", "G21", "G17", "G40", "G80");
+  writeWords("G90", "G21", "G17", "G40", "G49", "G80");
 }
 
 // 6. onSection() - WIRD VOR JEDER EINZELNEN OPERATION AUSGEFÜHRT
 function onSection() {
   var tool = currentSection.getTool(); // Werkzeug dieser Operation
   var sectionZ = currentSection.getGlobalZRange(); // Z-Bereich NUR für diesen speziellen Schritt
+  xOutput.reset();
+  yOutput.reset();
+  zOutput.reset();
+  feedOutput.reset();
 
   writeComment("--------------------------------------------------");
   writeComment("START OPERATION: " + (currentSection.hasParameter("operation-comment") ? currentSection.getParameter("operation-comment") : "FRAESUNG"));
@@ -118,7 +125,9 @@ function onSection() {
 
   // T.. = Werkzeugplatz im Magazinkarussell
   // M06 = Automatischer Werkzeugwechsel durch Doppelgreifer
-  writeWords("T" + tool.number, "M06");
+  var tStr = "T" + ("0" + tool.number).slice(-2);
+  var hStr = "H" + ("0" + tool.number).slice(-2);
+  writeWords(tStr, "M06");
 
   // G54 = 1. Werkstück-Koordinatensystem (Nullpunkt an Bauteilecke)
   writeWords("G54");
@@ -126,6 +135,10 @@ function onSection() {
   // S.. = Spindeldrehzahl in Umdrehungen pro Minute (U/min)
   // M03 = Spindelantrieb im Uhrzeigersinn (Rechtslauf) EIN
   writeWords("S" + tool.spindleRPM, "M03");
+
+  // G43 = Werkzeuglängenkompensation positiv aktivieren (H-Register passend zum Werkzeug)
+  // M08 = Kühlschmierstoff (KSS / Flutkühlung) EIN
+  writeWords("G43", hStr, "Z15.000", "M08");
 }
 
 // 6b. FAHRBEWEGUNGEN (DAMIT DER 3D-SIMULATOR DIE BAHNEN ZEICHNEN KANN)
@@ -147,11 +160,29 @@ function onLinear(x, y, z, feed) {
 }
 
 function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
-  writeWords(clockwise ? "G02" : "G03", xOutput.format(x), yOutput.format(y), zOutput.format(z), feedOutput.format(feed));
+  var start = getCurrentPosition();
+  xOutput.reset();
+  yOutput.reset();
+  writeWords(
+    clockwise ? "G02" : "G03",
+    xOutput.format(x),
+    yOutput.format(y),
+    zOutput.format(z),
+    iOutput.format(cx - start.x),
+    jOutput.format(cy - start.y),
+    feedOutput.format(feed)
+  );
 }
 
 function onCyclePoint(x, y, z) {
+  xOutput.reset();
+  yOutput.reset();
+  zOutput.reset();
   writeWords("G83", xOutput.format(x), yOutput.format(y), zOutput.format(z), "R2.000", "Q3.000", "F300");
+}
+
+function onCycleEnd() {
+  writeWords("G80");
 }
 
 // 7. onClose() - PROGRAMMENDE
@@ -166,6 +197,9 @@ function onClose() {
   // G00 = Eilgang (Schnellgang ohne Spanabtrag)
   // Z0.0 = Spindel senkrecht nach oben auf Maschinenreferenz fahren
   writeWords("G53", "G00", "Z0.0");
+
+  // Y0.0 = Maschinentisch vor zur Kabinentür fahren für ergonomischen Bauteilwechsel
+  writeWords("G53", "G00", "Y0.0");
 
   // M30 = Hauptprogramm-Ende, Reset und Rücklauf zum Programmanfang
   writeWords("M30");

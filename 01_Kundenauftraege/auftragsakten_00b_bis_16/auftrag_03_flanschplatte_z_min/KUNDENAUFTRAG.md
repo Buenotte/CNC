@@ -1,4 +1,4 @@
-# 📩 Kundenauftrag: Schmidt Präzisionsteile GmbH & Co. KG (Übung 3: Z-MIN Tiefenberechnung)
+# 📩 Auftrag 03: Automatischer Z-MIN-Kollisionsschutz (Flanschplatte) — Schmidt Präzisionsteile GmbH & Co. KG
 
 **Auftraggeber:** Dipl.-Ing. (FH) Markus Weber *(Leiter Fertigung & Zerspanungstechnik)* `<m.weber@schmidt-praezision.de>`  
 **Unternehmen:** Schmidt Präzisionsteile GmbH & Co. KG, Industriestraße 14, 34123 Kassel  
@@ -56,4 +56,4 @@
 > Mit freundlichen Grüßen aus Kassel  
 > **Dipl.-Ing. (FH) Markus Weber**  
 > *Leiter Fertigung & Zerspanungstechnik* – Schmidt Präzisionsteile GmbH & Co. KG  
-> Industriestraße 14, 34123 Kassel  
+> Industriestraße 14, 34123 Kassel

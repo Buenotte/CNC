@@ -47,7 +47,7 @@ Viele Einsteiger befürchten, man müsse jahrelang eine Werkzeugmacherlehre abso
 
 Im modernen Maschinenbau gibt es zwar tausende Sonderwerkzeuge, aber **95 % aller Bauteile** werden mit nur **5 geometrischen Grundtypen** gefertigt:
 
-![Die 5 wichtigsten Fräswerkzeuge und Bohrer im technischen Direktvergleich](docs/bilder/fraeser_und_bohrer_uebersicht.jpg)
+![Die 5 wichtigsten Fräswerkzeuge und Bohrer im technischen Direktvergleich](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/fraeser_und_bohrer_uebersicht.jpg)
 *Abbildung 1: Die 5 wichtigsten Werkzeuge nebeneinander – 1. Schaftfräser (flacher Boden), 2. Torusfräser (mit Eckenradius), 3. Vollkugelfräser (3D-Halbkugel), 4. Fasenfräser (45°-Kegel) und 5. Bohr- & Gewindewerkzeug.*
 
 ```mermaid
@@ -130,7 +130,7 @@ flowchart TD
 
 Jedes runde Loch und jedes Gewinde auf einer CNC-Maschine durchläuft in der Regel eine feste **3-stufige Werkzeug-Reihenfolge**:
 
-![Vergleich von Fräswerkzeugen und VHM-Spiralbohrer](docs/bilder/fraeser_und_spiralbohrer_vergleich.jpg)
+![Vergleich von Fräswerkzeugen und VHM-Spiralbohrer](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/fraeser_und_spiralbohrer_vergleich.jpg)
 *Abbildung 2: Technischer Direktvergleich von Fräswerkzeugen und Hochleistungs-VHM-Spiralbohrer mit Spiralnuten zur Spanabfuhr.*
 
 ```mermaid

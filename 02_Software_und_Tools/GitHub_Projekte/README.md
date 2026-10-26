@@ -20,7 +20,7 @@ Dieses Repository dokumentiert praxisnahe Referenzprojekte aus der **CAD/CAM-Fer
 4. **[Projekt 04 – Postprozessor-Engineering & Shopfloor-Automatisierung](../../04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_04_Postprozessor_und_CAM_Automatisierung/Fertigungspaket_Projekt_04.md)**
    * Maßgeschneiderte Postprozessor-Erweiterungen (automatische Berechnung der Mindest-Auskraglänge $L_{\text{min}}$, automatische Laser-Werkzeugbruchkontrolle `TCH PROBE 586`).
 5. **[Python-Tool: `cnc_setup_sheet_extractor.py`](./cnc_setup_sheet_extractor.py)**
-   * Ein Kommandozeilen- und Automatisierungstool in Python, das fertige **Heidenhain Klartext (`.H`)** und **Siemens Sinumerik (`.MPF`)** NC-Programme statisch analysiert, Rohteilabmessungen (`BLK FORM` / `WORKPIECE`), Nullpunkte, maximale $Z$-Tiefen sowie alle Werkzeugaufrufe (`TOOL CALL` / `T="..."`) extrahiert und automatisch ein druckfertiges **Einrichteblatt (Setup Sheet)** im Markdown-Format erzeugt.
+   * Ein Kommandozeilen- und Automatisierungstool in Python, das fertige **Heidenhain Klartext (`.H`)**, **Siemens Sinumerik (`.MPF`)** sowie **Fanuc / Haas ISO G-Code (`.nc`)** NC-Programme statisch analysiert, Rohteilabmessungen (`BLK FORM` / `WORKPIECE`), Nullpunkte, maximale $Z$-Tiefen sowie alle Werkzeugaufrufe (`TOOL CALL` / `T="..."`) extrahiert und automatisch ein druckfertiges **Einrichteblatt (Setup Sheet)** im Markdown-Format erzeugt.
 
 ---
 
@@ -33,7 +33,7 @@ python cnc_setup_sheet_extractor.py pfad/zum/programm.H --output einrichteblatt.
 ```
 
 ### Funktionsumfang des Parsers:
-* Automatische Steuerungserkennung (**Heidenhain Klartext** vs. **Siemens Sinumerik DIN/ISO**).
+* Automatische Steuerungserkennung (**Heidenhain Klartext**, **Siemens Sinumerik DIN/ISO** sowie **Fanuc / Haas ISO G-Code**).
 * Auslesen der Rohteil-Grenzwerte (`BLK FORM 0.1 / 0.2` bzw. `WORKPIECE(...)`) und Berechnung der Rohteilabmessungen ($\Delta X \times \Delta Y \times \Delta Z$).
 * Extraktion aller Werkzeugaufrufe inklusive Spindeldrehzahl ($S$), Vorschub ($F$), Kühlmittelstatus (`M7` Innenkühlung / `M8` Außenkühlung) und tiefster $Z$-Koordinate pro Werkzeug zur Ermittlung der **erforderlichen Mindest-Auskraglänge ($L_{\text{min}}$)**.
 
@@ -45,4 +45,4 @@ This repository showcases industrial **CAD/CAM Manufacturing Engineering package
 
 * **Multi-Axis CAM Programming:** 2.5D prismatic milling, 3+2 indexed 5-axis machining (`PLANE SPATIAL` / `CYCLE800`), and 5-axis simultaneous surface finishing (`FUNCTION TCPM` / `TRAORI`).
 * **Postprocessor Development:** Custom JavaScript, Python, and Tcl postprocessors with automated minimum tool overhang calculation ($L_{\text{min}}$) and automatic laser tool breakage probing (`TCH PROBE 586`).
-* **NC Code Static Analysis & Setup Sheet Generation:** Automated Python parser (`cnc_setup_sheet_extractor.py`) turning raw Heidenhain `.H` and Siemens `.MPF` G-code into structured shopfloor setup sheets.
+* **NC Code Static Analysis & Setup Sheet Generation:** Automated Python parser (`cnc_setup_sheet_extractor.py`) turning raw Heidenhain `.H`, Siemens `.MPF`, and Fanuc/Haas ISO `.nc` G-code into structured shopfloor setup sheets.

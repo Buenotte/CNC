@@ -384,3 +384,18 @@ Falls du nachschlagen möchtest, wo diese Vorgaben exakt festgeschrieben sind:
 4. **Auf dem Haupt-Dashboard:**
    [`README.md`](file:///c:/Projekte/CNC/README.md#L78-L86)
    *(Zentrale Übersicht mit Beispielsätzen zum Starten der 4 Agenten im Chat).*
+
+
+---
+
+## 10. Native Antigravity-Skill-Integration (`.agents/skills/` & `AGENTS.md`)
+
+Um sicherzustellen, dass die Entwicklungsumgebung **Google Antigravity *(AGY — Agentic Coding Environment)*** alle vier Spezial-Agenten nicht nur als Dokumentationstext liest, sondern als **native, ausführbare System-Skills *(Fähigkeitsmodule nach dem Antigravity Customization Standard)*** lädt, sind im Projekt-Stammverzeichnis folgende Systemdateien verankert:
+
+1. **Zentrales Agenten-Manifest im Projekt-Root:**
+   - [`AGENTS.md`](file:///c:/Projekte/CNC/AGENTS.md) *(Wird von Antigravity automatisch als hierarchische Workspace-Regel in den System-Kontext geladen).*
+2. **Die 4 nativen Antigravity-Skills unter `.agents/skills/`:**
+   - **Agent 1 (Lead-Scout-Agent):** [`.agents/skills/agent-1-lead-scout/SKILL.md`](file:///c:/Projekte/CNC/.agents/skills/agent-1-lead-scout/SKILL.md)
+   - **Agent 2 (Postprocessor-Coder-Agent):** [`.agents/skills/agent-2-postprocessor-coder/SKILL.md`](file:///c:/Projekte/CNC/.agents/skills/agent-2-postprocessor-coder/SKILL.md)
+   - **Agent 3 (NC-Safety- & Setup-Agent):** [`.agents/skills/agent-3-nc-safety-setup/SKILL.md`](file:///c:/Projekte/CNC/.agents/skills/agent-3-nc-safety-setup/SKILL.md)
+   - **Agent 4 (Backoffice-Ingenieur-Agent):** [`.agents/skills/agent-4-backoffice-ingenieur/SKILL.md`](file:///c:/Projekte/CNC/.agents/skills/agent-4-backoffice-ingenieur/SKILL.md)

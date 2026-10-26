@@ -204,27 +204,27 @@ Um die Architektur Ihres Projekts auf einen Blick zu verstehen:
 
 ### 📋 Tabelle aller Übungsdateien und ihrer Gegenstücke:
 
-Alle Quellcodedateien *(JavaScript `.cps` Postprozessoren, 3D-CAD-Modelle und Simulatoren)* befinden sich fertig vorbereitet im Ordner [`C:\Projekte\CNC\uebungen\`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/) sowie im Kundenauftrags-Ordner. Sie können jede dieser Dateien einzeln in Visual Studio Code öffnen, anpassen und direkt im Terminal *(Befehlsfenster)* mit dem Simulator ausführen:
+Alle Quellcodedateien *(JavaScript `.cps` Postprozessoren, 3D-CAD-Modelle und Simulatoren)* befinden sich fertig vorbereitet im Ordner [`C:\Projekte\CNC\03_Fachdokumentation_und_Wissen\uebungen\`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/) sowie im Kundenauftrags-Ordner. Sie können jede dieser Dateien einzeln in Visual Studio Code öffnen, anpassen und direkt im Terminal *(Befehlsfenster)* mit dem Simulator ausführen:
 
 | Nr.     | Übungsthema                         | Quelldatei *(Pfad)*                                                                                                                                                                                                                                       | Ausführen & Testen im Terminal *(Befehl)*                                  |
 | ------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| **00b** | Basis-Übung B *(Hallo Welt)*        | [`uebungen/uebung_00b_hallo_welt.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_00b_hallo_welt.cps)                                                                                                                        | `node simuliere_post.js uebungen/uebung_00b_hallo_welt.cps`                |
-| **01**  | Entwickler-Header *(onOpen)*        | [`uebungen/uebung_01_entwickler_header.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_01_entwickler_header.cps)                                                                                                            | `node simuliere_post.js uebungen/uebung_01_entwickler_header.cps`          |
-| **02**  | Werkzeugliste *(Tool Table)*        | [`uebungen/uebung_02_werkzeugliste.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_02_werkzeugliste.cps)                                                                                                                    | `node simuliere_post.js uebungen/uebung_02_werkzeugliste.cps`              |
-| **03**  | Z-MIN Berechnung *(Crashschutz)*    | [`uebungen/uebung_03_z_min_berechnung.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_03_z_min_berechnung.cps)                                                                                                              | `node simuliere_post.js uebungen/uebung_03_z_min_berechnung.cps`           |
-| **04**  | 3D-Modell CAM-Operationen           | [`uebungen/uebung_04_3d_modell_cam.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.cps) & [`bauteil_1001.stl`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl) | `node simuliere_post.js uebungen/uebung_04_3d_modell_cam.cps`              |
+| **00b** | Basis-Übung B *(Hallo Welt)*        | [`uebungen/uebung_00b_hallo_welt.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_00b_hallo_welt.cps)                                                                                                                        | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_00b_hallo_welt.cps`                |
+| **01**  | Entwickler-Header *(onOpen)*        | [`uebungen/uebung_01_entwickler_header.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_01_entwickler_header.cps)                                                                                                            | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_01_entwickler_header.cps`          |
+| **02**  | Werkzeugliste *(Tool Table)*        | [`uebungen/uebung_02_werkzeugliste.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_02_werkzeugliste.cps)                                                                                                                    | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_02_werkzeugliste.cps`              |
+| **03**  | Z-MIN Berechnung *(Crashschutz)*    | [`uebungen/uebung_03_z_min_berechnung.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_03_z_min_berechnung.cps)                                                                                                              | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_03_z_min_berechnung.cps`           |
+| **04**  | 3D-Modell CAM-Operationen           | [`uebungen/uebung_04_3d_modell_cam.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.cps) & [`bauteil_1001.stl`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl) | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.cps`              |
 | **05**  | 3D-Simulator & Einrichteblatt       | [`uebung_05_doku.md`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_05_3d_simulation_und_einrichteblatt.md) & [`3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) | Doppelklick im Windows-Explorer auf `3d_auftrag_simulator.html`            |
-| **06**  | Sicherer Rückzug *(Safe Retract)*   | [`uebungen/uebung_06_sicherer_rueckzug.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.cps)                                                                                                            | `node simuliere_post.js uebungen/uebung_06_sicherer_rueckzug.cps`          |
-| **07**  | Späneförderer Schalter *(Property)* | [`uebungen/uebung_07_spaenefoerderer_schalter.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_07_spaenefoerderer_schalter.cps)                                                                                              | `node simuliere_post.js uebungen/uebung_07_spaenefoerderer_schalter.cps`   |
-| **08**  | Fanuc vs. Siemens Sinumerik         | [`uebungen/uebung_08_fanuc_siemens_dialekt.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_08_fanuc_siemens_dialekt.cps)                                                                                                    | `node simuliere_post.js uebungen/uebung_08_fanuc_siemens_dialekt.cps`      |
-| **09**  | Schnittdaten-Plausibilitätsprüfung  | [`uebungen/uebung_09_schnittdaten_check.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_09_schnittdaten_check.cps)                                                                                                          | `node simuliere_post.js uebungen/uebung_09_schnittdaten_check.cps`         |
-| **10**  | 2. Aufspannung *(G55 OP20)*         | [`uebungen/uebung_10_zweite_aufspannung_g55.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_10_zweite_aufspannung_g55.cps)                                                                                                  | `node simuliere_post.js uebungen/uebung_10_zweite_aufspannung_g55.cps`     |
-| **11**  | Gewindebohren *(G84 Rigid Tapping)* | [`uebungen/uebung_11_gewindebohren_g84.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_11_gewindebohren_g84.cps)                                                                                                            | `node simuliere_post.js uebungen/uebung_11_gewindebohren_g84.cps`          |
-| **12**  | Radiuskorrektur *(G41/G42/G40)*     | [`uebungen/uebung_12_radiuskorrektur_g41.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_12_radiuskorrektur_g41.cps)                                                                                                        | `node simuliere_post.js uebungen/uebung_12_radiuskorrektur_g41.cps`        |
-| **13**  | 3D-Freiformflächen-Fräsen           | [`uebungen/uebung_13_3d_freiformflaechen.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_13_3d_freiformflaechen.cps)                                                                                                        | `node simuliere_post.js uebungen/uebung_13_3d_freiformflaechen.cps`        |
-| **14**  | Heidenhain Klartext & 4. Achse      | [`uebungen/uebung_14_heidenhain_klartext_4achse.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_14_heidenhain_klartext_4achse.cps)                                                                                          | `node simuliere_post.js uebungen/uebung_14_heidenhain_klartext_4achse.cps` |
-| **15**  | Fasenfräsen & Entgraten *(45°)*     | [`uebungen/uebung_15_fasenfraesen_entgraten.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_15_fasenfraesen_entgraten.cps)                                                                                                  | `node simuliere_post.js uebungen/uebung_15_fasenfraesen_entgraten.cps`     |
-| **16**  | Meister-Post Endabnahme             | [`uebungen/uebung_16_endabnahme_meister_post.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_16_endabnahme_meister_post.cps)                                                                                                | `node simuliere_post.js uebungen/uebung_16_endabnahme_meister_post.cps`    |
+| **06**  | Sicherer Rückzug *(Safe Retract)*   | [`uebungen/uebung_06_sicherer_rueckzug.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.cps)                                                                                                            | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.cps`          |
+| **07**  | Späneförderer Schalter *(Property)* | [`uebungen/uebung_07_spaenefoerderer_schalter.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_07_spaenefoerderer_schalter.cps)                                                                                              | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_07_spaenefoerderer_schalter.cps`   |
+| **08**  | Fanuc vs. Siemens Sinumerik         | [`uebungen/uebung_08_fanuc_siemens_dialekt.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_08_fanuc_siemens_dialekt.cps)                                                                                                    | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_08_fanuc_siemens_dialekt.cps`      |
+| **09**  | Schnittdaten-Plausibilitätsprüfung  | [`uebungen/uebung_09_schnittdaten_check.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_09_schnittdaten_check.cps)                                                                                                          | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_09_schnittdaten_check.cps`         |
+| **10**  | 2. Aufspannung *(G55 OP20)*         | [`uebungen/uebung_10_zweite_aufspannung_g55.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_10_zweite_aufspannung_g55.cps)                                                                                                  | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_10_zweite_aufspannung_g55.cps`     |
+| **11**  | Gewindebohren *(G84 Rigid Tapping)* | [`uebungen/uebung_11_gewindebohren_g84.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_11_gewindebohren_g84.cps)                                                                                                            | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_11_gewindebohren_g84.cps`          |
+| **12**  | Radiuskorrektur *(G41/G42/G40)*     | [`uebungen/uebung_12_radiuskorrektur_g41.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_12_radiuskorrektur_g41.cps)                                                                                                        | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_12_radiuskorrektur_g41.cps`        |
+| **13**  | 3D-Freiformflächen-Fräsen           | [`uebungen/uebung_13_3d_freiformflaechen.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_13_3d_freiformflaechen.cps)                                                                                                        | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_13_3d_freiformflaechen.cps`        |
+| **14**  | Heidenhain Klartext & 4. Achse      | [`uebungen/uebung_14_heidenhain_klartext_4achse.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_14_heidenhain_klartext_4achse.cps)                                                                                          | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_14_heidenhain_klartext_4achse.cps` |
+| **15**  | Fasenfräsen & Entgraten *(45°)*     | [`uebungen/uebung_15_fasenfraesen_entgraten.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_15_fasenfraesen_entgraten.cps)                                                                                                  | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_15_fasenfraesen_entgraten.cps`     |
+| **16**  | Meister-Post Endabnahme             | [`uebungen/uebung_16_endabnahme_meister_post.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_16_endabnahme_meister_post.cps)                                                                                                | `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_16_endabnahme_meister_post.cps`    |
 
 * **🤖 Nach den 16 Übungen – Deine 4 KI-Agenten im Praxiseinsatz:**
   * **[WANN und WIE du deine 4 KI-Agenten verwendest (Zeilen 935–971)](#🤖-wann-und-wie-du-deine-4-ki-agenten-verwendest-goldene-regel-für-die-übungen--praxisanleitung-nach-übung-16):** Warum du Übung 1–15 erst selbst ohne KI machst und welcher KI-Agent dir ab Übung 16 welche Übungen zu 80 % abnimmt.
@@ -626,7 +626,7 @@ function onClose() {
    Öffnen Sie das Terminal in Visual Studio Code (`Strg + Ö` oder Menü `Terminal` $\rightarrow$ `Neues Terminal`) und geben Sie folgenden Befehl ein:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_00b_hallo_welt.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_00b_hallo_welt.cps
    ```
 4. **Ergebnis-Datei ansehen:**  
    Der Postprozessor erzeugt blitzschnell die Maschinendatei [`uebungen/uebung_00b_hallo_welt.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_00b_hallo_welt.nc).  
@@ -642,7 +642,7 @@ function onClose() {
    G90
    ```
 5. **Im interaktiven 3D-Simulator ansehen:**  
-   Öffnen Sie [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) im Browser.  
+   Öffnen Sie [`02_Software_und_Tools/web_tools/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) im Browser.  
    Wählen Sie oben im Menü *(Selectbox)* einfach **„Übung 00b: Hallo Welt Postprozessor“** aus.  
    Sie sehen sofort die exakten G-Code-Zeilen, können mit `⏮ Vorheriger` und `⏭ Nächster Schritt` jede Zeile einzeln durchschalten und mit `🎥 3D-Ansicht Reset` jederzeit zur Startansicht zurückspringen!
 
@@ -650,14 +650,14 @@ function onClose() {
 
 | Prüfpunkt                   | Was muss im Code / Simulator zu sehen sein?                                                                                                                                     | Bestanden? |
 |:--------------------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:----------:|
-| **1. Terminal-Erfolg**      | Der Befehl `node simuliere_post.js ...` läuft fehlerfrei durch und meldet `SIMULATION ERFOLGREICH`.                                                                             | [ ]        |
+| **1. Terminal-Erfolg**      | Der Befehl `node 02_Software_und_Tools/scripts/simuliere_post.js ...` läuft fehlerfrei durch und meldet `SIMULATION ERFOLGREICH`.                                                                             | [ ]        |
 | **2. Kommentar im Code**    | In [`uebungen/uebung_00b_hallo_welt.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_00b_hallo_welt.nc) steht in runden Klammern `(HALLO WELT...)`. | [ ]        |
 | **3. Grundinitialisierung** | Die Sicherheitszeile `G90 G17 G21 G94` sowie der Z-Rückzug `G28 G91 Z0.` stehen direkt unter dem Kommentar.                                                                     | [ ]        |
 | **4. 3D-Simulator-Check**   | Im Browser steht das Werkzeug sicher über dem Bauteil-Nullpunkt `G54` auf Höhe `Z +15.0`.                                                                                       | [ ]        |
 
 ### ❓ Häufige Frage & Klarstellung: Warum steht im 3D-Simulator bei Übung 00b oben „T01 [Z=15.0]“, obwohl im G-Code nichts davon steht?
 
-Wenn Sie den 3D-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) öffnen und bei Übung 00b auf die Zeile `G28 G91 Z0.` schauen, fallen zwei Dinge auf:
+Wenn Sie den 3D-Simulator [`02_Software_und_Tools/web_tools/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) öffnen und bei Übung 00b auf die Zeile `G28 G91 Z0.` schauen, fallen zwei Dinge auf:
 
 1. **Die optische Täuschung mit dem Minuszeichen:**
 
@@ -930,7 +930,7 @@ Weil NCViewer weder Ihre Werkshalle noch Ihre physische Fräsmaschine kennt, ver
 
 #### Fazit:
 
-Kein Simulator der Welt kann „hellsehen“. Was als Zahl in der `.nc`-Datei steht (`X40 Y25 Z-5`), **zeichnet NCViewer exakt ab**. Alles andere *(Nullpunkte, Werkzeugkörper)* ersetzt NCViewer durch **Software-Standardwerte *(Defaults)*** – genau wie unser eigener 3D-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html)!
+Kein Simulator der Welt kann „hellsehen“. Was als Zahl in der `.nc`-Datei steht (`X40 Y25 Z-5`), **zeichnet NCViewer exakt ab**. Alles andere *(Nullpunkte, Werkzeugkörper)* ersetzt NCViewer durch **Software-Standardwerte *(Defaults)*** – genau wie unser eigener 3D-Simulator [`02_Software_und_Tools/web_tools/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html)!
 
 ### 📍 Woher kommt der gezeichnete Anfangspunkt im Simulator, wenn der Simulator die Maschine gar nicht kennt?
 
@@ -952,7 +952,7 @@ G54
 
 * In diesen Zeilen steht **noch kein einziges `X` und kein `Y`** für das Bauteil!
 * Wenn der Simulator stur darauf warten würde, wüsste er nicht, wo er den Bildschirm zentrieren soll.
-* **Deshalb steht im Quellcode unseres lokalen Simulators [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html#L614-L617) in Zeile 614 schwarz auf weiß:**
+* **Deshalb steht im Quellcode unseres lokalen Simulators [`02_Software_und_Tools/web_tools/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html#L614-L617) in Zeile 614 schwarz auf weiß:**
 
   ```javascript
   let curX = 0, curY = 0, curZ = 15;
@@ -1147,7 +1147,7 @@ Wenn Sie Übung 1 im [3D-Simulator](file:///c:/Projekte/CNC/02_Software_und_Tool
 2. **Warum wählt der 3D-Simulator genau 35 mm?**
    * Unser gefrästes Aluminiumteil ist $85 \times 55\,\text{mm}$ groß und $12\,\text{mm}$ hoch.
    * Würde der Browser-Simulator die echten $500\,\text{mm}$ Deckenhöhe im Maßstab 1:1 zeichnen, müsste die 3D-Kamera so weit herauszoomen, dass das kleine Bauteil auf Ihrem Bildschirm nur noch ein winziger Punkt wäre.
-   * Deshalb steht im Quellcode von [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html#L650-L654) in Zeile 651:
+   * Deshalb steht im Quellcode von [`02_Software_und_Tools/web_tools/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html#L650-L654) in Zeile 651:
 
      ```javascript
      if (/G53\s+G00?\s+Z0|G28\s+G91\s+Z0/i.test(line)) {
@@ -1209,7 +1209,7 @@ Dafür gibt es **zwei ganz einfache, logische Gründe**:
 
 #### 3. Der Vorteil unseres lokalen 3D-Simulators:
 
-Genau deshalb haben wir für Sie unseren eigenen Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) entwickelt:
+Genau deshalb haben wir für Sie unseren eigenen Simulator [`02_Software_und_Tools/web_tools/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) entwickelt:
 
 * Unser Simulator stürzt nicht ab und blendet nichts aus: Er zeigt auch bei reinen Header-Dateien die Werkstückplatte, die Werkzeugspindel, die Zeilen-Schaltung mit `⏮ Vorheriger` und `⏭ Nächster Schritt` und den Z-Rückzug `G53 Z0.0` auf die Deckenhöhe von $35\,\text{mm}$ an!
 
@@ -1305,7 +1305,7 @@ Hier ist die genaue Anleitung, wie Sie in **Visual Studio Code (VSC)** arbeiten:
 2. Tippen Sie folgenden Befehl ein und drücken Sie `Enter`:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_01_entwickler_header.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_01_entwickler_header.cps
    ```
 3. Der Simulator startet sofort! Im Terminal sehen Sie direkt das Testergebnis mit grünem Haken.
 
@@ -1485,7 +1485,7 @@ Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
 2. Führen Sie folgenden Befehl aus:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_02_werkzeugliste.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_02_werkzeugliste.cps
    ```
 3. Der Simulator liest die CAM-Werkzeuge ein und zeigt Ihnen das Testergebnis grün an.
 
@@ -1575,7 +1575,7 @@ Denken Sie an alltägliches JavaScript:
 
 #### 3. Wie macht das unser lokaler Testrunner ([`tests/simuliere_post.js`](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/simuliere_post.js#L318-L323))?
 
-Wenn Sie `node simuliere_post.js ...` im Terminal ausführen, startet Node.js eine simulierte Sandbox *(einen virtuellen Ausführungs-Kontext)*.  
+Wenn Sie `node 02_Software_und_Tools/scripts/simuliere_post.js ...` im Terminal ausführen, startet Node.js eine simulierte Sandbox *(einen virtuellen Ausführungs-Kontext)*.  
 In Zeile 318 von `tests/simuliere_post.js` steht deshalb:
 
 ```javascript
@@ -1599,7 +1599,7 @@ Vollkommen richtig! Hier ist der genaue Unterschied:
 
 * Das englische Wort **„to mock“** bedeutet **„nachahmen / nachstellen“**.
 * Ein **Mock-Objekt *(Test-Attrappe / Dummy)*** ist eine künstliche Nachbildung echter Daten, damit man als Software-Entwickler Programme testen kann, **ohne** jedes Mal eine 1.000-Euro-Software oder einen riesigen Cloud-Server starten zu müssen.
-* In unserem Testskript [`tests/simuliere_post.js`](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/simuliere_post.js) haben wir für Sie die Werkzeuge unseres Kundenauftrags *(T01 10mm-Schaftfräser, T02 6mm-Spiralbohrer)* als `mockTools` hinterlegt, damit der Befehl `node simuliere_post.js ...` in 50 Millisekunden blitzschnell im VS Code Terminal durchläuft.
+* In unserem Testskript [`tests/simuliere_post.js`](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/simuliere_post.js) haben wir für Sie die Werkzeuge unseres Kundenauftrags *(T01 10mm-Schaftfräser, T02 6mm-Spiralbohrer)* als `mockTools` hinterlegt, damit der Befehl `node 02_Software_und_Tools/scripts/simuliere_post.js ...` in 50 Millisekunden blitzschnell im VS Code Terminal durchläuft.
 
 #### 2. Und was passiert in echtem Autodesk Fusion 360?
 
@@ -1665,7 +1665,7 @@ Sie müssen nicht in die Firma des Kunden fahren! Sie arbeiten bequem an Ihrem S
 3. Sie testen das Skript blitzschnell im VS Code Terminal:
 
    ```powershell
-   node simuliere_post.js src/mein_erster_post.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 02_Software_und_Tools/src/mein_erster_post.cps
    ```
 4. Sie prüfen die erzeugte Maschinendatei [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/02_Software_und_Tools/uebungen/uebung_04_3d_modell_cam.nc) und kontrollieren sie im [3D-Simulator](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html).
 
@@ -2009,7 +2009,7 @@ Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
 2. Führen Sie aus:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_03_z_min_berechnung.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_03_z_min_berechnung.cps
    ```
 3. Der Simulator prüft die Z-Tiefen aller CAM-Schritte und zeigt die Z-MIN-Werte im Terminal.
 
@@ -2235,7 +2235,7 @@ Das ist eine der **wichtigsten Fragen für jeden CAM-Ingenieur**! Um die Antwort
     👉 **JA!** Wenn der Schraubstock im CAM als 3D-Spannmittel definiert wurde, stoppt die Simulation sofort, das Bauteil und der Fräser leuchten rot auf und das System warnt: *„KOLLISION: Werkzeug kollidiert mit Spannbacke!“*
   * **In einfachen Web-G-Code-Viewern *(z. B. NC Viewer)***:  
     👉 **NEIN!** Einfache G-Code-Viewer kennen den echten Maschinenschraubstock gar nicht. Sie sehen nur Linien im leeren Raum.
-  * **In unserem 3D-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html)**:  
+  * **In unserem 3D-Simulator [`02_Software_und_Tools/web_tools/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html)**:  
     👉 **JA, visuell sofort sichtbar!** Sie sehen im 3D-Canvas und im oberen HUD ganz genau, wie das Werkzeug tief unter die Werkstück-Unterkante ($Z = -12\,\text{mm}$) abtaucht!
 
 ---
@@ -2271,7 +2271,7 @@ Da Autodesk Fusion jede einzelne Mikrometer-Bewegung intern kennt, ist dieser We
 
 #### 4. Wie wird das im 3D-Simulator (`3d_auftrag_simulator.html`) exakt gezeichnet und gemeldet?
 
-In unserem Browser-Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html) haben wir eine **4-Stufen-Z-Zonen-Überwachung** mit visueller Warnanzeige integriert:
+In unserem Browser-Simulator [`02_Software_und_Tools/web_tools/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html) haben wir eine **4-Stufen-Z-Zonen-Überwachung** mit visueller Warnanzeige integriert:
 
 1. **Wie wird das Werkstück gezeichnet? *(Drahtgitter-Quader)***:
    * Das Bauteil wird mit `drawBox(0, 0, -12, 80, 50, 0, "#94a3b8", 2.2)` gerendert.
@@ -2299,7 +2299,7 @@ Sie haben **zwei bequeme Möglichkeiten**, um falsche Z-Werte oder Kollisionen s
 
 ##### Möglichkeit 1: Über das vorgefertigte Dropdown-Menü *(1-Klick-Test)*
 
-1. Öffnen Sie [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html) in Ihrem Webbrowser.
+1. Öffnen Sie [`02_Software_und_Tools/web_tools/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html) in Ihrem Webbrowser.
 2. Klicken Sie oben links auf das Dropdown-Feld **„Programm-Auswahl“**.
 3. Wählen Sie direkt unter der roten Rubrik **„🚨 Crash- & Sicherheits-Tests (Z-MIN)“**:
    * **`⚠️ Test 1: Bohrungs-Durchbruch (Z = -14.5 mm / Tunnel aktiv)`**:  
@@ -2716,10 +2716,10 @@ Die Antwort liegt im Unterschied zwischen **zwei völlig verschiedenen Werkzeuge
   Sie möchten Ihren Postprozessor (`.cps`) in Visual Studio Code in 0,1 Sekunden testen, **ohne** jedes Mal das riesige, 2-Gigabyte schwere CAD-Programm *Autodesk Fusion 360* starten zu müssen.
 * In der professionellen Softwareentwicklung nennt man das ein **Mock-Objekt *(Test-Dummy / synthetischer Prüfstand)***:
   * `simuliere_post.js` tut so, als wäre es Autodesk Fusion 360.
-  * Und welches Werkstück simuliert es? **Genau unsere Flanschplatte aus Übung 4 und dem Kundenauftrag 1** ([`kundenauftrag_01_flanschplatte/bauteil_1001.stl`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl))!
+  * Und welches Werkstück simuliert es? **Genau unsere Flanschplatte aus Übung 4 und dem Kundenauftrag 1** ([`01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl))!
   * Diese Platte hat exakt die festen Maße **$80 \times 50\,\text{mm}$**, eine Dicke von **$12\,\text{mm}$**, eine Frästiefe von **$-5\,\text{mm}$**, eine Kreistasche in der Mitte bei **$(40, 25)$** und 4 Bohrungen bei **$(10, 10)$ bis $(70, 40)$**.
 * **Warum feste Zahlen?**  
-  Damit automatisierte Tests *(Unit-Tests)* **reproduzierbar *(deterministisch)*** sind! Jedes Mal, wenn Sie `node simuliere_post.js` ausführen, müssen exakt dieselben Zahlen herauskommen, damit wir den erzeugten G-Code mit [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.nc) vergleichen können.
+  Damit automatisierte Tests *(Unit-Tests)* **reproduzierbar *(deterministisch)*** sind! Jedes Mal, wenn Sie `node 02_Software_und_Tools/scripts/simuliere_post.js` ausführen, müssen exakt dieselben Zahlen herauskommen, damit wir den erzeugten G-Code mit [`uebungen/uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.nc) vergleichen können.
 
 ---
 
@@ -2807,7 +2807,7 @@ In dieser Übung lernen Sie als angehender Postprozessor-Entwickler und CAM-Inge
 2. **Die 3 technischen Teilziele dieser Übung:**
 
    * **Teilziel 1 (CAM-Ereignisse verstehen):** Begreifen, wie Autodesk Fusion die Fräsoperationen an den Postprozessor übergibt und warum die JavaScript-Funktion `onSection()` vor jedem Werkzeugwechsel automatisch aufgerufen wird.
-   * **Teilziel 2 (Postprozessor-Ausführung im Terminal):** Den Übungs-Postprozessor mit dem Simulator-Befehl `node simuliere_post.js uebungen/uebung_04_3d_modell_cam.cps` ausführen und die Maschinendatei `uebung_04_3d_modell_cam.nc` direkt im Übungsordner generieren.
+   * **Teilziel 2 (Postprozessor-Ausführung im Terminal):** Den Übungs-Postprozessor mit dem Simulator-Befehl `node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.cps` ausführen und die Maschinendatei `uebung_04_3d_modell_cam.nc` direkt im Übungsordner generieren.
    * **Teilziel 3 (Kundenauftrags-Abwicklung nach § 18 EStG):** Nachvollziehen, wie ein echter B2B-Kundenauftrag *(am Beispiel der Lagerplatte von Franken Präzisionsteile GmbH)* von der 3D-Datei über das Einrichteblatt bis zur Honorarrechnung rechtssicher und fehlerfrei abgewickelt wird.
 
 3. **Das greifbare Endergebnis:**
@@ -2881,7 +2881,7 @@ Hier treffen **zwei Dinge** aufeinander: Eine **optische 3D-Perspektive** und di
 * In diesem Blickwinkel läuft die grüne Linie *(die Y-Achse)* schräg nach vorne unten auf Ihren Bildschirm zu.
 * Weil die grüne Linie nach vorne wächst *(von `Y = 0` bis `Y = +50 mm`)*, erscheint die Ecke bei `Y = +50` optisch im Vordergrund – und der Nullpunkt `Y = 0` wirkt, als läge er „hinten“.
 * **Probieren Sie es im Simulator aus:** Klicken Sie mit der linken Maustaste in das 3D-Fenster und drehen Sie das Modell nach Wunsch.
-* **Neuer Standard-Startwinkel:** Wir haben den Simulator [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html#L876) nun dauerhaft auf diesen natürlichen Fräser-Blickwinkel (`rotZ = -2.05`) voreingestellt. Wenn Sie den Simulator öffnen oder auf `🎥 3D-Ansicht Reset` klicken, liegt die `G54`-Nullpunkt-Ecke jetzt von der ersten Sekunde an immer direkt vorne links im Vordergrund!
+* **Neuer Standard-Startwinkel:** Wir haben den Simulator [`02_Software_und_Tools/web_tools/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html#L876) nun dauerhaft auf diesen natürlichen Fräser-Blickwinkel (`rotZ = -2.05`) voreingestellt. Wenn Sie den Simulator öffnen oder auf `🎥 3D-Ansicht Reset` klicken, liegt die `G54`-Nullpunkt-Ecke jetzt von der ersten Sekunde an immer direkt vorne links im Vordergrund!
 
 #### 2. Wie ist es an der ECHTEN Fräsmaschine in der Werkhalle?
 
@@ -2915,7 +2915,7 @@ Warum wählt man zu 90 % die vordere linke obere Ecke? Weil der Fräser mit sein
 
 ### 💡 Worum geht es in einfacher Sprache?
 
-Viele Kunden wollen gar keinen eigenen **Postprozessor (`.cps`-Übersetzer)** kaufen, sondern schicken Ihnen direkt eine **3D-Datei Ihres Bauteils** (z. B. [kundenauftrag_01_flanschplatte/bauteil_1001.stl](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl) oder eine `.step`-Datei) und sagen:
+Viele Kunden wollen gar keinen eigenen **Postprozessor (`.cps`-Übersetzer)** kaufen, sondern schicken Ihnen direkt eine **3D-Datei Ihres Bauteils** (z. B. [01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl) oder eine `.step`-Datei) und sagen:
 *„Bitte mach mir für dieses 3D-Bauteil das fertige CNC-Programm (G-Code), damit ich es auf meiner Maschine fräsen kann!“*
 
 ---
@@ -2982,7 +2982,7 @@ Damit Sie für neue Kundenanfragen nicht jedes Mal von Hand im Code tippen müss
 ---
 
 In dieser Übung lernen Sie die **6 einfachen Schritte**, wie Sie aus einem **3D-Modell** ohne händisches Tippen von Koordinaten das fertige **G-Code-Programm** erzeugen.
-*(Die komplette Vorlage liegt für Sie im Ordner [kundenauftrag_01_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md)).*
+*(Die komplette Vorlage liegt für Sie im Ordner [01_Kundenauftraege/referenz_auftrag_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md)).*
 
 ### 🛠️ Wo im Code wird das gemacht?
 
@@ -2991,7 +2991,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 1. **Als CAM-Postprozessor-Quelldatei:**  
    [`uebungen/uebung_04_3d_modell_cam.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.cps)
 2. **Als 3D-CAD-Bauteil:**  
-   [`kundenauftrag_01_flanschplatte/bauteil_1001.stl`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl)
+   [`01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl)
 3. **Im Haupt-Postprozessor:**  
    [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps)
 
@@ -3008,7 +3008,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 2. Geben Sie ein:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_04_3d_modell_cam.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.cps
    ```
 3. Der Simulator erzeugt den kompletten Maschinencode für die Flanschplatte.
 
@@ -3018,7 +3018,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 
 #### Schritt 4: 3D-Simulation visuell prüfen
 
-* Öffnen Sie per Doppelklick die Datei [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) direkt im Webbrowser oder nutzen Sie [https://ncviewer.com](https://ncviewer.com).
+* Öffnen Sie per Doppelklick die Datei [`02_Software_und_Tools/web_tools/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) direkt im Webbrowser oder nutzen Sie [https://ncviewer.com](https://ncviewer.com).
 
 ---
 
@@ -3295,7 +3295,7 @@ function onCycleEnd() {
 Um aus dieser JavaScript-Datei [`uebungen/uebung_04_3d_modell_cam.cps`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.cps) die fertige Maschinendatei [`uebung_04_3d_modell_cam.nc`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.nc) zu erzeugen, führen Sie einfach den folgenden Terminal-Befehl aus:
 
 ```powershell
-node simuliere_post.js uebungen/uebung_04_3d_modell_cam.cps
+node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_04_3d_modell_cam.cps
 ```
 
 **Was passiert bei diesem Befehl unter der Haube *(Automatischer Ablauf)*:**
@@ -3639,7 +3639,7 @@ Bevor Sie den fertigen **G-Code (Maschinencode)** an Ihren Kunden schicken und G
      - 📏 **G-Code-Fenstergröße frei anpassen *(Höhe & Breite)***:  
        Das Maschinencode-Fenster links unten lässt sich mit den 3 Buttons (`↕ 260px`, `↕ 450px`, `↕ 650px`) per Klick vergrößern oder mit der Maus an der rechten unteren Ecke frei auf jede Wunschhöhe ziehen. Außerdem kann die gesamte linke Seitenleiste über den senkrechten Schieberbalken *(Trennlinie zwischen Code und 3D)* mit der Maus beliebig breit gezogen werden.
 2. **Das fertige Einrichteblatt (`Setup Sheet`) prüfen:**
-   - Öffnen Sie die Datei [kundenauftrag_01_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md).
+   - Öffnen Sie die Datei [01_Kundenauftraege/referenz_auftrag_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/EINRICHTEBLATT_SETUP_SHEET.md).
    - Dieses Dokument drucken Sie als **PDF (Portable Document Format)** aus und schicken es zusammen mit der Datei [tests/output_expected.nc](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/output_expected.nc) an den Kunden. Damit ist Ihr Auftrag zu 100 % professionell abgeschlossen!
 
 ### 🛡️ Prüfliste dieser Übung: Wann ist Übung 5 zu 100 % bestanden?
@@ -3754,7 +3754,7 @@ Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
 2. Geben Sie ein:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_06_sicherer_rueckzug.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_06_sicherer_rueckzug.cps
    ```
 3. Der Simulator führt den Postprozessor aus und bestätigt den sicheren Rückzug.
 
@@ -3920,7 +3920,7 @@ Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
 2. Führen Sie aus:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_07_spaenefoerderer_schalter.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_07_spaenefoerderer_schalter.cps
    ```
 3. Der Simulator schaltet den Späneförderer automatisch ein und wieder aus.
 
@@ -4153,7 +4153,7 @@ Für diese Übung stehen Ihnen **zwei Quellcode-Dateien** zur Verfügung:
 2. Führen Sie aus:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_08_fanuc_siemens_dialekt.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_08_fanuc_siemens_dialekt.cps
    ```
 3. Der Simulator gibt je nach gewählter Einstellung Fanuc- oder Siemens-Code aus.
 
@@ -4389,7 +4389,7 @@ Dafür stehen Ihnen auf Ihrem **ThinkPad (Laptop)** ab sofort **4 einfache Wege*
 
 Unser interaktiver **3D-Auftrags-Simulator** verfügt ab sofort über einen direkten **Dateiauswahl-Button *(File Picker)*** sowie **Drag & Drop *(Ziehen und Ablegen mit der Maus)*** für jede beliebige `.nc`-Datei:
 
-1. Öffnen Sie die Datei [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) per Doppelklick in Ihrem Webbrowser *(Chrome, Edge oder Firefox)*.
+1. Öffnen Sie die Datei [`02_Software_und_Tools/web_tools/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html) per Doppelklick in Ihrem Webbrowser *(Chrome, Edge oder Firefox)*.
 2. Klicken Sie links oben auf den auffälligen grünen Button:  
    👉 **`📂 Eigene .nc Datei von Festplatte auswählen & laden`**  
    *(Alternativ können Sie eine beliebige `.nc`-Datei auch einfach mit der Maus vom Windows-Explorer direkt in das Browserfenster ziehen!)*
@@ -4428,7 +4428,7 @@ Ich habe Ihnen im Ordner `tests/` das Programm **[`tests/simuliere_post.js`](fil
 
 Wenn Sie sehen wollen, wie eine echte **CNC-Fräsmaschine (Werkzeugmaschine)** Ihren frisch erzeugten **G-Code** abfährt:
 
-1. Öffnen Sie nach dem Ausführen von `node simuliere_post.js` die neu erzeugte Datei **`uebungen/uebung_04_3d_modell_cam.nc`** (oder [tests/output_expected.nc](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/output_expected.nc)).
+1. Öffnen Sie nach dem Ausführen von `node 02_Software_und_Tools/scripts/simuliere_post.js` die neu erzeugte Datei **`uebungen/uebung_04_3d_modell_cam.nc`** (oder [tests/output_expected.nc](file:///c:/Projekte/CNC/02_Software_und_Tools/tests/output_expected.nc)).
 2. Markieren Sie den gesamten Text mit `Strg + A` und kopieren Sie ihn mit `Strg + C`.
 3. Öffnen Sie in Ihrem Internet-Browser die Webseite: **`https://ncviewer.com`**
 4. Klicken Sie links in das Feld **`GCode File`**, löschen Sie den dortigen Beispieltext und fügen Sie Ihren eigenen G-Code mit `Strg + V` ein.
@@ -4456,7 +4456,7 @@ Hier steht für **jede Übung aus diesem Handbuch** ganz genau, worauf Sie im Si
 
 ### 🔹 Test für Stufe 1 & Übung 5 (3D-Auftrags-Simulator im Browser):
 
-1. Machen Sie im Windows-Explorer einen Doppelklick auf [kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html).
+1. Machen Sie im Windows-Explorer einen Doppelklick auf [01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html).
 2. **Was Sie im Simulator prüfen:**
    - Klicken Sie auf **`Rohteil (85×55×15) Ein/Aus`**: Sie sehen den gestrichelten Rohblock um das Fertigteil.
    - Beobachten Sie oben links die Anzeige **`POS (G54)`**: Wenn das Werkzeug in die 4 Löcher bohrt, muss die Anzeige bei `Z` bis auf **`-12.000`** herunterzählen.
@@ -4503,24 +4503,24 @@ Hier steht für **jede Übung aus diesem Handbuch** ganz genau, worauf Sie im Si
 
    - Klicken Sie erst auf Zeile `N340 X10.000 Y40.000` (der Bohrer steckt noch im letzten Bohrloch hinten links).
    - Klicken Sie dann auf `N360 G00 Z15.000` und `N380 G53 G00 Z0.000`: Sie sehen im 3D-Fenster, wie der Bohrer **senkrecht nach oben aus dem Loch herausgezogen wird**, BEVOR er in Zeile `N400` in Richtung `Y0.000` (nach vorne zur Tür) fährt!
-   - **Bonus-Experiment:** Ändern Sie in [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L92) bei `useG28SafeRetract` den Wert von `false` auf `true`, speichern Sie (`Strg + S`) und führen Sie `node simuliere_post.js` aus. Jetzt steht am Ende statt `G53 G00 Z0.000` plötzlich `G28 G91 Z0.000`!
+   - **Bonus-Experiment:** Ändern Sie in [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps#L92) bei `useG28SafeRetract` den Wert von `false` auf `true`, speichern Sie (`Strg + S`) und führen Sie `node 02_Software_und_Tools/scripts/simuliere_post.js` aus. Jetzt steht am Ende statt `G53 G00 Z0.000` plötzlich `G28 G91 Z0.000`!
 
 ### 🔹 Test für Stufe 6 / Übung 7 (Eigenen Schalter `useChipConveyor` für Späneförderer `M31/M33` testen):
 
 1. Bauen Sie den Schalter `useChipConveyor` wie in [Übung 7](#übung-7-eigenen-schalter-property-für-zusatzfunktionen-wie-blasluft-m07-oder-späneförderer-bauen) beschrieben in [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps) ein.
 2. **Testlauf 1 (Schalter steht auf `value: false`):**  
-   Führen Sie `node simuliere_post.js` aus $\rightarrow$ Im erzeugten G-Code taucht **kein** `M31` und **kein** `M33` auf.
+   Führen Sie `node 02_Software_und_Tools/scripts/simuliere_post.js` aus $\rightarrow$ Im erzeugten G-Code taucht **kein** `M31` und **kein** `M33` auf.
 3. **Testlauf 2 (Schalter steht auf `value: true`):**  
-   Ändern Sie `value: true`, speichern Sie (`Strg + S`) und führen Sie `node simuliere_post.js` erneut aus $\rightarrow$ Jetzt erscheint oben im G-Code automatisch `M31` (Späneförderer ein) und unten vor `M30` automatisch `M33` (Späneförderer aus)!
+   Ändern Sie `value: true`, speichern Sie (`Strg + S`) und führen Sie `node 02_Software_und_Tools/scripts/simuliere_post.js` erneut aus $\rightarrow$ Jetzt erscheint oben im G-Code automatisch `M31` (Späneförderer ein) und unten vor `M30` automatisch `M33` (Späneförderer aus)!
 
 ### 🔹 Test für Stufe 7 / Übung 4 (3D-Modell `bauteil_1001.stl` in 3D-Software öffnen & prüfen):
 
-1. Öffnen Sie die 3D-Datei [kundenauftrag_01_flanschplatte/bauteil_1001.stl](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl) im **Windows 3D-Viewer**, in **FreeCAD** oder in **Autodesk Fusion**.
-2. Vergleichen Sie die Maße des 3D-Modells (`80 x 50 x 12 mm`) mit den Fräsbahnen in [kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html).
+1. Öffnen Sie die 3D-Datei [01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/bauteil_1001.stl) im **Windows 3D-Viewer**, in **FreeCAD** oder in **Autodesk Fusion**.
+2. Vergleichen Sie die Maße des 3D-Modells (`80 x 50 x 12 mm`) mit den Fräsbahnen in [01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html](file:///c:/Projekte/CNC/02_Software_und_Tools/web_tools/3d_auftrag_simulator.html).
 
 ### 🔹 Test für Stufe 8 / Übung 2 (Werkzeugliste `Tool Table`) & Stufe 9 / Übung 3 (`Z-MIN` Sicherheitsprüfung):
 
-1. Führen Sie `node simuliere_post.js` aus und kopieren Sie den erzeugten G-Code in **`https://ncviewer.com`**.
+1. Führen Sie `node 02_Software_und_Tools/scripts/simuliere_post.js` aus und kopieren Sie den erzeugten G-Code in **`https://ncviewer.com`**.
 2. **Wie Sie im Simulator beweisen, dass Ihre `Z-MIN`-Rechnung in JavaScript stimmt:**
    - Ihr Header oben sagt: `(T01 | ... | Z-MIN=-5.000MM)` und `(T02 | ... | Z-MIN=-12.000MM)`.
    - Drehen Sie in **NCViewer** die 3D-Ansicht genau von der Seite (klicken Sie im NCViewer oben rechts auf den Ansichtswürfel **`Front` / Vorne**).
@@ -4653,7 +4653,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 2. Führen Sie aus:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_09_schnittdaten_check.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_09_schnittdaten_check.cps
    ```
 3. Der Simulator berechnet die Schnittgeschwindigkeiten für die Werkzeuge.
 
@@ -5153,7 +5153,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 2. Führen Sie aus:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_10_zweite_aufspannung_g55.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_10_zweite_aufspannung_g55.cps
    ```
 3. Der Simulator gibt die 1. Aufspannung (`G54`), den Stopp `M00` und die 2. Aufspannung (`G55`) aus.
 
@@ -5324,7 +5324,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 2. Führen Sie aus:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_11_gewindebohren_g84.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_11_gewindebohren_g84.cps
    ```
 3. Der Simulator berechnet exakt den Vorschub für Gewinde.
 
@@ -5506,7 +5506,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 2. Führen Sie aus:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_12_radiuskorrektur_g41.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_12_radiuskorrektur_g41.cps
    ```
 3. Der Simulator erzeugt die Schlichtkontur mit Radiuskorrektur.
 
@@ -5663,7 +5663,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 2. Führen Sie aus:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_13_3d_freiformflaechen.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_13_3d_freiformflaechen.cps
    ```
 3. Der Simulator erzeugt 3D-Schlichtbahnen mit Kugelfräser.
 
@@ -5813,7 +5813,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 2. Führen Sie aus:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_14_heidenhain_klartext_4achse.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_14_heidenhain_klartext_4achse.cps
    ```
 3. Der Simulator erzeugt Heidenhain-Klartextcode (`.h`).
 
@@ -6000,7 +6000,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 2. Führen Sie aus:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_15_fasenfraesen_entgraten.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_15_fasenfraesen_entgraten.cps
    ```
 3. Der Simulator berechnet die $45^\circ$-Fasenbahn mit `G41` Radiuskorrektur.
 
@@ -6152,7 +6152,7 @@ Für diese Übung stehen Ihnen die folgenden Dateien zur Verfügung:
 2. Führen Sie aus:
 
    ```powershell
-   node simuliere_post.js uebungen/uebung_16_endabnahme_meister_post.cps
+   node 02_Software_und_Tools/scripts/simuliere_post.js 03_Fachdokumentation_und_Wissen/uebungen/uebung_16_endabnahme_meister_post.cps
    ```
 3. Der Meister-Postprozessor führt alle Sicherheitschecks (Drehzahl, Z-Kollision, Späneförderer) durch und erzeugt den perfekten Produktions-Code.
 
@@ -6247,7 +6247,7 @@ Damit du auch die fortgeschrittenen **Profi-Übungen 9 bis 16** sofort praktisch
 ### 🔹 Test für Übung 9 (Schnittdaten-Kontrolle $v_c$, `S` & `F` im Postprozessor):
 
 1. Füge die `vc`-Berechnung aus Übung 9 in [`src/mein_erster_post.cps`](file:///c:/Projekte/CNC/02_Software_und_Tools/src/mein_erster_post.cps) in die Funktion `onSection()` ein und speichere (`Strg + S`).
-2. Führe im Terminal `node simuliere_post.js` aus.
+2. Führe im Terminal `node 02_Software_und_Tools/scripts/simuliere_post.js` aus.
 3. **Prüfung:** Im erzeugten G-Code steht jetzt vor jeder Operation automatisch die berechnete Schnittgeschwindigkeit `(TECHNOLOGIE-CHECK: SCHNITTGESCHWINDIGKEIT VC = 251 M/MIN)`.
 
 ### 🔹 Test für Übung 10 (2. Aufspannung `G55` / `OP20` im Online-Simulator `NCViewer.com` testen):
@@ -6258,7 +6258,7 @@ Damit du auch die fortgeschrittenen **Profi-Übungen 9 bis 16** sofort praktisch
 
 ### 🔹 Test für Übung 11 (Gewindebohren `G84` mit `F = S × Steigung`):
 
-1. Prüfe im G-Code oder mit unserem Analyse-Tool `python GitHub_Projekte/cnc_setup_sheet_extractor.py Portfolio/Projekt_01_25D_Praezisionsfraesteil/Fertigungspaket_Projekt_01.md`:
+1. Prüfe im G-Code oder mit unserem Analyse-Tool `python 02_Software_und_Tools/GitHub_Projekte/cnc_setup_sheet_extractor.py 04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_01_25D_Praezisionsfraesteil/Fertigungspaket_Projekt_01.md`:
    Bei einem `M8`-Gewinde (Steigung $1{,}25\,\text{mm}$) und `S600` muss im `G84`-Satz zwingend `F750` stehen.
 
 ### 🔹 Test für Übung 12 (Werkzeugradiuskorrektur `G41` / `G40` im Simulator prüfen):
@@ -6271,7 +6271,7 @@ Damit du auch die fortgeschrittenen **Profi-Übungen 9 bis 16** sofort praktisch
 1. Öffne das Terminal (`Strg + Ö`) in `C:\Projekte\CNC` und führe unser neues Python-Tool direkt auf dein Heidenhain-Referenzprojekt aus:
 
    ```powershell
-   python GitHub_Projekte/cnc_setup_sheet_extractor.py Portfolio/Projekt_01_25D_Praezisionsfraesteil/Fertigungspaket_Projekt_01.md
+   python 02_Software_und_Tools/GitHub_Projekte/cnc_setup_sheet_extractor.py 04_Recht_Steuern_und_Backoffice/Portfolio/Projekt_01_25D_Praezisionsfraesteil/Fertigungspaket_Projekt_01.md
    ```
 2. **Prüfung:** Das Skript erkennt sofort automatisch `Heidenhain Klartext (TNC)`, liest das Rohteil (`BLK FORM`) von `150.0 x 100.0 x 45.0 mm` aus und listet die Heidenhain-Werkzeuge (`TOOL CALL 3`, `TOOL CALL 6`) inklusive Mindest-Auskraglänge ($L_{\text{min}}$) in einer fertigen Tabelle auf!
 
@@ -6339,7 +6339,7 @@ Damit du dir genau vorstellen kannst, wie die Zusammenarbeit zwischen dir und de
   3. Du tippst hier im Chat **nur einen einzigen Satz**:
 
      > *„Agent 2: Öffne `src/kunde_maschine.cps` und programmiere dort die Werkzeugliste, `Z-MIN` und den sicheren Rückzug am Programmende hinein!“*
-  4. **Was passiert dann automatisch?** Ich (als dein Agent 2) habe direkten Lese- und Schreibzugriff auf deinen Ordner `c:\Projekte\CNC\`. Ich öffne die Datei `kunde_maschine.cps` selbstständig, suche die richtigen Funktionen (`onOpen`, `onSection`, `onClose`), schreibe den kompletten JavaScript-Code direkt in die Datei hinein, speichere sie ab und teste sie sofort mit `node simuliere_post.js`!
+  4. **Was passiert dann automatisch?** Ich (als dein Agent 2) habe direkten Lese- und Schreibzugriff auf deinen Ordner `c:\Projekte\CNC\`. Ich öffne die Datei `kunde_maschine.cps` selbstständig, suche die richtigen Funktionen (`onOpen`, `onSection`, `onClose`), schreibe den kompletten JavaScript-Code direkt in die Datei hinein, speichere sie ab und teste sie sofort mit `node 02_Software_und_Tools/scripts/simuliere_post.js`!
 
 #### 🛡️ Wie Agent 3 (`NC-Safety- & Setup-Agent`) deine Prüf- und Dokumentationsarbeit (Übung 4, 5, 10, 11, 12, 13, 15, 16) übernimmt:
 

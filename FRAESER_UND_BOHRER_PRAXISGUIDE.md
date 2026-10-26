@@ -47,7 +47,7 @@ Viele Einsteiger befürchten, man müsse jahrelang eine Werkzeugmacherlehre abso
 
 Im modernen Maschinenbau gibt es zwar tausende Sonderwerkzeuge, aber **95 % aller Bauteile** werden mit nur **5 geometrischen Grundtypen** gefertigt:
 
-![Die 5 wichtigsten Fräswerkzeuge und Bohrer im technischen Direktvergleich](docs/bilder/fraeser_und_bohrer_uebersicht.jpg)
+![Die 5 wichtigsten Fräswerkzeuge und Bohrer im technischen Direktvergleich](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/fraeser_und_bohrer_uebersicht.jpg)
 *Abbildung 1: Die 5 wichtigsten Werkzeuge nebeneinander – 1. Schaftfräser (flacher Boden), 2. Torusfräser (mit Eckenradius), 3. Vollkugelfräser (3D-Halbkugel), 4. Fasenfräser (45°-Kegel) und 5. Bohr- & Gewindewerkzeug.*
 
 ```mermaid
@@ -109,6 +109,9 @@ flowchart TD
   * Ohne Entgraten schneidet sich der Werker beim Ausspannen sofort die Finger auf.
   * Früher feilten Arbeiter das von Hand mit der Feile ab. Heute fährt im CAM am Schluss ein **Fasenfräser mit einer Tiefe von $0,5\,\text{mm}$** einmal um alle Außenkanten und Taschen herum. Das Bauteil kommt gratfrei und mit edlen, gleichmäßigen 45°-Kanten aus der Maschine!
 
+![Fasenfräsen und Spitzen-Versatz Tip Offset](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_chamfer_tip_offset_diagram.jpg)
+*Abbildung 2a: Technischer Schnitt durch den Fasenfräser mit Spitzen-Versatz (Tip Offset). Die Spitze mit Schnittgeschwindigkeit $v_c = 0\,\text{m/min}$ wird nach unten in die Luft abgesenkt, damit die messerscharfen Außenflanken gratfrei schneiden.*
+
 ---
 
 ### 2.5 Planfräskopf / Messerkopf *(Face Mill – Der Abräumer)*
@@ -116,6 +119,10 @@ flowchart TD
 * **Geometrische Form:** Ein großer Werkzeugkörper *(Durchmesser $\varnothing\,40\,\text{mm}$ bis $\varnothing\,80\,\text{mm}$)*, auf den mehrere auswechselbare **Wendeschneidplatten *(WSP aus Hartmetall mit 4 bis 8 nutzbaren Schneidkanten)*** aufgeschraubt sind.
 * **Wofür man ihn einsetzt:**
   * **Planfräsen *(Facing)***: Das Rohteil ist vom Sägewerk oft uneben und rostig. In der ersten Bearbeitungsoperation (`OP10`) fährt der Messerkopf einmal über die gesamte Oberseite und fräst in 5 Sekunden eine spiegelblanke, exakt plane Bezugsfläche.
+  * **In der 2. Aufspannung (`OP20`):** Nach dem Umdrehen des Werkstücks fräst der Planfräser den verbliebenen Rohboden *(Spannrand)* exakt auf Fertigmaß ab.
+
+![1. und 2. Aufspannung OP10 und OP20 mit G54 und G55](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_op10_op20_setup.jpg)
+*Abbildung 2b: Das zweistufige Fertigungsverfahren: 1. Aufspannung (OP10 / G54) mit Spannrand im Schraubstock und 2. Aufspannung (OP20 / G55) nach 180°-Wendung zum Planfräsen auf Fertighöhe.*
 
 ---
 
@@ -123,7 +130,7 @@ flowchart TD
 
 Jedes runde Loch und jedes Gewinde auf einer CNC-Maschine durchläuft in der Regel eine feste **3-stufige Werkzeug-Reihenfolge**:
 
-![Vergleich von Fräswerkzeugen und VHM-Spiralbohrer](file:///c:/Projekte/CNC/docs/bilder/fraeser_und_spiralbohrer_vergleich.jpg)
+![Vergleich von Fräswerkzeugen und VHM-Spiralbohrer](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/fraeser_und_spiralbohrer_vergleich.jpg)
 *Abbildung 2: Technischer Direktvergleich von Fräswerkzeugen und Hochleistungs-VHM-Spiralbohrer mit Spiralnuten zur Spanabfuhr.*
 
 ```mermaid
@@ -160,11 +167,11 @@ flowchart LR
 
 Um in das gebohrte Loch die Gewindegänge hineinzubringen, gibt es zwei Methoden:
 
-| Merkmal                 | 1. Maschinengewindebohrer *(Tapping)*                                                                                                                                                                                                                               | 2. Gewindefräser *(Thread Milling)*                                                                                                                                                                                              |
-|:----------------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Wie es funktioniert** | Das Werkzeug sieht aus wie eine Schraube mit Nuten. Die CNC-Spindel synchronisiert Drehzahl und Vorschub exakt auf die Gewindesteigung *(z. B. `CYCL DEF 206/207` bei Heidenhain oder `CYCLE84` bei Siemens)* und dreht sich hinein und reversierend wieder heraus. | Ein kleiner Fräser mit Gewindezähnen rotiert schnell und fährt in einer **Schraubenlinie *(Helix-Interpolation)*** an der Bohrungswand entlang.                                                                                  |
-| **Vorteil**             | Extrem schnell *(dauert nur 2 Sekunden pro Gewinde)*.                                                                                                                                                                                                               | **Null Bruchgefahr!** Wenn ein Gewindebohrer abbricht, steckt er fest im Teil *(Ausschuss)*. Wenn ein Gewindefräser bricht, fällt er einfach heraus. Außerdem kann ein einziger Gewindefräser für M6, M8 und M10 genutzt werden! |
-| **Empfehlung**          | Ideal für Serienfertigung von Durchgangslöchern in Aluminium/Baustahl.                                                                                                                                                                                              | Ideal für teure Bauteile, Sacklöcher, schwer zerspanbaren Edelstahl und Titan.                                                                                                                                                   |
+| Merkmal | 1. Maschinengewindebohrer *(Tapping)* | 2. Gewindefräser *(Thread Milling)* |
+| :--- | :--- | :--- |
+| **Wie es funktioniert** | Das Werkzeug sieht aus wie eine Schraube mit Nuten. Die CNC-Spindel synchronisiert Drehzahl und Vorschub exakt auf die Gewindesteigung *(z. B. `CYCL DEF 206/207` bei Heidenhain oder `CYCLE84` bei Siemens)* und dreht sich hinein und reversierend wieder heraus. | Ein kleiner Fräser mit Gewindezähnen rotiert schnell und fährt in einer **Schraubenlinie *(Helix-Interpolation)*** an der Bohrungswand entlang. |
+| **Vorteil** | Extrem schnell *(dauert nur 2 Sekunden pro Gewinde)*. | **Null Bruchgefahr!** Wenn ein Gewindebohrer abbricht, steckt er fest im Teil *(Ausschuss)*. Wenn ein Gewindefräser bricht, fällt er einfach heraus. Außerdem kann ein einziger Gewindefräser für M6, M8 und M10 genutzt werden! |
+| **Empfehlung** | Ideal für Serienfertigung von Durchgangslöchern in Aluminium/Baustahl. | Ideal für teure Bauteile, Sacklöcher, schwer zerspanbaren Edelstahl und Titan. |
 
 ---
 
@@ -231,12 +238,12 @@ Um die optimalen Zahlen für $S$ und $F$ zu finden, musst du keine Formeln wälz
 
 Als Faustregel im CAM kannst du dir diese praktischen Standardwerte merken:
 
-| Materialgruppe                    | Typischer Werkstoff            | Schnittgeschwindigkeit $v_c$                | Richtwert für Fräser $\varnothing\,10\,\text{mm}$                                                                 | Kühlung / Schmierung                                                                             |
-|:--------------------------------- |:------------------------------ |:-------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------ |
-| **Aluminium & Buntmetalle**       | EN AW-6082 (AlMgSi1), AlCuMgPb | **Hoch** ($300 - 800\,\text{m/min}$)        | **Drehzahl:** $S \approx 10.000 - 15.000\,\text{U/min}$<br>**Vorschub:** $F \approx 2.000 - 4.000\,\text{mm/min}$ | Viel Kühlschmiermittel (`M08`) oder Minimalmengenschmierung *(MMS)*, damit Späne nicht ankleben. |
-| **Baustahl & Vergütungsstahl**    | S235JR, C45, 42CrMo4           | **Mittel** ($100 - 220\,\text{m/min}$)      | **Drehzahl:** $S \approx 3.000 - 4.500\,\text{U/min}$<br>**Vorschub:** $F \approx 800 - 1.500\,\text{mm/min}$     | Kühlschmiermittel (`M08`) oder Druckluftkühlung bei Hartmetall.                                  |
-| **Edelstahl (Rostfrei)**          | 1.4301 (V2A), 1.4404 (V4A)     | **Niedrig** ($60 - 120\,\text{m/min}$)      | **Drehzahl:** $S \approx 2.000 - 3.200\,\text{U/min}$<br>**Vorschub:** $F \approx 400 - 900\,\text{mm/min}$       | Intensive Innenkühlung oder Emulsion; darf niemals trocken reiben!                               |
-| **Holz & Kunststoffe (POM, PA6)** | POM-C, Acrylglas, Hartholz     | **Sehr hoch** ($400 - 1.200\,\text{m/min}$) | **Drehzahl:** $S \approx 15.000 - 24.000\,\text{U/min}$<br>**Vorschub:** $F \approx 3.000 - 6.000\,\text{mm/min}$ | **Trocken mit starker Absaugung** (`M09`), kein Wasser bei Holz!                                 |
+| Materialgruppe | Typischer Werkstoff | Schnittgeschwindigkeit $v_c$ | Richtwert für Fräser $\varnothing\,10\,\text{mm}$ | Kühlung / Schmierung |
+| :--- | :--- | :---: | :---: | :--- |
+| **Aluminium & Buntmetalle** | EN AW-6082 (AlMgSi1), AlCuMgPb | **Hoch** ($300 - 800\,\text{m/min}$) | **Drehzahl:** $S \approx 10.000 - 15.000\,\text{U/min}$<br>**Vorschub:** $F \approx 2.000 - 4.000\,\text{mm/min}$ | Viel Kühlschmiermittel (`M08`) oder Minimalmengenschmierung *(MMS)*, damit Späne nicht ankleben. |
+| **Baustahl & Vergütungsstahl** | S235JR, C45, 42CrMo4 | **Mittel** ($100 - 220\,\text{m/min}$) | **Drehzahl:** $S \approx 3.000 - 4.500\,\text{U/min}$<br>**Vorschub:** $F \approx 800 - 1.500\,\text{mm/min}$ | Kühlschmiermittel (`M08`) oder Druckluftkühlung bei Hartmetall. |
+| **Edelstahl (Rostfrei)** | 1.4301 (V2A), 1.4404 (V4A) | **Niedrig** ($60 - 120\,\text{m/min}$) | **Drehzahl:** $S \approx 2.000 - 3.200\,\text{U/min}$<br>**Vorschub:** $F \approx 400 - 900\,\text{mm/min}$ | Intensive Innenkühlung oder Emulsion; darf niemals trocken reiben! |
+| **Holz & Kunststoffe (POM, PA6)** | POM-C, Acrylglas, Hartholz | **Sehr hoch** ($400 - 1.200\,\text{m/min}$) | **Drehzahl:** $S \approx 15.000 - 24.000\,\text{U/min}$<br>**Vorschub:** $F \approx 3.000 - 6.000\,\text{mm/min}$ | **Trocken mit starker Absaugung** (`M09`), kein Wasser bei Holz! |
 
 ---
 
@@ -245,19 +252,16 @@ Als Faustregel im CAM kannst du dir diese praktischen Standardwerte merken:
 Als CAM-Programmierer machst du deinen Kunden glücklich, wenn du diese drei typischen Anfängerfehler von vornherein ausschließt:
 
 ### 5.1 Falle 1: Mindest-Auskraglänge $L_{\text{min}}$ zu kurz *(Spannfutter-Kollision)*
-
 * **Der Fehler:** Eine Bauteiltasche ist 40 mm tief. Im CAM wählst du einen Fräser mit nur 30 mm geschliffener Schneidenlänge und kurzer Auskragung aus.
 * **Was passiert:** Sobald der Fräser tiefer als 30 mm eintaucht, rammt das dicke Spannfutter *(die Aufnahme HSK-A63 oder SK40)* mit voller Wucht auf das Werkstück.
 * **Deine Lösung:** In deinen Einrichteblättern und im CAM immer prüfen:
   $$\text{Freie Auskraglänge } L_{\text{min}} > \text{Maximale Frästiefe } Z_{\text{max}} + 5\,\text{mm Sicherheitsabstand}$$
 
 ### 5.2 Falle 2: Senkrechtes Eintauchen ins Volle *(Plunging Crash)*
-
 * **Der Fehler:** Die meisten Fräser haben am flachen Boden in der Mitte keine Schneide *(sie sind „nicht zentrumschnittig“)*. Lässt man den Fräser wie einen Bohrer senkrecht von oben ins massive Metall stechen, bricht er sofort mit lautem Knall ab.
 * **Deine Lösung im CAM:** Als Eintauchstrategie *(Ramping / Lead-In)* **immer „Helix“ (Schraubenlinie)** oder **„Rampe mit 2° Winkel“** einstellen! Der Fräser schraubt sich kreisend ins Material, die Späne können entweichen und die Schneiden werden geschont.
 
 ### 5.3 Falle 3: Gleichlauf vs. Gegenlauf *(Climb vs. Conventional Milling)*
-
 * **Gleichlauf *(Climb Milling – Standard auf modernen CNC-Maschinen)***: Der Fräser dreht sich in Vorschubrichtung. Der Span beginnt dick und wird dünn.
   * **Vorteil:** Geringer Verschleiß, erstklassige Oberflächengüte, Maschine läuft leise.
   * **Regel im CAM:** Stelle immer **„Gleichlauf“ (Climb Milling)** ein!
@@ -269,16 +273,16 @@ Als CAM-Programmierer machst du deinen Kunden glücklich, wenn du diese drei typ
 
 Wenn du vor einem neuen 3D-STEP-Modell sitzt, wirf einfach einen Blick auf diesen 10-Sekunden-Spickzettel:
 
-| Was du am 3D-Modell siehst                     | Welches Werkzeug du im CAM wählst                                                                                                        | Typischer Befehl / Zyklus                                                           |
-|:---------------------------------------------- |:---------------------------------------------------------------------------------------------------------------------------------------- |:----------------------------------------------------------------------------------- |
-| **Rohteil-Oberseite planfräsen**               | Planfräskopf ($\varnothing\,50\,\text{mm}$) oder großer Schaftfräser                                                                     | Planfräsen *(Face Milling)*                                                         |
-| **Tiefe Taschen & Außenkonturen schruppen**    | Schaftfräser oder Torusfräser mit Eckenradius                                                                                            | Adaptives Räumen *(Adaptive Clearing / Trochoidal)*                                 |
-| **Flache Taschenböden & 90°-Wände schlichten** | Schaftfräser mit scharfer 90°-Ecke                                                                                                       | Taschenschlichten *(2D Pocket / 2D Contour)*                                        |
-| **Gekrümmte Freiformflächen & Rundungen**      | Vollkugelfräser ($\varnothing\,6 - 12\,\text{mm}$)                                                                                       | 3D-Parallel / 3D-Scallop *(Zeilenfräsen)*                                           |
-| **Scharfe Kanten entgraten**                   | Fasenfräser ($45^\circ$)                                                                                                                 | 2D-Fasenfräsen *(Chamfering, 0,5 mm)*                                               |
-| **Gewindebohrung (z. B. M6)**                  | 1. Zentrierbohrer $\rightarrow$ 2. Bohrer $\varnothing\,5,0\,\text{mm}$ $\rightarrow$ 3. Gewindebohrer M6                                | Zentrierzyklus $\rightarrow$ Tiefbohrzyklus `G83` $\rightarrow$ Gewindezyklus `G84` |
-| **Passbohrung mit hoher Genauigkeit (H7)**     | 1. Zentrierbohrer $\rightarrow$ 2. Bohrer $\varnothing\,9,8\,\text{mm}$ $\rightarrow$ 3. Maschinen-Reibahle $\varnothing\,10\,\text{H7}$ | Reibzyklus *(Boring / Reaming mit Spindelhalt)*                                     |
+| Was du am 3D-Modell siehst | Welches Werkzeug du im CAM wählst | Typischer Befehl / Zyklus |
+| :--- | :--- | :--- |
+| **Rohteil-Oberseite planfräsen** | Planfräskopf ($\varnothing\,50\,\text{mm}$) oder großer Schaftfräser | Planfräsen *(Face Milling)* |
+| **Tiefe Taschen & Außenkonturen schruppen** | Schaftfräser oder Torusfräser mit Eckenradius | Adaptives Räumen *(Adaptive Clearing / Trochoidal)* |
+| **Flache Taschenböden & 90°-Wände schlichten** | Schaftfräser mit scharfer 90°-Ecke | Taschenschlichten *(2D Pocket / 2D Contour)* |
+| **Gekrümmte Freiformflächen & Rundungen** | Vollkugelfräser ($\varnothing\,6 - 12\,\text{mm}$) | 3D-Parallel / 3D-Scallop *(Zeilenfräsen)* |
+| **Scharfe Kanten entgraten** | Fasenfräser ($45^\circ$) | 2D-Fasenfräsen *(Chamfering, 0,5 mm)* |
+| **Gewindebohrung (z. B. M6)** | 1. Zentrierbohrer $\rightarrow$ 2. Bohrer $\varnothing\,5,0\,\text{mm}$ $\rightarrow$ 3. Gewindebohrer M6 | Zentrierzyklus $\rightarrow$ Tiefbohrzyklus `G83` $\rightarrow$ Gewindezyklus `G84` |
+| **Passbohrung mit hoher Genauigkeit (H7)** | 1. Zentrierbohrer $\rightarrow$ 2. Bohrer $\varnothing\,9,8\,\text{mm}$ $\rightarrow$ 3. Maschinen-Reibahle $\varnothing\,10\,\text{H7}$ | Reibzyklus *(Boring / Reaming mit Spindelhalt)* |
 
 ---
 
-*Dieses Dokument gehört zum technischen Fertigungshandbuch des CAD/CAM-Ingenieurbüros und ergänzt das Übungshandbuch [ALLE_UEBUNGEN_HANDBUCH.md](file:///C:/Projekte/CNC/ALLE_UEBUNGEN_HANDBUCH.md) sowie den Hauptleitfaden [CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md](file:///C:/Projekte/CNC/CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md).*
+*Dieses Dokument gehört zum technischen Fertigungshandbuch des CAD/CAM-Ingenieurbüros und ergänzt das Übungshandbuch [ALLE_UEBUNGEN_HANDBUCH.md](file:///C:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md) sowie den Hauptleitfaden [CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md](file:///C:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/CAM_Nebentaetigkeit_und_Gewerbe_Leitfaden.md).*

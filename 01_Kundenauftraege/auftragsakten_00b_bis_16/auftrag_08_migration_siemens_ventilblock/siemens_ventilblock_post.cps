@@ -39,6 +39,8 @@ var toolFormat = createFormat({decimals: 0});
 var xOutput = createVariable({prefix: "X"}, xyzFormat);
 var yOutput = createVariable({prefix: "Y"}, xyzFormat);
 var zOutput = createVariable({prefix: "Z"}, xyzFormat);
+var iOutput = createReferenceVariable({prefix: "I"}, xyzFormat);
+var jOutput = createReferenceVariable({prefix: "J"}, xyzFormat);
 var feedOutput = createVariable({prefix: "F"}, feedFormat);
 
 // Benutzer-Optionen (Properties in Autodesk Fusion)
@@ -165,19 +167,31 @@ function onLinear(x, y, z, feed) {
 }
 
 function onCircular(clockwise, cx, cy, cz, x, y, z, feed) {
+  var start = getCurrentPosition();
+  xOutput.reset();
+  yOutput.reset();
   var xStr = xOutput.format(x);
   var yStr = yOutput.format(y);
   var zStr = zOutput.format(z);
+  var iStr = iOutput.format(cx - start.x);
+  var jStr = jOutput.format(cy - start.y);
   var fStr = feedOutput.format(feed);
   var cmd = clockwise ? "G02" : "G03";
-  writeWords(cmd, xStr, yStr, zStr, fStr);
+  writeWords(cmd, xStr, yStr, zStr, iStr, jStr, fStr);
 }
 
 function onCyclePoint(x, y, z) {
+  xOutput.reset();
+  yOutput.reset();
+  zOutput.reset();
   var xStr = xOutput.format(x);
   var yStr = yOutput.format(y);
   var zStr = zOutput.format(z);
   writeWords("G83", xStr, yStr, zStr, "R2.000", "Q3.000", "F300");
+}
+
+function onCycleEnd() {
+  writeWords("G80");
 }
 
 /**

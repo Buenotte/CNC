@@ -71,7 +71,7 @@ if __name__ == "__main__":
     parser.add_argument("--pocket", nargs=2, type=float, default=[30.0, 3.0], metavar=('DIA', 'DEPTH'), help="Kreistasche Durchmesser und Tiefe in mm")
     parser.add_argument("--hole-dia", type=float, default=6.0, help="Bohrungsdurchmesser in mm")
     parser.add_argument("--hole-margin", type=float, default=10.0, help="Randabstand der Bohrungen in mm")
-    parser.add_argument("--output", type=str, default=r"c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\custom_test_part.stl", help="Zielpfad der STL-Datei")
+    parser.add_argument("--output", type=str, default=r"c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\custom_test_part.stl", help="Zielpfad der STL-Datei")
     
     args = parser.parse_args()
     create_parametric_stl(

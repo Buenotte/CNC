@@ -53,7 +53,7 @@ if __name__ == "__main__":
     cad_mesh = build_perfect_cad_flanschplatte()
 
     target_paths = [
-        r"c:\Projekte\CNC\01_Kundenauftraege\test_auftrag_ubung_03\bauteil_1001.stl",
+        r"c:\Projekte\CNC\01_Kundenauftraege\test_ubungen\test_auftrag_ubung_03\bauteil_1001.stl",
         r"c:\Projekte\CNC\01_Kundenauftraege\referenz_auftrag_flanschplatte\bauteil_1001.stl",
         r"c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_03_flanschplatte_z_min\bauteil_1001.stl",
         r"c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16\auftrag_04_lagerplatte_3d_cam\bauteil_1001.stl",

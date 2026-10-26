@@ -1,5 +1,5 @@
 # 📋 Dokumentation der Auftragsabwicklung & Artefakt-Gesamtnachweis
-**Auftrags-Ordner:** [`test_auftrag_ubung_04`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/)  
+**Auftrags-Ordner:** [`test_auftrag_ubung_04`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/)  
 **Projekt / Bauteil:** Lagerplatte 1001 ($80 \times 50 \times 12\,\text{mm}$)  
 **Auftraggeber:** Franken Präzisionsteile GmbH, Schweinfurt *(Michael Brandner, Fertigungsleiter)*  
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik (§ 18 EStG)  
@@ -26,15 +26,15 @@ Die folgende Tabelle dokumentiert alle in diesem Auftragsordner erzeugten Dateie
 
 | Artefakt-Dateiname | Typ / Format | Zuständiger KI-Agent | Zweck, Inhalt & technischer Nachweis |
 | :--- | :---: | :---: | :--- |
-| [`KUNDENAUFTRAG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/KUNDENAUFTRAG.md) | Markdown | **Agent 1** *(Kunde)* | Reales Original-Briefing mit Maschinenpark, Bauteilabmessungen, Werkzeugen und Festpreisangebot. |
-| [`WORKFLOW_UND_PROMPTS.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/WORKFLOW_UND_PROMPTS.md) | Leitfaden | **System** | Verbindlicher 4-Phasen-Workflow inklusive fertiger Prompts für alle 4 Agenten. |
-| [`bauteil_1001.stl`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/bauteil_1001.stl) | 3D-CAD | Kunde / CAD | Dreidimensionales CAD-Modell *(Triangulierte Oberfläche)* der Lagerplatte $80 \times 50 \times 12\,\text{mm}$. |
-| [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | B2B-Vertrag | **Agent 4** *(Backoffice)* | Rechtssicheres Ingenieurangebot über 380,00 € netto mit Haftungsklausel für Einzelsatzeinfahren. |
-| [`kunden_auftrag_04.cps`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/kunden_auftrag_04.cps) | JavaScript | **Agent 2** *(Coder)* | Vollständiger, maßgeschneiderter Postprozessor für Haas VF-2 mit allen Zyklen und Satznummern. |
-| [`kunden_auftrag_04.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/kunden_auftrag_04.nc) | G-Code | **Agent 2** *(Coder)* | 56-zeiliges, kollisionsgeprüftes Produktionsprogramm nach DIN 66025 für die Haas VF-2 Fräsmaschine. |
-| [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | Prüfbericht | **Agent 3** *(Safety)* | 5-Stufen-Sicherheitsbericht mit Bestätigung: Status BESTANDEN (GRÜN) und Tunnel-Prinzip-Freigabe. |
-| [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/06_EINRICHTEBLATT_SETUP_SHEET.md) | Rüstplan | **Agent 3** *(Safety)* | Ausdruckbare Werkstatt-Dokumentation für den Zerspanungsmechaniker mit Nullpunkt G54 und Rüstmaßen. |
-| [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) | Abrechnung | **Agent 4** *(Backoffice)* | Revisionssichere Honorarabrechnung über 452,20 € brutto nach § 14 UStG für das Finanzamt Hanau. |
+| [`KUNDENAUFTRAG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/KUNDENAUFTRAG.md) | Markdown | **Agent 1** *(Kunde)* | Reales Original-Briefing mit Maschinenpark, Bauteilabmessungen, Werkzeugen und Festpreisangebot. |
+| [`WORKFLOW_UND_PROMPTS.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/WORKFLOW_UND_PROMPTS.md) | Leitfaden | **System** | Verbindlicher 4-Phasen-Workflow inklusive fertiger Prompts für alle 4 Agenten. |
+| [`bauteil_1001.stl`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/bauteil_1001.stl) | 3D-CAD | Kunde / CAD | Dreidimensionales CAD-Modell *(Triangulierte Oberfläche)* der Lagerplatte $80 \times 50 \times 12\,\text{mm}$. |
+| [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) | B2B-Vertrag | **Agent 4** *(Backoffice)* | Rechtssicheres Ingenieurangebot über 380,00 € netto mit Haftungsklausel für Einzelsatzeinfahren. |
+| [`kunden_auftrag_04.cps`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/kunden_auftrag_04.cps) | JavaScript | **Agent 2** *(Coder)* | Vollständiger, maßgeschneiderter Postprozessor für Haas VF-2 mit allen Zyklen und Satznummern. |
+| [`kunden_auftrag_04.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/kunden_auftrag_04.nc) | G-Code | **Agent 2** *(Coder)* | 56-zeiliges, kollisionsgeprüftes Produktionsprogramm nach DIN 66025 für die Haas VF-2 Fräsmaschine. |
+| [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/05_SICHERHEITS_CRASH_PRUEFBERICHT.md) | Prüfbericht | **Agent 3** *(Safety)* | 5-Stufen-Sicherheitsbericht mit Bestätigung: Status BESTANDEN (GRÜN) und Tunnel-Prinzip-Freigabe. |
+| [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/06_EINRICHTEBLATT_SETUP_SHEET.md) | Rüstplan | **Agent 3** *(Safety)* | Ausdruckbare Werkstatt-Dokumentation für den Zerspanungsmechaniker mit Nullpunkt G54 und Rüstmaßen. |
+| [`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) | Abrechnung | **Agent 4** *(Backoffice)* | Revisionssichere Honorarabrechnung über 452,20 € brutto nach § 14 UStG für das Finanzamt Hanau. |
 | **`08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md`** | Doku | **System / Agenten** | Diese umfassende Dokumentation aller durchgeführten Arbeiten und technischen Nachweise. |
 
 ---
@@ -90,7 +90,7 @@ Die Abwicklung erfolgte strikt nach der im Projekt definierten **4-Phasen-Archit
 ---
 
 ### Phase 2: Kaufmännische Vertragslegung & B2B-Angebot *(Agent 4)*
-* **Erstelltes Dokument:** [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md)
+* **Erstelltes Dokument:** [`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/02_ANGEBOT_DIPL_ING_BUJANOVSKI.md)
 * **Kaufmännische Details:**
   * Nettohonorar: **380,00 €**
   * Umsatzsteuer (19 %): **72,20 €**
@@ -103,8 +103,8 @@ Die Abwicklung erfolgte strikt nach der im Projekt definierten **4-Phasen-Archit
 
 ### Phase 3: Postprozessor-Programmierung & Maschinencode-Generierung *(Agent 2)*
 * **Erstellte Dokumente:**
-  * [`kunden_auftrag_04.cps`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/kunden_auftrag_04.cps)
-  * [`kunden_auftrag_04.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/kunden_auftrag_04.nc)
+  * [`kunden_auftrag_04.cps`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/kunden_auftrag_04.cps)
+  * [`kunden_auftrag_04.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/kunden_auftrag_04.nc)
 * **Umgesetzte Programmierlogik in JavaScript:**
   1. **Kopfdaten & Tool Table (`onOpen`):**
      * Schreibt die genormte ISO-Programmnummer `O1001 (KUNDENAUFTRAG LAGERPLATTE 80X50X12 MM - HAAS VF-2)`.
@@ -132,15 +132,15 @@ Die Abwicklung erfolgte strikt nach der im Projekt definierten **4-Phasen-Archit
 ---
 
 ### Phase 4: Crash-Prüfung, Werkstatt-Setup & Rechnungsstellung *(Agent 3 & 4)*
-* **Prüfbericht ([`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/05_SICHERHEITS_CRASH_PRUEFBERICHT.md)):**
+* **Prüfbericht ([`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/05_SICHERHEITS_CRASH_PRUEFBERICHT.md)):**
   * Kollisionsreserve zu den Schraubstockbacken:
     $$\text{Sicherheitsabstand} = Z_{\text{Backen}} - Z_{\text{Frästiefe}} = -12{,}5\,\text{mm} - (-12{,}0\,\text{mm}) = +0{,}5\,\text{mm}$$
   * Die Bohrerspitze taucht im Tunnel zwischen den Parallelunterlagen ein *(Tunnel-Prinzip – kein Kontakt zu Stahlbacken oder Unterlagen)*.
   * Status: **BESTANDEN (GRÜN)**.
-* **Einrichteblatt ([`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/06_EINRICHTEBLATT_SETUP_SHEET.md)):**
+* **Einrichteblatt ([`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/06_EINRICHTEBLATT_SETUP_SHEET.md)):**
   * Vollständige Rüsttabelle mit Werkzeug-Auskraglängen *(T01: min. 25 mm / T02: min. 30 mm)*.
   * Nullpunktlage `G54` vorne links oben grafisch dokumentiert.
-* **Honorarabrechnung ([`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/test_auftrag_ubung_04/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md)):**
+* **Honorarabrechnung ([`07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/test_ubungen/test_auftrag_ubung_04/07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md)):**
   * Ausgestellt auf Franken Präzisionsteile GmbH über **380,00 € netto** zzgl. **72,20 € MwSt.** = **452,20 € brutto**.
   * Revisionssicher für das Finanzamt Hanau.
 

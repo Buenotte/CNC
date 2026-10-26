@@ -1,4 +1,15 @@
-# 📩 Kundenauftrag: Übung 11: Gewindebohren (`G84` Rigid Tapping) – `M6`- und `M8`-Schraubengewinde ohne Werkzeugbruch programmieren (`F = S × Steigung`)
+# 📩 Auftrag 11: Synchron-Gewindebohren (Rigid Tapping M29 + G84 für M8x1,25) — Meyer Hydraulikkomponenten GmbH
+
+**Auftraggeber:** Christian Meyer (Fertigungsleiter)  
+**Unternehmen:** Meyer Hydraulikkomponenten GmbH  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
+**Zielmaschine:** **Haas VF-4SS (Haas NGC Steuerung)**  
+**Vereinbartes Budget:** **460,00 € netto** (547,40 € brutto)  
+
+---
+
+## Auftrags-Briefing des Kunden:
+
 **Auftrags-Kategorie:** 11 (Gewindebohrerbruch bei M8-Serienfertigung)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -34,8 +45,3 @@ So sieht eine typische Anfrage aus, wenn in der Fertigung ständig Gewindebohrer
 > **Christian Meyer** – Meyer Hydraulik KG, Hannover
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

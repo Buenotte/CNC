@@ -1,4 +1,15 @@
-# 📩 Kundenauftrag: Übung 8: Zwei Steuerungs-Sprachen vergleichen (Haas/Fanuc vs. Siemens Sinumerik)
+# 📩 Auftrag 08: Steuerungsmigration Fanuc ISO auf Siemens Sinumerik 840D sl (Ventilblock) — Franken Zerspanung GmbH
+
+**Auftraggeber:** Jürgen Meier (Fertigungsleiter)  
+**Unternehmen:** Franken Zerspanung GmbH  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
+**Zielmaschine:** **DMG MORI DMU 50 (Siemens Sinumerik 840D sl)**  
+**Vereinbartes Budget:** **650,00 € netto** (773,50 € brutto)  
+
+---
+
+## Auftrags-Briefing des Kunden:
+
 **Auftrags-Kategorie:** 8 (Migration von Haas auf Siemens Sinumerik)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -33,8 +44,3 @@ So sieht eine typische Anfrage aus, wenn ein Betrieb eine neue Maschine mit eine
 > **Jürgen Meier** – Lohnfertigung Franken GmbH, Erlangen
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

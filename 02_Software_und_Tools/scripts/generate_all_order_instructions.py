@@ -13,7 +13,7 @@ Die Anleitung beschreibt:
 import os
 import re
 
-BASE_DIR = r"c:\Projekte\CNC\kundenauftraege"
+BASE_DIR = r"c:\Projekte\CNC\01_Kundenauftraege\auftragsakten_00b_bis_16"
 
 order_metadata = {
     "auftrag_00b_hallo_welt_mum_systemhaus": {

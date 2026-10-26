@@ -1,4 +1,15 @@
-# 📩 Kundenauftrag: Übung 10: Die 2. Aufspannung (`G55` / `OP20`) – Wie das 3D-Bauteil umgedreht und der Restboden auf der Rückseite plangefräst wird
+# 📩 Auftrag 10: Dynamische Mehrseiten-Nullpunktlogik (G54 OP10 / G55 OP20) — AluTech Gehäusebau GmbH
+
+**Auftraggeber:** Robert Schneider (Fertigungsleiter)  
+**Unternehmen:** AluTech Gehäusebau GmbH  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
+**Zielmaschine:** **Hermle C42 U MT (ISO/Fanuc-Modus mit 2x Schunk Kontec KSC)**  
+**Vereinbartes Budget:** **520,00 € netto** (618,80 € brutto)  
+
+---
+
+## Auftrags-Briefing des Kunden:
+
 **Auftrags-Kategorie:** 10 (Restboden-Planfräsen in der 2. Aufspannung)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -34,8 +45,3 @@ So sieht eine typische Anfrage aus, wenn ein Bauteil nach der ersten Aufspannung
 > **Robert Schneider** – AluTech Gehäusebau GmbH, Friedrichshafen
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

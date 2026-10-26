@@ -1,4 +1,15 @@
-# 📩 Kundenauftrag: Übung 15: Kanten entgraten am 3D-Modell (`2D-Fase / Chamfer Milling`) mit einem 45°-Fasenfräser (`T04`)
+# 📩 Auftrag 15: Vollautomatisches 2D-Fasenfräsen & Entgraten (90°-NC-Anbohrer/Fasenfräser) — Kunz Feinwerktechnik
+
+**Auftraggeber:** Matthias Kunz (Geschäftsführer)  
+**Unternehmen:** Kunz Feinwerktechnik  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
+**Zielmaschine:** **Hedelius Tiltenta 7 (ISO G-Code-Modus)**  
+**Vereinbartes Budget:** **380,00 € netto** (452,20 € brutto)  
+
+---
+
+## Auftrags-Briefing des Kunden:
+
 **Auftrags-Kategorie:** 15 (Automatisiertes Entgraten & Spitzenversatz)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -33,8 +44,3 @@ So sieht eine typische Anfrage aus, wenn ein Kunde Bauteile nicht mehr mühsam v
 > **Matthias Kunz** – Kunz Feinwerktechnik, Villingen-Schwenningen
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

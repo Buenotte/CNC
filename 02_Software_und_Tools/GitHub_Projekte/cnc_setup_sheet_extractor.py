@@ -45,19 +45,39 @@ def parse_nc_program(content: str, filename: str) -> NCProgramSummary:
     """Analysiert den Textinhalt eines Heidenhain- oder Siemens-NC-Programms."""
     lines = [line.strip() for line in content.splitlines() if line.strip()]
 
-    # Steuerungstyp erkennen (Heidenhain BEGIN PGM vs. Siemens DIN/ISO)
+    # Steuerungstyp erkennen (Heidenhain BEGIN PGM vs. Siemens DIN/ISO vs. Fanuc/Haas ISO G-Code)
     is_heidenhain = any("BEGIN PGM" in line or "TOOL CALL" in line for line in lines)
-    control_type = "Heidenhain Klartext (TNC)" if is_heidenhain else "Siemens Sinumerik (DIN/ISO)"
+    is_siemens = any('T="' in line or "CYCLE8" in line or "SUPA" in line or "TRAORI" in line for line in lines)
+    if is_heidenhain:
+        control_type = "Heidenhain Klartext (TNC)"
+    elif is_siemens:
+        control_type = "Siemens Sinumerik (DIN/ISO)"
+    else:
+        control_type = "Fanuc / Haas NGC (ISO G-Code DIN 66025)"
     program_name = filename
 
     summary = NCProgramSummary(program_name=program_name, control_type=control_type)
 
-    # Heidenhain Programmname aus 'BEGIN PGM <NAME> MM'
+    # Heidenhain Programmname aus 'BEGIN PGM <NAME> MM' oder ISO O-Nummer 'O1001 (...)'
     for line in lines:
         m_pgm = re.search(r"BEGIN\s+PGM\s+([^\s]+)", line)
         if m_pgm:
             summary.program_name = m_pgm.group(1)
             break
+        m_iso = re.match(r"^(O\d+)\s*(?:\(([^)]+)\))?", line)
+        if m_iso:
+            summary.program_name = f"{m_iso.group(1)} ({m_iso.group(2)})" if m_iso.group(2) else m_iso.group(1)
+            break
+
+    # Vorab-Scan nach ISO-Werkzeugkommentaren im Header, z. B. (T01 : ...) oder (T1 D=10. ...)
+    iso_tool_comments = {}
+    for line in lines:
+        m_tcomm = re.search(r"\(\s*T0*(\d+)\b[:\s\-]*(.*?)\)", line, re.IGNORECASE)
+        if m_tcomm:
+            t_num = int(m_tcomm.group(1))
+            desc = m_tcomm.group(2).strip()
+            if desc and t_num not in iso_tool_comments:
+                iso_tool_comments[t_num] = desc
 
     # Rohteil (BLK FORM 0.1 / 0.2 bei Heidenhain)
     blk_min, blk_max = None, None
@@ -106,9 +126,31 @@ def parse_nc_program(content: str, filename: str) -> NCProgramSummary:
             )
             continue
 
+        # 3. Fanuc / Haas ISO Werkzeugwechsel erkennen (z. B. T01 M06, T1 M6, M06 T01)
+        m_iso_t = re.search(r"(?:\bT0*(\d+)\s*M0?6\b|\bM0?6\s*T0*(\d+)\b)", line)
+        if m_iso_t:
+            if current_op:
+                summary.operations.append(current_op)
+            t_num = int(m_iso_t.group(1) or m_iso_t.group(2))
+            t_id = f"T{t_num:02d}"
+            inline_comm = re.search(r"\(([^)]+)\)", line)
+            comment = (
+                inline_comm.group(1).strip()
+                if inline_comm
+                else iso_tool_comments.get(t_num, "ISO Standardwerkzeug (DIN 66025)")
+            )
+            current_op = ToolOperation(tool_id=t_id, comment=comment)
+            continue
+
         # Falls ein Werkzeug aktiv ist: Drehzahl, Vorschub, Kühlmittel und Z-Tiefe verfolgen
         if current_op:
-            # Siemens Drehzahl S... M3
+            # Kommentarzeile direkt nach Txx M06 als Werkzeugbeschreibung übernehmen, falls noch Standard
+            if current_op.comment == "ISO Standardwerkzeug (DIN 66025)":
+                m_op_comm = re.match(r"^\(([^)]+)\)$", line)
+                if m_op_comm and "SAFETY" not in m_op_comm.group(1).upper():
+                    current_op.comment = m_op_comm.group(1).strip()
+
+            # Siemens / ISO Drehzahl S... M3 / M03
             m_s = re.search(r"\bS(\d+)\b", line)
             if m_s and current_op.spindle_rpm == 0:
                 current_op.spindle_rpm = int(m_s.group(1))
@@ -118,15 +160,15 @@ def parse_nc_program(content: str, filename: str) -> NCProgramSummary:
             if m_f and current_op.feedrate == 0:
                 current_op.feedrate = int(float(m_f.group(1)))
 
-            # Kühlmittel M7 (IKZ) oder M8 (Außenkühlung)
-            if re.search(r"\bM7\b", line):
-                current_op.coolant = "Innenkühlung (IKZ / M7)"
-            elif re.search(r"\bM8\b", line) and "IKZ" not in current_op.coolant:
-                current_op.coolant = "Außenkühlung (M8)"
+            # Kühlmittel M7 / M88 (IKZ) oder M8 / M08 (Außenkühlung)
+            if re.search(r"\b(?:M0?7|M88)\b", line):
+                current_op.coolant = "Innenkühlung (IKZ / M7 / M88)"
+            elif re.search(r"\bM0?8\b", line) and "IKZ" not in current_op.coolant:
+                current_op.coolant = "Außenkühlung (M08)"
 
-            # Tiefste Z-Koordinate oder Bohrtiefe Q201
+            # Tiefste Z-Koordinate oder Bohrtiefe Q201 (Ignoriere Maschinenreferenz M91, SUPA, G53, G28)
             m_z = re.search(r"\bZ([+-]?\d+(?:\.\d+)?)\b", line)
-            if m_z and "M91" not in line and "SUPA" not in line:
+            if m_z and not any(tok in line for tok in ("M91", "SUPA", "G53", "G28")) and not line.startswith("("):
                 z_val = float(m_z.group(1))
                 if z_val < current_op.min_z:
                     current_op.min_z = z_val

@@ -1,4 +1,15 @@
-# 📩 Kundenauftrag: Übung 7: Eigenen Schalter (`Property`) für Zusatzfunktionen wie Blasluft (`M07`) oder Späneförderer bauen
+# 📩 Auftrag 07: Konfigurierbare Postprozessor-Properties (Späneförderer M31/M33) — Vogtland Zerspanungstechnik GmbH
+
+**Auftraggeber:** Karsten Wolf (Technischer Leiter)  
+**Unternehmen:** Vogtland Zerspanungstechnik GmbH  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
+**Zielmaschine:** **Alzmetall CS 1200 (ISO G-Code-Modus)**  
+**Vereinbartes Budget:** **390,00 € netto** (464,10 € brutto)  
+
+---
+
+## Auftrags-Briefing des Kunden:
+
 **Auftrags-Kategorie:** 7 (Konfigurierbare Schalter für verschiedene Materialien)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -34,8 +45,3 @@ So sieht eine typische Anfrage aus, wenn ein Betrieb verschiedene Werkstoffe zer
 > **Karsten Wolf** – Vogtland Zerspanungs-GmbH, Plauen
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.

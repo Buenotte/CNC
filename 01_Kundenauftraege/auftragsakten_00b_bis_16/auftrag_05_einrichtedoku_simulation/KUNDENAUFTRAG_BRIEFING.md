@@ -1,4 +1,15 @@
-# 📩 Kundenauftrag: Übung 5: 3D-Simulation im Browser & Einrichteblatt (`Setup Sheet`) für den Kunden erstellen
+# 📩 Auftrag 05: Einrichtedokumentation, G-Code-Verifikation & 3D-Simulation — Kuhn Medizintechnik & CNC-Fräszentrum
+
+**Auftraggeber:** Thomas Kuhn (Inhaber & Werkstattleiter)  
+**Unternehmen:** Kuhn Medizintechnik & CNC-Fräszentrum  
+**Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
+**Zielmaschine:** **Haas VF-2 (Haas NGC Steuerung)**  
+**Vereinbartes Budget:** **280,00 € netto** (333,20 € brutto)  
+
+---
+
+## Auftrags-Briefing des Kunden:
+
 **Auftrags-Kategorie:** 5 (Einrichtedokumentation & Simulationsprüfung)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -30,9 +41,3 @@ So sieht eine typische Anfrage aus, wenn ein Kunde das CAM-Programm bereits hat,
 > **Thomas Kuhn** – Kuhn Medizintechnik & Feinmechanik, Tuttlingen
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot & Honorar:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Haupt-Agent für die Auftragsabwicklung:** `Agent 3` (NC-Safety- & Setup-Agent) – führt die 3D-Kollisionssimulation im Browser durch und extrahiert das normgerechte Werkstatt-Einrichteblatt (`06_EINRICHTEBLATT_SETUP_SHEET.md`) aus dem beigestellten Kunden-G-Code `output_expected.nc`.
-* **Rolle von Agent 2 (Postprocessor-Coder-Agent):** Bereitschafts-Agent für Code-Korrekturen (wird in diesem Auftrag nur aufgerufen, falls Agent 3 bei der Analyse des beigestellten Kunden-G-Codes Syntaxfehler, fehlende Sicherheitszeilen oder Kollisionen detektiert; es wird keine neue `.cps`-Datei programmiert).
-* **Zuständiger Agent für Endabrechnung:** `Agent 4` (Backoffice-Agent) – Erstellung der Honorarrechnung nach § 18 EStG.

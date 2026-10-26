@@ -10,16 +10,22 @@ docs/videos/uebung_03_simulation_video.mp4
 import sys
 import os
 import math
+import argparse
 import subprocess
 from PIL import Image, ImageDraw, ImageFont
 
-def render_video():
+def render_video(out_mp4=None, gcode_path=None):
     width = 1280
     height = 720
     fps = 30
-    out_dir = "docs/videos"
-    os.makedirs(out_dir, exist_ok=True)
-    out_mp4 = os.path.join(out_dir, "uebung_03_simulation_video.mp4")
+    if not out_mp4:
+        out_dir = "docs/videos"
+        os.makedirs(out_dir, exist_ok=True)
+        out_mp4 = os.path.join(out_dir, "uebung_03_simulation_video.mp4")
+    else:
+        parent_dir = os.path.dirname(os.path.abspath(out_mp4))
+        if parent_dir:
+            os.makedirs(parent_dir, exist_ok=True)
 
     # FFmpeg Subprozess starten (Piped raw RGB24)
     ffmpeg_cmd = [
@@ -293,4 +299,8 @@ def render_video():
     print(f"[OK] Video erfolgreich fertiggestellt: {out_mp4}")
 
 if __name__ == "__main__":
-    render_video()
+    parser = argparse.ArgumentParser(description="3D-CAD CNC-Simulations-Video-Generator")
+    parser.add_argument("--gcode", type=str, default=None, help="Optionaler Pfad zur G-Code-Datei (.nc)")
+    parser.add_argument("--output", type=str, default=None, help="Optionaler Ausgabepfad fuer das MP4-Video (.mp4)")
+    args = parser.parse_args()
+    render_video(out_mp4=args.output, gcode_path=args.gcode)

@@ -1,44 +1,50 @@
-# 📄 Freiberufliches Ingenieur-Angebot (Agent 4: Backoffice-Agent)
-**Ingenieurbüro Dipl.-Ing. Bujanovski**  
-Softwaretechnik & CAD/CAM-Fertigungsprozesse  
-63526 Erlensee | E-Mail: kontakt@ingenieurbuero-bujanovski.de  
-Steuerliche Einordnung: Freiberufliche Tätigkeit nach § 18 Abs. 1 Nr. 1 EStG *(Finanzamt Hanau)*
+# 📄 Ingenieur-Angebot: Auftrag 04: 3D-CAD-Modell zu komplettem NC-Programm (Lagerplatte)
+
+* **Auftragnehmer:** Ingenieurbüro Dipl.-Ing. (FH) Alexander Bujanovski *(Freiberuflicher Beratender Ingenieur nach § 18 Abs. 1 Nr. 1 EStG [Einkommensteuergesetz])*
+* **Auftraggeber:** **Franken Präzisionsteile GmbH**, z. Hd. Michael Brandner (Fertigungsleiter), Industriestraße 28, 97424 Schweinfurt
+* **Angebot-Nr.:** `ANG-2026-04`
+* **Projekt / Bauteil:** Lagerplatte 80 x 50 x 12 mm mit Passungstasche Ø 30 mm (3D-CAD-Auftrag)
+* **Zielmaschine & Steuerung:** DMG MORI CMX 600 V (3-Achs-Bearbeitungszentrum) — Fanuc 31i / Siemens ISO-Modus (DIN 66025)
 
 ---
 
-**Empfänger:**  
-Franken Präzisionsteile GmbH  
-z. Hd. Herrn Michael Brandner *(Fertigungsleiter)*  
-`<m.brandner@franken-praezision.de>`  
+## 1. Technische Ausgangslage & Aufgabenstellung
 
-**Datum:** 22. Oktober 2026  
-**Angebots-Nummer:** ANG-2026-04-01  
-**Projekt / Betreff:** Eilauftrag CAM-Programmierung: Lagerplatte Alu (50 Stück) – Haas VF-2 (Haas NGC)  
+Sehr geehrte(r) Michael Brandner (Fertigungsleiter),
 
-Sehr geehrter Herr Brandner,
+vielen Dank für Ihre Projektanfrage bezüglich der ingenieurtechnischen Auslegung und Programmierung für Ihre **DMG MORI CMX 600 V (3-Achs-Bearbeitungszentrum)**. Ziel des Auftrags ist die Entwicklung und mathematische Verifikation von `uebung_04_3d_modell_cam.nc` (sowie `uebung_04_3d_modell_cam.cps`) für das Bauteil **Lagerplatte 80 x 50 x 12 mm mit Passungstasche Ø 30 mm (3D-CAD-Auftrag)** aus dem Werkstoff **Aluminium EN AW-6082 T6** unter strikter Einhaltung aller Kollisions- und Arbeitsschutzvorgaben.
 
-vielen Dank für Ihre Eil-Anfrage und die Bereitstellung des 3D-CAD-Modells für die Lagerplatte aus Aluminium EN AW-6082. Gerne übernehme ich für Ihren Fertigungsbetrieb die qualifizierte ingenieurtechnische CAM-Programmierung und Bahnoptimierung.
+---
 
-### 1. Leistungsumfang (Ingenieurtechnische Dienstleistung gem. § 18 EStG)
-* **Ingenieurtechnische CAD/CAM-Prozessauslegung & 3D-Bahnplanung:**  
-  Mathematische Werkzeugbahnoptimierung und kollisionsfreie Programmierung der 2,5D-Außenkontur ($80 \times 50 \times 12\,\text{mm}$ auf Tiefe $Z = -5{,}0\,\text{mm}$), der zentralen Kreistasche ($\varnothing 30\,\text{mm}$, Tiefe $Z = -3{,}0\,\text{mm}$) sowie der 4 Durchgangsbohrungen ($\varnothing 6\,\text{mm}$, Tiefe $Z = -12{,}0\,\text{mm}$) mit Tiefbohrzyklus `G83` *(Spanbruch)* für Ihr 3-Achs-Vertikal-Bearbeitungszentrum Haas VF-2 *(Haas NGC Steuerung)*.
-* **Statische 5-Stufen-Sicherheits- & Kollisionsprüfung:**  
-  Umfassende Prüfung der Werkzeugwechsel, Längenkorrekturen `G43`, Verfahrwege und Verifikation des Sicherheitsabstands ($+7{,}0\,\text{mm}$) zur Maschinenschraubstock-Backenoberkante.
-* **Erstellung der normgerechten Fertigungsdokumentation:**  
-  Bereitstellung des vollständigen, kommentierten NC-Programmcodes `uebung_04_3d_modell_cam.nc` sowie des druckfertigen Einrichteblatts `06_EINRICHTEBLATT_SETUP_SHEET.md` für den Maschinenbediener vor Ort.
-* **3D-Simulationsabnahme & Video-Vorabprüfung:**  
-  Bereitstellung des Simulationsnachweises zur Freigabe vor Bauteilfertigung.
+## 2. Ingenieurtechnischer Leistungsumfang *(Freie Ingenieurleistung nach § 18 EStG)*
 
-### 2. Honorar & Zahlungsbedingungen
-* **Vergütung:** **380,00 € netto** *(zzgl. 19 % gesetzliche Umsatzsteuer in Höhe von 72,20 € = 452,20 € brutto)*.
-* **Zahlungsbedingungen (wie vereinbart):**  
-  - 50 % Anzahlung (190,00 € netto / 226,10 € brutto) sofort nach Auftragserteilung.
-  - 50 % Restbetrag (190,00 € netto / 226,10 € brutto) nach Vorlage des Freigabevideos / Datenübergabe.
-* **Lieferform:** 100 % digital per gesichertem Datentransfer (E-Mail / GitHub Repository).
+1. **Algorithmische Postprozessor- & NC-Architektur *(Agent 2 — Postprocessor-Coder-Agent)*:**
+   - Implementierung und Validierung der steuerungsspezifischen Ausgabelogik für **Fanuc 31i / Siemens ISO-Modus (DIN 66025)**.
+   - Ausgabe eines eindeutigen Sicherheits-Startblocks *(Safe Start Block)* sowie exakter Werkzeuglängenkompensation (`H01`).
+2. **Mathematische Z-MIN-Kollisionsanalyse & Einrichtedokumentation *(Agent 3 — NC-Safety- & Setup-Agent)*:**
+   - Statische Überprüfung aller Verfahrwege in `uebung_04_3d_modell_cam.nc` auf Einhaltung der tiefsten Zustellung $Z_{\text{min}} = -12.000\,\text{mm}$ gegenüber der Spannmittel-Oberkante bei $Z = -15.000\,\text{mm}$.
+   - Erstellung des formalen Prüfberichts [`05_SICHERHEITS_CRASH_PRUEFBERICHT.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_04_lagerplatte_3d_cam/05_SICHERHEITS_CRASH_PRUEFBERICHT.md), des Einrichteblatts [`06_EINRICHTEBLATT_SETUP_SHEET.md`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_04_lagerplatte_3d_cam/06_EINRICHTEBLATT_SETUP_SHEET.md) sowie des 3D-Simulationsvideos [`uebung_04_3d_modell_cam_simulation_video.mp4`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_04_lagerplatte_3d_cam/uebung_04_3d_modell_cam_simulation_video.mp4).
 
-### 3. Technischer Haftungsausschluss & Mitwirkungspflichten des Auftraggebers
-Gemäß den ingenieurrechtlichen Sorgfaltspflichten obliegt die finale Kontrolle der realen Werkzeugabmessungen, des Spannmitteldrucks sowie das überwachte Einfahren des ersten Werkstücks im Einzelsatzbetrieb *(Single Block)* mit reduzierter Vorschubübersteuerung *(Feed Override maximal 25 %)* dem qualifizierten Bedienpersonal des Auftraggebers direkt an der Fräsmaschine Haas VF-2.
+---
+
+## 3. Honorarkalkulation *(Festpreis nach § 18 EStG)*
+
+| Pos. | Leistungsbeschreibung *(Ingenieurtechnische Entwicklung)* | Aufwand | Stundensatz | Gesamtpreis (Netto) |
+| :---: | :--- | :---: | :---: | :---: |
+| **1** | Ingenieurtechnische Analyse, Postprozessor-/CAM-Entwicklung (`uebung_04_3d_modell_cam.nc`), statische Z-MIN-Kollisionsprüfung & Werkstatteinrichteblatt | 4,00 Std. | 95,00 € | **380,00 €** |
+| | **Summe Netto** | | | **380,00 €** |
+| | zzgl. 19 % Umsatzsteuer *(gemäß § 14 UStG [Umsatzsteuergesetz])* | | | 72,20 € |
+| | **Gesamtbetrag (Brutto)** | | | **452,20 €** |
+
+---
+
+## 4. Abwicklungsmodalitäten & Sicherheitshinweis *(Mitwirkungspflicht)*
+
+* **Lieferzeit:** Sofortige digitale Bereitstellung aller 6 Projekt-Artefakte nach Auftragsfreigabe.
+* **Zahlungsziel:** 14 Tage netto nach Rechnungsstellung ohne Abzug.
+* **Verbindlicher Sicherheitshinweis für das Einfahren an der Maschine:**
+  Die gelieferten Postprozessoren und NC-Programme wurden rechnerisch und simulativ geprüft. Vor Beginn der Serienfertigung ist das Programm vom Maschinenbediener zwingend im **Einzelsatzbetrieb *(Single Block)*** bei reduziertem **Vorschub-Override *(Feedrate Potentiometer < 25 %)*** und mit Sichtkontrolle des Restwegs *(Distance-to-Go)* über dem Bauteil einzufahren.
 
 Mit freundlichen Grüßen  
-**Dipl.-Ing. Bujanovski**  
-*(Freiberuflicher Ingenieur nach § 18 EStG)*
+**Dipl.-Ing. (FH) Alexander Bujanovski**  
+*Beratender Ingenieur für CAD/CAM-Technik & Postprozessor-Entwicklung*

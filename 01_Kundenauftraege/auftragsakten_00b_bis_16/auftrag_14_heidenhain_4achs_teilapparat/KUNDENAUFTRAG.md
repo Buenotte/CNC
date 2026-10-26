@@ -1,16 +1,15 @@
-# 📩 Kundenauftrag: Alps Precision AG (Schweiz) (Auftrag 14: Heidenhain Klartext & 4. Achse (A-Achse))
+# 📩 Auftrag 14: Heidenhain TNC 640 Klartext-Postprozessor (4-Achs-Indexierung A-Achse) — Alps Precision AG (Schweiz)
 
 **Auftraggeber:** Urs Hodel (Produktionsleiter)  
 **Unternehmen:** Alps Precision AG (Schweiz)  
 **Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
-**Zielmaschine:** **Mikron HPM 600 HD (Heidenhain TNC 640)**  
+**Zielmaschine:** **Hermle C400 (Heidenhain TNC 640 Steuerung mit 4. Achse / A-Achse)**  
 **Vereinbartes Budget:** **850,00 € netto** (1.011,50 € brutto)  
 
 ---
 
 ## Auftrags-Briefing des Kunden:
 
-# 📩 Kundenauftrag: Übung 14: Heidenhain Klartext-Steuerung (`TOOL CALL`, `L ... FMAX`) & 4. Drehachse (`A-Achse`) für Aufträge im deutschsprachigen Raum
 **Auftrags-Kategorie:** 14 (Heidenhain TNC 640 & 4-Achs-Teilapparat)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -47,9 +46,3 @@ So sieht der lukrativste Auftragstyp aus der Schweiz oder Süddeutschland aus, w
 > **Urs Hodel** – Alps Precision CNC AG, St. Gallen
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.
-

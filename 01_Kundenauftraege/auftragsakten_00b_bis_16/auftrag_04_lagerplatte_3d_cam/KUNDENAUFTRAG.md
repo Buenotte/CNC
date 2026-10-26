@@ -1,4 +1,4 @@
-# 📩 Kundenauftrag: Franken Präzisionsteile GmbH (Übung 4: 3D-Lagerplatte)
+# 📩 Auftrag 04: 3D-CAD-Modell zu komplettem NC-Programm (Lagerplatte) — Franken Präzisionsteile GmbH
 
 **Auftraggeber:** Michael Brandner *(Fertigungsleiter)* `<m.brandner@franken-praezision.de>`  
 **Unternehmen:** Franken Präzisionsteile GmbH, Schweinfurt  

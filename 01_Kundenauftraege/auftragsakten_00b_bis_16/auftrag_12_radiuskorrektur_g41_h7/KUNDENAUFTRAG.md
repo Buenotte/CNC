@@ -1,16 +1,15 @@
-# 📩 Kundenauftrag: Wagner Getriebebau GmbH (Auftrag 12: Werkzeugradiuskorrektur (G41 / G40) für H7-Passungen)
+# 📩 Auftrag 12: Fräserradiuskorrektur G41/G42 für H7-Lagersitzpassung (Ø 30 H7) — Wagner Getriebebau GmbH
 
 **Auftraggeber:** Alexander Wagner (Werkstattleiter)  
 **Unternehmen:** Wagner Getriebebau GmbH  
 **Empfänger:** Dipl.-Ing. Bujanovski `<kontakt@ingenieurbuero-bujanovski.de>`  
-**Zielmaschine:** **DMG MORI NVX 5080**  
+**Zielmaschine:** **DMG MORI NVX 5080 (Fanuc 31i Steuerung)**  
 **Vereinbartes Budget:** **580,00 € netto** (690,20 € brutto)  
 
 ---
 
 ## Auftrags-Briefing des Kunden:
 
-# 📩 Kundenauftrag: Übung 12: Werkzeugradiuskorrektur (`G41` / `G42` / `G40`) – Wie der Kunde an der Maschine `0,01 mm` Genauigkeit für Passungen einstellt
 **Auftrags-Kategorie:** 12 (H7-Passungstoleranz über Steuerungskorrektur)
 **Auftragnehmer:** Dipl.-Ing. Bujanovski – Freiberufliches Ingenieurbüro für CAD/CAM-Fertigungstechnik & Postprozessor-Entwicklung  
 **Status:** Aktiv / Bereit zur Bearbeitung
@@ -47,9 +46,3 @@ So sieht eine typische Anfrage aus, wenn ein Kunde Passungen fertigen muss und M
 > **Alexander Wagner** – Präzisions-Getriebebau Wagner GmbH, Schweinfurt
 
 ---
-
-## 2. Bearbeitungshinweise für diesen Auftrag
-* **Zuständiger Agent für Angebot:** `Agent 4` (Backoffice-Agent) – siehe `ANGEBOT_DIPL_ING_BUJANOVSKI.md` in diesem Ordner.
-* **Zuständiger Agent für Umsetzung:** `Agent 2` (Postprocessor-Coder-Agent) für Code- & .cps-Modifikationen.
-* **Zuständiger Agent für Prüfung & Freigabe:** `Agent 3` (NC-Safety- & Setup-Agent) für Crash-Prüfung und Einrichteblatt.
-

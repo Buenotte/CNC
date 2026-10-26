@@ -13,9 +13,9 @@ import re
 import shutil
 
 BASE_DIR = r"c:\Projekte\CNC"
-HANDBUCH_PATH = os.path.join(BASE_DIR, "ALLE_UEBUNGEN_HANDBUCH.md")
-TARGET_DIR = os.path.join(BASE_DIR, "kundenauftraege")
-UEBUNGEN_DIR = os.path.join(BASE_DIR, "uebungen")
+HANDBUCH_PATH = os.path.join(BASE_DIR, "03_Fachdokumentation_und_Wissen", "ALLE_UEBUNGEN_HANDBUCH.md")
+TARGET_DIR = os.path.join(BASE_DIR, "01_Kundenauftraege", "auftragsakten_00b_bis_16")
+UEBUNGEN_DIR = os.path.join(BASE_DIR, "03_Fachdokumentation_und_Wissen", "uebungen")
 
 os.makedirs(TARGET_DIR, exist_ok=True)
 
@@ -141,7 +141,7 @@ Mit freundlichen Grüßen
             copied_files.append(s_file)
 
     # For exercise 3 / 4, copy 3D model if available
-    stl_src = os.path.join(BASE_DIR, "kundenauftrag_01_flanschplatte", "bauteil_1001.stl")
+    stl_src = os.path.join(BASE_DIR, "01_Kundenauftraege", "referenz_auftrag_flanschplatte", "bauteil_1001.stl")
     if ueb_id in ["03", "04", "05"] and os.path.exists(stl_src):
         dst_stl = os.path.join(order_dir, "bauteil_1001.stl")
         shutil.copy2(stl_src, dst_stl)

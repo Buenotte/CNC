@@ -13,8 +13,8 @@ Falls Sie nach bestimmten Funktionen suchen, finden Sie diese an folgenden Stell
 | **Web-Postprozessor-Generator** | [`kunden_cps_generator_web.html`](file:///C:/Projekte/CNC/02_Software_und_Tools/web_tools/kunden_cps_generator_web.html) | [`ANLEITUNG_CPS_GENERATOR_UND_WEB_INTERFACE.md`](file:///C:/Projekte/CNC/02_Software_und_Tools/ANLEITUNG_CPS_GENERATOR_UND_WEB_INTERFACE.md) & [`ALLE_UEBUNGEN_HANDBUCH.md#L2370`](file:///C:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md#L2370) |
 | **Web-Video-Generator (3D-Freigabe)** | [`cnc_video_generator_web.html`](file:///C:/Projekte/CNC/02_Software_und_Tools/web_tools/cnc_video_generator_web.html) | [`ALLE_UEBUNGEN_HANDBUCH.md#L2256`](file:///C:/Projekte/CNC/03_Fachdokumentation_und_Wissen/ALLE_UEBUNGEN_HANDBUCH.md#L2256) (Abschnitt 13) |
 | **Fertiges MP4-Video zu Übung 3** | [`docs/videos/uebung_03_simulation_video.mp4`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/videos/uebung_03_simulation_video.mp4) | Handbuch Übung 3 / Abschnitt 13 |
-| **Klick-Anleitung 3D-Modell Fusion 360** | [`kundenauftrag_01_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md) | Handbuch Übung 4 |
-| **3D-Simulator mit Satz-Editor** | [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html) | Handbuch Übung 00b & Übung 5 |
+| **Klick-Anleitung 3D-Modell Fusion 360** | [`01_Kundenauftraege/referenz_auftrag_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md) | Handbuch Übung 4 |
+| **3D-Simulator mit Satz-Editor** | [`01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html) | Handbuch Übung 00b & Übung 5 |
 | **Sicherheits- & Qualitätsprüfliste** | [`SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md) | Begleitendes Prüfhandbuch Phase 1 bis 5 |
 
 ---
@@ -230,7 +230,7 @@ Als freiberuflicher Ingenieur mit **nur 5 bis 8 Stunden Zeit pro Woche** nebenbe
   * **Die 80 % der KI-Agenten:** `Agent 1` recherchiert Systemhäuser & Firmen, `Agent 4` schreibt Angebot & Rechnungen, `Agent 2` schreibt den JavaScript-Code für die Zyklen, `Agent 3` testet den Maschinencode!
 
 * **In Weg B (Optionaler Nebenweg: Komplettes 3D-Bauteil von A bis Z):**
-  * **Deine 20 % (Mensch / Ingenieur):** 3D-Modell in Fusion 360 öffnen und die 4 Standard-Operationen *(Setup, Planen, Kontur, Bohren)* streng nach unserer Klick-Anleitung [`kundenauftrag_01_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md) kurz anklicken *(10 bis 15 Minuten)*.
+  * **Deine 20 % (Mensch / Ingenieur):** 3D-Modell in Fusion 360 öffnen und die 4 Standard-Operationen *(Setup, Planen, Kontur, Bohren)* streng nach unserer Klick-Anleitung [`01_Kundenauftraege/referenz_auftrag_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md) kurz anklicken *(10 bis 15 Minuten)*.
   * **Die 80 % der KI-Agenten:** Postprozessor generieren, G-Code-Sicherheitscheck, Video aufnehmen, Rüstblatt extrahieren und Rechnungen versenden!
 
 *(Ausführliche technische Baupläne und System-Prompts: Siehe [`KI_Agenten_System_und_Bauplan.md`](file:///c:/Projekte/CNC/04_Recht_Steuern_und_Backoffice/KI_Agenten_System_und_Bauplan.md)).*
@@ -325,14 +325,14 @@ Viele Werkstatt-Chefs und Lohnfertiger (5 bis 20 Mitarbeiter) suchen bei Engpäs
 > Kontaktieren Sie mich gerne mit einer Zeichnung oder einem 3D-Modell für ein unverbindliches Festpreisangebot!  
 > 
 > **Ingenieurbüro für CAD/CAM-Technik**  
-> Dipl.-Ing. Dipl.-Ing. Bujanovski  
+> Dipl.-Ing. (FH) Alexander Bujanovski  
 > E-Mail: [Ihre geschäftliche E-Mail]  
 > Sitz: 63526 Erlensee / 100 % Remote deutschlandweit
 > 
 > *(Rechnungsstellung erfolgt offiziell nach § 18 EStG als freiberuflicher Ingenieur).*
 
 ##### 📸 Welche Bilder laden Sie in der Anzeige hoch?
-1. Ein Screenshot unseres 3D-Simulators: [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html).
+1. Ein Screenshot unseres 3D-Simulators: [`01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html).
 2. Unser technisches CAD-Diagramm: [`docs/bilder/cnc_anfahrbewegung_lead_in_erklaerung.jpg`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_anfahrbewegung_lead_in_erklaerung.jpg).
 3. Das Schaubild der Spannsituation: [`docs/bilder/cnc_z_min_crash_prevention.jpg`](file:///c:/Projekte/CNC/03_Fachdokumentation_und_Wissen/docs/bilder/cnc_z_min_crash_prevention.jpg).
 
@@ -422,11 +422,11 @@ Fülle die Datei Vorlagen_Vertraege_Rechnungen/Vorlage_Angebot_und_Rechnung_Inge
 * **Option A (Browser per Doppelklick):** Öffnen Sie [`kunden_cps_generator_web.html`](file:///C:/Projekte/CNC/02_Software_und_Tools/web_tools/kunden_cps_generator_web.html) mit einem beliebigen Webbrowser *(Chrome, Edge, Firefox)*.
 * **Option B (Per PowerShell-Befehl ausführen):**
   ```powershell
-  Start-Process "C:\Projekte\CNC\kunden_cps_generator_web.html"
+  Start-Process "C:\Projekte\CNC\02_Software_und_Tools\web_tools\kunden_cps_generator_web.html"
   ```
 * **Option C (Per Node.js CLI-Skript automatisieren):**
   ```powershell
-  node scripts/kunden_cps_generator.js --kunde "Schmidt Zerspanung" --maschine "haas" --zmin --tuer --output "schmidt_haas.cps"
+  node 02_Software_und_Tools/scripts/kunden_cps_generator.js --kunde "Schmidt Zerspanung" --maschine "haas" --zmin --tuer --output "schmidt_haas.cps"
   ```
 
 #### 📋 Exakter Copy-Paste-Prompt zum Starten von Agent 2 (Sonderfunktionen & Postprozessor-Code):
@@ -480,7 +480,7 @@ Führe die Änderungen direkt im JavaScript-Code durch und dokumentiere jede ge�
 
 #### 📦 *Optionaler Alternativweg (Nur für Weg B – Falls jemals ein Kunde explizit ein Einzelteil gefräst haben will):*
 *(Wenn du dich auf reine Postprozessor- und Software-Aufträge konzentrierst, überspringst du diesen Kasten komplett!)*  
-Falls du ausnahmsweise doch ein einfaches Bauteil programmieren möchtest, klickst du die 4 Standard-Operationen streng nach unserer Klick-Anleitung [`kundenauftrag_01_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md) kurz ab *(Setup G54 vorne links oben, Planen, 2D-Kontur, Bohren G83)*.
+Falls du ausnahmsweise doch ein einfaches Bauteil programmieren möchtest, klickst du die 4 Standard-Operationen streng nach unserer Klick-Anleitung [`01_Kundenauftraege/referenz_auftrag_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md`](file:///C:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/KUNDEN_AUFTRAG_UND_KLICK_ANLEITUNG.md) kurz ab *(Setup G54 vorne links oben, Planen, 2D-Kontur, Bohren G83)*.
 
 ---
 
@@ -493,7 +493,7 @@ Falls du ausnahmsweise doch ein einfaches Bauteil programmieren möchtest, klick
 Kopiere diesen Textblock in den Chat, um den automatischen 5-Punkte-Crash-Check durchzuführen:
 ```text
 Starte AGENT 3 (NC-Safety- & Setup-Agent):
-Prüfe die fertige G-Code-Datei [z. B. kundenauftrag_01_flanschplatte/1001.nc] anhand unserer SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md:
+Prüfe die fertige G-Code-Datei [z. B. 01_Kundenauftraege/referenz_auftrag_flanschplatte/1001.nc] anhand unserer SICHERHEITS_UND_QUALITAETS_PRUEFLISTE_GCODE.md:
 1. Sicherheitszeile prüfen: Sind Modale Befehle (G90 Absolutmaß, G17 XY-Ebene, G40 Radiuskorrektur aus, G80 Zyklen aus) in Satz N10 aktiv?
 2. Spindelhochlauf: Startet M03 mit programmierter Drehzahl S vor dem ersten Z-Eintauchen ins Material?
 3. Kühlmittelprüfung: Ist M08 (oder M88 Innenkühlung) vor dem Schnitt aktiv und M09 am Programmende gesetzt?
@@ -518,11 +518,11 @@ Prüfe die fertige G-Code-Datei [z. B. kundenauftrag_01_flanschplatte/1001.nc] a
 * **Option A (Web-Studio im Browser):** Öffnen Sie per Doppelklick die Datei [`cnc_video_generator_web.html`](file:///C:/Projekte/CNC/02_Software_und_Tools/web_tools/cnc_video_generator_web.html)
 * **Option B (Per PowerShell-Befehl starten):**
   ```powershell
-  Start-Process "C:\Projekte\CNC\cnc_video_generator_web.html"
+  Start-Process "C:\Projekte\CNC\02_Software_und_Tools\web_tools\cnc_video_generator_web.html"
   ```
 * **Option C (Per Python & FFmpeg vollautomatisch als MP4 rendern):**
   ```powershell
-  python scripts/render_simulation_video.py --gcode "kundenauftrag_01_flanschplatte/1001.nc" --output "docs/videos/kunden_freigabe.mp4"
+  python 02_Software_und_Tools/scripts/render_simulation_video.py --gcode "01_Kundenauftraege/referenz_auftrag_flanschplatte/1001.nc" --output "docs/videos/kunden_freigabe.mp4"
   ```
 
 #### 📋 Klick-Schritte im Web-Studio:
@@ -582,7 +582,7 @@ Sie versenden die von Agent 4 erstellte E-Mail an Ihren Kunden:
 
 #### 💻 Einrichteblatt direkt per Terminal-Befehl erzeugen:
 ```powershell
-python GitHub_Projekte/cnc_setup_sheet_extractor.py "kundenauftrag_01_flanschplatte/1001.nc" --output "docs/Einrichteblatt_Kunde.md"
+python 02_Software_und_Tools/GitHub_Projekte/cnc_setup_sheet_extractor.py "01_Kundenauftraege/referenz_auftrag_flanschplatte/1001.nc" --output "docs/Einrichteblatt_Kunde.md"
 ```
 
 #### 📋 Exakter Copy-Paste-Prompt zum Starten von Agent 3 & Agent 4 (Auslieferung & Quittung):
@@ -607,7 +607,7 @@ Sobald das Geld auf Ihrem Konto gutgeschrieben ist:
 
 * ⚙️ **Postprozessor bauen / anpassen:** [`kunden_cps_generator_web.html`](file:///C:/Projekte/CNC/02_Software_und_Tools/web_tools/kunden_cps_generator_web.html)
 * 🎥 **Kunden-Freigabevideo aufnehmen:** [`cnc_video_generator_web.html`](file:///C:/Projekte/CNC/02_Software_und_Tools/web_tools/cnc_video_generator_web.html)
-* 🔍 **G-Code Satz für Satz im 3D-Detail analysieren:** [`kundenauftrag_01_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html)
+* 🔍 **G-Code Satz für Satz im 3D-Detail analysieren:** [`01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html`](file:///c:/Projekte/CNC/01_Kundenauftraege/referenz_auftrag_flanschplatte/3d_auftrag_simulator.html)
 
 ---
 
