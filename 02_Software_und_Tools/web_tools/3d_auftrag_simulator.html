@@ -71,7 +71,7 @@
     #gcode-box {
       height: 400px;
       min-height: 180px;
-      max-height: 85vh;
+      max-height: 2000px;
       resize: vertical;
       overflow: auto;
       background: #020617;
@@ -83,7 +83,6 @@
       line-height: 1.5;
       white-space: pre;
       color: #cbd5e1;
-      transition: height 0.2s ease;
     }
     #gcode-box:hover {
       border-color: #0284c7;
@@ -241,7 +240,7 @@
         <button id="btnReset" class="secondary" title="Programm zurück an den Anfang">↺ Code Reset</button>
         <button id="btnResetCamera" class="secondary" title="3D-Blickwinkel und Zoom auf Ausgangsposition zurücksetzen">🎥 3D-Ansicht Reset</button>
         <button id="btnToggleStock" class="secondary">Rohteil Ein/Aus</button>
-        <button id="btnToggleDim" style="background:#0284c7;" title="Maße und Pfeile direkt am 3D-Modell ein-/ausblenden">📐 Maße Ein/Aus</button>
+        <button id="btnToggleDim" style="background:#0284c7;" title="Alle 3D-Texte, Beschriftungen, Wende-Hinweise und CAD-Maße im 3D-Fenster komplett ein- oder ausblenden für freie Sicht">🏷️ Beschriftung: AN</button>
       </div>
       <div style="margin-top:6px; display:flex; align-items:center; flex-wrap:wrap; gap:6px; font-size:12px; background:#020617; padding:7px 10px; border-radius:6px; border:1px solid #334155;">
         <span style="white-space:nowrap; font-weight:700; color:#38bdf8;">Linien-Filter:</span>
@@ -270,6 +269,8 @@
         <button id="btnHNormal" type="button" style="background:#334155; padding:3px 8px; font-size:11px; border-radius:4px;" title="Standardhöhe 260px einstellen">↕ 260px</button>
         <button id="btnHLarge" type="button" style="background:#0284c7; padding:3px 8px; font-size:11px; border-radius:4px;" title="Große Ansicht 450px einstellen">↕ 450px</button>
         <button id="btnHMax" type="button" style="background:#10b981; padding:3px 8px; font-size:11px; border-radius:4px;" title="Maximale Höhe 650px einstellen">↕ 650px</button>
+        <input type="range" id="gcodeHeightSlider" min="150" max="1000" step="10" value="400" style="width:90px; cursor:pointer;" title="Höhe des G-Code-Fensters stufenlos einstellen (150 bis 1000 px)" />
+        <span id="gcodeHeightVal" style="font-size:11px; color:#38bdf8; font-weight:bold; min-width:44px; text-align:right;">400px</span>
       </div>
     </div>
     <div id="gcode-box"></div>
@@ -1458,9 +1459,41 @@
 
     // Buttons für schnelle Höhen-Umschaltung des G-Code-Fensters
     const gcodeBoxEl = document.getElementById("gcode-box");
-    document.getElementById("btnHNormal").onclick = () => { gcodeBoxEl.style.height = "260px"; };
-    document.getElementById("btnHLarge").onclick   = () => { gcodeBoxEl.style.height = "450px"; };
-    document.getElementById("btnHMax").onclick     = () => { gcodeBoxEl.style.height = "650px"; };
+    const gcodeHeightSlider = document.getElementById("gcodeHeightSlider");
+    const gcodeHeightVal = document.getElementById("gcodeHeightVal");
+
+    function showGcodeHeight(h) {
+      if (gcodeHeightSlider) gcodeHeightSlider.value = h;
+      if (gcodeHeightVal) gcodeHeightVal.textContent = Math.round(h) + "px";
+    }
+    function setGcodeHeight(h) {
+      h = Math.max(150, Math.min(1000, Math.round(h)));
+      gcodeBoxEl.style.height = h + "px";
+      showGcodeHeight(h);
+      try { localStorage.setItem("gcodeBoxHeight", String(h)); } catch (e) { /* Speichern nicht möglich - egal */ }
+    }
+
+    document.getElementById("btnHNormal").onclick = () => setGcodeHeight(260);
+    document.getElementById("btnHLarge").onclick  = () => setGcodeHeight(450);
+    document.getElementById("btnHMax").onclick    = () => setGcodeHeight(650);
+    if (gcodeHeightSlider) gcodeHeightSlider.oninput = (e) => setGcodeHeight(parseFloat(e.target.value));
+
+    // Beim Ziehen an der Ecke unten rechts den Regler und die Pixelanzeige mitführen und die Höhe merken
+    if (typeof ResizeObserver !== "undefined") {
+      new ResizeObserver(() => {
+        const h = gcodeBoxEl.getBoundingClientRect().height;
+        if (h > 0) {
+          showGcodeHeight(Math.min(1000, h));
+          try { localStorage.setItem("gcodeBoxHeight", String(Math.round(h))); } catch (e) { /* egal */ }
+        }
+      }).observe(gcodeBoxEl);
+    }
+
+    // Zuletzt gewählte Höhe beim Öffnen wiederherstellen
+    try {
+      const savedH = parseFloat(localStorage.getItem("gcodeBoxHeight"));
+      if (isFinite(savedH) && savedH >= 150) setGcodeHeight(savedH);
+    } catch (e) { /* kein gespeicherter Wert */ }
 
     // Horizontales Verschieben der Seitenleiste (Breite anpassen)
     const resizerEl = document.getElementById("resizer");
@@ -1582,6 +1615,7 @@
       btnToggleDim.onclick = () => {
         showDimensions = !showDimensions;
         btnToggleDim.style.background = showDimensions ? "#0284c7" : "#334155";
+        btnToggleDim.textContent = showDimensions ? "🏷️ Beschriftung: AN" : "🏷️ Beschriftung: AUS";
       };
     }
 
@@ -2020,7 +2054,11 @@
         drawText3D("12 mm Dicke", -10, 0, -6, "#fbbf24", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
 
         if (isFlippedNow || flipDeg > 90) {
-          drawText3D("🔄 OP20 (G55): BAUTEIL " + flipDeg + "° UMGEDREHT! (3 mm Restboden oben Z+3 -> Z0)", 8, 25, 6, "#fbbf24", "bold 11.5px sans-serif", "rgba(120,53,15,0.92)");
+          if (flipDeg < 180) {
+            drawText3D("🔄 OP20: BAUTEIL " + flipDeg + "° WENDEN... (3 mm Restboden oben)", 8, 25, 6, "#fbbf24", "bold 11.5px sans-serif", "rgba(120,53,15,0.92)");
+          } else {
+            drawText3D("OP20 (G55) - Rückseite oben (3 mm Restboden Z+3 -> Z0)", 0, 52, 4, "#fbbf24", "bold 10px sans-serif", "rgba(120,53,15,0.85)");
+          }
           drawText3D("Kreistasche Ø 30 mm (jetzt UNTEN bei Z-12)", 40, 25, -13, "#f59e0b", "bold 10.5px sans-serif", "rgba(15,23,42,0.9)");
         } else {
           drawText3D("Kreistasche Ø 30 mm (Z-3)", 40, 25, 2, "#93c5fd", "bold 10.5px sans-serif", "rgba(15,23,42,0.85)");
@@ -2037,13 +2075,15 @@
       drawLine3D({x:0,y:0,z:0}, {x:0,y:24,z:0}, "#22c55e", 3);
       drawLine3D({x:0,y:0,z:0}, {x:0,y:0,z:24}, "#3b82f6", 3);
 
-      drawText3D("X-Achse (Länge)", 26, 0, 0, "#ef4444", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
-      drawText3D("Y-Achse (Breite)", 0, 26, 0, "#22c55e", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
-      drawText3D("Z-Achse (Höhe)", 0, 0, 26, "#38bdf8", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
-      if (isFlippedNow) {
-        drawText3D("🔄 G55 (OP20 - BAUTEIL 180° UMGEDREHT)", 0, 0, -2, "#fbbf24", "bold 11px sans-serif", "rgba(120,53,15,0.95)");
-      } else {
-        drawText3D("G54 (X0 Y0 Z0 - OP10)", 0, 0, -2, "#f8fafc", "bold 10px sans-serif", "rgba(15,23,42,0.85)");
+      if (showDimensions) {
+        drawText3D("X-Achse (Länge)", 26, 0, 0, "#ef4444", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+        drawText3D("Y-Achse (Breite)", 0, 26, 0, "#22c55e", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+        drawText3D("Z-Achse (Höhe)", 0, 0, 26, "#38bdf8", "bold 11px sans-serif", "rgba(15,23,42,0.85)");
+        if (isFlippedNow) {
+          drawText3D("🔄 G55 (OP20 - BAUTEIL 180° UMGEDREHT)", 0, 0, -2, "#fbbf24", "bold 11px sans-serif", "rgba(120,53,15,0.95)");
+        } else {
+          drawText3D("G54 (X0 Y0 Z0 - OP10)", 0, 0, -2, "#f8fafc", "bold 10px sans-serif", "rgba(15,23,42,0.85)");
+        }
       }
 
       const activeOpForFilter = (w2 && w2.op) ? String(w2.op) : "";
@@ -2174,7 +2214,9 @@
 
       const zSign = curZ > 0 ? "+" : "";
       const toolShortName = curToolName.split(" ")[0] || "T01";
-      drawText3D(toolShortName + " [Z: " + zSign + curZ.toFixed(1) + " mm]", curX, curY, curZ + 32, toolColor, "bold 11px sans-serif", "rgba(15,23,42,0.9)");
+      if (showDimensions) {
+        drawText3D(toolShortName + " [Z: " + zSign + curZ.toFixed(1) + " mm]", curX, curY, curZ + 32, toolColor, "bold 11px sans-serif", "rgba(15,23,42,0.9)");
+      }
 
       // 3D-Warnhinweis direkt am Werkzeug einblenden
       if (curZ <= -15.0) {

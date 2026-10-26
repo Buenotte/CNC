@@ -175,3 +175,23 @@ Um sicherzustellen, dass bei der Bearbeitung eines Kundenauftrags keines der **6
 2. **Einsatz des `/goal`-Befehls *(Zielorientierter Ausdauer-Modus)*:**
    * **Komplett-Abwicklung (Modus A):** Soll ein Kundenauftrag von A bis Z in einem einzigen Durchgang abgearbeitet werden, wird der Prompt mit **`/goal`** eingeleitet. Dadurch arbeitet das System alle 4 Schritte (**Agent 4 ➔ Agent 2 ➔ Agent 3 ➔ Agent 4**) ohne vorzeitigen Abbruch ab und beendet den Lauf erst, wenn alle **6+1 Dateien** (`02_...`, `.cps`/`.nc`, `05_...`, `06_...`, `.mp4`, `07_...`, `08_...`) physisch im Auftragsordner verifiziert wurden.
    * **Zweistufiger Echtkunden-Betrieb (Modus B):** Im realen Tagesgeschäft wird bei Eingang einer Anfrage zunächst nur **Agent 4** für das Festpreis-Angebot (`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`) gestartet. Sobald die Auftragsbestätigung des Kunden vorliegt, wird mit **`/goal`** die gesamte technische Umsetzung und Abrechnung *(Stationen `03` bis `08`)* in einem Durchgang ausgeführt.
+
+---
+
+## 7. Kundenversand: Simulationsvideo statt Simulator-Datei *(Verbindliche Empfehlung)*
+
+**Regel:** Dem Kunden wird zur Vorab-Freigabe das **Simulationsvideo** *(`[auftragsname]_simulation_video.mp4`, Artefakt 5)* geschickt. Die Browser-Datei `3d_auftrag_simulator.html` *(interaktiver 3D-Simulator)* wird nur **auf ausdrücklichen Kundenwunsch** mitgeliefert.
+
+**Warum das Video die bessere Lösung ist:**
+
+1. **Läuft überall:** Das Video braucht keinen Browser, keine Zusatzdatei und keinen Ordner im Hintergrund. Es läuft auf Handy, Tablet und Rechner *(per E-Mail oder WhatsApp versendbar)*.
+2. **Keine Weiterleitungs-Falle:** Die Dateien `3d_auftrag_simulator.html` in den Auftragsordnern sind seit dem 26.10.2026 nur noch **Weiterleitungs-Dateien** *(Redirect-Stubs, ca. 1,3 KB)*, die auf die Haupt-Datei `02_Software_und_Tools/web_tools/3d_auftrag_simulator.html` zeigen. Wird ein Auftragsordner allein verschickt, fehlt dem Kunden das Ziel dieser Weiterleitung *(Fehlermeldung „Datei nicht gefunden")*. Das Video hat dieses Problem nicht.
+3. **Passt zum Freigabe-Prinzip:** Erst Video an den Kunden, dann Freigabe und 2. Teilzahlung, dann Lieferung der `.nc`-Datei und des Einrichteblatts.
+
+**Pflicht vor dem Versand:**
+
+* Das Video wird vom Skript `02_Software_und_Tools/scripts/render_simulation_video.py` erzeugt und sieht **nicht exakt gleich aus** wie der Browser-Simulator. Es ist daher **vor dem Versand einmal anzuschauen** *(Sichere Freifahrhöhe, kollisionsfreie Bahnen, bei Mehrfach-Aufspannung der Wende-Stopp `M00`)*. Nach Änderungen an der `.nc`-Datei ist das Video **neu zu rendern**.
+
+**Ausnahme (Kunde will interaktiv prüfen):**
+
+* Will der Kunde im 3D-Fenster zoomen oder Zeile für Zeile durchsteppen, wird **zusätzlich die Haupt-Datei** `02_Software_und_Tools/web_tools/3d_auftrag_simulator.html` mitgeschickt *(ersetzt die Weiterleitung durch den vollen Simulator; die Kopie beim Kunden ist ein eigenständiger Stand und ändert sich später nicht mehr)*.
