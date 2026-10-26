@@ -823,3 +823,49 @@ Erstelle die finale Schlussrechnung (mit Status: VOLLSTÄNDIG BEZAHLT) und das B
 * Alle lästigen Nebenarbeiten *(Angebot, Postprozessor-Syntax, 5-Punkte-Crash-Check, Rüstblatt und Rechnungen)* erledigen deine **4 KI-Agenten** in Sekundenschnelle auf Zuruf!
 
 
+
+---
+
+## 🚀 11. Best-Practice-Steuerung in Google Antigravity: Warum `Argon 4` + `/goal` für Kundenaufträge der Goldstandard ist
+
+Für die Erstellung aller **6+1 Pflicht-Artefakte *(Arbeitsergebnisse eines Kundenauftrags)*** und für technische Tiefen-Audits in **Google Antigravity *(AGY — Agentenbasierte Entwicklungsumgebung)*** hat sich die Kombination aus dem Reasoning-Modell **`Argon 4` *(KI-Modell mit mehrstufiger logischer Schlussfolgerung und Compiler-Prüfung)*** und dem Slash-Befehl **`/goal` *(Zielorientierter Ausdauer- und Selbstkontroll-Modus)*** als optimale Arbeitsweise erwiesen.
+
+### 1. Warum `Argon 4` + `/goal` zusammen eingesetzt werden sollten:
+* **Kein vorzeitiges Abbrechen:** Ohne `/goal` neigt ein Sprachmodell manchmal dazu, nach dem ersten oder zweiten Dokument innezuhalten und Rückfragen zu stellen. Mit **`/goal`** arbeitet der Assistent alle 4 Agenten-Stationen (**Agent 4 ➔ Agent 2 ➔ Agent 3 ➔ Agent 4**) selbstständig bis zum Ende durch.
+* **Echte Compiler- und Laufzeit-Verifikation *(Runtime Verification)*:** `Argon 4` verlässt sich nicht auf bloßes Textlesen, sondern führt im Hintergrund selbstständig **Node.js *(JavaScript-Laufzeitumgebung)*** (`simuliere_post.js`) und die **Python-Werkzeuge** (`cnc_setup_sheet_extractor.py`, `render_simulation_video.py`) aus. Dadurch werden subtile Fehler wie modale Koordinaten-Unterdrückung bei **360°-Vollkreisen (`xOutput.reset()`)** oder fehlende Bohrzyklus-Aufhebungen (`G80`) technisch ausgeschlossen.
+* **Automatische Vollständigkeitskontrolle:** Vor dem Abschluss prüft der `/goal`-Modus automatisch auf der Festplatte, ob wirklich alle **6+1 Pflicht-Artefakte** im Auftragsordner existieren und alle internen Links (`file:///...`) funktionieren.
+
+---
+
+### 2. Kopierfertige Master-Prompts für deine beiden Arbeitsmodi
+
+#### Modus A: Komplett-Durchlauf in einem Rutsch *(für Test-Aufträge, Übungen & bereits beauftragte Projekte)*
+Wenn ein Auftrag direkt komplett von der Kalkulation bis zur Schlussdokumentation (`02_...` bis `08_...`) durchgezogen werden soll, kopiere diesen **`/goal`**-Befehl in den Chat:
+
+```text
+/goal Bearbeite den Kundenauftrag im Ordner 01_Kundenauftraege/[ORDNERNAME] vollständig von A bis Z nach unserem 4-Schritte-Standard (AGENTS.md):
+1. Agent 4 (Backoffice-Ingenieur-Agent): Festpreis-Angebot (02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) nach § 18 EStG inkl. Haftungsbegrenzung (Single-Block-Testlauf) erstellen.
+2. Agent 2 (Postprocessor-Coder-Agent): Postprozessor (.cps) anpassen, mit node 02_Software_und_Tools/scripts/simuliere_post.js kompilieren und fehlerfreien G-Code (.nc) inkl. 360°-Vollkreis-Reset (xOutput.reset / yOutput.reset / I / J) und G80 erzeugen.
+3. Agent 3 (NC-Safety- & Setup-Agent): Statischen Sicherheits- und Crash-Prüfbericht (05_SICHERHEITS_CRASH_PRUEFBERICHT.md) mit Z-MIN-Freigabe, Einrichteblatt (06_EINRICHTEBLATT_SETUP_SHEET.md) via cnc_setup_sheet_extractor.py und 3D-Simulationsvideo (.mp4) via render_simulation_video.py generieren.
+4. Agent 4 (Backoffice-Ingenieur-Agent): GoBD-konforme Rechnung nach § 18 EStG und § 14 UStG (07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md) sowie die Gesamtdokumentation (08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md) erstellen und abschließend verifizieren, dass alle 6+1 Pflicht-Artefakte fehlerfrei im Auftragsordner liegen.
+```
+
+---
+
+#### Modus B: Zweistufiger Echtkunden-Ablauf im Tagesgeschäft *(Wenn du erst auf die Auftragsbestätigung des Kunden wartest)*
+Bei einem **echten Neukunden** möchtest du natürlich erst dann Zeit in den Postprozessor und die Simulation investieren, wenn der Kunde dein Angebot schriftlich angenommen (und ggf. die 50 % Anzahlung geleistet) hat:
+
+* **Stufe 1 (Kundenanfrage trifft ein – einzelner Prompt ohne `/goal`):**
+  ```text
+  Starte AGENT 4 (Backoffice-Ingenieur-Agent):
+  Lies die Kundenanfrage in 01_Kundenauftraege/[ORDNERNAME]/KUNDENAUFTRAG.md und erstelle das kaufmännische Festpreis-Angebot 02_ANGEBOT_DIPL_ING_BUJANOVSKI.md nach § 18 EStG.
+  ```
+  *(Danach sendest du das Angebot per E-Mail an den Kunden und wartest auf seine Freigabe.)*
+
+* **Stufe 2 (Kunde erteilt den Auftrag – jetzt Komplett-Umsetzung mit `/goal` und `Argon 4`):**
+  ```text
+  /goal Der Kunde hat das Angebot 02_ANGEBOT_DIPL_ING_BUJANOVSKI.md im Ordner 01_Kundenauftraege/[ORDNERNAME] angenommen. Führe jetzt die komplette technische Umsetzung und Abrechnung (Schritte 2 bis 4) durch:
+  1. Agent 2: Postprozessor (.cps) programmieren, kompilieren und G-Code (.nc) erzeugen.
+  2. Agent 3: Crash-Prüfbericht (05_...), Einrichteblatt (06_...) und 3D-Simulationsvideo (.mp4) erstellen.
+  3. Agent 4: Honorarrechnung nach § 18 EStG (07_...) und Abschlussdokumentation (08_...) erstellen und alle 6+1 Artefakte auf Vollständigkeit prüfen.
+  ```

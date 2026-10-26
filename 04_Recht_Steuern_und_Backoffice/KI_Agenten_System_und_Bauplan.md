@@ -399,3 +399,29 @@ Um sicherzustellen, dass die Entwicklungsumgebung **Google Antigravity *(AGY —
    - **Agent 2 (Postprocessor-Coder-Agent):** [`.agents/skills/agent-2-postprocessor-coder/SKILL.md`](file:///c:/Projekte/CNC/.agents/skills/agent-2-postprocessor-coder/SKILL.md)
    - **Agent 3 (NC-Safety- & Setup-Agent):** [`.agents/skills/agent-3-nc-safety-setup/SKILL.md`](file:///c:/Projekte/CNC/.agents/skills/agent-3-nc-safety-setup/SKILL.md)
    - **Agent 4 (Backoffice-Ingenieur-Agent):** [`.agents/skills/agent-4-backoffice-ingenieur/SKILL.md`](file:///c:/Projekte/CNC/.agents/skills/agent-4-backoffice-ingenieur/SKILL.md)
+
+
+---
+
+## 11. Best-Practice-Steuerung im Alltag: Warum `Argon 4` + `/goal` für Kundenaufträge der Goldstandard ist
+
+Für die automatisierte Erzeugung aller **6+1 Pflicht-Artefakte *(Arbeitsergebnisse eines Kundenauftrags)*** und für technische Tiefen-Audits in **Google Antigravity *(AGY — Agentic Coding Environment)*** ist die Kombination aus dem Reasoning-Modell **`Argon 4` *(KI-Modell mit mehrstufiger logischer Schlussfolgerung und Compiler-Prüfung)*** und dem Slash-Befehl **`/goal` *(Zielorientierter Ausdauer- und Selbstkontroll-Modus)*** die bevorzugte Arbeitsmethode:
+
+1. **Warum `Argon 4`?**
+   Im Gegensatz zu schnelleren Standard-Modellen prüft `Argon 4` den erzeugten **Postprozessor-Code (`.cps` *(Custom Postprocessor Script in JavaScript ES5)*)** und den **G-Code (`.nc` *(Numerical Control)*)** mit echten **Compilern *(Laufzeit- und Syntaxprüfern wie Node.js `simuliere_post.js`)*** und erkennt subtile Logikfehler wie die modale Koordinaten-Unterdrückung bei **360°-Vollkreisen (`xOutput.reset()`)** oder fehlende Bohrzyklus-Aufhebungen (`G80`).
+2. **Warum `/goal`?**
+   Der Befehl **`/goal`** verhindert, dass der Assistent nach einzelnen Zwischenschritten anhält. Das System arbeitet alle 4 Agenten-Stationen (**Agent 4 ➔ Agent 2 ➔ Agent 3 ➔ Agent 4**) selbstständig nacheinander ab, führt [cnc_setup_sheet_extractor.py](file:///c:/Projekte/CNC/02_Software_und_Tools/GitHub_Projekte/cnc_setup_sheet_extractor.py) sowie [render_simulation_video.py](file:///c:/Projekte/CNC/02_Software_und_Tools/scripts/render_simulation_video.py) aus und beendet den Lauf erst, wenn alle **6+1 Dateien** physisch im Auftragsordner verifiziert wurden.
+
+### Kopierfertige Master-Prompts *(Modus A vs. Modus B)*
+
+* **Modus A — Komplett-Durchlauf in einem Rutsch *(für Komplett-Aufträge & Test-Übungen)*:**
+  ```text
+  /goal Bearbeite den Kundenauftrag im Ordner 01_Kundenauftraege/[ORDNERNAME] vollständig von A bis Z nach unserem 4-Schritte-Standard (AGENTS.md):
+  1. Agent 4: Festpreis-Angebot (02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) nach § 18 EStG erstellen.
+  2. Agent 2: Postprozessor (.cps) anpassen, mit simuliere_post.js kompilieren und fehlerfreien G-Code (.nc) inkl. 360°-Vollkreis-Reset und G80 erzeugen.
+  3. Agent 3: Statischen Crash-Prüfbericht (05_...), Einrichteblatt (06_...) via cnc_setup_sheet_extractor.py und 3D-Simulationsvideo (.mp4) via render_simulation_video.py generieren.
+  4. Agent 4: Rechnung nach § 18 EStG / § 14 UStG (07_...) und Gesamtdokumentation (08_...) erstellen und am Ende prüfen, dass alle 6+1 Artefakte fehlerfrei vorhanden sind.
+  ```
+* **Modus B — Zweistufiger Echtkunden-Ablauf *(im realen Tagesgeschäft mit Angebotsfreigabe)*:**
+  1. **Stufe 1 (Bei Kundenanfrage ohne `/goal`):** Nur **Agent 4** zur Erstellung des Festpreis-Angebots (`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`) starten und das Angebot an den Kunden senden.
+  2. **Stufe 2 (Nach Auftragsbestätigung mit `/goal`):** Sobald der Kunde den Auftrag erteilt, mit **`/goal`** und **`Argon 4`** die komplette technische Umsetzung und Abrechnung (**Agent 2 ➔ Agent 3 ➔ Agent 4**, Artefakte `03` bis `08`) in einem durchgängigen Lauf ausführen.

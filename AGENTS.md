@@ -56,3 +56,23 @@ Für jeden Auftrag unter `01_Kundenauftraege/` gilt der in [.agents/rules/kunden
    - **Artefakt 5 (Agent 3):** `[auftragsname]_simulation_video.mp4` *(3D-Werkzeugwegsimulation zur visuellen Vorabkontrolle)*
    - **Artefakt 6 (Agent 4):** `07_RECHNUNG_NACH_PARAGRAPH_18_ESTG.md` *(GoBD-konforme [Grundsätze zur ordnungsmäßigen Führung und Aufbewahrung von Büchern] Ingenieur-Honorarabrechnung)*
    - **Artefakt 7 (Gesamtdokumentation):** `08_DOKUMENTATION_AUFTRAGSABWICKLUNG_UND_ARTEFAKTE.md` *(Lückenlose Zusammenfassung der Auftragsabwicklung von A bis Z)*
+
+
+---
+
+## 4. Empfohlene Ausführungs-Steuerung: `Argon 4` + `/goal`-Modus
+
+Für die fehlerfreie Erzeugung sämtlicher **6+1 Pflicht-Artefakte *(Arbeitsergebnisse)*** und für System-Audits gilt als Best Practice *(bewährte Ingenieurpraxis)*:
+
+1. **Modellwahl (`Argon 4`):** Nutzung von **`Argon 4`** für tiefe Code-Verifikation *(JavaScript ES5 in `.cps`, G-Code-Modalitätsprüfung `xOutput.reset()`, `G80`-Zyklusaufhebung und Python-Werkzeugausführung)*.
+2. **Komplett-Durchlauf mit `/goal` *(Modus A — Vollständige Auftragsabwicklung in einem Rutsch)*:**
+   ```text
+   /goal Bearbeite den Kundenauftrag im Ordner 01_Kundenauftraege/[ORDNERNAME] vollständig von A bis Z nach unserem 4-Schritte-Standard (AGENTS.md):
+   1. Agent 4: Festpreis-Angebot (02_ANGEBOT_DIPL_ING_BUJANOVSKI.md) nach § 18 EStG erstellen.
+   2. Agent 2: Postprozessor (.cps) anpassen, mit simuliere_post.js kompilieren und fehlerfreien G-Code (.nc) inkl. 360°-Vollkreis-Reset und G80 erzeugen.
+   3. Agent 3: Statischen Crash-Prüfbericht (05_...), Einrichteblatt (06_...) via cnc_setup_sheet_extractor.py und 3D-Simulationsvideo (.mp4) via render_simulation_video.py generieren.
+   4. Agent 4: Rechnung nach § 18 EStG / § 14 UStG (07_...) und Gesamtdokumentation (08_...) erstellen und am Ende prüfen, dass alle 6+1 Artefakte fehlerfrei vorhanden sind.
+   ```
+3. **Zweistufiger Echtkunden-Ablauf *(Modus B — Praxisbetrieb mit Angebotsfreigabe)*:**
+   - **Stufe 1 (Bei Kundenanfrage ohne `/goal`):** Nur **Agent 4** zur Erstellung von `02_ANGEBOT_DIPL_ING_BUJANOVSKI.md` aufrufen und Angebot an den Kunden senden.
+   - **Stufe 2 (Nach Auftragsbestätigung mit `/goal`):** Mit **`/goal`** und **`Argon 4`** die komplette technische Umsetzung und Abrechnung (**Agent 2 ➔ Agent 3 ➔ Agent 4**, Artefakte `03` bis `08`) in einem durchgängigen Lauf ausführen.

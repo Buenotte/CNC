@@ -162,3 +162,16 @@ Der Assistent muss bei **JEDER Antwort, Prüfung, Code-Generierung und jedem Arb
 * `💰 [Aktivierter Agent: Agent 4 – Backoffice-Ingenieur-Agent]` *(Angebote, Rechnungen nach § 18 EStG & kaufmännische Dokumente)*
 
 Dies stellt sicher, dass der Benutzer jederzeit lückenlos nachvollziehen kann, welcher spezialisierte Agent welche Aufgabe ausführt.
+
+
+---
+
+## 6. Best-Practice-Ausführung mit `Argon 4` und dem `/goal`-Befehl *(Autonome Gesamt-Abwicklung)*
+
+Um sicherzustellen, dass bei der Bearbeitung eines Kundenauftrags keines der **6+1 Pflicht-Artefakte *(Arbeitsergebnisse)*** vergessen wird und sämtliche Code-Dateien (`.cps` *(Custom Postprocessor Script)* und `.nc` *(Numerical Control G-Code)*) gegen echte **Compiler *(Übersetzer und Syntaxprüfer)*** getestet werden, gilt für die Ausführung in **Google Antigravity *(AGY — Agentenbasierte Entwicklungsumgebung)*** folgende Empfehlung:
+
+1. **Bevorzugtes KI-Modell (`Argon 4`):**
+   Für die Postprozessor-Programmierung (**Agent 2**), die statische G-Code-Kollisionsprüfung (**Agent 3**) und die steuerrechtlich präzise Abrechnung nach **§ 18 EStG *(Einkommensteuergesetz)*** (**Agent 4**) ist **`Argon 4`** zu wählen, da es komplexe logische Abhängigkeiten *(wie `xOutput.reset()` bei 360°-Vollkreisen und `G80`-Zyklusaufhebungen)* mittels echter Terminal-Prüfskripte verifiziert.
+2. **Einsatz des `/goal`-Befehls *(Zielorientierter Ausdauer-Modus)*:**
+   * **Komplett-Abwicklung (Modus A):** Soll ein Kundenauftrag von A bis Z in einem einzigen Durchgang abgearbeitet werden, wird der Prompt mit **`/goal`** eingeleitet. Dadurch arbeitet das System alle 4 Schritte (**Agent 4 ➔ Agent 2 ➔ Agent 3 ➔ Agent 4**) ohne vorzeitigen Abbruch ab und beendet den Lauf erst, wenn alle **6+1 Dateien** (`02_...`, `.cps`/`.nc`, `05_...`, `06_...`, `.mp4`, `07_...`, `08_...`) physisch im Auftragsordner verifiziert wurden.
+   * **Zweistufiger Echtkunden-Betrieb (Modus B):** Im realen Tagesgeschäft wird bei Eingang einer Anfrage zunächst nur **Agent 4** für das Festpreis-Angebot (`02_ANGEBOT_DIPL_ING_BUJANOVSKI.md`) gestartet. Sobald die Auftragsbestätigung des Kunden vorliegt, wird mit **`/goal`** die gesamte technische Umsetzung und Abrechnung *(Stationen `03` bis `08`)* in einem Durchgang ausgeführt.
