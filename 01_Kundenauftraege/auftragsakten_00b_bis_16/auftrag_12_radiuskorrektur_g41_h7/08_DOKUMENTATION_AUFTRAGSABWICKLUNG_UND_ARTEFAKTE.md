@@ -56,6 +56,7 @@
 * **Z-MIN-Kollisionsabgleich:** Tiefste programmierte Zustellung $Z_{\text{min}} = -5.000\,\text{mm}$ gegenüber Spannbacken-Oberkante $Z_{\text{Backe}} = -15.000\,\text{mm}$ ergibt eine bestätigte Sicherheitsreserve von **$\Delta Z = +10.000\,\text{mm}$**.
 * **Nullpunkt-Verifikation:** `G54 (Werkstücknullpunkt: Vorne links oben, Z = 0,0 mm)` ist vor der ersten Verfahrbewegung aktiv gesetzt.
 * **Schnittdaten-Plausibilität:** Alle Drehzahlen ($S$) und Vorschübe ($F$) wurden werkstoffgerecht für **Einsatzstahl 16MnCr5 (1.7131)** ausgelegt und mit aktiver Kühlschmierung verknüpft.
+* **Bauteilwand- & Äquidistanten-Verifikation (G41 / D01):** Mathematischer Nachweis, dass die Fräsermitte niemals auf der Bauteilwand *(senkrechte Begrenzungsfläche des Werkstücks)* verfährt, sondern stets um den Werkzeugradius $R = 5{,}000\,\text{mm}$ versetzt im freien Raum geführt wird (Äquidistante). Dies verhindert ein Einschneiden von $5\,\text{mm}$ ins Gutmaterial und ermöglicht dem Maschinenbediener die feinfühlige Maßkorrektur von Passungen ($\varnothing 30\,\text{H7}$) über das Verschleißregister `D01` (Wear Offset) im Hundertstelmillimeter-Bereich.
 
 ---
 

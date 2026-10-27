@@ -299,6 +299,214 @@ if (exerciseName.indexOf("uebung_11") !== -1) {
   });
 }
 
+// Für Übung 13 (3D-Freiformflächen & Kugelfräser-Schlichten) konfigurieren wir T02 als echten Kugelfräser und erzeugen simultane 3D-Zeilenschlichtbahnen:
+if (exerciseName.indexOf("uebung_13") !== -1) {
+  mockTools[1] = {
+    number: 2,
+    diameter: 6.0,
+    cornerRadius: 3.0, // R = D/2 = 3.0 mm (Vollradius / Kugelfräser)
+    type: 3, // TOOL_MILLING_END_BALL
+    lengthOffset: 2,
+    diameterOffset: 2,
+    description: "KUGELFRAESER 6MM VHM (3D FREIFORM)",
+    comment: "KUGELFRAESER 6MM VHM (3D FREIFORM)",
+    spindleRPM: 10000,
+    clockwise: true,
+    coolant: 1
+  };
+
+  mockSections.length = 0; // Standard-Abschnitte leeren
+
+  // Op 1: Schruppen / Adaptive Vorräumung der Außenkontur mit T01 Schaftfräser
+  mockSections.push({
+    comment: "1. 3D ADAPTIVE CLEARING - VORRAEUMUNG DER KONTUR (SCHAFTFRAESER D=10MM)",
+    tool: mockTools[0],
+    spindleSpeed: 8000,
+    workOffset: 1,
+    initialPos: { x: -10.0, y: -10.0, z: 15.0 },
+    zMin: -5.0,
+    zMax: 15.0,
+    runMoves: function (sandbox) {
+      if (typeof sandbox.onRapid === "function") sandbox.onRapid(-10.0, -10.0, 2.0);
+      if (typeof sandbox.onLinear === "function") {
+        sandbox.onLinear(-10.0, -10.0, -5.0, 500);
+        sandbox.onLinear(-5.0, -5.0, -5.0, 1200);
+        sandbox.onLinear(85.0, -5.0, -5.0, 1200);
+        sandbox.onLinear(85.0, 55.0, -5.0, 1200);
+        sandbox.onLinear(-5.0, 55.0, -5.0, 1200);
+        sandbox.onLinear(-5.0, -5.0, -5.0, 1200);
+      }
+      if (typeof sandbox.onRapid === "function") sandbox.onRapid(-5.0, -5.0, 15.0);
+    }
+  });
+
+  // Op 2: 3D-Freiformflächen-Schlichten mit T02 Kugelfräser D=6mm (Simultane 3D-Zeilen X/Y/Z)
+  mockSections.push({
+    comment: "2. 3D FREIFORMFLAECHEN SCHLICHTEN - KUGELFRAESER D=6MM (SIMULTANE 3D-BAHNEN)",
+    tool: mockTools[1],
+    spindleSpeed: 10000,
+    workOffset: 1,
+    initialPos: { x: 20.0, y: 15.0, z: 15.0 },
+    zMin: -4.8,
+    zMax: 15.0,
+    runMoves: function (sandbox) {
+      if (typeof sandbox.onRapid === "function") sandbox.onRapid(20.0, 15.0, 2.0);
+      if (typeof sandbox.onLinear === "function") {
+        // Eintauchen auf Start-Freiformhöhe
+        sandbox.onLinear(20.0, 15.0, -2.0, 600);
+
+        // Zeile 1: Y = 15.0 (3D-Welle simultan X/Y/Z)
+        sandbox.onLinear(28.0, 15.0, -3.2, 1500);
+        sandbox.onLinear(36.0, 15.0, -4.2, 1500);
+        sandbox.onLinear(44.0, 15.0, -4.2, 1500);
+        sandbox.onLinear(52.0, 15.0, -3.2, 1500);
+        sandbox.onLinear(60.0, 15.0, -2.0, 1500);
+
+        // Quer-Zustellung zu Zeile 2
+        sandbox.onLinear(60.0, 20.0, -2.0, 1500);
+
+        // Zeile 2: Y = 20.0 (Rückweg 3D-Welle simultan X/Y/Z)
+        sandbox.onLinear(52.0, 20.0, -3.5, 1500);
+        sandbox.onLinear(44.0, 20.0, -4.6, 1500);
+        sandbox.onLinear(36.0, 20.0, -4.6, 1500);
+        sandbox.onLinear(28.0, 20.0, -3.5, 1500);
+        sandbox.onLinear(20.0, 20.0, -2.0, 1500);
+
+        // Quer-Zustellung zu Zeile 3
+        sandbox.onLinear(20.0, 25.0, -2.0, 1500);
+
+        // Zeile 3: Y = 25.0 (Tiefster Scheitelpunkt Z-4.8mm)
+        sandbox.onLinear(28.0, 25.0, -3.8, 1500);
+        sandbox.onLinear(36.0, 25.0, -4.8, 1500);
+        sandbox.onLinear(44.0, 25.0, -4.8, 1500);
+        sandbox.onLinear(52.0, 25.0, -3.8, 1500);
+        sandbox.onLinear(60.0, 25.0, -2.0, 1500);
+
+        // Quer-Zustellung zu Zeile 4
+        sandbox.onLinear(60.0, 30.0, -2.0, 1500);
+
+        // Zeile 4: Y = 30.0 (Rückweg)
+        sandbox.onLinear(52.0, 30.0, -3.5, 1500);
+        sandbox.onLinear(44.0, 30.0, -4.6, 1500);
+        sandbox.onLinear(36.0, 30.0, -4.6, 1500);
+        sandbox.onLinear(28.0, 30.0, -3.5, 1500);
+        sandbox.onLinear(20.0, 30.0, -2.0, 1500);
+
+        // Quer-Zustellung zu Zeile 5
+        sandbox.onLinear(20.0, 35.0, -2.0, 1500);
+
+        // Zeile 5: Y = 35.0 (Auslauf-Zeile)
+        sandbox.onLinear(28.0, 35.0, -3.2, 1500);
+        sandbox.onLinear(36.0, 35.0, -4.2, 1500);
+        sandbox.onLinear(44.0, 35.0, -4.2, 1500);
+        sandbox.onLinear(52.0, 35.0, -3.2, 1500);
+        sandbox.onLinear(60.0, 35.0, -2.0, 1500);
+      }
+      if (typeof sandbox.onRapid === "function") sandbox.onRapid(60.0, 35.0, 15.0);
+    }
+  });
+}
+
+// Für Übung 14 (Heidenhain Klartext & 4. Drehachse A-Achse / Teilapparat):
+if (exerciseName.indexOf("uebung_14") !== -1) {
+  mockTools[0] = {
+    number: 1,
+    diameter: 10.0,
+    cornerRadius: 0.0,
+    lengthOffset: 1,
+    diameterOffset: 1,
+    description: "VHM-SCHAFTFRAESER D=10MM (SCHLUESSELFLAECHEN A+0 / A+90)",
+    comment: "VHM-SCHAFTFRAESER D=10MM",
+    spindleRPM: 8000,
+    clockwise: true,
+    coolant: 1
+  };
+  mockTools[1] = {
+    number: 2,
+    diameter: 6.0,
+    cornerRadius: 0.0,
+    lengthOffset: 2,
+    diameterOffset: 2,
+    description: "VHM-SPIRALBOHRER D=6MM (QUERBOHRUNGEN BIS Z-12MM)",
+    comment: "VHM-SPIRALBOHRER D=6MM",
+    spindleRPM: 3500,
+    clockwise: true,
+    coolant: 1
+  };
+
+  mockSections.length = 0; // Standard-Abschnitte leeren
+
+  // Op 1: 2D-Außenkontur / Schlüsselfläche 1 bei A = 0°
+  mockSections.push({
+    comment: "1. KONTURFRAESEN / SCHLUESSELFLAECHE 1 (A+0 GRAD)",
+    tool: mockTools[0],
+    spindleSpeed: 8000,
+    workOffset: 1,
+    initialPos: { x: -10.0, y: -10.0, z: 15.0 },
+    zMin: -5.0,
+    zMax: 15.0,
+    runMoves: function (sandbox) {
+      if (typeof sandbox.onRapid === "function") sandbox.onRapid(-10.0, -10.0, 2.0);
+      if (typeof sandbox.onLinear === "function") {
+        sandbox.onLinear(-10.0, -10.0, -5.0, 500);
+        sandbox.onLinear(0.0, 0.0, -5.0, 1200);
+        sandbox.onLinear(80.0, 0.0, -5.0, 1200);
+        sandbox.onLinear(80.0, 50.0, -5.0, 1200);
+        sandbox.onLinear(0.0, 50.0, -5.0, 1200);
+        sandbox.onLinear(0.0, 0.0, -5.0, 1200);
+      }
+      if (typeof sandbox.onRapid === "function") sandbox.onRapid(0.0, 0.0, 15.0);
+    }
+  });
+
+  // Op 2: Schlüsselfläche 2 / Längsnut bei A = 90° (Teilapparat geschwenkt)
+  mockSections.push({
+    comment: "2. SCHLUESSELFLAECHE 2 / LAENGSEINSCHNITT (A+90 GRAD)",
+    tool: mockTools[0],
+    spindleSpeed: 8000,
+    workOffset: 1,
+    initialPos: { x: 40.0, y: 25.0, z: 15.0 },
+    zMin: -3.0,
+    zMax: 15.0,
+    runMoves: function (sandbox) {
+      if (typeof sandbox.onRapid === "function") sandbox.onRapid(40.0, 25.0, 2.0);
+      if (typeof sandbox.onLinear === "function") {
+        sandbox.onLinear(40.0, 25.0, -3.0, 400);
+        sandbox.onLinear(55.0, 25.0, -3.0, 1000);
+        sandbox.onLinear(40.0, 25.0, -3.0, 1000);
+      }
+      if (typeof sandbox.onRapid === "function") sandbox.onRapid(40.0, 25.0, 15.0);
+    }
+  });
+
+  // Op 3: 4x Querbohrungen D=6mm bei A = 90° mit Bohrzyklus CYCL DEF 200 bis Z-12.0mm
+  mockSections.push({
+    comment: "3. VIER QUERBOHRUNGEN D=6MM (A+90 GRAD) - CYCL DEF 200 BOHREN BIS Z-12MM",
+    tool: mockTools[1],
+    spindleSpeed: 3500,
+    workOffset: 1,
+    initialPos: { x: 10.0, y: 10.0, z: 15.0 },
+    zMin: -12.0,
+    zMax: 15.0,
+    runMoves: function (sandbox) {
+      sandbox.cycleType = "drilling";
+      sandbox.cycle = { feedrate: 300, retract: 2.0, clearance: 15.0, bottom: -12.0 };
+      sandbox.cycleExpanded = false;
+      sandbox._firstCycle = true;
+      if (typeof sandbox.onCycle === "function") sandbox.onCycle();
+      if (typeof sandbox.onCyclePoint === "function") {
+        sandbox.onCyclePoint(10.0, 10.0, -12.0);
+        sandbox._firstCycle = false;
+        sandbox.onCyclePoint(70.0, 10.0, -12.0);
+        sandbox.onCyclePoint(70.0, 40.0, -12.0);
+        sandbox.onCyclePoint(10.0, 40.0, -12.0);
+      }
+      if (typeof sandbox.onCycleEnd === "function") sandbox.onCycleEnd();
+      if (typeof sandbox.onRapid === "function") sandbox.onRapid(10.0, 40.0, 15.0);
+    }
+  });
+}
+
 function wrapSection(sec) {
   return {
     workOffset: sec.workOffset,
@@ -322,6 +530,8 @@ const sandbox = {
   IN: 0,
   unit: 1, // 1 = MM (Millimeter)
   CAPABILITY_MILLING: 1,
+  TOOL_MILLING_END_FLAT: 1,
+  TOOL_MILLING_END_BALL: 3,
   COOLANT_OFF: 0,
   PLANE_XY: 0,
   X: 0,

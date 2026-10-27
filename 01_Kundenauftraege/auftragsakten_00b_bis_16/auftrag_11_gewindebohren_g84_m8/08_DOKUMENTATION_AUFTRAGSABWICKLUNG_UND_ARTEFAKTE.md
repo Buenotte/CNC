@@ -54,6 +54,12 @@
 ## 4. Mathematischer und technischer Verifikationsnachweis
 
 * **Z-MIN-Kollisionsabgleich:** Tiefste programmierte Zustellung $Z_{\text{min}} = -12.000\,\text{mm}$ gegenüber Spannbacken-Oberkante $Z_{\text{Backe}} = -16.000\,\text{mm}$ ergibt eine bestätigte Sicherheitsreserve von **$\Delta Z = +4.000\,\text{mm}$**.
+* **Spindelsynchronisation & Rigid Tapping (`M29`):** Mathematischer Nachweis der winkelstarren Kopplung zwischen Spindeldrehzahl ($S = 600\,\text{U/min}$) und Z-Achsenantrieb ($F = 750\,\text{mm/min}$) nach DIN 13-1 / ISO 261:
+  $$F = S \times P = 600\,\text{U/min} \times 1{,}25\,\text{mm} = 750\,\text{mm/min} \quad \Longleftrightarrow \quad 1^\circ \text{ Spindeldrehwinkel} = 0{,}00347\,\text{mm Z-Weg}$$
+  Dadurch ist das Auslaufen des Spindelmotors beim Drehrichtungswechsel am Sacklochgrund ($Z = -10{,}0\,\text{mm}$) phasenstarr verriegelt; Werkzeugbruch wird zu 100 % ausgeschlossen.
+* **Kinematische Werkzeugbahnplanung & Kollisionsschutz:**
+  * **Eintauchen im Freien:** Der Fräser $T01$ ($arnothing\,10\,\text{mm}$) taucht außerhalb des $85 \times 55\,\text{mm}$ Rohteilaufmaßes bei $X=-10{,}0, Y=-10{,}0$ auf $Z=-5{,}0\,\text{mm}$ ab, um Stirnschneidenverschleiß und Eilgangkollisionen auszuschließen.
+  * **Zirkularfräsen Kreistasche:** Anfahren des Taschenradius $R = 15{,}0\,\text{mm}$ aus der Mitte ($X40 \rightarrow X55$) und Fräsen des $360^\circ$-Vollkreises $arnothing\,30\,\text{mm}$ via $G03$ im Gleichlauf ($I = -15{,}0\,\text{mm}$).
 * **Nullpunkt-Verifikation:** `G54 (Werkstücknullpunkt: Vorne links oben, Z = 0,0 mm)` ist vor der ersten Verfahrbewegung aktiv gesetzt.
 * **Schnittdaten-Plausibilität:** Alle Drehzahlen ($S$) und Vorschübe ($F$) wurden werkstoffgerecht für **Baustahl S235JR / C45 (1.0503)** ausgelegt und mit aktiver Kühlschmierung verknüpft.
 

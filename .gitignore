@@ -11,6 +11,7 @@ Thumbs.db
 
 # Temporäre Testausgaben
 tests/scratch/
+scratch/
 *.tmp
 
 # Private / Persönliche Dokumente (Datenschutz)

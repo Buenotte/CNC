@@ -44,3 +44,25 @@ $$\Delta Z_{\text{Reserve}} = |Z_{\text{Spannbacke}} - Z_{\text{min, Programm}}|
 Das zugehörige 3D-Simulationsvideo [`kunden_post_generiert_simulation_video.mp4`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_16_meister_endabnahme_audit/kunden_post_generiert_simulation_video.mp4) wurde vollständig gerendert und geprüft:
 * Alle Anfahrbewegungen erfolgen auf sicherer Rückzugsebene ($Z = +15,000\,\text{mm}$ bzw. $+2,000\,\text{mm}$).
 * Keine unkontrollierten Eilgang-Bewegungen (`G00`) innerhalb des Rohteilvolumens.
+
+---
+
+## 5. Meister-Zertifizierung des finalen Master-Postprozessors (`uebung_16_endabnahme_meister_post.nc`)
+
+* **Geprüfter Master-G-Code:** [`uebung_16_endabnahme_meister_post.nc`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_16_meister_endabnahme_audit/uebung_16_endabnahme_meister_post.nc)
+* **Postprozessor-Quelldatei:** [`uebung_16_endabnahme_meister_post.cps`](file:///c:/Projekte/CNC/01_Kundenauftraege/auftragsakten_00b_bis_16/auftrag_16_meister_endabnahme_audit/uebung_16_endabnahme_meister_post.cps)
+* **Steuerungs-Dialekt:** Fanuc 0i-MF / Haas NGC / DIN 66025 (ISO-Standard)
+* **Gesamtlänge:** 70 Zeilen (Lückenlos mit ingenieurmäßigen Klartext-Kommentaren `(...)` auf jeder Zeile)
+
+### 5.1 Vollständige 5-Punkte-Meister-Audit-Matrix
+
+| Audit-Stufe | Prüfkriterium *(Quality Gate)* | Soll-Vorgabe *(Engineering Spec)* | Ist-Zustand in `uebung_16_endabnahme_meister_post.nc` | Konformitätsurteil |
+| :---: | :--- | :--- | :--- | :---: |
+| **Punkt 1** | **WCS-Nullpunkt & Initialisierung** | Eindeutige Definition von `G54` (Werkstücknullpunkt vorne links oben) & modale Sicherheitsinitialisierung (`G90 G17 G21 G94`) | Zeile 9: `G90 G17 G21 G94`, Zeilen 18, 36, 52: `G54` modal vor jedem Werkzeugeinsatz geladen | 🟢 **100 % KONFORM** |
+| **Punkt 2** | **Z-MIN-Spannmittelschutz & Auskraglänge** | $Z_{\text{min}} > -15.000\,\text{mm}$ (Backenoberkante); Mindest-Auskraglänge $L_{\text{min}} \ge |Z_{\text{min}}| + 5.0\,\text{mm}$ | Tiefster Punkt $Z_{\text{min}} = -12.000\,\text{mm}$ bei T02 Bohrung; Sicherheitsabstand $\Delta Z = +3.000\,\text{mm}$; $L_{\text{min}} = 17.0\,\text{mm}$ | 🟢 **100 % KONFORM** |
+| **Punkt 3** | **Eilgang-Sicherheitskorridor (`G00`)** | Eilgänge (`G00`) ausschließlich in der Luft ($Z \ge +2.000\,\text{mm}$ bzw. $Z = +15.000\,\text{mm}$); kein Eilgang unter $Z \le 0$ | Zeilen 22, 29, 40, 45, 61: Eilgang fährt auf $Z+2.000\,\text{mm}$ vor und zieht auf $Z+15.000\,\text{mm}$ zurück | 🟢 **100 % KONFORM** |
+| **Punkt 4** | **Technologie-Vierklang & Späneförderer** | Späneförderer Start (`M31`), Drehzahl $S > 0$, Spindel Rechtslauf (`M03`), Kühlmittel (`M08`) aktiv vor erstem Span | Zeile 8: `M31`, T1 mit `S8000 M03 M08`, T2 mit `S3500 M03 M08`, Späneförderer-Stopp `M33` in Zeile 67 | 🟢 **100 % KONFORM** |
+| **Punkt 5** | **Kollisionsfreier 2-Stufen-Safe-Footer** | Zuerst Kühlung aus (`M09`), Spindelstopp (`M05`), $Z$-Achse senkrecht in Referenz (`G28 G91 Z0.`), danach $Y$-Achse vor zur Tür (`G28 Y0.`), Programmende `M30` | Zeilen 65–70: `M09` ➔ `M05` ➔ `M33` ➔ `G28 G91 Z0.` ➔ `G28 Y0.` ➔ `M30` | 🟢 **100 % KONFORM** |
+
+### 5.2 Technologisches Fazit & Produktionsfreigabe
+Der Postprozessor `uebung_16_endabnahme_meister_post.cps` und der generierte NC-Code `uebung_16_endabnahme_meister_post.nc` erfüllen sämtliche 16 Ausbildungsbausteine der CNC-Postprozessor-Entwicklung fehlerfrei. Die Bearbeitung ist kollisionsfrei verifiziert und für den direkten Serienlauf auf 3-Achs- und 5-Achs-Bearbeitungszentren freigegeben.

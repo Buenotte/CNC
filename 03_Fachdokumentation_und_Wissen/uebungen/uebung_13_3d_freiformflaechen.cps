@@ -18,6 +18,8 @@ var xOutput = createVariable({prefix:"X"}, xyzFormat);
 var yOutput = createVariable({prefix:"Y"}, xyzFormat);
 var zOutput = createVariable({prefix:"Z"}, xyzFormat);
 var feedOutput = createVariable({prefix:"F"}, feedFormat);
+var coolantOn = false; // merkt sich, ob der Kühlschmierstoff (M08) schon läuft
+var smoothingActive = false; // merkt sich, ob G187 (HSM-Bahnverschleifung) aktiv ist
 
 function onOpen() {
   writeln("%");
@@ -28,13 +30,29 @@ function onOpen() {
   // G21 = Metrisches Einheitensystem in Millimeter (mm)
   // G17 = Fräsebene XY
   // G40 = Radiuskorrektur ausschalten
+  // G49 = Werkzeuglängenkorrektur ausschalten (löscht eine alte G43 vom Vorprogramm)
   // G80 = Bohrzyklen abbrechen
-  writeWords("G90", "G21", "G17", "G40", "G80");
+  writeWords("G90", "G21", "G17", "G40", "G49", "G80");
 }
 
 function onSection() {
   writeln("");
-  writeln("(OPERATION: 3D FREIFORMFLAECHE - KUGELFRAESER)");
+  var isBall = (typeof tool.type !== "undefined" && tool.type === TOOL_MILLING_END_BALL) ||
+               (tool.cornerRadius > 0 && Math.abs(tool.cornerRadius - tool.diameter / 2) < 0.01) ||
+               (tool.comment && /KUGEL|BALL/i.test(tool.comment));
+
+  if (hasParameter("operation-comment")) {
+    writeln("(OPERATION: " + getParameter("operation-comment") + ")");
+  } else if (isBall) {
+    writeln("(OPERATION: 3D FREIFORMFLAECHEN SCHLICHTEN - KUGELFRAESER)");
+  } else {
+    writeln("(OPERATION: 3D ADAPTIVE CLEARING - VORRAEUMUNG MIT SCHAFTFRAESER)");
+  }
+
+  if (isBall) {
+    writeln("(WERKZEUG-INFO: KUGELFRAESER VOLLRADIUS R=" + (tool.diameter / 2).toFixed(3) + "MM | D=" + tool.diameter.toFixed(3) + "MM)");
+    writeln("(HSM-INFO: 3-ACHS-SIMULTANBEWEGUNGEN MIT SEHNEN-TOLERANZ 0.005MM)");
+  }
 
   // G53 G00 Z0.0 = Spindel senkrecht nach oben auf Maschinenreferenz fahren
   writeWords("G53", "G00", "Z0.0");
@@ -50,9 +68,29 @@ function onSection() {
   // G54 = 1. Werkstück-Koordinatensystem
   writeWords("G54");
 
+  // G00 G43 H.. Z15.000 = Werkzeuglängenkorrektur EIN (G43 = Längenkorrektur positiv, H.. = Korrekturregister
+  // passend zur Werkzeugnummer: T01 -> H01) und gleichzeitig auf sichere Höhe Z+15 mm fahren.
+  // Erst ab hier rechnet die Steuerung mit der gemessenen Werkzeuglänge - vor jeder Bewegung ins Material!
+  writeWords("G00", "G43", "H" + ("0" + tool.lengthOffset).slice(-2), "Z" + xyzFormat.format(15));
+
+  // M08 = Kühlschmierstoff EIN (einmal pro Programm, ausgeschaltet wird mit M09 am Ende)
+  if (tool.coolant != COOLANT_OFF && !coolantOn) {
+    writeWords("M08");
+    coolantOn = true;
+  }
+
+  // G187 P3 E0.005 = Haas-Bahnverschleifung (Look-Ahead / HSM-Glättung) nur für das 3D-Schlichten mit Kugelfräser:
+  //   P3 = Genauigkeitsstufe "Finish" (höchste Konturtreue, Steuerung bremst vor Ecken nur minimal)
+  //   E0.005 = maximal zulässige Eckenverrundung 0,005 mm (passt zur CAM-Sehnentoleranz 0.005 mm)
+  if (isBall) {
+    writeWords("G187", "P3", "E0.005");
+    smoothingActive = true;
+  }
+
   xOutput.reset();
   yOutput.reset();
   zOutput.reset();
+  feedOutput.reset();
 }
 
 function onRapid(x, y, z) {
@@ -67,8 +105,15 @@ function onLinear(x, y, z, feed) {
 }
 
 function onClose() {
+  // G187 (ohne Parameter) = Bahnverschleifung zurück auf Maschinen-Standard setzen
+  if (smoothingActive) {
+    writeWords("G187");
+    smoothingActive = false;
+  }
+
   // M09 = Kühlmittel ausschalten
   writeWords("M09");
+  coolantOn = false;
 
   // G53 G00 Z0.0 = Spindel senkrecht nach ganz oben fahren
   writeWords("G53", "G00", "Z0.0");

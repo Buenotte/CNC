@@ -104,14 +104,20 @@ def parse_nc_program(content: str, filename: str) -> NCProgramSummary:
 
     for line in lines:
         # 1. Heidenhain TOOL CALL erkennen
-        m_tc = re.search(r"TOOL\s+CALL\s+([^\s]+)\s+[XYZ]\s+S(\d+)(?:\s+F(\d+))?(?:\s*;\s*(.*))?", line)
+        m_tc = re.search(r"TOOL\s+CALL\s+([^\s]+)\s+[XYZ]\s+S(\d+)(?:\s+F(\d+))?(?:\s*[;(]\s*(.*?)[)]?\s*$)?", line)
         if m_tc:
             if current_op:
                 summary.operations.append(current_op)
             t_id = f"T{m_tc.group(1)}"
             rpm = int(m_tc.group(2))
             feed = int(m_tc.group(3)) if m_tc.group(3) else 0
-            comment = m_tc.group(4).strip() if m_tc.group(4) else "Standardwerkzeug"
+            m_sc = re.search(r';\s*([^(;]+)', line)
+            if m_sc:
+                comment = m_sc.group(1).strip()
+            elif m_tc.group(4):
+                comment = m_tc.group(4).strip()
+            else:
+                comment = "Standardwerkzeug"
             current_op = ToolOperation(tool_id=t_id, comment=comment, spindle_rpm=rpm, feedrate=feed)
             continue
 
@@ -129,6 +135,8 @@ def parse_nc_program(content: str, filename: str) -> NCProgramSummary:
         # 3. Fanuc / Haas ISO Werkzeugwechsel erkennen (z. B. T01 M06, T1 M6, M06 T01)
         m_iso_t = re.search(r"(?:\bT0*(\d+)\s*M0?6\b|\bM0?6\s*T0*(\d+)\b)", line)
         if m_iso_t:
+            # Kühlmittel ist modal: läuft M08 aus dem vorigen Werkzeug weiter, gilt es auch für das neue Werkzeug
+            prev_coolant = current_op.coolant if current_op else "Trocken / Luft"
             if current_op:
                 summary.operations.append(current_op)
             t_num = int(m_iso_t.group(1) or m_iso_t.group(2))
@@ -140,6 +148,7 @@ def parse_nc_program(content: str, filename: str) -> NCProgramSummary:
                 else iso_tool_comments.get(t_num, "ISO Standardwerkzeug (DIN 66025)")
             )
             current_op = ToolOperation(tool_id=t_id, comment=comment)
+            current_op.coolant = prev_coolant
             continue
 
         # Falls ein Werkzeug aktiv ist: Drehzahl, Vorschub, Kühlmittel und Z-Tiefe verfolgen
@@ -216,7 +225,7 @@ def generate_markdown_setup_sheet(summary: NCProgramSummary) -> str:
     for idx, op in enumerate(summary.operations, start=1):
         rec_overhang = abs(op.min_z) + 5.0 if op.min_z < 0 else 25.0
         out.append(
-            f"| **{idx * 10}** | `{op.tool_id}` | {op.comment} | {op.spindle_rpm} | "
+            f"| **{idx * 10}** | `{op.tool_id}` | {op.comment.replace("|", "/")} | {op.spindle_rpm} | "
             f"{op.feedrate} | {op.min_z:.2f} | **{rec_overhang:.1f} mm** | {op.coolant} |"
         )
 
